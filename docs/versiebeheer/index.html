@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="../images/favicon.png" type="image/png">
+
+    <title>1. Versie- en issuebeheer :: Software Engineering Skills</title>
+
+    
+    <link href="../css/nucleus.css?1597313227" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1597313227" rel="stylesheet">
+    <link href="../css/hybrid.css?1597313227" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1597313227" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1597313227" rel="stylesheet">
+    <link href="../css/auto-complete.css?1597313227" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1597313227" rel="stylesheet">
+    <link href="../css/theme.css?1597313227" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1597313227" rel="stylesheet">
+    
+    <link href="../css/theme-kul.css?1597313227" rel="stylesheet">
+    
+    
+
+    <script src="../js/jquery-3.3.1.min.js?1597313227"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+      <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 2,                      
+    minScale: .5,                  
+    matchFontHeight: true,         
+    mtextInheritFont: false,       
+    merrorInheritFont: true,       
+    mathmlSpacing: false,          
+    skipAttributes: {},            
+    exFactor: .5,                  
+    displayAlign: 'center',        
+    displayIndent: '0'             
+  }
+};
+</script>
+
+<script src=../js/osc.js></script>
+  </head>
+  <body class="" data-url="/versiebeheer/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
+	<img src="../img/style/kul.png" alt="KU Leuven" /><br/>
+</a>
+<a href="https://www.uhasselt.be/" target="_blank">
+	<img src="../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../js/lunr.min.js?1597313227"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1597313227"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
+    
+</script>
+<script type="text/javascript" src="../js/search.js?1597313227"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <h3><a href="../">Inhoudsopgave</a></h3>
+    <ul class="topics">
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/versiebeheer/" title="1. Versie- en issuebeheer" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="../versiebeheer/">
+          1. Versie- en issuebeheer
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/dependency-management/" title="2. Dependency Management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../dependency-management/">
+          2. Dependency Management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/dependency-management/gradle/" title="Java Gradle projecten" class="dd-item ">
+        <a href="../dependency-management/gradle/">
+        Java Gradle projecten
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/tdd/" title="3. Test Driven Development" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../tdd/">
+          3. Test Driven Development
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/tdd/mockito/" title="TDD In de praktijk: Mockito" class="dd-item ">
+        <a href="../tdd/mockito/">
+        TDD In de praktijk: Mockito
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/tdd/capita/" title="TDD met algoritmes" class="dd-item ">
+        <a href="../tdd/capita/">
+        TDD met algoritmes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/algoritmes/" title="4. Algoritmes en Datastructuren" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../algoritmes/">
+          4. Algoritmes en Datastructuren
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/patterns/" title="5. Design Patterns" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../patterns/">
+          5. Design Patterns
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/facade/" title="1. Facade" class="dd-item ">
+        <a href="../patterns/facade/">
+        1. Facade
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/di/" title="2. Dependency Injection" class="dd-item ">
+        <a href="../patterns/di/">
+        2. Dependency Injection
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/singleton/" title="3. Singleton" class="dd-item ">
+        <a href="../patterns/singleton/">
+        3. Singleton
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/decorator/" title="4. Decorator" class="dd-item ">
+        <a href="../patterns/decorator/">
+        4. Decorator
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/factory/" title="5. Factory" class="dd-item ">
+        <a href="../patterns/factory/">
+        5. Factory
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/lifecycle/" title="6. SW Development Life Cycle" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../lifecycle/">
+          6. SW Development Life Cycle
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/lifecycle/ci/" title="Continuous Integration &amp; Deployment" class="dd-item ">
+        <a href="../lifecycle/ci/">
+        Continuous Integration &amp; Deployment
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/lifecycle/management/" title="Software Management Skills" class="dd-item ">
+        <a href="../lifecycle/management/">
+        Software Management Skills
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/extra/" title="Extra informatie" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../extra/">
+          Extra informatie
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/extra/software/" title="Gebruikte Software" class="dd-item ">
+        <a href="../extra/software/">
+        Gebruikte Software
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/extra/github-classroom/" title="Oefenzittingen: Github Clasroom" class="dd-item ">
+        <a href="../extra/github-classroom/">
+        Oefenzittingen: Github Clasroom
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/extra/sessy/" title="SESsy Library WebApp" class="dd-item ">
+        <a href="../extra/sessy/">
+        SESsy Library WebApp
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.uhasselt.be/studiegids"><i class='fa fa-university'></i> ECTS Sheet</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://toledo.kuleuven.be/portal/"><i class='fa fa-university'></i> Toledo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='../'>Software Engineering Skills</a> > 1. Versie- en issuebeheer
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#wat-is-versiebeheer-of-_source-control_">Wat is versiebeheer of <em>source control</em>?</a>
+      <ul>
+        <li><a href="#waarom-versioneren">Waarom versioneren?</a></li>
+      </ul>
+    </li>
+    <li><a href="#in-de-praktijk-git">In de praktijk: Git</a>
+      <ul>
+        <li><a href="#de-git-workflow">De Git workflow</a></li>
+        <li><a href="#conflicten-oplossen">Conflicten oplossen</a></li>
+        <li><a href="#branches">Branches</a></li>
+      </ul>
+    </li>
+    <li><a href="#bug-tracking-met-github">Bug tracking met Github</a></li>
+    <li><a href="#a-idoefalabo-oefeningen"><a id="oef"></a>Labo oefeningen</a>
+      <ul>
+        <li><a href="#opgave-1">Opgave 1</a></li>
+        <li><a href="#opgave-2">Opgave 2</a></li>
+      </ul>
+    </li>
+    <li><a href="#denkvragen">Denkvragen</a></li>
+    <li><a href="#extra-leermateriaal">Extra leermateriaal</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              1. Versie- en issuebeheer
+            </h1>
+          
+
+        
+
+
+
+	<blockquote>
+<p><i class="fa fa-question-circle" aria-hidden="true"></i>
+Wat is de beste manier om source code te bewaren?</p>
+</blockquote>
+<h2 id="wat-is-versiebeheer-of-_source-control_">Wat is versiebeheer of <em>source control</em>?</h2>
+<p><strong><a href="https://en.wikipedia.org/wiki/Version_control">Source Control</a></strong> is een sleutelbegrip voor ontwikkelteams. Het stelt iedereen in staat om aan dezelfde source file te werken zonder bestanden op- en neer te sturen, voorziet backups, maakt het mogelijk om releases en branches uit te rollen, &hellip;</p>
+<p>Een versiebeheer systeem bewaart alle <em>wijzigingen</em> aan (tekst)bestanden. Dat betekent dat eender welke wijziging, door wie dan ook, teruggedraaid kan worden. Zonder versiebeheer is het onmogelijk om code op één centrale plaats te bewaren als er met meerdere personen aan wordt gewerkt. Zelfs met maar één persoon is het toch nog steeds sterk aan te raden om te werken met versionering. Fouten worden immers snel gemaakt. Een bewaarde wijziging aan een bestand is permanent op je lokale harde schijf: de volgende dag kan je niet het origineel terug boven halen. Er wordt samen met delta&rsquo;s ook veel metadata bewaard (tijdstippen, commit comments, gebruikers, bestandsgroottes, &hellip;)</p>
+<h3 id="waarom-versioneren">Waarom versioneren?</h3>
+<p>Dat verduidelijkt Geek &amp; Poke:</p>
+<center>
+    <img src="../img/teaching/ses/sourcecontrol.jpg" style="width: 70%" />
+</center>
+<p>Zonder versionering stuurt iedereen e-mail attachments door naar elkaar, in de verwachting een aangepaste versie terug te ontvangen. Maar, wat gebeurt er met:</p>
+<ul>
+<li>Conflicten? (iemand wijzigt iets in dezelfde cel als jij)</li>
+<li>Meerdere bestanden? (je ontvangt verschillende versies, welke is nu relevant?)</li>
+<li>Nieuwe bestanden? (je ontvangt aparte bestanden met nieuwe tabbladen)</li>
+<li>Bestandstypes? (iemand mailt een <code>.xslx</code>, iemand anders een <code>.xls</code>)</li>
+<li>&hellip;</li>
+</ul>
+<p>Het wordt al snel duidelijk dat het delen van celdata beter wordt overgelaten aan Google Sheets, waar verschillende mensen tegelijkertijd gegevens in kunnen plaatsen. Hetzelfde geldt voor source code: dit wordt beter overgelaten aan een versiebeheer systeem.</p>
+<h2 id="in-de-praktijk-git">In de praktijk: Git</h2>
+<p>Git is een <em>gedecentraliseerd</em> versiebeheer systeem waarbij de hele repository inclusief historiek lokaal wordt geplaatst zodra een <code>clone</code> commando wordt uitgevoerd. Oudere <em>gecentraliseerde</em> systemen zoals SVN en CVS bewaren (meta-)data op één centrale plaats: de version control server. Voor dit vak wordt resoluut voor git gekozen.</p>
+<p>Onderstaande Figuur geeft het verschil weer tussen een <em>gecentraliseerd</em> versioneringssysteem, zoals SVN, CVS en MS SourceSafe, en een <em>gedecentraliseerd</em> systeem, zoals Git. Elke gebuiker heeft een kopie van de volledige repository op zijn lokale harde schijf staan. Bij SVN communiceren &lsquo;working copies&rsquo; met de server. Bij Git communiceren repositories (inclusief volledige history) met eender welke andere repository. &lsquo;Toevallig&rsquo; is dat meestal een centrale server, zoals <a href="https://github.com">Github.com</a>, <a href="https://gitlab.com">Gitlab.com</a> of <a href="https://bitbucket.com">BitBucket.com</a>.</p>
+<center>
+    ![SVN VS Git](/img/teaching/ses/svngit.png)
+</center>
+<p>(<a href="http://sgdev-blog.blogspot.com/2014_03_01_archive.html">Image Src</a>)</p>
+<p>Vanaf nu wordt verondersteld dat labo oefeningen gecommit worden in <code>git</code> op <a href="https://github.com">Github.com</a>: een zeer populair open source software ontwikkelingsplatform dat gebruiksvriendelijk is. Het <a href="https://git-scm.com/book/en/v2">Pro Git</a> handboek leert je alles over de werking van git. (<a href="http://rogerdudler.github.io/git-guide/">&lsquo;git - the simple guide&rsquo;</a> helpt ook)</p>
+<h3 id="de-git-workflow">De Git workflow</h3>
+<p>Een typische workflow is als volgt:</p>
+<ol>
+<li><code>git clone [url]</code>: Maakt een lokale repository aan die je op Github hebt gecreëerd. Het commando maakt een subdirectory aan.</li>
+<li>Doe je programmeerwerk.</li>
+<li><code>git status</code> en <code>git diff</code>: Bekijk lokale changes voordat ze naar de server gaan.</li>
+<li><code>git add [.]</code>: Geef aan welke changes staged worden voor commit</li>
+<li><code>git commit -m [comment]</code>: commit naar je <strong>lokale</strong> repository. Wijzingen moeten nu nog naar de Github server worden gesynchroniseerd.</li>
+<li><code>git push</code>: push lokale commits naar de Github server. Vanaf nu kan eender wie die meewerkt aan deze repository de wijzigingen downloaden op zijn lokaal systeem.</li>
+<li><code>git pull</code>: pull remote changes naar je lokale repository. Wijzigingen moeten altijd eerst gepushed worden voordat iemand anders kan pullen.</li>
+</ol>
+<p>De output van <code>git status</code> ziet er zo uit:</p>
+<pre>
+Wouters-MacBook-Air:brainbaking wgroenev$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+    modified:   content/teaching/cpp/labo-1.md
+    modified:   content/teaching/cpp/labo-2.md
+    modified:   content/teaching/cpp/labo-3.md
+    modified:   content/teaching/cpp/labo-4.md
+    modified:   content/teaching/cpp/labo-5.md
+    modified:   content/teaching/cpp/labo-6.md
+    deleted:    docs/CNAME
+    deleted:    docs/essays/i-am-jealous-of-my-dog/index.html
+</pre>
+<p>De output van <code>git diff</code> ziet er zo uit:</p>
+<pre>
+    Wouters-MacBook-Air:brainbaking wgroenev$ git diff
+diff --git a/content/teaching/cpp/labo-1.md b/content/teaching/cpp/labo-1.md
+index 654a4f6..11f0597 100644
+--- a/content/teaching/cpp/labo-1.md
++++ b/content/teaching/cpp/labo-1.md
+@@ -4,7 +4,7 @@ accent: "#008eb3"
+ disableComments: true
+ ---
+</pre>
+<p>Waarbij de <code>+++</code> regels wijzigingen zijn die zijn toegevoegd, en <code>---</code> die zijn verwijderd. Zowel bestanden als regels binnen bestanden zijn zichtbaar in de <em>difference</em> tool.</p>
+<h3 id="conflicten-oplossen">Conflicten oplossen</h3>
+<p><strong>Lees eerst</strong> hoofdstuk 2 van het Pro Git boek.</p>
+<h3 id="branches">Branches</h3>
+<p><strong>Lees eerst</strong> hoofdstuk 3 van het Pro Git boek.</p>
+<p>Een branch aanmaken kan via het <code>git branch</code> commando. Dit geeft een overzicht van beschikbare branches, en met een argument maak je een nieuwe aan. <code>git checkout</code> laat je switchen naar die branch. Het <code>*</code> symbool duidt de actieve branch aan. Hieronder wordt een nieuwe branch genaamd <em>bugfixbranch</em> aangemaakt nadat git toont dat er geen branches zijn. Daarna wordt er naar die branch overgeschakeld:</p>
+<pre>
+Wouters-Air:sessylibrary wgroeneveld$ git branch
+* master
+Wouters-Air:sessylibrary wgroeneveld$ git branch bugfixbranch
+Wouters-Air:sessylibrary wgroeneveld$ git branch
+  bugfixbranch
+* master
+Wouters-Air:sessylibrary wgroeneveld$ git checkout bugfixbranch
+Switched to branch 'bugfixbranch'
+Wouters-Air:sessylibrary wgroeneveld$ git branch
+* bugfixbranch
+  master
+</pre>
+<p>Een branch lokaal committen kan altijd, maar een <code>push</code> kan de volgende fout geven: <em>fatal: The current branch bugfixbranch has no upstream branch.</em> In dat geval dien je de branch &lsquo;upstream&rsquo; te pushen naar de Github server door middel van <code>git push --set-upstream origin bugfixbranch</code>.</p>
+<p>Na een branch commit is de volgende knop zichtbaar op Github:</p>
+<center>
+    <img src="../img/teaching/ses/github_compare.png"/>
+</center>
+<p>De <strong>Compare &amp; Pull Request</strong> knop maakt het mogelijk om wijzigingen op de bugfixbranch tot op de master branch te brengen. Dit kan ook via het commando <code>git merge bugfixbranch</code> in de master branch. Een demo toont dit aan. Daarna hebben we de branch niet meer nodig: <code>git branch -d bugfixbranch</code>. Merk op dat dit enkel <em>lokaal</em> de kopie van de branch verwijderd. De remote, op Github.com, verwijderen, vereist meer werk: <code>git push origin --delete bugfixbranch</code>.</p>
+<h4 id="ik-zie-niet-alle-branches-hoe-komt-dat">Ik zie niet alle branches, hoe komt dat?</h4>
+<p>Een <code>git pull</code> commando zal soms in de console &lsquo;new branch [branchnaam]&rsquo; afdrukken, maar toch zal je deze niet tot je beschikking hebben met het <code>git branch</code> commando. Dat komt omdat branches dan ook nog (lokaal) <strong>getracked</strong> moeten worden:</p>
+<ol>
+<li>Controleer welke branch je lokaal wilt volgen met <code>git branch -r</code></li>
+<li>Selecteer een bepaalde branch, waarschijnlijk <code>origin/[naam]</code></li>
+<li>Track die branch lokaal met <code>git branch --track [naam] origin/[naam]</code></li>
+<li>Vanaf nu kan je ook switchen naar die branch, controleer met <code>git branch</code></li>
+</ol>
+<h2 id="bug-tracking-met-github">Bug tracking met Github</h2>
+<p>Enkele &lsquo;kleine probleempjes&rsquo; in software worden al snel een hele berg aan grote problemen als er niet op tijd iets aan wordt gedaan. Bedrijven beheren deze problemen (<em>issues</em>) met een bug tracking systeem, waar alle door klant of collega gemeldde fouten van het systeem in worden gelogd en opgevolgd. Op die manier kan een ontwikkelaar op zoek naar werk in deze lijst de hoge prioritaire problemen identificeren, oplossen, en terug koppelen naar de melder.</p>
+<script defer src="../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph LR;
+    Bug[Bug discovery]
+    Report[Bug report]
+    Backlog[Bug in backlog met issues]
+    Prio[Bug in behandeling]
+    Fix[Bug fixed]
+    Bug --> Report
+    Report --> Backlog
+    Backlog --> Prio
+    Prio --> Fix
+
+</div>
+<p>De inhoud van deze stappen hangt af van bedrijf tot bedrijf, maar het skelet blijft hetzelfde. Bugs worden typisch gereproduceerd door middel van <a href="../tdd">unit testen</a> op een <strong>bepaalde git branch</strong> om de bestaande ontwikkeling van nieuwe features niet in de weg te lopen. Wanneer het probleem is opgelost, wordt deze branch gemerged met de <em>master</em> branch:</p>
+<script defer src="../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph LR;
+    masterx[Master branch x]
+    mastery[Master branch y]
+    bugbranch[Create bug branch]
+    bugfix[Bugfix on branch]
+    masterx --> mastery
+    masterx --> bugbranch
+    bugbranch --> bugfix
+    bugfix --> mastery
+
+</div>
+<p><a href="https://github.com/KULeuven-Diepenbeek/sessylibrary/issues">Github Issues</a> is een minimalistische feature van Github die het mogelijk maakt om zulke bugs op te volgen. Een nieuw issue openen en een beschrijving van het probleem meegeven (samen met stappen om het te reproduceren), maakt een nieuw item aan dat standaard op &lsquo;<em>open</em>&rsquo; staat. Dit kan worden toegewezen aan personen, en daarna worden &lsquo;<em>closed</em>', om aan te geven dat ofwel het probleem is opgelost, ofwel het geen echt probleem was. Issues kunnen worden gecategoriseerd door middel van labels.</p>
+<h2 id="a-idoefalabo-oefeningen"><a id="oef"></a>Labo oefeningen</h2>
+<h3 id="opgave-1">Opgave 1</h3>
+<p>Maak een Github.com account aan, als je dat nog niet hebt. Download de commandline tools <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a>, de officiele distributie, multiplatform, en probeer voor opgave twee de repository &lsquo;ses-issue-sandbox&rsquo; te clonen: <code>git clone https://github.com/KULeuven-Diepenbeek/ses-issue-sandbox.git</code>.</p>
+<p>Gebruik het Pro Git boek om kennis te maken met basis commando&rsquo;s van git. Het is de bedoeling om de commandline tools te leren kennen, en <em>niet</em> om met Github Desktop te werken.</p>
+<h3 id="opgave-2">Opgave 2</h3>
+<p>Kinderen vermaken zichzelf met een dagje aan zee. Het strand verdient extra veel aandacht, maar niet alle kinderen zijn blijkbaar even tevreden met onze implementatie. Kijk naar de <a href="https://github.com/KULeuven-Diepenbeek/ses-issue-sandbox/issues">issue lijst van de repository</a> om te kijken wat de wensen zijn van onze gebruikers.</p>
+<p>Kies er eentje uit om op te lossen - het maakt niet uit welke. <strong>Los elke issue op in een aparte branch</strong>! De oplossing bestaat uit twee fases:</p>
+<ol>
+<li>Implementeer de interface <code>Playable</code> door een nieuwe klasse te maken van het object waar het kind mee wenst te spelen aan zee (zie issue).</li>
+<li>Maak een nieuwe instantie aan van dit object in <code>SandboxMain</code>.</li>
+</ol>
+<p>Neem een kijkje bij de voorbeeld implementaties <code>SandCastle</code> en <code>BucketOfWater</code>.</p>
+<p>Merk op dat je onvoldoende <code>push</code> rechten hebt om lokale wijzigingen aan de repository te uploaden naar de Github server. We geven je nu de status van &lsquo;<em>collaborator</em>', zodat iedereen gemachtigd is om wijzigingen door te voeren.</p>
+<h2 id="denkvragen">Denkvragen</h2>
+<ul>
+<li>In welk geval is het aanmaken van een branch een goed idee, in plaats van verder te werken op de (enige) master branch? Lees eerst het Pro Git boek hoofdstuk over branches.</li>
+<li>In welk geval is het pushen van wijzigingen vanuit een branch naar de master branch een goed idee? Wanneer niet?</li>
+</ul>
+<h2 id="extra-leermateriaal">Extra leermateriaal</h2>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2">Pro Git</a> handboek, hoofdstuk 1 tot en met 3.</li>
+<li><a href="http://rogerdudler.github.io/git-guide/">git - the simple guide</a></li>
+<li><a href="https://www.codeforest.net/git-vs-svn">Code Forest: Git VS SVN</a></li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../" title="Software Engineering Skills"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../dependency-management/" title="2. Dependency Management" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../js/clipboard.min.js?1597313227"></script>
+    <script src="../js/perfect-scrollbar.min.js?1597313227"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1597313227"></script>
+    <script src="../js/jquery.sticky.js?1597313227"></script>
+    <script src="../js/featherlight.min.js?1597313227"></script>
+    <script src="../js/highlight.pack.js?1597313227"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../js/modernizr.custom-3.6.0.js?1597313227"></script>
+    <script src="../js/learn.js?1597313227"></script>
+    <script src="../js/hugo-learn.js?1597313227"></script>
+
+    <link href="../mermaid/mermaid.css?1597313227" rel="stylesheet" />
+    <script src="../mermaid/mermaid.js?1597313227"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>

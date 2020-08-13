@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="../../images/favicon.png" type="image/png">
+
+    <title>3. Singleton :: Software Engineering Skills</title>
+
+    
+    <link href="../../css/nucleus.css?1597313227" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1597313227" rel="stylesheet">
+    <link href="../../css/hybrid.css?1597313227" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1597313227" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1597313227" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1597313227" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1597313227" rel="stylesheet">
+    <link href="../../css/theme.css?1597313227" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1597313227" rel="stylesheet">
+    
+    <link href="../../css/theme-kul.css?1597313227" rel="stylesheet">
+    
+    
+
+    <script src="../../js/jquery-3.3.1.min.js?1597313227"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+      <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 2,                      
+    minScale: .5,                  
+    matchFontHeight: true,         
+    mtextInheritFont: false,       
+    merrorInheritFont: true,       
+    mathmlSpacing: false,          
+    skipAttributes: {},            
+    exFactor: .5,                  
+    displayAlign: 'center',        
+    displayIndent: '0'             
+  }
+};
+</script>
+
+<script src=../../js/osc.js></script>
+  </head>
+  <body class="" data-url="/patterns/singleton/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
+	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
+</a>
+<a href="https://www.uhasselt.be/" target="_blank">
+	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1597313227"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1597313227"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1597313227"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <h3><a href="../../">Inhoudsopgave</a></h3>
+    <ul class="topics">
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/versiebeheer/" title="1. Versie- en issuebeheer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../versiebeheer/">
+          1. Versie- en issuebeheer
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/dependency-management/" title="2. Dependency Management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../dependency-management/">
+          2. Dependency Management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/dependency-management/gradle/" title="Java Gradle projecten" class="dd-item ">
+        <a href="../../dependency-management/gradle/">
+        Java Gradle projecten
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/tdd/" title="3. Test Driven Development" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../tdd/">
+          3. Test Driven Development
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/tdd/mockito/" title="TDD In de praktijk: Mockito" class="dd-item ">
+        <a href="../../tdd/mockito/">
+        TDD In de praktijk: Mockito
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/tdd/capita/" title="TDD met algoritmes" class="dd-item ">
+        <a href="../../tdd/capita/">
+        TDD met algoritmes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/algoritmes/" title="4. Algoritmes en Datastructuren" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../algoritmes/">
+          4. Algoritmes en Datastructuren
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/patterns/" title="5. Design Patterns" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../patterns/">
+          5. Design Patterns
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/facade/" title="1. Facade" class="dd-item ">
+        <a href="../../patterns/facade/">
+        1. Facade
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/di/" title="2. Dependency Injection" class="dd-item ">
+        <a href="../../patterns/di/">
+        2. Dependency Injection
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/singleton/" title="3. Singleton" class="dd-item active">
+        <a href="../../patterns/singleton/">
+        3. Singleton
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/decorator/" title="4. Decorator" class="dd-item ">
+        <a href="../../patterns/decorator/">
+        4. Decorator
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/factory/" title="5. Factory" class="dd-item ">
+        <a href="../../patterns/factory/">
+        5. Factory
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/lifecycle/" title="6. SW Development Life Cycle" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../lifecycle/">
+          6. SW Development Life Cycle
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/lifecycle/ci/" title="Continuous Integration &amp; Deployment" class="dd-item ">
+        <a href="../../lifecycle/ci/">
+        Continuous Integration &amp; Deployment
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/lifecycle/management/" title="Software Management Skills" class="dd-item ">
+        <a href="../../lifecycle/management/">
+        Software Management Skills
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/extra/" title="Extra informatie" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../extra/">
+          Extra informatie
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/extra/software/" title="Gebruikte Software" class="dd-item ">
+        <a href="../../extra/software/">
+        Gebruikte Software
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/extra/github-classroom/" title="Oefenzittingen: Github Clasroom" class="dd-item ">
+        <a href="../../extra/github-classroom/">
+        Oefenzittingen: Github Clasroom
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/extra/sessy/" title="SESsy Library WebApp" class="dd-item ">
+        <a href="../../extra/sessy/">
+        SESsy Library WebApp
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.uhasselt.be/studiegids"><i class='fa fa-university'></i> ECTS Sheet</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://toledo.kuleuven.be/portal/"><i class='fa fa-university'></i> Toledo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Software Engineering Skills</a> > <a href='../../patterns/'>5. Design Patterns</a> > 3. Singleton
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#_singleton_---design-pattern"><em>&ldquo;Singleton&rdquo;</em> - Design Pattern</a>
+      <ul>
+        <li><a href="#doelstelling">Doelstelling</a></li>
+        <li><a href="#voorbeeld">Voorbeeld</a></li>
+        <li><a href="#eigenschappen-van-dit-patroon">Eigenschappen van dit patroon</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</a>
+      <ul>
+        <li><a href="#opgave-1">Opgave 1</a></li>
+        <li><a href="#opgave-2">Opgave 2</a></li>
+        <li><a href="#opgave-3">Opgave 3</a></li>
+      </ul>
+    </li>
+    <li><a href="#denkvragen">Denkvragen</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              3. Singleton
+            </h1>
+          
+
+        
+
+
+<h2 id="_singleton_---design-pattern"><em>&ldquo;Singleton&rdquo;</em> - Design Pattern</h2>
+<p>Begeleidende screencast:</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://player.vimeo.com/video/398534668" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="vimeo video" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
+<h3 id="doelstelling">Doelstelling</h3>
+<ul>
+<li>Vermijd de mogelijkheid tot meervoudige instantiatie van een bepaalde klasse. Er kan altijd maar één bepaalde instantie van bestaan.</li>
+<li>Voorzie een eenvoudige manier om vanuit eender waar in de code toegang te verkrijgen tot die éne instantie.</li>
+<li>Encapsuleer logica om deze instantie aan te maken, moest code dit raadplegen en dit toevallig de eerste keer zijn (<em>lazy initialization</em>).</li>
+</ul>
+<p><a href="https://sourcemaking.com/design_patterns/singleton">Dive Into Design Patterns: Singleton</a></p>
+<h3 id="voorbeeld">Voorbeeld</h3>
+<h4 id="1-opzet">1. Opzet</h4>
+<p>Een klassiek voorbeeld van een Singleton patroon is een database connectie, omdat het beheren van diezelfde connecties door diezelfde klasse gebeurt. Stel dat we een website hebben gemaakt met een winkelwagentje.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ShoppingCart</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> amountOfItems<span style="color:#f92672">;</span> <span style="color:#75715e">// and getters/setters
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> totalMOney<span style="color:#f92672">;</span>    <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><p>En de DB accessor:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DBHandle</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> ShoppingCart <span style="color:#a6e22e">getShoppingCart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// SELECT * FROM ...
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Met als REST endpoint:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/shoppingcart&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ShoppingResource</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@GET</span>
+    <span style="color:#66d9ef">public</span> ShoppingCart <span style="color:#a6e22e">getCart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> DBHandle<span style="color:#f92672">().</span><span style="color:#a6e22e">getShoppingCart</span><span style="color:#f92672">();</span>    <span style="color:#75715e">// oops!
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h4 id="2-probleemstelling">2. Probleemstelling</h4>
+<p>Tien gebruikers die op de site terecht komen wensen allemaal hun winkelwagentje te raadplegen. Er zijn maar twee DB connecties beschikbaar, dit opgelegd door de database zelf. Iemand moet die dus beheren (locken, vrijgeven, locken, &hellip; - dit heet <em>database pooling</em>).</p>
+<p>Als we twee instanties van <code>DBHandle</code> maken, kunnen er plots 2x2 connecties open worden gemaakt naar de database. Die zal dit ook blokkeren, wat resulteert in 2 klanten die een crash ervaren, en twee die hun winkelwagen kunnen raadplegen zonder verdere problemen.</p>
+<script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph TD;
+    A[ShoppingResource Inst1]
+    B[ShoppingResource Inst2]
+    C[DBHandle Inst1]
+    D[DBHandle Inst2]
+    A -->|nieuwe instance| C
+    B -->|nieuwe instance| D
+
+</div>
+<p>De <code>getCart()</code> methode mag dus in geen geval telkens een nieuwe <code>DBHandle</code> aanmaken.</p>
+<h4 id="3-oplossing">3. Oplossing</h4>
+<p>We hebben in dit geval een <em>singleton</em> instance nodig:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/shoppingcart&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ShoppingResource</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@GET</span>
+    <span style="color:#66d9ef">public</span> ShoppingCart <span style="color:#a6e22e">getCart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> DBHandle<span style="color:#f92672">.</span><span style="color:#a6e22e">getInstance</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getShoppingCart</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Waarbij de klasse <code>DBHandle</code> wordt uitgebreid tot:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DBHandle</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> DBHandle instance<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> DBHandle <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DBHandle<span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> instance<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">DBHandle</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> ShoppingCart <span style="color:#a6e22e">getShoppingCart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// SELECT * FROM ...
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><script defer src="../../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph TD;
+    A[ShoppingResource Inst1]
+    B[ShoppingResource Inst2]
+    C[DBHandle Inst]
+    A -->|zelfde instance| C
+    B -->|zelfde instance| C
+
+</div>
+<p>Op die manier is het aanmaken van een <code>DBHandle</code> instance beperkt tot de klasse zelf, door de <code>private</code> constructor. In de statische methode wordt er eerst gecontroleerd of de instantie <code>null</code> is of niet. In principe zou er maar één keer tijdens de uitvoering van het programma de <code>new DBHandle()</code> regel worden uitgevoerd<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<h3 id="eigenschappen-van-dit-patroon">Eigenschappen van dit patroon</h3>
+<ul>
+<li>Definiëer de enige instantie als een ontoegankelijke <code>static</code> variabele, die door één enkele <code>public static</code> methode wordt bewaakt.</li>
+<li>Singleton klassen hebben enkel een <code>private</code> constructor om te voorkomen dat dit nog elders kan worden aangemaakt.</li>
+<li>Er wordt meestal een <code>null</code> check gedaan, zodat de code die de getter aanroept dit niet opnieuw moet doen. Dit voorkomt onnodige duplicatie op verschillende plaatsen in de codebase.</li>
+</ul>
+<h2 id="a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</h2>
+<p>Via <a href="../../extra/github-classroom"><i class='fab fa-github'></i> Github Classroom</a>.</p>
+<h3 id="opgave-1">Opgave 1</h3>
+<p>Hierin is bovenstaande voorbeeld verwerkt, maar nog zonder Singleton&hellip; Voer de unit testen uit in <code>src/main/test</code>: het resultaat zijn gefaalde testen (ROOD), omdat <code>DBHandle</code> verschillende keren wordt aangemaakt. Zorg er voor dat alle testen slagen (GROEN) door het singleton patroon te implementeren!</p>
+<h3 id="opgave-2">Opgave 2</h3>
+<p>Pas ook <code>ShoppingCartResource</code> aan naar een singleton. Is dat nodig om de database niet te overbelasten, als de andere klasse reeds een singleton is, of niet?</p>
+<h3 id="opgave-3">Opgave 3</h3>
+<p><a href="../../extra/sessy">sessy library</a>:</p>
+<ol>
+<li>identificeer welke klassen een kans maken om een Singleton te worden. Denk aan bovenstaande voorbeeld. Is er reeds ergens een Singleton patroon geïmplementeerd?</li>
+<li>Pas het patroon toe waar jij denkt dat het nodig is.</li>
+<li>Hoe kan je afleiden welke gebruikte frameworks op bepaalde plekken Singleton klasses hebben?</li>
+</ol>
+<h2 id="denkvragen">Denkvragen</h2>
+<ul>
+<li>Dit patroon klinkt aanlokkelijk: eenvoudig, lost problemen op, dus waarom niet overal toepassen. Denk eens na over de verantwoordelijkheden van objecten. Waarom zou je zo veel mogelijk moeten <strong>vermijden</strong> om dit patroon toe te passen? Wie mag wel <code>DBHandle.getInstance()</code> aanroepen, en wie niet?</li>
+<li>Wat gebeurt er als 10 mensen tegelijkertijd de eerste keer de <code>getInstance()</code> methode aanroepen? Hoe kunnen we dit oplossen?</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Dit klopt niet helemaal als we kijken naar concurrency problemen, waarbij twee gebruikers op exact hetzelfde tijdstip de methode aanroepen. Dit laten we buiten beschouwing voor dit vak. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../../patterns/di/" title="2. Dependency Injection"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../../patterns/decorator/" title="4. Decorator" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1597313227"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1597313227"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1597313227"></script>
+    <script src="../../js/jquery.sticky.js?1597313227"></script>
+    <script src="../../js/featherlight.min.js?1597313227"></script>
+    <script src="../../js/highlight.pack.js?1597313227"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1597313227"></script>
+    <script src="../../js/learn.js?1597313227"></script>
+    <script src="../../js/hugo-learn.js?1597313227"></script>
+
+    <link href="../../mermaid/mermaid.css?1597313227" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1597313227"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+

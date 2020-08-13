@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Software Engineering Skills</title>
+    <link>https://kuleuven-diepenbeek.github.io/ses-course/</link>
+    <description>Recent content on Software Engineering Skills</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster>
+    
+	<atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>1. Facade</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/facade/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/facade/</guid>
+      <description>« Terug naar Software Engineering Skills » Naar de labo opgave
+&amp;ldquo;Facade&amp;rdquo; - Design Pattern Begeleidende screencast:
+  Doelstelling  Scherm een complex stukje software af met behulp van een simpele interface Voorzie éénzelfde interface naar een set van verschillende mogelijke subsystemen. Een Facade is een high-level interface die mogelijks low-level systemen aanspreekt.  Dive Into Design Patterns: Facade
+Voorbeeld 1. Opzet Stel dat we gegevens van de klant moeten versturen naar een overheidsinstantie.</description>
+    </item>
+    
+    <item>
+      <title>2. Dependency Injection</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/di/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/di/</guid>
+      <description>&amp;ldquo;Dependency Injection (DI)&amp;quot; - Design Pattern Begeleidende screencast:
+  Doelstelling  Promoot modulariteit door afhankelijkheden te injecteren, zodat aparte modules eenvoudig inplugbaar zijn in andere productiecode. Op deze manier worden modules ook makkelijker tesbaar. Promoot Inversion of Control: een client die services aanroept zou niet mogen weten hoe services worden aangemaakt - deze zou moeten worden &amp;lsquo;geinjecteerd&amp;rsquo;.  Wikipedia: Dependency Injection
+Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we dat een database handle nodig is om shopping cart gegevens op te halen.</description>
+    </item>
+    
+    <item>
+      <title>3. Singleton</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/singleton/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/singleton/</guid>
+      <description>&amp;ldquo;Singleton&amp;rdquo; - Design Pattern Begeleidende screencast:
+  Doelstelling  Vermijd de mogelijkheid tot meervoudige instantiatie van een bepaalde klasse. Er kan altijd maar één bepaalde instantie van bestaan. Voorzie een eenvoudige manier om vanuit eender waar in de code toegang te verkrijgen tot die éne instantie. Encapsuleer logica om deze instantie aan te maken, moest code dit raadplegen en dit toevallig de eerste keer zijn (lazy initialization).  Dive Into Design Patterns: Singleton</description>
+    </item>
+    
+    <item>
+      <title>4. Decorator</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/decorator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/decorator/</guid>
+      <description>&amp;ldquo;Decorator&amp;rdquo; - Design Pattern Begeleidende screencast:
+  Doelstelling  Voeg dynamisch functionaliteit toe als alternatief voor klassieke overerving. Gedraagt zich zoals het stukje &amp;lsquo;ingepakte&amp;rsquo; functionaliteit, maar voert extra handelingen uit. Wordt in Java altijd via interface implementaties uitegevoerd.  Dive Into Design Patterns: Decorator
+Voorbeeld 1. Opzet Stel dat we in een fabriek op plaats X een auto samenstellen. De wagen is een zeer eenvoudige Volkswagen Golf, zonder opties. Op een andere locatie, plaats Y, hebben wij als bedrijf ook fabrieken die sportauto&amp;rsquo;s bouwen (Volkswagen Scirocco) en op plaats Z luxe wagens (Volkswagen Passat).</description>
+    </item>
+    
+    <item>
+      <title>5. Factory</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/factory/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/factory/</guid>
+      <description>&amp;ldquo;Factory&amp;rdquo; - Design Pattern Begeleidende screencast:
+  Doelstelling  Scherm het aanmaken van bepaalde objecten af door middel van overerving en logica, waarbij die logica éénmalig wordt geïmplementeerd, en op een centrale plaats staat. Promoot een modulair model door de verantwoordlijkheid van object creatie en object gebruik te scheiden.  Dive Into Design Patterns: Factory (method)
+Voorbeeld 1. Opzet Stel, je wilt aan de kassa van een niet al te grote lokale cinema een film kopen.</description>
+    </item>
+    
+    <item>
+      <title>Continuous Integration &amp; Deployment</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/ci/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/ci/</guid>
+      <description>Begeleidende screencast:
+  1. Continuous Integration (CI) Het softwareontwikkel proces is een continu proces: als een eerste versie van het product klaar is, en wordt overgemaakt aan klanten, volgt het onderhoud en een mogelijke volgende versie. Elke wijziging maakt potentiëel dingen kapot (geminimaliseerd met TDD), of introduceert nieuwe features. Dat betekent dat bij elke wijziging, een computer het hele build proces moet doorlopen om te controleren of er niets stuk is.</description>
+    </item>
+    
+    <item>
+      <title>Gebruikte Software</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/software/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/software/</guid>
+      <description>Voor deze cursus werken we met Java en met Git. Dat betekent dat een JDK (en de Gradle build tool) en een Git client de enige vereisten zijn.
+Onderstaande lijst kan helpen bij het installeren en configureren van zulke tools:
+Commandline Tools  git-scm gradle  Om vlot met unix-like command lines te werken op een Windows machine, raden we één van de volgende toolchain aan:
+ cmder, Portable console Emulator for Windows MinGW, minimalist GNU for Windows Cygwin  Let op, bovenstaande tools mixen kan grote negatieve gevolgen hebben, iedere GNU flavor werkt op een andere manier en ze bëinvloeden allemaal je %PATH% systeen variabele (Unix: $PATH)</description>
+    </item>
+    
+    <item>
+      <title>Java Gradle projecten</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</guid>
+      <description>Helps teams build, automate and deliver better software, faster.volgens de gradle.org website.
+ Wat is dat, een build tool? Gradle is een build tool die de automatisatie van releasen, builden, testen, configureren, dependencies en libraries managen, &amp;hellip; eenvoudiger maakt. Kort gezegd: het maakt het leven van een ontwikkelaar eenvoudiger. In een config bestand genaamd build.gradle schrijft men met Groovy, een dynamische taal bovenop de JVM, op een descriptieve manier hoe Gradle de applicatie moet beheren.</description>
+    </item>
+    
+    <item>
+      <title>Oefenzittingen: Github Clasroom</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/github-classroom/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/github-classroom/</guid>
+      <description>Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. Bewkaam jezelf eerst in de basis van Gradle als build tool.
+Labo oefeningen  27/02/2020: TDD Opgave 1: https://classroom.github.com/a/WT_nzKGM 05/03/2020: TDD Opgave 4 &amp;amp; 5: https://classroom.github.com/a/M24O57aU 19/03/2020: TDD Capita Selecta: https://classroom.github.com/a/vd_26z08  Design Patterns:  Facade: https://classroom.github.com/a/Y0jE6TMb Dependency Injection: https://classroom.github.com/a/EMPJIYbY Singleton: https://classroom.github.com/a/x76Z-wrL Decorator: https://classroom.github.com/a/o5ae8Mz_ Factory: https://classroom.github.com/a/XOonKxSW  </description>
+    </item>
+    
+    <item>
+      <title>SESsy Library WebApp</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy/</guid>
+      <description>SESsy Library: Een geïntegreerde oefening Download Locatie: op  Github via https://github.com/KULeuven-Diepenbeek/sessylibrary. Zie README.md op de hoofdpagina. SESsy library is:
+ A Library Management Simulation WebApp for the &amp;lsquo;SES&amp;rsquo; (Software Engineering Skills) course
+ Installatie Download via bovenstaande Github link, of met git clone. Dit is een &amp;ldquo;Gradle&amp;rdquo; project, die de build van ons Java ecosysteem verzorgt. Dat wil zeggen dat het Gradle systeem automatisch libraries (jar bestanden) download van een centrale repository, moesten die nodig zijn.</description>
+    </item>
+    
+    <item>
+      <title>Software Management Skills</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/management/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/management/</guid>
+      <description>De chaos van het Werk De technische kant van het ontwikkelproces is slechts één kant van de medaille. De keerzijde bestaat uit het werk beheren en beheersen, zonder ten prooi te vallen aan de grillen van de klant of de chaos van de organisatie ervan.
+Stel, een gemeente vraagt om een nieuwe website te ontwikkelen voor de lokale bibliotheek. Er wordt een vergadering ingepland met stafhouders om samen met jou te beslissen wat de vereisten zijn.</description>
+    </item>
+    
+    <item>
+      <title>TDD In de praktijk: Mockito</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/mockito/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/mockito/</guid>
+      <description>Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen.
+ ![Mockito logo](/img/teaching/ses/mockito.png)  Lees op https://site.mockito.org hoe je het framework moet gebruiken. (Klik op de knoppen WHY en HOW bovenaan! Volledige javadoc) Denk aan de volgende zaken:
+ Hoe include ik Mockito als een dependency in mijn project? Hoe gebruik ik de API om een Test Double/mock aan te maken?</description>
+    </item>
+    
+    <item>
+      <title>TDD met algoritmes</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/capita/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/capita/</guid>
+      <description>Test-First Een algoritme ontwerpen Neem eerst de volgende noties terug door:
+ Test Driven Development principes  Dit labo gaan we ons focussen op het praktisch gebruik van TDD en unit testen ter ondersteuning van het opbouwen van een algoritme, ter oplossing van een probleem. Alle TDD concepten zijn reeds uitgelegd in het Test Driven Development labo. We gaan onmiddellijk verder met de oefeningen:
+Labo oefeningen Via  Github Classroom. Lege projecten, maak zelf in een nieuwe map voor elke opgave een Gradle project aan.</description>
+    </item>
+    
+  </channel>
+</rss>

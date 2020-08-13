@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="../../images/favicon.png" type="image/png">
+
+    <title>Continuous Integration &amp; Deployment :: Software Engineering Skills</title>
+
+    
+    <link href="../../css/nucleus.css?1597313227" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1597313227" rel="stylesheet">
+    <link href="../../css/hybrid.css?1597313227" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1597313227" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1597313227" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1597313227" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1597313227" rel="stylesheet">
+    <link href="../../css/theme.css?1597313227" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1597313227" rel="stylesheet">
+    
+    <link href="../../css/theme-kul.css?1597313227" rel="stylesheet">
+    
+    
+
+    <script src="../../js/jquery-3.3.1.min.js?1597313227"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+      <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+<script>
+window.MathJax = {
+  chtml: {
+    scale: 2,                      
+    minScale: .5,                  
+    matchFontHeight: true,         
+    mtextInheritFont: false,       
+    merrorInheritFont: true,       
+    mathmlSpacing: false,          
+    skipAttributes: {},            
+    exFactor: .5,                  
+    displayAlign: 'center',        
+    displayIndent: '0'             
+  }
+};
+</script>
+
+<script src=../../js/osc.js></script>
+  </head>
+  <body class="" data-url="/lifecycle/ci/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a href="https://www.kuleuven.be/kuleuven/" target="_blank">
+	<img src="../../img/style/kul.png" alt="KU Leuven" /><br/>
+</a>
+<a href="https://www.uhasselt.be/" target="_blank">
+	<img src="../../img/style/uhasselt.svg" alt="UHasselt" id="uhlogo" />
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="../../js/lunr.min.js?1597313227"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1597313227"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
+    
+</script>
+<script type="text/javascript" src="../../js/search.js?1597313227"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <h3><a href="../../">Inhoudsopgave</a></h3>
+    <ul class="topics">
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/versiebeheer/" title="1. Versie- en issuebeheer" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../versiebeheer/">
+          1. Versie- en issuebeheer
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/dependency-management/" title="2. Dependency Management" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../dependency-management/">
+          2. Dependency Management
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/dependency-management/gradle/" title="Java Gradle projecten" class="dd-item ">
+        <a href="../../dependency-management/gradle/">
+        Java Gradle projecten
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/tdd/" title="3. Test Driven Development" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../tdd/">
+          3. Test Driven Development
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/tdd/mockito/" title="TDD In de praktijk: Mockito" class="dd-item ">
+        <a href="../../tdd/mockito/">
+        TDD In de praktijk: Mockito
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/tdd/capita/" title="TDD met algoritmes" class="dd-item ">
+        <a href="../../tdd/capita/">
+        TDD met algoritmes
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/algoritmes/" title="4. Algoritmes en Datastructuren" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../algoritmes/">
+          4. Algoritmes en Datastructuren
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/patterns/" title="5. Design Patterns" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../patterns/">
+          5. Design Patterns
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/facade/" title="1. Facade" class="dd-item ">
+        <a href="../../patterns/facade/">
+        1. Facade
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/di/" title="2. Dependency Injection" class="dd-item ">
+        <a href="../../patterns/di/">
+        2. Dependency Injection
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/singleton/" title="3. Singleton" class="dd-item ">
+        <a href="../../patterns/singleton/">
+        3. Singleton
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/decorator/" title="4. Decorator" class="dd-item ">
+        <a href="../../patterns/decorator/">
+        4. Decorator
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/patterns/factory/" title="5. Factory" class="dd-item ">
+        <a href="../../patterns/factory/">
+        5. Factory
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/lifecycle/" title="6. SW Development Life Cycle" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="../../lifecycle/">
+          6. SW Development Life Cycle
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/lifecycle/ci/" title="Continuous Integration &amp; Deployment" class="dd-item active">
+        <a href="../../lifecycle/ci/">
+        Continuous Integration &amp; Deployment
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/lifecycle/management/" title="Software Management Skills" class="dd-item ">
+        <a href="../../lifecycle/management/">
+        Software Management Skills
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/extra/" title="Extra informatie" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../../extra/">
+          Extra informatie
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/extra/software/" title="Gebruikte Software" class="dd-item ">
+        <a href="../../extra/software/">
+        Gebruikte Software
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/extra/github-classroom/" title="Oefenzittingen: Github Clasroom" class="dd-item ">
+        <a href="../../extra/github-classroom/">
+        Oefenzittingen: Github Clasroom
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/extra/sessy/" title="SESsy Library WebApp" class="dd-item ">
+        <a href="../../extra/sessy/">
+        SESsy Library WebApp
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.uhasselt.be/studiegids"><i class='fa fa-university'></i> ECTS Sheet</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://toledo.kuleuven.be/portal/"><i class='fa fa-university'></i> Toledo</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='../../'>Software Engineering Skills</a> > <a href='../../lifecycle/'>6. SW Development Life Cycle</a> > Continuous Integration & Deployment
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-continuous-integration-ci">1. Continuous Integration (CI)</a>
+      <ul>
+        <li><a href="#11-de-ci-server">1.1. De CI Server</a></li>
+        <li><a href="#12-de-flow-van-een-ci-server">1.2. De flow van een CI server</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-continuous-deployment-cd">2. Continuous Deployment (CD)</a>
+      <ul>
+        <li><a href="#21-de-flow-van-deployment-en-releases-beheren">2.1. De flow van deployment en releases beheren</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</a>
+      <ul>
+        <li><a href="#opgave-1">Opgave 1</a></li>
+        <li><a href="#opgave-2">Opgave 2</a></li>
+      </ul>
+    </li>
+    <li><a href="#denkvragen">Denkvragen</a></li>
+    <li><a href="#extra-leermateriaal">Extra Leermateriaal</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Continuous Integration &amp; Deployment
+            </h1>
+          
+
+        
+
+
+<p>Begeleidende screencast:</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://player.vimeo.com/video/400180594" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="vimeo video" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
+<h2 id="1-continuous-integration-ci">1. Continuous Integration (CI)</h2>
+<p>Het softwareontwikkel proces is een continu proces: als een eerste versie van het product klaar is, en wordt overgemaakt aan klanten, volgt het onderhoud en een mogelijke volgende versie. Elke wijziging maakt potentiëel dingen kapot (geminimaliseerd met <a href="../../tdd">TDD</a>), of introduceert nieuwe features. Dat betekent dat bij <em>elke wijziging</em>, een computer het hele build proces moet doorlopen om te controleren of er niets stuk is. Dit noemen we het &ldquo;<em>integreren</em>&rdquo; van nieuwe code, vandaar de naam.</p>
+<h3 id="11-de-ci-server">1.1. De CI Server</h3>
+<p>In de praktijk worden aparte servers verantwoordelijk gesteld om regelmatig de hele codebase te downloaden, alles te compileren, en testen uit te voeren. Als iets niet compileert, of een test faalt, rapporteert dit systeem via diverse kanalen aan de ontwikkelaars. Niemand wilt dit in de achtergrond op zijn eigen machine een tweede build systeem geïnstalleerd hebben, die CPU kracht afsnoept van je eigen IDE. De volgende Figuur verduidelijkt de flow:</p>
+<center>
+    <img src="../../img/teaching/ses/devops.jpg" /><br/>
+    <em>Het Continuous Integration build systeem (<a href="https://devopscube.com/continuous-integration-delivery-deployment/" target="_blank">bron</a>).</em>
+</center>
+<p>Dit hele proces verloopt volledig automatisch: niemand drukt op een &ldquo;build&rdquo; knop, maar door middel van ingecheckte code wijzigingen (1) start dit systeem. De CI server haalt wijzigingen op (2), build (3) en test (4) om te kunnen rapporteren of dit lukte of niet (5), via verschillende kanalen (6).</p>
+<p>De Source Control server, zoals Github.com of een lokale <code>git</code> server, werd reeds besproken in labo &lsquo;<a href="../../versiebeheer">versiebeheer</a>'. Er zijn voor Java verschillende populaire CI software systemen:</p>
+<ul>
+<li><a href="https://jenkins.io/solutions/java/">Jenkins</a></li>
+<li><a href="www.jetbrains.com/teamcity">TeamCity</a></li>
+<li><a href="https://www.atlassian.com/software/bamboo">Bamboo</a></li>
+<li><a href="https://travis-ci.org">Travis</a></li>
+</ul>
+<p>In deze systemen zijn configureerbaar en beschikken over een UI, zoals bijvoorbeeld zichtbaar in de <a href="https://www.jetbrains.com/teamcity/documentation/">TeamCity screencast</a>. Betalende systemen zoals TeamCity en Bamboo zijn erg uitgebreid, maar wij gaan werken met Travis. Travis CI is eenvoudig configureerbaar door middel van een <code>.yml</code> bestand en integreert naadloos (en gratis) met Github.</p>
+<h3 id="12-de-flow-van-een-ci-server">1.2. De flow van een CI server</h3>
+<p>De <a href="../../extra/sessy">SESsy library</a> git repository bevat een <a href="https://github.com/KULeuven-Diepenbeek/sessylibrary/blob/master/.travis.yml">.travis.yml</a> bestand dat de Travis server instrueert wat te doen op welk moment:</p>
+<pre>
+language: java
+
+jdk:
+  - openjdk11
+
+env:
+  - NODE_VERSION="12.10.0"
+
+notifications:
+  email: false
+
+before_install:
+  - nvm install $NODE_VERSION
+  - nvm use $NODE_VERSION
+  - pushd frontend
+  - npm install
+  - mkdir dist
+  - popd
+
+install:
+  - ./gradlew check
+  - ./gradlew frontendSync --stacktrace
+  - ./gradlew shadowJar
+</pre>
+<h4 id="1-checkout-code">1. Checkout Code</h4>
+<p><code>git clone [repository]</code> (met de juiste branch). Klaar.</p>
+<h4 id="2-setup-environment">2. Setup Environment</h4>
+<p>Elke build op Travis begint met een <em>clean</em> besturingssysteem (standaard Linux) en gegeven basistools. Dat betekent dat als bepaalde versies van <code>node</code> of Java nodig zijn, deze eerst moeten worden geïnstalleerd. Travis voorziet openJDK versies - de Oracle versies moeten zelf worden afgehaald. Voor SESsy library is ook <code>node</code> vereist die de frontend kan builden.</p>
+<p>In <code>before_install</code> plaats je uit te voeren instructies die voor de <code>install</code> stap worden uitgevoerd.</p>
+<h4 id="3-build-code">3. Build Code</h4>
+<p>Gebruik <a href="../../dependency-management/gradle">Gradle</a> Tasks:</p>
+<ol>
+<li><code>check</code> - installeert de juiste Gradle versie, compileert en test.</li>
+<li><code>frontendSync</code> - build met <code>node</code> de frontend en kopiëert naar <code>src/main/resources</code>.</li>
+</ol>
+<h4 id="4-test-code">4. Test Code</h4>
+<p>Deel van <code>./gradlew check</code>.</p>
+<h4 id="5-package-code--upload-artifact">5. Package Code &amp; Upload Artifact</h4>
+<p><code>./gradlew shadowJar</code> - package alles, inclusief dependencies, in één grote jarfile.</p>
+<p>Zodra één stap mis gaat (zoals een falende test), worden volgende stappen niet uitgevoerd. Als alles goed gaat is de output van het builden de binary die we <em>het artifact</em> noemen, die de huidige buildstamp draagt (meestal een datumcode).</p>
+<p>Alle gebuilde artifacts kunnen daarna worden geupload naar een repository server, zoals de Central Maven Repository, of onze eigen artifact server, waar een historiek wordt bijgehouden.</p>
+<h4 id="6-publish-results">6. Publish Results</h4>
+<p>Op hat dashboard van <a href="https://travis-ci.org">https://travis-ci.org</a> kan je de gepubliceerde resultaten (live) raadplegen:</p>
+<center>
+    <img src="../../img/teaching/ses/travis.png" />
+</center>
+<h2 id="2-continuous-deployment-cd">2. Continuous Deployment (CD)</h2>
+<p>Automatisch code compileren, testen, en packagen, is slechts één stap in het continuous development proces. De volgende stap is deze package ook automatisch <em>deployen</em>, of <em>installeren</em>. Op deze manier staat er altijd de laatste versie op een interne development website, kunnen installaties automatisch worden uitgevoerd op bepaalde tijdstippen, &hellip;</p>
+<p>Populaire CD systemen:</p>
+<ul>
+<li><a href="https://octopus.com">Octopus Deploy</a></li>
+<li><a href="https://codeship.com">Codeship</a></li>
+<li>Eigen scripts gebaseerd op CI systemen</li>
+<li>Cloud deployment systemen (Amazon AWS, Heroku, Google Apps, &hellip;)</li>
+</ul>
+<p>De <code>shadowJar</code> task genereert één <code>jar</code> bestand die uitvoerbaar is (<code>java -jar [filename].jar</code>), en onze DropWizard server lokaal opstart op poort <code>8000</code>. Eender welke server kan dit programma dus op eenvoudige wijze uitvoeren.</p>
+<p>Automatisch packagen en installeren van programma&rsquo;s stopt hier niet. Een niveau hoger is het automatisch packagen en installeren van <em>hele omgevingen</em>: het virtualiseren van een server. Infrastructuur automatisatie is een vak apart, en wordt vaak uitgevoerd met behulp van tools als Puppet, Docker, Terraform, Ansible of Chef. Dit valt buiten de scope van deze cursus.</p>
+<h3 id="21-de-flow-van-deployment-en-releases-beheren">2.1. De flow van deployment en releases beheren</h3>
+<p>Nieuwe features in productie plaatsen brengt altijd een risico met zich mee. Het zou kunnen dat bepaalde nieuwe features bugs veroorzaken in de gekende oude features, of dat het (slecht getest) systeem helemaal niet werkt zoals men verwachtte. Om dat zo veel mogelijk te vermijden wordt er een release plan opgesteld waarin men aan &lsquo;<strong>smart routing</strong>&rsquo; doet.</p>
+<p>Stel, onze <a href="../../extra/sessy">SESsy bibliotheek webapplicatie</a> is toe aan vernieuwing. We wensen een nieuw scherm te ontwerpen om efficiënter te zoeken. We zijn echter niet zeker wat de gebruikers gaan vinden van deze nieuwe manier van werken, en beslissen daarom om slechts een <em>aantal gebruikers</em> bloot te stellen aan deze radicale verandering. Dat kan op twee manieren:</p>
+<ol>
+<li><em>Blue/green releasing</em>: Een &lsquo;harde switch&rsquo; in het systeem bepaalt welke personen (bijvoorbeeld op regio of IP) naar versie van het zoekscherm worden begeleid.</li>
+<li><em>Canary releasing</em>: Een load balancer verdeelt het netwerkverkeer over verschillende servers, waarvan op één server de nieuwe versie is geïnstalleerd. In het begin gaat <code>90%</code> van de bezoekers nog steeds naar de oude versie. Dit kan gradueel worden verhoogd, totdat de oude server wordt uitgeschakeld.</li>
+</ol>
+<p>Onderstaand schema verduidelijkt dit idee.</p>
+<center>
+  ![](/img/teaching/ses/releasing.png)<br/>
+  ([bron](https://blog.getambassador.io/deploy-and-release-decouple-for-speed-and-safety-a8c99a9b4d7b))
+</center>
+<p>De juiste logging en monitoring tools zorgen ervoor dat we een idee krijgen over het gebruik van het nieuwe scherm (groen, versie B). Gaat alles zoals verwacht, dan wordt de switch weggehaald in geval (1), of wordt de loadbalancer ge-herconfigureerd zodat het hele verkeer naar de nieuwe site gaat in geval (2). Ook deze aanpassingen zijn volledig geautomatiseerd. Na verloop van tijd valt de oude versie (blauw, versie A) volledig weg, en kunnen we ons concentreren op de volgende uitbreidingen.</p>
+<p>Het groene vlak, de &lsquo;Ambassador/API gateway&rsquo;, kan aanzien worden als:</p>
+<ul>
+<li>Een fysiek aparte machine, zoals een loadbalancer.</li>
+<li>Een publieke API, die de juiste redirects verzorgt.</li>
+<li>Een switch in de code, die binnen dezelfde toepassing naar scherm 1 of 2 verwijst.</li>
+</ul>
+<p>Versie A en B hoeven dus niet noodzakelijk aparte versies van applicaties te zijn: dit kan binnen dezelfde applicatie, softwarematig dus, worden ingebouwd.</p>
+<h2 id="a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</h2>
+<h3 id="opgave-1">Opgave 1</h3>
+<p>Omwille van privacy instellingen tussen Travis en de KULeuven-Diepenbeek organisatie op Github, wordt voor deze opgave verwacht dat je een <strong>nieuwe repository</strong> zelf aanmaakt vanaf nul, via <a href="https://github.com">Github.com</a>. Geef de repository de naam <code>ses-ci-opgave</code>, zoals in onderstaande screenshot:</p>
+<center>
+  ![](/img/teaching/ses/ci-newrepo.png)
+</center>
+<p>Het is belangrijk dat de repository <strong>public</strong> is, anders kan Travis je project niet builden.</p>
+<h4 id="11-de-calculator-app">1.1 De Calculator app</h4>
+<p>Ontwerp een command-line interface programma, getiteld &lsquo;calculator&rsquo;, dat twee argumenten inleest die terecht komen in de <code>main()</code> methode, en de sommatie ervan afdrukt:</p>
+<p><code>java -cp . Calculator 1 4</code> print <code>5</code> in <code>stdout</code>.</p>
+<p>Uiteraard gebruiken we hier Gradle voor. Zet de berekening in een aparte methode, die ook <em>getest</em> werd. Voorzie dus ook Enkele eenvoudige unit testen in <code>src/main/test</code>.</p>
+<h4 id="12-de-app-builden-op-travis">1.2 De app builden op Travis</h4>
+<p>Nadat de code voor 1.1 werd gecommit en gepushed op je Git repository, is de volgende stap dit project automatisch te builden op een server, zoals Travis. Om dit te activeren moeten er twee stappen worden uitgevoerd:</p>
+<ol>
+<li>Activeer je repository door op <a href="https://travis-ci.org">travis-ci.org</a> in te loggen met je Github account, de repository terug te zoeken in de lijst door op <code>+</code> te drukken links, en de slider naar rechts te zetten, zodat Travis changes detecteert. Zie screenshot hieronder.</li>
+<li>Voorzie een <code>.travis.yml</code> bestand waarin staat beschreven op welke manier je project moet worden gebuild.</li>
+</ol>
+<center>
+  ![](/img/teaching/ses/ci-enabletravis.png)
+</center>
+<p>Het verschil tussen de <code>.org</code> en <code>.com</code> websites is dat de eerste enkel publieke repositories kan behandelen, terwijl de laatste (in BETA) ook private repositories aankan. Vergewis je ervan om enkel via de eerste, <a href="https://travis-ci.org">travis-ci.org</a>, je opgave repository te activeren.</p>
+<p>Welke stappen denk je dat Travis zou moeten ondernemen op je project te builden? Is enkel builden voldoende? Wat als er een test faalt? Stel dat we de gebuilde jar ergens willen uploaden, hoe gaan we dan tewerk? Raadpleeg de documentatie om jezelf te bekwamen in de Yaml syntax:</p>
+<ul>
+<li><a href="https://docs.travis-ci.com/user/customizing-the-build/">Customizing the build - Travis</a></li>
+<li><a href="https://docs.travis-ci.com/user/languages/java/">Building a Java Project - Travis</a></li>
+</ul>
+<h3 id="opgave-2">Opgave 2</h3>
+<p>Er duikt plots een onvoorziene periode van boekenschaarste op! Om niet te veel paniek te veroorzaken, willen we gebruik maken van blue/green releasing om het uitleensysteem van <a href="../../extra/sessy">SESsy library</a> gradueel te wijzigen.</p>
+<p>De klasse <code>BorrowBooksResource</code> is het <em>entry point</em> voor alle calls naar <code>/borrow</code>, zoals de <code>@Path</code> annotatie aanduidt. Deze klasse zal voortaan moeten dienen als API gateway die gebruikers omleidt, ofwel naar het gebruikelijke uitleenproces, ofwel naar een methode die niet meer toestaat dat boeken worden uitgeleend, onafhankelijk van de ingelogde gebruiker of het type boek.</p>
+<p>Maak twee nieuwe klasses aan, <code>BorrowBooksOriginalResource</code> (1) met de originele <code>borrow()</code> implementatie, en <code>BorrowBooksNotAllowedResource</code> (2), die altijd een status <code>FORBIDDEN</code> teruggeeft. Kennis van patterns is een pluspunt hier.</p>
+<p>Denk na over hoe je de bestaande klasse <code>BorrowBooksResource</code> gaat aanpassen om bepaalde gebruikers naar ofwel (1) ofwel (2) te leiden. Je kan bijvoorbeeld een aantal boeken (op basis van ISBN) wel of niet toestaan, of gebaseerd op de sessie een aantal gebruikers wel of niet toestaan. Neem een kijkje in <code>request.getSession()</code>: wat is bruikbaar, en wat niet?</p>
+<h2 id="denkvragen">Denkvragen</h2>
+<ul>
+<li>Waarom is het belangrijk om gebuilde artifacts van de CI server bij te houden?</li>
+<li>Wat zijn de voordelen van het werken met een CI en CD systeem, ten opzichte van alles met de hand (of met eigen gemaakte scripts) in te stellen?</li>
+<li>Version control en continuous delivery zijn klassiek gezien vijanden van database migratie (of omgekeerd). Toch is het mogelijk om een database systeem ook automatisch te up- of downgraden, met bijvoorbeeld <a href="https://flywaydb.org">https://flywaydb.org</a>. Hoe gaat zoiets in zijn werk?</li>
+</ul>
+<h2 id="extra-leermateriaal">Extra Leermateriaal</h2>
+<ul>
+<li><a href="https://martinfowler.com/articles/continuousIntegration.html">Martin Fowler on Continuous Integration</a></li>
+<li><a href="https://martinfowler.com/bliki/CanaryRelease.html">Martin Fowler on Canary Releases</a></li>
+<li><a href="https://www.amazon.com/dp/0321601912?tag=duckduckgo-d-20&amp;linkCode=osi&amp;th=1&amp;psc=1">Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation</a></li>
+</ul>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="../../lifecycle/" title="6. SW Development Life Cycle"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="../../lifecycle/management/" title="Software Management Skills" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="../../js/clipboard.min.js?1597313227"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1597313227"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1597313227"></script>
+    <script src="../../js/jquery.sticky.js?1597313227"></script>
+    <script src="../../js/featherlight.min.js?1597313227"></script>
+    <script src="../../js/highlight.pack.js?1597313227"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1597313227"></script>
+    <script src="../../js/learn.js?1597313227"></script>
+    <script src="../../js/hugo-learn.js?1597313227"></script>
+
+    <link href="../../mermaid/mermaid.css?1597313227" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1597313227"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    
+
+  </body>
+</html>
+
