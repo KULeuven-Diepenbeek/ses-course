@@ -29,7 +29,6 @@ enableGitInfo = true
     lineNos = false
     lineNumbersInTable = true
     noClasses = true
-    style = "arduino"
     tabWidth = 4
 
 [privacy]
@@ -57,11 +56,11 @@ home = [ "HTML", "RSS", "JSON"]
 [[menu.shortcuts]] 
 name = "<i class='fa fa-university'></i> Toledo"
 identifier = "tol"
-url = "TODO"
+url = "https://toledo.kuleuven.be/portal/"
 weight = 10
 
 [[menu.shortcuts]] 
 name = "<i class='fa fa-university'></i> ECTS Sheet"
 identifier = "stud"
-url = "https://uhintra03.uhasselt.be/studiegidswww/opleidingsonderdeel.aspx?a=2019&i=4082&n=4&t=01"
+url = "https://www.uhasselt.be/studiegids"
 weight = 1

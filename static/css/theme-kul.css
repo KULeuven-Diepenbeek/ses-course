@@ -53,6 +53,12 @@ div.ex .inner:first-child:after {
     color: grey !important;
 }
 
+#sidebar h3 {
+    font-family: "Novacento Sans Wide", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+    color: white;
+    margin-top: 1rem;
+    padding-left: 1rem;
+}
 
 /* begin VlJo */
 div.todo {
