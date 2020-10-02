@@ -242,6 +242,15 @@ Meer informatie kan met de volgende parameters:
 
 Indien de Gralde wrapper een oudere versie aanmaakt (< v6), update met `gradle wrapper --gradle-version 6.0.1`. Gradle versie `6` of groter is vereist voor JDK `13` of groter. 
 
+[Gradle/Java compatibiliteitsmatrix](https://docs.gradle.org/current/userguide/compatibility.html#java): 
+
+- JDK `12` of ouder: Gradle `5.x`
+- JDK `13`: Gradle `6.x` of nieuwer
+- JDK `14`: Gradle `6.3` of nieuwer
+- JDK `15`: **NIET** compatibel (_02/10/2020_)! Zie [docs](https://docs.gradle.org/current/userguide/compatibility.html#java)
+
+Indien je de fout "Could not initialize class `org.codehaus.groovy.reflection.ReflectionCache`" krijgt, betekent dit dat je JDK te nieuw is voor de gradle versie. Controleer de huidige gralde versie met `gradle --info` of kijk in `gradle/wrapper/gradle-wrapper.properties`. 
+
 ### Meer links en tutorials:
 
 - Officiële Gradle [docs](https://docs.gradle.org/current/userguide/userguide.html).
