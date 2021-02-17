@@ -20,12 +20,9 @@ Hoe ga je te werk om dit te beheren en tot een succesvol einde te brengen? Er is
 
 ## A. Werk managen: Scrum
 
-De alsmaar populair wordende term '_scrum_' komt vanuit de Amerikaanse sport rugby, waar men letterlijk de koppen bij elkaar steekt om nog een laatste peptalk uit te delen voordat de chaos van de wedstrijd zelf losbarst:
+De alsmaar populair wordende term '_scrum_' komt vanuit de Amerikaanse sport rugby, waar men letterlijk de koppen bij elkaar steekt om nog een laatste peptalk uit te delen voordat de chaos van de wedstrijd zelf losbarst ([Bron](https://en.wikipedia.org/wiki/Scrum_(rugby))):
 
-<center>
-    <img src="/img/teaching/ses/scrum-rugby.jpg" style="width: 80%;" />
-    <br/>Een 'Scrum' bespreking ([Bron](https://en.wikipedia.org/wiki/Scrum_(rugby))).
-</center>
+![](/img/teaching/ses/scrum-rugby.jpg "Een 'Scrum' bespreking")
 
 Het principe van deze coördinatie is gemuteerd naar de softwareontwikkeling, waar het Scrum framework een oplossing kan bieden voor ons beheer probleem, waarvan alle 5 bovenstaande punten van het probleem op een structurele manier worden aangepakt. 
 
@@ -35,9 +32,7 @@ Een **agile software development** methodologie is een methodologie om snel te k
 
 De volgende Figuur representeert het Scrum principe in de technische wereld:
 
-<center>
-    <img src="/img/teaching/ses/scrum-swdev.gif" />
-</center>
+![](/img/teaching/ses/scrum-swdev.gif)
 
 Het Scrum principe verdeelt de ontwikkeltijd in een aantal **iteraties**, waarbij een iteratie een vooropgestelde tijd is, meestal 14 of 30 dagen, die een vaste kadans bepaalt waarin teams software ontwikkelen. Elke iteratie gebeurt er hetzelfde: bepalen wat te doen binnen die iteratie, de ontwikkeling ervan, en het vrijgeven van een nieuwe versie van het al dan niet volledig afgewerkt product. 
 
@@ -75,12 +70,10 @@ Op die manier is onmiddellijk iedereen op de hoogte. Dit noemt men ook wel een _
 
 ### Werk visualiseren
 
-Een van de belangrijkste redenen om voor een agile methodologie te kiezen als Scrum, is de mogelijkheid tot het **visualiseren** van werk. Een team van 6 mensen kan daardoor ten allen tijden in één oogopslag zien aan welke taken wordt gewerkt, welke taken/stories in de iteratie zijn opgenomen, en waar het schoentje knelt:
+Een van de belangrijkste redenen om voor een agile methodologie te kiezen als Scrum, is de mogelijkheid tot het **visualiseren** van werk. Een team van 6 mensen kan daardoor ten allen tijden in één oogopslag zien aan welke taken wordt gewerkt, welke taken/stories in de iteratie zijn opgenomen, en waar het schoentje knelt ([bron](http://agilecomplexificationinverter.blogspot.com/2013/11/elements-of-effective-scrum-task-board.html)):
 
-<center>
-    <img src="/img/teaching/ses/scrumbord.png" class="bordered" /><br/>
-    Het Scrumbord ([bron](http://agilecomplexificationinverter.blogspot.com/2013/11/elements-of-effective-scrum-task-board.html)).
-</center>
+![](/img/teaching/ses/scrumbord.png "Het Scrumbord")
+
 
 Elke story wordt een '_swimlane_' toegewezen: een horizontale band, die wordt opgedeeld in een aantal kolommen. Wanneer alle taken van één story van links naar rechts zijn verhuisd, weet het team dat die bepaalde functionaliteit (de story) klaar is voor de eindgebruikers. De taken kunnen worden gecategoriseerd met behulp van kleurcodes (technische opzet, database werk, UI werk, scherm x, y, ...) De kolommen zelf variëren van team tot team. Een voorbeeld:
 
@@ -120,21 +113,15 @@ Stories worden opgesplitst in taken door de proxy en ontwikkelaar, die de functi
 
 Ontwikkelen en analyseren loopt nooit van een leien dakje. Een leider zorgt er voor dat het team zo weinig mogelijk last heeft van eender welke vorm van afleiding. Dat betekent zowel te veel druk van de klant als mogelijke administratieve taken die het bedrijf eist van elke werknemer. Een goede team leider is een onzichtbare die er voor zorgt dat iedereen zijn werk kan doen. 
 
-Een tweede taak van de team leider is het opvolgen van vooruitgang van de sprint. Het zou kunnen dat ingeschatte stories meer werk kosten dan initiëel gepland, of dat er een gaatje is om extra werk op te nemen. Dit wordt gevisualiseerd door middel van een '**burndown chart**', een grafiek die het aantal nog te behandelen taken afbeeldt op de resterende tijd in dagen of uren:
+Een tweede taak van de team leider is het opvolgen van vooruitgang van de sprint. Het zou kunnen dat ingeschatte stories meer werk kosten dan initiëel gepland, of dat er een gaatje is om extra werk op te nemen. Dit wordt gevisualiseerd door middel van een '**burndown chart**', een grafiek die het aantal nog te behandelen taken afbeeldt op de resterende tijd in dagen of uren ([bron](https://de.wikipedia.org/wiki/Burn-Down-Chart)):
 
-<center>
-    <img src="/img/teaching/ses/burndown.png" /><br/>
-    Een voorbeeld _burndown chart_ ([bron](https://de.wikipedia.org/wiki/Burn-Down-Chart)).
-</center>
+![](/img/teaching/ses/burndown.png "Een voorbeeld burndown chart")
 
 Pieken _boven_ de groene ideaallijn betekent onverwacht extra werk die niet werd ingepland, waarbij de team leider mogelijk moet ingrijpen. Dalingen _onder_ de groene lijn betekent vlot werk met mogelijkheid tot iets extra buiten de sprint. De team leider overlegt vaak met de Product Owner om de verwachtingen zo goed mogelijk bij de ideaallijn gealigneerd te krijgen. 
 
-Trends in burndown charts evalueren is een belangrijke vaardigheid voor elk lid van het team. Iedereen kan in één oogopslag onmiddellijk zien of het team meer werk heeft gedaan dan initieel ingepland, nog op schema ligt, of erg achter hinkt. Pieken en dalingen in de grafiek zijn duidelijke tekenen van onder- of overschattingen van de story's. In bovenstaande grafiek krijgt het team bijvoorbeeld na dag 4 (X-as) een zware dobber te verwerken dat meer tijd kost dan eerst gedacht, die pas na dag 9 wordt opgelost. Tussen dag 11 en 15 verloopt alles op cruise snelheid - het gaat zelfs lichtjes beter dan verwacht. De grafiek 'remaining effort' is de belangrijkste.
+Trends in burndown charts evalueren is een belangrijke vaardigheid voor elk lid van het team. Iedereen kan in één oogopslag onmiddellijk zien of het team meer werk heeft gedaan dan initieel ingepland, nog op schema ligt, of erg achter hinkt. Pieken en dalingen in de grafiek zijn duidelijke tekenen van onder- of overschattingen van de story's. In bovenstaande grafiek krijgt het team bijvoorbeeld na dag 4 (X-as) een zware dobber te verwerken dat meer tijd kost dan eerst gedacht, die pas na dag 9 wordt opgelost. Tussen dag 11 en 15 verloopt alles op cruise snelheid - het gaat zelfs lichtjes beter dan verwacht. De grafiek 'remaining effort' is de belangrijkste ([bron](http://www.makhfi.com/Scrum/)).
 
-<center>
-    <img src="/img/teaching/ses/burndown2.png" /><br/>
-    Een tweede voorbeeld _burndown chart_ ([bron](http://www.makhfi.com/Scrum/)).
-</center>
+![](/img/teaching/ses/burndown2.png "Een tweede voorbeeld burndown chart")
 
 Het effect is erg uitgesproken op de tweede grafiek. Op dag 3 valt het team volledig stil (de oorzaak is natuurlijk niet af te lezen, dit kan zowel liggen aan technische problemen als aan bijvoorbeeld ziekte van een aantal programmeurs), wat de scherpe piek verklaart. De rest van de iteratie zwoegt het team om het verloren werk in te halen, wat pas na dag 10 uiteindelijk bijna lukt. 
 

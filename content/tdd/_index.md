@@ -122,10 +122,7 @@ Voel jij je veilig genoeg om grote wijzigingen door te voeren zonder te kunnen v
 
 Unit testen zijn stukjes code die productie code verifiëren op verschillende niveau's. Het resultaat van een test is GROEN (geslaagd) of ROOD (gefaald met een bepaalde reden). Een collectie van testen geeft ontwikkelaars het zelfvertrouwen om stukken van de applicatie te wijzigen met de zekerheid dat de aanwezige testen rapporteren wat nog werkt, en wat niet. Het uitvoeren van deze testen gebeurt meestal in een IDE zoals IntelliJ voor Java, of Visual Studio voor C#, zoals deze screenshot:
 
-<center>
-    <img src="https://wgroeneveld.github.io/tdd-course/img/nunit.png"/><br/>
-    <em>De visuele output van NUnit in C#.</em>
-</center>
+![](/img/nunit.jpg "De visuele output van NUnit in C#")
 
 Elke validatieregel wordt apart opgelijst in één test. Als de `validate()` methode 4 regels test, zijn er minstens 4 testen geimplementeerd. In de praktijk is dat meestal meer omdat **edge cases** - uitzonderingsgevallen zoals `null` checks - ook aanzien worden als een apart testgeval. 
 
@@ -206,10 +203,7 @@ JUnit 4 en JUnit 5 verschillen hierin op niveau van gebruik. Vanaf JUnit 5 werkt
 
 Er zijn drie grote types van testen:
 
-<center>
-    <img src="https://wgroeneveld.github.io/tdd-course/img/testniveaus.png" /><br/>
-    <em>De drie soorten van testen.</em>
-</center>
+![](/img/testniveaus.jpg "De drie soorten van testen.")
 
 #### 1. Unit Testing (GROEN)
 
@@ -248,10 +242,7 @@ public class Service {
 
 Hoe testen we de `updateCustomerWallet()` methode, zonder de effectieve implementatie van `save()` te moeten gebruiken? Door middel van _test doubles_.
 
-<center>
-    <img src="https://wgroeneveld.github.io/tdd-course/img/testdouble.jpg" style="width: 75%; border: 1px solid black;" /><br/>
-    <em>I'll Be Back.</em>
-</center>
+![](/img/testdouble.jpg "I'll Be Back.")
 
 Zoals Arnie in zijn films bij gevaarlijke scenes een stuntman lookalike gebruikt, zo gaan wij in onze code een `Repository` lookalike gebruiken, zodat de `Service` dénkt dat hij `save()` aanroept, terwijl dit in werkelijkheid niet zo is. Daarvoor moet de repository een interface zijn. We passen in principe een design pattern toe, waarbij in de service een repository instantie wordt geïnjecteerd:
 
@@ -298,9 +289,7 @@ Een werkend voorbeeld hiervan is terug te vinden in de [SESsy library applicatie
 
 De SESsy applicatie maakt gebruik van **WebDriver**, een interface die **Selenium** aanstuurt die browsers automatiseert. Op die manier kan men eenvoudig commando's doorsturen zoals surf naar daar, klik hier op, wacht x seconden, verifieer dat hier dat staat, ... Dit is één test scenario in totaal. 
 
-<center>
-    <img src="/img/teaching/ses/selenium.png" class="bordered" />
-</center>
+![](/img/teaching/ses/selenium.png)
 
 In plaats van dit in (Java) code te schrijven, is het echter ook mogelijk om de [Selenium IDE](https://selenium.dev/selenium-ide/) extentie voor Google Chrome of Mozilla Firefox te gebruiken. Deze browser extentie laat recorden in de browser zelf toe, en vergemakkelijkt het gebruik (er is geen nood meer aan het vanbuiten kennen van zulke commando's). Dit wordt in de praktijk vaak gebruikt door software analisten of testers die niet de technische kennis hebben om te programmeren, maar toch deel zijn van het ontwikkelteam. 
 
@@ -400,9 +389,7 @@ Hoe kunnen we dan toch nog testen wat we willen testen? Mogelijke scenario's:
 
 Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen. 
 
-<center>
-    ![Mockito logo](/img/teaching/ses/mockito.png)
-</center>
+![Mockito logo](/img/teaching/ses/mockito.png)
 
 Gebruik dus hiervoor Mockito, en injecteer een `mock(SpeculaasFabriek.class)` in de verkoopster (de setter is reeds voorzien). 
 

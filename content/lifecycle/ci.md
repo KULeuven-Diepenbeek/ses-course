@@ -14,12 +14,9 @@ Het softwareontwikkel proces is een continu proces: als een eerste versie van he
 
 ### 1.1. De CI Server
 
-In de praktijk worden aparte servers verantwoordelijk gesteld om regelmatig de hele codebase te downloaden, alles te compileren, en testen uit te voeren. Als iets niet compileert, of een test faalt, rapporteert dit systeem via diverse kanalen aan de ontwikkelaars. Niemand wilt dit in de achtergrond op zijn eigen machine een tweede build systeem geïnstalleerd hebben, die CPU kracht afsnoept van je eigen IDE. De volgende Figuur verduidelijkt de flow:
+In de praktijk worden aparte servers verantwoordelijk gesteld om regelmatig de hele codebase te downloaden, alles te compileren, en testen uit te voeren. Als iets niet compileert, of een test faalt, rapporteert dit systeem via diverse kanalen aan de ontwikkelaars. Niemand wilt dit in de achtergrond op zijn eigen machine een tweede build systeem geïnstalleerd hebben, die CPU kracht afsnoept van je eigen IDE. De volgende Figuur verduidelijkt de flow ([bron](https://devopscube.com/continuous-integration-delivery-deployment/)):
 
-<center>
-    <img src="/img/teaching/ses/devops.jpg" /><br/>
-    <em>Het Continuous Integration build systeem (<a href="https://devopscube.com/continuous-integration-delivery-deployment/" target="_blank">bron</a>).</em>
-</center>
+![](/img/teaching/ses/devops.jpg "Het Continuous Integration build systeem")
 
 Dit hele proces verloopt volledig automatisch: niemand drukt op een "build" knop, maar door middel van ingecheckte code wijzigingen (1) start dit systeem. De CI server haalt wijzigingen op (2), build (3) en test (4) om te kunnen rapporteren of dit lukte of niet (5), via verschillende kanalen (6).
 
@@ -95,9 +92,7 @@ Alle gebuilde artifacts kunnen daarna worden geupload naar een repository server
 
 Op hat dashboard van [https://travis-ci.org](https://travis-ci.org) kan je de gepubliceerde resultaten (live) raadplegen:
 
-<center>
-    <img src="/img/teaching/ses/travis.png" />
-</center>
+![](/img/teaching/ses/travis.png)
 
 ## 2. Continuous Deployment (CD)
 
@@ -123,12 +118,10 @@ Stel, onze [SESsy bibliotheek webapplicatie](/extra/sessy) is toe aan vernieuwin
 1. _Blue/green releasing_: Een 'harde switch' in het systeem bepaalt welke personen (bijvoorbeeld op regio of IP) naar versie van het zoekscherm worden begeleid. 
 2. _Canary releasing_: Een load balancer verdeelt het netwerkverkeer over verschillende servers, waarvan op één server de nieuwe versie is geïnstalleerd. In het begin gaat `90%` van de bezoekers nog steeds naar de oude versie. Dit kan gradueel worden verhoogd, totdat de oude server wordt uitgeschakeld. 
 
-Onderstaand schema verduidelijkt dit idee.
+Onderstaand schema verduidelijkt dit idee ([bron](https://blog.getambassador.io/deploy-and-release-decouple-for-speed-and-safety-a8c99a9b4d7b)).
 
-<center>
-  ![](/img/teaching/ses/releasing.png)<br/>
-  ([bron](https://blog.getambassador.io/deploy-and-release-decouple-for-speed-and-safety-a8c99a9b4d7b))
-</center>
+![](/img/teaching/ses/releasing.png)
+  
 
 De juiste logging en monitoring tools zorgen ervoor dat we een idee krijgen over het gebruik van het nieuwe scherm (groen, versie B). Gaat alles zoals verwacht, dan wordt de switch weggehaald in geval (1), of wordt de loadbalancer ge-herconfigureerd zodat het hele verkeer naar de nieuwe site gaat in geval (2). Ook deze aanpassingen zijn volledig geautomatiseerd. Na verloop van tijd valt de oude versie (blauw, versie A) volledig weg, en kunnen we ons concentreren op de volgende uitbreidingen. 
 
@@ -147,9 +140,8 @@ Versie A en B hoeven dus niet noodzakelijk aparte versies van applicaties te zij
 
 Omwille van privacy instellingen tussen Travis en de KULeuven-Diepenbeek organisatie op Github, wordt voor deze opgave verwacht dat je een **nieuwe repository** zelf aanmaakt vanaf nul, via [Github.com](https://github.com). Geef de repository de naam `ses-ci-opgave`, zoals in onderstaande screenshot:
 
-<center>
-  ![](/img/teaching/ses/ci-newrepo.png)
-</center>
+![](/img/teaching/ses/ci-newrepo.png)
+
 
 Het is belangrijk dat de repository **public** is, anders kan Travis je project niet builden. 
 
@@ -168,9 +160,9 @@ Nadat de code voor 1.1 werd gecommit en gepushed op je Git repository, is de vol
 1. Activeer je repository door op [travis-ci.org](https://travis-ci.org) in te loggen met je Github account, de repository terug te zoeken in de lijst door op `+` te drukken links, en de slider naar rechts te zetten, zodat Travis changes detecteert. Zie screenshot hieronder.
 2. Voorzie een `.travis.yml` bestand waarin staat beschreven op welke manier je project moet worden gebuild. 
 
-<center>
-  ![](/img/teaching/ses/ci-enabletravis.png)
-</center>
+
+![](/img/teaching/ses/ci-enabletravis.png)
+
 
 Het verschil tussen de `.org` en `.com` websites is dat de eerste enkel publieke repositories kan behandelen, terwijl de laatste (in BETA) ook private repositories aankan. Vergewis je ervan om enkel via de eerste, [travis-ci.org](https://travis-ci.org), je opgave repository te activeren. 
 

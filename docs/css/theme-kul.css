@@ -1,6 +1,10 @@
 
 /* ---------------- custom style below */
 
+#body img {
+    margin: 1rem auto !important;
+}
+
 #uhlogo {
     width: 165px;
     -webkit-filter: invert(100%); /* safari 6.0 - 9.0 */

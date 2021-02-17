@@ -126,7 +126,7 @@ Execution failed for task ':test'.
 
 Dit is **exact hetzelfde** als in IntelliJ de testen uitvoeren met de knop 'Run':
 
-<img src="/img/teaching/ses/intellij_run_test.png" />
+![](/img/teaching/ses/intellij_run_test.png)
 
 ### Waarom een build tool gebruiken?
 
@@ -217,9 +217,8 @@ Belangrijke taken zijn onder andere:
 
 Onderstaande screenshot is een voorbeeld van een Unit Test HTML rapport voor de SESsy library:
 
-<center>
-    ![Gradle test report](/img/teaching/ses/gradle-testreports.png)
-</center>
+![Gradle test report](/img/teaching/ses/gradle-testreports.png)
+
 
 ### Ik wil meer output bij het uitvoeren van mijn tasks!
 

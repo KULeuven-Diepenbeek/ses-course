@@ -174,9 +174,8 @@ Het XML bestand beschrijft welke afhankelijkheden deze module op zich heeft. Zo 
 
 Grote projecten kunnen makkelijk afhankelijk zijn van tientallen libraries, die op hun beurt weer afhankelijk zijn van libraries. Een typische grote webapplicatie geschreven in java heeft de volgende dependency tree, die opgevraagd kan worden via Gradle of Maven:
 
-<center>
-    <img src="/img/teaching/ses/deptree.png" />
-</center>
+![](/img/teaching/ses/deptree.png)
+
 
 Gradle voorziet een plugin genaamd '_maven-publish_' die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een `publishing` tag toe met de volgende properties:
 
@@ -238,9 +237,7 @@ public class Scorebord {
 De klasse `Speler` is een intern hulpmiddel om te serialiseren. <br/>
 Extra methodes toevoegen mag altijd. De constructor van het scorebord leest automatisch de score van de vorige keer in, als dat bestand bestaat. Denk bij de implementatie aan een collectie om spelers en hun scores bij te houden. Maak via IntelliJ een nieuw **Gradle - Java project**. Groupid: `be.kuleuven`. Arifactid: `scorebord`. Vergeet niet op 'refresh' te drukken wanneer je een dependency toevoegt (linksboven op onderstaande screenshot):
 
-<center>
-    <img src="/img/teaching/ses/gradle-refresh.png" />
-</center>
+![](/img/teaching/ses/gradle-refresh.png)
 
 Met het commando `gradlew jar` creëer je het bestand `scorebord-1.0-SNAPSHOT.jar` in de `build/libs` folder. 
 
@@ -259,9 +256,7 @@ public class DartsGame {
 
 Als de dependencies goed liggen, kan je een nieuw `Scorebord` aanmaken, en herkent IntelliJ dit met CTRL+Space:
 
-<center>
-    <img src="/img/teaching/ses/gradle-dependency-used.png" />
-</center>
+![](/img/teaching/ses/gradle-dependency-used.png)
 
 Maak een `Main` klasse met een `public static void main(String[] args)` methode, waarin een darts spel wordt opgezet, en een aantal keer ter test wordt 'gegooid'. Druk de totale score en de winnaar af, dat opgevraagd kan worden via het spelbord. Krijg je deze klasse opgestart? 
 

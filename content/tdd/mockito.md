@@ -6,9 +6,8 @@ disableList: true
 
 Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen. 
 
-<center>
-    ![Mockito logo](/img/teaching/ses/mockito.png)
-</center>
+![Mockito logo](/img/teaching/ses/mockito.png)
+
 
 Lees op [https://site.mockito.org](https://site.mockito.org) **hoe** je het framework moet gebruiken. (Klik op de knoppen **WHY** en **HOW** bovenaan! Volledige [javadoc](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)) Denk aan de volgende zaken:
 
@@ -20,10 +19,8 @@ Lees op [https://site.mockito.org](https://site.mockito.org) **hoe** je het fram
 
 Zoals aangehaald in de [TDD noties](/tdd) kan een eigen implementatie van een interface worden gemaakt die als Test Double werkt (denk aan Arnie's stuntman). Het vervelende is dat deze klasse enkel maar wordt gebruikt in test code, dus niet in productie code. Mockito maakt dit dynamisch aan, zonder dat er ooit het keyword `class` bij aan de pas komt. 
 
-<center>
-    <img src="https://wgroeneveld.github.io/tdd-course/img/testdouble.jpg" style="width: 75%; border: 1px solid black;" /><br/>
-    <em>I'll Be Back.</em>
-</center>
+![](/img/testdouble.jpg "I'll Be Back.")
+
 
 Stel, Arnold gaat acteren voor de nieuwe film **Die Hard: In A Deepen Beek** (uit in 2025 - Bruce had geen zin meer). Hij moet daarvoor een aantal fantastische stunts uithalen, die hij niet graag zelf zou doen. De volgende interface definieert een 'Arnold', waarbij `doBackFlip()` de gevaarlijke stunt is (resultaat is `true` indien geslaagd):
 

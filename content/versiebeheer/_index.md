@@ -14,11 +14,9 @@ Een versiebeheer systeem bewaart alle _wijzigingen_ aan (tekst)bestanden. Dat be
 
 ### Waarom versioneren?
 
-Dat verduidelijkt Geek & Poke:
+Dat verduidelijkt [Geek & Poke](https://geek-and-poke.com/):
 
-<center>
-    <img src="/img/teaching/ses/sourcecontrol.jpg" style="width: 70%" />
-</center>
+![](/img/teaching/ses/sourcecontrol.jpg)
 
 Zonder versionering stuurt iedereen e-mail attachments door naar elkaar, in de verwachting een aangepaste versie terug te ontvangen. Maar, wat gebeurt er met:
 
@@ -36,9 +34,7 @@ Git is een _gedecentraliseerd_ versiebeheer systeem waarbij de hele repository i
 
 Onderstaande Figuur geeft het verschil weer tussen een _gecentraliseerd_ versioneringssysteem, zoals SVN, CVS en MS SourceSafe, en een _gedecentraliseerd_ systeem, zoals Git. Elke gebuiker heeft een kopie van de volledige repository op zijn lokale harde schijf staan. Bij SVN communiceren 'working copies' met de server. Bij Git communiceren repositories (inclusief volledige history) met eender welke andere repository. 'Toevallig' is dat meestal een centrale server, zoals [Github.com](https://github.com), [Gitlab.com](https://gitlab.com) of [BitBucket.com](https://bitbucket.com). 
 
-<center>
-    ![SVN VS Git](/img/teaching/ses/svngit.png)
-</center>
+![](/img/teaching/ses/svngit.png "SVN VS Git")
 
 ([Image Src](http://sgdev-blog.blogspot.com/2014_03_01_archive.html))
 
@@ -120,9 +116,7 @@ Een branch lokaal committen kan altijd, maar een `push` kan de volgende fout gev
 
 Na een branch commit is de volgende knop zichtbaar op Github:
 
-<center>
-    <img src="/img/teaching/ses/github_compare.png"/>
-</center>
+![](/img/teaching/ses/github_compare.png)
 
 De **Compare &amp; Pull Request** knop maakt het mogelijk om wijzigingen op de bugfixbranch tot op de master branch te brengen. Dit kan ook via het commando `git merge bugfixbranch` in de master branch. Een demo toont dit aan. Daarna hebben we de branch niet meer nodig: `git branch -d bugfixbranch`. Merk op dat dit enkel _lokaal_ de kopie van de branch verwijderd. De remote, op Github.com, verwijderen, vereist meer werk: `git push origin --delete bugfixbranch`.
 
