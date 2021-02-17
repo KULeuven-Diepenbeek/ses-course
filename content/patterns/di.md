@@ -6,7 +6,9 @@ disableList: true
 
 ## _"Dependency Injection (DI)"_ - Design Pattern
 
-Begeleidende screencast:
+Begeleidende screencast[^host]:
+
+[^host]: Merk op dat de cursus nu wordt gehost op https://kuleuven-diepenbeek.github.io/ses-course/
 
 {{< vimeo 398530942 >}}
 

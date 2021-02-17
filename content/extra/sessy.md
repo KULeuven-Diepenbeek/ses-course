@@ -9,6 +9,8 @@ Download Locatie: op <i class='fab fa-github'></i> Github via [https://github.co
 
 > A Library Management Simulation WebApp for the 'SES' (Software Engineering Skills) course
 
+![](/img/sessy.jpg "Een boek uitlenen in de SESsy Library webapp.")
+
 ### Installatie
 
 Download via bovenstaande Github link, of met `git clone`. Dit is een ["Gradle" project](/dependency-management/gradle), die de build van ons Java ecosysteem verzorgt. Dat wil zeggen dat het Gradle systeem automatisch libraries (`jar` bestanden) download van een centrale repository, moesten die nodig zijn. Het enige wat jij moet installeren is Java:

@@ -13,7 +13,7 @@ Onderstaande lijst kan helpen bij het installeren en configureren van zulke tool
 - [git-scm](https://git-scm.com/downloads)
 - [gradle](/dependency-management/gradle)
 
-Om vlot met unix-like command lines te werken op een Windows machine, raden we één van de volgende toolchain aan: 
+Het is onze intentie om jullie kennis van **Linux commando's**, opgedaan in het vak Besturingssystemen en C, hier ook van pas te laten komen. Daarom is het aangeraden om dezelfde virtuele machine te gebruiken voor BESC en voor SES. Indien dit voor jou niet lukt, vanwege performantieproblemen of andere, kan je toch nog op Windows met unix-like commandos werken. Daarvoor raden we één van de volgende toolchain aan: 
 
 - [cmder, Portable console Emulator for Windows](https://cmder.net)
 - [MinGW, minimalist GNU for Windows](http://www.mingw.org/wiki/msys)

@@ -6,7 +6,10 @@ disableList: true
 
 ## _"Factory"_ - Design Pattern
 
-Begeleidende screencast:
+Begeleidende screencast[^host]:
+
+[^host]: Merk op dat de cursus nu wordt gehost op https://kuleuven-diepenbeek.github.io/ses-course/
+
 
 {{< vimeo 398548507 >}}
 

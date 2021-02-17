@@ -7,7 +7,7 @@ weight: 5
 
 Patronen zijn voor het mensenlijk brein eenvoudig herkenbaar: we zien stukjes van iets die we al eens ergens anders gezien hebben. Blokjes op een bepaalde manier ingekleurd, gehaakte patroontjes van een dekbed, Fibonacci spiralen in bloemblaadjes en zaadjes, ... Wanneer we programmeren, geldt dit principe ook: blokken code die herbruikt worden om eenvoudige oplossingen te bieden voor complexe problemen. 
 
-![](/img/teaching/creativepatterns.jpg "Een (creatief) patroon?")
+![](/img/creativepatterns.jpg "Een (creatief) patroon?")
 
 Een _pattern_ is een herkenbaar en herhalende blok van eigenschappen die herbruikt kan worden. In het geval van softwareontwikkeling zijn patterns structuren in code die herbruikt worden om code eenvoudiger, beter leesbaar, en beter in onderhoud te maken. Deze structuren zijn in feite **pre-fab oplossingen** voor gelijkaardige problemen. 
 
