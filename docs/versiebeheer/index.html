@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.79.1" />
     <meta name="description" content="">
 
 
@@ -12,21 +12,21 @@
     <title>1. Versie- en issuebeheer :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1597313227" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1597313227" rel="stylesheet">
-    <link href="../css/hybrid.css?1597313227" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1597313227" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1597313227" rel="stylesheet">
-    <link href="../css/auto-complete.css?1597313227" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1597313227" rel="stylesheet">
-    <link href="../css/theme.css?1597313227" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1597313227" rel="stylesheet">
+    <link href="../css/nucleus.css?1613550772" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1613550772" rel="stylesheet">
+    <link href="../css/hybrid.css?1613550772" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1613550772" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1613550772" rel="stylesheet">
+    <link href="../css/auto-complete.css?1613550772" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1613550772" rel="stylesheet">
+    <link href="../css/theme.css?1613550772" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1613550772" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1597313227" rel="stylesheet">
+    <link href="../css/theme-kul.css?1613550772" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1597313227"></script>
+    <script src="../js/jquery-3.3.1.min.js?1613550772"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../js/osc.js></script>
   </head>
-  <body class="" data-url="/versiebeheer/">
+  <body class="" data-url="../versiebeheer/">
     <nav id="sidebar" class="">
 
 
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1597313227"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1597313227"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1613550772"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1613550772"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1597313227"></script>
+<script type="text/javascript" src="../js/search.js?1613550772"></script>
 
     
   </div>
@@ -716,10 +716,14 @@ Wat is de beste manier om source code te bewaren?</p>
 <p><strong><a href="https://en.wikipedia.org/wiki/Version_control">Source Control</a></strong> is een sleutelbegrip voor ontwikkelteams. Het stelt iedereen in staat om aan dezelfde source file te werken zonder bestanden op- en neer te sturen, voorziet backups, maakt het mogelijk om releases en branches uit te rollen, &hellip;</p>
 <p>Een versiebeheer systeem bewaart alle <em>wijzigingen</em> aan (tekst)bestanden. Dat betekent dat eender welke wijziging, door wie dan ook, teruggedraaid kan worden. Zonder versiebeheer is het onmogelijk om code op één centrale plaats te bewaren als er met meerdere personen aan wordt gewerkt. Zelfs met maar één persoon is het toch nog steeds sterk aan te raden om te werken met versionering. Fouten worden immers snel gemaakt. Een bewaarde wijziging aan een bestand is permanent op je lokale harde schijf: de volgende dag kan je niet het origineel terug boven halen. Er wordt samen met delta&rsquo;s ook veel metadata bewaard (tijdstippen, commit comments, gebruikers, bestandsgroottes, &hellip;)</p>
 <h3 id="waarom-versioneren">Waarom versioneren?</h3>
-<p>Dat verduidelijkt Geek &amp; Poke:</p>
-<center>
-    <img src="../img/teaching/ses/sourcecontrol.jpg" style="width: 70%" />
-</center>
+<p>Dat verduidelijkt <a href="https://geek-and-poke.com/">Geek &amp; Poke</a>:</p>
+<p><figure>
+	<a href="../img/teaching/ses/sourcecontrol.jpg" data-featherlight="image">
+		<img src="../img/teaching/ses/sourcecontrol.jpg"  >
+	</a>
+	
+</figure>
+</p>
 <p>Zonder versionering stuurt iedereen e-mail attachments door naar elkaar, in de verwachting een aangepaste versie terug te ontvangen. Maar, wat gebeurt er met:</p>
 <ul>
 <li>Conflicten? (iemand wijzigt iets in dezelfde cel als jij)</li>
@@ -732,9 +736,15 @@ Wat is de beste manier om source code te bewaren?</p>
 <h2 id="in-de-praktijk-git">In de praktijk: Git</h2>
 <p>Git is een <em>gedecentraliseerd</em> versiebeheer systeem waarbij de hele repository inclusief historiek lokaal wordt geplaatst zodra een <code>clone</code> commando wordt uitgevoerd. Oudere <em>gecentraliseerde</em> systemen zoals SVN en CVS bewaren (meta-)data op één centrale plaats: de version control server. Voor dit vak wordt resoluut voor git gekozen.</p>
 <p>Onderstaande Figuur geeft het verschil weer tussen een <em>gecentraliseerd</em> versioneringssysteem, zoals SVN, CVS en MS SourceSafe, en een <em>gedecentraliseerd</em> systeem, zoals Git. Elke gebuiker heeft een kopie van de volledige repository op zijn lokale harde schijf staan. Bij SVN communiceren &lsquo;working copies&rsquo; met de server. Bij Git communiceren repositories (inclusief volledige history) met eender welke andere repository. &lsquo;Toevallig&rsquo; is dat meestal een centrale server, zoals <a href="https://github.com">Github.com</a>, <a href="https://gitlab.com">Gitlab.com</a> of <a href="https://bitbucket.com">BitBucket.com</a>.</p>
-<center>
-    ![SVN VS Git](/img/teaching/ses/svngit.png)
-</center>
+<p><figure>
+	<a href="../img/teaching/ses/svngit.png" data-featherlight="image">
+		<img src="../img/teaching/ses/svngit.png"   title="SVN VS Git">
+	</a>
+	
+		<figcaption>SVN VS Git</figcaption>
+	
+</figure>
+</p>
 <p>(<a href="http://sgdev-blog.blogspot.com/2014_03_01_archive.html">Image Src</a>)</p>
 <p>Vanaf nu wordt verondersteld dat labo oefeningen gecommit worden in <code>git</code> op <a href="https://github.com">Github.com</a>: een zeer populair open source software ontwikkelingsplatform dat gebruiksvriendelijk is. Het <a href="https://git-scm.com/book/en/v2">Pro Git</a> handboek leert je alles over de werking van git. (<a href="http://rogerdudler.github.io/git-guide/">&lsquo;git - the simple guide&rsquo;</a> helpt ook)</p>
 <h3 id="de-git-workflow">De Git workflow</h3>
@@ -799,9 +809,13 @@ Wouters-Air:sessylibrary wgroeneveld$ git branch
 </pre>
 <p>Een branch lokaal committen kan altijd, maar een <code>push</code> kan de volgende fout geven: <em>fatal: The current branch bugfixbranch has no upstream branch.</em> In dat geval dien je de branch &lsquo;upstream&rsquo; te pushen naar de Github server door middel van <code>git push --set-upstream origin bugfixbranch</code>.</p>
 <p>Na een branch commit is de volgende knop zichtbaar op Github:</p>
-<center>
-    <img src="../img/teaching/ses/github_compare.png"/>
-</center>
+<p><figure>
+	<a href="../img/teaching/ses/github_compare.png" data-featherlight="image">
+		<img src="../img/teaching/ses/github_compare.png"  >
+	</a>
+	
+</figure>
+</p>
 <p>De <strong>Compare &amp; Pull Request</strong> knop maakt het mogelijk om wijzigingen op de bugfixbranch tot op de master branch te brengen. Dit kan ook via het commando <code>git merge bugfixbranch</code> in de master branch. Een demo toont dit aan. Daarna hebben we de branch niet meer nodig: <code>git branch -d bugfixbranch</code>. Merk op dat dit enkel <em>lokaal</em> de kopie van de branch verwijderd. De remote, op Github.com, verwijderen, vereist meer werk: <code>git push origin --delete bugfixbranch</code>.</p>
 <h4 id="ik-zie-niet-alle-branches-hoe-komt-dat">Ik zie niet alle branches, hoe komt dat?</h4>
 <p>Een <code>git pull</code> commando zal soms in de console &lsquo;new branch [branchnaam]&rsquo; afdrukken, maar toch zal je deze niet tot je beschikking hebben met het <code>git branch</code> commando. Dat komt omdat branches dan ook nog (lokaal) <strong>getracked</strong> moeten worden:</p>
@@ -857,7 +871,7 @@ graph LR;
     bugfix --> mastery
 
 </div>
-<p><a href="https://github.com/KULeuven-Diepenbeek/sessylibrary/issues">Github Issues</a> is een minimalistische feature van Github die het mogelijk maakt om zulke bugs op te volgen. Een nieuw issue openen en een beschrijving van het probleem meegeven (samen met stappen om het te reproduceren), maakt een nieuw item aan dat standaard op &lsquo;<em>open</em>&rsquo; staat. Dit kan worden toegewezen aan personen, en daarna worden &lsquo;<em>closed</em>', om aan te geven dat ofwel het probleem is opgelost, ofwel het geen echt probleem was. Issues kunnen worden gecategoriseerd door middel van labels.</p>
+<p><a href="https://github.com/KULeuven-Diepenbeek/sessylibrary/issues">Github Issues</a> is een minimalistische feature van Github die het mogelijk maakt om zulke bugs op te volgen. Een nieuw issue openen en een beschrijving van het probleem meegeven (samen met stappen om het te reproduceren), maakt een nieuw item aan dat standaard op &lsquo;<em>open</em>&rsquo; staat. Dit kan worden toegewezen aan personen, en daarna worden &lsquo;<em>closed</em>&rsquo;, om aan te geven dat ofwel het probleem is opgelost, ofwel het geen echt probleem was. Issues kunnen worden gecategoriseerd door middel van labels.</p>
 <h2 id="a-idoefalabo-oefeningen"><a id="oef"></a>Labo oefeningen</h2>
 <h3 id="opgave-1">Opgave 1</h3>
 <p>Maak een Github.com account aan, als je dat nog niet hebt. Download de commandline tools <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a>, de officiele distributie, multiplatform, en probeer voor opgave twee de repository &lsquo;ses-issue-sandbox&rsquo; te clonen: <code>git clone https://github.com/KULeuven-Diepenbeek/ses-issue-sandbox.git</code>.</p>
@@ -870,7 +884,7 @@ graph LR;
 <li>Maak een nieuwe instantie aan van dit object in <code>SandboxMain</code>.</li>
 </ol>
 <p>Neem een kijkje bij de voorbeeld implementaties <code>SandCastle</code> en <code>BucketOfWater</code>.</p>
-<p>Merk op dat je onvoldoende <code>push</code> rechten hebt om lokale wijzigingen aan de repository te uploaden naar de Github server. We geven je nu de status van &lsquo;<em>collaborator</em>', zodat iedereen gemachtigd is om wijzigingen door te voeren.</p>
+<p>Merk op dat je onvoldoende <code>push</code> rechten hebt om lokale wijzigingen aan de repository te uploaden naar de Github server. We geven je nu de status van &lsquo;<em>collaborator</em>&rsquo;, zodat iedereen gemachtigd is om wijzigingen door te voeren.</p>
 <h2 id="denkvragen">Denkvragen</h2>
 <ul>
 <li>In welk geval is het aanmaken van een branch een goed idee, in plaats van verder te werken op de (enige) master branch? Lees eerst het Pro Git boek hoofdstuk over branches.</li>
@@ -892,7 +906,7 @@ graph LR;
 </footer>
 
         
-        </div> 
+        </div>
         
 
       </div>
@@ -900,7 +914,7 @@ graph LR;
     <div id="navigation">
         
         
-        
+
         
             
             
@@ -1243,7 +1257,7 @@ graph LR;
                     
             
         
-        
+
         
 
 
@@ -1259,26 +1273,28 @@ graph LR;
     </div>
 
     </section>
-    
+
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1597313227"></script>
-    <script src="../js/perfect-scrollbar.min.js?1597313227"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1597313227"></script>
-    <script src="../js/jquery.sticky.js?1597313227"></script>
-    <script src="../js/featherlight.min.js?1597313227"></script>
-    <script src="../js/highlight.pack.js?1597313227"></script>
+    <script src="../js/clipboard.min.js?1613550772"></script>
+    <script src="../js/perfect-scrollbar.min.js?1613550772"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1613550772"></script>
+    <script src="../js/jquery.sticky.js?1613550772"></script>
+    <script src="../js/featherlight.min.js?1613550772"></script>
+    <script src="../js/highlight.pack.js?1613550772"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1597313227"></script>
-    <script src="../js/learn.js?1597313227"></script>
-    <script src="../js/hugo-learn.js?1597313227"></script>
-
-    <link href="../mermaid/mermaid.css?1597313227" rel="stylesheet" />
-    <script src="../mermaid/mermaid.js?1597313227"></script>
-    <script>
-        mermaid.initialize({ startOnLoad: true });
-    </script>
+    <script src="../js/modernizr.custom-3.6.0.js?1613550772"></script>
+    <script src="../js/learn.js?1613550772"></script>
+    <script src="../js/hugo-learn.js?1613550772"></script>
+    
+        
+            <script src="../mermaid/mermaid.js?1613550772"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
     
 
   </body>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.79.1" />
     <meta name="description" content="">
 
 
@@ -12,21 +12,21 @@
     <title>Continuous Integration &amp; Deployment :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1597313227" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1597313227" rel="stylesheet">
-    <link href="../../css/hybrid.css?1597313227" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1597313227" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1597313227" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1597313227" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1597313227" rel="stylesheet">
-    <link href="../../css/theme.css?1597313227" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1597313227" rel="stylesheet">
+    <link href="../../css/nucleus.css?1613550772" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1613550772" rel="stylesheet">
+    <link href="../../css/hybrid.css?1613550772" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1613550772" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1613550772" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1613550772" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1613550772" rel="stylesheet">
+    <link href="../../css/theme.css?1613550772" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1613550772" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1597313227" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1613550772" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1597313227"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1613550772"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="/lifecycle/ci/">
+  <body class="" data-url="../../lifecycle/ci/">
     <nav id="sidebar" class="">
 
 
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1597313227"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1597313227"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1613550772"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1613550772"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1597313227"></script>
+<script type="text/javascript" src="../../js/search.js?1613550772"></script>
 
     
   </div>
@@ -715,18 +715,23 @@ window.MathJax = {
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://player.vimeo.com/video/400180594" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="vimeo video" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
- </div>
+</div>
 
 <h2 id="1-continuous-integration-ci">1. Continuous Integration (CI)</h2>
 <p>Het softwareontwikkel proces is een continu proces: als een eerste versie van het product klaar is, en wordt overgemaakt aan klanten, volgt het onderhoud en een mogelijke volgende versie. Elke wijziging maakt potentiëel dingen kapot (geminimaliseerd met <a href="../../tdd">TDD</a>), of introduceert nieuwe features. Dat betekent dat bij <em>elke wijziging</em>, een computer het hele build proces moet doorlopen om te controleren of er niets stuk is. Dit noemen we het &ldquo;<em>integreren</em>&rdquo; van nieuwe code, vandaar de naam.</p>
 <h3 id="11-de-ci-server">1.1. De CI Server</h3>
-<p>In de praktijk worden aparte servers verantwoordelijk gesteld om regelmatig de hele codebase te downloaden, alles te compileren, en testen uit te voeren. Als iets niet compileert, of een test faalt, rapporteert dit systeem via diverse kanalen aan de ontwikkelaars. Niemand wilt dit in de achtergrond op zijn eigen machine een tweede build systeem geïnstalleerd hebben, die CPU kracht afsnoept van je eigen IDE. De volgende Figuur verduidelijkt de flow:</p>
-<center>
-    <img src="../../img/teaching/ses/devops.jpg" /><br/>
-    <em>Het Continuous Integration build systeem (<a href="https://devopscube.com/continuous-integration-delivery-deployment/" target="_blank">bron</a>).</em>
-</center>
+<p>In de praktijk worden aparte servers verantwoordelijk gesteld om regelmatig de hele codebase te downloaden, alles te compileren, en testen uit te voeren. Als iets niet compileert, of een test faalt, rapporteert dit systeem via diverse kanalen aan de ontwikkelaars. Niemand wilt dit in de achtergrond op zijn eigen machine een tweede build systeem geïnstalleerd hebben, die CPU kracht afsnoept van je eigen IDE. De volgende Figuur verduidelijkt de flow (<a href="https://devopscube.com/continuous-integration-delivery-deployment/">bron</a>):</p>
+<p><figure>
+	<a href="../../img/teaching/ses/devops.jpg" data-featherlight="image">
+		<img src="../../img/teaching/ses/devops.jpg"   title="Het Continuous Integration build systeem">
+	</a>
+	
+		<figcaption>Het Continuous Integration build systeem</figcaption>
+	
+</figure>
+</p>
 <p>Dit hele proces verloopt volledig automatisch: niemand drukt op een &ldquo;build&rdquo; knop, maar door middel van ingecheckte code wijzigingen (1) start dit systeem. De CI server haalt wijzigingen op (2), build (3) en test (4) om te kunnen rapporteren of dit lukte of niet (5), via verschillende kanalen (6).</p>
-<p>De Source Control server, zoals Github.com of een lokale <code>git</code> server, werd reeds besproken in labo &lsquo;<a href="../../versiebeheer">versiebeheer</a>'. Er zijn voor Java verschillende populaire CI software systemen:</p>
+<p>De Source Control server, zoals Github.com of een lokale <code>git</code> server, werd reeds besproken in labo &lsquo;<a href="../../versiebeheer">versiebeheer</a>&rsquo;. Er zijn voor Java verschillende populaire CI software systemen:</p>
 <ul>
 <li><a href="https://jenkins.io/solutions/java/">Jenkins</a></li>
 <li><a href="www.jetbrains.com/teamcity">TeamCity</a></li>
@@ -780,9 +785,13 @@ install:
 <p>Alle gebuilde artifacts kunnen daarna worden geupload naar een repository server, zoals de Central Maven Repository, of onze eigen artifact server, waar een historiek wordt bijgehouden.</p>
 <h4 id="6-publish-results">6. Publish Results</h4>
 <p>Op hat dashboard van <a href="https://travis-ci.org">https://travis-ci.org</a> kan je de gepubliceerde resultaten (live) raadplegen:</p>
-<center>
-    <img src="../../img/teaching/ses/travis.png" />
-</center>
+<p><figure>
+	<a href="../../img/teaching/ses/travis.png" data-featherlight="image">
+		<img src="../../img/teaching/ses/travis.png"  >
+	</a>
+	
+</figure>
+</p>
 <h2 id="2-continuous-deployment-cd">2. Continuous Deployment (CD)</h2>
 <p>Automatisch code compileren, testen, en packagen, is slechts één stap in het continuous development proces. De volgende stap is deze package ook automatisch <em>deployen</em>, of <em>installeren</em>. Op deze manier staat er altijd de laatste versie op een interne development website, kunnen installaties automatisch worden uitgevoerd op bepaalde tijdstippen, &hellip;</p>
 <p>Populaire CD systemen:</p>
@@ -801,11 +810,14 @@ install:
 <li><em>Blue/green releasing</em>: Een &lsquo;harde switch&rsquo; in het systeem bepaalt welke personen (bijvoorbeeld op regio of IP) naar versie van het zoekscherm worden begeleid.</li>
 <li><em>Canary releasing</em>: Een load balancer verdeelt het netwerkverkeer over verschillende servers, waarvan op één server de nieuwe versie is geïnstalleerd. In het begin gaat <code>90%</code> van de bezoekers nog steeds naar de oude versie. Dit kan gradueel worden verhoogd, totdat de oude server wordt uitgeschakeld.</li>
 </ol>
-<p>Onderstaand schema verduidelijkt dit idee.</p>
-<center>
-  ![](/img/teaching/ses/releasing.png)<br/>
-  ([bron](https://blog.getambassador.io/deploy-and-release-decouple-for-speed-and-safety-a8c99a9b4d7b))
-</center>
+<p>Onderstaand schema verduidelijkt dit idee (<a href="https://blog.getambassador.io/deploy-and-release-decouple-for-speed-and-safety-a8c99a9b4d7b">bron</a>).</p>
+<p><figure>
+	<a href="../../img/teaching/ses/releasing.png" data-featherlight="image">
+		<img src="../../img/teaching/ses/releasing.png"  >
+	</a>
+	
+</figure>
+</p>
 <p>De juiste logging en monitoring tools zorgen ervoor dat we een idee krijgen over het gebruik van het nieuwe scherm (groen, versie B). Gaat alles zoals verwacht, dan wordt de switch weggehaald in geval (1), of wordt de loadbalancer ge-herconfigureerd zodat het hele verkeer naar de nieuwe site gaat in geval (2). Ook deze aanpassingen zijn volledig geautomatiseerd. Na verloop van tijd valt de oude versie (blauw, versie A) volledig weg, en kunnen we ons concentreren op de volgende uitbreidingen.</p>
 <p>Het groene vlak, de &lsquo;Ambassador/API gateway&rsquo;, kan aanzien worden als:</p>
 <ul>
@@ -817,9 +829,13 @@ install:
 <h2 id="a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</h2>
 <h3 id="opgave-1">Opgave 1</h3>
 <p>Omwille van privacy instellingen tussen Travis en de KULeuven-Diepenbeek organisatie op Github, wordt voor deze opgave verwacht dat je een <strong>nieuwe repository</strong> zelf aanmaakt vanaf nul, via <a href="https://github.com">Github.com</a>. Geef de repository de naam <code>ses-ci-opgave</code>, zoals in onderstaande screenshot:</p>
-<center>
-  ![](/img/teaching/ses/ci-newrepo.png)
-</center>
+<p><figure>
+	<a href="../../img/teaching/ses/ci-newrepo.png" data-featherlight="image">
+		<img src="../../img/teaching/ses/ci-newrepo.png"  >
+	</a>
+	
+</figure>
+</p>
 <p>Het is belangrijk dat de repository <strong>public</strong> is, anders kan Travis je project niet builden.</p>
 <h4 id="11-de-calculator-app">1.1 De Calculator app</h4>
 <p>Ontwerp een command-line interface programma, getiteld &lsquo;calculator&rsquo;, dat twee argumenten inleest die terecht komen in de <code>main()</code> methode, en de sommatie ervan afdrukt:</p>
@@ -831,9 +847,13 @@ install:
 <li>Activeer je repository door op <a href="https://travis-ci.org">travis-ci.org</a> in te loggen met je Github account, de repository terug te zoeken in de lijst door op <code>+</code> te drukken links, en de slider naar rechts te zetten, zodat Travis changes detecteert. Zie screenshot hieronder.</li>
 <li>Voorzie een <code>.travis.yml</code> bestand waarin staat beschreven op welke manier je project moet worden gebuild.</li>
 </ol>
-<center>
-  ![](/img/teaching/ses/ci-enabletravis.png)
-</center>
+<p><figure>
+	<a href="../../img/teaching/ses/ci-enabletravis.png" data-featherlight="image">
+		<img src="../../img/teaching/ses/ci-enabletravis.png"  >
+	</a>
+	
+</figure>
+</p>
 <p>Het verschil tussen de <code>.org</code> en <code>.com</code> websites is dat de eerste enkel publieke repositories kan behandelen, terwijl de laatste (in BETA) ook private repositories aankan. Vergewis je ervan om enkel via de eerste, <a href="https://travis-ci.org">travis-ci.org</a>, je opgave repository te activeren.</p>
 <p>Welke stappen denk je dat Travis zou moeten ondernemen op je project te builden? Is enkel builden voldoende? Wat als er een test faalt? Stel dat we de gebuilde jar ergens willen uploaden, hoe gaan we dan tewerk? Raadpleeg de documentatie om jezelf te bekwamen in de Yaml syntax:</p>
 <ul>
@@ -864,7 +884,7 @@ install:
 </footer>
 
         
-        </div> 
+        </div>
         
 
       </div>
@@ -872,8 +892,8 @@ install:
     <div id="navigation">
         
         
+
         
-        
             
             
                 
@@ -896,102 +916,6 @@ install:
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1032,6 +956,86 @@ install:
                     
             
         
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
                         
             
@@ -1097,6 +1101,22 @@ install:
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -1219,7 +1239,7 @@ install:
                     
             
         
-        
+
         
 
 
@@ -1235,26 +1255,28 @@ install:
     </div>
 
     </section>
-    
+
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1597313227"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1597313227"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1597313227"></script>
-    <script src="../../js/jquery.sticky.js?1597313227"></script>
-    <script src="../../js/featherlight.min.js?1597313227"></script>
-    <script src="../../js/highlight.pack.js?1597313227"></script>
+    <script src="../../js/clipboard.min.js?1613550772"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1613550772"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1613550772"></script>
+    <script src="../../js/jquery.sticky.js?1613550772"></script>
+    <script src="../../js/featherlight.min.js?1613550772"></script>
+    <script src="../../js/highlight.pack.js?1613550772"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1597313227"></script>
-    <script src="../../js/learn.js?1597313227"></script>
-    <script src="../../js/hugo-learn.js?1597313227"></script>
-
-    <link href="../../mermaid/mermaid.css?1597313227" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1597313227"></script>
-    <script>
-        mermaid.initialize({ startOnLoad: true });
-    </script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1613550772"></script>
+    <script src="../../js/learn.js?1613550772"></script>
+    <script src="../../js/hugo-learn.js?1613550772"></script>
+    
+        
+            <script src="../../mermaid/mermaid.js?1613550772"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
     
 
   </body>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.79.1" />
     <meta name="description" content="">
 
 
@@ -12,21 +12,21 @@
     <title>Java Gradle projecten :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1597313227" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1597313227" rel="stylesheet">
-    <link href="../../css/hybrid.css?1597313227" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1597313227" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1597313227" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1597313227" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1597313227" rel="stylesheet">
-    <link href="../../css/theme.css?1597313227" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1597313227" rel="stylesheet">
+    <link href="../../css/nucleus.css?1613550772" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1613550772" rel="stylesheet">
+    <link href="../../css/hybrid.css?1613550772" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1613550772" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1613550772" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1613550772" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1613550772" rel="stylesheet">
+    <link href="../../css/theme.css?1613550772" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1613550772" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1597313227" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1613550772" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1597313227"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1613550772"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="/dependency-management/gradle/">
+  <body class="" data-url="../../dependency-management/gradle/">
     <nav id="sidebar" class="">
 
 
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1597313227"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1597313227"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1613550772"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1613550772"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1597313227"></script>
+<script type="text/javascript" src="../../js/search.js?1613550772"></script>
 
     
   </div>
@@ -816,7 +816,13 @@ Execution failed for task ':test'.
 > There were failing tests. See the report at: file:///Users/jefklak/development/brainbaking/content/teaching/ses/singleton/build/reports/tests/test/index.html
 </pre>
 <p>Dit is <strong>exact hetzelfde</strong> als in IntelliJ de testen uitvoeren met de knop &lsquo;Run&rsquo;:</p>
-<p><img src="../../img/teaching/ses/intellij_run_test.png" /></p>
+<p><figure>
+	<a href="../../img/teaching/ses/intellij_run_test.png" data-featherlight="image">
+		<img src="../../img/teaching/ses/intellij_run_test.png"  >
+	</a>
+	
+</figure>
+</p>
 <h3 id="waarom-een-build-tool-gebruiken">Waarom een build tool gebruiken?</h3>
 <p>De grootste voordelen hiervan zijn onder andere:</p>
 <ul>
@@ -892,9 +898,13 @@ dependencies {
 <li><code>javadoc</code>: (plugin) genereert HTML javadoc. Een rapport hiervan is beschikbaar op build/docs/javadoc/index.html.</li>
 </ul>
 <p>Onderstaande screenshot is een voorbeeld van een Unit Test HTML rapport voor de SESsy library:</p>
-<center>
-    ![Gradle test report](/img/teaching/ses/gradle-testreports.png)
-</center>
+<p><figure>
+	<a href="../../img/teaching/ses/gradle-testreports.png" data-featherlight="image">
+		<img src="../../img/teaching/ses/gradle-testreports.png"  alt="Gradle test report" >
+	</a>
+	
+</figure>
+</p>
 <h3 id="ik-wil-meer-output-bij-het-uitvoeren-van-mijn-tasks">Ik wil meer output bij het uitvoeren van mijn tasks!</h3>
 <p>De standaard output geeft enkel weer of er iets gelukt is of niet:</p>
 <pre>
@@ -911,6 +921,14 @@ BUILD SUCCESSFUL in 9s
 </ul>
 <h3 id="de-gradle-wrapper-upgraden">De Gradle (wrapper) Upgraden</h3>
 <p>Indien de Gralde wrapper een oudere versie aanmaakt (&lt; v6), update met <code>gradle wrapper --gradle-version 6.0.1</code>. Gradle versie <code>6</code> of groter is vereist voor JDK <code>13</code> of groter.</p>
+<p><a href="https://docs.gradle.org/current/userguide/compatibility.html#java">Gradle/Java compatibiliteitsmatrix</a>:</p>
+<ul>
+<li>JDK <code>12</code> of ouder: Gradle <code>5.x</code></li>
+<li>JDK <code>13</code>: Gradle <code>6.x</code> of nieuwer</li>
+<li>JDK <code>14</code>: Gradle <code>6.3</code> of nieuwer</li>
+<li>JDK <code>15</code>: <strong>NIET</strong> compatibel (<em>02/10/2020</em>)! Zie <a href="https://docs.gradle.org/current/userguide/compatibility.html#java">docs</a></li>
+</ul>
+<p>Indien je de fout &ldquo;Could not initialize class <code>org.codehaus.groovy.reflection.ReflectionCache</code>&rdquo; krijgt, betekent dit dat je JDK te nieuw is voor de gradle versie. Controleer de huidige gralde versie met <code>gradle --info</code> of kijk in <code>gradle/wrapper/gradle-wrapper.properties</code>.</p>
 <h3 id="meer-links-en-tutorials">Meer links en tutorials:</h3>
 <ul>
 <li>Officiële Gradle <a href="https://docs.gradle.org/current/userguide/userguide.html">docs</a>.</li>
@@ -925,7 +943,7 @@ BUILD SUCCESSFUL in 9s
 </footer>
 
         
-        </div> 
+        </div>
         
 
       </div>
@@ -933,8 +951,8 @@ BUILD SUCCESSFUL in 9s
     <div id="navigation">
         
         
+
         
-        
             
             
                 
@@ -957,72 +975,6 @@ BUILD SUCCESSFUL in 9s
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1039,6 +991,21 @@ BUILD SUCCESSFUL in 9s
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -1059,34 +1026,8 @@ BUILD SUCCESSFUL in 9s
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
                     
                 
                 
@@ -1095,41 +1036,6 @@ BUILD SUCCESSFUL in 9s
                     
                     
 
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -1178,6 +1084,70 @@ BUILD SUCCESSFUL in 9s
                     
                     
 
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -1259,6 +1229,54 @@ BUILD SUCCESSFUL in 9s
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -1280,7 +1298,7 @@ BUILD SUCCESSFUL in 9s
                     
             
         
-        
+
         
 
 
@@ -1296,26 +1314,28 @@ BUILD SUCCESSFUL in 9s
     </div>
 
     </section>
-    
+
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1597313227"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1597313227"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1597313227"></script>
-    <script src="../../js/jquery.sticky.js?1597313227"></script>
-    <script src="../../js/featherlight.min.js?1597313227"></script>
-    <script src="../../js/highlight.pack.js?1597313227"></script>
+    <script src="../../js/clipboard.min.js?1613550772"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1613550772"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1613550772"></script>
+    <script src="../../js/jquery.sticky.js?1613550772"></script>
+    <script src="../../js/featherlight.min.js?1613550772"></script>
+    <script src="../../js/highlight.pack.js?1613550772"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1597313227"></script>
-    <script src="../../js/learn.js?1597313227"></script>
-    <script src="../../js/hugo-learn.js?1597313227"></script>
-
-    <link href="../../mermaid/mermaid.css?1597313227" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1597313227"></script>
-    <script>
-        mermaid.initialize({ startOnLoad: true });
-    </script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1613550772"></script>
+    <script src="../../js/learn.js?1613550772"></script>
+    <script src="../../js/hugo-learn.js?1613550772"></script>
+    
+        
+            <script src="../../mermaid/mermaid.js?1613550772"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
     
 
   </body>

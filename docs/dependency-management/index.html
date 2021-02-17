@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.79.1" />
     <meta name="description" content="">
 
 
@@ -12,21 +12,21 @@
     <title>2. Dependency Management :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1597313227" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1597313227" rel="stylesheet">
-    <link href="../css/hybrid.css?1597313227" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1597313227" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1597313227" rel="stylesheet">
-    <link href="../css/auto-complete.css?1597313227" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1597313227" rel="stylesheet">
-    <link href="../css/theme.css?1597313227" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1597313227" rel="stylesheet">
+    <link href="../css/nucleus.css?1613550772" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1613550772" rel="stylesheet">
+    <link href="../css/hybrid.css?1613550772" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1613550772" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1613550772" rel="stylesheet">
+    <link href="../css/auto-complete.css?1613550772" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1613550772" rel="stylesheet">
+    <link href="../css/theme.css?1613550772" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1613550772" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1597313227" rel="stylesheet">
+    <link href="../css/theme-kul.css?1613550772" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1597313227"></script>
+    <script src="../js/jquery-3.3.1.min.js?1613550772"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../js/osc.js></script>
   </head>
-  <body class="" data-url="/dependency-management/">
+  <body class="" data-url="../dependency-management/">
     <nav id="sidebar" class="">
 
 
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1597313227"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1597313227"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1613550772"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1613550772"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1597313227"></script>
+<script type="text/javascript" src="../js/search.js?1613550772"></script>
 
     
   </div>
@@ -842,9 +842,13 @@ graph LR;
 <span style="color:#f92672">&lt;/dependency&gt;</span>
 <span style="color:#f92672">&lt;/dependencies&gt;</span>
 </code></pre></div><p>Grote projecten kunnen makkelijk afhankelijk zijn van tientallen libraries, die op hun beurt weer afhankelijk zijn van libraries. Een typische grote webapplicatie geschreven in java heeft de volgende dependency tree, die opgevraagd kan worden via Gradle of Maven:</p>
-<center>
-    <img src="../img/teaching/ses/deptree.png" />
-</center>
+<p><figure>
+	<a href="../img/teaching/ses/deptree.png" data-featherlight="image">
+		<img src="../img/teaching/ses/deptree.png"  >
+	</a>
+	
+</figure>
+</p>
 <p>Gradle voorziet een plugin genaamd &lsquo;<em>maven-publish</em>&rsquo; die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een <code>publishing</code> tag toe met de volgende properties:</p>
 <pre>
 plugins {
@@ -893,21 +897,29 @@ repositories {
 <span style="color:#f92672">}</span>
 </code></pre></div><p>De klasse <code>Speler</code> is een intern hulpmiddel om te serialiseren. <br/>
 Extra methodes toevoegen mag altijd. De constructor van het scorebord leest automatisch de score van de vorige keer in, als dat bestand bestaat. Denk bij de implementatie aan een collectie om spelers en hun scores bij te houden. Maak via IntelliJ een nieuw <strong>Gradle - Java project</strong>. Groupid: <code>be.kuleuven</code>. Arifactid: <code>scorebord</code>. Vergeet niet op &lsquo;refresh&rsquo; te drukken wanneer je een dependency toevoegt (linksboven op onderstaande screenshot):</p>
-<center>
-    <img src="../img/teaching/ses/gradle-refresh.png" />
-</center>
+<p><figure>
+	<a href="../img/teaching/ses/gradle-refresh.png" data-featherlight="image">
+		<img src="../img/teaching/ses/gradle-refresh.png"  >
+	</a>
+	
+</figure>
+</p>
 <p>Met het commando <code>gradlew jar</code> creëer je het bestand <code>scorebord-1.0-SNAPSHOT.jar</code> in de <code>build/libs</code> folder.</p>
 <p>Tip: indien de Gralde wrapper een oudere versie aanmaakt (&lt; v6), update met <code>gradlew wrapper --gradle-version 6.0.1</code>. Gradle versie <code>6</code> of groter is vereist voor JDK <code>13</code> of groter.</p>
 <h3 id="opgave-2">Opgave 2</h3>
-<p>Maak een nieuw Gradle project aan genaamd &lsquo;<em>scorebord-darts</em>', dat bovenstaand scorebord project als een library gaat gebruiken. Bewaar de jar file lokaal in een &lsquo;lib&rsquo; folder en instrueer Gradle zo dat dit als <code>flatDir</code> repository wordt opgenomen (<a href="#flatdir">zie boven</a>). Het tweede project heeft als Artifactid <code>scorebord-darts</code>. De klasse <code>DartsGame</code> ziet er zo uit:</p>
+<p>Maak een nieuw Gradle project aan genaamd &lsquo;<em>scorebord-darts</em>&rsquo;, dat bovenstaand scorebord project als een library gaat gebruiken. Bewaar de jar file lokaal in een &lsquo;lib&rsquo; folder en instrueer Gradle zo dat dit als <code>flatDir</code> repository wordt opgenomen (<a href="#flatdir">zie boven</a>). Het tweede project heeft als Artifactid <code>scorebord-darts</code>. De klasse <code>DartsGame</code> ziet er zo uit:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DartsGame</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">private</span> String player <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;jos&#34;</span><span style="color:#f92672">;</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">throwDart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Als de dependencies goed liggen, kan je een nieuw <code>Scorebord</code> aanmaken, en herkent IntelliJ dit met CTRL+Space:</p>
-<center>
-    <img src="../img/teaching/ses/gradle-dependency-used.png" />
-</center>
+<p><figure>
+	<a href="../img/teaching/ses/gradle-dependency-used.png" data-featherlight="image">
+		<img src="../img/teaching/ses/gradle-dependency-used.png"  >
+	</a>
+	
+</figure>
+</p>
 <p>Maak een <code>Main</code> klasse met een <code>public static void main(String[] args)</code> methode, waarin een darts spel wordt opgezet, en een aantal keer ter test wordt &lsquo;gegooid&rsquo;. Druk de totale score en de winnaar af, dat opgevraagd kan worden via het spelbord. Krijg je deze klasse opgestart?</p>
 <pre>
 > Task :Main.main() FAILED
@@ -948,7 +960,7 @@ Execution failed for task ':Main.main()'.
 </footer>
 
         
-        </div> 
+        </div>
         
 
       </div>
@@ -956,8 +968,8 @@ Execution failed for task ':Main.main()'.
     <div id="navigation">
         
         
+
         
-        
             
             
                 
@@ -969,39 +981,6 @@ Execution failed for task ':Main.main()'.
                     
                     
                         
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
                     
                     
 
@@ -1025,42 +1004,27 @@ Execution failed for task ':Main.main()'.
             
         
                     
+                        
             
-        
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
                         
             
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
                     
                 
                 
@@ -1072,22 +1036,6 @@ Execution failed for task ':Main.main()'.
                     
             
         
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -1137,6 +1085,38 @@ Execution failed for task ':Main.main()'.
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
                         
             
             
@@ -1184,22 +1164,6 @@ Execution failed for task ':Main.main()'.
                     
             
         
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
                         
             
@@ -1281,6 +1245,54 @@ Execution failed for task ':Main.main()'.
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -1302,7 +1314,7 @@ Execution failed for task ':Main.main()'.
                     
             
         
-        
+
         
 
 
@@ -1318,26 +1330,28 @@ Execution failed for task ':Main.main()'.
     </div>
 
     </section>
-    
+
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1597313227"></script>
-    <script src="../js/perfect-scrollbar.min.js?1597313227"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1597313227"></script>
-    <script src="../js/jquery.sticky.js?1597313227"></script>
-    <script src="../js/featherlight.min.js?1597313227"></script>
-    <script src="../js/highlight.pack.js?1597313227"></script>
+    <script src="../js/clipboard.min.js?1613550772"></script>
+    <script src="../js/perfect-scrollbar.min.js?1613550772"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1613550772"></script>
+    <script src="../js/jquery.sticky.js?1613550772"></script>
+    <script src="../js/featherlight.min.js?1613550772"></script>
+    <script src="../js/highlight.pack.js?1613550772"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1597313227"></script>
-    <script src="../js/learn.js?1597313227"></script>
-    <script src="../js/hugo-learn.js?1597313227"></script>
-
-    <link href="../mermaid/mermaid.css?1597313227" rel="stylesheet" />
-    <script src="../mermaid/mermaid.js?1597313227"></script>
-    <script>
-        mermaid.initialize({ startOnLoad: true });
-    </script>
+    <script src="../js/modernizr.custom-3.6.0.js?1613550772"></script>
+    <script src="../js/learn.js?1613550772"></script>
+    <script src="../js/hugo-learn.js?1613550772"></script>
+    
+        
+            <script src="../mermaid/mermaid.js?1613550772"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
     
 
   </body>

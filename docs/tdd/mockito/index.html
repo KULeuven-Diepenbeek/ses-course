@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.79.1" />
     <meta name="description" content="">
 
 
@@ -12,21 +12,21 @@
     <title>TDD In de praktijk: Mockito :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1597313227" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1597313227" rel="stylesheet">
-    <link href="../../css/hybrid.css?1597313227" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1597313227" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1597313227" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1597313227" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1597313227" rel="stylesheet">
-    <link href="../../css/theme.css?1597313227" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1597313227" rel="stylesheet">
+    <link href="../../css/nucleus.css?1613550772" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1613550772" rel="stylesheet">
+    <link href="../../css/hybrid.css?1613550772" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1613550772" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1613550772" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1613550772" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1613550772" rel="stylesheet">
+    <link href="../../css/theme.css?1613550772" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1613550772" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1597313227" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1613550772" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1597313227"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1613550772"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="/tdd/mockito/">
+  <body class="" data-url="../../tdd/mockito/">
     <nav id="sidebar" class="">
 
 
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1597313227"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1597313227"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1613550772"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1613550772"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1597313227"></script>
+<script type="text/javascript" src="../../js/search.js?1613550772"></script>
 
     
   </div>
@@ -700,9 +700,13 @@ window.MathJax = {
 
 
 <p>Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen.</p>
-<center>
-    ![Mockito logo](/img/teaching/ses/mockito.png)
-</center>
+<p><figure>
+	<a href="../../img/teaching/ses/mockito.png" data-featherlight="image">
+		<img src="../../img/teaching/ses/mockito.png"  alt="Mockito logo" >
+	</a>
+	
+</figure>
+</p>
 <p>Lees op <a href="https://site.mockito.org">https://site.mockito.org</a> <strong>hoe</strong> je het framework moet gebruiken. (Klik op de knoppen <strong>WHY</strong> en <strong>HOW</strong> bovenaan! Volledige <a href="https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html">javadoc</a>) Denk aan de volgende zaken:</p>
 <ul>
 <li>Hoe include ik Mockito als een dependency in mijn project?</li>
@@ -711,10 +715,15 @@ window.MathJax = {
 </ul>
 <h3 id="een-interface-mocken-the-hard-way">Een interface &lsquo;mocken&rsquo;: the hard way</h3>
 <p>Zoals aangehaald in de <a href="../../tdd">TDD noties</a> kan een eigen implementatie van een interface worden gemaakt die als Test Double werkt (denk aan Arnie&rsquo;s stuntman). Het vervelende is dat deze klasse enkel maar wordt gebruikt in test code, dus niet in productie code. Mockito maakt dit dynamisch aan, zonder dat er ooit het keyword <code>class</code> bij aan de pas komt.</p>
-<center>
-    <img src="https://wgroeneveld.github.io/tdd-course/img/testdouble.jpg" style="width: 75%; border: 1px solid black;" /><br/>
-    <em>I'll Be Back.</em>
-</center>
+<p><figure>
+	<a href="../../img/testdouble.jpg" data-featherlight="image">
+		<img src="../../img/testdouble.jpg"   title="I&#39;ll Be Back.">
+	</a>
+	
+		<figcaption>I&#39;ll Be Back.</figcaption>
+	
+</figure>
+</p>
 <p>Stel, Arnold gaat acteren voor de nieuwe film <strong>Die Hard: In A Deepen Beek</strong> (uit in 2025 - Bruce had geen zin meer). Hij moet daarvoor een aantal fantastische stunts uithalen, die hij niet graag zelf zou doen. De volgende interface definieert een &lsquo;Arnold&rsquo;, waarbij <code>doBackFlip()</code> de gevaarlijke stunt is (resultaat is <code>true</code> indien geslaagd):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IllBeBack</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">();</span>
@@ -820,7 +829,7 @@ window.MathJax = {
 </footer>
 
         
-        </div> 
+        </div>
         
 
       </div>
@@ -828,8 +837,8 @@ window.MathJax = {
     <div id="navigation">
         
         
+
         
-        
             
             
                 
@@ -852,107 +861,6 @@ window.MathJax = {
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -993,6 +901,91 @@ window.MathJax = {
                     
             
         
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
                         
             
@@ -1041,38 +1034,6 @@ window.MathJax = {
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
                         
             
@@ -1154,6 +1115,54 @@ window.MathJax = {
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -1175,7 +1184,7 @@ window.MathJax = {
                     
             
         
-        
+
         
 
 
@@ -1191,26 +1200,28 @@ window.MathJax = {
     </div>
 
     </section>
-    
+
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1597313227"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1597313227"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1597313227"></script>
-    <script src="../../js/jquery.sticky.js?1597313227"></script>
-    <script src="../../js/featherlight.min.js?1597313227"></script>
-    <script src="../../js/highlight.pack.js?1597313227"></script>
+    <script src="../../js/clipboard.min.js?1613550772"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1613550772"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1613550772"></script>
+    <script src="../../js/jquery.sticky.js?1613550772"></script>
+    <script src="../../js/featherlight.min.js?1613550772"></script>
+    <script src="../../js/highlight.pack.js?1613550772"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1597313227"></script>
-    <script src="../../js/learn.js?1597313227"></script>
-    <script src="../../js/hugo-learn.js?1597313227"></script>
-
-    <link href="../../mermaid/mermaid.css?1597313227" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1597313227"></script>
-    <script>
-        mermaid.initialize({ startOnLoad: true });
-    </script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1613550772"></script>
+    <script src="../../js/learn.js?1613550772"></script>
+    <script src="../../js/hugo-learn.js?1613550772"></script>
+    
+        
+            <script src="../../mermaid/mermaid.js?1613550772"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
     
 
   </body>

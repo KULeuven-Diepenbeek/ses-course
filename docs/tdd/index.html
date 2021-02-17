@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.79.1" />
     <meta name="description" content="">
 
 
@@ -12,21 +12,21 @@
     <title>3. Test Driven Development :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1597313227" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1597313227" rel="stylesheet">
-    <link href="../css/hybrid.css?1597313227" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1597313227" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1597313227" rel="stylesheet">
-    <link href="../css/auto-complete.css?1597313227" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1597313227" rel="stylesheet">
-    <link href="../css/theme.css?1597313227" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1597313227" rel="stylesheet">
+    <link href="../css/nucleus.css?1613550772" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1613550772" rel="stylesheet">
+    <link href="../css/hybrid.css?1613550772" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1613550772" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1613550772" rel="stylesheet">
+    <link href="../css/auto-complete.css?1613550772" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1613550772" rel="stylesheet">
+    <link href="../css/theme.css?1613550772" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1613550772" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1597313227" rel="stylesheet">
+    <link href="../css/theme-kul.css?1613550772" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1597313227"></script>
+    <script src="../js/jquery-3.3.1.min.js?1613550772"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../js/osc.js></script>
   </head>
-  <body class="" data-url="/tdd/">
+  <body class="" data-url="../tdd/">
     <nav id="sidebar" class="">
 
 
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1597313227"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1597313227"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1613550772"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1613550772"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1597313227"></script>
+<script type="text/javascript" src="../js/search.js?1613550772"></script>
 
     
   </div>
@@ -808,10 +808,15 @@ graph LR;
 <h2 id="unit-testing-basics">Unit Testing Basics</h2>
 <h3 id="wat-is-unit-testing">Wat is Unit Testing</h3>
 <p>Unit testen zijn stukjes code die productie code verifiëren op verschillende niveau&rsquo;s. Het resultaat van een test is GROEN (geslaagd) of ROOD (gefaald met een bepaalde reden). Een collectie van testen geeft ontwikkelaars het zelfvertrouwen om stukken van de applicatie te wijzigen met de zekerheid dat de aanwezige testen rapporteren wat nog werkt, en wat niet. Het uitvoeren van deze testen gebeurt meestal in een IDE zoals IntelliJ voor Java, of Visual Studio voor C#, zoals deze screenshot:</p>
-<center>
-    <img src="https://wgroeneveld.github.io/tdd-course/img/nunit.png"/><br/>
-    <em>De visuele output van NUnit in C#.</em>
-</center>
+<p><figure>
+	<a href="../img/nunit.jpg" data-featherlight="image">
+		<img src="../img/nunit.jpg"   title="De visuele output van NUnit in C#">
+	</a>
+	
+		<figcaption>De visuele output van NUnit in C#</figcaption>
+	
+</figure>
+</p>
 <p>Elke validatieregel wordt apart opgelijst in één test. Als de <code>validate()</code> methode 4 regels test, zijn er minstens 4 testen geimplementeerd. In de praktijk is dat meestal meer omdat <strong>edge cases</strong> - uitzonderingsgevallen zoals <code>null</code> checks - ook aanzien worden als een apart testgeval.</p>
 <h4 id="eigenschappen-van-een-goede-test">Eigenschappen van een goede test</h4>
 <p>Elke unit test is <strong>F.I.R.S.T.</strong>:</p>
@@ -866,10 +871,15 @@ graph LR;
 <p>JUnit 4 en JUnit 5 verschillen hierin op niveau van gebruik. Vanaf JUnit 5 werkt men met <code>@BeforeEach</code>/<code>@BeforeAll</code>. Raadpleeg <a href="https://junit.org/junit5/docs/current/user-guide/">de documentatie</a> voor meer informatie over het verschil tussen each/all en tussen v4/v5. Voorbeelden van JUnit 5 testen zijn terug te vinden in de <a href="../extra/sessy">SESsy Library applicatie</a>.</p>
 <h3 id="soorten-van-testen">Soorten van Testen</h3>
 <p>Er zijn drie grote types van testen:</p>
-<center>
-    <img src="https://wgroeneveld.github.io/tdd-course/img/testniveaus.png" /><br/>
-    <em>De drie soorten van testen.</em>
-</center>
+<p><figure>
+	<a href="../img/testniveaus.jpg" data-featherlight="image">
+		<img src="../img/testniveaus.jpg"   title="De drie soorten van testen.">
+	</a>
+	
+		<figcaption>De drie soorten van testen.</figcaption>
+	
+</figure>
+</p>
 <h4 id="1-unit-testing-groen">1. Unit Testing (GROEN)</h4>
 <p>Een unit test test zaken op <em>individueel niveau</em>, per klasse dus. De methodes van de <code>Periode</code> klasse testen zijn unit testen: er zijn geen andere klasses mee gemoeid. De meeste testen zijn unit testen. Hoe kleiner het blokje op bovenstaande figuur, hoe beter de <strong>F.I.R.S.T. principes</strong> kunnen nageleefd worden. Immers, hoe meer systemen opgezet moeten worden voordat het assertion framework zijn ding kan doen, hoe meer tijd verloren, en hoe meer tijd de test in totaal nodig heeft om zijn resultaat te verwerken.</p>
 <h4 id="2-integration-testing-oranje">2. Integration Testing (ORANJE)</h4>
@@ -897,10 +907,15 @@ graph LR;
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Hoe testen we de <code>updateCustomerWallet()</code> methode, zonder de effectieve implementatie van <code>save()</code> te moeten gebruiken? Door middel van <em>test doubles</em>.</p>
-<center>
-    <img src="https://wgroeneveld.github.io/tdd-course/img/testdouble.jpg" style="width: 75%; border: 1px solid black;" /><br/>
-    <em>I'll Be Back.</em>
-</center>
+<p><figure>
+	<a href="../img/testdouble.jpg" data-featherlight="image">
+		<img src="../img/testdouble.jpg"   title="I&#39;ll Be Back.">
+	</a>
+	
+		<figcaption>I&#39;ll Be Back.</figcaption>
+	
+</figure>
+</p>
 <p>Zoals Arnie in zijn films bij gevaarlijke scenes een stuntman lookalike gebruikt, zo gaan wij in onze code een <code>Repository</code> lookalike gebruiken, zodat de <code>Service</code> dénkt dat hij <code>save()</code> aanroept, terwijl dit in werkelijkheid niet zo is. Daarvoor moet de repository een interface zijn. We passen in principe een design pattern toe, waarbij in de service een repository instantie wordt geïnjecteerd:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Repository</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>Customer c<span style="color:#f92672">);</span>
@@ -936,9 +951,13 @@ graph LR;
 </ul>
 <p>Een werkend voorbeeld hiervan is terug te vinden in de <a href="../extra/sessy">SESsy library applicatie</a>.</p>
 <p>De SESsy applicatie maakt gebruik van <strong>WebDriver</strong>, een interface die <strong>Selenium</strong> aanstuurt die browsers automatiseert. Op die manier kan men eenvoudig commando&rsquo;s doorsturen zoals surf naar daar, klik hier op, wacht x seconden, verifieer dat hier dat staat, &hellip; Dit is één test scenario in totaal.</p>
-<center>
-    <img src="../img/teaching/ses/selenium.png" class="bordered" />
-</center>
+<p><figure>
+	<a href="../img/teaching/ses/selenium.png" data-featherlight="image">
+		<img src="../img/teaching/ses/selenium.png"  >
+	</a>
+	
+</figure>
+</p>
 <p>In plaats van dit in (Java) code te schrijven, is het echter ook mogelijk om de <a href="https://selenium.dev/selenium-ide/">Selenium IDE</a> extentie voor Google Chrome of Mozilla Firefox te gebruiken. Deze browser extentie laat recorden in de browser zelf toe, en vergemakkelijkt het gebruik (er is geen nood meer aan het vanbuiten kennen van zulke commando&rsquo;s). Dit wordt in de praktijk vaak gebruikt door software analisten of testers die niet de technische kennis hebben om te programmeren, maar toch deel zijn van het ontwikkelteam.</p>
 <h2 id="a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</h2>
 <p>Download de startprojecten via <a href="../extra/github-classroom"><i class='fab fa-github'></i> Github Classroom</a>.</p>
@@ -1001,9 +1020,13 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
 </ol>
 <h3 id="hoe-controleer-ik-het-gedrag-van-de-fabriek">Hoe controleer ik het gedrag van de fabriek?</h3>
 <p>Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen.</p>
-<center>
-    ![Mockito logo](/img/teaching/ses/mockito.png)
-</center>
+<p><figure>
+	<a href="../img/teaching/ses/mockito.png" data-featherlight="image">
+		<img src="../img/teaching/ses/mockito.png"  alt="Mockito logo" >
+	</a>
+	
+</figure>
+</p>
 <p>Gebruik dus hiervoor Mockito, en injecteer een <code>mock(SpeculaasFabriek.class)</code> in de verkoopster (de setter is reeds voorzien).</p>
 <p>Lees op <a href="https://site.mockito.org">https://site.mockito.org</a> <strong>hoe</strong> je het framework moet gebruiken. (Volledige <a href="https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html">javadoc</a>) Denk aan de volgende zaken:</p>
 <ul>
@@ -1016,7 +1039,7 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
 <p>Gebruik Selenium IDE om een test scenario op te nemen van de SESsy applicatie. Start deze eerst lokaal, en vertrek vanuit het localhost base address <a href="http://localhost:8080/#/">http://localhost:8080/#/</a>. Hanteer de volgende scenario&rsquo;s:</p>
 <ol>
 <li>Als anoniempje, zoek op &lsquo;art&rsquo;, klik op detail, klik op uitlenen. Verifieer dat er een waarschuwingsboodschap verschijnt dat je niet kan uitlenen.</li>
-<li>Als slechte uitlener, zoek op &lsquo;art&rsquo;, klik op detail, klik op uitlenen. Verifieer dat er een boodschap verschijnt dat het gelukt is, en dat de knop veranderde naar &lsquo;Terugbrengen?'. Klik op terugbrengen. Verifieer dat er een boodschap verschijnt dat het gelukt is.</li>
+<li>Als slechte uitlener, zoek op &lsquo;art&rsquo;, klik op detail, klik op uitlenen. Verifieer dat er een boodschap verschijnt dat het gelukt is, en dat de knop veranderde naar &lsquo;Terugbrengen?&rsquo;. Klik op terugbrengen. Verifieer dat er een boodschap verschijnt dat het gelukt is.</li>
 <li>Als anoniempje, log in (een van beide rollen). Verifieer dat login naar logout verandert. Logout. Verifieer dat logout naar login verandert.</li>
 </ol>
 <p><strong>Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand <em>opgave5.html</em></strong> in de root van deze repository.</p>
@@ -1045,7 +1068,7 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
 </footer>
 
         
-        </div> 
+        </div>
         
 
       </div>
@@ -1053,8 +1076,8 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
     <div id="navigation">
         
         
+
         
-        
             
             
                 
@@ -1077,106 +1100,6 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1217,6 +1140,90 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
                     
             
         
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
                         
             
@@ -1265,38 +1272,6 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
                         
             
@@ -1378,6 +1353,54 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -1399,7 +1422,7 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
                     
             
         
-        
+
         
 
 
@@ -1415,26 +1438,28 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
     </div>
 
     </section>
-    
+
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1597313227"></script>
-    <script src="../js/perfect-scrollbar.min.js?1597313227"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1597313227"></script>
-    <script src="../js/jquery.sticky.js?1597313227"></script>
-    <script src="../js/featherlight.min.js?1597313227"></script>
-    <script src="../js/highlight.pack.js?1597313227"></script>
+    <script src="../js/clipboard.min.js?1613550772"></script>
+    <script src="../js/perfect-scrollbar.min.js?1613550772"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1613550772"></script>
+    <script src="../js/jquery.sticky.js?1613550772"></script>
+    <script src="../js/featherlight.min.js?1613550772"></script>
+    <script src="../js/highlight.pack.js?1613550772"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1597313227"></script>
-    <script src="../js/learn.js?1597313227"></script>
-    <script src="../js/hugo-learn.js?1597313227"></script>
-
-    <link href="../mermaid/mermaid.css?1597313227" rel="stylesheet" />
-    <script src="../mermaid/mermaid.js?1597313227"></script>
-    <script>
-        mermaid.initialize({ startOnLoad: true });
-    </script>
+    <script src="../js/modernizr.custom-3.6.0.js?1613550772"></script>
+    <script src="../js/learn.js?1613550772"></script>
+    <script src="../js/hugo-learn.js?1613550772"></script>
+    
+        
+            <script src="../mermaid/mermaid.js?1613550772"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
     
 
   </body>
