@@ -9,6 +9,17 @@
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
     <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/extra/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Extending the SESsy WebApp</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy-extending/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy-extending/</guid>
+      <description>SESsy Library Uitbreiden Lees eerst de installatieinstructies en basics over de SESsy Library app.
+Met de SESsy Library WebApp kunnen verstokte lezers (en mensen die boeken nooit terugbrengen) de database van de lokale bibliotheek raadplegen, en eventueel boeken uitlenen. Het is een simpele webapplicatie met een embedded server die standaard op poort 8080 draait, met een minimale front-end interface:
+   De codebase bevat echter nog heel wat lijntjes TODO commentaar die door de luie ontwikkelaars nooit zijn geïmplementeerd.</description>
+    </item>
+    
+    <item>
       <title>Gebruikte Software</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/software/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -16,8 +27,7 @@
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/software/</guid>
       <description>Voor deze cursus werken we met Java en met Git. Dat betekent dat een JDK (en de Gradle build tool) en een Git client de enige vereisten zijn.
 Onderstaande lijst kan helpen bij het installeren en configureren van zulke tools:
-Commandline Tools  git-scm gradle  Om vlot met unix-like command lines te werken op een Windows machine, raden we één van de volgende toolchain aan:
- cmder, Portable console Emulator for Windows MinGW, minimalist GNU for Windows Cygwin  Let op, bovenstaande tools mixen kan grote negatieve gevolgen hebben, iedere GNU flavor werkt op een andere manier en ze bëinvloeden allemaal je %PATH% systeen variabele (Unix: $PATH)</description>
+Commandline Tools  git-scm gradle  Het is onze intentie om jullie kennis van Linux commando&amp;rsquo;s, opgedaan in het vak Besturingssystemen en C, hier ook van pas te laten komen. Daarom is het aangeraden om dezelfde virtuele machine te gebruiken voor BESC en voor SES.</description>
     </item>
     
     <item>
@@ -27,7 +37,7 @@ Commandline Tools  git-scm gradle  Om vlot met unix-like command lines te werken
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/github-classroom/</guid>
       <description>Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. Bewkaam jezelf eerst in de basis van Gradle als build tool.
-Labo oefeningen  27/02/2020: TDD Opgave 1: https://classroom.github.com/a/WT_nzKGM 05/03/2020: TDD Opgave 4 &amp;amp; 5: https://classroom.github.com/a/M24O57aU 19/03/2020: TDD Capita Selecta: https://classroom.github.com/a/vd_26z08  Design Patterns:  Facade: https://classroom.github.com/a/Y0jE6TMb Dependency Injection: https://classroom.github.com/a/EMPJIYbY Singleton: https://classroom.github.com/a/x76Z-wrL Decorator: https://classroom.github.com/a/o5ae8Mz_ Factory: https://classroom.github.com/a/XOonKxSW  </description>
+Labo oefeningen Meer info volgt binnenkort!</description>
     </item>
     
     <item>
@@ -38,7 +48,7 @@ Labo oefeningen  27/02/2020: TDD Opgave 1: https://classroom.github.com/a/WT_nzK
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy/</guid>
       <description>SESsy Library: Een geïntegreerde oefening Download Locatie: op  Github via https://github.com/KULeuven-Diepenbeek/sessylibrary. Zie README.md op de hoofdpagina. SESsy library is:
  A Library Management Simulation WebApp for the &amp;lsquo;SES&amp;rsquo; (Software Engineering Skills) course
- Installatie Download via bovenstaande Github link, of met git clone. Dit is een &amp;ldquo;Gradle&amp;rdquo; project, die de build van ons Java ecosysteem verzorgt. Dat wil zeggen dat het Gradle systeem automatisch libraries (jar bestanden) download van een centrale repository, moesten die nodig zijn.</description>
+   Een boek uitlenen in de SESsy Library webapp.  Installatie Download via bovenstaande Github link, of met git clone. Dit is een &amp;ldquo;Gradle&amp;rdquo; project, die de build van ons Java ecosysteem verzorgt. Dat wil zeggen dat het Gradle systeem automatisch libraries (jar bestanden) download van een centrale repository, moesten die nodig zijn.</description>
     </item>
     
   </channel>

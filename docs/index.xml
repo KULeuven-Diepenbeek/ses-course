@@ -15,7 +15,7 @@
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/facade/</guid>
       <description>« Terug naar Software Engineering Skills » Naar de labo opgave
-&amp;ldquo;Facade&amp;rdquo; - Design Pattern Begeleidende screencast:
+&amp;ldquo;Facade&amp;rdquo; - Design Pattern Begeleidende screencast1:
   Doelstelling  Scherm een complex stukje software af met behulp van een simpele interface Voorzie éénzelfde interface naar een set van verschillende mogelijke subsystemen. Een Facade is een high-level interface die mogelijks low-level systemen aanspreekt.  Dive Into Design Patterns: Facade
 Voorbeeld 1. Opzet Stel dat we gegevens van de klant moeten versturen naar een overheidsinstantie.</description>
     </item>
@@ -26,7 +26,7 @@ Voorbeeld 1. Opzet Stel dat we gegevens van de klant moeten versturen naar een o
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/di/</guid>
-      <description>&amp;ldquo;Dependency Injection (DI)&amp;quot; - Design Pattern Begeleidende screencast:
+      <description>&amp;ldquo;Dependency Injection (DI)&amp;quot; - Design Pattern Begeleidende screencast1:
   Doelstelling  Promoot modulariteit door afhankelijkheden te injecteren, zodat aparte modules eenvoudig inplugbaar zijn in andere productiecode. Op deze manier worden modules ook makkelijker tesbaar. Promoot Inversion of Control: een client die services aanroept zou niet mogen weten hoe services worden aangemaakt - deze zou moeten worden &amp;lsquo;geinjecteerd&amp;rsquo;.  Wikipedia: Dependency Injection
 Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we dat een database handle nodig is om shopping cart gegevens op te halen.</description>
     </item>
@@ -37,7 +37,7 @@ Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/singleton/</guid>
-      <description>&amp;ldquo;Singleton&amp;rdquo; - Design Pattern Begeleidende screencast:
+      <description>&amp;ldquo;Singleton&amp;rdquo; - Design Pattern Begeleidende screencast1:
   Doelstelling  Vermijd de mogelijkheid tot meervoudige instantiatie van een bepaalde klasse. Er kan altijd maar één bepaalde instantie van bestaan. Voorzie een eenvoudige manier om vanuit eender waar in de code toegang te verkrijgen tot die éne instantie. Encapsuleer logica om deze instantie aan te maken, moest code dit raadplegen en dit toevallig de eerste keer zijn (lazy initialization).  Dive Into Design Patterns: Singleton</description>
     </item>
     
@@ -47,7 +47,7 @@ Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/decorator/</guid>
-      <description>&amp;ldquo;Decorator&amp;rdquo; - Design Pattern Begeleidende screencast:
+      <description>&amp;ldquo;Decorator&amp;rdquo; - Design Pattern Begeleidende screencast1:
   Doelstelling  Voeg dynamisch functionaliteit toe als alternatief voor klassieke overerving. Gedraagt zich zoals het stukje &amp;lsquo;ingepakte&amp;rsquo; functionaliteit, maar voert extra handelingen uit. Wordt in Java altijd via interface implementaties uitegevoerd.  Dive Into Design Patterns: Decorator
 Voorbeeld 1. Opzet Stel dat we in een fabriek op plaats X een auto samenstellen. De wagen is een zeer eenvoudige Volkswagen Golf, zonder opties. Op een andere locatie, plaats Y, hebben wij als bedrijf ook fabrieken die sportauto&amp;rsquo;s bouwen (Volkswagen Scirocco) en op plaats Z luxe wagens (Volkswagen Passat).</description>
     </item>
@@ -58,7 +58,7 @@ Voorbeeld 1. Opzet Stel dat we in een fabriek op plaats X een auto samenstellen.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/factory/</guid>
-      <description>&amp;ldquo;Factory&amp;rdquo; - Design Pattern Begeleidende screencast:
+      <description>&amp;ldquo;Factory&amp;rdquo; - Design Pattern Begeleidende screencast1:
   Doelstelling  Scherm het aanmaken van bepaalde objecten af door middel van overerving en logica, waarbij die logica éénmalig wordt geïmplementeerd, en op een centrale plaats staat. Promoot een modulair model door de verantwoordlijkheid van object creatie en object gebruik te scheiden.  Dive Into Design Patterns: Factory (method)
 Voorbeeld 1. Opzet Stel, je wilt aan de kassa van een niet al te grote lokale cinema een film kopen.</description>
     </item>
@@ -74,6 +74,17 @@ Voorbeeld 1. Opzet Stel, je wilt aan de kassa van een niet al te grote lokale ci
     </item>
     
     <item>
+      <title>Extending the SESsy WebApp</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy-extending/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy-extending/</guid>
+      <description>SESsy Library Uitbreiden Lees eerst de installatieinstructies en basics over de SESsy Library app.
+Met de SESsy Library WebApp kunnen verstokte lezers (en mensen die boeken nooit terugbrengen) de database van de lokale bibliotheek raadplegen, en eventueel boeken uitlenen. Het is een simpele webapplicatie met een embedded server die standaard op poort 8080 draait, met een minimale front-end interface:
+   De codebase bevat echter nog heel wat lijntjes TODO commentaar die door de luie ontwikkelaars nooit zijn geïmplementeerd.</description>
+    </item>
+    
+    <item>
       <title>Gebruikte Software</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/software/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -81,8 +92,7 @@ Voorbeeld 1. Opzet Stel, je wilt aan de kassa van een niet al te grote lokale ci
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/software/</guid>
       <description>Voor deze cursus werken we met Java en met Git. Dat betekent dat een JDK (en de Gradle build tool) en een Git client de enige vereisten zijn.
 Onderstaande lijst kan helpen bij het installeren en configureren van zulke tools:
-Commandline Tools  git-scm gradle  Om vlot met unix-like command lines te werken op een Windows machine, raden we één van de volgende toolchain aan:
- cmder, Portable console Emulator for Windows MinGW, minimalist GNU for Windows Cygwin  Let op, bovenstaande tools mixen kan grote negatieve gevolgen hebben, iedere GNU flavor werkt op een andere manier en ze bëinvloeden allemaal je %PATH% systeen variabele (Unix: $PATH)</description>
+Commandline Tools  git-scm gradle  Het is onze intentie om jullie kennis van Linux commando&amp;rsquo;s, opgedaan in het vak Besturingssystemen en C, hier ook van pas te laten komen. Daarom is het aangeraden om dezelfde virtuele machine te gebruiken voor BESC en voor SES.</description>
     </item>
     
     <item>
@@ -102,7 +112,7 @@ Commandline Tools  git-scm gradle  Om vlot met unix-like command lines te werken
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/github-classroom/</guid>
       <description>Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. Bewkaam jezelf eerst in de basis van Gradle als build tool.
-Labo oefeningen  27/02/2020: TDD Opgave 1: https://classroom.github.com/a/WT_nzKGM 05/03/2020: TDD Opgave 4 &amp;amp; 5: https://classroom.github.com/a/M24O57aU 19/03/2020: TDD Capita Selecta: https://classroom.github.com/a/vd_26z08  Design Patterns:  Facade: https://classroom.github.com/a/Y0jE6TMb Dependency Injection: https://classroom.github.com/a/EMPJIYbY Singleton: https://classroom.github.com/a/x76Z-wrL Decorator: https://classroom.github.com/a/o5ae8Mz_ Factory: https://classroom.github.com/a/XOonKxSW  </description>
+Labo oefeningen Meer info volgt binnenkort!</description>
     </item>
     
     <item>
@@ -113,7 +123,7 @@ Labo oefeningen  27/02/2020: TDD Opgave 1: https://classroom.github.com/a/WT_nzK
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy/</guid>
       <description>SESsy Library: Een geïntegreerde oefening Download Locatie: op  Github via https://github.com/KULeuven-Diepenbeek/sessylibrary. Zie README.md op de hoofdpagina. SESsy library is:
  A Library Management Simulation WebApp for the &amp;lsquo;SES&amp;rsquo; (Software Engineering Skills) course
- Installatie Download via bovenstaande Github link, of met git clone. Dit is een &amp;ldquo;Gradle&amp;rdquo; project, die de build van ons Java ecosysteem verzorgt. Dat wil zeggen dat het Gradle systeem automatisch libraries (jar bestanden) download van een centrale repository, moesten die nodig zijn.</description>
+   Een boek uitlenen in de SESsy Library webapp.  Installatie Download via bovenstaande Github link, of met git clone. Dit is een &amp;ldquo;Gradle&amp;rdquo; project, die de build van ons Java ecosysteem verzorgt. Dat wil zeggen dat het Gradle systeem automatisch libraries (jar bestanden) download van een centrale repository, moesten die nodig zijn.</description>
     </item>
     
     <item>

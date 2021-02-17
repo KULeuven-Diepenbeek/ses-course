@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>TDD In de praktijk: Mockito :: Software Engineering Skills</title>
+    <title>Extending the SESsy WebApp :: Software Engineering Skills</title>
 
     
     <link href="../../css/nucleus.css?1613554192" rel="stylesheet">
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="../../tdd/mockito/">
+  <body class="" data-url="../../extra/sessy-extending/">
     <nav id="sidebar" class="">
 
 
@@ -187,7 +187,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/tdd/" title="3. Test Driven Development" class="dd-item 
-        parent
+        
         
         
         ">
@@ -213,7 +213,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/tdd/mockito/" title="TDD In de praktijk: Mockito" class="dd-item active">
+      <li data-nav-id="/tdd/mockito/" title="TDD In de praktijk: Mockito" class="dd-item ">
         <a href="../../tdd/mockito/">
         TDD In de praktijk: Mockito
         
@@ -502,7 +502,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/extra/" title="Extra informatie" class="dd-item 
-        
+        parent
         
         
         ">
@@ -528,7 +528,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/extra/sessy-extending/" title="Extending the SESsy WebApp" class="dd-item ">
+      <li data-nav-id="/extra/sessy-extending/" title="Extending the SESsy WebApp" class="dd-item active">
         <a href="../../extra/sessy-extending/">
         Extending the SESsy WebApp
         
@@ -674,7 +674,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Software Engineering Skills</a> > <a href='../../tdd/'>3. Test Driven Development</a> > TDD In de praktijk: Mockito
+            <a href='../../'>Software Engineering Skills</a> > <a href='../../extra/'>Extra informatie</a> > Extending the SESsy WebApp
           
         
           
@@ -689,11 +689,11 @@ window.MathJax = {
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#sessy-library-uitbreiden">SESsy Library Uitbreiden</a>
       <ul>
-        <li><a href="#een-interface-mocken-the-hard-way">Een interface &lsquo;mocken&rsquo;: the hard way</a></li>
-        <li><a href="#een-interface-mocken-the-easy-way">Een interface &lsquo;mocken&rsquo;: the easy way</a></li>
-        <li><a href="#tdd-in-een-groter-project">TDD in een groter project</a></li>
+        <li><a href="#opgave-1">Opgave 1</a></li>
+        <li><a href="#opgave-2">Opgave 2</a></li>
+        <li><a href="#opgave-3">Opgave 3</a></li>
       </ul>
     </li>
   </ul>
@@ -713,136 +713,65 @@ window.MathJax = {
           
             <h1>
               
-              TDD In de praktijk: Mockito
+              Extending the SESsy WebApp
             </h1>
           
 
         
 
 
-<p>Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen.</p>
+<h2 id="sessy-library-uitbreiden">SESsy Library Uitbreiden</h2>
+<p><strong>Lees eerst</strong> <a href="../../extra/sessy">de installatieinstructies</a> en basics over de SESsy Library app.</p>
+<p>Met de SESsy Library WebApp kunnen verstokte lezers (en mensen die boeken nooit terugbrengen) de database van de lokale bibliotheek raadplegen, en eventueel boeken uitlenen. Het is een simpele webapplicatie met een embedded server die standaard op poort <code>8080</code> draait, met een minimale front-end interface:</p>
 <p><figure>
-	<a href="../../img/teaching/ses/mockito.png" data-featherlight="image">
-		<img src="../../img/teaching/ses/mockito.png"  alt="Mockito logo" >
+	<a href="../../img/teaching/ses/sessy.png" data-featherlight="image">
+		<img src="../../img/teaching/ses/sessy.png"  >
 	</a>
 	
 </figure>
 </p>
-<p>Lees op <a href="https://site.mockito.org">https://site.mockito.org</a> <strong>hoe</strong> je het framework moet gebruiken. (Klik op de knoppen <strong>WHY</strong> en <strong>HOW</strong> bovenaan! Volledige <a href="https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html">javadoc</a>) Denk aan de volgende zaken:</p>
-<ul>
-<li>Hoe include ik Mockito als een dependency in mijn project?</li>
-<li>Hoe gebruik ik de API om een Test Double/mock aan te maken?</li>
-<li>Hoe valideer ik verwachtingen die ik heb van deze Test Double?</li>
-</ul>
-<h3 id="een-interface-mocken-the-hard-way">Een interface &lsquo;mocken&rsquo;: the hard way</h3>
-<p>Zoals aangehaald in de <a href="../../tdd">TDD noties</a> kan een eigen implementatie van een interface worden gemaakt die als Test Double werkt (denk aan Arnie&rsquo;s stuntman). Het vervelende is dat deze klasse enkel maar wordt gebruikt in test code, dus niet in productie code. Mockito maakt dit dynamisch aan, zonder dat er ooit het keyword <code>class</code> bij aan de pas komt.</p>
+<p>De codebase bevat echter nog heel wat lijntjes <code>TODO</code> commentaar die door de luie ontwikkelaars nooit zijn geïmplementeerd. Het is aan jullie om de applicatie verder af te werken, en deze tekortkomingen handig weg te werken. Uiteraard weten jullie ondertussen dat de twee hoekstenen van goede softwareontwikkeling <em>test-driven development</em> en <em>design patterns</em> zijn. Pas deze concepten ook bij het uitbreiden van deze applicatie toe.</p>
+<p>IntelliJ biedt hiervoor het &ldquo;TODO window&rdquo; aan (CMD-6 of CTRL-6). Elke regel commentaar die begint met <code>// TODO doe dit of dat</code> verschijnt automatisch in dit venster.</p>
+<h3 id="opgave-1">Opgave 1</h3>
+<p>Neem een kijkje in de klasse <code>BookLendService</code>. De uitleen- en teruggeeffuncties zijn sterk vereenvoudigd:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">lend</span><span style="color:#f92672">(</span>Book book<span style="color:#f92672">,</span> User user<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    book<span style="color:#f92672">.</span><span style="color:#a6e22e">borrow</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Waarbij de <code>borrowed</code> flag op <code>true</code> of <code>false</code> wordt gezet. Er ontbreekt hier nog heel wat logica:</p>
+<ol>
+<li>Mag de gebruiker die binnen komt als parameter dit boek wel uitlenen? In het geval van teruggeven, mag dat? Als die user <code>null</code> is - dus niet ingelogd - wat gebeurt er dan?</li>
+<li>Moeten we valideren of het <code>book</code> object correct is - zijnde, is dat ISBN nummer wel aanwezig in onze database? Ik kan niet aan de lokale bib vragen een boek uit te lenen als het er nooit is geweest. Ik kan ook geen boek &lsquo;terugbrengen&rsquo; om het cadeau te geven.</li>
+<li>Het veranderen van de staat van het object wordt momenteel niet gepersisteerd. Dat betekent dat de volgende keer als we zoeken naar boeken, plots het boek terug beschikbaar is. De <code>BooksRepository</code> interface moet dus worden aangesproken, maar die is momenteel nog niet geïnjecteerd.</li>
+</ol>
+<p>Voorzie ook een <code>BookLendServiceTests</code> klasse in de <code>src/test/java</code> map, in de juiste package subfolder. Denk na over het gebruik van unit- of integratietesten. Het spreekt voor zich dat je je implementatie best ook eens manueel, volledig geïntegreerd, test door de applicatie op te starten.</p>
+<h3 id="opgave-2">Opgave 2</h3>
+<p>De unit testen voor de klasse <code>BorrowBooksResource</code> zijn niet allemaal zuivere <em>unit</em> testen: sommigen leunen ook op de implementatie van <code>BookLendService</code> (wat het eerder integratietestem maakt). De kans is groot dat enkele testen kapot zijn door de implementatie van opgave 1. De TODO in deze klasse spreekt voor zich: gebruik Dependency Injection om de service te injecteren.</p>
+<p>Mockito maakt het erg eenvoudig om dynamisch implementaties van interfaces te genereren, maar onze service is geen interface. Gewone klassen testen is minder evident voor het framework. Voorzie daarom een interface bovenop de standaard implementatie die de methodes <code>lend()</code> en <code>bringBack()</code> bevat, zodat we gedrag kunnen beschrijven in onze unit testen voor de borrow books resource.</p>
+<h3 id="opgave-3">Opgave 3</h3>
+<p>De gebruikersgroep &lsquo;<em>slechte uitleners</em>&rsquo; zijn echt, echt slecht. Ze luisteren nooit, en zorgen er nog ooit voor dat onze bibliotheek failliet gaat. We willen bij deze strengere maatregelen hanteren wat betreft het uitlenen van boeken:</p>
+<ol>
+<li>Slechte Uitleners mogen nooit meer dan 2 boeken tegelijkertijd uitlenen. Dit is momenteel onmogelijk om na te gaan, want een boek bevat slechts een <code>boolean</code>. Dat wil zeggen dat we dan ook onze trouwe klanten, de goede uitleners, straffen. We kunnen een extra veld introduceren of de boolean veranderen van data type, zodat we weten elk boek wordt bijgehouden door welke gebruiker.</li>
+<li>Anoniempjes, dus de niet-ingelogde gebruikers, willen we een beperkte view op de database aanbieden. Reeds uitgeleende boeken mogen niet meer worden getoond in de resultaten van de zoek pagina. Welke klasse(n) dien je daarvoor te wijzigen? Welke edge cases (lees: testgevallen) kan je daarvoor verzinnen?</li>
+</ol>
 <p><figure>
-	<a href="../../img/testdouble.jpg" data-featherlight="image">
-		<img src="../../img/testdouble.jpg"   title="I&#39;ll Be Back.">
+	<a href="../../img/teaching/ses/sessy-uitgeleend.png" data-featherlight="image">
+		<img src="../../img/teaching/ses/sessy-uitgeleend.png"   title="Dit uitgeleend boek mag niet meer verschijnen voor anonieme gebruikers.">
 	</a>
 	
-		<figcaption>I&#39;ll Be Back.</figcaption>
+		<figcaption>Dit uitgeleend boek mag niet meer verschijnen voor anonieme gebruikers.</figcaption>
 	
 </figure>
 </p>
-<p>Stel, Arnold gaat acteren voor de nieuwe film <strong>Die Hard: In A Deepen Beek</strong> (uit in 2025 - Bruce had geen zin meer). Hij moet daarvoor een aantal fantastische stunts uithalen, die hij niet graag zelf zou doen. De volgende interface definieert een &lsquo;Arnold&rsquo;, waarbij <code>doBackFlip()</code> de gevaarlijke stunt is (resultaat is <code>true</code> indien geslaagd):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IllBeBack</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">();</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>De casting crew en de director verwachten dat tijdens een opname 3x een backflip succesvol wordt uitgevoerd. Indien deze niet lukt, wordt de take opnieuw genomen. Dit manifesteert zich in code in de vorm van een <code>RuntimeException</code>. De One And Only Arnold had op dat moment een crisisvergadering in Californië en kon niet aanwezig zijn op de set. Gelukkig zijn er lookalikes en stuntmannen genoeg:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ArnieLookalike</span> <span style="color:#66d9ef">implements</span> IllBeBack <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StuntmanArnie</span> <span style="color:#66d9ef">implements</span> IllBeBack <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Enkel <code>StuntmanArnie</code> is fysiek krachtig genoeg om consistent de backflip uit te voeren. De lookalike ziet er uit zoals Arnold, maar bakt jammer genoeg van de scene niet zo veel. Hieronder een blueprint van de opname code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DieHardInADeepenBeek</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> IllBeBack arnoldActor<span style="color:#f92672">;</span>
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>IllBeBack actor<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">arnoldActor</span> <span style="color:#f92672">=</span> actor<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">boolean</span> succeeded <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> 3<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
-            succeeded <span style="color:#f92672">&amp;=</span> arnoldActor<span style="color:#f92672">.</span><span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">();</span>
-        <span style="color:#f92672">}</span>
-
-        <span style="color:#66d9ef">if</span><span style="color:#f92672">(!</span>succeeded<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;do that again, please...&#34;</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>De hamvraag is nu: hoe testen we de <strong>logica in <code>recordActOne</code></strong>? Daarvoor zal de backflip soms moeten lukken, en soms ook niet. We hebben dus zowel een <code>ArnieLookalike</code> als <code>StuntmanArnie</code> implementatie nodig:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DieHardInADeepenBeekTests</span> <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Test</span><span style="color:#f92672">(</span>ExpectedException <span style="color:#f92672">=</span> RuntimeException<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        var movie <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DieHardInADeepenBeek<span style="color:#f92672">();</span>
-        var actor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArnieLookalike<span style="color:#f92672">();</span>
-        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>actor<span style="color:#f92672">);</span>
-
-        <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">();</span>
-        <span style="color:#75715e">// 3. assert (in annotation)
-</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-
-    <span style="color:#a6e22e">@Test</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne_backflipSucceeds_ok</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        var movie <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DieHardInADeepenBeek<span style="color:#f92672">();</span>
-        var actor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StuntmanArnie<span style="color:#f92672">();</span>
-        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>actor<span style="color:#f92672">);</span>
-
-        <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">();</span>
-        <span style="color:#75715e">// 3. assert
-</span><span style="color:#75715e"></span>        assertTrue<span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><h3 id="een-interface-mocken-the-easy-way">Een interface &lsquo;mocken&rsquo;: the easy way</h3>
-<p>In plaats van de <code>ArnieLookalike</code> en <code>StuntmanArnie</code> klasses zelf te maken, kunnen we hier Mockito het zware werk laten doen door gebruik te maken van de <code>mock()</code> methode. De testen worden dan lichtjes anders, omdat we daarin het gedrag van de mock eerst moeten bepalen voordat we naar de act en assert stappen kunnen gaan:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DieHardInADeepenBeekTests</span> <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Test</span><span style="color:#f92672">(</span>ExpectedException <span style="color:#f92672">=</span> RuntimeException<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        var movie <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DieHardInADeepenBeek<span style="color:#f92672">();</span>
-        var actor <span style="color:#f92672">=</span> mock<span style="color:#f92672">(</span>IllBeBack<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-        when<span style="color:#f92672">(</span>actor<span style="color:#f92672">.</span><span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span><span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
-        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>actor<span style="color:#f92672">);</span>
-
-        <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">();</span>
-        <span style="color:#75715e">// 3. assert (in annotation)
-</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-
-    <span style="color:#a6e22e">@Test</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne_backflipSucceeds_ok</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        var movie <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DieHardInADeepenBeek<span style="color:#f92672">();</span>
-        var actor <span style="color:#f92672">=</span> mock<span style="color:#f92672">(</span>IllBeBack<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-        when<span style="color:#f92672">(</span>actor<span style="color:#f92672">.</span><span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
-        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>actor<span style="color:#f92672">);</span>
-
-        <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">();</span>
-        <span style="color:#75715e">// 3. assert
-</span><span style="color:#75715e"></span>        assertTrue<span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Het geheim zit hem in de <code>mock()</code> en <code>when()</code> methodes, waarmee we het gedrag van de mock implementatie kunnen aansturen. Dit werd vroeger manueel geïmplementeerd, maar die klasses zijn nu niet meer nodig.</p>
-<p>Lees op <a href="https://site.mockito.org">https://site.mockito.org</a> <strong>hoe</strong> je het framework moet gebruiken. (Klik op de knoppen <strong>WHY</strong> en <strong>HOW</strong> bovenaan! Volledige <a href="https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html">javadoc</a>)</p>
-<h3 id="tdd-in-een-groter-project">TDD in een groter project</h3>
-<p>De <a href="../../extra/sessy">SESsy library</a> webapplicatie bevat ook unit-, integratie- en endtoend-testen die een meer &lsquo;real-life&rsquo; omgeving simuleren met een grotere codebase. Zij die zoeken naar een beter begrip van het concept TDD en de implementatie ervan in de dagelijkse wereld, kunnen daar hun oren en ogen de kost geven. We moedigen tevens het wijzigen van testen aan om te kijken wat er gebeurt!</p>
+<p>Vergeet niet dat wijzigingen in de <code>Book</code> datastructuur grote gevolgen hebben voor de rest van de applicatie! De database, aangedreven door <code>BooksRepository</code>, zal ook moeten wijzigen. Een <code>String</code> in Java is een <code>VARCHAR</code> in SQL.</p>
+<p>De front-end Javascript code gaat steeds uit van een <code>borrowed</code> flag die wordt gecontroleerd om de gele &ldquo;uitgeleend&rdquo; waarschuwing weer te geven. Je kan indien gewenst deze code in <code>Zoeken.vue</code> wijzigen, of de boolean laten staan en aan- of uitzetten naargelang de waarde van het nieuwe String veld. Bijvoorbeeld:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setBorrowedBy</span><span style="color:#f92672">(</span>String user<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">borrowedBy</span> <span style="color:#f92672">=</span> user<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">borrowed</span> <span style="color:#f92672">=</span> user <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> <span style="color:#66d9ef">true</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span> <span style="color:#75715e">// of lege String checken
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><p>Ik zeg altijd:</p>
+<blockquote>
+<p><code>./gradlew test</code> is uw vriend!</p>
+</blockquote>
 
 
 <footer class="footline">
@@ -931,7 +860,6 @@ window.MathJax = {
             
                 
                     
-                    
                 
                 
 
@@ -944,7 +872,6 @@ window.MathJax = {
             
             
                 
-                    
                     
                 
                 
@@ -961,9 +888,6 @@ window.MathJax = {
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1144,6 +1068,7 @@ window.MathJax = {
             
                 
                     
+                    
                 
                 
 
@@ -1156,6 +1081,7 @@ window.MathJax = {
             
             
                 
+                    
                     
                 
                 
@@ -1172,6 +1098,9 @@ window.MathJax = {
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1228,10 +1157,10 @@ window.MathJax = {
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../tdd/" title="3. Test Driven Development"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../extra/" title="Extra informatie"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../tdd/capita/" title="TDD met algoritmes" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../extra/software/" title="Gebruikte Software" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
