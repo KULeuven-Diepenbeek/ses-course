@@ -90,11 +90,15 @@ Waarbij de `+++` regels wijzigingen zijn die zijn toegevoegd, en `---` die zijn 
 
 ### Conflicten oplossen
 
-**Lees eerst** hoofdstuk 2 van het Pro Git boek.
+**Lees eerst** [hoofdstuk 2 van het Pro Git boek](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository).
 
 ### Branches
 
-**Lees eerst** hoofdstuk 3 van het Pro Git boek.
+**Lees eerst** [hoofdstuk 3 van het Pro Git boek](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell).
+
+{{% notice warning %}}
+Hoofdstuk 1 t.e.m. 3 van het bovenstaande Pro Git boek horen bij de leerstof!
+{{% /notice %}}
 
 Een branch aanmaken kan via het `git branch` commando. Dit geeft een overzicht van beschikbare branches, en met een argument maak je een nieuwe aan. `git checkout` laat je switchen naar die branch. Het `*` symbool duidt de actieve branch aan. Hieronder wordt een nieuwe branch genaamd _bugfixbranch_ aangemaakt nadat git toont dat er geen branches zijn. Daarna wordt er naar die branch overgeschakeld:
 
@@ -167,6 +171,11 @@ graph LR;
 ### Opgave 1
 
 Maak een Github.com account aan, als je dat nog niet hebt. Download de commandline tools [https://git-scm.com/downloads](https://git-scm.com/downloads), de officiele distributie, multiplatform, en probeer voor opgave twee de repository 'ses-issue-sandbox' te clonen: `git clone https://github.com/KULeuven-Diepenbeek/ses-issue-sandbox.git`. 
+
+{{% notice note %}}
+Voor **2ba** studenten (_NIET_ schakelstudenten): Gebruik `https://github.com/KULeuven-Diepenbeek/ses-issue-sandbox2` (nummber 2). 
+{{% /notice %}}
+
 
 Gebruik het Pro Git boek om kennis te maken met basis commando's van git. Het is de bedoeling om de commandline tools te leren kennen, en _niet_ om met Github Desktop te werken. 
 
