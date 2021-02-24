@@ -24,6 +24,23 @@ Het is onze intentie om jullie kennis van **Linux commando's**, opgedaan in het 
 ## Software Development Tools
 
 - [IntelliJ IDEA](https://www.jetbrains.com/idea/)
-- [Java Development Kit 11.x of later](https://www.oracle.com/java/technologies/javase-jdk13-downloads.html)
+- [Java Development Kit 15.x of later](https://www.oracle.com/java/technologies/javase-downloads.html)
 
 De IntelliJ community edition is voldoende. Studenten krijgen een gratis licentie op alle JetBrains producten. Registreer op de website met je `@student.uhasselt.be` e-mail adres zodat het bedrijf herkent dat je studeert aan een Universitaire Instelling. 
+
+### Installatieinstructies JDK
+
+**Windows gebruikers**: volg De [HowToDoInJava Installing Java on 64 bit Windows](https://howtodoinjava.com/java/basics/install-java-on-64-bit-windows/) guide om jullie `%PATH%` en `%JAVA_HOME%` omgevingsvariabelen correct op te zetten. 
+
+Als alles gelukt is, kan je in een opdrachtprompt `java -version` typen en krijg je als resultaat de geïnstalleerde Java versie. 
+
+**Unix gebruikers**: Editeer jullie `~/.bash_profile` , `~/.bashrc` of `~/.zshrc`, afhankelijk van de gebruikte cmdline `$SHELL`, en voeg de `$JAVA_HOME` variabele toe op de volgende manier (pas het pad aan):
+
+```sh
+export JAVA_HOME="/dir/to/jdk/home"
+export PATH="$JAVA_HOME/bin:$PATH"
+```
+
+### Installatieinstructies Gradle
+
+**NIET** apart installeren - dit wordt automatisch gedownload bij het bootstrappen van een Gradle project. 
