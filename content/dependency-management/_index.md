@@ -42,6 +42,10 @@ Main.java:3: error: cannot find symbol
 
 De klasse `Gson` is immers iets dat we niet hebben zelfgemaakt, maar wensen te importeren via het `import com.google.gson.*;` statement. Er is een manier nodig om de [gedownloade library](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.6) te linken met onze bestaande code: `javac -cp gson-2.8.6.jar Main.java`. Het programma uitvoeren kan met `java -cp gson-2.8.6.jar:. Main`. Er worden dus 2 zaken aan het classpath meegegeven: de Google jar, en de huidige directory (`.`), om `Main.class` terug te vinden.
 
+{{% notice warning %}}
+Java classpath separators zijn [OS-specifiek](https://howtodoinjava.com/java/basics/java-classpath/)! Windows: `;` in plaats van Unix: `:`.
+{{% /notice %}}
+
 Dit programma kan schematisch worden voorgesteld als volgt:
 
 {{<mermaid>}}
