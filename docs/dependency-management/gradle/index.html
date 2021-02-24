@@ -12,21 +12,21 @@
     <title>Java Gradle projecten :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1613649759" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1613649759" rel="stylesheet">
-    <link href="../../css/hybrid.css?1613649759" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1613649759" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1613649759" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1613649759" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1613649759" rel="stylesheet">
-    <link href="../../css/theme.css?1613649759" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1613649759" rel="stylesheet">
+    <link href="../../css/nucleus.css?1614161204" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1614161204" rel="stylesheet">
+    <link href="../../css/hybrid.css?1614161204" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1614161204" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1614161204" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1614161204" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1614161204" rel="stylesheet">
+    <link href="../../css/theme.css?1614161204" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1614161204" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1613649759" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1614161204" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1613649759"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1614161204"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1613649759"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1613649759"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1614161204"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1614161204"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1613649759"></script>
+<script type="text/javascript" src="../../js/search.js?1614161204"></script>
 
     
   </div>
@@ -777,6 +777,10 @@ dependencies {
 </ol>
 <p>Merk op dat een typisch gradle project <strong>geen jars</strong> mee zipt, zoals de oefeningen. Die worden dus automatisch door deze tool gedownload, en in de juiste map geplaatst.</p>
 <p>Voor het <a href="../../extra/sessy">SESsy Library</a> project wordt ook Gradle gebruikt, en is de config file iets ingewikkelder, door de inclusie van eigen &ldquo;tasks&rdquo;. (te raadplegen op <i class='fab fa-github'></i> <a href="https://github.com/KULeuven-Diepenbeek/sessylibrary/blob/master/build.gradle">Github</a>)</p>
+
+<div class="notices note" ><p>Merk op dat bij Gradle 6.x, t.o.v. de vorige versies, de de runtime dependencies nu <code>implementation</code> in plaats van <code>compile</code> heten, en de test dependencies <code>testImplementation</code> en <code>testRuntimeOnly</code> in plaats van <code>testCompile</code>. Zie ook: <a href="https://docs.gradle.org/current/userguide/declaring_dependencies.html">Declaring dependencies</a> in de Gradle docs.</p>
+</div>
+
 <h4 id="ontleding-van-een-gradle-project-mappenstructuur">Ontleding van een Gradle project mappenstructuur</h4>
 <p>Als we kijken naar de bestanden- en mappenstructuur van <a href="https://github.com/KULeuven-Diepenbeek/ses-patterns-singleton-template/blob/master/">singleton oefening</a>, vinden we dit terug:</p>
 <pre>
@@ -907,6 +911,10 @@ dependencies {
 }
 </pre>
 <p>Optionele test libraries zoals Hamcrest en Selenium/WebDriver kunnen daarna ook worden toegevoegd onder de <code>testImplementation</code> groep.</p>
+
+<div class="notices note" ><p>Merk op dat recente versies van IntelliJ, die Gradle 6.7 gebruiken, de jupiter engine categoriseren onder <code>testRuntimeOnly</code>.</p>
+</div>
+
 <h3 id="welke-task-moet-ik-uitvoeren">Welke Task moet ik uitvoeren?</h3>
 <p><code>./gradlew tasks --all</code> voorziet een overzicht van alle beschikbare taken voor een bepaald Gradle project, opgesplitst per fase (build tasks, build setup tasks, documentation tasks, help tasks, verification tasks). Plugins voorzien vaak extra tasks, zoals bovenstaande maven plugin.</p>
 <p>Belangrijke taken zijn onder andere:</p>
@@ -1355,19 +1363,19 @@ BUILD SUCCESSFUL in 9s
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1613649759"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1613649759"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1613649759"></script>
-    <script src="../../js/jquery.sticky.js?1613649759"></script>
-    <script src="../../js/featherlight.min.js?1613649759"></script>
-    <script src="../../js/highlight.pack.js?1613649759"></script>
+    <script src="../../js/clipboard.min.js?1614161204"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1614161204"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1614161204"></script>
+    <script src="../../js/jquery.sticky.js?1614161204"></script>
+    <script src="../../js/featherlight.min.js?1614161204"></script>
+    <script src="../../js/highlight.pack.js?1614161204"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1613649759"></script>
-    <script src="../../js/learn.js?1613649759"></script>
-    <script src="../../js/hugo-learn.js?1613649759"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1614161204"></script>
+    <script src="../../js/learn.js?1614161204"></script>
+    <script src="../../js/hugo-learn.js?1614161204"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1613649759"></script>
+            <script src="../../mermaid/mermaid.js?1614161204"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

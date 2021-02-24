@@ -12,21 +12,21 @@
     <title>2. Dependency Management :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1613649759" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1613649759" rel="stylesheet">
-    <link href="../css/hybrid.css?1613649759" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1613649759" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1613649759" rel="stylesheet">
-    <link href="../css/auto-complete.css?1613649759" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1613649759" rel="stylesheet">
-    <link href="../css/theme.css?1613649759" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1613649759" rel="stylesheet">
+    <link href="../css/nucleus.css?1614161204" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1614161204" rel="stylesheet">
+    <link href="../css/hybrid.css?1614161204" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1614161204" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1614161204" rel="stylesheet">
+    <link href="../css/auto-complete.css?1614161204" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1614161204" rel="stylesheet">
+    <link href="../css/theme.css?1614161204" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1614161204" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1613649759" rel="stylesheet">
+    <link href="../css/theme-kul.css?1614161204" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1613649759"></script>
+    <script src="../js/jquery-3.3.1.min.js?1614161204"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1613649759"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1613649759"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1614161204"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1614161204"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1613649759"></script>
+<script type="text/javascript" src="../js/search.js?1614161204"></script>
 
     
   </div>
@@ -754,7 +754,32 @@ Main.java:3: error: cannot find symbol
   location: class Main
 </pre>
 <p>De klasse <code>Gson</code> is immers iets dat we niet hebben zelfgemaakt, maar wensen te importeren via het <code>import com.google.gson.*;</code> statement. Er is een manier nodig om de <a href="https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.6">gedownloade library</a> te linken met onze bestaande code: <code>javac -cp gson-2.8.6.jar Main.java</code>. Het programma uitvoeren kan met <code>java -cp gson-2.8.6.jar:. Main</code>. Er worden dus 2 zaken aan het classpath meegegeven: de Google jar, en de huidige directory (<code>.</code>), om <code>Main.class</code> terug te vinden.</p>
-<p>De dependency in bovenstaand voorbeeld is <code>gson-2.8.6.jar</code>. Een gemiddelde Java applicatie heeft <strong>meer dan 10 dependencies!</strong> Het beheren van deze bestanden en de verschillende versies (major, minor, revision) geeft vaak conflicten die beter beheerd kunnen worden door tools dan door de typische vergeetachtigheid van mensen.</p>
+<p>Dit programma kan schematisch worden voorgesteld als volgt:</p>
+<script defer src="../mermaid/mermaid.min.js">
+	mermaid.initialize({
+		startOnLoad: true,
+		flowchart: {
+			useMaxWidth: true
+		}
+	});
+</script>
+<div class="mermaid" align="center" >
+	
+graph LR;
+    A["Main klasse"]
+    C["Gson 2.8.6"]
+    A -->|dependent on| C
+
+</div>
+<p>De dependency in bovenstaand voorbeeld is <code>gson-2.8.6.jar</code>. Een gemiddelde Java applicatie heeft echter <strong>meer dan 10 dependencies!</strong> Het beheren van deze bestanden en de verschillende versies (major, minor, revision) geeft vaak conflicten die beter beheerd kunnen worden door tools dan door de typische vergeetachtigheid van mensen. Dit kluwen aan afhankelijkheden, dat erg snel onhandelbaar kan worden, noemt men een <a href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency Hell</a>. Er zijn varianten: <a href="https://en.wikipedia.org/wiki/DLL_Hell">DLL Hell</a> sinds 16-bit Windows versies, RPM Hell voor Redhat Linux distributies, en <a href="https://en.wikipedia.org/wiki/Java_Classloader#JAR_hell">JAR Hell</a> voor Java projecten.</p>
+<p>Zie ook xkcd&rsquo;s <a href="https://www.explainxkcd.com/wiki/index.php/1579:_Tech_Loops">Tech Loops</a> rommelboeltje:</p>
+<p><figure>
+	<a href="../img/tech_loops.png" data-featherlight="image">
+		<img src="../img/tech_loops.png"  >
+	</a>
+	
+</figure>
+</p>
 <h2 id="wie-beheert-dependencies">Wie beheert dependencies?</h2>
 <h3 id="de-ontwikkelaar-manueel">De ontwikkelaar (manueel)</h3>
 <p>De eenvoudigste manier om een library te gebruiken is de volgende procedure te volgen:</p>
@@ -764,6 +789,10 @@ Main.java:3: error: cannot find symbol
 <li>Compileer de code door middel van het <code>-cp dependency1.jar</code> argument.</li>
 </ol>
 <p>Voor kleine programma&rsquo;s met enkele libraries is dit meer dan voldoende. Het kost echter redelijk veel moeite om de juiste versie te downloaden: stap 1 kost meestal meer dan 5 minuten werk.</p>
+
+<div class="notices note" ><p>Merk op dat jar files in een submap steken de syntax van de <code>-cp</code> parameter lichtjes wijzigt: bij compileren wordt het <code>javac -cp lib/* bla.java</code> en bij uitvoeren wordt het <code>java -cp &quot;lib/*:.&quot; bla</code>. Zonder de toegevoegde punt (<code>.</code>) bij het <code>java</code> commando wordt de main methode in <code>bla</code> zelf niet gevonden. Wildcards zijn toegestaan. Zie ook <a href="https://dev.to/martingaston/understanding-the-java-classpath-building-a-project-manually-3c3l">Understanding the Java Classpath</a>. In de praktijk worden build tools als Gradle gebruikt om projecten automatisch te builden, inclusief het doorgeven van de juiste parameters/dependencies.</p>
+</div>
+
 <h3 id="de-tools-automatisch">De tools (automatisch)</h3>
 <h4 id="apache-maven">Apache Maven</h4>
 <p><a href="https://en.wikipedia.org/wiki/Apache_Maven">Maven</a> is een build tool van de Apache Foundation die zowel de manier waarop de software wordt gecompileerd als zijn afhankelijkheden beheert. Maven is de voorloper van Gradle en bestaat reeds 15 jaar.</p>
@@ -791,18 +820,17 @@ Main.java:3: error: cannot find symbol
 <li>Zoek op de <a href="https://mvnrepository.com">Maven Repository</a> website naar de gewenste library.</li>
 <li>Voeg één regel toe in je <code>gradle.build</code> bestand, in het dependencies stuk:</li>
 </ol>
-<pre>
-dependencies {
+<pre><code>dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 }
-</pre>
-<p>Bij het uitvoeren van <code>gradlew</code> download Gradle automatisch de juiste opgegeven versie. Gradle bewaart lokale kopies van libraries in een submap van je home folder: <code>~/.gradle</code>.</p>
+</code></pre><p>Bij het uitvoeren van <code>gradlew</code> download Gradle automatisch de juiste opgegeven versie. Gradle bewaart lokale kopies van libraries in een submap van je home folder: <code>~/.gradle</code>.</p>
 <p>Voordelen van het gebruik van deze methode:</p>
 <ol>
 <li>Het zoeken van libraries beperkt zich tot één centrale (Maven Repository) website, waar alle verschillende versie revisies duidelijk worden vermeld.</li>
 <li>Het downloaden van libraries beperkt zich tot één centrale locatie op je harde schijf: 10 verschillende Java projecten die gebruik maken van Gson vereisen linken naar dezelfde gradle bestanden.</li>
 <li>Het beheren van dependencies en versies beperkt zich tot één centraal configuratiebestand: <code>build.gradle</code>. Dit is (terecht) een <strong>integraal deel van het project</strong>!</li>
 </ol>
+<p>Lees ook: <a href="https://docs.gradle.org/current/userguide/declaring_dependencies.html">Declaring dependencies</a> in de Gradle docs.</p>
 <h4 id="custom-repository-urls-voorzien">Custom Repository URLs voorzien</h4>
 <p>Veelgebruikte libraries zijn eenvoudig te vinden via de <a href="https://mvnrepository.com">Central Maven Repository</a>. Wanneer echter een eigen library werd gecompileerd, die dan in andere projecten worden gebruikt, schiet deze methode tekort: interne libraries zijn uiteraard niet op een publieke server gepubliceerd.</p>
 <p>Gradle voorziet gelukkig genoeg een eenvoudige manier om <a href="https://docs.gradle.org/current/userguide/declaring_repositories.html">repository websites toe te voegen</a>, met de volgende eenvoudige syntax:</p>
@@ -870,6 +898,7 @@ graph LR;
 	
 </figure>
 </p>
+<p>Gebruik hiervoor de task <code>dependencies</code>: <code>./gradlew dependencies</code>. Detailinformatie voor specifieke dependencies kunnen worden opgevraagd met de <code>dependencyInsight</code> task. Zie ook: <a href="https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html">Viewing and debugging dependencies</a> in de Gradle docs.</p>
 <p>Gradle voorziet een plugin genaamd &lsquo;<em>maven-publish</em>&rsquo; die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een <code>publishing</code> tag toe met de volgende properties:</p>
 <pre>
 plugins {
@@ -1371,19 +1400,19 @@ Execution failed for task ':Main.main()'.
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1613649759"></script>
-    <script src="../js/perfect-scrollbar.min.js?1613649759"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1613649759"></script>
-    <script src="../js/jquery.sticky.js?1613649759"></script>
-    <script src="../js/featherlight.min.js?1613649759"></script>
-    <script src="../js/highlight.pack.js?1613649759"></script>
+    <script src="../js/clipboard.min.js?1614161204"></script>
+    <script src="../js/perfect-scrollbar.min.js?1614161204"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1614161204"></script>
+    <script src="../js/jquery.sticky.js?1614161204"></script>
+    <script src="../js/featherlight.min.js?1614161204"></script>
+    <script src="../js/highlight.pack.js?1614161204"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1613649759"></script>
-    <script src="../js/learn.js?1613649759"></script>
-    <script src="../js/hugo-learn.js?1613649759"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1614161204"></script>
+    <script src="../js/learn.js?1614161204"></script>
+    <script src="../js/hugo-learn.js?1614161204"></script>
     
         
-            <script src="../mermaid/mermaid.js?1613649759"></script>
+            <script src="../mermaid/mermaid.js?1614161204"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
