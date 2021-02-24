@@ -42,7 +42,21 @@ Main.java:3: error: cannot find symbol
 
 De klasse `Gson` is immers iets dat we niet hebben zelfgemaakt, maar wensen te importeren via het `import com.google.gson.*;` statement. Er is een manier nodig om de [gedownloade library](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.6) te linken met onze bestaande code: `javac -cp gson-2.8.6.jar Main.java`. Het programma uitvoeren kan met `java -cp gson-2.8.6.jar:. Main`. Er worden dus 2 zaken aan het classpath meegegeven: de Google jar, en de huidige directory (`.`), om `Main.class` terug te vinden.
 
-De dependency in bovenstaand voorbeeld is `gson-2.8.6.jar`. Een gemiddelde Java applicatie heeft **meer dan 10 dependencies!** Het beheren van deze bestanden en de verschillende versies (major, minor, revision) geeft vaak conflicten die beter beheerd kunnen worden door tools dan door de typische vergeetachtigheid van mensen. 
+Dit programma kan schematisch worden voorgesteld als volgt:
+
+{{<mermaid>}}
+graph LR;
+    A["Main klasse"]
+    C["Gson 2.8.6"]
+    A -->|dependent on| C
+{{< /mermaid >}}
+
+
+De dependency in bovenstaand voorbeeld is `gson-2.8.6.jar`. Een gemiddelde Java applicatie heeft echter **meer dan 10 dependencies!** Het beheren van deze bestanden en de verschillende versies (major, minor, revision) geeft vaak conflicten die beter beheerd kunnen worden door tools dan door de typische vergeetachtigheid van mensen. Dit kluwen aan afhankelijkheden, dat erg snel onhandelbaar kan worden, noemt men een [Dependency Hell](https://en.wikipedia.org/wiki/Dependency_hell). Er zijn varianten: [DLL Hell](https://en.wikipedia.org/wiki/DLL_Hell) sinds 16-bit Windows versies, RPM Hell voor Redhat Linux distributies, en [JAR Hell](https://en.wikipedia.org/wiki/Java_Classloader#JAR_hell) voor Java projecten.
+
+Zie ook xkcd's [Tech Loops](https://www.explainxkcd.com/wiki/index.php/1579:_Tech_Loops) rommelboeltje:
+
+![](/img/tech_loops.png)
 
 ## Wie beheert dependencies?
 
@@ -55,6 +69,10 @@ De eenvoudigste manier om een library te gebruiken is de volgende procedure te v
 3. Compileer de code door middel van het `-cp dependency1.jar` argument.
 
 Voor kleine programma's met enkele libraries is dit meer dan voldoende. Het kost echter redelijk veel moeite om de juiste versie te downloaden: stap 1 kost meestal meer dan 5 minuten werk. 
+
+{{% notice note %}}
+Merk op dat jar files in een submap steken de syntax van de `-cp` parameter lichtjes wijzigt: bij compileren wordt het `javac -cp lib/* bla.java` en bij uitvoeren wordt het `java -cp "lib/*:." bla`. Zonder de toegevoegde punt (`.`) bij het `java` commando wordt de main methode in `bla` zelf niet gevonden. Wildcards zijn toegestaan. Zie ook [Understanding the Java Classpath](https://dev.to/martingaston/understanding-the-java-classpath-building-a-project-manually-3c3l). In de praktijk worden build tools als Gradle gebruikt om projecten automatisch te builden, inclusief het doorgeven van de juiste parameters/dependencies.
+{{% /notice %}}
 
 ### De tools (automatisch)
 
@@ -94,11 +112,11 @@ De volgende procedure volg je als je Gradle dependencies laat beheren:
 1. Zoek op de [Maven Repository](https://mvnrepository.com) website naar de gewenste library. 
 2. Voeg één regel toe in je `gradle.build` bestand, in het dependencies stuk:
 
-<pre>
+```
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 }
-</pre>
+```
 
 Bij het uitvoeren van `gradlew` download Gradle automatisch de juiste opgegeven versie. Gradle bewaart lokale kopies van libraries in een submap van je home folder: `~/.gradle`.
 
@@ -107,6 +125,8 @@ Voordelen van het gebruik van deze methode:
 1. Het zoeken van libraries beperkt zich tot één centrale (Maven Repository) website, waar alle verschillende versie revisies duidelijk worden vermeld.
 2. Het downloaden van libraries beperkt zich tot één centrale locatie op je harde schijf: 10 verschillende Java projecten die gebruik maken van Gson vereisen linken naar dezelfde gradle bestanden. 
 3. Het beheren van dependencies en versies beperkt zich tot één centraal configuratiebestand: `build.gradle`. Dit is (terecht) een **integraal deel van het project**! 
+
+Lees ook: [Declaring dependencies](https://docs.gradle.org/current/userguide/declaring_dependencies.html) in de Gradle docs. 
 
 #### Custom Repository URLs voorzien
 
@@ -176,6 +196,7 @@ Grote projecten kunnen makkelijk afhankelijk zijn van tientallen libraries, die 
 
 ![](/img/teaching/ses/deptree.png)
 
+Gebruik hiervoor de task `dependencies`: `./gradlew dependencies`. Detailinformatie voor specifieke dependencies kunnen worden opgevraagd met de `dependencyInsight` task. Zie ook: [Viewing and debugging dependencies](https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html) in de Gradle docs. 
 
 Gradle voorziet een plugin genaamd '_maven-publish_' die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een `publishing` tag toe met de volgende properties:
 

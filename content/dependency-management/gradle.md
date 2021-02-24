@@ -60,6 +60,11 @@ Merk op dat een typisch gradle project **geen jars** mee zipt, zoals de oefening
 
 Voor het [SESsy Library](/extra/sessy) project wordt ook Gradle gebruikt, en is de config file iets ingewikkelder, door de inclusie van eigen "tasks". (te raadplegen op <i class='fab fa-github'></i> [Github](https://github.com/KULeuven-Diepenbeek/sessylibrary/blob/master/build.gradle))
 
+{{% notice note %}}
+Merk op dat bij Gradle 6.x, t.o.v. de vorige versies, de de runtime dependencies nu `implementation` in plaats van `compile` heten, en de test dependencies `testImplementation` en `testRuntimeOnly` in plaats van `testCompile`. Zie ook: [Declaring dependencies](https://docs.gradle.org/current/userguide/declaring_dependencies.html) in de Gradle docs. 
+{{% /notice %}}
+
+
 #### Ontleding van een Gradle project mappenstructuur
 
 Als we kijken naar de bestanden- en mappenstructuur van [singleton oefening](https://github.com/KULeuven-Diepenbeek/ses-patterns-singleton-template/blob/master/), vinden we dit terug:
@@ -201,6 +206,12 @@ dependencies {
 </pre>
 
 Optionele test libraries zoals Hamcrest en Selenium/WebDriver kunnen daarna ook worden toegevoegd onder de `testImplementation` groep.
+
+{{% notice note %}}
+Merk op dat recente versies van IntelliJ, die Gradle 6.7 gebruiken, de jupiter engine categoriseren onder `testRuntimeOnly`. 
+{{% /notice %}}
+
+
 
 ### Welke Task moet ik uitvoeren?
 
