@@ -12,21 +12,21 @@
     <title>2. Dependency Management :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1614176935" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1614176935" rel="stylesheet">
-    <link href="../css/hybrid.css?1614176935" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1614176935" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1614176935" rel="stylesheet">
-    <link href="../css/auto-complete.css?1614176935" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1614176935" rel="stylesheet">
-    <link href="../css/theme.css?1614176935" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1614176935" rel="stylesheet">
+    <link href="../css/nucleus.css?1614766173" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1614766173" rel="stylesheet">
+    <link href="../css/hybrid.css?1614766173" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1614766173" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1614766173" rel="stylesheet">
+    <link href="../css/auto-complete.css?1614766173" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1614766173" rel="stylesheet">
+    <link href="../css/theme.css?1614766173" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1614766173" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1614176935" rel="stylesheet">
+    <link href="../css/theme-kul.css?1614766173" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1614176935"></script>
+    <script src="../js/jquery-3.3.1.min.js?1614766173"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1614176935"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1614176935"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1614766173"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1614766173"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1614176935"></script>
+<script type="text/javascript" src="../js/search.js?1614766173"></script>
 
     
   </div>
@@ -698,6 +698,7 @@ window.MathJax = {
         <li><a href="#opgave-4-extra">Opgave 4 (extra)</a></li>
       </ul>
     </li>
+    <li><a href="#extra-leermateriaal">Extra leermateriaal</a></li>
     <li><a href="#denkvragen">Denkvragen</a></li>
   </ul>
 </nav>
@@ -940,7 +941,7 @@ repositories {
 <p>Neem dit eerst door: <a href="../dependency-management/gradle/">Meer informatie over Gradle</a>.</p>
 <h3 id="opgave-1">Opgave 1</h3>
 <p>Ontwerp een eenvoudige library genaamd &lsquo;<em>scorebord</em>&rsquo; die scores kan bijhouden voor bordspelletjes. Deze library kan kan gebruikt worden door toekomstige digitale Java bordspellen. In een Scorebord kan je spelers toevoegen door middel van een naam en een score. Er is een mogelijkheid om de huidige score van een speler op te vragen, en de winnende speler. Deze gegevens worden met behulp van Gson in een <code>JSON</code> bestand bewaard, zodat bij het heropstarten van een spel de scores behouden blijven. <br/>De API (publieke methodes) van de library ziet er zo uit:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Speler</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Speler</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getNaam</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getScore</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
@@ -959,6 +960,10 @@ Extra methodes toevoegen mag altijd. De constructor van het scorebord leest auto
 </figure>
 </p>
 <p>Met het commando <code>gradlew jar</code> creëer je het bestand <code>scorebord-1.0-SNAPSHOT.jar</code> in de <code>build/libs</code> folder.</p>
+
+<div class="notices note" ><p>Denk na over het bijhouden van <code>Speler</code>s in <code>Scorebord</code>. Een simpele <code>ArrayList</code> zal volstaan. Gebruik <code>Gson</code> in een methode als <code>save()</code> om gewoon de lijst (of het object zelf) naar de HDD te serialiseren. Tip: <a href="https://www.logicbig.com/how-to/code-snippets/jcode-java-io-files-write.html">java.nio.files.write</a>.</p>
+</div>
+
 <p>Tip: indien de Gralde wrapper een oudere versie aanmaakt (&lt; v6), update met <code>gradlew wrapper --gradle-version 6.0.1</code>. Gradle versie <code>6</code> of groter is vereist voor JDK <code>13</code> of groter.</p>
 <h3 id="opgave-2">Opgave 2</h3>
 <p>Maak een nieuw Gradle project aan genaamd &lsquo;<em>scorebord-darts</em>&rsquo;, dat bovenstaand scorebord project als een library gaat gebruiken. Bewaar de jar file lokaal in een &lsquo;lib&rsquo; folder en instrueer Gradle zo dat dit als <code>flatDir</code> repository wordt opgenomen (<a href="#flatdir">zie boven</a>). Het tweede project heeft als Artifactid <code>scorebord-darts</code>. De klasse <code>DartsGame</code> ziet er zo uit:</p>
@@ -997,6 +1002,10 @@ Execution failed for task ':Main.main()'.
 <p>Bovenstaande screenshot geeft aan dat IntelliJ methodes herkent van de <code>Scorebord</code> klasse. Er is echter geen javadoc voorzien die uitlegt wat welke parameter doet. Voorzie javadoc bij alle publieke methodes. Dit moet ook mee worden verpakt in het <code>jar</code> bestand, zodat het ander project deze kan herkennen. Probeer uit te zoeken wat je hier voor moet doen in het <code>build.gradle</code> bestand.</p>
 <h3 id="opgave-4-extra">Opgave 4 (extra)</h3>
 <p>Genereer met behulp van Gradle van de <a href="../dependency-management/sessy">SESsy library</a> een dependency tree en inspecteer welke dpendencies transitief zijn en welke direct.</p>
+<h2 id="extra-leermateriaal">Extra leermateriaal</h2>
+<ul>
+<li>Opfriscursus Java nodig? Neem je INF1 cursus er terug bij, of volg een van de talrijke online cursussen, zoals <a href="https://www.codecademy.com/learn/learn-java/">Learn Java</a> van Codeacademy. Concepten zoals packages, structuur, imports, klasses, objecten en instances, containers, &hellip; zijn voor dit vak elementaire basiskennis.</li>
+</ul>
 <h2 id="denkvragen">Denkvragen</h2>
 <ul>
 <li>Hoe zou je transitieve dependencies handmatig kunnen beheren? Wat zijn de voor- en nadelen?</li>
@@ -1404,19 +1413,19 @@ Execution failed for task ':Main.main()'.
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1614176935"></script>
-    <script src="../js/perfect-scrollbar.min.js?1614176935"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1614176935"></script>
-    <script src="../js/jquery.sticky.js?1614176935"></script>
-    <script src="../js/featherlight.min.js?1614176935"></script>
-    <script src="../js/highlight.pack.js?1614176935"></script>
+    <script src="../js/clipboard.min.js?1614766173"></script>
+    <script src="../js/perfect-scrollbar.min.js?1614766173"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1614766173"></script>
+    <script src="../js/jquery.sticky.js?1614766173"></script>
+    <script src="../js/featherlight.min.js?1614766173"></script>
+    <script src="../js/highlight.pack.js?1614766173"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1614176935"></script>
-    <script src="../js/learn.js?1614176935"></script>
-    <script src="../js/hugo-learn.js?1614176935"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1614766173"></script>
+    <script src="../js/learn.js?1614766173"></script>
+    <script src="../js/hugo-learn.js?1614766173"></script>
     
         
-            <script src="../mermaid/mermaid.js?1614176935"></script>
+            <script src="../mermaid/mermaid.js?1614766173"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -248,7 +248,7 @@ Neem dit eerst door: [Meer informatie over Gradle](/dependency-management/gradle
 Ontwerp een eenvoudige library genaamd '_scorebord_' die scores kan bijhouden voor bordspelletjes. Deze library kan kan gebruikt worden door toekomstige digitale Java bordspellen. In een Scorebord kan je spelers toevoegen door middel van een naam en een score. Er is een mogelijkheid om de huidige score van een speler op te vragen, en de winnende speler. Deze gegevens worden met behulp van Gson in een `JSON` bestand bewaard, zodat bij het heropstarten van een spel de scores behouden blijven. <br/>De API (publieke methodes) van de library ziet er zo uit:
 
 ```java
-class Speler {
+public class Speler {
     public String getNaam() { }
     public int getScore() { }
 }
@@ -265,6 +265,10 @@ Extra methodes toevoegen mag altijd. De constructor van het scorebord leest auto
 ![](/img/teaching/ses/gradle-refresh.png)
 
 Met het commando `gradlew jar` creëer je het bestand `scorebord-1.0-SNAPSHOT.jar` in de `build/libs` folder. 
+
+{{% notice note %}}
+Denk na over het bijhouden van `Speler`s in `Scorebord`. Een simpele `ArrayList` zal volstaan. Gebruik `Gson` in een methode als `save()` om gewoon de lijst (of het object zelf) naar de HDD te serialiseren. Tip: [java.nio.files.write](https://www.logicbig.com/how-to/code-snippets/jcode-java-io-files-write.html).
+{{% /notice %}}
 
 Tip: indien de Gralde wrapper een oudere versie aanmaakt (< v6), update met `gradlew wrapper --gradle-version 6.0.1`. Gradle versie `6` of groter is vereist voor JDK `13` of groter. 
 
@@ -312,6 +316,10 @@ Bovenstaande screenshot geeft aan dat IntelliJ methodes herkent van de `Scorebor
 ### Opgave 4 (extra)
 
 Genereer met behulp van Gradle van de [SESsy library](/dependency-management/sessy) een dependency tree en inspecteer welke dpendencies transitief zijn en welke direct. 
+
+## Extra leermateriaal
+
+- Opfriscursus Java nodig? Neem je INF1 cursus er terug bij, of volg een van de talrijke online cursussen, zoals [Learn Java](https://www.codecademy.com/learn/learn-java/) van Codeacademy. Concepten zoals packages, structuur, imports, klasses, objecten en instances, containers, ... zijn voor dit vak elementaire basiskennis. 
 
 ## Denkvragen
 
