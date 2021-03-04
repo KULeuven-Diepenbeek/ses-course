@@ -112,7 +112,8 @@ Commandline Tools  git-scm gradle  Het is onze intentie om jullie kennis van Lin
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/github-classroom/</guid>
       <description>Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. Bewkaam jezelf eerst in de basis van Gradle als build tool.
-Labo oefeningen Meer info volgt binnenkort!</description>
+Labo oefeningen TDD 2ba: 04/03/2021
+ TDD opgave 1: https://classroom.github.com/a/9bQ1kN3J TDD opgave 2: https://classroom.github.com/a/QOfCEmRM TDD opgave 4, 5: werk verder in de repository van opgave 1.  </description>
     </item>
     
     <item>
