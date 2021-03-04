@@ -1,119 +1,73 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/versiebeheer/</loc>
-    <lastmod>2021-03-03T11:09:47+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/</loc>
-    <lastmod>2021-03-03T11:09:47+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/tdd/</loc>
-    <lastmod>2021-03-04T10:42:35+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/algoritmes/</loc>
-    <lastmod>2020-08-13T12:01:39+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/patterns/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/</loc>
-    <lastmod>2020-08-13T12:01:39+02:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/extra/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/patterns/facade/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/patterns/di/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/patterns/singleton/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/patterns/decorator/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/patterns/factory/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/ci/</loc>
-    <lastmod>2021-02-17T09:32:49+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy-extending/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/extra/software/</loc>
-    <lastmod>2021-02-24T15:29:11+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</loc>
-    <lastmod>2021-02-24T11:06:41+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/extra/github-classroom/</loc>
-    <lastmod>2021-03-04T10:42:35+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/</loc>
-    <lastmod>2021-02-17T10:29:37+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/management/</loc>
-    <lastmod>2021-02-17T09:32:49+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/tags/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/tdd/mockito/</loc>
-    <lastmod>2021-02-17T09:32:49+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
+  </url><url>
     <loc>https://kuleuven-diepenbeek.github.io/ses-course/tdd/capita/</loc>
-    <lastmod>2020-08-13T12:01:39+02:00</lastmod>
+    <lastmod>2021-03-04T11:34:19+01:00</lastmod>
   </url>
-  
 </urlset>
