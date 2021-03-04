@@ -295,7 +295,7 @@ In plaats van dit in (Java) code te schrijven, is het echter ook mogelijk om de 
 
 ## <a name="oef"></a>Labo oefeningen
 
-Download de startprojecten via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom). 
+Fork het startproject via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom). 
 
 ### Opgave 1
 
@@ -323,6 +323,8 @@ We zijn dus geïnteresseerd in **edge cases**. Probeer alle mogelijkheden te con
 - Wat als een speculaas wordt meegegeven zonder ingrediënten?
 
 ### Opgave 2
+
+Fork het startproject via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom). 
 
 #### A. Misluke login pogingen
 
@@ -363,7 +365,9 @@ Werk een volledige implementatie van `Periode.overlaptMet()` uit, zoals hierbove
 
 ### Opgave 4
 
-Dit is een vervolgopgave van de code van **Opgave 1**. Werk verder op dat bestaand project.
+{{% notice note %}}
+Dit is een vervolgopgave van de code van **Opgave 1**. Werk verder op dat bestaand project, in diezelfde repository!
+{{% /notice %}}
 
 Een verkoopster werkt in een (goede) speculaasfabriek. De verkoopster wilt graag 2 EUR aanrekenen per speculaas die de fabriek produceert. 
 Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worden aangerekend. 
@@ -409,7 +413,9 @@ Gebruik Selenium IDE om een test scenario op te nemen van de SESsy applicatie. S
 2. Als slechte uitlener, zoek op 'art', klik op detail, klik op uitlenen. Verifieer dat er een boodschap verschijnt dat het gelukt is, en dat de knop veranderde naar 'Terugbrengen?'. Klik op terugbrengen. Verifieer dat er een boodschap verschijnt dat het gelukt is. 
 3. Als anoniempje, log in (een van beide rollen). Verifieer dat login naar logout verandert. Logout. Verifieer dat logout naar login verandert. 
 
-**Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_** in de root van deze repository. 
+{{% notice note %}}
+**Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_** in de root de repository van **opgave 1** (de eerste Github Classroom link). 
+{{% /notice %}}
 
 Je zal voor deze opgave dus de lokale [SESsy applicatie](/extra/sessy) moeten starten, en de Selenium (Google Chrome) plugin moeten installeren. 
 
