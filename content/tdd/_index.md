@@ -318,6 +318,10 @@ Recente versies van de Selenium IDE plugin bewaren scenario's in `.side` bestand
 ```
 
 
+{{% notice note %}}
+Er zijn moderne alternatieven voor Webdriver-based Java testen. De front-end van de SESsy library werkt met Vue.js, en dit kan je makkelijk testen met behulp van https://webdriver.io/ in JavaScript. Een voorbeeldje van zo'n geautomatiseerde test staat op de front page. WebdriverIO integreert ook met ChromeDevTools, waardoor je kan doen alsof je met een smartphone surft naar een pagina: `browser.emulateDevice('iPhone X')`.
+{{% /notice %}}
+
 ## <a name="oef"></a>Labo oefeningen
 
 Fork het startproject via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom). 
@@ -442,7 +446,7 @@ Gebruik Selenium IDE om een test scenario op te nemen van de SESsy applicatie. S
 **Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_ (of `.side` voor nieuwe versies)** in de root de repository van **opgave 1** (de eerste Github Classroom link). 
 {{% /notice %}}
 
-Je zal voor deze opgave dus de lokale [SESsy applicatie](/extra/sessy) moeten starten, en de Selenium (Google Chrome) plugin moeten installeren. 
+Je zal voor deze opgave dus de lokale [SESsy applicatie](/extra/sessy) moeten starten, en de Selenium (Chromium/Firefox) plugin moeten installeren: zie hierboven.
 
 
 ## Denkvragen
