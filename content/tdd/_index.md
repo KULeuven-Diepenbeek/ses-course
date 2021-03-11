@@ -291,7 +291,32 @@ De SESsy applicatie maakt gebruik van **WebDriver**, een interface die **Seleniu
 
 ![](/img/teaching/ses/selenium.png)
 
-In plaats van dit in (Java) code te schrijven, is het echter ook mogelijk om de [Selenium IDE](https://selenium.dev/selenium-ide/) extentie voor Google Chrome of Mozilla Firefox te gebruiken. Deze browser extentie laat recorden in de browser zelf toe, en vergemakkelijkt het gebruik (er is geen nood meer aan het vanbuiten kennen van zulke commando's). Dit wordt in de praktijk vaak gebruikt door software analisten of testers die niet de technische kennis hebben om te programmeren, maar toch deel zijn van het ontwikkelteam. 
+In plaats van dit in (Java) code te schrijven, is het echter ook mogelijk om de [Selenium IDE](https://selenium.dev/selenium-ide/) extentie voor Google Chrome of [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/) te gebruiken. Deze browser extentie laat recorden in de browser zelf toe, en vergemakkelijkt het gebruik (er is geen nood meer aan het vanbuiten kennen van zulke commando's). Dit wordt in de praktijk vaak gebruikt door software analisten of testers die niet de technische kennis hebben om te programmeren, maar toch deel zijn van het ontwikkelteam. 
+
+Recente versies van de Selenium IDE plugin bewaren scenario's in `.side` bestanden, wat een JSON-notatie is. Oudere versies bewaren commando's in het `.html` formaat. deze bestanden bevatten een lijst van je opgenomen records:
+
+```
+  "tests": [{
+    "id": "73bc78d5-1ca2-44c4-9ad2-6ccfe7cba5fe",
+    "name": "bla",
+    "commands": [{
+      "id": "f192c93d-064a-4298-8d84-a44fd617622b",
+      "comment": "",
+      "command": "open",
+      "target": "/mattersof/workshops",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b94bd35b-0fc0-4ede-9b47-7e24d78126e8",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1365x691",
+      "targets": [],
+      "value": ""
+    }, {
+        ...
+```
+
 
 ## <a name="oef"></a>Labo oefeningen
 
@@ -414,10 +439,11 @@ Gebruik Selenium IDE om een test scenario op te nemen van de SESsy applicatie. S
 3. Als anoniempje, log in (een van beide rollen). Verifieer dat login naar logout verandert. Logout. Verifieer dat logout naar login verandert. 
 
 {{% notice note %}}
-**Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_** in de root de repository van **opgave 1** (de eerste Github Classroom link). 
+**Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_ (of `.side` voor nieuwe versies)** in de root de repository van **opgave 1** (de eerste Github Classroom link). 
 {{% /notice %}}
 
 Je zal voor deze opgave dus de lokale [SESsy applicatie](/extra/sessy) moeten starten, en de Selenium (Google Chrome) plugin moeten installeren. 
+
 
 ## Denkvragen
 
