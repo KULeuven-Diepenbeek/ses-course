@@ -9,7 +9,7 @@
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
     <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/patterns/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>1. Facade</title>
+      <title>5.1 Facade</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/facade/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -21,7 +21,7 @@ Voorbeeld 1. Opzet Stel dat we gegevens van de klant moeten versturen naar een o
     </item>
     
     <item>
-      <title>2. Dependency Injection</title>
+      <title>5.2 Dependency Injection</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/di/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -32,7 +32,7 @@ Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we
     </item>
     
     <item>
-      <title>3. Singleton</title>
+      <title>5.3 Singleton</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/singleton/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -42,7 +42,7 @@ Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we
     </item>
     
     <item>
-      <title>4. Decorator</title>
+      <title>5.4 Decorator</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/decorator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -53,7 +53,7 @@ Voorbeeld 1. Opzet Stel dat we in een fabriek op plaats X een auto samenstellen.
     </item>
     
     <item>
-      <title>5. Factory</title>
+      <title>5.5 Factory</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/factory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>

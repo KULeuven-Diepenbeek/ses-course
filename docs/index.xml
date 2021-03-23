@@ -9,7 +9,50 @@
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
     <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>1. Facade</title>
+      <title>2.1 Java Gradle projecten</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</guid>
+      <description>Helps teams build, automate and deliver better software, faster.volgens de gradle.org website.
+ Wat is dat, een build tool? Gradle is een build tool die de automatisatie van releasen, builden, testen, configureren, dependencies en libraries managen, &amp;hellip; eenvoudiger maakt. Kort gezegd: het maakt het leven van een ontwikkelaar eenvoudiger. In een config bestand genaamd build.gradle schrijft men met Groovy, een dynamische taal bovenop de JVM, op een descriptieve manier hoe Gradle de applicatie moet beheren.</description>
+    </item>
+    
+    <item>
+      <title>3.1 TDD In de praktijk: Mockito</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/mockito/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/mockito/</guid>
+      <description>Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen.
+   Lees op https://site.mockito.org hoe je het framework moet gebruiken. (Klik op de knoppen WHY en HOW bovenaan! Volledige javadoc) Denk aan de volgende zaken:
+ Hoe include ik Mockito als een dependency in mijn project? Hoe gebruik ik de API om een Test Double/mock aan te maken?</description>
+    </item>
+    
+    <item>
+      <title>3.2 TDD Capita Selecta: Algoritmes</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/capita/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/capita/</guid>
+      <description>Test-First Een algoritme ontwerpen Neem eerst de volgende noties terug door:
+ Test Driven Development principes  Dit labo gaan we ons focussen op het praktisch gebruik van TDD en unit testen ter ondersteuning van het opbouwen van een algoritme, ter oplossing van een probleem. Alle TDD concepten zijn reeds uitgelegd in het Test Driven Development labo. We gaan onmiddellijk verder met de oefeningen:
+Labo oefeningen Via  Github Classroom. Lege projecten, maak zelf in een nieuwe map voor elke opgave een Gradle project aan.</description>
+    </item>
+    
+    <item>
+      <title>3.3 The TDD proglang challenge</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/tdd-challenge/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/tdd-challenge/</guid>
+      <description>1. De opgave: Wimbledon Tennisspelers staan weer klaar om een balletje heen en weer over de netten te sturen. In plaats van een tennisbal, zijn karakters voorzien die deel uitmaken van een mysterieuze zin, die ontcijferd moet worden.
+De decodering van deze `Wimbledon-versleutelde&#39; zin bestaat uit het eerste karakter, gevolgd door het laatste karakter, het tweede karakter, het voorlaatste karakter, het derde karakter, enzovoort.
+   Ontcijfer de zinnen zoals aangegeven in bovenstaande figuur om populaire tennis quotes te ontdekken.</description>
+    </item>
+    
+    <item>
+      <title>5.1 Facade</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/facade/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -21,7 +64,7 @@ Voorbeeld 1. Opzet Stel dat we gegevens van de klant moeten versturen naar een o
     </item>
     
     <item>
-      <title>2. Dependency Injection</title>
+      <title>5.2 Dependency Injection</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/di/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -32,7 +75,7 @@ Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we
     </item>
     
     <item>
-      <title>3. Singleton</title>
+      <title>5.3 Singleton</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/singleton/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -42,7 +85,7 @@ Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we
     </item>
     
     <item>
-      <title>4. Decorator</title>
+      <title>5.4 Decorator</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/decorator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -53,7 +96,7 @@ Voorbeeld 1. Opzet Stel dat we in een fabriek op plaats X een auto samenstellen.
     </item>
     
     <item>
-      <title>5. Factory</title>
+      <title>5.5 Factory</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/factory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -64,13 +107,23 @@ Voorbeeld 1. Opzet Stel, je wilt aan de kassa van een niet al te grote lokale ci
     </item>
     
     <item>
-      <title>Continuous Integration &amp; Deployment</title>
+      <title>6.1 Continuous Integration &amp; Deployment</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/ci/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/ci/</guid>
       <description>Begeleidende screencast:
   1. Continuous Integration (CI) Het softwareontwikkel proces is een continu proces: als een eerste versie van het product klaar is, en wordt overgemaakt aan klanten, volgt het onderhoud en een mogelijke volgende versie. Elke wijziging maakt potentiëel dingen kapot (geminimaliseerd met TDD), of introduceert nieuwe features. Dat betekent dat bij elke wijziging, een computer het hele build proces moet doorlopen om te controleren of er niets stuk is.</description>
+    </item>
+    
+    <item>
+      <title>6.2 Software Management Skills</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/management/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/management/</guid>
+      <description>De chaos van het Werk De technische kant van het ontwikkelproces is slechts één kant van de medaille. De keerzijde bestaat uit het werk beheren en beheersen, zonder ten prooi te vallen aan de grillen van de klant of de chaos van de organisatie ervan.
+Stel, een gemeente vraagt om een nieuwe website te ontwikkelen voor de lokale bibliotheek. Er wordt een vergadering ingepland met stafhouders om samen met jou te beslissen wat de vereisten zijn.</description>
     </item>
     
     <item>
@@ -96,16 +149,6 @@ Commandline Tools  git-scm gradle  Het is onze intentie om jullie kennis van Lin
     </item>
     
     <item>
-      <title>Java Gradle projecten</title>
-      <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</guid>
-      <description>Helps teams build, automate and deliver better software, faster.volgens de gradle.org website.
- Wat is dat, een build tool? Gradle is een build tool die de automatisatie van releasen, builden, testen, configureren, dependencies en libraries managen, &amp;hellip; eenvoudiger maakt. Kort gezegd: het maakt het leven van een ontwikkelaar eenvoudiger. In een config bestand genaamd build.gradle schrijft men met Groovy, een dynamische taal bovenop de JVM, op een descriptieve manier hoe Gradle de applicatie moet beheren.</description>
-    </item>
-    
-    <item>
       <title>Oefenzittingen: Github Clasroom</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/github-classroom/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -114,7 +157,8 @@ Commandline Tools  git-scm gradle  Het is onze intentie om jullie kennis van Lin
       <description>Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. Bewkaam jezelf eerst in de basis van Gradle als build tool.
 Labo oefeningen TDD 2ba: 04/03/2021
  TDD opgave 1: https://classroom.github.com/a/9bQ1kN3J TDD opgave 2: https://classroom.github.com/a/QOfCEmRM TDD opgave 4, 5: werk verder in de repository van opgave 1.  TDD Met algoritmes 2ba: 18/03/2021
- Opgave 1: https://classroom.github.com/a/O9KX3qpH Opgave 2: https://classroom.github.com/a/gsOh5vdG  </description>
+ Opgave 1: https://classroom.github.com/a/O9KX3qpH Opgave 2: https://classroom.github.com/a/gsOh5vdG  TDD Programming Language Challenge 2ba: 25/03/2021
+ Groepsopdracht: https://classroom.github.com/g/xr6rQmsK  </description>
     </item>
     
     <item>
@@ -126,38 +170,6 @@ Labo oefeningen TDD 2ba: 04/03/2021
       <description>SESsy Library: Een geïntegreerde oefening Download Locatie: op  Github via https://github.com/KULeuven-Diepenbeek/sessylibrary. Zie README.md op de hoofdpagina. SESsy library is:
  A Library Management Simulation WebApp for the &amp;lsquo;SES&amp;rsquo; (Software Engineering Skills) course
    Een boek uitlenen in de SESsy Library webapp.  Installatie Download via bovenstaande Github link, of met git clone. Dit is een &amp;ldquo;Gradle&amp;rdquo; project, die de build van ons Java ecosysteem verzorgt. Dat wil zeggen dat het Gradle systeem automatisch libraries (jar bestanden) download van een centrale repository, moesten die nodig zijn.</description>
-    </item>
-    
-    <item>
-      <title>Software Management Skills</title>
-      <link>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/management/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/management/</guid>
-      <description>De chaos van het Werk De technische kant van het ontwikkelproces is slechts één kant van de medaille. De keerzijde bestaat uit het werk beheren en beheersen, zonder ten prooi te vallen aan de grillen van de klant of de chaos van de organisatie ervan.
-Stel, een gemeente vraagt om een nieuwe website te ontwikkelen voor de lokale bibliotheek. Er wordt een vergadering ingepland met stafhouders om samen met jou te beslissen wat de vereisten zijn.</description>
-    </item>
-    
-    <item>
-      <title>TDD In de praktijk: Mockito</title>
-      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/mockito/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/mockito/</guid>
-      <description>Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen.
-   Lees op https://site.mockito.org hoe je het framework moet gebruiken. (Klik op de knoppen WHY en HOW bovenaan! Volledige javadoc) Denk aan de volgende zaken:
- Hoe include ik Mockito als een dependency in mijn project? Hoe gebruik ik de API om een Test Double/mock aan te maken?</description>
-    </item>
-    
-    <item>
-      <title>TDD met algoritmes</title>
-      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/capita/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/capita/</guid>
-      <description>Test-First Een algoritme ontwerpen Neem eerst de volgende noties terug door:
- Test Driven Development principes  Dit labo gaan we ons focussen op het praktisch gebruik van TDD en unit testen ter ondersteuning van het opbouwen van een algoritme, ter oplossing van een probleem. Alle TDD concepten zijn reeds uitgelegd in het Test Driven Development labo. We gaan onmiddellijk verder met de oefeningen:
-Labo oefeningen Via  Github Classroom. Lege projecten, maak zelf in een nieuwe map voor elke opgave een Gradle project aan.</description>
     </item>
     
   </channel>
