@@ -1,7 +1,5 @@
 ---
-title: 'Continuous Integration & Deployment'
-accent: "#008eb3"
-disableList: true
+title: '6.1 Continuous Integration & Deployment'
 ---
 
 Begeleidende screencast:

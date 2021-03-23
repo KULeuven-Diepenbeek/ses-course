@@ -1,7 +1,5 @@
 ---
-title: '4. Decorator'
-accent: "#008eb3"
-disableList: true
+title: '5.4 Decorator'
 ---
 
 ## _"Decorator"_ - Design Pattern

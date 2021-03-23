@@ -83,8 +83,7 @@ diff --git a/content/teaching/cpp/labo-1.md b/content/teaching/cpp/labo-1.md
 index 654a4f6..11f0597 100644
 --- a/content/teaching/cpp/labo-1.md
 +++ b/content/teaching/cpp/labo-1.md
-@@ -4,7 +4,7 @@ accent: "#008eb3"
- disableComments: true
+@@ -4,7 +4,7 @@  disableComments: true
  ---
 </pre>
 

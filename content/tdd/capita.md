@@ -1,8 +1,5 @@
 ---
-title: 'TDD met algoritmes'
-subtitle: 'Capita Selecta'
-accent: "#008eb3"
-disableList: true
+title: '3.2 TDD Capita Selecta: Algoritmes'
 ---
 
 ## Test-First Een algoritme ontwerpen

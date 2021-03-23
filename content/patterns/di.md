@@ -1,7 +1,5 @@
 ---
-title: '2. Dependency Injection'
-accent: "#008eb3"
-disableList: true
+title: '5.2 Dependency Injection'
 ---
 
 ## _"Dependency Injection (DI)"_ - Design Pattern

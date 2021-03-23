@@ -1,7 +1,5 @@
 ---
 title: 'Gebruikte Software'
-accent: "#008eb3"
-disableList: true
 ---
 
 Voor deze cursus werken we met Java en met Git. Dat betekent dat **een JDK** (en de Gradle build tool) en een **Git client** de enige vereisten zijn. 

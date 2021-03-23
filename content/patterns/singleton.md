@@ -1,7 +1,5 @@
 ---
-title: '3. Singleton'
-accent: "#008eb3"
-disableList: true
+title: '5.3 Singleton'
 ---
 
 ## _"Singleton"_ - Design Pattern

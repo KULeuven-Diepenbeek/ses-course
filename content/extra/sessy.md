@@ -1,6 +1,5 @@
 ---
 title: 'SESsy Library WebApp'
-accent: "#008eb3"
 ---
 
 ## SESsy Library: Een geïntegreerde oefening

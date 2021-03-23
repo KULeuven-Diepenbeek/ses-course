@@ -1,7 +1,5 @@
 ---
-title: '5. Factory'
-accent: "#008eb3"
-disableList: true
+title: '5.5 Factory'
 ---
 
 ## _"Factory"_ - Design Pattern

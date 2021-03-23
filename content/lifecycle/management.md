@@ -1,7 +1,5 @@
 ---
-title: 'Software Management Skills'
-accent: "#008eb3"
-disableList: true
+title: '6.2 Software Management Skills'
 ---
 
 ## De chaos van het Werk

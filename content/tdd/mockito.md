@@ -1,7 +1,5 @@
 ---
-title: 'TDD In de praktijk: Mockito'
-accent: "#008eb3"
-disableList: true
+title: '3.1 TDD In de praktijk: Mockito'
 ---
 
 Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen. 

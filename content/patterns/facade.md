@@ -1,7 +1,5 @@
 ---
-title: '1. Facade'
-accent: "#008eb3"
-disableList: true
+title: '5.1 Facade'
 ---
 
 &laquo;&nbsp;[Terug naar Software Engineering Skills](/)<br/>

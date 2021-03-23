@@ -1,6 +1,5 @@
 ---
-title: 'Java Gradle projecten'
-accent: "#008eb3"
+title: '2.1 Java Gradle projecten'
 ---
 
 
