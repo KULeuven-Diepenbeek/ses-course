@@ -38,7 +38,13 @@ Er zijn verschillende manieren om de gebuilde `jar` file aan het draaien te bren
 
 De applicatie staat nu live op [http://localhost:8080](http://localhost:8080)!
 
+{{% notice warning %}}
+Indien je "port already in use" Exceptions krijgt, en je niet in de mogelijkheid bent om poort `8080` vrij te maken, kan je in `app.yml` kiezen voor een andere HTTP poort: zie [DropWizard port documentation](https://www.dropwizard.io/en/latest/manual/configuration.html?highlight=port#default).
+{{% /notice %}}
+
 ### Componenten
+
+(Documentatie overgenomen uit de [Git repository README.md](https://github.com/KULeuven-Diepenbeek/sessylibrary))
 
 #### Backend
 
@@ -58,7 +64,6 @@ Building and running the Frontend source:
 1. `npm install` in the frontend subdir
 2. `npm run serve` in the frontend subdir
 
-Your project should be running at `http://localhost:8080` now.
 
 ### Extra leermateriaal
 
