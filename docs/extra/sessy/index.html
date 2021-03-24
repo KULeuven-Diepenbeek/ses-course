@@ -12,21 +12,21 @@
     <title>SESsy Library WebApp :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1616492915" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1616492915" rel="stylesheet">
-    <link href="../../css/hybrid.css?1616492915" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1616492915" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1616492915" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1616492915" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1616492915" rel="stylesheet">
-    <link href="../../css/theme.css?1616492915" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1616492915" rel="stylesheet">
+    <link href="../../css/nucleus.css?1616587061" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1616587061" rel="stylesheet">
+    <link href="../../css/hybrid.css?1616587061" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1616587061" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1616587061" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1616587061" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1616587061" rel="stylesheet">
+    <link href="../../css/theme.css?1616587061" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1616587061" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1616492915" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1616587061" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1616492915"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1616587061"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1616492915"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1616492915"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1616587061"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1616587061"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1616492915"></script>
+<script type="text/javascript" src="../../js/search.js?1616587061"></script>
 
     
   </div>
@@ -775,7 +775,12 @@ Het resultaat is <code>sessylibrary-1.0-SNAPSHOT-all.jar</code> in de <code>buil
 <li><strong>IntelliJ:</strong> Menu Run -&gt; Run&hellip; Kies voor klasse <code>be.kuleuven.sessylibrary.SessyLibApplication</code> en geef als program arguments (<em>NIET</em> met VM options) &ldquo;server app.yml&rdquo; in. Klik op Apply/Run.</li>
 </ol>
 <p>De applicatie staat nu live op <a href="http://localhost:8080">http://localhost:8080</a>!</p>
+
+<div class="notices warning" ><p>Indien je &ldquo;port already in use&rdquo; Exceptions krijgt, en je niet in de mogelijkheid bent om poort <code>8080</code> vrij te maken, kan je in <code>app.yml</code> kiezen voor een andere HTTP poort: zie <a href="https://www.dropwizard.io/en/latest/manual/configuration.html?highlight=port#default">DropWizard port documentation</a>.</p>
+</div>
+
 <h3 id="componenten">Componenten</h3>
+<p>(Documentatie overgenomen uit de <a href="https://github.com/KULeuven-Diepenbeek/sessylibrary">Git repository README.md</a>)</p>
 <h4 id="backend">Backend</h4>
 <p><a href="http://www.dropwizard.io/en/stable/">DropWizard</a> Java RESTful API that integrates Jetty/Jackson/&hellip; functionality in a nice all-in-one package.
 This means executing the jar automatically bootstraps a webserver, and REST calls can be easily added using <code>javax.ws</code> annotations. See <code>be.kuleuven.sessylibrary.api</code> classes for examples.</p>
@@ -788,7 +793,6 @@ This means executing the jar automatically bootstraps a webserver, and REST call
 <li><code>npm install</code> in the frontend subdir</li>
 <li><code>npm run serve</code> in the frontend subdir</li>
 </ol>
-<p>Your project should be running at <code>http://localhost:8080</code> now.</p>
 <h3 id="extra-leermateriaal">Extra leermateriaal</h3>
 <ul>
 <li><a href="https://dropwizard.io/en/stable/getting-started.html">DropWizard: Getting Started</a></li>
@@ -1210,19 +1214,19 @@ This means executing the jar automatically bootstraps a webserver, and REST call
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1616492915"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1616492915"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1616492915"></script>
-    <script src="../../js/jquery.sticky.js?1616492915"></script>
-    <script src="../../js/featherlight.min.js?1616492915"></script>
-    <script src="../../js/highlight.pack.js?1616492915"></script>
+    <script src="../../js/clipboard.min.js?1616587061"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1616587061"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1616587061"></script>
+    <script src="../../js/jquery.sticky.js?1616587061"></script>
+    <script src="../../js/featherlight.min.js?1616587061"></script>
+    <script src="../../js/highlight.pack.js?1616587061"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1616492915"></script>
-    <script src="../../js/learn.js?1616492915"></script>
-    <script src="../../js/hugo-learn.js?1616492915"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1616587061"></script>
+    <script src="../../js/learn.js?1616587061"></script>
+    <script src="../../js/hugo-learn.js?1616587061"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1616492915"></script>
+            <script src="../../mermaid/mermaid.js?1616587061"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
