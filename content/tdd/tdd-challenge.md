@@ -132,3 +132,8 @@ De hoeveelheid `*` duiden aan hoe groot de verwachtte uitdaging is. Groepen die 
     + Hoe splits je een string, als je denkt dat dat nodig is?
 
 Denk eraan: **RED** (1), **GREEN** (2), **REFACTOR** (3).
+
+### Over het bijleren van programmeertalen
+
+https://brainbaking.com/post/2021/03/teaching-students-how-to-follow-development-trends/
+
