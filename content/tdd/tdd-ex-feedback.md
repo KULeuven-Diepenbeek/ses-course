@@ -13,7 +13,7 @@ Aangezien het vaak over veel opgaves gaat wordt dit gescript met behulp van [Gra
 
 Een niet-compilerend ingediend project komt over als erg slordig werk. Het zou kunnen dat er discrepanties zijn tussen JDK versies, waar ook rekening mee gehouden wordt, maar in de praktijk merken we vaak dat nalatigheden zoals het vergeten van een constructor veel punten kost. 
 
-Zorg ervoor dat je **Gradle buildfile** in orde is. Zonder een syntactisch correcte `build.gradle` file kan het project niet builden mat het `gradlew` commando. Dat komt opnieuw over als erg slordig, zeker omdat er in dit vak nadruk gelegd wordt op dependency management. 
+Zorg ervoor dat je **Gradle buildfile** in orde is. Zonder een syntactisch correcte `build.gradle` file kan het project niet builden met het `gradlew` commando. Dat komt opnieuw over als erg slordig, zeker omdat er in dit vak nadruk gelegd wordt op dependency management. 
 
 Zorg ervoor dat **testen groen zijn**. Verwijder niet-relevante testen die misschien zijn opgesteld om te experimenteren. Controleer dit simpelweg met het gradle commando, los van het comfort van de IDE!
 
