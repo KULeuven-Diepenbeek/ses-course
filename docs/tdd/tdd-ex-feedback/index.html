@@ -12,21 +12,21 @@
     <title>3.4 TDD opgave feedback :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1619685325" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1619685325" rel="stylesheet">
-    <link href="../../css/hybrid.css?1619685325" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1619685325" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1619685325" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1619685325" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1619685325" rel="stylesheet">
-    <link href="../../css/theme.css?1619685325" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1619685325" rel="stylesheet">
+    <link href="../../css/nucleus.css?1619685943" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1619685943" rel="stylesheet">
+    <link href="../../css/hybrid.css?1619685943" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1619685943" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1619685943" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1619685943" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1619685943" rel="stylesheet">
+    <link href="../../css/theme.css?1619685943" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1619685943" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1619685325" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1619685943" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1619685325"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1619685943"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1619685325"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1619685325"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1619685943"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1619685943"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1619685325"></script>
+<script type="text/javascript" src="../../js/search.js?1619685943"></script>
 
     
   </div>
@@ -765,14 +765,16 @@ window.MathJax = {
 
 
 <h2 id="algemene-feedback">Algemene feedback</h2>
-<p>Bij het indienen van een opdracht worden de volgende zaken altijd eerste nagekeken:</p>
+<p>Bij het indienen van een opdracht worden de volgende zaken altijd eerst nagekeken:</p>
 <ol>
 <li>Compileert het programma?</li>
 <li>Zijn alle testen groen?</li>
 </ol>
 <p>Aangezien het vaak over veel opgaves gaat wordt dit gescript met behulp van <a href="../../dependency-management/gradle/">Gradle</a>. Na het downloaden van de opdracht wordt vaak het commando <code>./gradlew clean test</code> uitgevoerd, die ook impliciet build. Zorg er dan ook steeds voor dat je project correct build vóórdat je indient! Test dit zelf met het commando in je opdrachtprompt, los van IntelliJ. Waarom? Omdat individuele testen uitvoeren in IntelliJ niet betekent dat je hele project compileert.</p>
 <p>Een niet-compilerend ingediend project komt over als erg slordig werk. Het zou kunnen dat er discrepanties zijn tussen JDK versies, waar ook rekening mee gehouden wordt, maar in de praktijk merken we vaak dat nalatigheden zoals het vergeten van een constructor veel punten kost.</p>
+<p>Zorg ervoor dat je <strong>Gradle buildfile</strong> in orde is. Zonder een syntactisch correcte <code>build.gradle</code> file kan het project niet builden mat het <code>gradlew</code> commando. Dat komt opnieuw over als erg slordig, zeker omdat er in dit vak nadruk gelegd wordt op dependency management.</p>
 <p>Zorg ervoor dat <strong>testen groen zijn</strong>. Verwijder niet-relevante testen die misschien zijn opgesteld om te experimenteren. Controleer dit simpelweg met het gradle commando, los van het comfort van de IDE!</p>
+<p>Zorg ervoor dat je <strong>code leesbaar is</strong>. Dit is het vak Software Engineering, waarbij we constant de nadruk leggen op zaken als <em>clean code</em>, <em>TDD</em>, en <em>software design</em>. Als je programma doet wat het moet doen, betekent dit nog niet dat het volgens deze principes als goede code aanschouwd wordt.</p>
 <h2 id="31-opgave-4tddopgave-4-integratie-testen"><a href="../../tdd#opgave-4">3.1 Opgave 4</a>: integratie testen</h2>
 <p>Hieronder volgen een aantal veel voorkomende fouten, die eenvoudig te vermijden zijn als je aandacht schenkt aan je unit test designs.</p>
 <h3 id="fout-1-assertions-verkeerd-gebruiken">Fout 1: assertions verkeerd gebruiken</h3>
@@ -1269,19 +1271,19 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1619685325"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1619685325"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1619685325"></script>
-    <script src="../../js/jquery.sticky.js?1619685325"></script>
-    <script src="../../js/featherlight.min.js?1619685325"></script>
-    <script src="../../js/highlight.pack.js?1619685325"></script>
+    <script src="../../js/clipboard.min.js?1619685943"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1619685943"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1619685943"></script>
+    <script src="../../js/jquery.sticky.js?1619685943"></script>
+    <script src="../../js/featherlight.min.js?1619685943"></script>
+    <script src="../../js/highlight.pack.js?1619685943"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1619685325"></script>
-    <script src="../../js/learn.js?1619685325"></script>
-    <script src="../../js/hugo-learn.js?1619685325"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1619685943"></script>
+    <script src="../../js/learn.js?1619685943"></script>
+    <script src="../../js/hugo-learn.js?1619685943"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1619685325"></script>
+            <script src="../../mermaid/mermaid.js?1619685943"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
