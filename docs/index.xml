@@ -52,6 +52,16 @@ De decodering van deze `Wimbledon-versleutelde&#39; zin bestaat uit het eerste k
     </item>
     
     <item>
+      <title>3.4 TDD opgave feedback</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/tdd-ex-feedback/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/tdd-ex-feedback/</guid>
+      <description>Algemene feedback Bij het indienen van een opdracht worden de volgende zaken altijd eerste nagekeken:
+ Compileert het programma? Zijn alle testen groen?  Aangezien het vaak over veel opgaves gaat wordt dit gescript met behulp van Gradle. Na het downloaden van de opdracht wordt vaak het commando ./gradlew clean test uitgevoerd, die ook impliciet build. Zorg er dan ook steeds voor dat je project correct build vóórdat je indient! Test dit zelf met het commando in je opdrachtprompt, los van IntelliJ.</description>
+    </item>
+    
+    <item>
       <title>5.1 Facade</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/facade/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

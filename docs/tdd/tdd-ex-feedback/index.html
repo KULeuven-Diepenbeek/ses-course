@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>5.5 Factory :: Software Engineering Skills</title>
+    <title>3.4 TDD opgave feedback :: Software Engineering Skills</title>
 
     
     <link href="../../css/nucleus.css?1619685325" rel="stylesheet">
@@ -61,7 +61,7 @@ window.MathJax = {
 
 <script src=../../js/osc.js></script>
   </head>
-  <body class="" data-url="../../patterns/factory/">
+  <body class="" data-url="../../tdd/tdd-ex-feedback/">
     <nav id="sidebar" class="">
 
 
@@ -187,7 +187,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/tdd/" title="3. Test Driven Development" class="dd-item 
-        
+        parent
         
         
         ">
@@ -276,7 +276,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/tdd/tdd-ex-feedback/" title="3.4 TDD opgave feedback" class="dd-item ">
+      <li data-nav-id="/tdd/tdd-ex-feedback/" title="3.4 TDD opgave feedback" class="dd-item active">
         <a href="../../tdd/tdd-ex-feedback/">
         3.4 TDD opgave feedback
         
@@ -329,7 +329,7 @@ window.MathJax = {
   
     
     <li data-nav-id="/patterns/" title="5. Design Patterns" class="dd-item 
-        parent
+        
         
         
         ">
@@ -439,7 +439,7 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/patterns/factory/" title="5.5 Factory" class="dd-item active">
+      <li data-nav-id="/patterns/factory/" title="5.5 Factory" class="dd-item ">
         <a href="../../patterns/factory/">
         5.5 Factory
         
@@ -716,7 +716,7 @@ window.MathJax = {
             
           
           
-            <a href='../../'>Software Engineering Skills</a> > <a href='../../patterns/'>5. Design Patterns</a> > 5.5 Factory
+            <a href='../../'>Software Engineering Skills</a> > <a href='../../tdd/'>3. Test Driven Development</a> > 3.4 TDD opgave feedback
           
         
           
@@ -731,21 +731,15 @@ window.MathJax = {
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#_factory_---design-pattern"><em>&ldquo;Factory&rdquo;</em> - Design Pattern</a>
+    <li><a href="#algemene-feedback">Algemene feedback</a></li>
+    <li><a href="#31-opgave-4tddopgave-4-integratie-testen"><a href="../../tdd#opgave-4">3.1 Opgave 4</a>: integratie testen</a>
       <ul>
-        <li><a href="#doelstelling">Doelstelling</a></li>
-        <li><a href="#voorbeeld">Voorbeeld</a></li>
-        <li><a href="#eigenschappen-van-dit-patroon">Eigenschappen van dit patroon</a></li>
+        <li><a href="#fout-1-assertions-verkeerd-gebruiken">Fout 1: assertions verkeerd gebruiken</a></li>
+        <li><a href="#fout-2-expected-en-actual-in-assertions-omkeren">Fout 2: expected en actual in assertions omkeren</a></li>
+        <li><a href="#fout-3-mocks-als-fields-definiëren">Fout 3: mocks als fields definiëren</a></li>
+        <li><a href="#fout-4-onduidelijke-test-namen">Fout 4: onduidelijke test namen</a></li>
       </ul>
     </li>
-    <li><a href="#a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</a>
-      <ul>
-        <li><a href="#opgave-1">Opgave 1</a></li>
-        <li><a href="#opgave-2">Opgave 2</a></li>
-        <li><a href="#opgave-3">Opgave 3</a></li>
-      </ul>
-    </li>
-    <li><a href="#denkvragen">Denkvragen</a></li>
   </ul>
 </nav>
     </div>
@@ -763,130 +757,85 @@ window.MathJax = {
           
             <h1>
               
-              5.5 Factory
+              3.4 TDD opgave feedback
             </h1>
           
 
         
 
 
-<h2 id="_factory_---design-pattern"><em>&ldquo;Factory&rdquo;</em> - Design Pattern</h2>
-<p>Begeleidende screencast<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://player.vimeo.com/video/398548507" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="vimeo video" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-</div>
-
-<h3 id="doelstelling">Doelstelling</h3>
-<ul>
-<li>Scherm het aanmaken van bepaalde objecten af door middel van overerving en logica, waarbij die logica éénmalig wordt geïmplementeerd, en op een centrale plaats staat.</li>
-<li>Promoot een <em>modulair</em> model door de verantwoordlijkheid van object creatie en object gebruik te scheiden.</li>
-</ul>
-<p><a href="https://sourcemaking.com/design_patterns/factory_method">Dive Into Design Patterns: Factory (method)</a></p>
-<h3 id="voorbeeld">Voorbeeld</h3>
-<h4 id="1-opzet">1. Opzet</h4>
-<p>Stel, je wilt aan de kassa van een niet al te grote lokale cinema een film kopen. Stel, de persoon aan de kassa beslist de film, gebaseerd op je leeftijd. Er spelen die avond drie filmen: een kindvriendelijke, eentje voor tieners, en eentje gereserveerd voor volwassenen.</p>
-<script defer src="../../mermaid/mermaid.min.js">
-	mermaid.initialize({
-		startOnLoad: true,
-		flowchart: {
-			useMaxWidth: true
-		}
-	});
-</script>
-<div class="mermaid" align="center" >
-	
-graph TD;
-    A{Ticket}
-    B[FamilyFilm]
-    C[TeenageFilm]
-    D[XRatedFilm]
-    E[TicketSeller]
-    F[Person]
-    A --> B
-    A --> C
-    A --> D
-
-</div>
-<p>Waarbij een persoon een bepaalde leeftijd heeft:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> age<span style="color:#f92672">;</span>
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getAge</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> age<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> age<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> age<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>En de ticket verkoper een ticket verkoopt aan een persoon:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TicketSeller</span> <span style="color:#f92672">{</span>
-
-    Ticket <span style="color:#a6e22e">buyTicketFor</span><span style="color:#f92672">(</span>Person person<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><h4 id="2-probleemstelling">2. Probleemstelling</h4>
-<p>De logica voor het aanmaken van de juiste <code>Ticket</code> subklasse moet op één centrale plaats staan. De ticket verkoper is hier ideaal voor, waarbij met wat simpele logica gebaseerd op <code>person.getAge()</code> de juiste film kan worden aangemaakt. We noemen in dat geval de methode <code>buyTicketFor()</code> een <strong>factory method</strong>.</p>
-<h4 id="3-oplossing">3. Oplossing</h4>
-<p>Door te controleren op leeftijd kan men de juiste instantie aanmaken en teruggeven. Dit is de verantwoordelijkheid van de ticket seller. Het voordeel is dat je als &ldquo;gebruiker&rdquo; van deze klasse, die de methode <code>buyTicketFor()</code> aanroept, je niet hoeft af te vragen wat er achter de abstracte klasse <code>Ticket</code> zit. Het is een ticket, de code kan verder lopen.</p>
-<p>We kunnen dit nog verder drijven door de ticket verkoper zelf ook te laten aanmaken door een &ldquo;factory&rdquo; die bijvoorbeeld de medewerkers van diezelfde lokale cinema inhuurt. Persoon x verkoopt je tickets op basis van je leeftijd, en persoon y op basis van hoeveel geld je op zak hebt.</p>
-<h3 id="eigenschappen-van-dit-patroon">Eigenschappen van dit patroon</h3>
-<ul>
-<li>Implementaties (van Ticket) zijn verborgen via de Factory Method.</li>
-<li>Logica voor creatie staat op één centrale plaats.</li>
-</ul>
-<h2 id="a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</h2>
-<p>Via <a href="../../extra/github-classroom"><i class='fab fa-github'></i> Github Classroom</a>.</p>
-<h3 id="opgave-1">Opgave 1</h3>
-<p>Het project bevat bovenstaande voorbeeld, maar nog niet alles is geïmplementeerd. Voer de unit testen uit in <code>src/main/test</code>: het resultaat zijn gefaalde testen (ROOD). Zorg er voor dat alle testen slagen (GROEN) door het factory patroon te vervolledigen!</p>
-<h3 id="opgave-2">Opgave 2</h3>
-<p>De eerste aanzet is genomen om een nieuw type van <code>TicketSeller</code> aan te maken, door reeds een interface te voorzien. Ontwikkel een <code>MoneyBasedTicketSeller</code>, die gebaseerd op het geld in je portefuille je het juiste ticket bezorgt. Dit betekent dat je in <code>Person</code> dus een nieuwe property nodig hebt. Voorzie ook een nieuwe test klasse, gebaseerd op <code>AgeBasedTicketSellerTest</code>.</p>
-<h3 id="opgave-3">Opgave 3</h3>
-<p><a href="../../extra/sessy">sessy library</a>:</p>
+<h2 id="algemene-feedback">Algemene feedback</h2>
+<p>Bij het indienen van een opdracht worden de volgende zaken altijd eerste nagekeken:</p>
 <ol>
-<li>identificeer waar het mogelijk zou zijn om een factory patroon toe te passen. Welke verschillende implementaties delen een gelijke noemer? Waar staat mogelijks creatie logica (dubbel)?</li>
-<li>Pas dit toe door een nieuwe klasse te voorzien die de Factory methode implementeert. Vergeet de unit testen niet!</li>
+<li>Compileert het programma?</li>
+<li>Zijn alle testen groen?</li>
 </ol>
-<script defer src="../../mermaid/mermaid.min.js">
-	mermaid.initialize({
-		startOnLoad: true,
-		flowchart: {
-			useMaxWidth: true
-		}
-	});
-</script>
-<div class="mermaid" align="center" >
-	
-graph TD;
-    A{Ticket}
-    B[FamilyFilm]
-    C[TeenageFilm]
-    D[XRatedFilm]
-    E{TicketSeller}
-    F[AgeBasedTicketSeller]
-    G[MoneyBasedTicketSeller]
-    A --> B
-    A --> C
-    A --> D
-    E --> F
-    E --> G
+<p>Aangezien het vaak over veel opgaves gaat wordt dit gescript met behulp van <a href="../../dependency-management/gradle/">Gradle</a>. Na het downloaden van de opdracht wordt vaak het commando <code>./gradlew clean test</code> uitgevoerd, die ook impliciet build. Zorg er dan ook steeds voor dat je project correct build vóórdat je indient! Test dit zelf met het commando in je opdrachtprompt, los van IntelliJ. Waarom? Omdat individuele testen uitvoeren in IntelliJ niet betekent dat je hele project compileert.</p>
+<p>Een niet-compilerend ingediend project komt over als erg slordig werk. Het zou kunnen dat er discrepanties zijn tussen JDK versies, waar ook rekening mee gehouden wordt, maar in de praktijk merken we vaak dat nalatigheden zoals het vergeten van een constructor veel punten kost.</p>
+<p>Zorg ervoor dat <strong>testen groen zijn</strong>. Verwijder niet-relevante testen die misschien zijn opgesteld om te experimenteren. Controleer dit simpelweg met het gradle commando, los van het comfort van de IDE!</p>
+<h2 id="31-opgave-4tddopgave-4-integratie-testen"><a href="../../tdd#opgave-4">3.1 Opgave 4</a>: integratie testen</h2>
+<p>Hieronder volgen een aantal veel voorkomende fouten, die eenvoudig te vermijden zijn als je aandacht schenkt aan je unit test designs.</p>
+<h3 id="fout-1-assertions-verkeerd-gebruiken">Fout 1: assertions verkeerd gebruiken</h3>
+<p>Bijvoorbeeld:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">someTestMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> someCalculation<span style="color:#f92672">(</span>2<span style="color:#f92672">,</span> 5<span style="color:#f92672">);</span>
+    Assert<span style="color:#f92672">.</span><span style="color:#a6e22e">assertTrue</span><span style="color:#f92672">(</span>result <span style="color:#f92672">==</span> 5 <span style="color:#f92672">*</span> 20<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Als deze test faalt, krijg je de boodschap: <code>expected true, but was false</code>. <em>That&rsquo;s it.</em> Heb je daar iets aan, buiten dat de test faalt? Nee: je zal breakpoints moeten plaatsen om te zien wat er precies mis ging. <code>assertTrue()</code> is hier de verkeerde keuze. Gebruik nooit <code>==</code> om een expressie om te vormen naar een boolean statement. Laat dit aan de juiste assertion method over:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">someTestMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> someCalculation<span style="color:#f92672">(</span>2<span style="color:#f92672">,</span> 5<span style="color:#f92672">);</span>
+    Assert<span style="color:#f92672">.</span><span style="color:#a6e22e">assertEquals</span><span style="color:#f92672">(</span>100<span style="color:#f92672">,</span> result<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Nu krijg je bijvoorbeeld de boodschap <code>expected 100, but was 45</code>. Dat is veel duidelijker. Vermijd ook het a-la-minute berekenen van de expected outcome (<code>5 * 20</code> is minder expliciet dan <code>100</code>). Gebruik maken van de betere leesbaarheid van Hamcrest is nog beter: <code>assertThat(result, is(100))</code>.</p>
+<h3 id="fout-2-expected-en-actual-in-assertions-omkeren">Fout 2: expected en actual in assertions omkeren</h3>
+<p>In veel xUnit test frameworks, inclusief JUnit, verwachten assertion methodes <strong>eerst de expected</strong> value, daarna pas de actual.</p>
+<p>Dus niet <code>Assert.assertEquals(result, 100);</code> maar <code>Assert.assertEquals(100, result);</code>. De test geeft misschien hetzelfde resultaat (rood/groen), maar de boodschap en interpretatie is een wereld van verschil.</p>
+<p>Opnieuw, <strong>leesbaarheid</strong> primeert hier, en Hamcrest helpt en keert dit wel correct om.</p>
+<h3 id="fout-3-mocks-als-fields-definiëren">Fout 3: mocks als fields definiëren</h3>
+<p>Een Mockito mock (of een zelfgeschreven Test Double) mag je <strong>nooit herbruiken</strong>. Er is state aan verbonden, die bij voor elke test uniek moet zijn. Dus niet:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> MyInterface mockObj <span style="color:#f92672">=</span> Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">mock</span><span style="color:#f92672">(</span>MyInterface<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
 
-</div>
-<h2 id="denkvragen">Denkvragen</h2>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>mockObj<span style="color:#f92672">.</span><span style="color:#a6e22e">doStuff</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>mockObj<span style="color:#f92672">.</span><span style="color:#a6e22e">doMoreStuff</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Het probleem hier is dat na het uitvoeren van <code>test1()</code>, je <code>mockObj</code> nog steeds <code>10</code> gaat teruggeven bij het oproepen van <code>doStuff()</code>, omdat de mock in <code>test2</code> hetzelfde object is! Dit geeft heel vreemde side effects en kan tot erg buggy testen leiden waarvan de bugs moeilijk te achterhalen zijn.</p>
+<p>Om dit te vermijden maak je elke mock aan in de test zelf. Ook al heb je voor elke test dezelfde soort mock nodig. Dus:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        MyInterface mockObj <span style="color:#f92672">=</span> Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">mock</span><span style="color:#f92672">(</span>MyInterface<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>mockObj<span style="color:#f92672">.</span><span style="color:#a6e22e">doStuff</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        MyInterface mockObj <span style="color:#f92672">=</span> Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">mock</span><span style="color:#f92672">(</span>MyInterface<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>mockObj<span style="color:#f92672">.</span><span style="color:#a6e22e">doMoreStuff</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Dit lijkt niet goed te zijn omdat we code regels dupliceren, maar hiermee encapsuleren we <code>mockObj</code>: deze variabele is nu een lokale variabele en geen field, en zal dus stoppen met bestaan na het uitvoeren van de test.</p>
+<p>Vergeet niet de <strong>F.I.R.S.T.</strong> principes van unit testen, waar we fouten tegen maken als we dit niet doen.</p>
+<h3 id="fout-4-onduidelijke-test-namen">Fout 4: onduidelijke test namen</h3>
+<p>Dit spreekt voor zich. In bovenstaande voorbeelden staat <code>test1</code> en <code>test2</code>, maar niemand weet precies wat dit betekent, en welke condities ze aftesten. Dit is uiteraard slechts een voorbeeld, maar helaas dienen studenten soms ook zulke testnamen in.</p>
+<p>Als een vuistregel is het een goed idee om in testnamen het volgende te verwerken:</p>
 <ul>
-<li>Wat is het verschil tussen een factory en een <a href="../../patterns/facade">facade</a> patroon? Wanneer heb ik het ene of het andere nodig?</li>
-<li>Is er een mogelijkheid om <a href="../../patterns/di">Dependency Injection</a> en de Factory te combineren, zodat het keyword <code>new</code> niet meer wordt gebruikt in de factory klasse zelf?</li>
+<li>De methode die je wenst te testen</li>
+<li>De condities van de test</li>
+<li>Het effect</li>
 </ul>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>Merk op dat de cursus nu wordt gehost op <a href="https://kuleuven-diepenbeek.github.io/ses-course/">https://kuleuven-diepenbeek.github.io/ses-course/</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
+<p>Bijvoorbeeld: <code>encrypt_withEmptyString_returnsEmptyString</code>, of <code>encrypt_withSpaces_ignoresSpecialChars</code>, en niet <code>encryptTest1</code> of <code>encryptDoesStuff</code>. Test methodes mogen lang zijn: zolang opnieuw <strong>leesbaarheid</strong> primeert is alles oké, inclusief snake casing (gebruik maken van <code>_</code>) of camel casing.</p>
 
 
 <footer class="footline">
@@ -975,6 +924,110 @@ graph TD;
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -1047,111 +1100,10 @@ graph TD;
             
         
                     
-            
-        
-                    
                         
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -1171,9 +1123,6 @@ graph TD;
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1307,10 +1256,10 @@ graph TD;
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../patterns/decorator/" title="5.4 Decorator"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../tdd/tdd-challenge/" title="3.3 The TDD proglang challenge"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../lifecycle/" title="6. SW Development Life Cycle" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../algoritmes/" title="4. Algoritmes en Datastructuren" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
