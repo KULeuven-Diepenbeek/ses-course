@@ -4,7 +4,7 @@ title: 3.4 TDD opgave feedback
 
 ## Algemene feedback
 
-Bij het indienen van een opdracht worden de volgende zaken altijd eerste nagekeken:
+Bij het indienen van een opdracht worden de volgende zaken altijd eerst nagekeken:
 
 1. Compileert het programma? 
 2. Zijn alle testen groen?
@@ -13,7 +13,11 @@ Aangezien het vaak over veel opgaves gaat wordt dit gescript met behulp van [Gra
 
 Een niet-compilerend ingediend project komt over als erg slordig werk. Het zou kunnen dat er discrepanties zijn tussen JDK versies, waar ook rekening mee gehouden wordt, maar in de praktijk merken we vaak dat nalatigheden zoals het vergeten van een constructor veel punten kost. 
 
+Zorg ervoor dat je **Gradle buildfile** in orde is. Zonder een syntactisch correcte `build.gradle` file kan het project niet builden mat het `gradlew` commando. Dat komt opnieuw over als erg slordig, zeker omdat er in dit vak nadruk gelegd wordt op dependency management. 
+
 Zorg ervoor dat **testen groen zijn**. Verwijder niet-relevante testen die misschien zijn opgesteld om te experimenteren. Controleer dit simpelweg met het gradle commando, los van het comfort van de IDE!
+
+Zorg ervoor dat je **code leesbaar is**. Dit is het vak Software Engineering, waarbij we constant de nadruk leggen op zaken als _clean code_, _TDD_, en _software design_. Als je programma doet wat het moet doen, betekent dit nog niet dat het volgens deze principes als goede code aanschouwd wordt. 
 
 ## [3.1 Opgave 4](/tdd#opgave-4): integratie testen
 
