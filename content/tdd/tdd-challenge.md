@@ -97,7 +97,7 @@ Je kan dit zelf verifiëren door bovenstaande code te evalueren in de browser (b
 
 ## 2. De challenge
 
-**Start hier:** [Github Classroom](/ses-course/extra/github-classroom/)!
+**Start hier:** [Github Classroom](/extra/github-classroom/)!
 
 Dit is een _groepsopdracht_. Dat wil zeggen dat de GitHub classroom repositories niet individueel zijn, maar dat je per groepje één repository aanmaakt om te kunnen samenwerken. Puntenverdeling /10: actief meewerken en íets proberen = 10. Het is NIET belangrijk of jullie de opdracht met succes weten af te werken of niet!
 

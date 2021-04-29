@@ -26,3 +26,12 @@ Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. B
 2ba: 25/03/2021
 
 - **Groepsopdracht**: [https://classroom.github.com/g/xr6rQmsK](https://classroom.github.com/g/xr6rQmsK)
+
+### Design Patterns
+
+2ba: 29/04/2021
+
+- Dependency Injection: https://classroom.github.com/a/yjOJXtq-
+- Singleton: https://classroom.github.com/a/9YvHkQUL
+
+
