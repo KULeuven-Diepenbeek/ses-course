@@ -33,5 +33,5 @@ Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. B
 
 - Dependency Injection: https://classroom.github.com/a/yjOJXtq-
 - Singleton: https://classroom.github.com/a/9YvHkQUL
-
+- 2ba 06/05: Facade: https://classroom.github.com/a/N0PAFfTS
 
