@@ -12,21 +12,21 @@
     <title>5.1 Facade :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1620307230" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1620307230" rel="stylesheet">
-    <link href="../../css/hybrid.css?1620307230" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1620307230" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1620307230" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1620307230" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1620307230" rel="stylesheet">
-    <link href="../../css/theme.css?1620307230" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1620307230" rel="stylesheet">
+    <link href="../../css/nucleus.css?1620394664" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1620394664" rel="stylesheet">
+    <link href="../../css/hybrid.css?1620394664" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1620394664" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1620394664" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1620394664" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1620394664" rel="stylesheet">
+    <link href="../../css/theme.css?1620394664" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1620394664" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1620307230" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1620394664" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1620307230"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1620394664"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1620307230"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1620307230"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1620394664"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1620394664"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1620307230"></script>
+<script type="text/javascript" src="../../js/search.js?1620394664"></script>
 
     
   </div>
@@ -869,7 +869,13 @@ graph LR;
 <h2 id="a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</h2>
 <p>Via <a href="../../extra/github-classroom"><i class='fab fa-github'></i> Github Classroom</a>.</p>
 <h3 id="opgave-1">Opgave 1</h3>
-<p>We modelleren een dierentuin, waarvan een <code>be.kuleuven.ses.facade.animals.Chicken</code> een gegeven klasse is. Elk dier willen we voederen met de <code>feed()</code> methode. Let op! Sommige dieren vereisten veel meer aandracht (lees: complexiteit), die we willen wegwerken met het introduceren van een Facade.</p>
+<p>We modelleren een dierentuin, waarvan een <code>be.kuleuven.ses.facade.animals.Chicken</code> een gegeven klasse is. Elk dier willen we voederen met de <code>feed()</code> methode. Let op! Sommige dieren vereisten veel meer aandracht (lees: complexiteit), die we willen wegwerken met het introduceren van een Facade. Bijvoorbeeld:</p>
+<ul>
+<li>Een eekoorn gebruikt <code>feed(boolean isNootje)</code></li>
+<li>Een varken gebruikt <code>feed(int hoeveelheidModder, float gewichtInKg)</code></li>
+<li>&hellip;</li>
+</ul>
+<p>Dat betekent dat je niet zomaar een algemene interface kan maken en een &ldquo;Facade klasse&rdquo; nodig hebt, zoals bovenstaand voorbeeld.</p>
 <p>Voeg klasses <code>be.kuleuven.ses.facade.animals.Cow</code> en <code>Cat</code> toe, geef deze ook eten, en verberg dan het voederen in een aparte interface.</p>
 <h3 id="opgave-2">Opgave 2</h3>
 <p><a href="../../extra/sessy">sessy library</a>:</p>
@@ -1320,19 +1326,19 @@ graph LR;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1620307230"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1620307230"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1620307230"></script>
-    <script src="../../js/jquery.sticky.js?1620307230"></script>
-    <script src="../../js/featherlight.min.js?1620307230"></script>
-    <script src="../../js/highlight.pack.js?1620307230"></script>
+    <script src="../../js/clipboard.min.js?1620394664"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1620394664"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1620394664"></script>
+    <script src="../../js/jquery.sticky.js?1620394664"></script>
+    <script src="../../js/featherlight.min.js?1620394664"></script>
+    <script src="../../js/highlight.pack.js?1620394664"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1620307230"></script>
-    <script src="../../js/learn.js?1620307230"></script>
-    <script src="../../js/hugo-learn.js?1620307230"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1620394664"></script>
+    <script src="../../js/learn.js?1620394664"></script>
+    <script src="../../js/hugo-learn.js?1620394664"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1620307230"></script>
+            <script src="../../mermaid/mermaid.js?1620394664"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
