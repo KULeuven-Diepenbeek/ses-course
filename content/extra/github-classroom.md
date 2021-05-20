@@ -29,9 +29,8 @@ Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. B
 
 ### Design Patterns
 
-2ba: 29/04/2021
-
-- Dependency Injection: https://classroom.github.com/a/yjOJXtq-
-- Singleton: https://classroom.github.com/a/9YvHkQUL
+- 2ba 29/04: Dependency Injection: https://classroom.github.com/a/yjOJXtq-
+- 2ba 29/04: Singleton: https://classroom.github.com/a/9YvHkQUL
 - 2ba 06/05: Facade: https://classroom.github.com/a/N0PAFfTS
 - 2ba 06/05: Decorator: https://classroom.github.com/a/iQFBBmRc
+- 2ba 20/05: Facctory: https://classroom.github.com/a/RIZeCcX1
