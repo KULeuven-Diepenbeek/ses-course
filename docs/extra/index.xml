@@ -9,6 +9,18 @@
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
     <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/extra/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Examen feedback 2020-2021</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/examen-202021/</link>
+      <pubDate>Fri, 25 Jun 2021 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/examen-202021/</guid>
+      <description>Onderstaande feedback verduidelijkt de meest voorkomende fouten op het SES examen van academiejaar 2020-2021. Hopelijk leer je er iets uit. Vergeet niet: een ezel stoot zich geen&amp;hellip;
+1. Lees wat er staat Voorbeeldvraag 1 Gegeven deze code
+public AnalyticsResult sendAnalytics(Data data) { ftpClient.upload(data); httpClient.post(data); return AnalyticsResult.success(); } Vraag:
+ Deze code uploadt gegevens naar een FTP server én verstuurt het naar een backup server door middel van een HTTP POST. Vraag: wat is er nodig om bovenstaande code te (1) unit testen, (2) integratie testen, en (3) end-to-end testen?</description>
+    </item>
+    
+    <item>
       <title>Extending the SESsy WebApp</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy-extending/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
