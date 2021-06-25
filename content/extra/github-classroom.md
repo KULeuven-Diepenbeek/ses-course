@@ -34,3 +34,4 @@ Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. B
 - 2ba 06/05: Facade: https://classroom.github.com/a/N0PAFfTS
 - 2ba 06/05: Decorator: https://classroom.github.com/a/iQFBBmRc
 - 2ba 20/05: Facctory: https://classroom.github.com/a/RIZeCcX1
+
