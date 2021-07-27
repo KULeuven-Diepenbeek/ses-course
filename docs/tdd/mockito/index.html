@@ -12,21 +12,20 @@
     <title>3.1 TDD In de praktijk: Mockito :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1624628127" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/hybrid.css?1624628127" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1624628127" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1624628127" rel="stylesheet">
-    <link href="../../css/theme.css?1624628127" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1624628127" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372899" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372899" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372899" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372899" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372899" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1627372899" rel="stylesheet">
+    <link href="../../css/theme.css?1627372899" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372899" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1624628127" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372899" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1624628127"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372899"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1624628127"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1624628127"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372899"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372899"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1624628127"></script>
+<script type="text/javascript" src="../../js/search.js?1627372899"></script>
 
     
   </div>
@@ -809,97 +808,97 @@ window.MathJax = {
 </figure>
 </p>
 <p>Stel, Arnold gaat acteren voor de nieuwe film <strong>Die Hard: In A Deepen Beek</strong> (uit in 2025 - Bruce had geen zin meer). Hij moet daarvoor een aantal fantastische stunts uithalen, die hij niet graag zelf zou doen. De volgende interface definieert een &lsquo;Arnold&rsquo;, waarbij <code>doBackFlip()</code> de gevaarlijke stunt is (resultaat is <code>true</code> indien geslaagd):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IllBeBack</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">interface</span> <span style="color:#75af00">IllBeBack</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">boolean</span> <span style="color:#75af00">doBackFlip</span><span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>De casting crew en de director verwachten dat tijdens een opname 3x een backflip succesvol wordt uitgevoerd. Indien deze niet lukt, wordt de take opnieuw genomen. Dit manifesteert zich in code in de vorm van een <code>RuntimeException</code>. De One And Only Arnold had op dat moment een crisisvergadering in Californië en kon niet aanwezig zijn op de set. Gelukkig zijn er lookalikes en stuntmannen genoeg:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ArnieLookalike</span> <span style="color:#66d9ef">implements</span> IllBeBack <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ArnieLookalike</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">IllBeBack</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Override</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">boolean</span> <span style="color:#75af00">doBackFlip</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">false</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StuntmanArnie</span> <span style="color:#66d9ef">implements</span> IllBeBack <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">StuntmanArnie</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">IllBeBack</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Override</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">boolean</span> <span style="color:#75af00">doBackFlip</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">true</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Enkel <code>StuntmanArnie</code> is fysiek krachtig genoeg om consistent de backflip uit te voeren. De lookalike ziet er uit zoals Arnold, maar bakt jammer genoeg van de scene niet zo veel. Hieronder een blueprint van de opname code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DieHardInADeepenBeek</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> IllBeBack arnoldActor<span style="color:#f92672">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeek</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">IllBeBack</span> <span style="color:#111">arnoldActor</span><span style="color:#f92672">;</span>
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>IllBeBack actor<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">arnoldActor</span> <span style="color:#f92672">=</span> actor<span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">setArnoldActor</span><span style="color:#f92672">(</span><span style="color:#111">IllBeBack</span> <span style="color:#111">actor</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">arnoldActor</span> <span style="color:#f92672">=</span> <span style="color:#111">actor</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">boolean</span> succeeded <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> 3<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
-            succeeded <span style="color:#f92672">&amp;=</span> arnoldActor<span style="color:#f92672">.</span><span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">();</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">recordActOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">boolean</span> <span style="color:#111">succeeded</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">true</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">for</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">1</span><span style="color:#f92672">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#111">3</span><span style="color:#f92672">;</span> <span style="color:#111">i</span><span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">succeeded</span> <span style="color:#f92672">&amp;=</span> <span style="color:#111">arnoldActor</span><span style="color:#f92672">.</span><span style="color:#75af00">doBackFlip</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
 
-        <span style="color:#66d9ef">if</span><span style="color:#f92672">(!</span>succeeded<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;do that again, please...&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#00a8c8">if</span><span style="color:#f92672">(!</span><span style="color:#111">succeeded</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">throw</span> <span style="color:#00a8c8">new</span> <span style="color:#111">RuntimeException</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;do that again, please...&#34;</span><span style="color:#f92672">);</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>De hamvraag is nu: hoe testen we de <strong>logica in <code>recordActOne</code></strong>? Daarvoor zal de backflip soms moeten lukken, en soms ook niet. We hebben dus zowel een <code>ArnieLookalike</code> als <code>StuntmanArnie</code> implementatie nodig:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DieHardInADeepenBeekTests</span> <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Test</span><span style="color:#f92672">(</span>ExpectedException <span style="color:#f92672">=</span> RuntimeException<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeekTests</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Test</span><span style="color:#f92672">(</span><span style="color:#111">ExpectedException</span> <span style="color:#f92672">=</span> <span style="color:#111">RuntimeException</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">)</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        var movie <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DieHardInADeepenBeek<span style="color:#f92672">();</span>
-        var actor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArnieLookalike<span style="color:#f92672">();</span>
-        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>actor<span style="color:#f92672">);</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">var</span> <span style="color:#111">movie</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#f92672">();</span>
+        <span style="color:#111">var</span> <span style="color:#111">actor</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ArnieLookalike</span><span style="color:#f92672">();</span>
+        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">setArnoldActor</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">);</span>
 
         <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">();</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">();</span>
         <span style="color:#75715e">// 3. assert (in annotation)
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 
-    <span style="color:#a6e22e">@Test</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne_backflipSucceeds_ok</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Test</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">recordActOne_backflipSucceeds_ok</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        var movie <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DieHardInADeepenBeek<span style="color:#f92672">();</span>
-        var actor <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StuntmanArnie<span style="color:#f92672">();</span>
-        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>actor<span style="color:#f92672">);</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">var</span> <span style="color:#111">movie</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#f92672">();</span>
+        <span style="color:#111">var</span> <span style="color:#111">actor</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">StuntmanArnie</span><span style="color:#f92672">();</span>
+        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">setArnoldActor</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">);</span>
 
         <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">();</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">();</span>
         <span style="color:#75715e">// 3. assert
-</span><span style="color:#75715e"></span>        assertTrue<span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">assertTrue</span><span style="color:#f92672">(</span><span style="color:#00a8c8">true</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><h3 id="een-interface-mocken-the-easy-way">Een interface &lsquo;mocken&rsquo;: the easy way</h3>
 <p>In plaats van de <code>ArnieLookalike</code> en <code>StuntmanArnie</code> klasses zelf te maken, kunnen we hier Mockito het zware werk laten doen door gebruik te maken van de <code>mock()</code> methode. De testen worden dan lichtjes anders, omdat we daarin het gedrag van de mock eerst moeten bepalen voordat we naar de act en assert stappen kunnen gaan:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DieHardInADeepenBeekTests</span> <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Test</span><span style="color:#f92672">(</span>ExpectedException <span style="color:#f92672">=</span> RuntimeException<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeekTests</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Test</span><span style="color:#f92672">(</span><span style="color:#111">ExpectedException</span> <span style="color:#f92672">=</span> <span style="color:#111">RuntimeException</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">)</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        var movie <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DieHardInADeepenBeek<span style="color:#f92672">();</span>
-        var actor <span style="color:#f92672">=</span> mock<span style="color:#f92672">(</span>IllBeBack<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-        when<span style="color:#f92672">(</span>actor<span style="color:#f92672">.</span><span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span><span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
-        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>actor<span style="color:#f92672">);</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">var</span> <span style="color:#111">movie</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#f92672">();</span>
+        <span style="color:#111">var</span> <span style="color:#111">actor</span> <span style="color:#f92672">=</span> <span style="color:#111">mock</span><span style="color:#f92672">(</span><span style="color:#111">IllBeBack</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">);</span>
+        <span style="color:#111">when</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">.</span><span style="color:#75af00">doBackFlip</span><span style="color:#f92672">()).</span><span style="color:#75af00">thenReturn</span><span style="color:#f92672">(</span><span style="color:#00a8c8">false</span><span style="color:#f92672">);</span>
+        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">setArnoldActor</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">);</span>
 
         <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">();</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">();</span>
         <span style="color:#75715e">// 3. assert (in annotation)
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 
-    <span style="color:#a6e22e">@Test</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recordActOne_backflipSucceeds_ok</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Test</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">recordActOne_backflipSucceeds_ok</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        var movie <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DieHardInADeepenBeek<span style="color:#f92672">();</span>
-        var actor <span style="color:#f92672">=</span> mock<span style="color:#f92672">(</span>IllBeBack<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-        when<span style="color:#f92672">(</span>actor<span style="color:#f92672">.</span><span style="color:#a6e22e">doBackFlip</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
-        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">setArnoldActor</span><span style="color:#f92672">(</span>actor<span style="color:#f92672">);</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">var</span> <span style="color:#111">movie</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#f92672">();</span>
+        <span style="color:#111">var</span> <span style="color:#111">actor</span> <span style="color:#f92672">=</span> <span style="color:#111">mock</span><span style="color:#f92672">(</span><span style="color:#111">IllBeBack</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">);</span>
+        <span style="color:#111">when</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">.</span><span style="color:#75af00">doBackFlip</span><span style="color:#f92672">()).</span><span style="color:#75af00">thenReturn</span><span style="color:#f92672">(</span><span style="color:#00a8c8">true</span><span style="color:#f92672">);</span>
+        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">setArnoldActor</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">);</span>
 
         <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        movie<span style="color:#f92672">.</span><span style="color:#a6e22e">recordActOne</span><span style="color:#f92672">();</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">();</span>
         <span style="color:#75715e">// 3. assert
-</span><span style="color:#75715e"></span>        assertTrue<span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">assertTrue</span><span style="color:#f92672">(</span><span style="color:#00a8c8">true</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Het geheim zit hem in de <code>mock()</code> en <code>when()</code> methodes, waarmee we het gedrag van de mock implementatie kunnen aansturen. Dit werd vroeger manueel geïmplementeerd, maar die klasses zijn nu niet meer nodig.</p>
@@ -1352,19 +1351,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1624628127"></script>
-    <script src="../../js/jquery.sticky.js?1624628127"></script>
-    <script src="../../js/featherlight.min.js?1624628127"></script>
-    <script src="../../js/highlight.pack.js?1624628127"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1624628127"></script>
-    <script src="../../js/learn.js?1624628127"></script>
-    <script src="../../js/hugo-learn.js?1624628127"></script>
+    <script src="../../js/clipboard.min.js?1627372899"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372899"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372899"></script>
+    <script src="../../js/jquery.sticky.js?1627372899"></script>
+    <script src="../../js/featherlight.min.js?1627372899"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372899"></script>
+    <script src="../../js/learn.js?1627372899"></script>
+    <script src="../../js/hugo-learn.js?1627372899"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1624628127"></script>
+            <script src="../../mermaid/mermaid.js?1627372899"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

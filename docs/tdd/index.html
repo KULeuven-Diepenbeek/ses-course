@@ -12,21 +12,20 @@
     <title>3. Test Driven Development :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1624628127" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1624628127" rel="stylesheet">
-    <link href="../css/hybrid.css?1624628127" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1624628127" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1624628127" rel="stylesheet">
-    <link href="../css/auto-complete.css?1624628127" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1624628127" rel="stylesheet">
-    <link href="../css/theme.css?1624628127" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1624628127" rel="stylesheet">
+    <link href="../css/nucleus.css?1627372899" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1627372899" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1627372899" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1627372899" rel="stylesheet">
+    <link href="../css/auto-complete.css?1627372899" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1627372899" rel="stylesheet">
+    <link href="../css/theme.css?1627372899" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1627372899" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1624628127" rel="stylesheet">
+    <link href="../css/theme-kul.css?1627372899" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1624628127"></script>
+    <script src="../js/jquery-3.3.1.min.js?1627372899"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1624628127"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1624628127"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1627372899"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1627372899"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1624628127"></script>
+<script type="text/javascript" src="../js/search.js?1627372899"></script>
 
     
   </div>
@@ -826,13 +825,13 @@ graph LR;
 <p>Testen worden in opgenomen in een build omgeving, waardoor alle testen automatisch worden gecontroleerd bij bijvoorbeeld het compileren, starten, of packagen van de applicatie. Op deze manier krijgt men <strong>onmiddellijk feedback</strong> van modules die door bepaalde wijzigingen niet meer werken zoals beschreven in de test.</p>
 <h3 id="een-tdd-scenario">Een TDD Scenario</h3>
 <p>Stel dat een programma een notie van periodes nodig heeft, waarvan elke periode een start- en einddatum heeft, die al dan niet ingevuld kunnen zijn. Een contract bijvoorbeeld geldt voor een periode van <em>bepaalde duur</em>, waarvan beide data ingevuld zijn, of voor gelukkige werknemers voor een periode van <em>onbepaalde duur</em>, waarvan de einddatum ontbreekt:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Contract</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> Periode periode<span style="color:#f92672">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Contract</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">Periode</span> <span style="color:#111">periode</span><span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Periode</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> Date startDatum<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">private</span> Date eindDatum<span style="color:#f92672">;</span> 
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Periode</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">Date</span> <span style="color:#111">startDatum</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">Date</span> <span style="color:#111">eindDatum</span><span style="color:#f92672">;</span> 
 <span style="color:#f92672">}</span>
 </code></pre></div><p>We wensen aan de <code>Periode</code> klasse een methode toe te voegen om te controleren of periodes overlappen, zodat de volgende statement mogelijk is: <code>periode1.overlaptMet(periode2)</code>.</p>
 <h4 id="1-schrijf-falende-testen">1. Schrijf Falende Testen</h4>
@@ -840,44 +839,44 @@ graph LR;
 <ul>
 <li>Het standaard geval: beide periodes hebben start- en einddatum ingevuld, en de periodes overlappen.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    var jandec19 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Periode<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Date<span style="color:#f92672">(</span>2019<span style="color:#f92672">,</span> 01<span style="color:#f92672">,</span> 01<span style="color:#f92672">),</span> 
-            <span style="color:#66d9ef">new</span> Date<span style="color:#f92672">(</span>2019<span style="color:#f92672">,</span> 12<span style="color:#f92672">,</span> 31<span style="color:#f92672">));</span>
-    var maartnov19 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Periode<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Date<span style="color:#f92672">(</span>2019<span style="color:#f92672">,</span> 03<span style="color:#f92672">,</span> 01<span style="color:#f92672">),</span>
-            <span style="color:#66d9ef">new</span> Date<span style="color:#f92672">(</span>2019<span style="color:#f92672">,</span> 11<span style="color:#f92672">,</span> 31<span style="color:#f92672">));</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">var</span> <span style="color:#111">jandec19</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Periode</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">),</span> 
+            <span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">12</span><span style="color:#f92672">,</span> <span style="color:#111">31</span><span style="color:#f92672">));</span>
+    <span style="color:#111">var</span> <span style="color:#111">maartnov19</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Periode</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">03</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">),</span>
+            <span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">11</span><span style="color:#f92672">,</span> <span style="color:#111">31</span><span style="color:#f92672">));</span>
 
-    assertThat<span style="color:#f92672">(</span>jandec19<span style="color:#f92672">.</span><span style="color:#a6e22e">overlaptMet</span><span style="color:#f92672">(</span>maartnov19<span style="color:#f92672">),</span> is<span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">));</span>
+    <span style="color:#111">assertThat</span><span style="color:#f92672">(</span><span style="color:#111">jandec19</span><span style="color:#f92672">.</span><span style="color:#75af00">overlaptMet</span><span style="color:#f92672">(</span><span style="color:#111">maartnov19</span><span style="color:#f92672">),</span> <span style="color:#111">is</span><span style="color:#f92672">(</span><span style="color:#00a8c8">true</span><span style="color:#f92672">));</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ul>
 <li>Beide periodes hebben start- en einddatum ingevuld, en periodes overlappen niet.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    var jandec19 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Periode<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Date<span style="color:#f92672">(</span>2019<span style="color:#f92672">,</span> 01<span style="color:#f92672">,</span> 01<span style="color:#f92672">),</span> 
-            <span style="color:#66d9ef">new</span> Date<span style="color:#f92672">(</span>2019<span style="color:#f92672">,</span> 12<span style="color:#f92672">,</span> 31<span style="color:#f92672">));</span>
-    var maartnov20 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Periode<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Date<span style="color:#f92672">(</span>2020<span style="color:#f92672">,</span> 03<span style="color:#f92672">,</span> 01<span style="color:#f92672">),</span>
-            <span style="color:#66d9ef">new</span> Date<span style="color:#f92672">(</span>2020<span style="color:#f92672">,</span> 11<span style="color:#f92672">,</span> 31<span style="color:#f92672">));</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">var</span> <span style="color:#111">jandec19</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Periode</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">),</span> 
+            <span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">12</span><span style="color:#f92672">,</span> <span style="color:#111">31</span><span style="color:#f92672">));</span>
+    <span style="color:#111">var</span> <span style="color:#111">maartnov20</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Periode</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2020</span><span style="color:#f92672">,</span> <span style="color:#111">03</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">),</span>
+            <span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2020</span><span style="color:#f92672">,</span> <span style="color:#111">11</span><span style="color:#f92672">,</span> <span style="color:#111">31</span><span style="color:#f92672">));</span>
 
-    assertThat<span style="color:#f92672">(</span>jandec19<span style="color:#f92672">.</span><span style="color:#a6e22e">overlaptMet</span><span style="color:#f92672">(</span>maartnov20<span style="color:#f92672">),</span> is<span style="color:#f92672">(</span><span style="color:#66d9ef">false</span><span style="color:#f92672">));</span>
+    <span style="color:#111">assertThat</span><span style="color:#f92672">(</span><span style="color:#111">jandec19</span><span style="color:#f92672">.</span><span style="color:#75af00">overlaptMet</span><span style="color:#f92672">(</span><span style="color:#111">maartnov20</span><span style="color:#f92672">),</span> <span style="color:#111">is</span><span style="color:#f92672">(</span><span style="color:#00a8c8">false</span><span style="color:#f92672">));</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ul>
 <li>&hellip; Er zijn nog tal van mogelijkheden, waarvan voornamelijk de extreme gevallen belangrijk zijn om <strong>de kans op bugs te minimaliseren</strong>. Immers, gebruikers van onze <code>Periode</code> klasse kunnen onbewust <code>null</code> mee doorgeven, waardoor de methode onverwachte waardes teruggeeft.</li>
 </ul>
 <p>De testen compileren niet, omdat de methode <code>overlaptMet()</code> nog niet bestaat. Voordat we overschakelen naar het schrijven van de implementatie willen we eerst de testen zien ROOD kleuren, waarbij wel de bestaande code nog compileert:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Periode</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> Date startDatum<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">private</span> Date eindDatum<span style="color:#f92672">;</span> 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">overlaptMet</span><span style="color:#f92672">(</span>Periode anderePeriode<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsupportedOperationException<span style="color:#f92672">();</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Periode</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">Date</span> <span style="color:#111">startDatum</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">Date</span> <span style="color:#111">eindDatum</span><span style="color:#f92672">;</span> 
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">boolean</span> <span style="color:#75af00">overlaptMet</span><span style="color:#f92672">(</span><span style="color:#111">Periode</span> <span style="color:#111">anderePeriode</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">throw</span> <span style="color:#00a8c8">new</span> <span style="color:#111">UnsupportedOperationException</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>De aanwezigheid van het skelet van de methode zorgt er voor dat de testen compileren. De inhoud, die een <code>UnsupportedOperationException</code> gooit, dient nog aangevuld te worden in stap 2. Op dit punt falen alle testen (met hopelijk als oorzaak de voorgaande exception).</p>
 <h4 id="2-schrijf-implementatie">2. Schrijf Implementatie</h4>
 <p>Pas nadat er minstens 4 verschillende testen werden voorzien (standaard gevallen, edge cases, null cases, &hellip;), kan aan met een gerust hart aan de implementatie worden gewerkt:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">overlaptMet</span><span style="color:#f92672">(</span>Periode anderePeriode<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">return</span> startDatum<span style="color:#f92672">.</span><span style="color:#a6e22e">after</span><span style="color:#f92672">(</span>anderePeriode<span style="color:#f92672">.</span><span style="color:#a6e22e">startDatum</span><span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> 
-        eindDatum<span style="color:#f92672">.</span><span style="color:#a6e22e">before</span><span style="color:#f92672">(</span>anderePeriode<span style="color:#f92672">.</span><span style="color:#a6e22e">eindDatum</span><span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">boolean</span> <span style="color:#75af00">overlaptMet</span><span style="color:#f92672">(</span><span style="color:#111">Periode</span> <span style="color:#111">anderePeriode</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">startDatum</span><span style="color:#f92672">.</span><span style="color:#75af00">after</span><span style="color:#f92672">(</span><span style="color:#111">anderePeriode</span><span style="color:#f92672">.</span><span style="color:#75af00">startDatum</span><span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> 
+        <span style="color:#111">eindDatum</span><span style="color:#f92672">.</span><span style="color:#75af00">before</span><span style="color:#f92672">(</span><span style="color:#111">anderePeriode</span><span style="color:#f92672">.</span><span style="color:#75af00">eindDatum</span><span style="color:#f92672">);</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><h4 id="3-voer-testen-uit">3. Voer Testen uit</h4>
 <p>Deze eerste aanzet verandert de deprimerende rode kleur van minstens één test naar GROEN. Echter, lang niet alle testen zijn in orde. Voer de testen uit na elke wijziging in implementatie totdat alles in orde is. Het is mogelijk om terug naar stap 1 te gaan en extra test gevallen toe te voegen.</p>
@@ -920,30 +919,30 @@ graph LR;
 <h5 id="2-het-assertion-framework">2. Het Assertion Framework</h5>
 <p>Naast het harnas, die zorgt voor het uitvoeren van testen, hebben we ook een <em>verificatie framework</em> nodig, dat fouten genereert wanneer nodig, om te bepalen of een test al dan niet geslaagd is. Dit gebeurt typisch met <strong>assertions</strong>, die vereisten dat een argument een bepaalde waarde heeft. Is dit niet het geval, wordt er een <code>AssertionError</code> exception gegooid, die door het harnas herkent wordt, met als resultaat een falende test.</p>
 <p>Assertions zijn er in alle kleuren en gewichten, waarbij in de oefeningen de statische methode <code>assertThat()</code> wordt gebruikt, die leeft in <code> org.hamcrest.MatcherAssert</code>. Hamcrest is een plugin library die ons in staat stelt om een <em>fluent API</em> te gebruiken in plaats van moeilijk leesbare assertions:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testWithDefaultAssertions</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    var result <span style="color:#f92672">=</span> doStuff<span style="color:#f92672">();</span>
-    AssertEquals<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> 3<span style="color:#f92672">);</span>    <span style="color:#75715e">// arg1: expected, arg2: actual
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">testWithDefaultAssertions</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">var</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">doStuff</span><span style="color:#f92672">();</span>
+    <span style="color:#111">AssertEquals</span><span style="color:#f92672">(</span><span style="color:#111">result</span><span style="color:#f92672">,</span> <span style="color:#111">3</span><span style="color:#f92672">);</span>    <span style="color:#75715e">// arg1: expected, arg2: actual
 </span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-<span style="color:#a6e22e">@Test</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testWithHamcrestMatchers</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    var result <span style="color:#f92672">=</span> doStuff<span style="color:#f92672">();</span>
-    assertThat<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> is<span style="color:#f92672">(</span>3<span style="color:#f92672">));</span>
+<span style="color:#75af00">@Test</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">testWithHamcrestMatchers</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">var</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">doStuff</span><span style="color:#f92672">();</span>
+    <span style="color:#111">assertThat</span><span style="color:#f92672">(</span><span style="color:#111">result</span><span style="color:#f92672">,</span> <span style="color:#111">is</span><span style="color:#f92672">(</span><span style="color:#111">3</span><span style="color:#f92672">));</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Het tweede voorbeeld leest als een vloeiende zin, terwijl de eerste <code>AssertEquals()</code> vereist dat als eerste argument de expected value wordt meegegeven - dit is vaak het omgekeerde van wat wij verwachten!</p>
 <p><a href="http://hamcrest.org/JavaHamcrest/javadoc/">HamCrest Matchers API Documentation</a></p>
 <h4 id="arrange-act-assert">Arrange, Act, Assert</h4>
 <p>De body van een test bestaat typisch uit drie delen:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">testMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">// 1. Arrange 
-</span><span style="color:#75715e"></span>    var instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ClassToTest<span style="color:#f92672">(</span>arg1<span style="color:#f92672">,</span> arg2<span style="color:#f92672">);</span>
+</span><span style="color:#75715e"></span>    <span style="color:#111">var</span> <span style="color:#111">instance</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ClassToTest</span><span style="color:#f92672">(</span><span style="color:#111">arg1</span><span style="color:#f92672">,</span> <span style="color:#111">arg2</span><span style="color:#f92672">);</span>
 
     <span style="color:#75715e">// 2. Act
-</span><span style="color:#75715e"></span>    var result <span style="color:#f92672">=</span> instance<span style="color:#f92672">.</span><span style="color:#a6e22e">callStuff</span><span style="color:#f92672">();</span>
+</span><span style="color:#75715e"></span>    <span style="color:#111">var</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">instance</span><span style="color:#f92672">.</span><span style="color:#75af00">callStuff</span><span style="color:#f92672">();</span>
 
     <span style="color:#75715e">// 3. Assert
-</span><span style="color:#75715e"></span>    assertThat<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> is<span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">));</span>
+</span><span style="color:#75715e"></span>    <span style="color:#111">assertThat</span><span style="color:#f92672">(</span><span style="color:#111">result</span><span style="color:#f92672">,</span> <span style="color:#111">is</span><span style="color:#f92672">(</span><span style="color:#00a8c8">true</span><span style="color:#f92672">));</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ol>
 <li><strong>Arrange</strong>. Het klaarzetten van data, nodig om te testen, zoals een instantie van een klasse die wordt getest, met nodige parameters/DB waardes/&hellip;</li>
@@ -977,17 +976,17 @@ graph LR;
 </ul>
 <h5 id="test-doubles">Test Doubles</h5>
 <p>Stel dat we een <code>Service</code> en een <code>Repository</code> klasse hebben gemaakt, waarvan de tweede gegevens wegschrijft naar een database. Als we de eerste klasse willen testen, willen we niet weer een verbinding opstellen, omdat dit te traag is (1), én omdat dit al getest is (2):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Repository</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>Customer c<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Repository</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">save</span><span style="color:#f92672">(</span><span style="color:#111">Customer</span> <span style="color:#111">c</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// insert into ... 
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Service</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> Repository repository<span style="color:#f92672">;</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Service</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">Repository</span> <span style="color:#111">repository</span><span style="color:#f92672">;</span>
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">updateCustomerWallet</span><span style="color:#f92672">(</span>Customer c<span style="color:#f92672">,</span> <span style="color:#66d9ef">double</span> balance<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        c<span style="color:#f92672">.</span><span style="color:#a6e22e">setBalance</span><span style="color:#f92672">(</span>balance<span style="color:#f92672">);</span>
-        repository<span style="color:#f92672">.</span><span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>c<span style="color:#f92672">);</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">updateCustomerWallet</span><span style="color:#f92672">(</span><span style="color:#111">Customer</span> <span style="color:#111">c</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">double</span> <span style="color:#111">balance</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">c</span><span style="color:#f92672">.</span><span style="color:#75af00">setBalance</span><span style="color:#f92672">(</span><span style="color:#111">balance</span><span style="color:#f92672">);</span>
+        <span style="color:#111">repository</span><span style="color:#f92672">.</span><span style="color:#75af00">save</span><span style="color:#f92672">(</span><span style="color:#111">c</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Hoe testen we de <code>updateCustomerWallet()</code> methode, zonder de effectieve implementatie van <code>save()</code> te moeten gebruiken? Door middel van <em>test doubles</em>.</p>
@@ -1001,25 +1000,25 @@ graph LR;
 </figure>
 </p>
 <p>Zoals Arnie in zijn films bij gevaarlijke scenes een stuntman lookalike gebruikt, zo gaan wij in onze code een <code>Repository</code> lookalike gebruiken, zodat de <code>Service</code> dénkt dat hij <code>save()</code> aanroept, terwijl dit in werkelijkheid niet zo is. Daarvoor moet de repository een interface zijn. We passen in principe een design pattern toe, waarbij in de service een repository instantie wordt geïnjecteerd:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Repository</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>Customer c<span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">interface</span> <span style="color:#75af00">Repository</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#75af00">save</span><span style="color:#f92672">(</span><span style="color:#111">Customer</span> <span style="color:#111">c</span><span style="color:#f92672">);</span>
 <span style="color:#f92672">}</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RepositoryDBImpl</span> <span style="color:#66d9ef">implements</span> Repository <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>Customer c<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">RepositoryDBImpl</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">Repository</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Override</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#75af00">save</span><span style="color:#f92672">(</span><span style="color:#111">Customer</span> <span style="color:#111">c</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// insert into...
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RepositoryForTesting</span> <span style="color:#66d9ef">implements</span> Repository <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">save</span><span style="color:#f92672">(</span>Customer c<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">RepositoryForTesting</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">Repository</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Override</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">save</span><span style="color:#f92672">(</span><span style="color:#111">Customer</span> <span style="color:#111">c</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// do nothing!
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Service</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> Repository repository<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Service</span><span style="color:#f92672">(</span>Repository r<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">repository</span> <span style="color:#f92672">=</span> r<span style="color:#f92672">;</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Service</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">Repository</span> <span style="color:#111">repository</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#75af00">Service</span><span style="color:#f92672">(</span><span style="color:#111">Repository</span> <span style="color:#111">r</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">repository</span> <span style="color:#f92672">=</span> <span style="color:#111">r</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>In de test wordt een instantie van <code>RepositoryForTesting</code> in service gebruikt in plaats van de effectieve <code>RepositoryDBImpl</code>. De test klasse <em>gedraagt</em> zich als een <code>Repository</code>, omdat deze de betreffende interface implementeert. De <code>Service</code> klasse weet niet welke implementatie van de interface binnen komt: daar kan bij het integration testing handig gebruk van worden gemaakt.</p>
@@ -1074,7 +1073,7 @@ graph LR;
 Er wordt veel Hasseltse <a href="https://en.wikipedia.org/wiki/Speculaas">Speculaas</a> gebakken, maar niemand weet
 precies wat de <strong>beste</strong> Speculaas is. Schrijf een methode die <em>speculaas</em> beoordeelt op basis van de ingrediënten.
 De methode, in de klasse <code>Speculaas</code>, zou er zo uit moeten zien:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">beoordeel</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">beoordeel</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// TODO ...
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 </code></pre></div><p>De functie geeft een nummer terug - hoe hoger dit nummer, hoe beter de beoordeling en hoe gelukkiger de bakker. Een speculaas kan de volgende ingrediënten bevatten: kruiden, boter, suiker, eieren, melk, honing, bloem, zout. Elke eigenschap is een nummer dat de hoeveelheid in gram uitdrukt.</p>
@@ -1091,22 +1090,22 @@ De methode, in de klasse <code>Speculaas</code>, zou er zo uit moeten zien:</p>
 <h4 id="a-misluke-login-pogingen">A. Misluke login pogingen</h4>
 <p>Er is een foutje geslopen in de login module, waardoor Abigail nog steeds kan inloggen, maar Jos plots niet meer. De senior programmeur in ons team heeft de bug geïdentificeerd en beweert dat het in een stukje <em>oude code</em> zit,
 maar hij heeft geen tijd om dit op te lossen. Nu is het aan jou.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.util.regex.Pattern<span style="color:#f92672">;</span>
-<span style="color:#f92672">import static</span> java.util.regex.Pattern.CASE_INSENSITIVE<span style="color:#f92672">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> <span style="color:#111">java.util.regex.Pattern</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">import static</span> <span style="color:#111">java.util.regex.Pattern.CASE_INSENSITIVE</span><span style="color:#f92672">;</span>
 
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">control</span><span style="color:#f92672">(</span>String username<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    Pattern pattern <span style="color:#f92672">=</span> Pattern<span style="color:#f92672">.</span><span style="color:#a6e22e">compile</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;^(?=[a-z]{2})(?=.{4,26})(?=[^.]*\\.?[^.]*$)(?=[^_]*_?[^_]*$)[\\w.]+$&#34;</span><span style="color:#f92672">,</span> CASE_INSENSITIVE<span style="color:#f92672">);</span>
-    <span style="color:#66d9ef">return</span> pattern<span style="color:#f92672">.</span><span style="color:#a6e22e">matcher</span><span style="color:#f92672">(</span>username<span style="color:#f92672">).</span><span style="color:#a6e22e">matches</span><span style="color:#f92672">();</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">boolean</span> <span style="color:#75af00">control</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">username</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">Pattern</span> <span style="color:#111">pattern</span> <span style="color:#f92672">=</span> <span style="color:#111">Pattern</span><span style="color:#f92672">.</span><span style="color:#75af00">compile</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;^(?=[a-z]{2})(?=.{4,26})(?=[^.]*\\.?[^.]*$)(?=[^_]*_?[^_]*$)[\\w.]+$&#34;</span><span style="color:#f92672">,</span> <span style="color:#111">CASE_INSENSITIVE</span><span style="color:#f92672">);</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">pattern</span><span style="color:#f92672">.</span><span style="color:#75af00">matcher</span><span style="color:#f92672">(</span><span style="color:#111">username</span><span style="color:#f92672">).</span><span style="color:#75af00">matches</span><span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Deze functie geeft <code>true</code> terug als Abigail probeert in te loggen, en <code>false</code> als Jos probeert in te loggen. Hoe komt dit? Schrijf éérst een falende test!</p>
 <h4 id="b-url-verificatie-fouten">B. URL Verificatie fouten</h4>
 <p>Een tweede bug wordt gemeld: URL verificatie features werken plots niet meer. Deze methode faalt steeds, ook al zijn er reeds unit testen voorzien. Het probleem is dat <strong>HTTPS</strong> URLs met een SSL certificaat niet werken. Je onderzocht de URL verificatie code en vond de volgende verdachte regels:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.util.regex.Pattern<span style="color:#f92672">;</span>
-<span style="color:#f92672">import static</span> java.util.regex.Pattern.CASE_INSENSITIVE<span style="color:#f92672">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> <span style="color:#111">java.util.regex.Pattern</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">import static</span> <span style="color:#111">java.util.regex.Pattern.CASE_INSENSITIVE</span><span style="color:#f92672">;</span>
 
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">verifyUrl</span><span style="color:#f92672">(</span>String url<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    Pattern pattern <span style="color:#f92672">=</span> Pattern<span style="color:#f92672">.</span><span style="color:#a6e22e">compile</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;http:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&amp;//=]*)&#34;</span><span style="color:#f92672">,</span> CASE_INSENSITIVE<span style="color:#f92672">);</span>
-    <span style="color:#66d9ef">return</span> pattern<span style="color:#f92672">.</span><span style="color:#a6e22e">matcher</span><span style="color:#f92672">(</span>url<span style="color:#f92672">).</span><span style="color:#a6e22e">matches</span><span style="color:#f92672">();</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">boolean</span> <span style="color:#75af00">verifyUrl</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">url</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">Pattern</span> <span style="color:#111">pattern</span> <span style="color:#f92672">=</span> <span style="color:#111">Pattern</span><span style="color:#f92672">.</span><span style="color:#75af00">compile</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;http:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&amp;//=]*)&#34;</span><span style="color:#f92672">,</span> <span style="color:#111">CASE_INSENSITIVE</span><span style="color:#f92672">);</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">pattern</span><span style="color:#f92672">.</span><span style="color:#75af00">matcher</span><span style="color:#f92672">(</span><span style="color:#111">url</span><span style="color:#f92672">).</span><span style="color:#75af00">matches</span><span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>De code blijkt reeds <strong>unit testen</strong> te hebben, dus schrijf éérst een falende test (in <code>VerifierTests</code>).</p>
 <h3 id="opgave-3">Opgave 3</h3>
@@ -1118,8 +1117,8 @@ maar hij heeft geen tijd om dit op te lossen. Nu is het aan jou.</p>
 
 <p>Een verkoopster werkt in een (goede) speculaasfabriek. De verkoopster wilt graag 2 EUR aanrekenen per speculaas die de fabriek produceert.
 Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worden aangerekend.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">verkoop</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        var gebakken <span style="color:#f92672">=</span> speculaasFabriek<span style="color:#f92672">.</span><span style="color:#a6e22e">bak</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">double</span> <span style="color:#75af00">verkoop</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">var</span> <span style="color:#111">gebakken</span> <span style="color:#f92672">=</span> <span style="color:#111">speculaasFabriek</span><span style="color:#f92672">.</span><span style="color:#75af00">bak</span><span style="color:#f92672">();</span>
         <span style="color:#75715e">// TODO ...
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 </code></pre></div><p>Je ziet aan bovenstaande code dat de speculaasfabriek instantie wordt gebruikt. We hebben dus eigenlijk <strong>geen controle</strong> op de hoeveelheid speculaas die deze fabriek produceert.</p>
@@ -1621,19 +1620,17 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1624628127"></script>
-    <script src="../js/perfect-scrollbar.min.js?1624628127"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1624628127"></script>
-    <script src="../js/jquery.sticky.js?1624628127"></script>
-    <script src="../js/featherlight.min.js?1624628127"></script>
-    <script src="../js/highlight.pack.js?1624628127"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1624628127"></script>
-    <script src="../js/learn.js?1624628127"></script>
-    <script src="../js/hugo-learn.js?1624628127"></script>
+    <script src="../js/clipboard.min.js?1627372899"></script>
+    <script src="../js/perfect-scrollbar.min.js?1627372899"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1627372899"></script>
+    <script src="../js/jquery.sticky.js?1627372899"></script>
+    <script src="../js/featherlight.min.js?1627372899"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1627372899"></script>
+    <script src="../js/learn.js?1627372899"></script>
+    <script src="../js/hugo-learn.js?1627372899"></script>
     
         
-            <script src="../mermaid/mermaid.js?1624628127"></script>
+            <script src="../mermaid/mermaid.js?1627372899"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -12,21 +12,20 @@
     <title>Extending the SESsy WebApp :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1624628127" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/hybrid.css?1624628127" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1624628127" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1624628127" rel="stylesheet">
-    <link href="../../css/theme.css?1624628127" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1624628127" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372898" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372898" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372898" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372898" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372898" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1627372898" rel="stylesheet">
+    <link href="../../css/theme.css?1627372898" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372898" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1624628127" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372898" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1624628127"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372898"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1624628127"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1624628127"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372898"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372898"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1624628127"></script>
+<script type="text/javascript" src="../../js/search.js?1627372898"></script>
 
     
   </div>
@@ -797,8 +796,8 @@ window.MathJax = {
 <p>IntelliJ biedt hiervoor het &ldquo;TODO window&rdquo; aan (CMD-6 of CTRL-6). Elke regel commentaar die begint met <code>// TODO doe dit of dat</code> verschijnt automatisch in dit venster.</p>
 <h3 id="opgave-1">Opgave 1</h3>
 <p>Neem een kijkje in de klasse <code>BookLendService</code>. De uitleen- en teruggeeffuncties zijn sterk vereenvoudigd:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">lend</span><span style="color:#f92672">(</span>Book book<span style="color:#f92672">,</span> User user<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    book<span style="color:#f92672">.</span><span style="color:#a6e22e">borrow</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">lend</span><span style="color:#f92672">(</span><span style="color:#111">Book</span> <span style="color:#111">book</span><span style="color:#f92672">,</span> <span style="color:#111">User</span> <span style="color:#111">user</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">book</span><span style="color:#f92672">.</span><span style="color:#75af00">borrow</span><span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Waarbij de <code>borrowed</code> flag op <code>true</code> of <code>false</code> wordt gezet. Er ontbreekt hier nog heel wat logica:</p>
 <ol>
@@ -827,9 +826,9 @@ window.MathJax = {
 </p>
 <p>Vergeet niet dat wijzigingen in de <code>Book</code> datastructuur grote gevolgen hebben voor de rest van de applicatie! De database, aangedreven door <code>BooksRepository</code>, zal ook moeten wijzigen. Een <code>String</code> in Java is een <code>VARCHAR</code> in SQL.</p>
 <p>De front-end Javascript code gaat steeds uit van een <code>borrowed</code> flag die wordt gecontroleerd om de gele &ldquo;uitgeleend&rdquo; waarschuwing weer te geven. Je kan indien gewenst deze code in <code>Zoeken.vue</code> wijzigen, of de boolean laten staan en aan- of uitzetten naargelang de waarde van het nieuwe String veld. Bijvoorbeeld:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setBorrowedBy</span><span style="color:#f92672">(</span>String user<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">borrowedBy</span> <span style="color:#f92672">=</span> user<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">borrowed</span> <span style="color:#f92672">=</span> user <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> <span style="color:#66d9ef">true</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span> <span style="color:#75715e">// of lege String checken
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">setBorrowedBy</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">user</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">borrowedBy</span> <span style="color:#f92672">=</span> <span style="color:#111">user</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">borrowed</span> <span style="color:#f92672">=</span> <span style="color:#111">user</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">null</span> <span style="color:#f92672">?</span> <span style="color:#00a8c8">true</span> <span style="color:#f92672">:</span> <span style="color:#00a8c8">false</span><span style="color:#f92672">;</span> <span style="color:#75715e">// of lege String checken
 </span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
 </code></pre></div><p>Ik zeg altijd:</p>
 <blockquote>
@@ -1284,19 +1283,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1624628127"></script>
-    <script src="../../js/jquery.sticky.js?1624628127"></script>
-    <script src="../../js/featherlight.min.js?1624628127"></script>
-    <script src="../../js/highlight.pack.js?1624628127"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1624628127"></script>
-    <script src="../../js/learn.js?1624628127"></script>
-    <script src="../../js/hugo-learn.js?1624628127"></script>
+    <script src="../../js/clipboard.min.js?1627372898"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372898"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372898"></script>
+    <script src="../../js/jquery.sticky.js?1627372898"></script>
+    <script src="../../js/featherlight.min.js?1627372898"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372898"></script>
+    <script src="../../js/learn.js?1627372898"></script>
+    <script src="../../js/hugo-learn.js?1627372898"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1624628127"></script>
+            <script src="../../mermaid/mermaid.js?1627372898"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

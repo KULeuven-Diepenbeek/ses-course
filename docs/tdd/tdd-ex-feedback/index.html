@@ -12,21 +12,20 @@
     <title>3.4 TDD opgave feedback :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1624628127" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/hybrid.css?1624628127" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1624628127" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1624628127" rel="stylesheet">
-    <link href="../../css/theme.css?1624628127" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1624628127" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372899" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372899" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372899" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372899" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372899" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1627372899" rel="stylesheet">
+    <link href="../../css/theme.css?1627372899" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372899" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1624628127" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372899" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1624628127"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372899"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1624628127"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1624628127"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372899"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372899"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1624628127"></script>
+<script type="text/javascript" src="../../js/search.js?1627372899"></script>
 
     
   </div>
@@ -800,16 +799,16 @@ window.MathJax = {
 <p>Hieronder volgen een aantal veel voorkomende fouten, die eenvoudig te vermijden zijn als je aandacht schenkt aan je unit test designs.</p>
 <h3 id="fout-1-assertions-verkeerd-gebruiken">Fout 1: assertions verkeerd gebruiken</h3>
 <p>Bijvoorbeeld:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">someTestMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> someCalculation<span style="color:#f92672">(</span>2<span style="color:#f92672">,</span> 5<span style="color:#f92672">);</span>
-    Assert<span style="color:#f92672">.</span><span style="color:#a6e22e">assertTrue</span><span style="color:#f92672">(</span>result <span style="color:#f92672">==</span> 5 <span style="color:#f92672">*</span> 20<span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">someTestMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">someCalculation</span><span style="color:#f92672">(</span><span style="color:#111">2</span><span style="color:#f92672">,</span> <span style="color:#111">5</span><span style="color:#f92672">);</span>
+    <span style="color:#111">Assert</span><span style="color:#f92672">.</span><span style="color:#75af00">assertTrue</span><span style="color:#f92672">(</span><span style="color:#111">result</span> <span style="color:#f92672">==</span> <span style="color:#111">5</span> <span style="color:#f92672">*</span> <span style="color:#111">20</span><span style="color:#f92672">);</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Als deze test faalt, krijg je de boodschap: <code>expected true, but was false</code>. <em>That&rsquo;s it.</em> Heb je daar iets aan, buiten dat de test faalt? Nee: je zal breakpoints moeten plaatsen om te zien wat er precies mis ging. <code>assertTrue()</code> is hier de verkeerde keuze. Gebruik nooit <code>==</code> om een expressie om te vormen naar een boolean statement. Laat dit aan de juiste assertion method over:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">someTestMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> someCalculation<span style="color:#f92672">(</span>2<span style="color:#f92672">,</span> 5<span style="color:#f92672">);</span>
-    Assert<span style="color:#f92672">.</span><span style="color:#a6e22e">assertEquals</span><span style="color:#f92672">(</span>100<span style="color:#f92672">,</span> result<span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">someTestMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">someCalculation</span><span style="color:#f92672">(</span><span style="color:#111">2</span><span style="color:#f92672">,</span> <span style="color:#111">5</span><span style="color:#f92672">);</span>
+    <span style="color:#111">Assert</span><span style="color:#f92672">.</span><span style="color:#75af00">assertEquals</span><span style="color:#f92672">(</span><span style="color:#111">100</span><span style="color:#f92672">,</span> <span style="color:#111">result</span><span style="color:#f92672">);</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Nu krijg je bijvoorbeeld de boodschap <code>expected 100, but was 45</code>. Dat is veel duidelijker. Vermijd ook het a-la-minute berekenen van de expected outcome (<code>5 * 20</code> is minder expliciet dan <code>100</code>). Gebruik maken van de betere leesbaarheid van Hamcrest is nog beter: <code>assertThat(result, is(100))</code>.</p>
 <h3 id="fout-2-expected-en-actual-in-assertions-omkeren">Fout 2: expected en actual in assertions omkeren</h3>
@@ -818,33 +817,33 @@ window.MathJax = {
 <p>Opnieuw, <strong>leesbaarheid</strong> primeert hier, en Hamcrest helpt en keert dit wel correct om.</p>
 <h3 id="fout-3-mocks-als-fields-definiëren">Fout 3: mocks als fields definiëren</h3>
 <p>Een Mockito mock (of een zelfgeschreven Test Double) mag je <strong>nooit herbruiken</strong>. Er is state aan verbonden, die bij voor elke test uniek moet zijn. Dus niet:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyTest</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> MyInterface mockObj <span style="color:#f92672">=</span> Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">mock</span><span style="color:#f92672">(</span>MyInterface<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">MyTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">MyInterface</span> <span style="color:#111">mockObj</span> <span style="color:#f92672">=</span> <span style="color:#111">Mockito</span><span style="color:#f92672">.</span><span style="color:#75af00">mock</span><span style="color:#f92672">(</span><span style="color:#111">MyInterface</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">);</span>
 
-    <span style="color:#a6e22e">@Test</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>mockObj<span style="color:#f92672">.</span><span style="color:#a6e22e">doStuff</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+    <span style="color:#75af00">@Test</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">Mockito</span><span style="color:#f92672">.</span><span style="color:#75af00">when</span><span style="color:#f92672">(</span><span style="color:#111">mockObj</span><span style="color:#f92672">.</span><span style="color:#75af00">doStuff</span><span style="color:#f92672">()).</span><span style="color:#75af00">thenReturn</span><span style="color:#f92672">(</span><span style="color:#111">10</span><span style="color:#f92672">);</span>
         <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-    <span style="color:#a6e22e">@Test</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>mockObj<span style="color:#f92672">.</span><span style="color:#a6e22e">doMoreStuff</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+    <span style="color:#75af00">@Test</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">Mockito</span><span style="color:#f92672">.</span><span style="color:#75af00">when</span><span style="color:#f92672">(</span><span style="color:#111">mockObj</span><span style="color:#f92672">.</span><span style="color:#75af00">doMoreStuff</span><span style="color:#f92672">()).</span><span style="color:#75af00">thenReturn</span><span style="color:#f92672">(</span><span style="color:#00a8c8">true</span><span style="color:#f92672">);</span>
         <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Het probleem hier is dat na het uitvoeren van <code>test1()</code>, je <code>mockObj</code> nog steeds <code>10</code> gaat teruggeven bij het oproepen van <code>doStuff()</code>, omdat de mock in <code>test2</code> hetzelfde object is! Dit geeft heel vreemde side effects en kan tot erg buggy testen leiden waarvan de bugs moeilijk te achterhalen zijn.</p>
 <p>Om dit te vermijden maak je elke mock aan in de test zelf. Ook al heb je voor elke test dezelfde soort mock nodig. Dus:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyTest</span> <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Test</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        MyInterface mockObj <span style="color:#f92672">=</span> Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">mock</span><span style="color:#f92672">(</span>MyInterface<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-        Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>mockObj<span style="color:#f92672">.</span><span style="color:#a6e22e">doStuff</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span>10<span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">MyTest</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Test</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">test1</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">MyInterface</span> <span style="color:#111">mockObj</span> <span style="color:#f92672">=</span> <span style="color:#111">Mockito</span><span style="color:#f92672">.</span><span style="color:#75af00">mock</span><span style="color:#f92672">(</span><span style="color:#111">MyInterface</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">);</span>
+        <span style="color:#111">Mockito</span><span style="color:#f92672">.</span><span style="color:#75af00">when</span><span style="color:#f92672">(</span><span style="color:#111">mockObj</span><span style="color:#f92672">.</span><span style="color:#75af00">doStuff</span><span style="color:#f92672">()).</span><span style="color:#75af00">thenReturn</span><span style="color:#f92672">(</span><span style="color:#111">10</span><span style="color:#f92672">);</span>
         <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-    <span style="color:#a6e22e">@Test</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        MyInterface mockObj <span style="color:#f92672">=</span> Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">mock</span><span style="color:#f92672">(</span>MyInterface<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-        Mockito<span style="color:#f92672">.</span><span style="color:#a6e22e">when</span><span style="color:#f92672">(</span>mockObj<span style="color:#f92672">.</span><span style="color:#a6e22e">doMoreStuff</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">thenReturn</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+    <span style="color:#75af00">@Test</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">test2</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">MyInterface</span> <span style="color:#111">mockObj</span> <span style="color:#f92672">=</span> <span style="color:#111">Mockito</span><span style="color:#f92672">.</span><span style="color:#75af00">mock</span><span style="color:#f92672">(</span><span style="color:#111">MyInterface</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">);</span>
+        <span style="color:#111">Mockito</span><span style="color:#f92672">.</span><span style="color:#75af00">when</span><span style="color:#f92672">(</span><span style="color:#111">mockObj</span><span style="color:#f92672">.</span><span style="color:#75af00">doMoreStuff</span><span style="color:#f92672">()).</span><span style="color:#75af00">thenReturn</span><span style="color:#f92672">(</span><span style="color:#00a8c8">true</span><span style="color:#f92672">);</span>
         <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
@@ -1308,19 +1307,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1624628127"></script>
-    <script src="../../js/jquery.sticky.js?1624628127"></script>
-    <script src="../../js/featherlight.min.js?1624628127"></script>
-    <script src="../../js/highlight.pack.js?1624628127"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1624628127"></script>
-    <script src="../../js/learn.js?1624628127"></script>
-    <script src="../../js/hugo-learn.js?1624628127"></script>
+    <script src="../../js/clipboard.min.js?1627372899"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372899"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372899"></script>
+    <script src="../../js/jquery.sticky.js?1627372899"></script>
+    <script src="../../js/featherlight.min.js?1627372899"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372899"></script>
+    <script src="../../js/learn.js?1627372899"></script>
+    <script src="../../js/hugo-learn.js?1627372899"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1624628127"></script>
+            <script src="../../mermaid/mermaid.js?1627372899"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

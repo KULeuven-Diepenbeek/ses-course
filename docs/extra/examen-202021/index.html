@@ -12,21 +12,20 @@
     <title>Examen feedback 2020-2021 :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1624628127" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/hybrid.css?1624628127" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1624628127" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1624628127" rel="stylesheet">
-    <link href="../../css/theme.css?1624628127" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1624628127" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372898" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372898" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372898" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372898" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372898" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1627372898" rel="stylesheet">
+    <link href="../../css/theme.css?1627372898" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372898" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1624628127" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372898" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1624628127"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372898"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1624628127"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1624628127"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372898"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372898"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1624628127"></script>
+<script type="text/javascript" src="../../js/search.js?1627372898"></script>
 
     
   </div>
@@ -787,10 +786,10 @@ window.MathJax = {
 <h2 id="1-lees-wat-er-staat">1. Lees wat er staat</h2>
 <h4 id="voorbeeldvraag-1">Voorbeeldvraag 1</h4>
 <p>Gegeven deze code</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> AnalyticsResult <span style="color:#a6e22e">sendAnalytics</span><span style="color:#f92672">(</span>Data data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    ftpClient<span style="color:#f92672">.</span><span style="color:#a6e22e">upload</span><span style="color:#f92672">(</span>data<span style="color:#f92672">);</span>
-    httpClient<span style="color:#f92672">.</span><span style="color:#a6e22e">post</span><span style="color:#f92672">(</span>data<span style="color:#f92672">);</span>
-    <span style="color:#66d9ef">return</span> AnalyticsResult<span style="color:#f92672">.</span><span style="color:#a6e22e">success</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#111">AnalyticsResult</span> <span style="color:#75af00">sendAnalytics</span><span style="color:#f92672">(</span><span style="color:#111">Data</span> <span style="color:#111">data</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">ftpClient</span><span style="color:#f92672">.</span><span style="color:#75af00">upload</span><span style="color:#f92672">(</span><span style="color:#111">data</span><span style="color:#f92672">);</span>
+    <span style="color:#111">httpClient</span><span style="color:#f92672">.</span><span style="color:#75af00">post</span><span style="color:#f92672">(</span><span style="color:#111">data</span><span style="color:#f92672">);</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">AnalyticsResult</span><span style="color:#f92672">.</span><span style="color:#75af00">success</span><span style="color:#f92672">();</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Vraag:</p>
 <blockquote>
@@ -805,25 +804,25 @@ window.MathJax = {
 </ul>
 <h4 id="voorbeeldvraag-2">Voorbeeldvraag 2</h4>
 <p>Zelfde principe. Gegeven de volgende Java klasses:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OldClient</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> FtpHandler handler<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">public</span> FtpResult <span style="color:#a6e22e">call</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        handler<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>public_html<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">,</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>data<span style="color:#f92672">.</span><span style="color:#a6e22e">dat</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">));</span>
-        <span style="color:#66d9ef">return</span> FtpResult<span style="color:#f92672">.</span><span style="color:#a6e22e">success</span><span style="color:#f92672">();</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">OldClient</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">FtpHandler</span> <span style="color:#111">handler</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#111">FtpResult</span> <span style="color:#75af00">call</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">handler</span><span style="color:#f92672">.</span><span style="color:#75af00">put</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">File</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">public_html</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">,</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#75af00">dat</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">));</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">FtpResult</span><span style="color:#f92672">.</span><span style="color:#75af00">success</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NewClient</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> HttpHandler handler<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">public</span> HttpResult <span style="color:#a6e22e">call</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        handler<span style="color:#f92672">.</span><span style="color:#a6e22e">httpPost</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">/</span>data<span style="color:#f92672">/</span>upload<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>data<span style="color:#f92672">.</span><span style="color:#a6e22e">dat</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">));</span>
-        <span style="color:#66d9ef">return</span> HttpResult<span style="color:#f92672">.</span><span style="color:#a6e22e">ok</span><span style="color:#f92672">();</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">NewClient</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#111">HttpHandler</span> <span style="color:#111">handler</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#111">HttpResult</span> <span style="color:#75af00">call</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">handler</span><span style="color:#f92672">.</span><span style="color:#75af00">httpPost</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">/</span><span style="color:#111">data</span><span style="color:#f92672">/</span><span style="color:#111">upload</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">new</span> <span style="color:#111">File</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#75af00">dat</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">));</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">HttpResult</span><span style="color:#f92672">.</span><span style="color:#75af00">ok</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DataSender</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">send</span><span style="color:#f92672">(</span>String data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        Files<span style="color:#f92672">.</span><span style="color:#a6e22e">write</span><span style="color:#f92672">(</span>Paths<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span>data<span style="color:#f92672">.</span><span style="color:#a6e22e">dat</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">),</span> data<span style="color:#f92672">.</span><span style="color:#a6e22e">getBytes</span><span style="color:#f92672">());</span>
-        var result <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> OldClient<span style="color:#f92672">().</span><span style="color:#a6e22e">call</span><span style="color:#f92672">();</span>
-        <span style="color:#66d9ef">return</span> result<span style="color:#f92672">.</span><span style="color:#a6e22e">isSuccess</span><span style="color:#f92672">()</span> <span style="color:#f92672">?</span> 1 <span style="color:#f92672">:</span> 0<span style="color:#f92672">;</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DataSender</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">send</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">data</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">Files</span><span style="color:#f92672">.</span><span style="color:#75af00">write</span><span style="color:#f92672">(</span><span style="color:#111">Paths</span><span style="color:#f92672">.</span><span style="color:#75af00">get</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#75af00">dat</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">),</span> <span style="color:#111">data</span><span style="color:#f92672">.</span><span style="color:#75af00">getBytes</span><span style="color:#f92672">());</span>
+        <span style="color:#111">var</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">OldClient</span><span style="color:#f92672">().</span><span style="color:#75af00">call</span><span style="color:#f92672">();</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">result</span><span style="color:#f92672">.</span><span style="color:#75af00">isSuccess</span><span style="color:#f92672">()</span> <span style="color:#f92672">?</span> <span style="color:#111">1</span> <span style="color:#f92672">:</span> <span style="color:#111">0</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Vraag:</p>
@@ -837,19 +836,19 @@ window.MathJax = {
 </blockquote>
 <p>Opnieuw, <strong>lees wat er staat</strong>! Het belangrijkste woord hebben we voor jullie zelfs in CAPITALS gezet, maar bijna iedereen koos ervoor om dit gewoon te negeren. Bijgevolg negeerden wij het geven van punten&hellip; Als je zou antwoorden, &ldquo;een factory&rdquo;, laat dan ook zien dat je, afhankelijk van de INHOUD van de file, de switch maakt. De code hoefde niet eens 100% correct te zijn.</p>
 <p>Dit is goed (genoeg):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientFactory</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">public</span> ClientInterface <span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>File file<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>file<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()</span> <span style="color:#f92672">&gt;</span> 10<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> NewClient<span style="color:#f92672">();</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientFactory</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#111">ClientInterface</span> <span style="color:#75af00">create</span><span style="color:#f92672">(</span><span style="color:#111">File</span> <span style="color:#111">file</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">if</span><span style="color:#f92672">(</span><span style="color:#111">file</span><span style="color:#f92672">.</span><span style="color:#75af00">size</span><span style="color:#f92672">()</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">10</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">new</span> <span style="color:#111">NewClient</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> OldClient<span style="color:#f92672">();</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">new</span> <span style="color:#111">OldClient</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Dit is fout:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClientFactory</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">public</span> ClientInterface <span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>String client<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>client <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;new&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> NewClient<span style="color:#f92672">();</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientFactory</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#111">ClientInterface</span> <span style="color:#75af00">create</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">client</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">if</span><span style="color:#f92672">(</span><span style="color:#111">client</span> <span style="color:#f92672">==</span> <span style="color:#d88200">&#34;new&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+            <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">new</span> <span style="color:#111">NewClient</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
         <span style="color:#75715e">// ,,,
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
@@ -857,20 +856,20 @@ window.MathJax = {
 </code></pre></div><p>De switch hoort op file niveau te gebeuren. Of dat nu de size of de contents is was niet aangegeven en dus niet relevant. Vergeet trouwens niet dat <em>als</em> je kiest voor het gebruik van een nieuwe interface, deze <code>ClientInterface</code> interface toe te voegen aan de bestaande code. Dit werd door een aantal studenten wel, en een aantal niet gedaan.</p>
 <h4 id="voorbeeldvraag-3">Voorbeeldvraag 3</h4>
 <p>Gegeven de volgende code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> CompilifyResult <span style="color:#a6e22e">compile</span><span style="color:#f92672">(</span>String text<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">return</span> compileService<span style="color:#f92672">.</span><span style="color:#a6e22e">compile</span><span style="color:#f92672">(</span>text<span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#111">CompilifyResult</span> <span style="color:#75af00">compile</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">text</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">compileService</span><span style="color:#f92672">.</span><span style="color:#75af00">compile</span><span style="color:#f92672">(</span><span style="color:#111">text</span><span style="color:#f92672">);</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Vraag:</p>
 <blockquote>
 <p>De variabele <code>compileService</code> is een instantie van de <code>CompileService</code> interface die elders correct wordt geïnitialiseerd. Deze kan je beschouwen als een zwarte doos. Schrijf unit testen voor <code>compile()</code>.</p>
 </blockquote>
 <p>De begeleidende tekst die verduidelijkt wat de variabele <code>compileService</code> is, staat er voor een reden! De volgende unit testen zijn dus in alle haast geschreven zonder te lezen wat er staat:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Test</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eenTest</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">eenTest</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">// ...
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// ACT
-</span><span style="color:#75715e"></span>    var result <span style="color:#f92672">=</span> compileService<span style="color:#f92672">.</span><span style="color:#a6e22e">compile</span><span style="color:#f92672">(</span>test<span style="color:#f92672">);</span>
-    assertThat<span style="color:#f92672">(...)</span>
+</span><span style="color:#75715e"></span>    <span style="color:#111">var</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">compileService</span><span style="color:#f92672">.</span><span style="color:#75af00">compile</span><span style="color:#f92672">(</span><span style="color:#111">test</span><span style="color:#f92672">);</span>
+    <span style="color:#111">assertThat</span><span style="color:#f92672">(...)</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Dit is onmogelijk: wat zijn we hier aan het testen? Bovenstaande code? Bovenstaande code is inderdaad ook een methode genaamd <code>compile()</code>, maar die zit NIET in <code>compileService</code>: die gebruikt de service. Dat is dus een dependency, niet het system-under-test! Bovenstaande test is een test die bij de service hoort, en niet bij de functie die wij aan jullie voorlegden om te testen.</p>
 
@@ -1356,19 +1355,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1624628127"></script>
-    <script src="../../js/jquery.sticky.js?1624628127"></script>
-    <script src="../../js/featherlight.min.js?1624628127"></script>
-    <script src="../../js/highlight.pack.js?1624628127"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1624628127"></script>
-    <script src="../../js/learn.js?1624628127"></script>
-    <script src="../../js/hugo-learn.js?1624628127"></script>
+    <script src="../../js/clipboard.min.js?1627372898"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372898"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372898"></script>
+    <script src="../../js/jquery.sticky.js?1627372898"></script>
+    <script src="../../js/featherlight.min.js?1627372898"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372899"></script>
+    <script src="../../js/learn.js?1627372899"></script>
+    <script src="../../js/hugo-learn.js?1627372899"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1624628127"></script>
+            <script src="../../mermaid/mermaid.js?1627372899"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -12,21 +12,20 @@
     <title>5. Design Patterns :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1624628127" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1624628127" rel="stylesheet">
-    <link href="../css/hybrid.css?1624628127" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1624628127" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1624628127" rel="stylesheet">
-    <link href="../css/auto-complete.css?1624628127" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1624628127" rel="stylesheet">
-    <link href="../css/theme.css?1624628127" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1624628127" rel="stylesheet">
+    <link href="../css/nucleus.css?1627372899" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1627372899" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1627372899" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1627372899" rel="stylesheet">
+    <link href="../css/auto-complete.css?1627372899" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1627372899" rel="stylesheet">
+    <link href="../css/theme.css?1627372899" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1627372899" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1624628127" rel="stylesheet">
+    <link href="../css/theme-kul.css?1627372899" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1624628127"></script>
+    <script src="../js/jquery-3.3.1.min.js?1627372899"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1624628127"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1624628127"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1627372899"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1627372899"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1624628127"></script>
+<script type="text/javascript" src="../js/search.js?1627372899"></script>
 
     
   </div>
@@ -792,11 +791,11 @@ window.MathJax = {
 <p>Een <em>pattern</em> is een herkenbaar en herhalende blok van eigenschappen die herbruikt kan worden. In het geval van softwareontwikkeling zijn patterns structuren in code die herbruikt worden om code eenvoudiger, beter leesbaar, en beter in onderhoud te maken. Deze structuren zijn in feite <strong>pre-fab oplossingen</strong> voor gelijkaardige problemen.</p>
 <h4 id="ingebouwde-patronen">Ingebouwde patronen</h4>
 <p>Een <em>constructor</em> is een begrip in Java dat ook geclassificeerd kan worden als patroon, omdat het constant terugkomt bij de creatie van objecten en een hulpmiddel is dat een bepaalt probleem helpt oplossen: het voert stukjes code uit bij het aanmaken van een object.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Appel</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> kcal<span style="color:#f92672">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Appel</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#00a8c8">int</span> <span style="color:#111">kcal</span><span style="color:#f92672">;</span>
 
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Appel</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        kcal <span style="color:#f92672">=</span> 160<span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#75af00">Appel</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">kcal</span> <span style="color:#f92672">=</span> <span style="color:#111">160</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Een nieuwe appel aanmaken, <code>Appel jonagold = new Appel();</code> stelt <code>kcal</code> automatisch gelijk aan <code>160</code>. Dit is uiteraard een ingebouwd principe dat deel uitmaakt van de programmeertaal zelf. Dit concept kunnen we verder doortrekken door patronen van oplossingen te maken die het ons makkelijker maakt om toekomstige gelijkaardige problemen aan te pakken.</p>
@@ -1320,19 +1319,17 @@ graph LR;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1624628127"></script>
-    <script src="../js/perfect-scrollbar.min.js?1624628127"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1624628127"></script>
-    <script src="../js/jquery.sticky.js?1624628127"></script>
-    <script src="../js/featherlight.min.js?1624628127"></script>
-    <script src="../js/highlight.pack.js?1624628127"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1624628127"></script>
-    <script src="../js/learn.js?1624628127"></script>
-    <script src="../js/hugo-learn.js?1624628127"></script>
+    <script src="../js/clipboard.min.js?1627372899"></script>
+    <script src="../js/perfect-scrollbar.min.js?1627372899"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1627372899"></script>
+    <script src="../js/jquery.sticky.js?1627372899"></script>
+    <script src="../js/featherlight.min.js?1627372899"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1627372899"></script>
+    <script src="../js/learn.js?1627372899"></script>
+    <script src="../js/hugo-learn.js?1627372899"></script>
     
         
-            <script src="../mermaid/mermaid.js?1624628127"></script>
+            <script src="../mermaid/mermaid.js?1627372899"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

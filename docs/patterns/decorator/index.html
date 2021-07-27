@@ -12,21 +12,20 @@
     <title>5.4 Decorator :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1624628127" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/hybrid.css?1624628127" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1624628127" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1624628127" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1624628127" rel="stylesheet">
-    <link href="../../css/theme.css?1624628127" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1624628127" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627372899" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627372899" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627372899" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627372899" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627372899" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1627372899" rel="stylesheet">
+    <link href="../../css/theme.css?1627372899" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627372899" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1624628127" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627372899" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1624628127"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627372899"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +81,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1624628127"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1624628127"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627372899"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627372899"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1624628127"></script>
+<script type="text/javascript" src="../../js/search.js?1627372899"></script>
 
     
   </div>
@@ -808,28 +807,28 @@ window.MathJax = {
 <h3 id="voorbeeld">Voorbeeld</h3>
 <h4 id="1-opzet">1. Opzet</h4>
 <p>Stel dat we in een fabriek op plaats X een auto samenstellen. De wagen is een zeer eenvoudige Volkswagen Golf, zonder opties. Op een andere locatie, plaats Y, hebben wij als bedrijf ook fabrieken die sportauto&rsquo;s bouwen (Volkswagen Scirocco) en op plaats Z luxe wagens (Volkswagen Passat).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Car</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assemble</span><span style="color:#f92672">();</span> <span style="color:#75715e">// build stuff
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">interface</span> <span style="color:#75af00">Car</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">assemble</span><span style="color:#f92672">();</span> <span style="color:#75715e">// build stuff
 </span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
 </code></pre></div><p>Fabriek X:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VWGolf</span> <span style="color:#66d9ef">implements</span> Car <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assemble</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;do not forget the steering wheel!&#34;</span><span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">VWGolf</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">Car</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Override</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">assemble</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;do not forget the steering wheel!&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Fabriek Y:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VWScirocco</span> <span style="color:#66d9ef">implements</span> Car <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assemble</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;do not forget lots of turbo!&#34;</span><span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">VWScirocco</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">Car</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Override</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">assemble</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;do not forget lots of turbo!&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Fabriek Z:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VWPassat</span> <span style="color:#66d9ef">implements</span> Car <span style="color:#f92672">{</span>
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assemble</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;do not forget all the leather!&#34;</span><span style="color:#f92672">);</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">VWPassat</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">Car</span> <span style="color:#f92672">{</span>
+    <span style="color:#75af00">@Override</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">assemble</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;do not forget all the leather!&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><script defer src="../../mermaid/mermaid.min.js">
@@ -880,30 +879,30 @@ graph TD;
 </div>
 <h4 id="3-oplossing">3. Oplossing</h4>
 <p>Deze custom oplossing is nog steeds een implementatie van de interface <code>Car</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomCarDecorator</span> <span style="color:#66d9ef">implements</span> Car <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> List<span style="color:#f92672">&lt;</span>Car<span style="color:#f92672">&gt;</span> carsToAssemble<span style="color:#f92672">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">CustomCarDecorator</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">Car</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#00a8c8">final</span> <span style="color:#111">List</span><span style="color:#f92672">&lt;</span><span style="color:#111">Car</span><span style="color:#f92672">&gt;</span> <span style="color:#111">carsToAssemble</span><span style="color:#f92672">;</span>
 
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CustomCarDecorator</span><span style="color:#f92672">(</span>Car<span style="color:#f92672">...</span> carTypes<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">carsToAssemble</span> <span style="color:#f92672">=</span> Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">asList</span><span style="color:#f92672">(</span>carTypes<span style="color:#f92672">);</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#75af00">CustomCarDecorator</span><span style="color:#f92672">(</span><span style="color:#111">Car</span><span style="color:#f92672">...</span> <span style="color:#111">carTypes</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">carsToAssemble</span> <span style="color:#f92672">=</span> <span style="color:#111">Arrays</span><span style="color:#f92672">.</span><span style="color:#75af00">asList</span><span style="color:#f92672">(</span><span style="color:#111">carTypes</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 
-    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">assemble</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span>Car car <span style="color:#f92672">:</span> carsToAssemble<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            car<span style="color:#f92672">.</span><span style="color:#a6e22e">assemble</span><span style="color:#f92672">();</span>
+    <span style="color:#75af00">@Override</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">assemble</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">for</span><span style="color:#f92672">(</span><span style="color:#111">Car</span> <span style="color:#111">car</span> <span style="color:#f92672">:</span> <span style="color:#111">carsToAssemble</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">car</span><span style="color:#f92672">.</span><span style="color:#75af00">assemble</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Op deze manier kunnen we zoveel auto types als de klant wenst doorgeven aan de <code>CustomCarDecorator</code> instantie, die netjes in de bestaande fabriek logica past, gegeven de volgende fabriek klasse:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Factory</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">public</span> Car <span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>Car car<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        car<span style="color:#f92672">.</span><span style="color:#a6e22e">assemble</span><span style="color:#f92672">();</span>  <span style="color:#75715e">// works, since it&#39;s an interface
-</span><span style="color:#75715e"></span>        paint<span style="color:#f92672">(</span>car<span style="color:#f92672">);</span>
-        <span style="color:#66d9ef">return</span> car<span style="color:#f92672">;</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Factory</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#111">Car</span> <span style="color:#75af00">create</span><span style="color:#f92672">(</span><span style="color:#111">Car</span> <span style="color:#111">car</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">car</span><span style="color:#f92672">.</span><span style="color:#75af00">assemble</span><span style="color:#f92672">();</span>  <span style="color:#75715e">// works, since it&#39;s an interface
+</span><span style="color:#75715e"></span>        <span style="color:#111">paint</span><span style="color:#f92672">(</span><span style="color:#111">car</span><span style="color:#f92672">);</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">car</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">paint</span><span style="color:#f92672">(</span>Car car<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;painting...&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">paint</span><span style="color:#f92672">(</span><span style="color:#111">Car</span> <span style="color:#111">car</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;painting...&#34;</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Dit werkt enkel en alleen omdat we met een <strong>interface</strong> werken!</p>
@@ -1393,19 +1392,17 @@ graph TD;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1624628127"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1624628127"></script>
-    <script src="../../js/jquery.sticky.js?1624628127"></script>
-    <script src="../../js/featherlight.min.js?1624628127"></script>
-    <script src="../../js/highlight.pack.js?1624628127"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1624628127"></script>
-    <script src="../../js/learn.js?1624628127"></script>
-    <script src="../../js/hugo-learn.js?1624628127"></script>
+    <script src="../../js/clipboard.min.js?1627372899"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627372899"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627372899"></script>
+    <script src="../../js/jquery.sticky.js?1627372899"></script>
+    <script src="../../js/featherlight.min.js?1627372899"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627372899"></script>
+    <script src="../../js/learn.js?1627372899"></script>
+    <script src="../../js/hugo-learn.js?1627372899"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1624628127"></script>
+            <script src="../../mermaid/mermaid.js?1627372899"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
