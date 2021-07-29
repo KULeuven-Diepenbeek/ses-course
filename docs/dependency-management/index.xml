@@ -18,5 +18,16 @@
  Wat is dat, een build tool? Gradle is een build tool die de automatisatie van releasen, builden, testen, configureren, dependencies en libraries managen, &amp;hellip; eenvoudiger maakt. Kort gezegd: het maakt het leven van een ontwikkelaar eenvoudiger. In een config bestand genaamd build.gradle schrijft men met Groovy, een dynamische taal bovenop de JVM, op een descriptieve manier hoe Gradle de applicatie moet beheren.</description>
     </item>
     
+    <item>
+      <title>2.2 Kotlin Gradle projecten</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/kotlin-gradle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/kotlin-gradle/</guid>
+      <description>De build.gradle bestanden die tot nu toe in de cursus zijn beschreven (zie 2.1 Java Gradle Projecten), werden geschreven in de Groovy programmeertaal, een multi-purpose dynamische taal voor het Java platform. Aangezien we voor Kotlin projecten geen Groovy, noch Java, maar Kotlin schrijven, zou het fijn zijn om de syntax van de Gradle configuratie óók te kunnen wijzigen naar Kotlin.
+Dat kan.
+Daarvoor vink je bij het aanmaken van nieuwe projecten in IntelliJ het vinkje Kotlin DSL Build Script aan:</description>
+    </item>
+    
   </channel>
 </rss>
