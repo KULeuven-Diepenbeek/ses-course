@@ -28,6 +28,16 @@ Testen worden in opgenomen in een build omgeving, waardoor alle testen automatis
 
 Stel dat een programma een notie van periodes nodig heeft, waarvan elke periode een start- en einddatum heeft, die al dan niet ingevuld kunnen zijn. Een contract bijvoorbeeld geldt voor een periode van _bepaalde duur_, waarvan beide data ingevuld zijn, of voor gelukkige werknemers voor een periode van _onbepaalde duur_, waarvan de einddatum ontbreekt:
 
+<div class="devselect">
+
+```kt
+class Contract() {
+    private lateinit periode: Periode
+}
+
+data class Periode(val startDatum: LocalDate, val eindDatum: LocalDate)
+```
+
 ```java
 public class Contract {
     private Periode periode;
@@ -39,6 +49,8 @@ public class Periode {
 }
 ```
 
+</div>
+
 We wensen aan de `Periode` klasse een methode toe te voegen om te controleren of periodes overlappen, zodat de volgende statement mogelijk is: `periode1.overlaptMet(periode2)`.
 
 #### 1. Schrijf Falende Testen
@@ -46,6 +58,20 @@ We wensen aan de `Periode` klasse een methode toe te voegen om te controleren of
 Voordat de methode wordt opgevuld met een implementatie dienen we na te denken over de mogelijke gevallen van een periode. Wat kan overlappen met wat? Wanneer geeft de methode `true` terug, en wanneer `false`? Wat met lege waardes? 
 
 - Het standaard geval: beide periodes hebben start- en einddatum ingevuld, en de periodes overlappen. 
+
+<div class="devselect">
+
+```kt
+@Test
+fun overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue() {
+    val jandec19 = Periode(LocalDate.of(2019, 1, 1),
+        LocalDate.of(2019, 12, 31))
+    val maartnov19 = Periode(LocalDate.of(2019, 3, 1),
+        LocalDate.of(2019, 11, 31))
+
+    assertTrue { jandec19.overlaptMet(maartnov19) }
+}
+```
 
 ```java
 @Test
@@ -59,7 +85,23 @@ public void overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue() {
 }
 ```
 
+</div>
+
 - Beide periodes hebben start- en einddatum ingevuld, en periodes overlappen niet. 
+
+<div class="devselect">
+
+```kt
+@Test
+fun overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse() {
+    val jandec19 = Periode(LocalDate.of(2019, 1, 1), 
+        LocalDate.of(2019, 12, 31))
+    val maartnov20 = Periode(LocalDate.of(2020, 3, 1), 
+        LocalDate.of(2020, 11, 31))
+
+    assertFalse { jandec19.overlaptMet(maartnov20) }
+}
+```
 
 ```java
 @Test
@@ -73,9 +115,21 @@ public void overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse() {
 }
 ```
 
+</div>
+
 - ... Er zijn nog tal van mogelijkheden, waarvan voornamelijk de extreme gevallen belangrijk zijn om **de kans op bugs te minimaliseren**. Immers, gebruikers van onze `Periode` klasse kunnen onbewust `null` mee doorgeven, waardoor de methode onverwachte waardes teruggeeft. 
 
 De testen compileren niet, omdat de methode `overlaptMet()` nog niet bestaat. Voordat we overschakelen naar het schrijven van de implementatie willen we eerst de testen zien ROOD kleuren, waarbij wel de bestaande code nog compileert:
+
+<div class="devselect">
+
+```kt
+data class Periode(val startDatum: LocalDate, val eindDatum: LocalDate) {
+    fun overlaptMet(anderePeriode: Periode): Boolean {
+        throw UnsupportedOperationException()
+    }
+}
+```
 
 ```java
 public class Periode {
@@ -87,11 +141,22 @@ public class Periode {
 }
 ```
 
+</div>
+
 De aanwezigheid van het skelet van de methode zorgt er voor dat de testen compileren. De inhoud, die een `UnsupportedOperationException` gooit, dient nog aangevuld te worden in stap 2. Op dit punt falen alle testen (met hopelijk als oorzaak de voorgaande exception).
 
 #### 2. Schrijf Implementatie
 
 Pas nadat er minstens 4 verschillende testen werden voorzien (standaard gevallen, edge cases, null cases, ...), kan aan met een gerust hart aan de implementatie worden gewerkt:
+
+<div class="devselect">
+
+```kt
+fun overlaptMet(ander: Periode): Boolean {
+    return startDatum.isAfter(ander.startDatum) &&
+            eindDatum.isBefore(ander.eindDatum)
+}
+```
 
 ```java
 public boolean overlaptMet(Periode anderePeriode) {
@@ -99,6 +164,8 @@ public boolean overlaptMet(Periode anderePeriode) {
         eindDatum.before(anderePeriode.eindDatum);
 }
 ```
+
+</div>
 
 #### 3. Voer Testen uit
 
@@ -154,6 +221,22 @@ Naast het harnas, die zorgt voor het uitvoeren van testen, hebben we ook een _ve
 
 Assertions zijn er in alle kleuren en gewichten, waarbij in de oefeningen de statische methode `assertThat()` wordt gebruikt, die leeft in ` org.hamcrest.MatcherAssert`. Hamcrest is een plugin library die ons in staat stelt om een _fluent API_ te gebruiken in plaats van moeilijk leesbare assertions:
 
+<div class="devselect">
+
+```kt
+import org.hamcrest.CoreMatchers.`is` as Is
+@Test
+fun testWithDefaultAssertions() {
+    val result = doStuff()
+    AssertEquals(result, 3)    // arg1: expected, arg2: actual
+}
+@Test
+fun testWithHamcrestMatchers() {
+    val result = doStuff()
+    assertThat(result, Is(3))
+}
+```
+
 ```java
 @Test
 public void testWithDefaultAssertions() {
@@ -167,13 +250,33 @@ public void testWithHamcrestMatchers() {
 }
 ```
 
+</div>
+
 Het tweede voorbeeld leest als een vloeiende zin, terwijl de eerste `AssertEquals()` vereist dat als eerste argument de expected value wordt meegegeven - dit is vaak het omgekeerde van wat wij verwachten! 
 
 [HamCrest Matchers API Documentation](http://hamcrest.org/JavaHamcrest/javadoc/)
 
+Merk op dat in Kotlin `is` een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase `Is` met behulp van ` import org.hamcrest.CoreMatchers.``is`` as Is`.
+
 #### Arrange, Act, Assert
 
 De body van een test bestaat typisch uit drie delen:
+
+<div class="devselect">
+
+```kt
+@Test
+fun testMethod() {
+    // 1. Arrange 
+    val instance = ClassToTest(arg1, arg2)
+
+    // 2. Act
+    val result = instance.callStuff()
+
+    // 3. Assert
+    assertThat(result, Is(true))
+}
+```
 
 ```java
 @Test
@@ -188,6 +291,8 @@ public void testMethod() {
     assertThat(result, is(true));
 }
 ```
+
+</div>
 
 1. **Arrange**. Het klaarzetten van data, nodig om te testen, zoals een instantie van een klasse die wordt getest, met nodige parameters/DB waardes/...
 2. **Act**. Het uitvoeren van de methode die wordt getest, en opvangen van het resultaat.
@@ -224,6 +329,22 @@ Typische eigenschappen van integration testen:
 
 Stel dat we een `Service` en een `Repository` klasse hebben gemaakt, waarvan de tweede gegevens wegschrijft naar een database. Als we de eerste klasse willen testen, willen we niet weer een verbinding opstellen, omdat dit te traag is (1), én omdat dit al getest is (2):
 
+<div class="devselect">
+
+```kt
+class Repository() {
+    fun save(c: Customer) {
+        // insert into...
+    }
+}
+class Service(val repository: Repository) {
+    fun updateCustomerWallet(c: Customer, balance: double) {
+        c.balance = balance
+        repository.save(c)
+    }
+}
+```
+
 ```java
 public class Repository {
     public void save(Customer c) {
@@ -240,11 +361,32 @@ public class Service {
 }
 ```
 
+</div>
+
 Hoe testen we de `updateCustomerWallet()` methode, zonder de effectieve implementatie van `save()` te moeten gebruiken? Door middel van _test doubles_.
 
 ![](/img/testdouble.jpg "I'll Be Back.")
 
 Zoals Arnie in zijn films bij gevaarlijke scenes een stuntman lookalike gebruikt, zo gaan wij in onze code een `Repository` lookalike gebruiken, zodat de `Service` dénkt dat hij `save()` aanroept, terwijl dit in werkelijkheid niet zo is. Daarvoor moet de repository een interface zijn. We passen in principe een design pattern toe, waarbij in de service een repository instantie wordt geïnjecteerd:
+
+<div class="devselect">
+
+```kt
+interface Repository {
+    fun save(c: Customer)
+}
+class RepositoryDBImpl : Repository {
+    override fun save(c: Cusomter) {
+        // insert into...
+    }
+}
+class RepositoryForTesting : Repository {
+    override fun save(c: Customer) {
+        // do nothing!
+    }
+}
+class Service(val repository: Repository)
+```
 
 ```java
 public interface Repository {
@@ -269,6 +411,8 @@ public class Service {
     }
 }
 ```
+
+</div>
 
 In de test wordt een instantie van `RepositoryForTesting` in service gebruikt in plaats van de effectieve `RepositoryDBImpl`. De test klasse _gedraagt_ zich als een `Repository`, omdat deze de betreffende interface implementeert. De `Service` klasse weet niet welke implementatie van de interface binnen komt: daar kan bij het integration testing handig gebruk van worden gemaakt.
 
@@ -333,11 +477,21 @@ Er wordt veel Hasseltse [Speculaas](https://en.wikipedia.org/wiki/Speculaas) geb
 precies wat de **beste** Speculaas is. Schrijf een methode die _speculaas_ beoordeelt op basis van de ingrediënten. 
 De methode, in de klasse `Speculaas`, zou er zo uit moeten zien:
 
+<div class="devselect">
+
+```kt
+    fun beoordeel(): Int {
+        // TODO ...
+    }
+```
+
 ```java
     public int beoordeel() {
         // TODO ...
     }
 ```
+
+</div>
 
 De functie geeft een nummer terug - hoe hoger dit nummer, hoe beter de beoordeling en hoe gelukkiger de bakker. Een speculaas kan de volgende ingrediënten bevatten: kruiden, boter, suiker, eieren, melk, honing, bloem, zout. Elke eigenschap is een nummer dat de hoeveelheid in gram uitdrukt.
 
@@ -360,6 +514,18 @@ Fork het startproject via [<i class='fab fa-github'></i> Github Classroom](/extr
 Er is een foutje geslopen in de login module, waardoor Abigail nog steeds kan inloggen, maar Jos plots niet meer. De senior programmeur in ons team heeft de bug geïdentificeerd en beweert dat het in een stukje _oude code_ zit, 
 maar hij heeft geen tijd om dit op te lossen. Nu is het aan jou.
 
+<div class="devselect">
+
+```kt
+import java.util.regex.Pattern;
+import java.util.regex.Pattern.CASE_INSENSITIVE;
+
+fun control(username: String): Boolean {
+    val pattern = Pattern.compile("^(?=[a-z]{2})(?=.{4,26})(?=[^.]*\\.?[^.]*$)(?=[^_]*_?[^_]*$)[\\w.]+$", CASE_INSENSITIVE)
+    return pattern.matcher(username).matches()
+}
+```
+
 ```java
 import java.util.regex.Pattern;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
@@ -370,11 +536,25 @@ public static boolean control(String username) {
 }
 ```
 
+</div>
+
 Deze functie geeft `true` terug als Abigail probeert in te loggen, en `false` als Jos probeert in te loggen. Hoe komt dit? Schrijf éérst een falende test!
 
 #### B. URL Verificatie fouten
 
 Een tweede bug wordt gemeld: URL verificatie features werken plots niet meer. Deze methode faalt steeds, ook al zijn er reeds unit testen voorzien. Het probleem is dat **HTTPS** URLs met een SSL certificaat niet werken. Je onderzocht de URL verificatie code en vond de volgende verdachte regels:
+
+<div class="devselect">
+
+```kt
+import java.util.regex.Pattern;
+import java.util.regex.Pattern.CASE_INSENSITIVE;
+
+fun verifyUrl(url: String): Boolean {
+    val pattern = Pattern.compile("http:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)", CASE_INSENSITIVE)
+    return pattern.matcher(url).matches()
+}
+```
 
 ```java
 import java.util.regex.Pattern;
@@ -385,6 +565,8 @@ public static boolean verifyUrl(String url) {
     return pattern.matcher(url).matches();
 }
 ```
+
+</div>
 
 De code blijkt reeds **unit testen** te hebben, dus schrijf éérst een falende test (in `VerifierTests`).
 
@@ -401,12 +583,23 @@ Dit is een vervolgopgave van de code van **Opgave 1**. Werk verder op dat bestaa
 Een verkoopster werkt in een (goede) speculaasfabriek. De verkoopster wilt graag 2 EUR aanrekenen per speculaas die de fabriek produceert. 
 Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worden aangerekend. 
 
+<div class="devselect">
+
+```kt
+    fun verkoop(): Double {
+        val gebakken = speculaasFabriek.bak()
+        // TODO ...
+    }
+```
+
 ```java
     public double verkoop() {
         var gebakken = speculaasFabriek.bak();
         // TODO ...
     }
 ```
+
+</div>
 
 Je ziet aan bovenstaande code dat de speculaasfabriek instantie wordt gebruikt. We hebben dus eigenlijk **geen controle** op de hoeveelheid speculaas die deze fabriek produceert.
 

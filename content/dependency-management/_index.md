@@ -20,6 +20,15 @@ Het vertrouwen op zo'n library houdt in dat een extern bestand, zoals een `.jar`
 
 Serialisatie met behulp van Gson kan op deze manier:
 
+<div class="devselect">
+
+```kt
+fun main(args: Array<String>) {
+    val gson = Gson()
+    println(gson.toJson(1))
+}
+```
+
 ```java
 public class Main {
     public static void main(String[] args) {
@@ -28,6 +37,9 @@ public class Main {
     }
 }
 ```
+
+
+</div>
 
 Bovenstaande `Main.java` compileren zonder meer geeft de volgende fout:
 
@@ -247,6 +259,17 @@ Neem dit eerst door: [Meer informatie over Gradle](/dependency-management/gradle
 
 Ontwerp een eenvoudige library genaamd '_scorebord_' die scores kan bijhouden voor bordspelletjes. Deze library kan kan gebruikt worden door toekomstige digitale Java bordspellen. In een Scorebord kan je spelers toevoegen door middel van een naam en een score. Er is een mogelijkheid om de huidige score van een speler op te vragen, en de winnende speler. Deze gegevens worden met behulp van Gson in een `JSON` bestand bewaard, zodat bij het heropstarten van een spel de scores behouden blijven. <br/>De API (publieke methodes) van de library ziet er zo uit:
 
+<div class="devselect">
+
+```kt
+data class Speler(val naam: String, val score: Int)
+class Scorebord() {
+    fun voegToe(x: String, huidigeScore: int) { }
+    fun getTotaleScore(x: String): Int { }
+    fun getWinnaar(): String { }
+}
+```
+
 ```java
 public class Speler {
     public String getNaam() { }
@@ -258,6 +281,8 @@ public class Scorebord {
     public String getWinnaar() { }
 }
 ```
+
+</div>
 
 De klasse `Speler` is een intern hulpmiddel om te serialiseren. <br/>
 Extra methodes toevoegen mag altijd. De constructor van het scorebord leest automatisch de score van de vorige keer in, als dat bestand bestaat. Denk bij de implementatie aan een collectie om spelers en hun scores bij te houden. Maak via IntelliJ een nieuw **Gradle - Java project**. Groupid: `be.kuleuven`. Arifactid: `scorebord`. Vergeet niet op 'refresh' te drukken wanneer je een dependency toevoegt (linksboven op onderstaande screenshot):
@@ -276,12 +301,23 @@ Tip: indien de Gralde wrapper een oudere versie aanmaakt (< v6), update met `gra
 
 Maak een nieuw Gradle project aan genaamd '_scorebord-darts_', dat bovenstaand scorebord project als een library gaat gebruiken. Bewaar de jar file lokaal in een 'lib' folder en instrueer Gradle zo dat dit als `flatDir` repository wordt opgenomen ([zie boven](#flatdir)). Het tweede project heeft als Artifactid `scorebord-darts`. De klasse `DartsGame` ziet er zo uit:
 
+<div class="devselect">
+
+```kt
+class DartsGame() {
+    private val player = "jos"
+    fun throwDart() { }
+}
+```
+
 ```java
 public class DartsGame {
     private String player = "jos";
     public void throwDart() {}
 }
 ```
+
+</div>
 
 Als de dependencies goed liggen, kan je een nieuw `Scorebord` aanmaken, en herkent IntelliJ dit met CTRL+Space:
 
