@@ -56,12 +56,24 @@ Pas de testen aan en schrijf testen bij waar nodig. Verander dan pas de implemen
 
 Nu de `encrypt()` methode correct werd geïmplementeerd, kunnen we ons bezig houden met de manier waarop het programma boodschappen in- en uitleest. Een systeem dat ook wordt gebruikt bij de [Vlaamse Programmeerwedstrijd](https://www.vlaamseprogrammeerwedstrijd.be/), is het inlezen via de standard input `stdin` en uitlezen via standard output `stdout`.  Je kan hiervoor het volgende gebruiken:
 
+<div class="devselect">
+
+```kt
+  fun main(args: Array<String>) {
+      val sc = Scanner(System.in)
+      // ...
+      println("output")
+  }
+```
+
 ```java
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         // ...
         System.out.println("output");
 ```
+
+</div>
 
 Lees in de [Scanner Javadoc](https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html) hoe je de volgende regels van `stdin` inleest. 
 

@@ -27,19 +27,43 @@ Begeleidende screencast[^host]:
 
 Stel dat we gegevens van de klant moeten versturen naar een overheidsinstantie. Die instantie beschikt jammer genoeg niet over voldoende budgetten om ook een cutting-edge server interface en implementatie aan te bieden. Het komt er op neer dat we verplicht zijn om tekst bestanden op een FTP server te plaatsen. 
 
-```java
+<div class="devselect">
+
+```kt
 class ClientFtpSender {
+    fun upload(client: Client) {
+        // create ftp connection, upload, ...
+    }
+}
+```
+
+```java
+public class ClientFtpSender {
     public void upload(Client client) {
         // create ftp connection, upload, ...
     }
 }
 ```
 
+</div>
+
 Deze code gebruiken we als de gebruiker op een knop genaamd `export`
  klikt:
 
+<div class="devselect">
+
+```kt
+class ClientHTTPHandler(val clientRepository: ClientRepository) {
+    fun onExport(clientId: Int): HTTPResponse {
+        val client = clientRepository.getById(clientId)
+        ClientFtpSender().upload(client)
+        return HTTPResponse.success()  // 200 OK
+    }
+}
+```
+
 ```java
-class ClientHTTPHandler {
+public class ClientHTTPHandler {
     private ClientRepository clientRepository;
     public HTTPResponse onExport(int clientId) {
         Client client = clientRepository.getById(clientId);
@@ -48,6 +72,8 @@ class ClientHTTPHandler {
     }
 }
 ```
+
+</div>
 
 {{<mermaid>}}
 graph LR;
@@ -60,14 +86,25 @@ graph LR;
 
 We verkopen onze software aan een andere partij, die niet alleen met de overheid wenst te communiceren, maar ook met een derde instantie. Deze instantie biedt ons de mogelijkheid aan om de klant in de vorm van XML met een `POST` HTTPS call op te sturen. Onze `ClientFTPSender` is dus niet meer genoeg:
 
-```java
+<div class="devselect">
 
+```kt
 class ClientPOSTSender {
+    fun upload(client: Client) {
+        // secure HTTPS, encode client in XML, post...
+    }
+}
+```
+
+```java
+public class ClientPOSTSender {
     public void upload(Client client) {
         // secure HTTPS, encode client in XML, post...
     }
 }
 ```
+
+</div>
 
 Deze complexe stukjes software, de `POST` en `FTP` senders, willen we niet langer rechtstreeks aanspreken in de HTTP handler. Het is zo dat afhankelijk van een bepaalde instelling, het ene of het andere gebruikt kan worden. 
 
@@ -90,8 +127,24 @@ graph LR;
 
 Waarbij de Facade een klasse is die de details "wegstopt" voor onze HTTP handler:
 
-```java
+<div class="devselect">
+
+```kt
 class UploadClientFacade {
+    fun upload(client: Client) {
+        if(settings.isPOST()) {
+            ClientPOSTSender().upload(client)
+        } else if(settings.isFTP()) {
+            ClientFtpSender().upload(client)
+        } else {
+            throw UnsupportedOperationException("settings?")
+        }
+    }
+}
+```
+
+```java
+public class UploadClientFacade {
     public void upload(Client client) {
         if(settings.isPOST()) {
             new ClientPOSTSender().upload(client);
@@ -103,6 +156,7 @@ class UploadClientFacade {
     }
 }
 ```
+</div>
 
 ### Eigenschappen van dit patroon
 

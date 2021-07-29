@@ -15,6 +15,14 @@ Een _pattern_ is een herkenbaar en herhalende blok van eigenschappen die herbrui
 
 Een _constructor_ is een begrip in Java dat ook geclassificeerd kan worden als patroon, omdat het constant terugkomt bij de creatie van objecten en een hulpmiddel is dat een bepaalt probleem helpt oplossen: het voert stukjes code uit bij het aanmaken van een object.
 
+<div class="devselect">
+
+```kt
+class Appel {
+    val kcal = 160
+}
+```
+
 ```java
 public class Appel {
     private int kcal;
@@ -24,6 +32,8 @@ public class Appel {
     }
 }
 ```
+
+</div>
 
 Een nieuwe appel aanmaken, `Appel jonagold = new Appel();` stelt `kcal` automatisch gelijk aan `160`. Dit is uiteraard een ingebouwd principe dat deel uitmaakt van de programmeertaal zelf. Dit concept kunnen we verder doortrekken door patronen van oplossingen te maken die het ons makkelijker maakt om toekomstige gelijkaardige problemen aan te pakken. 
 

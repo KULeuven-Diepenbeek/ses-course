@@ -25,13 +25,32 @@ Begeleidende screencast[^host]:
 
 Stel dat we in een fabriek op plaats X een auto samenstellen. De wagen is een zeer eenvoudige Volkswagen Golf, zonder opties. Op een andere locatie, plaats Y, hebben wij als bedrijf ook fabrieken die sportauto's bouwen (Volkswagen Scirocco) en op plaats Z luxe wagens (Volkswagen Passat). 
 
+<div class="devselect">
+
+```kt
+interface Car {
+    fun assemble() // build stuff
+}
+```
+
 ```java
 public interface Car {
     public void assemble(); // build stuff
 }
 ```
+</div>
 
 Fabriek X:
+
+<div class="devselect">
+
+```kt
+class VWGolf : Car {
+    override fun assemble() {
+        println("do not forget the steering wheel!")
+    }
+}
+```
 
 ```java
 public class VWGolf implements Car {
@@ -41,8 +60,19 @@ public class VWGolf implements Car {
     }
 }
 ```
+</div>
 
 Fabriek Y:
+
+<div class="devselect">
+
+```kt
+class VWScirocco : Car {
+    override fun assemble() {
+        println("do not forget lots of turbo!")
+    }
+}
+```
 
 ```java
 public class VWScirocco implements Car {
@@ -52,8 +82,19 @@ public class VWScirocco implements Car {
     }
 }
 ```
+</div>
 
 Fabriek Z:
+
+<div class="devselect">
+
+```kt
+class VWPassat : Car {
+    override fun assemble() {
+        println("do not forget all the leather!")
+    }
+}
+```
 
 ```java
 public class VWPassat implements Car {
@@ -63,6 +104,7 @@ public class VWPassat implements Car {
     }
 }
 ```
+</div>
 
 {{<mermaid>}}
 graph TD;
@@ -99,6 +141,24 @@ graph TD;
 
 Deze custom oplossing is nog steeds een implementatie van de interface `Car`:
 
+<div class="devselect">
+
+```kt
+class CustomCarDecorator : Car {
+    val carsToAssemble: List<Car>
+
+    constructor(vararg carTypes: Car) {
+        carsToAssemble = carTypes.toList()
+    }
+
+    override fun assemble() {
+        for(car in carsToAssemble) {
+            car.assemble()
+        }
+    }
+}
+```
+
 ```java
 public class CustomCarDecorator implements Car {
     private final List<Car> carsToAssemble;
@@ -115,8 +175,25 @@ public class CustomCarDecorator implements Car {
     }
 }
 ```
+</div>
 
 Op deze manier kunnen we zoveel auto types als de klant wenst doorgeven aan de `CustomCarDecorator` instantie, die netjes in de bestaande fabriek logica past, gegeven de volgende fabriek klasse:
+
+<div class="devselect">
+
+```kt
+class Factory {
+    fun create(car: Car): Car {
+        car.assemble()  // works, since it's an interface
+        paint(car)
+        return car
+    }
+
+    private fun paint(car: Car) {
+        println("painting...")
+    }
+}
+```
 
 ```java
 public class Factory {
@@ -131,6 +208,7 @@ public class Factory {
     }
 }
 ```
+</div>
 
 Dit werkt enkel en alleen omdat we met een **interface** werken! 
 

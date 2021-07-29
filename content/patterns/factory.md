@@ -39,6 +39,12 @@ graph TD;
 
 Waarbij een persoon een bepaalde leeftijd heeft:
 
+<div class="devselect">
+
+```kt
+data class Person(val age: int)
+```
+
 ```java
 public class Person {
     private final int age;
@@ -52,8 +58,19 @@ public class Person {
     }
 }
 ```
+</div>
 
 En de ticket verkoper een ticket verkoopt aan een persoon:
+
+<div class="devselect">
+
+```kt
+class TicketSeller {
+    fun buyTicketFor(person: Person): Ticket? {
+        return null
+    }
+}
+```
 
 ```java
 public class TicketSeller {
@@ -63,6 +80,7 @@ public class TicketSeller {
     }
 }
 ```
+</div>
 
 #### 2. Probleemstelling
 

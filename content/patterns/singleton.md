@@ -25,14 +25,31 @@ Begeleidende screencast[^host]:
 
 Een klassiek voorbeeld van een Singleton patroon is een database connectie, omdat het beheren van diezelfde connecties door diezelfde klasse gebeurt. Stel dat we een website hebben gemaakt met een winkelwagentje. 
 
+<div class="devselect">
+
+```kt
+data class ShoppingCart(val amountOfItems: int, val totalMoney: int)
+```
+
 ```java
 public class ShoppingCart {
     private int amountOfItems; // and getters/setters
-    private int totalMOney;    // ...
+    private int totalMoney;    // ...
 }
 ```
+</div>
 
 En de DB accessor:
+
+<div class="devselect">
+
+```kt
+class DBHandle {
+    fun getShoppingCart(): ShoppingCart {
+        // SELECT * FROM ...
+    }
+}
+```
 
 ```java
 public class DBHandle {
@@ -41,8 +58,21 @@ public class DBHandle {
     }
 }
 ```
+</div>
 
 Met als REST endpoint:
+
+<div class="devselect">
+
+```kt
+@Path("/shoppingcart")
+class ShoppingResource {
+    @GET
+    fun getCart(): ShoppingCart {
+        return DBHandle().getShoppingCart()    // oops!
+    }
+}
+```
 
 ```java
 @Path("/shoppingcart")
@@ -53,6 +83,7 @@ public class ShoppingResource {
     }
 }
 ```
+</div>
 
 #### 2. Probleemstelling
 
@@ -76,6 +107,18 @@ De `getCart()` methode mag dus in geen geval telkens een nieuwe `DBHandle` aanma
 
 We hebben in dit geval een _singleton_ instance nodig:
 
+<div class="devselect">
+
+```kt
+@Path("/shoppingcart")
+class ShoppingResource {
+    @GET
+    fun getCart(): ShoppingCart {
+        return DBHandle.getInstance().getShoppingCart()
+    }
+}
+```
+
 ```java
 @Path("/shoppingcart")
 public class ShoppingResource {
@@ -85,8 +128,19 @@ public class ShoppingResource {
     }
 }
 ```
+</div>
 
 Waarbij de klasse `DBHandle` wordt uitgebreid tot:
+
+<div class="devselect">
+
+```kt
+object DBHandle {
+    fun getShoppingCart(): ShoppingCart {
+        // SELECT * FROM ...
+    }
+}
+```
 
 ```java
 public class DBHandle {
@@ -107,6 +161,12 @@ public class DBHandle {
     }
 }
 ```
+</div>
+
+{{% notice warning %}}
+Merk op dat [Kotlin ingebouwde features heeft voor singleton](https://blog.mindorks.com/how-to-create-a-singleton-class-in-kotlin): namelijk het `object` keyword dat `class` vervangt in bovenstaande code. Dit is véél meer werk in Java. De "Java way" moet ook gekend zijn!<br/>Bijkomend, Kotlin heeft geen `static` keyword. 
+{{% /notice %}}
+
 
 {{<mermaid>}}
 graph TD;
@@ -149,5 +209,5 @@ Pas ook `ShoppingCartResource` aan naar een singleton. Is dat nodig om de databa
 
 ## Denkvragen
 
-* Dit patroon klinkt aanlokkelijk: eenvoudig, lost problemen op, dus waarom niet overal toepassen. Denk eens na over de verantwoordelijkheden van objecten. Waarom zou je zo veel mogelijk moeten **vermijden** om dit patroon toe te passen? Wie mag wel `DBHandle.getInstance()` aanroepen, en wie niet? 
+* Dit patroon klinkt aanlokkelijk: eenvoudig, lost problemen op, dus waarom niet overal toepassen. Denk eens na over de verantwoordelijkheden van objecten. Waarom zou je zo veel mogelijk moeten **vermijden** om dit patroon toe te passen? Wie mag wel `DBHandle.getInstance()` (of in geval van Kotlin, de functies zelf) aanroepen, en wie niet? 
 * Wat gebeurt er als 10 mensen tegelijkertijd de eerste keer de `getInstance()` methode aanroepen? Hoe kunnen we dit oplossen? 

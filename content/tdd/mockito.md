@@ -22,13 +22,35 @@ Zoals aangehaald in de [TDD noties](/tdd) kan een eigen implementatie van een in
 
 Stel, Arnold gaat acteren voor de nieuwe film **Die Hard: In A Deepen Beek** (uit in 2025 - Bruce had geen zin meer). Hij moet daarvoor een aantal fantastische stunts uithalen, die hij niet graag zelf zou doen. De volgende interface definieert een 'Arnold', waarbij `doBackFlip()` de gevaarlijke stunt is (resultaat is `true` indien geslaagd):
 
+<div class="devselect">
+
+```kt
+interface IllBeBack {
+    fun doBackFlip(): Boolean
+}
+```
+
 ```java
 public interface IllBeBack {
     boolean doBackFlip();
 }
 ```
 
+</div>
+
 De casting crew en de director verwachten dat tijdens een opname 3x een backflip succesvol wordt uitgevoerd. Indien deze niet lukt, wordt de take opnieuw genomen. Dit manifesteert zich in code in de vorm van een `RuntimeException`. De One And Only Arnold had op dat moment een crisisvergadering in Californië en kon niet aanwezig zijn op de set. Gelukkig zijn er lookalikes en stuntmannen genoeg:
+
+<div class="devselect">
+
+```kt
+class arnieLookalike : IllBeBack {
+    override fun doBackFlip(): Boolean = false
+}
+
+class StuntmanArnie : IllBeBack {
+    override fun doBackFlip(): Boolean = true
+}
+```
 
 ```java
 public class ArnieLookalike implements IllBeBack {
@@ -46,7 +68,27 @@ public class StuntmanArnie implements IllBeBack {
 }
 ```
 
+</div>
+
 Enkel `StuntmanArnie` is fysiek krachtig genoeg om consistent de backflip uit te voeren. De lookalike ziet er uit zoals Arnold, maar bakt jammer genoeg van de scene niet zo veel. Hieronder een blueprint van de opname code:
+
+<div class="devselect">
+
+```kt
+class DieHardInADeepenBeek() {
+    var arnoldActor: IllBeBack
+
+    fun recordActOne() {
+        var succeeded = true
+        for(i in 1..3) {
+            succeeded &= arnoldActor.doBackFlip()
+        }
+
+        if(!succeeded)
+            throw RuntimeException("do that again, please...")
+    }
+}
+```
 
 ```java
 public class DieHardInADeepenBeek {
@@ -69,7 +111,37 @@ public class DieHardInADeepenBeek {
 }
 ```
 
+</div>
+
 De hamvraag is nu: hoe testen we de **logica in `recordActOne`**? Daarvoor zal de backflip soms moeten lukken, en soms ook niet. We hebben dus zowel een `ArnieLookalike` als `StuntmanArnie` implementatie nodig:
+
+<div class="devselect">
+
+```kt
+class DieHardInADeepenBeekTests {
+    @Test
+    fun recordActOne_backflipFails_haveToRedoTheWholeThing() {
+        // 1. Arrange
+        val movie = DieHardInADeepenBeek()
+        val actor = ArnieLookalike()
+        movie.arnoldActor = actor
+
+        // 2/3 act/assert in one
+        assertThrows<RuntimeException>> { movie.recordActOne() }
+    }
+
+    @Test
+    fun recordActOne_backflipSucceeds_ok() {
+        // 1. Arrange
+        val movie = DieHardInADeepenBeek()
+        val actor = StuntmanArnie()
+        movie.arnoldActor = actor
+
+        // 2/3 act/assert in one
+        assertDoesNotThrow { movie.recordActOne() }
+    }
+}
+```
 
 ```java
 public class DieHardInADeepenBeekTests {
@@ -94,15 +166,46 @@ public class DieHardInADeepenBeekTests {
 
         // 2. act
         movie.recordActOne();
-        // 3. assert
-        assertTrue(true);
+        // 3. assert (not needed, doesn't crash)
+        // assertTrue(true);
     }
 }
 ```
 
+</div>
+
 ### Een interface 'mocken': the easy way
 
 In plaats van de `ArnieLookalike` en `StuntmanArnie` klasses zelf te maken, kunnen we hier Mockito het zware werk laten doen door gebruik te maken van de `mock()` methode. De testen worden dan lichtjes anders, omdat we daarin het gedrag van de mock eerst moeten bepalen voordat we naar de act en assert stappen kunnen gaan:
+
+<div class="devselect">
+
+```kt
+class DieHardInADeepenBeekTests {
+    @Test
+    fun recordActOne_backflipFails_haveToRedoTheWholeThing() {
+        // 1. Arrange
+        val movie = new DieHardInADeepenBeek()
+        val actor = mock(IllBeBack::class.java)
+        when(actor.doBackFlip()).thenReturn(false)
+        movie.arnoldActor = actor
+
+        // 2/3 act/assert in one
+        assertThrows<RuntimeException>> { movie.recordActOne() }
+    }
+
+    @Test
+    public void recordActOne_backflipSucceeds_ok() {
+        // 1. Arrange
+        val movie = DieHardInADeepenBeek()
+        val actor = mock(IllBeBack::class.java)
+        movie.arnoldActor = actor
+
+        // 2/3 act/assert in one
+        assertDoesNotThrow { movie.recordActOne() }
+    }
+}
+```
 
 ```java
 public class DieHardInADeepenBeekTests {
@@ -129,11 +232,13 @@ public class DieHardInADeepenBeekTests {
 
         // 2. act
         movie.recordActOne();
-        // 3. assert
-        assertTrue(true);
+        // 3. assert (not needed, doesn't throw)
+        // assertTrue(true);
     }
 }
 ```
+
+</div>
 
 Het geheim zit hem in de `mock()` en `when()` methodes, waarmee we het gedrag van de mock implementatie kunnen aansturen. Dit werd vroeger manueel geïmplementeerd, maar die klasses zijn nu niet meer nodig. 
 
