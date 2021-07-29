@@ -256,7 +256,9 @@ Het tweede voorbeeld leest als een vloeiende zin, terwijl de eerste `AssertEqual
 
 [HamCrest Matchers API Documentation](http://hamcrest.org/JavaHamcrest/javadoc/)
 
-Merk op dat in Kotlin `is` een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase `Is` met behulp van ` import org.hamcrest.CoreMatchers.``is`` as Is`.
+{{% notice note %}}
+Merk op dat in Kotlin `is` een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase `Is` met behulp van ` import org.hamcrest.CoreMatchers.`\`is\`` as Is` (enkele backtick).
+{{% /notice %}}
 
 #### Arrange, Act, Assert
 
