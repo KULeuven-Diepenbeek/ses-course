@@ -12,20 +12,20 @@
     <title>2. Dependency Management :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1627372899" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1627372899" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1627372899" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1627372899" rel="stylesheet">
-    <link href="../css/auto-complete.css?1627372899" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1627372899" rel="stylesheet">
-    <link href="../css/theme.css?1627372899" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1627372899" rel="stylesheet">
+    <link href="../css/nucleus.css?1627549930" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1627549930" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1627549930" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1627549930" rel="stylesheet">
+    <link href="../css/auto-complete.css?1627549930" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1627549930" rel="stylesheet">
+    <link href="../css/theme.css?1627549930" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1627549930" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1627372899" rel="stylesheet">
+    <link href="../css/theme-kul.css?1627549930" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1627372899"></script>
+    <script src="../js/jquery-3.3.1.min.js?1627549930"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -58,7 +58,8 @@ window.MathJax = {
 };
 </script>
 
-<script src=../js/osc.js></script>
+<script src=../js/devselector.js></script>
+<link href="../css/devselector.css" rel="stylesheet">
   </head>
   <body class="" data-url="../dependency-management/">
     <nav id="sidebar" class="">
@@ -81,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1627372899"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1627372899"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1627549930"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1627549930"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1627372899"></script>
+<script type="text/javascript" src="../js/search.js?1627549930"></script>
 
     
   </div>
@@ -801,13 +802,19 @@ Wat is de beste manier om afhankelijkheden te beheren?</p>
 </ol>
 <p>Het vertrouwen op zo&rsquo;n library houdt in dat een extern bestand, zoals een <code>.jar</code> of <code>.war</code> bestand, download en koppelt wordt aan de applicatie. In Java koppelen we externe libraries door middel van het <code>CLASSPATH</code>: een folder die de compiler gebruikt om te zoeken naar klassen.</p>
 <p>Serialisatie met behulp van Gson kan op deze manier:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Main</span> <span style="color:#f92672">{</span>
+<div class="devselect">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">fun</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#111">args</span><span style="color:#111">:</span> <span style="color:#111">Array</span><span style="color:#111">&lt;</span><span style="color:#111">String</span><span style="color:#111">&gt;)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">val</span> <span style="color:#111">gson</span> <span style="color:#111">=</span> <span style="color:#111">Gson</span><span style="color:#111">()</span>
+    <span style="color:#111">println</span><span style="color:#111">(</span><span style="color:#111">gson</span><span style="color:#111">.</span><span style="color:#111">toJson</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">))</span>
+<span style="color:#111">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Main</span> <span style="color:#f92672">{</span>
     <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#f92672">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#111">Gson</span> <span style="color:#111">gson</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Gson</span><span style="color:#f92672">();</span>
         <span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#111">gson</span><span style="color:#f92672">.</span><span style="color:#75af00">toJson</span><span style="color:#f92672">(</span><span style="color:#111">1</span><span style="color:#f92672">));</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p>Bovenstaande <code>Main.java</code> compileren zonder meer geeft de volgende fout:</p>
+</code></pre></div></div>
+<p>Bovenstaande <code>Main.java</code> compileren zonder meer geeft de volgende fout:</p>
 <pre>
 Wouters-MacBook-Air:java wgroeneveld$ javac Main.java
 Main.java:3: error: cannot find symbol
@@ -822,7 +829,7 @@ Main.java:3: error: cannot find symbol
 </div>
 
 <p>Dit programma kan schematisch worden voorgesteld als volgt:</p>
-<script defer src="../mermaid/mermaid.min.js">
+<script defer src="../mermaid/mermaid.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -921,7 +928,7 @@ repositories {
 </pre>
 <h4 id="transitieve-dependencies">Transitieve dependencies</h4>
 <p>Er zijn twee types van dependencies: <strong>directe</strong> (1) en <strong>transitieve</strong> (2). Een directe dependency is een afhankelijkheid die het project nodig heeft, zoals het gebruik van Gson, waarbij dit in de <code>dependencies {}</code> config zit. Een <em>transitieve</em> of indirecte dependency is een dependency van een dependency. In de oefening hieronder maken we een project (1) aan, dat een project (2) gebruikt, dat Gson gebruikt. In project 1 is project 2 een directe dependency, en Gson een transitieve. In Project 2 is Gson een directe dependency (en komt project 1 niet voor):</p>
-<script defer src="../mermaid/mermaid.min.js">
+<script defer src="../mermaid/mermaid.js">
 	mermaid.initialize({
 		startOnLoad: true,
 		flowchart: {
@@ -1003,7 +1010,14 @@ repositories {
 <p>Neem dit eerst door: <a href="../dependency-management/gradle/">Meer informatie over Gradle</a>.</p>
 <h3 id="opgave-1">Opgave 1</h3>
 <p>Ontwerp een eenvoudige library genaamd &lsquo;<em>scorebord</em>&rsquo; die scores kan bijhouden voor bordspelletjes. Deze library kan kan gebruikt worden door toekomstige digitale Java bordspellen. In een Scorebord kan je spelers toevoegen door middel van een naam en een score. Er is een mogelijkheid om de huidige score van een speler op te vragen, en de winnende speler. Deze gegevens worden met behulp van Gson in een <code>JSON</code> bestand bewaard, zodat bij het heropstarten van een spel de scores behouden blijven. <br/>De API (publieke methodes) van de library ziet er zo uit:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Speler</span> <span style="color:#f92672">{</span>
+<div class="devselect">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">data</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Speler</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">naam</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">,</span> <span style="color:#00a8c8">val</span> <span style="color:#111">score</span><span style="color:#111">:</span> <span style="color:#111">Int</span><span style="color:#111">)</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Scorebord</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">voegToe</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">,</span> <span style="color:#111">huidigeScore</span><span style="color:#111">:</span> <span style="color:#111">int</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getTotaleScore</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">):</span> <span style="color:#111">Int</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getWinnaar</span><span style="color:#111">():</span> <span style="color:#111">String</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Speler</span> <span style="color:#f92672">{</span>
     <span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">getNaam</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
     <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">getScore</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
@@ -1012,7 +1026,8 @@ repositories {
     <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">getTotaleScore</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">x</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
     <span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">getWinnaar</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p>De klasse <code>Speler</code> is een intern hulpmiddel om te serialiseren. <br/>
+</code></pre></div></div>
+<p>De klasse <code>Speler</code> is een intern hulpmiddel om te serialiseren. <br/>
 Extra methodes toevoegen mag altijd. De constructor van het scorebord leest automatisch de score van de vorige keer in, als dat bestand bestaat. Denk bij de implementatie aan een collectie om spelers en hun scores bij te houden. Maak via IntelliJ een nieuw <strong>Gradle - Java project</strong>. Groupid: <code>be.kuleuven</code>. Arifactid: <code>scorebord</code>. Vergeet niet op &lsquo;refresh&rsquo; te drukken wanneer je een dependency toevoegt (linksboven op onderstaande screenshot):</p>
 <p><figure>
 	<a href="../img/teaching/ses/gradle-refresh.png" data-featherlight="image">
@@ -1029,11 +1044,17 @@ Extra methodes toevoegen mag altijd. De constructor van het scorebord leest auto
 <p>Tip: indien de Gralde wrapper een oudere versie aanmaakt (&lt; v6), update met <code>gradlew wrapper --gradle-version 6.0.1</code>. Gradle versie <code>6</code> of groter is vereist voor JDK <code>13</code> of groter.</p>
 <h3 id="opgave-2">Opgave 2</h3>
 <p>Maak een nieuw Gradle project aan genaamd &lsquo;<em>scorebord-darts</em>&rsquo;, dat bovenstaand scorebord project als een library gaat gebruiken. Bewaar de jar file lokaal in een &lsquo;lib&rsquo; folder en instrueer Gradle zo dat dit als <code>flatDir</code> repository wordt opgenomen (<a href="#flatdir">zie boven</a>). Het tweede project heeft als Artifactid <code>scorebord-darts</code>. De klasse <code>DartsGame</code> ziet er zo uit:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DartsGame</span> <span style="color:#f92672">{</span>
+<div class="devselect">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DartsGame</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#00a8c8">val</span> <span style="color:#111">player</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;jos&#34;</span>
+    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">throwDart</span><span style="color:#111">()</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DartsGame</span> <span style="color:#f92672">{</span>
     <span style="color:#00a8c8">private</span> <span style="color:#111">String</span> <span style="color:#111">player</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;jos&#34;</span><span style="color:#f92672">;</span>
     <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">throwDart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p>Als de dependencies goed liggen, kan je een nieuw <code>Scorebord</code> aanmaken, en herkent IntelliJ dit met CTRL+Space:</p>
+</code></pre></div></div>
+<p>Als de dependencies goed liggen, kan je een nieuw <code>Scorebord</code> aanmaken, en herkent IntelliJ dit met CTRL+Space:</p>
 <p><figure>
 	<a href="../img/teaching/ses/gradle-dependency-used.png" data-featherlight="image">
 		<img src="../img/teaching/ses/gradle-dependency-used.png"  >
@@ -1523,17 +1544,17 @@ Execution failed for task ':Main.main()'.
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1627372899"></script>
-    <script src="../js/perfect-scrollbar.min.js?1627372899"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1627372899"></script>
-    <script src="../js/jquery.sticky.js?1627372899"></script>
-    <script src="../js/featherlight.min.js?1627372899"></script>
-    <script src="../js/modernizr.custom-3.6.0.js?1627372899"></script>
-    <script src="../js/learn.js?1627372899"></script>
-    <script src="../js/hugo-learn.js?1627372899"></script>
+    <script src="../js/clipboard.min.js?1627549930"></script>
+    <script src="../js/perfect-scrollbar.min.js?1627549930"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1627549930"></script>
+    <script src="../js/jquery.sticky.js?1627549930"></script>
+    <script src="../js/featherlight.min.js?1627549930"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1627549930"></script>
+    <script src="../js/learn.js?1627549930"></script>
+    <script src="../js/hugo-learn.js?1627549930"></script>
     
         
-            <script src="../mermaid/mermaid.js?1627372899"></script>
+            <script src="../mermaid/mermaid.js?1627549930"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
