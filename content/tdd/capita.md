@@ -140,6 +140,11 @@ Het programma oproepen, ook vanuit de root, kan je met `java -cp build/ package.
 
 Gebruik je geen speciale packages (aangeduid in het begin van de java file met `package blabla;`), dan kan je in dezelfde folder als je source compileren en als classpath de huidige folder, `.` of `./`, meegeven. Voor simpele programma's, zoals deze oefeningen, kan dit volstaan. 
 
+{{% notice note %}}
+Voor Kotlin geldt exact hetzelfde, alleen wordt `javac` vervangen door `kotlinc`. Vergeet nooit `-include-runtime` mee te geven: zie [Kotlin docs: command-line compiler](https://kotlinlang.org/docs/command-line.html).
+{{% /notice %}}
+
+
 ### Opgave 2
 
 Kristien is een modebewuste vrouw die graag - en regelmatig - nieuwe schoenen koopt. Het probleem is van praktische aard: de schoenenkast geraakt te vol. Ze heeft de opdracht gegeven aan haar man om nieuwe schoenenkasten te bouwen met de juiste afmetingen. Op die manier is ze ervan overtuigd dat er nog wel een paar of twee aangeschaft kan worden (waar ze waarschijnlijk gelijk in heeft). 

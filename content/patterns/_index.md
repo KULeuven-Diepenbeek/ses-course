@@ -99,3 +99,7 @@ graph LR;
 {{< /mermaid >}}
 
 Nadenken over **het ontwerp** voordat je jezelf overgeeft aan het schrijven van code is een belangrijke stap, zoals we gezien hebben in het vak 'Software ontwerp in Java'. Tijdens het ontwerpen, of nadenken over de oplossing, houden ervaren ontwikkelaars ook al rekening met de welgende patronen. Het is dus belangrijk om te weten dat het gebruiken van patronen zich niet beperkt tot de code schrijven stap. 
+
+{{% notice warning %}}
+Vanaf nu veronderstellen we dat jullie weten hoe een nieuw **Kotlin-specifiek** project aan te maken voor wie de design patterns oefeningen in Kotlin wenst op te lossen. De repositories op GitHub bevatten vanaf hier enkel nog Java code. Zie de [TDD Exercises GitHub repositories](https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-1-template) voor Kotlin templates. 
+{{% /notice %}}

@@ -13,7 +13,9 @@ Laatste aanpassingen voor academiejaar _2020 - 2021_.
 #### Software Development: Pre-Requirements
 
 1. [Versie- en issuebeheer](/versiebeheer)
-2. [Dependency Management](/dependency-management) & de [Gradle Build Tool](/dependency-management/gradle/)
+2. [Dependency Management](/dependency-management):
+    -  De [Gradle Build Tool](/dependency-management/gradle/)
+    -  [Kotlin-specifics](/dependency-management/kotlin-gradle))
 3. [Test-Driven Development](/tdd): Unit-, Integration- (1) en E2E (2) niveau
 4. [TDD In de praktijk: Mockito](/tdd/mockito)
 
