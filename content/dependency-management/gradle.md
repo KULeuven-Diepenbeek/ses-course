@@ -37,8 +37,13 @@ repositories {
 }
 
 dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testImplementation group: 'org.hamcrest', name: 'hamcrest-library', version: '2.2'
+}
+
+test {
+    useJUnitPlatform()
 }
 </pre>
 
@@ -47,7 +52,8 @@ Hier onderscheiden we de volgende zaken:
 1. Het project is een java 10 project (er zijn ook nog andere talen op de JVM)
 2. Het project komt van `be.kuleuven.ses`, versie `1.0-SNAPSHOT`.
 3. Dependencies downloaden via de [standaard maven central](https://mvnrepository.com/repos/central) (ingebouwde URL).
-    - Hiervan moet Gradle `junit-jupiter-api 5.5.2` downloaden voor de testen
+    - Hiervan moet Gradle `junit-jupiter-api 5.6.0` downloaden voor de testen
+    - Hiervan moet Gradle `junit-jupiter-engine` (zelfde versie) gebruiken om testen te runnen
     - Hiervan moet Gradle `hamcrest-library 2.2` downloaden voor de testen
 
 Dependencies vallen (meestal) in twee categorieën:
@@ -198,18 +204,17 @@ test {
 
 dependencies {
     // for WRITING tests, this will suffice:
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     // for RUNNING tests (cmdline, without IntelliJ), this is also needed:
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 </pre>
 
 Optionele test libraries zoals Hamcrest en Selenium/WebDriver kunnen daarna ook worden toegevoegd onder de `testImplementation` groep.
 
 {{% notice note %}}
-Merk op dat recente versies van IntelliJ, die Gradle 6.7 gebruiken, de jupiter engine categoriseren onder `testRuntimeOnly`. 
+Merk op dat dit betekent dat dependencies in de `testRuntimeOnly` groep eigenlijk _runtime dependencies_ zijn: deze worden niet gebruikt om mee te builden. Denk aan het verschil tussen statisch en dynamisch linken in C. 
 {{% /notice %}}
-
 
 
 ### Welke Task moet ik uitvoeren?

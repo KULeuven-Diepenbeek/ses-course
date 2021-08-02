@@ -111,5 +111,5 @@ Als een vuistregel is het een goed idee om in testnamen het volgende te verwerke
 - De condities van de test
 - Het effect
 
-Bijvoorbeeld: `encrypt_withEmptyString_returnsEmptyString`, of `encrypt_withSpaces_ignoresSpecialChars`, en niet `encryptTest1` of `encryptDoesStuff`. Test methodes mogen lang zijn: zolang opnieuw **leesbaarheid** primeert is alles oké, inclusief snake casing (gebruik maken van `_`) of camel casing. 
+Bijvoorbeeld: `encrypt_withEmptyString_returnsEmptyString`, of `encrypt_withSpaces_ignoresSpecialChars`, en niet `encryptTest1` of `encryptDoesStuff`. Test methodes mogen lang zijn: zolang opnieuw **leesbaarheid** primeert is alles oké, inclusief snake casing (gebruik maken van `_`) of camelCasing. Vergeet niet dat in Kotlin een hele zin mag. Schrijf bijvoorbeeld test `fun`s in de stijl van `Given blah When this Then that`. Zie het [unit testen hoofdstuk](/tdd/). 
 

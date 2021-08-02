@@ -63,7 +63,7 @@ Voordat de methode wordt opgevuld met een implementatie dienen we na te denken o
 
 ```kt
 @Test
-fun overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue() {
+fun `Gegeven biede periodes met datum ingevuld Wanneer overlaptMet Dan is true`() {
     val jandec19 = Periode(LocalDate.of(2019, 1, 1),
         LocalDate.of(2019, 12, 31))
     val maartnov19 = Periode(LocalDate.of(2019, 3, 1),
@@ -75,7 +75,7 @@ fun overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue() {
 
 ```java
 @Test
-public void overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue() {
+public void GegevenBeidePeriodesDatumIngevuld_Wanneeroverlapt_DanIsTrue() {
     var jandec19 = new Periode(new Date(2019, 01, 01), 
             new Date(2019, 12, 31));
     var maartnov19 = new Periode(new Date(2019, 03, 01),
@@ -93,7 +93,7 @@ public void overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue() {
 
 ```kt
 @Test
-fun overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse() {
+fun `Gegeven niet overlappende periodes Wanneer overlaptMet Dan is false`() {
     val jandec19 = Periode(LocalDate.of(2019, 1, 1), 
         LocalDate.of(2019, 12, 31))
     val maartnov20 = Periode(LocalDate.of(2020, 3, 1), 
@@ -105,7 +105,7 @@ fun overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse() {
 
 ```java
 @Test
-public void overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse() {
+public void gegevenNietOverlappendePeriodes_WanneerOverlaptMet_DanIsFalse() {
     var jandec19 = new Periode(new Date(2019, 01, 01), 
             new Date(2019, 12, 31));
     var maartnov20 = new Periode(new Date(2020, 03, 01),
@@ -118,6 +118,10 @@ public void overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse() {
 </div>
 
 - ... Er zijn nog tal van mogelijkheden, waarvan voornamelijk de extreme gevallen belangrijk zijn om **de kans op bugs te minimaliseren**. Immers, gebruikers van onze `Periode` klasse kunnen onbewust `null` mee doorgeven, waardoor de methode onverwachte waardes teruggeeft. 
+
+{{% notice note %}}
+In Kotlin is het mogelijk om een volle zin te gebruiken als functienaam met behulp van backtics. Dit wordt in de praktijk vaak gebruik in testen op voorwaarde dat je je strict houdt aan een conventie voor de naamgeving. Zoals hierboven alle testen in de vorm van **Gegeven... Wanneer... Dan...** geschreven zijn. Zulke testen zijn niet alleen in code makkelijker te lezen en begrijpen, maar ook in het JUnit output window. Java enthousiastelingen zullen zich moeten beperken tot camelCase of snake_case.
+{{% /notice %}}
 
 De testen compileren niet, omdat de methode `overlaptMet()` nog niet bestaat. Voordat we overschakelen naar het schrijven van de implementatie willen we eerst de testen zien ROOD kleuren, waarbij wel de bestaande code nog compileert:
 
@@ -226,12 +230,12 @@ Assertions zijn er in alle kleuren en gewichten, waarbij in de oefeningen de sta
 ```kt
 import org.hamcrest.CoreMatchers.`is` as Is
 @Test
-fun testWithDefaultAssertions() {
+fun `test with default assertions`() {
     val result = doStuff()
     AssertEquals(result, 3)    // arg1: expected, arg2: actual
 }
 @Test
-fun testWithHamcrestMatchers() {
+fun `test with hamcrest matchers`() {
     val result = doStuff()
     assertThat(result, Is(3))
 }
@@ -268,7 +272,7 @@ De body van een test bestaat typisch uit drie delen:
 
 ```kt
 @Test
-fun testMethod() {
+fun `Given arranged When acting Then some expected result`() {
     // 1. Arrange 
     val instance = ClassToTest(arg1, arg2)
 
@@ -282,7 +286,7 @@ fun testMethod() {
 
 ```java
 @Test
-public void testMethod() {
+public void givenArranged_whenActing_thenSomeExpectedResult() {
     // 1. Arrange 
     var instance = new ClassToTest(arg1, arg2);
 

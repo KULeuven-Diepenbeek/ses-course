@@ -120,7 +120,7 @@ De hamvraag is nu: hoe testen we de **logica in `recordActOne`**? Daarvoor zal d
 ```kt
 class DieHardInADeepenBeekTests {
     @Test
-    fun recordActOne_backflipFails_haveToRedoTheWholeThing() {
+    fun `Given failing backflip When recording act one Then redo the whole thing`() {
         // 1. Arrange
         val movie = DieHardInADeepenBeek()
         val actor = ArnieLookalike()
@@ -131,7 +131,7 @@ class DieHardInADeepenBeekTests {
     }
 
     @Test
-    fun recordActOne_backflipSucceeds_ok() {
+    fun `Given a good backflip When recording act one Then its a success`() {
         // 1. Arrange
         val movie = DieHardInADeepenBeek()
         val actor = StuntmanArnie()
@@ -183,7 +183,7 @@ In plaats van de `ArnieLookalike` en `StuntmanArnie` klasses zelf te maken, kunn
 ```kt
 class DieHardInADeepenBeekTests {
     @Test
-    fun recordActOne_backflipFails_haveToRedoTheWholeThing() {
+    fun `Given failing backflip When recording act one Then redo the whole thing`() {
         // 1. Arrange
         val movie = new DieHardInADeepenBeek()
         val actor = mock(IllBeBack::class.java)
@@ -195,7 +195,7 @@ class DieHardInADeepenBeekTests {
     }
 
     @Test
-    public void recordActOne_backflipSucceeds_ok() {
+    fun `Given a good backflip When recording act one Then its a success`() {
         // 1. Arrange
         val movie = DieHardInADeepenBeek()
         val actor = mock(IllBeBack::class.java)
