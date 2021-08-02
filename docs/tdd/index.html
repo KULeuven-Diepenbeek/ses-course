@@ -12,20 +12,20 @@
     <title>3. Test Driven Development :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1627561298" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1627561298" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1627561298" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1627561298" rel="stylesheet">
-    <link href="../css/auto-complete.css?1627561298" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1627561298" rel="stylesheet">
-    <link href="../css/theme.css?1627561298" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1627561298" rel="stylesheet">
+    <link href="../css/nucleus.css?1627905391" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1627905391" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1627905391" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1627905391" rel="stylesheet">
+    <link href="../css/auto-complete.css?1627905391" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1627905391" rel="stylesheet">
+    <link href="../css/theme.css?1627905391" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1627905391" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1627561298" rel="stylesheet">
+    <link href="../css/theme-kul.css?1627905391" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1627561298"></script>
+    <script src="../js/jquery-3.3.1.min.js?1627905391"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1627561298"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1627561298"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1627905391"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1627905391"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1627561298"></script>
+<script type="text/javascript" src="../js/search.js?1627905391"></script>
 
     
   </div>
@@ -870,7 +870,7 @@ graph LR;
 </ul>
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75af00">@Test</span>
-<span style="color:#00a8c8">fun</span> <span style="color:#75af00">overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Gegeven biede periodes met datum ingevuld Wanneer overlaptMet Dan is true`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">val</span> <span style="color:#111">jandec19</span> <span style="color:#111">=</span> <span style="color:#111">Periode</span><span style="color:#111">(</span><span style="color:#111">LocalDate</span><span style="color:#111">.</span><span style="color:#111">of</span><span style="color:#111">(</span><span style="color:#ae81ff">2019</span><span style="color:#111">,</span> <span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">1</span><span style="color:#111">),</span>
         <span style="color:#111">LocalDate</span><span style="color:#111">.</span><span style="color:#111">of</span><span style="color:#111">(</span><span style="color:#ae81ff">2019</span><span style="color:#111">,</span> <span style="color:#ae81ff">12</span><span style="color:#111">,</span> <span style="color:#ae81ff">31</span><span style="color:#111">))</span>
     <span style="color:#00a8c8">val</span> <span style="color:#111">maartnov19</span> <span style="color:#111">=</span> <span style="color:#111">Periode</span><span style="color:#111">(</span><span style="color:#111">LocalDate</span><span style="color:#111">.</span><span style="color:#111">of</span><span style="color:#111">(</span><span style="color:#ae81ff">2019</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#ae81ff">1</span><span style="color:#111">),</span>
@@ -879,7 +879,7 @@ graph LR;
     <span style="color:#111">assertTrue</span> <span style="color:#111">{</span> <span style="color:#111">jandec19</span><span style="color:#111">.</span><span style="color:#111">overlaptMet</span><span style="color:#111">(</span><span style="color:#111">maartnov19</span><span style="color:#111">)</span> <span style="color:#111">}</span>
 <span style="color:#111">}</span>
 </code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">overlaptMet_biedePeriodesDatumIngevuld_overlaptIsTrue</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">GegevenBeidePeriodesDatumIngevuld_Wanneeroverlapt_DanIsTrue</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#111">var</span> <span style="color:#111">jandec19</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Periode</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">),</span> 
             <span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">12</span><span style="color:#f92672">,</span> <span style="color:#111">31</span><span style="color:#f92672">));</span>
     <span style="color:#111">var</span> <span style="color:#111">maartnov19</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Periode</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">03</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">),</span>
@@ -893,7 +893,7 @@ graph LR;
 </ul>
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75af00">@Test</span>
-<span style="color:#00a8c8">fun</span> <span style="color:#75af00">overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Gegeven niet overlappende periodes Wanneer overlaptMet Dan is false`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">val</span> <span style="color:#111">jandec19</span> <span style="color:#111">=</span> <span style="color:#111">Periode</span><span style="color:#111">(</span><span style="color:#111">LocalDate</span><span style="color:#111">.</span><span style="color:#111">of</span><span style="color:#111">(</span><span style="color:#ae81ff">2019</span><span style="color:#111">,</span> <span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">1</span><span style="color:#111">),</span> 
         <span style="color:#111">LocalDate</span><span style="color:#111">.</span><span style="color:#111">of</span><span style="color:#111">(</span><span style="color:#ae81ff">2019</span><span style="color:#111">,</span> <span style="color:#ae81ff">12</span><span style="color:#111">,</span> <span style="color:#ae81ff">31</span><span style="color:#111">))</span>
     <span style="color:#00a8c8">val</span> <span style="color:#111">maartnov20</span> <span style="color:#111">=</span> <span style="color:#111">Periode</span><span style="color:#111">(</span><span style="color:#111">LocalDate</span><span style="color:#111">.</span><span style="color:#111">of</span><span style="color:#111">(</span><span style="color:#ae81ff">2020</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#ae81ff">1</span><span style="color:#111">),</span> 
@@ -902,7 +902,7 @@ graph LR;
     <span style="color:#111">assertFalse</span> <span style="color:#111">{</span> <span style="color:#111">jandec19</span><span style="color:#111">.</span><span style="color:#111">overlaptMet</span><span style="color:#111">(</span><span style="color:#111">maartnov20</span><span style="color:#111">)</span> <span style="color:#111">}</span>
 <span style="color:#111">}</span>
 </code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">overlaptMet_biedePeriodesDatumIngevuld_overlaptNietIsFalse</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">gegevenNietOverlappendePeriodes_WanneerOverlaptMet_DanIsFalse</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#111">var</span> <span style="color:#111">jandec19</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Periode</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">),</span> 
             <span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2019</span><span style="color:#f92672">,</span> <span style="color:#111">12</span><span style="color:#f92672">,</span> <span style="color:#111">31</span><span style="color:#f92672">));</span>
     <span style="color:#111">var</span> <span style="color:#111">maartnov20</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Periode</span><span style="color:#f92672">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Date</span><span style="color:#f92672">(</span><span style="color:#111">2020</span><span style="color:#f92672">,</span> <span style="color:#111">03</span><span style="color:#f92672">,</span> <span style="color:#111">01</span><span style="color:#f92672">),</span>
@@ -914,6 +914,10 @@ graph LR;
 <ul>
 <li>&hellip; Er zijn nog tal van mogelijkheden, waarvan voornamelijk de extreme gevallen belangrijk zijn om <strong>de kans op bugs te minimaliseren</strong>. Immers, gebruikers van onze <code>Periode</code> klasse kunnen onbewust <code>null</code> mee doorgeven, waardoor de methode onverwachte waardes teruggeeft.</li>
 </ul>
+
+<div class="notices note" ><p>In Kotlin is het mogelijk om een volle zin te gebruiken als functienaam met behulp van backtics. Dit wordt in de praktijk vaak gebruik in testen op voorwaarde dat je je strict houdt aan een conventie voor de naamgeving. Zoals hierboven alle testen in de vorm van <strong>Gegeven&hellip; Wanneer&hellip; Dan&hellip;</strong> geschreven zijn. Zulke testen zijn niet alleen in code makkelijker te lezen en begrijpen, maar ook in het JUnit output window. Java enthousiastelingen zullen zich moeten beperken tot camelCase of snake_case.</p>
+</div>
+
 <p>De testen compileren niet, omdat de methode <code>overlaptMet()</code> nog niet bestaat. Voordat we overschakelen naar het schrijven van de implementatie willen we eerst de testen zien ROOD kleuren, waarbij wel de bestaande code nog compileert:</p>
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">data</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Periode</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">startDatum</span><span style="color:#111">:</span> <span style="color:#111">LocalDate</span><span style="color:#111">,</span> <span style="color:#00a8c8">val</span> <span style="color:#111">eindDatum</span><span style="color:#111">:</span> <span style="color:#111">LocalDate</span><span style="color:#111">)</span> <span style="color:#111">{</span>
@@ -986,12 +990,12 @@ graph LR;
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">import</span> <span style="color:#111">org.hamcrest.CoreMatchers.`is`</span> <span style="color:#00a8c8">as</span> <span style="color:#111">Is</span>
 <span style="color:#75af00">@Test</span>
-<span style="color:#00a8c8">fun</span> <span style="color:#75af00">testWithDefaultAssertions</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">fun</span> <span style="color:#75af00">`test with default assertions`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">val</span> <span style="color:#111">result</span> <span style="color:#111">=</span> <span style="color:#111">doStuff</span><span style="color:#111">()</span>
     <span style="color:#111">AssertEquals</span><span style="color:#111">(</span><span style="color:#111">result</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span><span style="color:#111">)</span>    <span style="color:#75715e">// arg1: expected, arg2: actual
 </span><span style="color:#75715e"></span><span style="color:#111">}</span>
 <span style="color:#75af00">@Test</span>
-<span style="color:#00a8c8">fun</span> <span style="color:#75af00">testWithHamcrestMatchers</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">fun</span> <span style="color:#75af00">`test with hamcrest matchers`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">val</span> <span style="color:#111">result</span> <span style="color:#111">=</span> <span style="color:#111">doStuff</span><span style="color:#111">()</span>
     <span style="color:#111">assertThat</span><span style="color:#111">(</span><span style="color:#111">result</span><span style="color:#111">,</span> <span style="color:#111">Is</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">))</span>
 <span style="color:#111">}</span>
@@ -1016,7 +1020,7 @@ graph LR;
 <p>De body van een test bestaat typisch uit drie delen:</p>
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75af00">@Test</span>
-<span style="color:#00a8c8">fun</span> <span style="color:#75af00">testMethod</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Given arranged When acting Then some expected result`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
     <span style="color:#75715e">// 1. Arrange 
 </span><span style="color:#75715e"></span>    <span style="color:#00a8c8">val</span> <span style="color:#111">instance</span> <span style="color:#111">=</span> <span style="color:#111">ClassToTest</span><span style="color:#111">(</span><span style="color:#111">arg1</span><span style="color:#111">,</span> <span style="color:#111">arg2</span><span style="color:#111">)</span>
 
@@ -1027,7 +1031,7 @@ graph LR;
 </span><span style="color:#75715e"></span>    <span style="color:#111">assertThat</span><span style="color:#111">(</span><span style="color:#111">result</span><span style="color:#111">,</span> <span style="color:#111">Is</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">))</span>
 <span style="color:#111">}</span>
 </code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Test</span>
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">testMethod</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">givenArranged_whenActing_thenSomeExpectedResult</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e">// 1. Arrange 
 </span><span style="color:#75715e"></span>    <span style="color:#111">var</span> <span style="color:#111">instance</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ClassToTest</span><span style="color:#f92672">(</span><span style="color:#111">arg1</span><span style="color:#f92672">,</span> <span style="color:#111">arg2</span><span style="color:#f92672">);</span>
 
@@ -1788,17 +1792,17 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1627561298"></script>
-    <script src="../js/perfect-scrollbar.min.js?1627561298"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1627561298"></script>
-    <script src="../js/jquery.sticky.js?1627561298"></script>
-    <script src="../js/featherlight.min.js?1627561298"></script>
-    <script src="../js/modernizr.custom-3.6.0.js?1627561298"></script>
-    <script src="../js/learn.js?1627561298"></script>
-    <script src="../js/hugo-learn.js?1627561298"></script>
+    <script src="../js/clipboard.min.js?1627905391"></script>
+    <script src="../js/perfect-scrollbar.min.js?1627905391"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1627905391"></script>
+    <script src="../js/jquery.sticky.js?1627905391"></script>
+    <script src="../js/featherlight.min.js?1627905391"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1627905391"></script>
+    <script src="../js/learn.js?1627905391"></script>
+    <script src="../js/hugo-learn.js?1627905391"></script>
     
         
-            <script src="../mermaid/mermaid.js?1627561298"></script>
+            <script src="../mermaid/mermaid.js?1627905391"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

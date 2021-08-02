@@ -12,20 +12,20 @@
     <title>3.1 TDD In de praktijk: Mockito :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1627561298" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1627561298" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1627561298" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1627561298" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1627561298" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1627561298" rel="stylesheet">
-    <link href="../../css/theme.css?1627561298" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1627561298" rel="stylesheet">
+    <link href="../../css/nucleus.css?1627905391" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1627905391" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1627905391" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1627905391" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1627905391" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1627905391" rel="stylesheet">
+    <link href="../../css/theme.css?1627905391" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1627905391" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1627561298" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1627905391" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1627561298"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1627905391"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1627561298"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1627561298"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1627905391"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1627905391"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1627561298"></script>
+<script type="text/javascript" src="../../js/search.js?1627905391"></script>
 
     
   </div>
@@ -899,7 +899,7 @@ window.MathJax = {
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeekTests</span> <span style="color:#111">{</span>
     <span style="color:#75af00">@Test</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Given failing backflip When recording act one Then redo the whole thing`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#75715e">// 1. Arrange
 </span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">()</span>
         <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">ArnieLookalike</span><span style="color:#111">()</span>
@@ -910,7 +910,7 @@ window.MathJax = {
     <span style="color:#111">}</span>
 
     <span style="color:#75af00">@Test</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">recordActOne_backflipSucceeds_ok</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Given a good backflip When recording act one Then its a success`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#75715e">// 1. Arrange
 </span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">()</span>
         <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">StuntmanArnie</span><span style="color:#111">()</span>
@@ -952,7 +952,7 @@ window.MathJax = {
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeekTests</span> <span style="color:#111">{</span>
     <span style="color:#75af00">@Test</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Given failing backflip When recording act one Then redo the whole thing`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#75715e">// 1. Arrange
 </span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">new</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">()</span>
         <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">mock</span><span style="color:#111">(</span><span style="color:#111">IllBeBack</span><span style="color:#f92672">::</span><span style="color:#00a8c8">class</span><span style="color:#111">.</span><span style="color:#111">java</span><span style="color:#111">)</span>
@@ -964,7 +964,7 @@ window.MathJax = {
     <span style="color:#111">}</span>
 
     <span style="color:#75af00">@Test</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#111">void</span> <span style="color:#111">recordActOne_backflipSucceeds_ok</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Given a good backflip When recording act one Then its a success`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#75715e">// 1. Arrange
 </span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">()</span>
         <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">mock</span><span style="color:#111">(</span><span style="color:#111">IllBeBack</span><span style="color:#f92672">::</span><span style="color:#00a8c8">class</span><span style="color:#111">.</span><span style="color:#111">java</span><span style="color:#111">)</span>
@@ -1469,17 +1469,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1627561298"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1627561298"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1627561298"></script>
-    <script src="../../js/jquery.sticky.js?1627561298"></script>
-    <script src="../../js/featherlight.min.js?1627561298"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1627561298"></script>
-    <script src="../../js/learn.js?1627561298"></script>
-    <script src="../../js/hugo-learn.js?1627561298"></script>
+    <script src="../../js/clipboard.min.js?1627905391"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1627905391"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1627905391"></script>
+    <script src="../../js/jquery.sticky.js?1627905391"></script>
+    <script src="../../js/featherlight.min.js?1627905391"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1627905391"></script>
+    <script src="../../js/learn.js?1627905391"></script>
+    <script src="../../js/hugo-learn.js?1627905391"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1627561298"></script>
+            <script src="../../mermaid/mermaid.js?1627905391"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
