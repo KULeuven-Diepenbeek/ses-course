@@ -260,8 +260,10 @@ Het tweede voorbeeld leest als een vloeiende zin, terwijl de eerste `AssertEqual
 
 [HamCrest Matchers API Documentation](http://hamcrest.org/JavaHamcrest/javadoc/)
 
+Een populair alternatief voor HamCrest is bijvoorbeeld [AssertJ](https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html). De keuze is aan jou, beide frameworks bieden dezelfde fluent API aan met ongeveer dezelfde features. 
+
 {{% notice note %}}
-Merk op dat in Kotlin `is` een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase `Is` met behulp van ` import org.hamcrest.CoreMatchers.`\`is\`` as Is` (enkele backtick).
+Merk op dat in Kotlin `is` een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase `Is` met behulp van ` import org.hamcrest.CoreMatchers.`\`is\`` as Is` (enkele backtick). Opossing 3: Gebruik een Kotlin-idiomatic assertion framework zoals [assertK](https://www.kotlinresources.com/library/assertk/). 
 {{% /notice %}}
 
 #### Arrange, Act, Assert

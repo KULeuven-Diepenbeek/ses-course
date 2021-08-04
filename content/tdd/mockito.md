@@ -43,7 +43,7 @@ De casting crew en de director verwachten dat tijdens een opname 3x een backflip
 <div class="devselect">
 
 ```kt
-class arnieLookalike : IllBeBack {
+class ArnieLookalike : IllBeBack {
     override fun doBackFlip(): Boolean = false
 }
 
@@ -75,13 +75,11 @@ Enkel `StuntmanArnie` is fysiek krachtig genoeg om consistent de backflip uit te
 <div class="devselect">
 
 ```kt
-class DieHardInADeepenBeek() {
-    var arnoldActor: IllBeBack
-
+class DieHardInADeepenBeek(var arnoldActor: IllBeBack) {
     fun recordActOne() {
         var succeeded = true
         for(i in 1..3) {
-            succeeded &= arnoldActor.doBackFlip()
+            succeeded = succeeded && arnoldActor.doBackFlip()
         }
 
         if(!succeeded)
@@ -101,7 +99,7 @@ public class DieHardInADeepenBeek {
     public void recordActOne() {
         boolean succeeded = true;
         for(int i = 1; i <= 3; i++) {
-            succeeded &= arnoldActor.doBackFlip();
+            succeeded = succeeded && arnoldActor.doBackFlip();
         }
 
         if(!succeeded) {
@@ -122,20 +120,16 @@ class DieHardInADeepenBeekTests {
     @Test
     fun `Given failing backflip When recording act one Then redo the whole thing`() {
         // 1. Arrange
-        val movie = DieHardInADeepenBeek()
-        val actor = ArnieLookalike()
-        movie.arnoldActor = actor
+        val movie = DieHardInADeepenBeek(ArnieLookalike())
 
         // 2/3 act/assert in one
-        assertThrows<RuntimeException>> { movie.recordActOne() }
+        assertThrows(RuntimeException::class.java) { movie.recordActOne() }
     }
 
     @Test
     fun `Given a good backflip When recording act one Then its a success`() {
         // 1. Arrange
-        val movie = DieHardInADeepenBeek()
-        val actor = StuntmanArnie()
-        movie.arnoldActor = actor
+        val movie = DieHardInADeepenBeek(StuntmanArnie())
 
         // 2/3 act/assert in one
         assertDoesNotThrow { movie.recordActOne() }
@@ -145,7 +139,7 @@ class DieHardInADeepenBeekTests {
 
 ```java
 public class DieHardInADeepenBeekTests {
-    @Test(ExpectedException = RuntimeException.class)
+    @Test
     public void recordActOne_backflipFails_haveToRedoTheWholeThing() {
         // 1. Arrange
         var movie = new DieHardInADeepenBeek();
@@ -153,7 +147,8 @@ public class DieHardInADeepenBeekTests {
         movie.setArnoldActor(actor);
 
         // 2. act
-        movie.recordActOne();
+        assertThrows(RuntimeException.class, 
+            () -> { movie.recordActOne() });
         // 3. assert (in annotation)
     }
 
@@ -165,7 +160,7 @@ public class DieHardInADeepenBeekTests {
         movie.setArnoldActor(actor);
 
         // 2. act
-        movie.recordActOne();
+        assertDoesNotThrow(() -> { movie.recordActOne() });
         // 3. assert (not needed, doesn't crash)
         // assertTrue(true);
     }
@@ -181,25 +176,25 @@ In plaats van de `ArnieLookalike` en `StuntmanArnie` klasses zelf te maken, kunn
 <div class="devselect">
 
 ```kt
+import org.mockito.Mockito.`when` as When
 class DieHardInADeepenBeekTests {
     @Test
     fun `Given failing backflip When recording act one Then redo the whole thing`() {
         // 1. Arrange
-        val movie = new DieHardInADeepenBeek()
         val actor = mock(IllBeBack::class.java)
-        when(actor.doBackFlip()).thenReturn(false)
-        movie.arnoldActor = actor
+        When(actor.doBackFlip()).thenReturn(false)
+        val movie = DieHardInADeepenBeek(actor)
 
         // 2/3 act/assert in one
-        assertThrows<RuntimeException>> { movie.recordActOne() }
+        assertThrows(RuntimeException::class.java) { movie.recordActOne() }
     }
 
     @Test
     fun `Given a good backflip When recording act one Then its a success`() {
         // 1. Arrange
-        val movie = DieHardInADeepenBeek()
         val actor = mock(IllBeBack::class.java)
-        movie.arnoldActor = actor
+        When(actor.doBackFlip()).thenReturn(true)
+        val movie = DieHardInADeepenBeek(actor)
 
         // 2/3 act/assert in one
         assertDoesNotThrow { movie.recordActOne() }
@@ -209,7 +204,7 @@ class DieHardInADeepenBeekTests {
 
 ```java
 public class DieHardInADeepenBeekTests {
-    @Test(ExpectedException = RuntimeException.class)
+    @Test
     public void recordActOne_backflipFails_haveToRedoTheWholeThing() {
         // 1. Arrange
         var movie = new DieHardInADeepenBeek();
@@ -218,7 +213,8 @@ public class DieHardInADeepenBeekTests {
         movie.setArnoldActor(actor);
 
         // 2. act
-        movie.recordActOne();
+        assertThrows(RuntimeException.class, 
+            () -> { movie.recordActOne() });
         // 3. assert (in annotation)
     }
 
@@ -231,9 +227,8 @@ public class DieHardInADeepenBeekTests {
         movie.setArnoldActor(actor);
 
         // 2. act
-        movie.recordActOne();
+        assertDoesNotThrow(() -> { movie.recordActOne() });
         // 3. assert (not needed, doesn't throw)
-        // assertTrue(true);
     }
 }
 ```
@@ -243,6 +238,10 @@ public class DieHardInADeepenBeekTests {
 Het geheim zit hem in de `mock()` en `when()` methodes, waarmee we het gedrag van de mock implementatie kunnen aansturen. Dit werd vroeger manueel geïmplementeerd, maar die klasses zijn nu niet meer nodig. 
 
 Lees op [https://site.mockito.org](https://site.mockito.org) **hoe** je het framework moet gebruiken. (Klik op de knoppen **WHY** en **HOW** bovenaan! Volledige [javadoc](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)) 
+
+{{% notice warning %}}
+Dezelfde Kotlin-specifieke problemen met reserved keywords zoals HamCrest's `is` komen hier voor met Mockito's `when`! Een Kotlin-idiomatic alternatief is gebruik maken van [MockK](https://mockk.io/) in plaats van Mockito, die specifiek geschreven is voor Kotlin. <br/>`Mockito.mock(MyClass::class.java)` wordt dan `mockk<MyClass>()`. `When(x.y()).thenReturn(z)` wordt dan `every { x.y() } returns z`. Zie `examples/kotlin/mocking` in de cursus git repository. 
+{{% /notice %}}
 
 ### TDD in een groter project
 
