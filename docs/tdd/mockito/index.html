@@ -12,20 +12,20 @@
     <title>3.1 TDD In de praktijk: Mockito :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1627907551" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1627907551" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1627907551" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1627907551" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1627907551" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1627907551" rel="stylesheet">
-    <link href="../../css/theme.css?1627907551" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1627907551" rel="stylesheet">
+    <link href="../../css/nucleus.css?1628065328" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1628065328" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1628065328" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1628065328" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1628065328" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1628065328" rel="stylesheet">
+    <link href="../../css/theme.css?1628065328" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1628065328" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1627907551" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1628065328" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1627907551"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1628065328"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1627907551"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1627907551"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1628065328"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1628065328"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1627907551"></script>
+<script type="text/javascript" src="../../js/search.js?1628065328"></script>
 
     
   </div>
@@ -844,7 +844,7 @@ window.MathJax = {
 </code></pre></div></div>
 <p>De casting crew en de director verwachten dat tijdens een opname 3x een backflip succesvol wordt uitgevoerd. Indien deze niet lukt, wordt de take opnieuw genomen. Dit manifesteert zich in code in de vorm van een <code>RuntimeException</code>. De One And Only Arnold had op dat moment een crisisvergadering in Californië en kon niet aanwezig zijn op de set. Gelukkig zijn er lookalikes en stuntmannen genoeg:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">arnieLookalike</span> <span style="color:#111">:</span> <span style="color:#111">IllBeBack</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">ArnieLookalike</span> <span style="color:#111">:</span> <span style="color:#111">IllBeBack</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">override</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">doBackFlip</span><span style="color:#111">():</span> <span style="color:#111">Boolean</span> <span style="color:#111">=</span> <span style="color:#00a8c8">false</span>
 <span style="color:#111">}</span>
 
@@ -867,13 +867,11 @@ window.MathJax = {
 </code></pre></div></div>
 <p>Enkel <code>StuntmanArnie</code> is fysiek krachtig genoeg om consistent de backflip uit te voeren. De lookalike ziet er uit zoals Arnold, maar bakt jammer genoeg van de scene niet zo veel. Hieronder een blueprint van de opname code:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeek</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">var</span> <span style="color:#111">arnoldActor</span><span style="color:#111">:</span> <span style="color:#111">IllBeBack</span>
-
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeek</span><span style="color:#111">(</span><span style="color:#00a8c8">var</span> <span style="color:#111">arnoldActor</span><span style="color:#111">:</span> <span style="color:#111">IllBeBack</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">fun</span> <span style="color:#75af00">recordActOne</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#00a8c8">var</span> <span style="color:#111">succeeded</span> <span style="color:#111">=</span> <span style="color:#00a8c8">true</span>
         <span style="color:#00a8c8">for</span><span style="color:#111">(</span><span style="color:#111">i</span> <span style="color:#00a8c8">in</span> <span style="color:#ae81ff">1.</span><span style="color:#111">.</span><span style="color:#ae81ff">3</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-            <span style="color:#111">succeeded</span> <span style="color:#111">&amp;=</span> <span style="color:#111">arnoldActor</span><span style="color:#111">.</span><span style="color:#111">doBackFlip</span><span style="color:#111">()</span>
+            <span style="color:#111">succeeded</span> <span style="color:#111">=</span> <span style="color:#111">succeeded</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">arnoldActor</span><span style="color:#111">.</span><span style="color:#111">doBackFlip</span><span style="color:#111">()</span>
         <span style="color:#111">}</span>
 
         <span style="color:#00a8c8">if</span><span style="color:#111">(!</span><span style="color:#111">succeeded</span><span style="color:#111">)</span>
@@ -890,7 +888,7 @@ window.MathJax = {
     <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">recordActOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#00a8c8">boolean</span> <span style="color:#111">succeeded</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">true</span><span style="color:#f92672">;</span>
         <span style="color:#00a8c8">for</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">1</span><span style="color:#f92672">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;=</span> <span style="color:#111">3</span><span style="color:#f92672">;</span> <span style="color:#111">i</span><span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
-            <span style="color:#111">succeeded</span> <span style="color:#f92672">&amp;=</span> <span style="color:#111">arnoldActor</span><span style="color:#f92672">.</span><span style="color:#75af00">doBackFlip</span><span style="color:#f92672">();</span>
+            <span style="color:#111">succeeded</span> <span style="color:#f92672">=</span> <span style="color:#111">succeeded</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">arnoldActor</span><span style="color:#f92672">.</span><span style="color:#75af00">doBackFlip</span><span style="color:#f92672">();</span>
         <span style="color:#f92672">}</span>
 
         <span style="color:#00a8c8">if</span><span style="color:#f92672">(!</span><span style="color:#111">succeeded</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -905,27 +903,23 @@ window.MathJax = {
     <span style="color:#75af00">@Test</span>
     <span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Given failing backflip When recording act one Then redo the whole thing`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">()</span>
-        <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">ArnieLookalike</span><span style="color:#111">()</span>
-        <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">arnoldActor</span> <span style="color:#111">=</span> <span style="color:#111">actor</span>
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">(</span><span style="color:#111">ArnieLookalike</span><span style="color:#111">())</span>
 
         <span style="color:#75715e">// 2/3 act/assert in one
-</span><span style="color:#75715e"></span>        <span style="color:#111">assertThrows</span><span style="color:#111">&lt;</span><span style="color:#111">RuntimeException</span><span style="color:#111">&gt;&gt;</span> <span style="color:#111">{</span> <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">recordActOne</span><span style="color:#111">()</span> <span style="color:#111">}</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">assertThrows</span><span style="color:#111">(</span><span style="color:#111">RuntimeException</span><span style="color:#f92672">::</span><span style="color:#00a8c8">class</span><span style="color:#111">.</span><span style="color:#111">java</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">recordActOne</span><span style="color:#111">()</span> <span style="color:#111">}</span>
     <span style="color:#111">}</span>
 
     <span style="color:#75af00">@Test</span>
     <span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Given a good backflip When recording act one Then its a success`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">()</span>
-        <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">StuntmanArnie</span><span style="color:#111">()</span>
-        <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">arnoldActor</span> <span style="color:#111">=</span> <span style="color:#111">actor</span>
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">(</span><span style="color:#111">StuntmanArnie</span><span style="color:#111">())</span>
 
         <span style="color:#75715e">// 2/3 act/assert in one
 </span><span style="color:#75715e"></span>        <span style="color:#111">assertDoesNotThrow</span> <span style="color:#111">{</span> <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">recordActOne</span><span style="color:#111">()</span> <span style="color:#111">}</span>
     <span style="color:#111">}</span>
 <span style="color:#111">}</span>
 </code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeekTests</span> <span style="color:#f92672">{</span>
-    <span style="color:#75af00">@Test</span><span style="color:#f92672">(</span><span style="color:#111">ExpectedException</span> <span style="color:#f92672">=</span> <span style="color:#111">RuntimeException</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">)</span>
+    <span style="color:#75af00">@Test</span>
     <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// 1. Arrange
 </span><span style="color:#75715e"></span>        <span style="color:#111">var</span> <span style="color:#111">movie</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#f92672">();</span>
@@ -933,7 +927,8 @@ window.MathJax = {
         <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">setArnoldActor</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">);</span>
 
         <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">();</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">assertThrows</span><span style="color:#f92672">(</span><span style="color:#111">RuntimeException</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">,</span> 
+            <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span> <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">});</span>
         <span style="color:#75715e">// 3. assert (in annotation)
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 
@@ -945,7 +940,7 @@ window.MathJax = {
         <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">setArnoldActor</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">);</span>
 
         <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">();</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">assertDoesNotThrow</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span> <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">});</span>
         <span style="color:#75715e">// 3. assert (not needed, doesn&#39;t crash)
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">// assertTrue(true);
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
@@ -954,32 +949,32 @@ window.MathJax = {
 <h3 id="een-interface-mocken-the-easy-way">Een interface &lsquo;mocken&rsquo;: the easy way</h3>
 <p>In plaats van de <code>ArnieLookalike</code> en <code>StuntmanArnie</code> klasses zelf te maken, kunnen we hier Mockito het zware werk laten doen door gebruik te maken van de <code>mock()</code> methode. De testen worden dan lichtjes anders, omdat we daarin het gedrag van de mock eerst moeten bepalen voordat we naar de act en assert stappen kunnen gaan:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeekTests</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">import</span> <span style="color:#111">org.mockito.Mockito.`when`</span> <span style="color:#00a8c8">as</span> <span style="color:#111">When</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeekTests</span> <span style="color:#111">{</span>
     <span style="color:#75af00">@Test</span>
     <span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Given failing backflip When recording act one Then redo the whole thing`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">new</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">()</span>
-        <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">mock</span><span style="color:#111">(</span><span style="color:#111">IllBeBack</span><span style="color:#f92672">::</span><span style="color:#00a8c8">class</span><span style="color:#111">.</span><span style="color:#111">java</span><span style="color:#111">)</span>
-        <span style="color:#00a8c8">when</span><span style="color:#111">(</span><span style="color:#111">actor</span><span style="color:#111">.</span><span style="color:#111">doBackFlip</span><span style="color:#111">()).</span><span style="color:#111">thenReturn</span><span style="color:#111">(</span><span style="color:#00a8c8">false</span><span style="color:#111">)</span>
-        <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">arnoldActor</span> <span style="color:#111">=</span> <span style="color:#111">actor</span>
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">mock</span><span style="color:#111">(</span><span style="color:#111">IllBeBack</span><span style="color:#f92672">::</span><span style="color:#00a8c8">class</span><span style="color:#111">.</span><span style="color:#111">java</span><span style="color:#111">)</span>
+        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">actor</span><span style="color:#111">.</span><span style="color:#111">doBackFlip</span><span style="color:#111">()).</span><span style="color:#111">thenReturn</span><span style="color:#111">(</span><span style="color:#00a8c8">false</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">(</span><span style="color:#111">actor</span><span style="color:#111">)</span>
 
         <span style="color:#75715e">// 2/3 act/assert in one
-</span><span style="color:#75715e"></span>        <span style="color:#111">assertThrows</span><span style="color:#111">&lt;</span><span style="color:#111">RuntimeException</span><span style="color:#111">&gt;&gt;</span> <span style="color:#111">{</span> <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">recordActOne</span><span style="color:#111">()</span> <span style="color:#111">}</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">assertThrows</span><span style="color:#111">(</span><span style="color:#111">RuntimeException</span><span style="color:#f92672">::</span><span style="color:#00a8c8">class</span><span style="color:#111">.</span><span style="color:#111">java</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">recordActOne</span><span style="color:#111">()</span> <span style="color:#111">}</span>
     <span style="color:#111">}</span>
 
     <span style="color:#75af00">@Test</span>
     <span style="color:#00a8c8">fun</span> <span style="color:#75af00">`Given a good backflip When recording act one Then its a success`</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#75715e">// 1. Arrange
-</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">()</span>
-        <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">mock</span><span style="color:#111">(</span><span style="color:#111">IllBeBack</span><span style="color:#f92672">::</span><span style="color:#00a8c8">class</span><span style="color:#111">.</span><span style="color:#111">java</span><span style="color:#111">)</span>
-        <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">arnoldActor</span> <span style="color:#111">=</span> <span style="color:#111">actor</span>
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">actor</span> <span style="color:#111">=</span> <span style="color:#111">mock</span><span style="color:#111">(</span><span style="color:#111">IllBeBack</span><span style="color:#f92672">::</span><span style="color:#00a8c8">class</span><span style="color:#111">.</span><span style="color:#111">java</span><span style="color:#111">)</span>
+        <span style="color:#111">When</span><span style="color:#111">(</span><span style="color:#111">actor</span><span style="color:#111">.</span><span style="color:#111">doBackFlip</span><span style="color:#111">()).</span><span style="color:#111">thenReturn</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">)</span>
+        <span style="color:#00a8c8">val</span> <span style="color:#111">movie</span> <span style="color:#111">=</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#111">(</span><span style="color:#111">actor</span><span style="color:#111">)</span>
 
         <span style="color:#75715e">// 2/3 act/assert in one
 </span><span style="color:#75715e"></span>        <span style="color:#111">assertDoesNotThrow</span> <span style="color:#111">{</span> <span style="color:#111">movie</span><span style="color:#111">.</span><span style="color:#111">recordActOne</span><span style="color:#111">()</span> <span style="color:#111">}</span>
     <span style="color:#111">}</span>
 <span style="color:#111">}</span>
 </code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DieHardInADeepenBeekTests</span> <span style="color:#f92672">{</span>
-    <span style="color:#75af00">@Test</span><span style="color:#f92672">(</span><span style="color:#111">ExpectedException</span> <span style="color:#f92672">=</span> <span style="color:#111">RuntimeException</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">)</span>
+    <span style="color:#75af00">@Test</span>
     <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">recordActOne_backflipFails_haveToRedoTheWholeThing</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// 1. Arrange
 </span><span style="color:#75715e"></span>        <span style="color:#111">var</span> <span style="color:#111">movie</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DieHardInADeepenBeek</span><span style="color:#f92672">();</span>
@@ -988,7 +983,8 @@ window.MathJax = {
         <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">setArnoldActor</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">);</span>
 
         <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">();</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">assertThrows</span><span style="color:#f92672">(</span><span style="color:#111">RuntimeException</span><span style="color:#f92672">.</span><span style="color:#75af00">class</span><span style="color:#f92672">,</span> 
+            <span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span> <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">});</span>
         <span style="color:#75715e">// 3. assert (in annotation)
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 
@@ -1001,14 +997,17 @@ window.MathJax = {
         <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">setArnoldActor</span><span style="color:#f92672">(</span><span style="color:#111">actor</span><span style="color:#f92672">);</span>
 
         <span style="color:#75715e">// 2. act
-</span><span style="color:#75715e"></span>        <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">();</span>
+</span><span style="color:#75715e"></span>        <span style="color:#111">assertDoesNotThrow</span><span style="color:#f92672">(()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span> <span style="color:#111">movie</span><span style="color:#f92672">.</span><span style="color:#75af00">recordActOne</span><span style="color:#f92672">()</span> <span style="color:#f92672">});</span>
         <span style="color:#75715e">// 3. assert (not needed, doesn&#39;t throw)
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// assertTrue(true);
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div></div>
 <p>Het geheim zit hem in de <code>mock()</code> en <code>when()</code> methodes, waarmee we het gedrag van de mock implementatie kunnen aansturen. Dit werd vroeger manueel geïmplementeerd, maar die klasses zijn nu niet meer nodig.</p>
 <p>Lees op <a href="https://site.mockito.org">https://site.mockito.org</a> <strong>hoe</strong> je het framework moet gebruiken. (Klik op de knoppen <strong>WHY</strong> en <strong>HOW</strong> bovenaan! Volledige <a href="https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html">javadoc</a>)</p>
+
+<div class="notices warning" ><p>Dezelfde Kotlin-specifieke problemen met reserved keywords zoals HamCrest&rsquo;s <code>is</code> komen hier voor met Mockito&rsquo;s <code>when</code>! Een Kotlin-idiomatic alternatief is gebruik maken van <a href="https://mockk.io/">MockK</a> in plaats van Mockito, die specifiek geschreven is voor Kotlin. <br/><code>Mockito.mock(MyClass::class.java)</code> wordt dan <code>mockk&lt;MyClass&gt;()</code>. <code>When(x.y()).thenReturn(z)</code> wordt dan <code>every { x.y() } returns z</code>. Zie <code>examples/kotlin/mocking</code> in de cursus git repository.</p>
+</div>
+
 <h3 id="tdd-in-een-groter-project">TDD in een groter project</h3>
 <p>De <a href="../../extra/sessy">SESsy library</a> webapplicatie bevat ook unit-, integratie- en endtoend-testen die een meer &lsquo;real-life&rsquo; omgeving simuleren met een grotere codebase. Zij die zoeken naar een beter begrip van het concept TDD en de implementatie ervan in de dagelijkse wereld, kunnen daar hun oren en ogen de kost geven. We moedigen tevens het wijzigen van testen aan om te kijken wat er gebeurt!</p>
 
@@ -1473,17 +1472,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1627907551"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1627907551"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1627907551"></script>
-    <script src="../../js/jquery.sticky.js?1627907551"></script>
-    <script src="../../js/featherlight.min.js?1627907551"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1627907551"></script>
-    <script src="../../js/learn.js?1627907551"></script>
-    <script src="../../js/hugo-learn.js?1627907551"></script>
+    <script src="../../js/clipboard.min.js?1628065328"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1628065328"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1628065328"></script>
+    <script src="../../js/jquery.sticky.js?1628065328"></script>
+    <script src="../../js/featherlight.min.js?1628065328"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1628065328"></script>
+    <script src="../../js/learn.js?1628065328"></script>
+    <script src="../../js/hugo-learn.js?1628065328"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1627907551"></script>
+            <script src="../../mermaid/mermaid.js?1628065328"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
