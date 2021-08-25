@@ -1,8 +1,12 @@
 ---
-title: '3.1 TDD In de praktijk: Mockito'
+title: '3.1 TDD In de praktijk'
+aliases:
+    - /tdd/mockito
 ---
 
-Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen. 
+## The Java way: Mockito
+
+Mockito is verreweg het meest populaire Java-specifieke Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen. 
 
 ![Mockito logo](/img/teaching/ses/mockito.png)
 
@@ -239,11 +243,44 @@ Het geheim zit hem in de `mock()` en `when()` methodes, waarmee we het gedrag va
 
 Lees op [https://site.mockito.org](https://site.mockito.org) **hoe** je het framework moet gebruiken. (Klik op de knoppen **WHY** en **HOW** bovenaan! Volledige [javadoc](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)) 
 
-{{% notice warning %}}
-Dezelfde Kotlin-specifieke problemen met reserved keywords zoals HamCrest's `is` komen hier voor met Mockito's `when`! Een Kotlin-idiomatic alternatief is gebruik maken van [MockK](https://mockk.io/) in plaats van Mockito, die specifiek geschreven is voor Kotlin. <br/>`Mockito.mock(MyClass::class.java)` wordt dan `mockk<MyClass>()`. `When(x.y()).thenReturn(z)` wordt dan `every { x.y() } returns z`. Zie `examples/kotlin/mocking` in de cursus git repository. 
-{{% /notice %}}
+## The Kotlin way: MockK
 
-### TDD in een groter project
+Mockito's `is` en `when` methodes zijn reserved keywords in Kotlin, en dat zorgt de aanwezigheid van ofwel vervelende backticks, ofwel een import alias met een hoofdletter (zie Kotlin voorbeelden hierboven). Om mocks "de Kotlin-idiomatic way" te schrijven, gebruiken we een framework dat geschreven werd met Kotlin in gedachten: [MockK](https://mockk.io/).
+
+Bovenstaande `DieHardInADeepenBeekTests` klasse kan herschreven worden door Mockito-specifieke calls te vervagnen met MockK-specifieke calls. Het resultaat is als volgt:
+
+```kt
+class DieHardInADeepenBeekTests {
+    @Test
+    fun `Given failing backflip When recording act one Then redo the whole thing`() {
+        // 1. Arrange
+        val actor = mockk<IllBeBack>()
+        every { actor.doBackFlip() } returns false
+        val movie = DieHardInADeepenBeek(actor)
+
+        // 2/3 act/assert in one
+        assertThrows(RuntimeException::class.java) { movie.recordActOne() }
+    }
+
+    @Test
+    fun `Given a good backflip When recording act one Then its a success`() {
+        // 1. Arrange
+        val actor = mock<IllBeBack>()
+        every { actor.doBackFlip() } returns true
+        val movie = DieHardInADeepenBeek(actor)
+
+        // 2/3 act/assert in one
+        assertDoesNotThrow { movie.recordActOne() }
+    }
+}
+```
+
+`Mockito.mock(MyClass::class.java)` in Mockito wordt `mockk<MyClass>()` in MockK. `When(x.y()).thenReturn(z)` in Mockito wordt `every { x.y() } returns z` in MockK. Merk op dat de assertions niet veranderen: Mockito/MockK zijn mocking frameworks die de **ARRANGE** stap vereenvoudigen, niet de ASSERT stap---dat wordt nog steeds overgelaten aan JUnit 4/5, eventueel bijgestaan door Hamcrest. 
+
+Voor meer voorbeelden, zie `examples/kotlin/mocking` in de cursus git repository. 
+
+## TDD in een groter project
 
 De [SESsy library](/extra/sessy) webapplicatie bevat ook unit-, integratie- en endtoend-testen die een meer 'real-life' omgeving simuleren met een grotere codebase. Zij die zoeken naar een beter begrip van het concept TDD en de implementatie ervan in de dagelijkse wereld, kunnen daar hun oren en ogen de kost geven. We moedigen tevens het wijzigen van testen aan om te kijken wat er gebeurt!
+
 

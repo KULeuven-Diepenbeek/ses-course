@@ -156,9 +156,9 @@ Pas nadat er minstens 4 verschillende testen werden voorzien (standaard gevallen
 <div class="devselect">
 
 ```kt
-fun overlaptMet(ander: Periode): Boolean {
-    return startDatum.isAfter(ander.startDatum) &&
-            eindDatum.isBefore(ander.eindDatum)
+fun overlaptMet(ander: Periode): Boolean =
+    startDatum.isAfter(ander.startDatum) &&
+        eindDatum.isBefore(ander.eindDatum)
 }
 ```
 
@@ -260,10 +260,10 @@ Het tweede voorbeeld leest als een vloeiende zin, terwijl de eerste `AssertEqual
 
 [HamCrest Matchers API Documentation](http://hamcrest.org/JavaHamcrest/javadoc/)
 
-Een populair alternatief voor HamCrest is bijvoorbeeld [AssertJ](https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html). De keuze is aan jou, beide frameworks bieden dezelfde fluent API aan met ongeveer dezelfde features. 
+Een populair alternatief voor HamCrest is bijvoorbeeld [AssertJ](https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html)---en voor Kotlin-only code is [MockK](https://mockk.io/) de betere keuze. De keuze is aan jou: alle frameworks bieden ongeveer dezelfde fluent API aan met ongeveer dezelfde features. 
 
 {{% notice note %}}
-Merk op dat in Kotlin `is` een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase `Is` met behulp van ` import org.hamcrest.CoreMatchers.`\`is\`` as Is` (enkele backtick). Opossing 3: Gebruik een Kotlin-idiomatic assertion framework zoals [assertK](https://www.kotlinresources.com/library/assertk/). 
+Merk op dat in Kotlin `is` een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase `Is` met behulp van ` import org.hamcrest.CoreMatchers.`\`is\`` as Is` (enkele backtick). Opossing 3: Gebruik een Kotlin-idiomatic assertion framework zoals [MockK](https://mockk.io/). Zie [TDD in de praktijk](/tdd/in-de-praktijk) voor meer informatie.
 {{% /notice %}}
 
 #### Arrange, Act, Assert
@@ -584,7 +584,7 @@ Werk een volledige implementatie van `Periode.overlaptMet()` uit, zoals hierbove
 
 ### Opgave 4
 
-{{% notice note %}}
+{{% notice info %}}
 Dit is een vervolgopgave van de code van **Opgave 1**. Werk verder op dat bestaand project, in diezelfde repository!
 {{% /notice %}}
 
@@ -633,7 +633,7 @@ Lees op [https://site.mockito.org](https://site.mockito.org) **hoe** je het fram
 - Hoe gebruik ik de API om een Test Double/mock aan te maken?
 - Hoe valideer ik verwachtingen die ik heb van deze Test Double?
 
-[Het gebruik van Mockito: een uitgewerkt voorbeeld](/tdd/mockito).
+[Het gebruik van Mockito en MockK: een uitgewerkt voorbeeld](/tdd/in-de-praktijk).
 
 ### Opgave 5
 
@@ -643,7 +643,7 @@ Gebruik Selenium IDE om een test scenario op te nemen van de SESsy applicatie. S
 2. Als slechte uitlener, zoek op 'art', klik op detail, klik op uitlenen. Verifieer dat er een boodschap verschijnt dat het gelukt is, en dat de knop veranderde naar 'Terugbrengen?'. Klik op terugbrengen. Verifieer dat er een boodschap verschijnt dat het gelukt is. 
 3. Als anoniempje, log in (een van beide rollen). Verifieer dat login naar logout verandert. Logout. Verifieer dat logout naar login verandert. 
 
-{{% notice note %}}
+{{% notice info %}}
 **Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_ (of `.side` voor nieuwe versies)** in de root de repository van **opgave 1** (de eerste Github Classroom link). 
 {{% /notice %}}
 

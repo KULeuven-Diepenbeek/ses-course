@@ -132,12 +132,10 @@ Waarbij de Facade een klasse is die de details "wegstopt" voor onze HTTP handler
 ```kt
 class UploadClientFacade {
     fun upload(client: Client) {
-        if(settings.isPOST()) {
-            ClientPOSTSender().upload(client)
-        } else if(settings.isFTP()) {
-            ClientFtpSender().upload(client)
-        } else {
-            throw UnsupportedOperationException("settings?")
+        when {
+            settings.isPOST() -> ClientPOSTSender().upload(client)
+            settings.isSFTP() -> ClientFtpSender().upload(client)
+            else -> throw UnsupportedOperationException("settings incorrect?")
         }
     }
 }
@@ -151,12 +149,17 @@ public class UploadClientFacade {
         } else if(settings.isFTP()) {
             new ClientFtpSender().upload(client);
         } else {
-            throw new UnsupportedOperationException("settings?");
+            throw new UnsupportedOperationException("settings incorrect?");
         }
     }
 }
 ```
 </div>
+
+{{% notice note %}}
+Merk op dat in Kotlin de `when { }` block een heel krachtige manier is om selecties te maken. `when` is een expressie, geen statement: dat betekent dat je toekenningen kan doen, zoals `val getal = when(someString) { "twee" -> 2 "drie" -> 3 else -> -1 }`. Zie de [control flow - when expression Kotlin docs](https://kotlinlang.org/docs/control-flow.html#if-expression) voor meer informatie. <br/>
+Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu _Tools - Kotlin - Show Kotlin Bytecode_. Dit wordt in bytecode nog steeds vertaald naar een "simpele(re)" sequentie van Java `if {}` statements. 
+{{% /notice %}}
 
 ### Eigenschappen van dit patroon
 

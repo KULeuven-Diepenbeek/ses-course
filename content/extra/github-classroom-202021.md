@@ -1,10 +1,9 @@
 ---
 title: 'Oefenzittingen: Github Clasroom'
+draft: true
 ---
 
-Onderstaande Github Classroom repositories zijn telkens Gradle projecten. Bewkaam jezelf eerst in de basis van [Gradle](/dependency-management/gradle) als build tool.
-
-Je mag kiezen om oefeningen ofwel in _Java_ ofwel in _Kotlin_ uit te voeren, maar submissies dienen Gradle projecten te zijn! 
+Onderstaande Github Classroom repositories zijn telkens Gradle Java projecten. Bewkaam jezelf eerst in de basis van [Gradle](/dependency-management/gradle) als build tool.
 
 ## <a name="oef"></a>Labo oefeningen
 

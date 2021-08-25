@@ -29,6 +29,7 @@ De DB accessor:
 <div class="devselect">
 
 ```kt
+// eigenlijk is dit al DI: de connectionString wordt meegegeven
 class DBHandle(val connectionString: String) {
     fun getShoppingCart(): ShoppingCart {
         // SELECT * FROM ...
@@ -40,7 +41,7 @@ class DBHandle(val connectionString: String) {
 public class DBHandle {
     private String connectionString;
 
-    // comes from some config file
+    // eigenlijk is dit al DI: de connectionString wordt meegegeven
     public DBHandle(String connectionString) {
         this.connectionString = connectionString;
     }
@@ -87,7 +88,7 @@ Elke Resource klasse die een `DBHandle` instance wenst, zal ook via de `Configur
 
 #### 3. Oplossing
 
-Een mogelijke oplossing is een Singleton maken. Maar dan hebben we nog steeds:
+Een mogelijke oplossing is een Singleton maken: zie [het Singleton pattern](/patterns/singleton). Maar dan hebben we nog steeds:
 
 <div class="devselect">
 
@@ -96,7 +97,7 @@ Een mogelijke oplossing is een Singleton maken. Maar dan hebben we nog steeds:
 class ShoppingResource {
     @GET
     fun getCart(): ShoppingCart {
-        return DBHandle.getInstance().getShoppingCart()
+        return DBHandle.getShoppingCart()
     }
 }
 ```
@@ -113,15 +114,14 @@ public class ShoppingResource {
 
 </div>
 
-Als we deze methode willen testen, door `getCart()` op te roepen, spreken we steeds de échte database aan, wat duidelijk niet het gewenste gedrag is. We willen in dat geval de database **injecteren**. Een tweede stap is om de implementatie te verbergen achter een interface. 
+Als we deze methode willen **unit testen**, door `getCart()` op te roepen, spreken we steeds de échte database aan, wat duidelijk niet het gewenste gedrag is. We willen in dat geval de database **injecteren**. Een tweede stap is om de implementatie te verbergen achter een interface. 
 
 <div class="devselect">
 
 ```kt
 @Path("/shoppingcart")
 class ShoppingResource(val dbHandle: DBHandle) {
-    @GET
-    fun getCart(): ShoppingCart {
+    @GET fun getCart(): ShoppingCart {
         return dbHandle.getShoppingCart()
     }
 }
@@ -145,13 +145,16 @@ public class ShoppingResource {
 </div>
 
 {{% notice note %}}
-Merk op dat de Kotlin implementatie veel korter is dankzij primary constructors: alles tussen de haakjes wordt automatisch omgezet in een veld dat injecteerbaar is. `val` is automatisch `final`.
+Merk op dat de Kotlin implementatie veel korter is dankzij **primary constructors**: alles tussen de haakjes wordt automatisch omgezet in een veld dat injecteerbaar is. Bijkomend, `val` is automatisch een `final` veld.<br/>
+Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu _Tools - Kotlin - Show Kotlin Bytecode_. 
 {{% /notice %}}
 
 Nu weet deze klasse niet meer hoe hij de database aanmaakt: hij krijgt dit slechts toegeschoven via de constructor. Uiteraard hebben we het probleem verlegt: wie maakt deze resource klasse aan? Om dit probleem op te lossen zijn er typische Dependency Injection frameworks beschikbaar die objecten in een pool aanmaken en zo injecteren. Voorbeelden hiervan zijn:
 
 - [Google Guice](https://github.com/google/guice)
+- [Google Dagger](https://github.com/google/dagger) (vooral, maar niet alleen, voor _Android_ development)
 - [Spring Framework](https://spring.io)
+- [Kodein-DI](https://github.com/Kodein-Framework/Kodein-DI) (vooral, maar niet alleen, voor _Kotlin_ projecten)
 
 Als `DBHandle` een interface is, kunnen we op een eenvoudige manier een dummy implementatie maken en dit injecteren in de klasse ter test:
 
@@ -159,7 +162,7 @@ Als `DBHandle` een interface is, kunnen we op een eenvoudige manier een dummy im
 
 ```kt
 class DummyDBHandle : DBHandle {
-    var boolean called = false
+    var called = false
     
     override fun getShoppingCart(): ShoppingCart? {
         called = true
@@ -168,9 +171,9 @@ class DummyDBHandle : DBHandle {
 }
 
 class ShoppingResourceTest {
-    @Test
-    fun getCart_callsGetShoppingCartFromDb() {
+    @Test fun getCart_callsGetShoppingCartFromDb() {
         val dbHandle = DummyDBHandle()
+        // hier "injecteren" we de dbHandle dummy in de ShoppingResource.
         val resource = ShoppingResource(dbHandle)
         resource.getCart()
 
@@ -193,6 +196,7 @@ public class ShoppingResourceTest {
     @Test
     public void getCart_callsGetShoppingCartFromDb() {
         DummyDBHandle dbHandle = new DummyDBHandle();
+        // hier "injecteren" we de dbHandle dummy in de ShoppingResource.
         ShoppingResource resource = new ShoppingResource(dbHandle);
         resource.getCart();
 

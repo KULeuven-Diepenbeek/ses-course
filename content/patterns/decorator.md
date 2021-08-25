@@ -46,9 +46,8 @@ Fabriek X:
 
 ```kt
 class VWGolf : Car {
-    override fun assemble() {
+    override fun assemble() =
         println("do not forget the steering wheel!")
-    }
 }
 ```
 
@@ -68,9 +67,8 @@ Fabriek Y:
 
 ```kt
 class VWScirocco : Car {
-    override fun assemble() {
+    override fun assemble() =
         println("do not forget lots of turbo!")
-    }
 }
 ```
 
@@ -90,9 +88,8 @@ Fabriek Z:
 
 ```kt
 class VWPassat : Car {
-    override fun assemble() {
+    override fun assemble() =
         println("do not forget all the leather!")
-    }
 }
 ```
 
@@ -189,9 +186,8 @@ class Factory {
         return car
     }
 
-    private fun paint(car: Car) {
+    private fun paint(car: Car) =
         println("painting...")
-    }
 }
 ```
 

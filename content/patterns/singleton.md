@@ -114,7 +114,7 @@ We hebben in dit geval een _singleton_ instance nodig:
 class ShoppingResource {
     @GET
     fun getCart(): ShoppingCart {
-        return DBHandle.getInstance().getShoppingCart()
+        return DBHandle.getShoppingCart()
     }
 }
 ```
@@ -163,8 +163,9 @@ public class DBHandle {
 ```
 </div>
 
-{{% notice warning %}}
-Merk op dat [Kotlin ingebouwde features heeft voor singleton](https://blog.mindorks.com/how-to-create-a-singleton-class-in-kotlin): namelijk het `object` keyword dat `class` vervangt in bovenstaande code. Dit is véél meer werk in Java. De "Java way" moet ook gekend zijn!<br/>Bijkomend, Kotlin heeft geen `static` keyword. 
+{{% notice note %}}
+Merk op dat [Kotlin ingebouwde features heeft voor singleton](https://blog.mindorks.com/how-to-create-a-singleton-class-in-kotlin): namelijk het `object` keyword dat `class` vervangt in bovenstaande code. Dit is véél meer werk in Java. De "Java way" moet ook gekend zijn! Bijkomend, Kotlin heeft geen `static` keyword. <br/>
+Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu _Tools - Kotlin - Show Kotlin Bytecode_. Een `object` bevat automatisch een statische referentie naar zichzelf, zoals we in Java handmatig moeten schrijven: `public static final DBHandle INSTANCE;`. Calls naar Kotlin's `DBHandle.getShoppingCart()` worden automatisch vervangen door Java's `DBHandle.INSTANCE.getShoppingCart();`
 {{% /notice %}}
 
 

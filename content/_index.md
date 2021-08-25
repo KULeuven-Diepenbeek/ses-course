@@ -17,7 +17,7 @@ Laatste aanpassingen voor academiejaar _2020 - 2021_.
     -  De [Gradle Build Tool](/dependency-management/gradle/)
     -  [Kotlin-specifics](/dependency-management/kotlin-gradle))
 3. [Test-Driven Development](/tdd): Unit-, Integration- (1) en E2E (2) niveau
-4. [TDD In de praktijk: Mockito](/tdd/mockito)
+4. [TDD In de praktijk](/tdd/in-de-praktijk)
 
 #### Algoritmen & Data Structuren
 
