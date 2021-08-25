@@ -12,20 +12,20 @@
     <title>5.2 Dependency Injection :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1628065327" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1628065327" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1628065327" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1628065327" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1628065327" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1628065327" rel="stylesheet">
-    <link href="../../css/theme.css?1628065327" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1628065327" rel="stylesheet">
+    <link href="../../css/nucleus.css?1629879823" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1629879823" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1629879823" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1629879823" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1629879823" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1629879823" rel="stylesheet">
+    <link href="../../css/theme.css?1629879823" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1629879823" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1628065327" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1629879823" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1628065327"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1629879823"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1628065327"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1628065327"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1629879823"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1629879823"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1628065327"></script>
+<script type="text/javascript" src="../../js/search.js?1629879823"></script>
 
     
   </div>
@@ -234,9 +234,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/tdd/mockito/" title="3.1 TDD In de praktijk: Mockito" class="dd-item ">
-        <a href="../../tdd/mockito/">
-        3.1 TDD In de praktijk: Mockito
+      <li data-nav-id="/tdd/in-de-praktijk/" title="3.1 TDD In de praktijk" class="dd-item ">
+        <a href="../../tdd/in-de-praktijk/">
+        3.1 TDD In de praktijk
         
         </a>
     </li>
@@ -834,7 +834,8 @@ window.MathJax = {
 <p>Als we verder gaan op het voorbeeld van de <a href="../../patterns/singleton">singleton</a>, zien we dat een database handle nodig is om shopping cart gegevens op te halen. Hoe deze database wordt aangemaakt, daar heeft een typische API geen kaas van gegeten: daar komt meestal een connection string bij kijken met gebruikersnaam, wachtwoord, en IP adres naar de juiste DB server.</p>
 <p>De DB accessor:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DBHandle</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">connectionString</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75715e">// eigenlijk is dit al DI: de connectionString wordt meegegeven
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">DBHandle</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">connectionString</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">)</span> <span style="color:#111">{</span>
     <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
         <span style="color:#75715e">// SELECT * FROM ...
 </span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
@@ -842,7 +843,7 @@ window.MathJax = {
 </code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DBHandle</span> <span style="color:#f92672">{</span>
     <span style="color:#00a8c8">private</span> <span style="color:#111">String</span> <span style="color:#111">connectionString</span><span style="color:#f92672">;</span>
 
-    <span style="color:#75715e">// comes from some config file
+    <span style="color:#75715e">// eigenlijk is dit al DI: de connectionString wordt meegegeven
 </span><span style="color:#75715e"></span>    <span style="color:#00a8c8">public</span> <span style="color:#75af00">DBHandle</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">connectionString</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">connectionString</span> <span style="color:#f92672">=</span> <span style="color:#111">connectionString</span><span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
@@ -874,13 +875,13 @@ window.MathJax = {
 <h4 id="2-probleemstelling">2. Probleemstelling</h4>
 <p>Elke Resource klasse die een <code>DBHandle</code> instance wenst, zal ook via de <code>ConfigurationManager</code> het constructor argument moeten ophalen, om een instantie te kunnen aanmaken. Dit is uiteraard <strong>niet</strong> de juiste manier en introduceert veel duplicatie. Nu is de shopping resource &ldquo;in control&rdquo;, terwijl we in dat geval de Database de controle willen geven: <strong>Inversion of Control</strong> dus.</p>
 <h4 id="3-oplossing">3. Oplossing</h4>
-<p>Een mogelijke oplossing is een Singleton maken. Maar dan hebben we nog steeds:</p>
+<p>Een mogelijke oplossing is een Singleton maken: zie <a href="../../patterns/singleton">het Singleton pattern</a>. Maar dan hebben we nog steeds:</p>
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
 <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#111">{</span>
     <span style="color:#75af00">@GET</span>
     <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#111">DBHandle</span><span style="color:#111">.</span><span style="color:#111">getInstance</span><span style="color:#111">().</span><span style="color:#111">getShoppingCart</span><span style="color:#111">()</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">DBHandle</span><span style="color:#111">.</span><span style="color:#111">getShoppingCart</span><span style="color:#111">()</span>
     <span style="color:#111">}</span>
 <span style="color:#111">}</span>
 </code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Path</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#f92672">)</span>
@@ -891,12 +892,11 @@ window.MathJax = {
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div></div>
-<p>Als we deze methode willen testen, door <code>getCart()</code> op te roepen, spreken we steeds de échte database aan, wat duidelijk niet het gewenste gedrag is. We willen in dat geval de database <strong>injecteren</strong>. Een tweede stap is om de implementatie te verbergen achter een interface.</p>
+<p>Als we deze methode willen <strong>unit testen</strong>, door <code>getCart()</code> op te roepen, spreken we steeds de échte database aan, wat duidelijk niet het gewenste gedrag is. We willen in dat geval de database <strong>injecteren</strong>. Een tweede stap is om de implementatie te verbergen achter een interface.</p>
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
 <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">dbHandle</span><span style="color:#111">:</span> <span style="color:#111">DBHandle</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">@GET</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">@GET</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
         <span style="color:#00a8c8">return</span> <span style="color:#111">dbHandle</span><span style="color:#111">.</span><span style="color:#111">getShoppingCart</span><span style="color:#111">()</span>
     <span style="color:#111">}</span>
 <span style="color:#111">}</span>
@@ -915,18 +915,21 @@ window.MathJax = {
 <span style="color:#f92672">}</span>
 </code></pre></div></div>
 
-<div class="notices note" ><p>Merk op dat de Kotlin implementatie veel korter is dankzij primary constructors: alles tussen de haakjes wordt automatisch omgezet in een veld dat injecteerbaar is. <code>val</code> is automatisch <code>final</code>.</p>
+<div class="notices note" ><p>Merk op dat de Kotlin implementatie veel korter is dankzij <strong>primary constructors</strong>: alles tussen de haakjes wordt automatisch omgezet in een veld dat injecteerbaar is. Bijkomend, <code>val</code> is automatisch een <code>final</code> veld.<br/>
+Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu <em>Tools - Kotlin - Show Kotlin Bytecode</em>.</p>
 </div>
 
 <p>Nu weet deze klasse niet meer hoe hij de database aanmaakt: hij krijgt dit slechts toegeschoven via de constructor. Uiteraard hebben we het probleem verlegt: wie maakt deze resource klasse aan? Om dit probleem op te lossen zijn er typische Dependency Injection frameworks beschikbaar die objecten in een pool aanmaken en zo injecteren. Voorbeelden hiervan zijn:</p>
 <ul>
 <li><a href="https://github.com/google/guice">Google Guice</a></li>
+<li><a href="https://github.com/google/dagger">Google Dagger</a> (vooral, maar niet alleen, voor <em>Android</em> development)</li>
 <li><a href="https://spring.io">Spring Framework</a></li>
+<li><a href="https://github.com/Kodein-Framework/Kodein-DI">Kodein-DI</a> (vooral, maar niet alleen, voor <em>Kotlin</em> projecten)</li>
 </ul>
 <p>Als <code>DBHandle</code> een interface is, kunnen we op een eenvoudige manier een dummy implementatie maken en dit injecteren in de klasse ter test:</p>
 <div class="devselect">
 <div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DummyDBHandle</span> <span style="color:#111">:</span> <span style="color:#111">DBHandle</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">var</span> <span style="color:#111">boolean</span> <span style="color:#111">called</span> <span style="color:#111">=</span> <span style="color:#00a8c8">false</span>
+    <span style="color:#00a8c8">var</span> <span style="color:#111">called</span> <span style="color:#111">=</span> <span style="color:#00a8c8">false</span>
     
     <span style="color:#00a8c8">override</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span><span style="color:#111">?</span> <span style="color:#111">{</span>
         <span style="color:#111">called</span> <span style="color:#111">=</span> <span style="color:#00a8c8">true</span>
@@ -935,10 +938,10 @@ window.MathJax = {
 <span style="color:#111">}</span>
 
 <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResourceTest</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">@Test</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart_callsGetShoppingCartFromDb</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">@Test</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart_callsGetShoppingCartFromDb</span><span style="color:#111">()</span> <span style="color:#111">{</span>
         <span style="color:#00a8c8">val</span> <span style="color:#111">dbHandle</span> <span style="color:#111">=</span> <span style="color:#111">DummyDBHandle</span><span style="color:#111">()</span>
-        <span style="color:#00a8c8">val</span> <span style="color:#111">resource</span> <span style="color:#111">=</span> <span style="color:#111">ShoppingResource</span><span style="color:#111">(</span><span style="color:#111">dbHandle</span><span style="color:#111">)</span>
+        <span style="color:#75715e">// hier &#34;injecteren&#34; we de dbHandle dummy in de ShoppingResource.
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">resource</span> <span style="color:#111">=</span> <span style="color:#111">ShoppingResource</span><span style="color:#111">(</span><span style="color:#111">dbHandle</span><span style="color:#111">)</span>
         <span style="color:#111">resource</span><span style="color:#111">.</span><span style="color:#111">getCart</span><span style="color:#111">()</span>
 
         <span style="color:#111">assertThat</span><span style="color:#111">(</span><span style="color:#111">dbHandle</span><span style="color:#111">.</span><span style="color:#111">called</span><span style="color:#111">,</span> <span style="color:#111">Is</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">))</span>
@@ -957,7 +960,8 @@ window.MathJax = {
     <span style="color:#75af00">@Test</span>
     <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">getCart_callsGetShoppingCartFromDb</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#111">DummyDBHandle</span> <span style="color:#111">dbHandle</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DummyDBHandle</span><span style="color:#f92672">();</span>
-        <span style="color:#111">ShoppingResource</span> <span style="color:#111">resource</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ShoppingResource</span><span style="color:#f92672">(</span><span style="color:#111">dbHandle</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">// hier &#34;injecteren&#34; we de dbHandle dummy in de ShoppingResource.
+</span><span style="color:#75715e"></span>        <span style="color:#111">ShoppingResource</span> <span style="color:#111">resource</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ShoppingResource</span><span style="color:#f92672">(</span><span style="color:#111">dbHandle</span><span style="color:#f92672">);</span>
         <span style="color:#111">resource</span><span style="color:#f92672">.</span><span style="color:#75af00">getCart</span><span style="color:#f92672">();</span>
 
         <span style="color:#111">assertThat</span><span style="color:#f92672">(</span><span style="color:#111">dbHandle</span><span style="color:#f92672">.</span><span style="color:#75af00">called</span><span style="color:#f92672">,</span> <span style="color:#111">is</span><span style="color:#f92672">(</span><span style="color:#00a8c8">true</span><span style="color:#f92672">));</span>
@@ -1465,17 +1469,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1628065328"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1628065328"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1628065328"></script>
-    <script src="../../js/jquery.sticky.js?1628065328"></script>
-    <script src="../../js/featherlight.min.js?1628065328"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1628065328"></script>
-    <script src="../../js/learn.js?1628065328"></script>
-    <script src="../../js/hugo-learn.js?1628065328"></script>
+    <script src="../../js/clipboard.min.js?1629879824"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1629879824"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1629879824"></script>
+    <script src="../../js/jquery.sticky.js?1629879824"></script>
+    <script src="../../js/featherlight.min.js?1629879824"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1629879824"></script>
+    <script src="../../js/learn.js?1629879824"></script>
+    <script src="../../js/hugo-learn.js?1629879824"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1628065328"></script>
+            <script src="../../mermaid/mermaid.js?1629879824"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

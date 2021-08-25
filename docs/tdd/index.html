@@ -12,20 +12,20 @@
     <title>3. Test Driven Development :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1628065328" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1628065328" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1628065328" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1628065328" rel="stylesheet">
-    <link href="../css/auto-complete.css?1628065328" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1628065328" rel="stylesheet">
-    <link href="../css/theme.css?1628065328" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1628065328" rel="stylesheet">
+    <link href="../css/nucleus.css?1629879824" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1629879824" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1629879824" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1629879824" rel="stylesheet">
+    <link href="../css/auto-complete.css?1629879824" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1629879824" rel="stylesheet">
+    <link href="../css/theme.css?1629879824" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1629879824" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1628065328" rel="stylesheet">
+    <link href="../css/theme-kul.css?1629879824" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1628065328"></script>
+    <script src="../js/jquery-3.3.1.min.js?1629879824"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1628065328"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1628065328"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1629879824"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1629879824"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1628065328"></script>
+<script type="text/javascript" src="../js/search.js?1629879824"></script>
 
     
   </div>
@@ -234,9 +234,9 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/tdd/mockito/" title="3.1 TDD In de praktijk: Mockito" class="dd-item ">
-        <a href="../tdd/mockito/">
-        3.1 TDD In de praktijk: Mockito
+      <li data-nav-id="/tdd/in-de-praktijk/" title="3.1 TDD In de praktijk" class="dd-item ">
+        <a href="../tdd/in-de-praktijk/">
+        3.1 TDD In de praktijk
         
         </a>
     </li>
@@ -941,9 +941,9 @@ graph LR;
 <h4 id="2-schrijf-implementatie">2. Schrijf Implementatie</h4>
 <p>Pas nadat er minstens 4 verschillende testen werden voorzien (standaard gevallen, edge cases, null cases, &hellip;), kan aan met een gerust hart aan de implementatie worden gewerkt:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">fun</span> <span style="color:#75af00">overlaptMet</span><span style="color:#111">(</span><span style="color:#111">ander</span><span style="color:#111">:</span> <span style="color:#111">Periode</span><span style="color:#111">):</span> <span style="color:#111">Boolean</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">return</span> <span style="color:#111">startDatum</span><span style="color:#111">.</span><span style="color:#111">isAfter</span><span style="color:#111">(</span><span style="color:#111">ander</span><span style="color:#111">.</span><span style="color:#111">startDatum</span><span style="color:#111">)</span> <span style="color:#f92672">&amp;&amp;</span>
-            <span style="color:#111">eindDatum</span><span style="color:#111">.</span><span style="color:#111">isBefore</span><span style="color:#111">(</span><span style="color:#111">ander</span><span style="color:#111">.</span><span style="color:#111">eindDatum</span><span style="color:#111">)</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">fun</span> <span style="color:#75af00">overlaptMet</span><span style="color:#111">(</span><span style="color:#111">ander</span><span style="color:#111">:</span> <span style="color:#111">Periode</span><span style="color:#111">):</span> <span style="color:#111">Boolean</span> <span style="color:#111">=</span>
+    <span style="color:#111">startDatum</span><span style="color:#111">.</span><span style="color:#111">isAfter</span><span style="color:#111">(</span><span style="color:#111">ander</span><span style="color:#111">.</span><span style="color:#111">startDatum</span><span style="color:#111">)</span> <span style="color:#f92672">&amp;&amp;</span>
+        <span style="color:#111">eindDatum</span><span style="color:#111">.</span><span style="color:#111">isBefore</span><span style="color:#111">(</span><span style="color:#111">ander</span><span style="color:#111">.</span><span style="color:#111">eindDatum</span><span style="color:#111">)</span>
 <span style="color:#111">}</span>
 </code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">boolean</span> <span style="color:#75af00">overlaptMet</span><span style="color:#f92672">(</span><span style="color:#111">Periode</span> <span style="color:#111">anderePeriode</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     <span style="color:#00a8c8">return</span> <span style="color:#111">startDatum</span><span style="color:#f92672">.</span><span style="color:#75af00">after</span><span style="color:#f92672">(</span><span style="color:#111">anderePeriode</span><span style="color:#f92672">.</span><span style="color:#75af00">startDatum</span><span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> 
@@ -1016,9 +1016,9 @@ graph LR;
 </code></pre></div></div>
 <p>Het tweede voorbeeld leest als een vloeiende zin, terwijl de eerste <code>AssertEquals()</code> vereist dat als eerste argument de expected value wordt meegegeven - dit is vaak het omgekeerde van wat wij verwachten!</p>
 <p><a href="http://hamcrest.org/JavaHamcrest/javadoc/">HamCrest Matchers API Documentation</a></p>
-<p>Een populair alternatief voor HamCrest is bijvoorbeeld <a href="https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html">AssertJ</a>. De keuze is aan jou, beide frameworks bieden dezelfde fluent API aan met ongeveer dezelfde features.</p>
+<p>Een populair alternatief voor HamCrest is bijvoorbeeld <a href="https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html">AssertJ</a>&mdash;en voor Kotlin-only code is <a href="https://mockk.io/">MockK</a> de betere keuze. De keuze is aan jou: alle frameworks bieden ongeveer dezelfde fluent API aan met ongeveer dezelfde features.</p>
 
-<div class="notices note" ><p>Merk op dat in Kotlin <code>is</code> een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase <code>Is</code> met behulp van <code> import org.hamcrest.CoreMatchers.</code>`is`<code> as Is</code> (enkele backtick). Opossing 3: Gebruik een Kotlin-idiomatic assertion framework zoals <a href="https://www.kotlinresources.com/library/assertk/">assertK</a>.</p>
+<div class="notices note" ><p>Merk op dat in Kotlin <code>is</code> een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase <code>Is</code> met behulp van <code> import org.hamcrest.CoreMatchers.</code>`is`<code> as Is</code> (enkele backtick). Opossing 3: Gebruik een Kotlin-idiomatic assertion framework zoals <a href="https://mockk.io/">MockK</a>. Zie <a href="../tdd/in-de-praktijk">TDD in de praktijk</a> voor meer informatie.</p>
 </div>
 
 <h4 id="arrange-act-assert">Arrange, Act, Assert</h4>
@@ -1267,7 +1267,7 @@ maar hij heeft geen tijd om dit op te lossen. Nu is het aan jou.</p>
 <p>Werk een volledige implementatie van <code>Periode.overlaptMet()</code> uit, zoals hierboven uitgelegd.</p>
 <h3 id="opgave-4">Opgave 4</h3>
 
-<div class="notices note" ><p>Dit is een vervolgopgave van de code van <strong>Opgave 1</strong>. Werk verder op dat bestaand project, in diezelfde repository!</p>
+<div class="notices info" ><p>Dit is een vervolgopgave van de code van <strong>Opgave 1</strong>. Werk verder op dat bestaand project, in diezelfde repository!</p>
 </div>
 
 <p>Een verkoopster werkt in een (goede) speculaasfabriek. De verkoopster wilt graag 2 EUR aanrekenen per speculaas die de fabriek produceert.
@@ -1306,7 +1306,7 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
 <li>Hoe gebruik ik de API om een Test Double/mock aan te maken?</li>
 <li>Hoe valideer ik verwachtingen die ik heb van deze Test Double?</li>
 </ul>
-<p><a href="../tdd/mockito">Het gebruik van Mockito: een uitgewerkt voorbeeld</a>.</p>
+<p><a href="../tdd/in-de-praktijk">Het gebruik van Mockito en MockK: een uitgewerkt voorbeeld</a>.</p>
 <h3 id="opgave-5">Opgave 5</h3>
 <p>Gebruik Selenium IDE om een test scenario op te nemen van de SESsy applicatie. Start deze eerst lokaal, en vertrek vanuit het localhost base address <a href="http://localhost:8080/#/">http://localhost:8080/#/</a>. Hanteer de volgende scenario&rsquo;s:</p>
 <ol>
@@ -1315,7 +1315,7 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
 <li>Als anoniempje, log in (een van beide rollen). Verifieer dat login naar logout verandert. Logout. Verifieer dat logout naar login verandert.</li>
 </ol>
 
-<div class="notices note" ><p><strong>Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand <em>opgave5.html</em> (of <code>.side</code> voor nieuwe versies)</strong> in de root de repository van <strong>opgave 1</strong> (de eerste Github Classroom link).</p>
+<div class="notices info" ><p><strong>Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand <em>opgave5.html</em> (of <code>.side</code> voor nieuwe versies)</strong> in de root de repository van <strong>opgave 1</strong> (de eerste Github Classroom link).</p>
 </div>
 
 <p>Je zal voor deze opgave dus de lokale <a href="../extra/sessy">SESsy applicatie</a> moeten starten, en de Selenium (Chromium/Firefox) plugin moeten installeren: zie hierboven.</p>
@@ -1787,7 +1787,7 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
 			<a class="nav nav-prev" href="../dependency-management/kotlin-gradle/" title="2.2 Kotlin Gradle projecten"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../tdd/mockito/" title="3.1 TDD In de praktijk: Mockito" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../tdd/in-de-praktijk/" title="3.1 TDD In de praktijk" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1797,17 +1797,17 @@ Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worde
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1628065328"></script>
-    <script src="../js/perfect-scrollbar.min.js?1628065328"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1628065328"></script>
-    <script src="../js/jquery.sticky.js?1628065328"></script>
-    <script src="../js/featherlight.min.js?1628065328"></script>
-    <script src="../js/modernizr.custom-3.6.0.js?1628065328"></script>
-    <script src="../js/learn.js?1628065328"></script>
-    <script src="../js/hugo-learn.js?1628065328"></script>
+    <script src="../js/clipboard.min.js?1629879824"></script>
+    <script src="../js/perfect-scrollbar.min.js?1629879824"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1629879824"></script>
+    <script src="../js/jquery.sticky.js?1629879824"></script>
+    <script src="../js/featherlight.min.js?1629879824"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1629879824"></script>
+    <script src="../js/learn.js?1629879824"></script>
+    <script src="../js/hugo-learn.js?1629879824"></script>
     
         
-            <script src="../mermaid/mermaid.js?1628065328"></script>
+            <script src="../mermaid/mermaid.js?1629879824"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
