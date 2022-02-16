@@ -40,7 +40,18 @@ Onderstaande Figuur geeft het verschil weer tussen een _gecentraliseerd_ version
 
 ([Image Src](http://sgdev-blog.blogspot.com/2014_03_01_archive.html))
 
-Vanaf nu wordt verondersteld dat labo oefeningen gecommit worden in `git` op [Github.com](https://github.com): een zeer populair open source software ontwikkelingsplatform dat gebruiksvriendelijk is. Het [Pro Git](https://git-scm.com/book/en/v2) handboek leert je alles over de werking van git. (['git - the simple guide'](http://rogerdudler.github.io/git-guide/) helpt ook)
+Vanaf nu wordt verondersteld dat labo oefeningen gecommit worden in `git` op [Github.com](https://github.com): een zeer populair open source software ontwikkelingsplatform dat gebruiksvriendelijk is. Andere populaire platformen zijn Gitlab, Codeberg, Gitea (self-hosted), ... Deze software platformen voorzien een extra laag bovenop Git (de web UI) die het makkelijk maakt op via knoppen acties uit te voeren. Het voegt ook een social media esque aspect toe: comments, requests, issues, ... 
+
+Wat is de beste manier om vanaf nul te leren werken met Git? 
+
+1. [git - the simple guide](http://rogerdudler.github.io/git-guide/); en daarna:
+2. Het [Pro Git](https://git-scm.com/book/en/v2) handboek.
+
+
+{{% notice note %}}
+SVN, RCS, MS SourceSafe, CVS, ... zijn allemaal **version control systemen** (VCS). Merk op dat Git géén klassieke "version control" is maar eerder een collaboratieve tool om met meerdere personen tegelijkertijd aan verschillende versies van een project te werken. Er is geen revisienummer dat op elkaar volgt zoals in CVS of SVN (v1, v2, v3, v'), en er is geen logische timestamp. (Zie [git is not revision control](https://blog.feld.me/posts/2018/01/git-is-not-revision-control/)).
+Ook, in tegenstelling tot bovenstaande tools, kan je Git ook compleet lokaal gebruiken, zonder ooit te pushen naar een upstream server. Het is dus "self-sufficient": er is geen "server" nodig: dat is je PC zelf. 
+{{% /notice %}}
 
 ### De Git workflow
 
@@ -133,6 +144,8 @@ Een `git pull` commando zal soms in de console 'new branch [branchnaam]' afdrukk
 2. Selecteer een bepaalde branch, waarschijnlijk `origin/[naam]`
 3. Track die branch lokaal met `git branch --track [naam] origin/[naam]`
 4. Vanaf nu kan je ook switchen naar die branch, controleer met `git branch`
+
+Merk op dat een branch verwijderen met `git branch -d` enkel gaat bij _lokale branches_. Een _remote_ branch verwijderen wordt niet met het `branch` subcommando gedaan, maar met `git push origin --delete [branch1] [branch2] ...`.
 
 ## Bug tracking met Github
 

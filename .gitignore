@@ -3,6 +3,8 @@
 
 *.class
 
+.hugo_build.lock
+
 .idea/
 .gradle/
 out/

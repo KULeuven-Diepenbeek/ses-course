@@ -4,7 +4,7 @@ title: 'Software Engineering Skills'
 
 # Software Engineering Skills
 
-Laatste aanpassingen voor academiejaar _2020 - 2021_.
+Laatste aanpassingen voor academiejaar _2021 - 2022_.
 
 ## _Cursus notities_
 
