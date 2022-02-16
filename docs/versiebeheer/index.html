@@ -12,20 +12,20 @@
     <title>1. Versie- en issuebeheer :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1629879824" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1629879824" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1629879824" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1629879824" rel="stylesheet">
-    <link href="../css/auto-complete.css?1629879824" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1629879824" rel="stylesheet">
-    <link href="../css/theme.css?1629879824" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1629879824" rel="stylesheet">
+    <link href="../css/nucleus.css?1645021901" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1645021901" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1645021901" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1645021901" rel="stylesheet">
+    <link href="../css/auto-complete.css?1645021901" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1645021901" rel="stylesheet">
+    <link href="../css/theme.css?1645021901" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1645021901" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1629879824" rel="stylesheet">
+    <link href="../css/theme-kul.css?1645021901" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1629879824"></script>
+    <script src="../js/jquery-3.3.1.min.js?1645021901"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1629879824"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1629879824"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1645021901"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1645021901"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1629879824"></script>
+<script type="text/javascript" src="../js/search.js?1645021901"></script>
 
     
   </div>
@@ -591,27 +591,6 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/extra/examen-202021/" title="Examen feedback 2020-2021" class="dd-item ">
-        <a href="../extra/examen-202021/">
-        Examen feedback 2020-2021
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/extra/sessy-extending/" title="Extending the SESsy WebApp" class="dd-item ">
         <a href="../extra/sessy-extending/">
         Extending the SESsy WebApp
@@ -856,7 +835,17 @@ Wat is de beste manier om source code te bewaren?</p>
 </figure>
 </p>
 <p>(<a href="http://sgdev-blog.blogspot.com/2014_03_01_archive.html">Image Src</a>)</p>
-<p>Vanaf nu wordt verondersteld dat labo oefeningen gecommit worden in <code>git</code> op <a href="https://github.com">Github.com</a>: een zeer populair open source software ontwikkelingsplatform dat gebruiksvriendelijk is. Het <a href="https://git-scm.com/book/en/v2">Pro Git</a> handboek leert je alles over de werking van git. (<a href="http://rogerdudler.github.io/git-guide/">&lsquo;git - the simple guide&rsquo;</a> helpt ook)</p>
+<p>Vanaf nu wordt verondersteld dat labo oefeningen gecommit worden in <code>git</code> op <a href="https://github.com">Github.com</a>: een zeer populair open source software ontwikkelingsplatform dat gebruiksvriendelijk is. Andere populaire platformen zijn Gitlab, Codeberg, Gitea (self-hosted), &hellip; Deze software platformen voorzien een extra laag bovenop Git (de web UI) die het makkelijk maakt op via knoppen acties uit te voeren. Het voegt ook een social media esque aspect toe: comments, requests, issues, &hellip;</p>
+<p>Wat is de beste manier om vanaf nul te leren werken met Git?</p>
+<ol>
+<li><a href="http://rogerdudler.github.io/git-guide/">git - the simple guide</a>; en daarna:</li>
+<li>Het <a href="https://git-scm.com/book/en/v2">Pro Git</a> handboek.</li>
+</ol>
+
+<div class="notices note" ><p>SVN, RCS, MS SourceSafe, CVS, &hellip; zijn allemaal <strong>version control systemen</strong> (VCS). Merk op dat Git géén klassieke &ldquo;version control&rdquo; is maar eerder een collaboratieve tool om met meerdere personen tegelijkertijd aan verschillende versies van een project te werken. Er is geen revisienummer dat op elkaar volgt zoals in CVS of SVN (v1, v2, v3, v'), en er is geen logische timestamp. (Zie <a href="https://blog.feld.me/posts/2018/01/git-is-not-revision-control/">git is not revision control</a>).
+Ook, in tegenstelling tot bovenstaande tools, kan je Git ook compleet lokaal gebruiken, zonder ooit te pushen naar een upstream server. Het is dus &ldquo;self-sufficient&rdquo;: er is geen &ldquo;server&rdquo; nodig: dat is je PC zelf.</p>
+</div>
+
 <h3 id="de-git-workflow">De Git workflow</h3>
 <p>Een typische workflow is als volgt:</p>
 <ol>
@@ -938,6 +927,7 @@ Wouters-Air:sessylibrary wgroeneveld$ git branch
 <li>Track die branch lokaal met <code>git branch --track [naam] origin/[naam]</code></li>
 <li>Vanaf nu kan je ook switchen naar die branch, controleer met <code>git branch</code></li>
 </ol>
+<p>Merk op dat een branch verwijderen met <code>git branch -d</code> enkel gaat bij <em>lokale branches</em>. Een <em>remote</em> branch verwijderen wordt niet met het <code>branch</code> subcommando gedaan, maar met <code>git push origin --delete [branch1] [branch2] ...</code>.</p>
 <h2 id="bug-tracking-met-github">Bug tracking met Github</h2>
 <p>Enkele &lsquo;kleine probleempjes&rsquo; in software worden al snel een hele berg aan grote problemen als er niet op tijd iets aan wordt gedaan. Bedrijven beheren deze problemen (<em>issues</em>) met een bug tracking systeem, waar alle door klant of collega gemeldde fouten van het systeem in worden gelogd en opgevolgd. Op die manier kan een ontwikkelaar op zoek naar werk in deze lijst de hoge prioritaire problemen identificeren, oplossen, en terug koppelen naar de melder.</p>
 <script defer src="../mermaid/mermaid.js">
@@ -1434,22 +1424,6 @@ graph LR;
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -1475,17 +1449,17 @@ graph LR;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1629879824"></script>
-    <script src="../js/perfect-scrollbar.min.js?1629879824"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1629879824"></script>
-    <script src="../js/jquery.sticky.js?1629879824"></script>
-    <script src="../js/featherlight.min.js?1629879824"></script>
-    <script src="../js/modernizr.custom-3.6.0.js?1629879824"></script>
-    <script src="../js/learn.js?1629879824"></script>
-    <script src="../js/hugo-learn.js?1629879824"></script>
+    <script src="../js/clipboard.min.js?1645021901"></script>
+    <script src="../js/perfect-scrollbar.min.js?1645021901"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1645021901"></script>
+    <script src="../js/jquery.sticky.js?1645021901"></script>
+    <script src="../js/featherlight.min.js?1645021901"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1645021901"></script>
+    <script src="../js/learn.js?1645021901"></script>
+    <script src="../js/hugo-learn.js?1645021901"></script>
     
         
-            <script src="../mermaid/mermaid.js?1629879824"></script>
+            <script src="../mermaid/mermaid.js?1645021901"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
