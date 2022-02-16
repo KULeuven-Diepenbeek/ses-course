@@ -128,6 +128,8 @@ Wouters-Air:sessylibrary wgroeneveld$ git branch
   master
 </pre>
 
+Merk op dat eerst branchen en dan die branch uitchecken sneller gaat met `bit checkout -b`---_enkel_ als die branch not niet bestaat.
+
 Een branch lokaal committen kan altijd, maar een `push` kan de volgende fout geven: _fatal: The current branch bugfixbranch has no upstream branch._ In dat geval dien je de branch 'upstream' te pushen naar de Github server door middel van `git push --set-upstream origin bugfixbranch`.
 
 Na een branch commit is de volgende knop zichtbaar op Github:
@@ -135,6 +137,10 @@ Na een branch commit is de volgende knop zichtbaar op Github:
 ![](/img/teaching/ses/github_compare.png)
 
 De **Compare &amp; Pull Request** knop maakt het mogelijk om wijzigingen op de bugfixbranch tot op de master branch te brengen. Dit kan ook via het commando `git merge bugfixbranch` in de master branch. Een demo toont dit aan. Daarna hebben we de branch niet meer nodig: `git branch -d bugfixbranch`. Merk op dat dit enkel _lokaal_ de kopie van de branch verwijderd. De remote, op Github.com, verwijderen, vereist meer werk: `git push origin --delete bugfixbranch`.
+
+{{% notice note %}}
+Geen idee wat de mogelijke opties zijn van een bepaald subcommando? Gebruik `git help [cmd]`, bijvoorbeeld `git help branch`. 
+{{% /notice %}}
 
 #### Ik zie niet alle branches, hoe komt dat?
 
