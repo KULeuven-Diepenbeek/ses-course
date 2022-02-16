@@ -12,20 +12,20 @@
     <title>Gebruikte Software :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1629879823" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1629879823" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1629879823" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1629879823" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1629879823" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1629879823" rel="stylesheet">
-    <link href="../../css/theme.css?1629879823" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1629879823" rel="stylesheet">
+    <link href="../../css/nucleus.css?1645021900" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1645021900" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1645021900" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1645021900" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1645021900" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1645021900" rel="stylesheet">
+    <link href="../../css/theme.css?1645021900" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1645021900" rel="stylesheet">
     
-    <link href="../../css/theme-kul.css?1629879823" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1645021900" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1629879823"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1645021900"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1629879823"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1629879823"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1645021900"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1645021900"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1629879823"></script>
+<script type="text/javascript" src="../../js/search.js?1645021900"></script>
 
     
   </div>
@@ -591,27 +591,6 @@ window.MathJax = {
  
   
     
-      <li data-nav-id="/extra/examen-202021/" title="Examen feedback 2020-2021" class="dd-item ">
-        <a href="../../extra/examen-202021/">
-        Examen feedback 2020-2021
-        
-        </a>
-    </li>
-     
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
       <li data-nav-id="/extra/sessy-extending/" title="Extending the SESsy WebApp" class="dd-item ">
         <a href="../../extra/sessy-extending/">
         Extending the SESsy WebApp
@@ -782,6 +761,7 @@ window.MathJax = {
       <ul>
         <li><a href="#installatieinstructies-jdk">Installatieinstructies JDK</a></li>
         <li><a href="#installatieinstructies-gradle">Installatieinstructies Gradle</a></li>
+        <li><a href="#installatieinstructies-intellij">Installatieinstructies IntelliJ</a></li>
       </ul>
     </li>
   </ul>
@@ -808,7 +788,7 @@ window.MathJax = {
         
 
 
-<p>Voor deze cursus werken we met Java en met Git. Dat betekent dat <strong>een JDK</strong> (en de Gradle build tool) en een <strong>Git client</strong> de enige vereisten zijn.</p>
+<p>Voor deze cursus werken we met Java en met Git. Dat betekent dat <strong>JDK 15.0.2</strong> (en de Gradle build tool, <code>v6.7</code>) en een <strong>Git client</strong> de enige vereisten zijn.</p>
 <p>Onderstaande lijst kan helpen bij het installeren en configureren van zulke tools:</p>
 <h2 id="commandline-tools">Commandline Tools</h2>
 <ul>
@@ -823,12 +803,18 @@ window.MathJax = {
 </ul>
 <p><strong>Let op</strong>, bovenstaande tools mixen kan grote negatieve gevolgen hebben, iedere GNU flavor werkt op een andere manier en ze bëinvloeden allemaal je <code>%PATH%</code> systeen variabele (Unix: <code>$PATH</code>)</p>
 <h2 id="software-development-tools">Software Development Tools</h2>
-<ul>
-<li><a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a></li>
-<li><a href="https://www.oracle.com/java/technologies/javase-downloads.html">Java Development Kit 15.x of later</a></li>
-</ul>
-<p>De IntelliJ community edition is voldoende. Studenten krijgen een gratis licentie op alle JetBrains producten. Registreer op de website met je <code>@student.uhasselt.be</code> e-mail adres zodat het bedrijf herkent dat je studeert aan een Universitaire Instelling.</p>
 <h3 id="installatieinstructies-jdk">Installatieinstructies JDK</h3>
+<h4 id="1-install-jdk">1. Install JDK</h4>
+<p>Via:</p>
+<ul>
+<li><a href="https://jdk.java.net/archive/">https://jdk.java.net/archive/</a> zonder in te loggen, of</li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/archive/">https://www.oracle.com/java/technologies/downloads/archive/</a> (Oracle account vereist).</li>
+</ul>
+
+<div class="notices warning" ><p>De exacte JDK versie is erg belangrijk. Installeer versie <code>15.0.2</code>.</p>
+</div>
+
+<h4 id="2-set-java_home">2. Set JAVA_HOME</h4>
 <p><strong>Windows gebruikers</strong>: volg De <a href="https://howtodoinjava.com/java/basics/install-java-on-64-bit-windows/">HowToDoInJava Installing Java on 64 bit Windows</a> guide om jullie <code>%PATH%</code> en <code>%JAVA_HOME%</code> omgevingsvariabelen correct op te zetten.</p>
 <p>Als alles gelukt is, kan je in een opdrachtprompt <code>java -version</code> typen en krijg je als resultaat de geïnstalleerde Java versie.</p>
 <p><strong>Unix gebruikers</strong>: Editeer jullie <code>~/.bash_profile</code> , <code>~/.bashrc</code> of <code>~/.zshrc</code>, afhankelijk van de gebruikte cmdline <code>$SHELL</code>, en voeg de <code>$JAVA_HOME</code> variabele toe op de volgende manier (pas het pad aan):</p>
@@ -836,6 +822,13 @@ window.MathJax = {
 <span style="color:#111">export</span> <span style="color:#111">PATH</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;</span><span style="color:#111">$JAVA_HOME</span><span style="color:#d88200">/bin:</span><span style="color:#111">$PATH</span><span style="color:#d88200">&#34;</span>
 </code></pre></div><h3 id="installatieinstructies-gradle">Installatieinstructies Gradle</h3>
 <p><strong>NIET</strong> apart installeren - dit wordt automatisch gedownload bij het bootstrappen van een Gradle project.</p>
+<h3 id="installatieinstructies-intellij">Installatieinstructies IntelliJ</h3>
+<ul>
+<li><a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a></li>
+<li><a href="https://www.oracle.com/java/technologies/javase-downloads.html">Java Development Kit 15.x of later</a></li>
+</ul>
+<p>De IntelliJ <strong>community edition</strong> is voldoende. Studenten krijgen een gratis licentie op alle JetBrains producten.</p>
+<p>Studenten gebrand op de &ldquo;Ultimate Edition&rdquo; kunnen hun registreren op de website met het <code>@student.uhasselt.be</code> e-mail adres zodat het bedrijf herkent dat je studeert aan een Universitaire Instelling. Dan is ook die versie gratis te downloaden.</p>
 
 
 <footer class="footline">
@@ -1213,22 +1206,6 @@ window.MathJax = {
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -1301,17 +1278,17 @@ window.MathJax = {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1629879823"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1629879823"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1629879823"></script>
-    <script src="../../js/jquery.sticky.js?1629879823"></script>
-    <script src="../../js/featherlight.min.js?1629879823"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1629879823"></script>
-    <script src="../../js/learn.js?1629879823"></script>
-    <script src="../../js/hugo-learn.js?1629879823"></script>
+    <script src="../../js/clipboard.min.js?1645021900"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1645021900"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1645021900"></script>
+    <script src="../../js/jquery.sticky.js?1645021900"></script>
+    <script src="../../js/featherlight.min.js?1645021900"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1645021900"></script>
+    <script src="../../js/learn.js?1645021900"></script>
+    <script src="../../js/hugo-learn.js?1645021900"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1629879823"></script>
+            <script src="../../mermaid/mermaid.js?1645021900"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
