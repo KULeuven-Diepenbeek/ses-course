@@ -12,20 +12,20 @@
     <title>1. Versie- en issuebeheer :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1645021901" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1645021901" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1645021901" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1645021901" rel="stylesheet">
-    <link href="../css/auto-complete.css?1645021901" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1645021901" rel="stylesheet">
-    <link href="../css/theme.css?1645021901" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1645021901" rel="stylesheet">
+    <link href="../css/nucleus.css?1645024513" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1645024513" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1645024513" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1645024513" rel="stylesheet">
+    <link href="../css/auto-complete.css?1645024513" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1645024513" rel="stylesheet">
+    <link href="../css/theme.css?1645024513" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1645024513" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1645021901" rel="stylesheet">
+    <link href="../css/theme-kul.css?1645024513" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1645021901"></script>
+    <script src="../js/jquery-3.3.1.min.js?1645024513"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1645021901"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1645021901"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1645024513"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1645024513"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1645021901"></script>
+<script type="text/javascript" src="../js/search.js?1645024513"></script>
 
     
   </div>
@@ -909,6 +909,7 @@ Wouters-Air:sessylibrary wgroeneveld$ git branch
 * bugfixbranch
   master
 </pre>
+<p>Merk op dat eerst branchen en dan die branch uitchecken sneller gaat met <code>bit checkout -b</code>&mdash;<em>enkel</em> als die branch not niet bestaat.</p>
 <p>Een branch lokaal committen kan altijd, maar een <code>push</code> kan de volgende fout geven: <em>fatal: The current branch bugfixbranch has no upstream branch.</em> In dat geval dien je de branch &lsquo;upstream&rsquo; te pushen naar de Github server door middel van <code>git push --set-upstream origin bugfixbranch</code>.</p>
 <p>Na een branch commit is de volgende knop zichtbaar op Github:</p>
 <p><figure>
@@ -919,6 +920,10 @@ Wouters-Air:sessylibrary wgroeneveld$ git branch
 </figure>
 </p>
 <p>De <strong>Compare &amp; Pull Request</strong> knop maakt het mogelijk om wijzigingen op de bugfixbranch tot op de master branch te brengen. Dit kan ook via het commando <code>git merge bugfixbranch</code> in de master branch. Een demo toont dit aan. Daarna hebben we de branch niet meer nodig: <code>git branch -d bugfixbranch</code>. Merk op dat dit enkel <em>lokaal</em> de kopie van de branch verwijderd. De remote, op Github.com, verwijderen, vereist meer werk: <code>git push origin --delete bugfixbranch</code>.</p>
+
+<div class="notices note" ><p>Geen idee wat de mogelijke opties zijn van een bepaald subcommando? Gebruik <code>git help [cmd]</code>, bijvoorbeeld <code>git help branch</code>.</p>
+</div>
+
 <h4 id="ik-zie-niet-alle-branches-hoe-komt-dat">Ik zie niet alle branches, hoe komt dat?</h4>
 <p>Een <code>git pull</code> commando zal soms in de console &lsquo;new branch [branchnaam]&rsquo; afdrukken, maar toch zal je deze niet tot je beschikking hebben met het <code>git branch</code> commando. Dat komt omdat branches dan ook nog (lokaal) <strong>getracked</strong> moeten worden:</p>
 <ol>
@@ -1449,17 +1454,17 @@ graph LR;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1645021901"></script>
-    <script src="../js/perfect-scrollbar.min.js?1645021901"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1645021901"></script>
-    <script src="../js/jquery.sticky.js?1645021901"></script>
-    <script src="../js/featherlight.min.js?1645021901"></script>
-    <script src="../js/modernizr.custom-3.6.0.js?1645021901"></script>
-    <script src="../js/learn.js?1645021901"></script>
-    <script src="../js/hugo-learn.js?1645021901"></script>
+    <script src="../js/clipboard.min.js?1645024513"></script>
+    <script src="../js/perfect-scrollbar.min.js?1645024513"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1645024513"></script>
+    <script src="../js/jquery.sticky.js?1645024513"></script>
+    <script src="../js/featherlight.min.js?1645024513"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1645024513"></script>
+    <script src="../js/learn.js?1645024513"></script>
+    <script src="../js/hugo-learn.js?1645024513"></script>
     
         
-            <script src="../mermaid/mermaid.js?1645021901"></script>
+            <script src="../mermaid/mermaid.js?1645024513"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
