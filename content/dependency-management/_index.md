@@ -218,29 +218,6 @@ Gradle voorziet een plugin genaamd '_maven-publish_' die deze bestanden automati
 
 <div class="devselect">
 
-```java
-plugins {
-    id 'java'
-    id 'maven-publish' // toevoegen!
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = project.group.toString()
-            version = version
-            artifactId = 'projectnaam'
-
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url = "/Users/wgroeneveld/development/java/maven-repo"
-        }
-    }
-}
-```
 
 ```kt
 plugins {
@@ -267,24 +244,61 @@ publishing {
 }
 ```
 
+```java
+plugins {
+    id 'java'
+    id 'maven-publish' // toevoegen!
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group.toString()
+            version = version
+            artifactId = 'projectnaam'
+
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = "/Users/wgroeneveld/development/java/maven-repo"
+        }
+    }
+}
+```
+
 </div>
 
 Windows gebruikers dienen in de `url` value te werken met dubbele backslashes (`\\`) in plaats van forward slashes (`/`) om naar het juiste pad te navigeren.
 
 {{% notice warning %}}
-**Opgelet met Kotlin-specifieke build files**: Als je een `build.gradle.kts` bestand gebruikt (Gradle in Kotlin-script formaat), is de syntax sterk gewijzigd. Zie ook [de officiele Gradle documentatie](https://docs.gradle.org/current/userguide/publishing_maven.html) over how to publish in Maven.
+**Opgelet met Kotlin-specifieke build files**: Als je een `build.gradle.kts` bestand gebruikt (Gradle in Kotlin-script formaat), is de syntax sterk gewijzigd (klik dan hierboven op de tab "Kotlin"). Zie ook [de officiele Gradle documentatie](https://docs.gradle.org/current/userguide/publishing_maven.html) over how to publish in Maven.
 {{% /notice %}}
 
 Deze uitbreiding voegt de target `publish` toe aan Gradle. Dus: `./gradlew publish` publiceert de nodige bestanden in de aangegeven folder. Een Gradle project die daar gebruik van wenst te maken dient enkel een tweede Maven Repository plaats te definiëren:
 
-<pre>
+<div class="devselect">
+
+```kt
+repositories {
+    mavenCentral()
+    maven {
+        url = uri(layout.buildDirectory.dir("/Users/wgroeneveld/development/java/maven-repo"))
+    }
+}
+```
+
+```java
 repositories {
     mavenCentral()
     maven {
         url = "/Users/wgroeneveld/development/java/maven-repo"
     }
 }
-</pre>
+```
+
+</div>
 
 ## <a name="oef"></a>Labo oefeningen
 
