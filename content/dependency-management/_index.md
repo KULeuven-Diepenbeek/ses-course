@@ -216,7 +216,9 @@ Gebruik hiervoor de task `dependencies`: `./gradlew dependencies`. Detailinforma
 
 Gradle voorziet een plugin genaamd '_maven-publish_' die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een `publishing` tag toe met de volgende properties:
 
-<pre>
+<div class="devselect">
+
+```java
 plugins {
     id 'java'
     id 'maven-publish' // toevoegen!
@@ -238,12 +240,39 @@ publishing {
         }
     }
 }
-</pre>
+```
+
+```kt
+plugins {
+    java
+    kotlin("jvm") version "1.6.0"
+    `maven-publish`
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "be.kuleuven"
+            artifactId = "projectnaam"
+            version = "1.0-SNAPSHOT"
+
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            url = uri(layout.buildDirectory.dir("/Users/wgroeneveld/development/java/maven-repo"))
+        }
+    }
+}
+```
+
+</div>
 
 Windows gebruikers dienen in de `url` value te werken met dubbele backslashes (`\\`) in plaats van forward slashes (`/`) om naar het juiste pad te navigeren.
 
 {{% notice warning %}}
-**Opgelet met Kotlin-specifieke build files**: Als je een `build.gradle.kts` bestand gebruikt (Gradle in Kotlin-script formaat), is `id 'maven-publish'` incorrect. In dat geval wordt `id` weggelaten en de enkele quotes vervangen door backtics!
+**Opgelet met Kotlin-specifieke build files**: Als je een `build.gradle.kts` bestand gebruikt (Gradle in Kotlin-script formaat), is de syntax sterk gewijzigd. Zie ook [de officiele Gradle documentatie](https://docs.gradle.org/current/userguide/publishing_maven.html) over how to publish in Maven.
 {{% /notice %}}
 
 Deze uitbreiding voegt de target `publish` toe aan Gradle. Dus: `./gradlew publish` publiceert de nodige bestanden in de aangegeven folder. Een Gradle project die daar gebruik van wenst te maken dient enkel een tweede Maven Repository plaats te definiëren:
