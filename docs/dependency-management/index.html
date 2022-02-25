@@ -12,20 +12,20 @@
     <title>2. Dependency Management :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1645786772" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1645786772" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1645786772" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1645786772" rel="stylesheet">
-    <link href="../css/auto-complete.css?1645786772" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1645786772" rel="stylesheet">
-    <link href="../css/theme.css?1645786772" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1645786772" rel="stylesheet">
+    <link href="../css/nucleus.css?1645804095" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1645804095" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1645804095" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1645804095" rel="stylesheet">
+    <link href="../css/auto-complete.css?1645804095" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1645804095" rel="stylesheet">
+    <link href="../css/theme.css?1645804095" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1645804095" rel="stylesheet">
     
-    <link href="../css/theme-kul.css?1645786772" rel="stylesheet">
+    <link href="../css/theme-kul.css?1645804095" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1645786772"></script>
+    <script src="../js/jquery-3.3.1.min.js?1645804095"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -82,14 +82,14 @@ window.MathJax = {
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1645786772"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1645786772"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1645804095"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1645804095"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1645786772"></script>
+<script type="text/javascript" src="../js/search.js?1645804095"></script>
 
     
   </div>
@@ -979,28 +979,7 @@ graph LR;
 <p>Gebruik hiervoor de task <code>dependencies</code>: <code>./gradlew dependencies</code>. Detailinformatie voor specifieke dependencies kunnen worden opgevraagd met de <code>dependencyInsight</code> task. Zie ook: <a href="https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html">Viewing and debugging dependencies</a> in de Gradle docs.</p>
 <p>Gradle voorziet een plugin genaamd &lsquo;<em>maven-publish</em>&rsquo; die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een <code>publishing</code> tag toe met de volgende properties:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#111">plugins</span> <span style="color:#f92672">{</span>
-    <span style="color:#111">id</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">java</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-    <span style="color:#111">id</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">maven</span><span style="color:#f92672">-</span><span style="color:#111">publish</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#75715e">// toevoegen!
-</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-
-<span style="color:#111">publishing</span> <span style="color:#f92672">{</span>
-    <span style="color:#111">publications</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">maven</span><span style="color:#f92672">(</span><span style="color:#111">MavenPublication</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            <span style="color:#111">groupId</span> <span style="color:#f92672">=</span> <span style="color:#111">project</span><span style="color:#f92672">.</span><span style="color:#75af00">group</span><span style="color:#f92672">.</span><span style="color:#75af00">toString</span><span style="color:#f92672">()</span>
-            <span style="color:#111">version</span> <span style="color:#f92672">=</span> <span style="color:#111">version</span>
-            <span style="color:#111">artifactId</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">projectnaam</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-
-            <span style="color:#111">from</span> <span style="color:#111">components</span><span style="color:#f92672">.</span><span style="color:#75af00">java</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-    <span style="color:#111">repositories</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">maven</span> <span style="color:#f92672">{</span>
-            <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#111">plugins</span> <span style="color:#111">{</span>
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#111">plugins</span> <span style="color:#111">{</span>
     <span style="color:#111">java</span>
     <span style="color:#111">kotlin</span><span style="color:#111">(</span><span style="color:#d88200">&#34;jvm&#34;</span><span style="color:#111">)</span> <span style="color:#111">version</span> <span style="color:#d88200">&#34;1.6.0&#34;</span>
     <span style="color:#75af00">`maven</span><span style="color:#111">-</span><span style="color:#111">publish</span><span style="color:#960050;background-color:#1e0010">`</span>
@@ -1022,21 +1001,48 @@ graph LR;
         <span style="color:#111">}</span>
     <span style="color:#111">}</span>
 <span style="color:#111">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#111">plugins</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">id</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">java</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+    <span style="color:#111">id</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">maven</span><span style="color:#f92672">-</span><span style="color:#111">publish</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#75715e">// toevoegen!
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+
+<span style="color:#111">publishing</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">publications</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">maven</span><span style="color:#f92672">(</span><span style="color:#111">MavenPublication</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">groupId</span> <span style="color:#f92672">=</span> <span style="color:#111">project</span><span style="color:#f92672">.</span><span style="color:#75af00">group</span><span style="color:#f92672">.</span><span style="color:#75af00">toString</span><span style="color:#f92672">()</span>
+            <span style="color:#111">version</span> <span style="color:#f92672">=</span> <span style="color:#111">version</span>
+            <span style="color:#111">artifactId</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">projectnaam</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+
+            <span style="color:#111">from</span> <span style="color:#111">components</span><span style="color:#f92672">.</span><span style="color:#75af00">java</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#111">repositories</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">maven</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
 </code></pre></div></div>
 <p>Windows gebruikers dienen in de <code>url</code> value te werken met dubbele backslashes (<code>\\</code>) in plaats van forward slashes (<code>/</code>) om naar het juiste pad te navigeren.</p>
 
-<div class="notices warning" ><p><strong>Opgelet met Kotlin-specifieke build files</strong>: Als je een <code>build.gradle.kts</code> bestand gebruikt (Gradle in Kotlin-script formaat), is de syntax sterk gewijzigd. Zie ook <a href="https://docs.gradle.org/current/userguide/publishing_maven.html">de officiele Gradle documentatie</a> over how to publish in Maven.</p>
+<div class="notices warning" ><p><strong>Opgelet met Kotlin-specifieke build files</strong>: Als je een <code>build.gradle.kts</code> bestand gebruikt (Gradle in Kotlin-script formaat), is de syntax sterk gewijzigd (klik dan hierboven op de tab &ldquo;Kotlin&rdquo;). Zie ook <a href="https://docs.gradle.org/current/userguide/publishing_maven.html">de officiele Gradle documentatie</a> over how to publish in Maven.</p>
 </div>
 
 <p>Deze uitbreiding voegt de target <code>publish</code> toe aan Gradle. Dus: <code>./gradlew publish</code> publiceert de nodige bestanden in de aangegeven folder. Een Gradle project die daar gebruik van wenst te maken dient enkel een tweede Maven Repository plaats te definiëren:</p>
-<pre>
-repositories {
-    mavenCentral()
-    maven {
-        url = "/Users/wgroeneveld/development/java/maven-repo"
-    }
-}
-</pre>
+<div class="devselect">
+<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#111">repositories</span> <span style="color:#111">{</span>
+    <span style="color:#111">mavenCentral</span><span style="color:#111">()</span>
+    <span style="color:#111">maven</span> <span style="color:#111">{</span>
+        <span style="color:#111">url</span> <span style="color:#111">=</span> <span style="color:#111">uri</span><span style="color:#111">(</span><span style="color:#111">layout</span><span style="color:#111">.</span><span style="color:#111">buildDirectory</span><span style="color:#111">.</span><span style="color:#111">dir</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span><span style="color:#111">))</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#111">repositories</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">mavenCentral</span><span style="color:#f92672">()</span>
+    <span style="color:#111">maven</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></div>
 <h2 id="a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</h2>
 <p>Neem dit eerst door: <a href="../dependency-management/gradle/">Meer informatie over Gradle</a>.</p>
 <h3 id="opgave-1">Opgave 1</h3>
@@ -1575,17 +1581,17 @@ Execution failed for task ':Main.main()'.
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1645786772"></script>
-    <script src="../js/perfect-scrollbar.min.js?1645786772"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1645786772"></script>
-    <script src="../js/jquery.sticky.js?1645786772"></script>
-    <script src="../js/featherlight.min.js?1645786772"></script>
-    <script src="../js/modernizr.custom-3.6.0.js?1645786772"></script>
-    <script src="../js/learn.js?1645786772"></script>
-    <script src="../js/hugo-learn.js?1645786772"></script>
+    <script src="../js/clipboard.min.js?1645804095"></script>
+    <script src="../js/perfect-scrollbar.min.js?1645804095"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1645804095"></script>
+    <script src="../js/jquery.sticky.js?1645804095"></script>
+    <script src="../js/featherlight.min.js?1645804095"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1645804095"></script>
+    <script src="../js/learn.js?1645804095"></script>
+    <script src="../js/hugo-learn.js?1645804095"></script>
     
         
-            <script src="../mermaid/mermaid.js?1645786772"></script>
+            <script src="../mermaid/mermaid.js?1645804095"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
