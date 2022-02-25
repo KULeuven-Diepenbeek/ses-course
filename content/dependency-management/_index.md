@@ -171,7 +171,7 @@ repositories {
 }
 </pre>
 
-#### Transitieve dependencies 
+#### Transitieve dependencies
 
 Er zijn twee types van dependencies: **directe** (1) en **transitieve** (2). Een directe dependency is een afhankelijkheid die het project nodig heeft, zoals het gebruik van Gson, waarbij dit in de `dependencies {}` config zit. Een _transitieve_ of indirecte dependency is een dependency van een dependency. In de oefening hieronder maken we een project (1) aan, dat een project (2) gebruikt, dat Gson gebruikt. In project 1 is project 2 een directe dependency, en Gson een transitieve. In Project 2 is Gson een directe dependency (en komt project 1 niet voor):
 
@@ -239,6 +239,12 @@ publishing {
     }
 }
 </pre>
+
+Windows gebruikers dienen in de `url` value te werken met dubbele backslashes (`\\`) in plaats van forward slashes (`/`) om naar het juiste pad te navigeren.
+
+{{% notice warning %}}
+**Opgelet met Kotlin-specifieke build files**: Als je een `build.gradle.kts` bestand gebruikt (Gradle in Kotlin-script formaat), is `id 'maven-publish'` incorrect. In dat geval wordt `id` weggelaten en de enkele quotes vervangen door backtics!
+{{% /notice %}}
 
 Deze uitbreiding voegt de target `publish` toe aan Gradle. Dus: `./gradlew publish` publiceert de nodige bestanden in de aangegeven folder. Een Gradle project die daar gebruik van wenst te maken dient enkel een tweede Maven Repository plaats te definiëren:
 
