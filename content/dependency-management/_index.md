@@ -134,7 +134,9 @@ dependencies {
 }
 ```
 
-Bij het uitvoeren van `gradlew` download Gradle automatisch de juiste opgegeven versie. Gradle bewaart lokale kopies van libraries in een submap van je home folder: `~/.gradle`.
+Bij het uitvoeren van `gradlew` download Gradle automatisch de juiste opgegeven versie. Gradle bewaart lokale kopies van libraries in een submap van je home folder: `~/.gradle`. Dit kan je controleren door in IntelliJ naar File -> Project Structure te gaan en te klikken op "Libraries":
+
+![](/img/gradlepath.png "Het lokale path naar de auto-cached libraries.")
 
 Voordelen van het gebruik van deze methode:
 
