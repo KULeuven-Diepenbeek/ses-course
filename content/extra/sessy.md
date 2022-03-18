@@ -39,8 +39,17 @@ Er zijn verschillende manieren om de gebuilde `jar` file aan het draaien te bren
 De applicatie staat nu live op [http://localhost:8080](http://localhost:8080)!
 
 {{% notice warning %}}
-Indien je "port already in use" Exceptions krijgt, en je niet in de mogelijkheid bent om poort `8080` vrij te maken, kan je in `app.yml` kiezen voor een andere HTTP poort: zie [DropWizard port documentation](https://www.dropwizard.io/en/latest/manual/configuration.html?highlight=port#default).
+Indien je "port already in use" Exceptions krijgt, en je niet in de mogelijkheid bent om poort `8080` vrij te maken, kan je in `app.yml` kiezen voor een andere HTTP poort. Plak daarom onderstaande stuk in je config file:
 {{% /notice %}}
+
+
+```
+server:
+  applicationConnectors:
+  - type: http 
+    port: 9000 (of 8088, of ....)
+```
+
 
 ### Componenten
 
