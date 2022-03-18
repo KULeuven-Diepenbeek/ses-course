@@ -31,6 +31,17 @@ Labo oefeningen Via  Github Classroom. Lege projecten, maak zelf in een nieuwe m
     </item>
     
     <item>
+      <title>3.3 TDD opgave feedback</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/tdd-ex-feedback/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/tdd-ex-feedback/</guid>
+      <description>Deze opgave feedback werd gegeven in academiejaar 2021-2022 voor opgave 1, 4, en 5. We laten dit hier staan voor jullie ter referentie zodat het kan helpen om laatste controles voor het indienen van de opgaves tot een goed einde te brengen.
+Algemene feedback Bij het indienen van een opdracht worden de volgende zaken altijd eerst nagekeken:
+ Compileert het programma? Zijn alle testen groen?  Aangezien het vaak over veel opgaves gaat wordt dit gescript met behulp van Gradle.</description>
+    </item>
+    
+    <item>
       <title>3.3 The TDD proglang challenge</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/tdd-challenge/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -39,16 +50,6 @@ Labo oefeningen Via  Github Classroom. Lege projecten, maak zelf in een nieuwe m
       <description>1. De opgave: Wimbledon Tennisspelers staan weer klaar om een balletje heen en weer over de netten te sturen. In plaats van een tennisbal, zijn karakters voorzien die deel uitmaken van een mysterieuze zin, die ontcijferd moet worden.
 De decodering van deze `Wimbledon-versleutelde&#39; zin bestaat uit het eerste karakter, gevolgd door het laatste karakter, het tweede karakter, het voorlaatste karakter, het derde karakter, enzovoort.
    Ontcijfer de zinnen zoals aangegeven in bovenstaande figuur om populaire tennis quotes te ontdekken.</description>
-    </item>
-    
-    <item>
-      <title>3.4 TDD opgave feedback</title>
-      <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/tdd-ex-feedback/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
-      <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/tdd-ex-feedback/</guid>
-      <description>Algemene feedback Bij het indienen van een opdracht worden de volgende zaken altijd eerst nagekeken:
- Compileert het programma? Zijn alle testen groen?  Aangezien het vaak over veel opgaves gaat wordt dit gescript met behulp van Gradle. Na het downloaden van de opdracht wordt vaak het commando ./gradlew clean test uitgevoerd, die ook impliciet build. Zorg er dan ook steeds voor dat je project correct build vóórdat je indient! Test dit zelf met het commando in je opdrachtprompt, los van IntelliJ.</description>
     </item>
     
   </channel>
