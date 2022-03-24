@@ -45,6 +45,7 @@ Indien je "port already in use" Exceptions krijgt, en je niet in de mogelijkheid
 
 ```
 server:
+  rootPath: /api/
   applicationConnectors:
   - type: http 
     port: 9000 (of 8088, of ....)
