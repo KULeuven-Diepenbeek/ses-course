@@ -14,22 +14,16 @@ Je mag kiezen om oefeningen ofwel in _Java_ ofwel in _Kotlin_ uit te voeren, maa
 
 - TDD opgave 1: https://classroom.github.com/a/kLLq7-Xx
 - TDD opgave 2: https://classroom.github.com/a/K0oEWxa1
-- TDD opgave 4, 5: TODO
-
-#### TDD Met algoritmes
-
-- Opgave 1: TODO
-- Opgave 2: TODO
-
-#### TDD Programming Language Challenge
-
-- **Groepsopdracht**: TODO
+- TDD opgave 4, 5: zelfde als opgave 1
 
 ### Design Patterns
 
+2ba: vrijdag 31/03/2022
+
+- Facade: https://classroom.github.com/a/kW_nqWIO
+
 - Dependency Injection: TODO
 - Singleton: TODO
-- Facade: TODO
 - Decorator: TODO
 - Facctory: TODO
 
