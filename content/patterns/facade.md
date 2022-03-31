@@ -172,15 +172,7 @@ Via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom).
 
 ### Opgave 1
 
-We modelleren een dierentuin, waarvan een `be.kuleuven.ses.facade.animals.Chicken` een gegeven klasse is. Elk dier willen we voederen met de `feed()` methode. Let op! Sommige dieren vereisten veel meer aandracht (lees: complexiteit), die we willen wegwerken met het introduceren van een Facade. Bijvoorbeeld:
-
-- Een eekoorn gebruikt `feed(boolean isNootje)`
-- Een varken gebruikt `feed(int hoeveelheidModder, float gewichtInKg)`
-- ...
-
-Dat betekent dat je niet zomaar een algemene interface kan maken en een "Facade klasse" nodig hebt, zoals bovenstaand voorbeeld.
-
-Voeg klasses `be.kuleuven.ses.facade.animals.Cow` en `Cat` toe, geef deze ook eten, en verberg dan het voederen in een aparte interface. 
+Opgave tekst: zie GitHub classroom `README.md` bestand!
 
 ### Opgave 2
 
