@@ -23,7 +23,7 @@ Je mag kiezen om oefeningen ofwel in _Java_ ofwel in _Kotlin_ uit te voeren, maa
 - Facade: https://classroom.github.com/a/kW_nqWIO
 
 - Dependency Injection: TODO
-- Singleton: TODO
+- Singleton: https://classroom.github.com/a/MM3j9szP
 - Decorator: TODO
 - Facctory: TODO
 
