@@ -158,7 +158,7 @@
 	"title": "Oefenzittingen: Github Clasroom",
 	"tags": [],
 	"description": "",
-	"content": "Onderstaande Github Classroom repositories zijn telkens Gradle projecten. Bewkaam jezelf eerst in de basis van Gradle als build tool.\nJe mag kiezen om oefeningen ofwel in Java ofwel in Kotlin uit te voeren, maar submissies dienen Gradle projecten te zijn!\nLabo oefeningen TDD 2ba: vrijdag 04/03/2022\n TDD opgave 1: https://classroom.github.com/a/kLLq7-Xx TDD opgave 2: https://classroom.github.com/a/K0oEWxa1 TDD opgave 4, 5: zelfde als opgave 1  Design Patterns 2ba: vrijdag 31/03/2022\n  Facade: https://classroom.github.com/a/kW_nqWIO\n  Dependency Injection: TODO\n  Singleton: TODO\n  Decorator: TODO\n  Facctory: TODO\n  "
+	"content": "Onderstaande Github Classroom repositories zijn telkens Gradle projecten. Bewkaam jezelf eerst in de basis van Gradle als build tool.\nJe mag kiezen om oefeningen ofwel in Java ofwel in Kotlin uit te voeren, maar submissies dienen Gradle projecten te zijn!\nLabo oefeningen TDD 2ba: vrijdag 04/03/2022\n TDD opgave 1: https://classroom.github.com/a/kLLq7-Xx TDD opgave 2: https://classroom.github.com/a/K0oEWxa1 TDD opgave 4, 5: zelfde als opgave 1  Design Patterns 2ba: vrijdag 31/03/2022\n  Facade: https://classroom.github.com/a/kW_nqWIO\n  Dependency Injection: TODO\n  Singleton: https://classroom.github.com/a/MM3j9szP\n  Decorator: TODO\n  Facctory: TODO\n  "
 },
 {
 	"uri": "https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy/",
