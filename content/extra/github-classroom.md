@@ -21,9 +21,8 @@ Je mag kiezen om oefeningen ofwel in _Java_ ofwel in _Kotlin_ uit te voeren, maa
 2ba: vrijdag 31/03/2022
 
 - Facade: https://classroom.github.com/a/kW_nqWIO
-
-- Dependency Injection: TODO
+- Dependency Injection: https://classroom.github.com/a/YuIOk837
 - Singleton: https://classroom.github.com/a/MM3j9szP
-- Decorator: TODO
-- Facctory: TODO
+- Decorator: https://classroom.github.com/a/vunlOrb-
+- Factory: https://classroom.github.com/a/jJKB0Qhk
 
