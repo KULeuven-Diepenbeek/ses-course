@@ -129,6 +129,17 @@ Voorbeeld 1. Opzet Stel, je wilt aan de kassa van een niet al te grote lokale ci
     </item>
     
     <item>
+      <title>5.6 Catching Patterns in the Wild</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/catching-patterns-in-the-wild/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/catching-patterns-in-the-wild/</guid>
+      <description>De design pattern opgaves tot nu toe zijn vrij kleine self-contained oefeningen geweest die enkel de basisprincipes verduidelijken. In de praktijk worden patronen vooral gecombineerd toegepast. Het is om te beginnen al een kunst om ze te ontdekken in bestaande code.
+Een goede softwareingenieur is een ingenieur die ook veel code leest. Een goede schrijver kan niet schrijven zonder te lezen. Hetzelfde is waar voor code schrijven.
+Gotta Catch &amp;lsquo;em All   Pokemon Leaf Green op de GBA  De opdracht is misleidend eenvoudig: identificeer in onderstaande codebases de vijf aangeleerde software design patterns.</description>
+    </item>
+    
+    <item>
       <title>6.1 Continuous Integration &amp; Deployment</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/lifecycle/ci/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
