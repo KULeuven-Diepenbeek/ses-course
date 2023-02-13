@@ -31,7 +31,7 @@ Via:
 - https://www.oracle.com/java/technologies/downloads/archive/ (Oracle account vereist).
 
 {{% notice warning %}}
-De exacte JDK versie is erg belangrijk. Installeer versie `15.0.2`. 
+De exacte JDK versie is erg belangrijk. Installeer versie `15.0.2`. Waarom `15` en geen recentere? Vanwege de [Gradle compatibility matrix](https://docs.gradle.org/current/userguide/compatibility.html): te nieuwe JDKs werken niet met oudere Gradle versies, waardoor je de oefeningen niet met Gradle zal kunnen compileren. 
 {{% /notice %}}
 
 

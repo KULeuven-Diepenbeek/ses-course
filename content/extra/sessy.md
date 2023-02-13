@@ -1,5 +1,5 @@
 ---
-title: 'SESsy Library WebApp'
+title: 'SESsy Library (1) De WebApp'
 ---
 
 ## SESsy Library: Een geïntegreerde oefening

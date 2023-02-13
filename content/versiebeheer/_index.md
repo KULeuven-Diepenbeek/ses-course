@@ -192,11 +192,6 @@ graph LR;
 
 Maak een Github.com account aan, als je dat nog niet hebt. Download de commandline tools [https://git-scm.com/downloads](https://git-scm.com/downloads), de officiele distributie, multiplatform, en probeer voor opgave twee de repository 'ses-issue-sandbox' te clonen: `git clone https://github.com/KULeuven-Diepenbeek/ses-issue-sandbox.git`. 
 
-{{% notice note %}}
-Voor **2ba** studenten (_NIET_ schakelstudenten): Gebruik `https://github.com/KULeuven-Diepenbeek/ses-issue-sandbox2` (nummber 2). 
-{{% /notice %}}
-
-
 Gebruik het Pro Git boek om kennis te maken met basis commando's van git. Het is de bedoeling om de commandline tools te leren kennen, en _niet_ om met Github Desktop te werken. 
 
 ### Opgave 2
@@ -208,7 +203,7 @@ Kies er eentje uit om op te lossen - het maakt niet uit welke. **Los elke issue 
 1. Implementeer de interface `Playable` door een nieuwe klasse te maken van het object waar het kind mee wenst te spelen aan zee (zie issue).
 2. Maak een nieuwe instantie aan van dit object in `SandboxMain`.
 
-Neem een kijkje bij de voorbeeld implementaties `SandCastle` en `BucketOfWater`.
+Neem een kijkje bij de voorbeeld implementaties `SandCastle`.
 
 Merk op dat je onvoldoende `push` rechten hebt om lokale wijzigingen aan de repository te uploaden naar de Github server. We geven je nu de status van '_collaborator_', zodat iedereen gemachtigd is om wijzigingen door te voeren. 
 

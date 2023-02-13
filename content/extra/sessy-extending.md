@@ -1,5 +1,5 @@
 ---
-title: 'Extending the SESsy WebApp'
+title: 'SESsy Library (2) Uitbreidingen'
 ---
 
 ## SESsy Library Uitbreiden
