@@ -99,7 +99,7 @@ We kunnen dit nog verder drijven door de ticket verkoper zelf ook te laten aanma
 
 ## <a name="oef"></a>Labo oefeningen
 
-Via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom).
+Clone of fork <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-patterns-factory-template
 
 ### Opgave 1
 

@@ -15,7 +15,7 @@ Laatste aanpassingen voor academiejaar _2021 - 2022_.
 1. [Versie- en issuebeheer](/versiebeheer)
 2. [Dependency Management](/dependency-management):
     -  De [Gradle Build Tool](/dependency-management/gradle/)
-    -  [Kotlin-specifics](/dependency-management/kotlin-gradle))
+    -  [Kotlin-specifics](/dependency-management/kotlin-gradle) voor Gradle
 3. [Test-Driven Development](/tdd): Unit-, Integration- (1) en E2E (2) niveau
 4. [TDD In de praktijk](/tdd/in-de-praktijk)
 
@@ -39,16 +39,12 @@ Laatste aanpassingen voor academiejaar _2021 - 2022_.
 4. [Continuous Integration &amp; Deployment](/lifecycle/ci)
 5. [Software Management](/lifecycle/management): Skills (1), Scrum (2)
 
-#### Aanvullende Oefeningen
-
-1. [De 'SESsy Library' WebApp: uitbreiden](/extra/sessy-extending)
-
 ### Extra informatie
 
 1. [Gebruikte Software: een overzicht](/extra/software)
-1. [De 'SESsy Library' WebApp: installatie & configuratie](/extra/sessy)
-2. [Gradle build tools](/dependency-management/gradle)
-3. [<i class='fab fa-github'></i> Github Classroom links](/extra/github-classroom)
+2. [De 'SESsy Library' WebApp: installatie & configuratie](/extra/sessy)
+3. [De 'SESsy Library' WebApp: extra oefeningen](/extra/sessy-extending)
+4. [Taak 1: Open Source Contributie](/extra/taak-oss/)
 
 ## Syllabus
 

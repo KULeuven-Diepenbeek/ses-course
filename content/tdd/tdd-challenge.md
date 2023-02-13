@@ -1,6 +1,7 @@
 ---
 title: '3.3 The TDD proglang challenge'
-concept: true
+draft: true
+date: 2021-03-01
 ---
 
 ## 1. De opgave: Wimbledon

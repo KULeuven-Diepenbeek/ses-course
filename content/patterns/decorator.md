@@ -216,7 +216,7 @@ Dit werkt enkel en alleen omdat we met een **interface** werken!
 
 ## <a name="oef"></a>Labo oefeningen
 
-Via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom). 
+Clone of fork <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-patterns-decorator-template
 
 ### Opgave 1
 

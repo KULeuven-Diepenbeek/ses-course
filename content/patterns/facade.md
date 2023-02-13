@@ -168,11 +168,11 @@ Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode insp
 
 ## <a name="oef"></a>Labo oefeningen
 
-Via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom). 
+Clone of fork <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-patterns-facade-template
 
 ### Opgave 1
 
-Opgave tekst: zie GitHub classroom `README.md` bestand!
+Opgave tekst: zie repository bestand `README.md`!
 
 ### Opgave 2
 

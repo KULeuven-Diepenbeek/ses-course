@@ -476,7 +476,7 @@ Er zijn moderne alternatieven voor Webdriver-based Java testen. De front-end van
 
 ## <a name="oef"></a>Labo oefeningen
 
-Fork het startproject via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom). 
+Clone of fork het <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-1-template
 
 ### Opgave 1
 
@@ -515,7 +515,7 @@ We zijn dus geïnteresseerd in **edge cases**. Probeer alle mogelijkheden te con
 
 ### Opgave 2
 
-Fork het startproject via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom). 
+Clone of fork het <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-2-template
 
 #### A. Misluke login pogingen
 
@@ -644,7 +644,7 @@ Gebruik Selenium IDE om een test scenario op te nemen van de SESsy applicatie. S
 3. Als anoniempje, log in (een van beide rollen). Verifieer dat login naar logout verandert. Logout. Verifieer dat logout naar login verandert. 
 
 {{% notice info %}}
-**Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_ (of `.side` voor nieuwe versies)** in de root de repository van **opgave 1** (de eerste Github Classroom link). 
+**Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_ (of `.side` voor nieuwe versies)** in de root de [repository van opgave 1](https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-1-template).
 {{% /notice %}}
 
 Je zal voor deze opgave dus de lokale [SESsy applicatie](/extra/sessy) moeten starten, en de Selenium (Chromium/Firefox) plugin moeten installeren: zie hierboven.

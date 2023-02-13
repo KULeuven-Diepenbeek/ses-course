@@ -215,11 +215,11 @@ Merk op dat de `connectionString` van de `DBHandle` ook via de constructor als a
 
 ## <a name="oef"></a>Labo oefeningen
 
-Via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom). 
+Clone of fork <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-patterns-di-template
 
 ### Opgave 1
 
-* Er staan twee TODO items: verwijder eerst de `new DBHandle()` vanuit de resource klasse, en injecteer het via een constructor argument. Pas dan de unit test aan om de compile fouten te fixen.
+* Er staan twee TODO items in de code: verwijder eerst de `new DBHandle()` vanuit de resource klasse, en injecteer het via een constructor argument. Pas dan de unit test aan om de compile fouten te fixen.
 * Gebruik een interface om bovenstaande `DummyDBHandle` in het project te introduceren. Dat wil zeggen, hernoem `DBHandle` naar `DBHandleImplementation`, en maak een nieuwe interface genaamd `DBHandle`. Nu kan je de tweede unit test zoals hierboven toevoegen. 
 
 ### Opgave 2

@@ -190,7 +190,7 @@ Op die manier is het aanmaken van een `DBHandle` instance beperkt tot de klasse 
 
 ## <a name="oef"></a>Labo oefeningen
 
-Via [<i class='fab fa-github'></i> Github Classroom](/extra/github-classroom).
+Clone of fork <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-patterns-singleton-template
 
 ### Opgave 1
 

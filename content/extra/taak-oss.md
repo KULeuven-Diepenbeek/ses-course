@@ -32,22 +32,15 @@ Concreet moet een potentiëel project aan de volgende eisen voldoen:
 4. Er moet een `LICENSE` bestand in de root van het project aanwezig zijn.
 4. Er moeten reeds **andere contributors** aan het project hebben meegewerkt: op die manier weet je dat er een kans is dat je pull request wordt aanvaard.
 
-Beperk je zoektocht tot projecten gehost op `github.com`: die omgeving en UI ken je ondertussen al. Via https://github.com/topics/java kan je leuke projecten ontdekken en sorteren op stars/last modified/etc. Het soort project maakt niet uit:
-
-- Speel je graag bordspelletjes? Bekijk dan https://github.com/ccomeaux/boardgamegeek4android eens
-- Houd je van muziek? Misschien is er een muziekproject dat hulp kan gebruiken: https://github.com/topics/music?l=java&o=desc&s=updated
-- Automatiseer je graag dingen? Bekijk dan bot projecten: https://github.com/topics/bot?l=java&o=desc&s=updated
-- Bewerk je graag foto's? https://github.com/topics/photo?l=java&o=desc&s=updated
-- ...
-
-Meer projecten met issues die door beginners aangepakt zouden kunnen worden:
+Beperk je zoektocht tot projecten gehost op `github.com`: die omgeving en UI ken je ondertussen al. Via de volgende sites kan je leuke projecten ontdekken en sorteren/filteren op topic/programmeertaal en stars/last modified/etc. Het soort project maakt niet uit:
 
 - https://gauger.io/contrib/#/language/java
 - https://ovio.org/projects?skills=Java
 - https://www.codetriage.com/?language=Kotlin
 - https://24pullrequests.com/projects
+- https://github.com/topics/java
 
-Bekijk de bestaande **issues** lijst en lees de `CONTRIBUTING.md` documentatie. Klinkt dat als iets wat je aanspreekt en zou kunnen doen?
+Bekijk de bestaande **issues** lijst en lees de `CONTRIBUTING.md` documentatie. Spreekt het je aan en is het haalbaar?
 
 {{% notice info %}}
 Wees niet té ambitieus. Bedenk dat je het project lokaal moet kunnen builden om er aan te werken: Android-projecten vereisen extra tooling (zie de [app devevelopment cursus](https://kuleuven-diepenbeek.github.io/appdev-course/)) waar je veel tijd mee kan verliezen. Een project hoeft geen 200 stars te hebben om een nuttige bijdrage aan te kunnen leveren.<br/>Deze stap is mogelijks **de belangrijkste** dus geef het genoeg nadenktijd!
@@ -81,7 +74,8 @@ Schrijf een verslag van **minstens 4 pagina's** (single-column, lettergrootte 12
 - Een nauwkeurige beschrijving van je wijzigingen (de inclusie van een schema ter visualisatie of code snippets wordt aangemoedigd);
 - Op welke verschillende manieren je je wijzigingen getest hebt en/of hebt laten testen;
 - De uitdagingen en moeilijkheden die je had tijdens de realisatie ervan;
-- De eventuele feedback die je ontving na de pull request.
+- De eventuele feedback die je ontving na de pull request;
+- Een conclusie met samenvatting van wat je geleerd hebt en hoe je dit in de toekomst zou aanakken.
 
 Dit mag in het Nederlands of Engels. Indienen in `.PDF` formaat op Toledo.
 
