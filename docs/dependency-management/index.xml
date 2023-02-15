@@ -9,7 +9,17 @@
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
     <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>2.1 Java Gradle projecten</title>
+      <title>2.1 Cmdline Java Compiling</title>
+      <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/cmdline/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <guid>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/cmdline/</guid>
+      <description>Dit is in principe iets wat je in het INF1 vak onbewust reeds uitvoerde door op de groene &amp;ldquo;Compile&amp;rdquo; knop te drukken van je NetBeans/IntelliJ IDE. Het is belangrijk om te weten welke principes hier achter zitten. Hieronder volgt ter herhaling een kort overzicht over het compileren van Java programma&amp;rsquo;s zonder een buildtool. Voor Kotlin gelden dezelfde regels: vervang dan javac door kotlinc.
+Een minimaal programma compileren Als je je JAVA_HOME en PATH omgevingsvariabelen goed hebt ingesteld (zie installatie van gebruikte software), dan kan je in een CMD window de commando&amp;rsquo;s:</description>
+    </item>
+    
+    <item>
+      <title>2.2 Java Gradle projecten</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
@@ -19,7 +29,7 @@
     </item>
     
     <item>
-      <title>2.2 Kotlin Gradle projecten</title>
+      <title>2.3 Kotlin Gradle projecten</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/kotlin-gradle/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
