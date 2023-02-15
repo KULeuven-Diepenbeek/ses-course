@@ -1,5 +1,5 @@
 ---
-title: '2.1 Java Gradle projecten'
+title: '2.2 Java Gradle projecten'
 ---
 
 
@@ -16,7 +16,7 @@ Andere bekende build tools:
 - `yarn`, `grunt`, `gulp`, (in JS) ... voor JS
 - `nuget` (custom config, XML) voor .NET
 
-Naast het beheren van compilaties, verzorgt Gradle ook libraries. Het is dus ook een _dependency management_ systeem, zoals Composer voor PHP of Node Package Manager voor NodeJS. 
+Naast het beheren van compilaties, verzorgt Gradle ook libraries. Het is dus ook een _dependency management_ systeem, zoals Composer voor PHP of Node Package Manager voor NodeJS. Sommige build tools doen dus meer dan builden en beheren en downloaden ook automatisch je libraries, maar dat is niet altijd het geval!
 
 #### Ontleding van een Gradle config file
 
@@ -49,7 +49,7 @@ test {
 
 Hier onderscheiden we de volgende zaken:
 
-1. Het project is een java 10 project (er zijn ook nog andere talen op de JVM)
+1. Het project is een java 10 project (er zijn ook nog andere talen op de JVM; zoals Kotlin---Gradle kan ook Kotlinprogramma's compileren)
 2. Het project komt van `be.kuleuven.ses`, versie `1.0-SNAPSHOT`.
 3. Dependencies downloaden via de [standaard maven central](https://mvnrepository.com/repos/central) (ingebouwde URL).
     - Hiervan moet Gradle `junit-jupiter-api 5.6.0` downloaden voor de testen
@@ -146,7 +146,7 @@ De grootste voordelen hiervan zijn onder andere:
 - Een project _bootstrappen_ in luttele seconden: download code, voer de Gradle wrapper uit, en alles wordt vanzelf klaargezet (de juiste Gradle versie, de juiste library versies, ...)
 - Platform-onafhankelijk processen besturen die altijd op dezelfde manier werken: een taak uitvoeren op mijn PC doet exact hetzelfde als bij jou, dankzij de beschrijving van de stappen in de config file. 
 
-Het is bijvoorbeeld bij de oefeningen eenvoudig om een test library als `junit` mee te leveren, zonder de bestanden zelf aan te leveren, dankzij het regeltje `testCompile group: 'junit', name: 'junit', version: '4.12'` in de dependencies block. 
+Het is bijvoorbeeld bij de oefeningen eenvoudig om een test library als `junit` mee te leveren, zonder de bestanden zelf aan te leveren, dankzij het toevoegen van twee regels in de dependencies block (zie hieronder: "Gradle en JUnit integratie"). 
 
 ### Gradle en Maven integratie
 
@@ -261,9 +261,9 @@ Indien de Gralde wrapper een oudere versie aanmaakt (< v6), update met `gradle w
 - JDK `12` of ouder: Gradle `5.x`
 - JDK `13`: Gradle `6.x` of nieuwer
 - JDK `14`: Gradle `6.3` of nieuwer
-- JDK `15`: **NIET** compatibel (_02/10/2020_)! Zie [docs](https://docs.gradle.org/current/userguide/compatibility.html#java)
+- JDK `15`: Gradle `6.7` of nieuwer
 
-Indien je de fout "Could not initialize class `org.codehaus.groovy.reflection.ReflectionCache`" krijgt, betekent dit dat je JDK te nieuw is voor de gradle versie. Controleer de huidige gralde versie met `gradle --info` of kijk in `gradle/wrapper/gradle-wrapper.properties`. 
+Indien je de fout "Could not initialize class `org.codehaus.groovy.reflection.ReflectionCache`" krijgt, betekent dit dat je JDK te nieuw is voor de gradle versie (bijvoorbeeld JDK `17` met Gradle `6.7` in plaats van `7.0` of nieuwer). Controleer de huidige gralde versie met `gradle --info` of kijk in `gradle/wrapper/gradle-wrapper.properties`. 
 
 ### Meer links en tutorials:
 
