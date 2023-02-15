@@ -52,7 +52,7 @@ Main.java:3: error: cannot find symbol
   location: class Main
 </pre>
 
-De klasse `Gson` is immers iets dat we niet hebben zelfgemaakt, maar wensen te importeren via het `import com.google.gson.*;` statement. Er is een manier nodig om de [gedownloade library](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.6) te linken met onze bestaande code: `javac -cp gson-2.8.6.jar Main.java`. Het programma uitvoeren kan met `java -cp gson-2.8.6.jar:. Main`. Er worden dus 2 zaken aan het classpath meegegeven: de Google jar, en de huidige directory (`.`), om `Main.class` terug te vinden.
+De klasse `Gson` is immers iets dat we niet hebben zelfgemaakt, maar wensen te importeren via het `import com.google.gson.*;` statement. Er is een manier nodig om de [gedownloade library](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.9.0) te linken met onze bestaande code: `javac -cp gson-2.9.0.jar Main.java`. Het programma uitvoeren kan met `java -cp gson-2.9.0.jar:. Main`. Er worden dus 2 zaken aan het classpath meegegeven: de Google jar, en de huidige directory (`.`), om `Main.class` terug te vinden.
 
 {{% notice warning %}}
 Java classpath separators zijn [OS-specifiek](https://howtodoinjava.com/java/basics/java-classpath/)! Windows: `;` in plaats van Unix: `:`.
@@ -63,12 +63,12 @@ Dit programma kan schematisch worden voorgesteld als volgt:
 {{<mermaid>}}
 graph LR;
     A["Main klasse"]
-    C["Gson 2.8.6"]
+    C["Gson 2.9.0"]
     A -->|dependent on| C
 {{< /mermaid >}}
 
 
-De dependency in bovenstaand voorbeeld is `gson-2.8.6.jar`. Een gemiddelde Java applicatie heeft echter **meer dan 10 dependencies!** Het beheren van deze bestanden en de verschillende versies (major, minor, revision) geeft vaak conflicten die beter beheerd kunnen worden door tools dan door de typische vergeetachtigheid van mensen. Dit kluwen aan afhankelijkheden, dat erg snel onhandelbaar kan worden, noemt men een [Dependency Hell](https://en.wikipedia.org/wiki/Dependency_hell). Er zijn varianten: [DLL Hell](https://en.wikipedia.org/wiki/DLL_Hell) sinds 16-bit Windows versies, RPM Hell voor Redhat Linux distributies, en [JAR Hell](https://en.wikipedia.org/wiki/Java_Classloader#JAR_hell) voor Java projecten.
+De dependency in bovenstaand voorbeeld is `gson-2.9.0.jar`. Een gemiddelde Java applicatie heeft echter **meer dan 10 dependencies!** Het beheren van deze bestanden en de verschillende versies (major, minor, revision) geeft vaak conflicten die beter beheerd kunnen worden door tools dan door de typische vergeetachtigheid van mensen. Dit kluwen aan afhankelijkheden, dat erg snel onhandelbaar kan worden, noemt men een [Dependency Hell](https://en.wikipedia.org/wiki/Dependency_hell). Er zijn varianten: [DLL Hell](https://en.wikipedia.org/wiki/DLL_Hell) sinds 16-bit Windows versies, RPM Hell voor Redhat Linux distributies, en [JAR Hell](https://en.wikipedia.org/wiki/Java_Classloader#JAR_hell) voor Java projecten.
 
 Zie ook xkcd's [Tech Loops](https://www.explainxkcd.com/wiki/index.php/1579:_Tech_Loops) rommelboeltje:
 
@@ -130,7 +130,7 @@ De volgende procedure volg je als je Gradle dependencies laat beheren:
 
 ```
 dependencies {
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 ```
 
@@ -191,7 +191,7 @@ Het is **geen goed idee** om bij fouten in uitvoering de zachte link (stippellij
 
 #### Publiceren naar een Maven Repository
 
-Klik op '[View All](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.6)' bij de Gson module op de MVN Central Repo om te inspecteren welke bestanden typisch worden aangeleverd in een Maven repository:
+Klik op '[View All](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.9.0)' bij de Gson module op de MVN Central Repo om te inspecteren welke bestanden typisch worden aangeleverd in een Maven repository:
 
 1. De library zelf, in een bepaalde versie.
 2. Eventueel de javadoc en/of sources als aparte jars.
