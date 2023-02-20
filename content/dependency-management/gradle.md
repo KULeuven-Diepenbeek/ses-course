@@ -148,6 +148,27 @@ De grootste voordelen hiervan zijn onder andere:
 
 Het is bijvoorbeeld bij de oefeningen eenvoudig om een test library als `junit` mee te leveren, zonder de bestanden zelf aan te leveren, dankzij het toevoegen van twee regels in de dependencies block (zie hieronder: "Gradle en JUnit integratie"). 
 
+### Een nieuw Gradle project maken
+
+Dit kan op twee manieren:
+
+1. Via IntelliJ: File -> New Project, kies voor "Java" of "Kotlin", en kies als build tool "Gradle". Je kan dan nog kiezen tussen Groovy of Kotlin build files. Dit maakt automatisch de juiste bestanden aan (`src/main/java`, `build.gradle(.kts)`, `gradle` wrapper files)
+2. Via commandline. 
+
+De tweede manier vereist de installatie van een lokale Gradle tool: zie [Gradle Docs: installing manually](https://gradle.org/install/#manually) (package managers zoals `brew` en `apt` voorzien meestal een `gradle` entry). Zorg er net zoals bij De Java installatie ervoor dat de bin folder in je `$PATH` is toegevoegd (zie documentatie). 
+
+
+Vanaf dan kan je met het `gradle` commando in een lege map een nieuw project initialiseren. Zie [Gradle Docs: Bootstrapping new projects](https://docs.gradle.org/current/userguide/command_line_interface.html#sec:command_line_bootstrapping_projects)
+
+```
+$ gradle init
+```
+
+Dit start een interactieve shell waarin je dezelfde keuzes als bij een nieuw IntelliJ project moet ingeven (Kotlin/Gradle, ...). Dit maakt de folders gradle, .gradle, lib aan en de files settings.gradle, gradlew, en gradlew.bat. De broncode van je programma (Java code + `build.gradle`) zit in de `lib/` folder!
+
+Het is ook via die `gradle` commando dat je wrapper bestanden kan aanmaken (`gradle wrapper`) of updaten. 
+
+
 ### Gradle en Maven integratie
 
 Gradle voorziet een plugin genaamd '_maven-publish_' die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een `publishing` tag toe met de volgende properties:
