@@ -12,21 +12,21 @@
     <title>2.2 Java Gradle projecten :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1676454875" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1676454875" rel="stylesheet">
-    <link href="../../css/hybrid.css?1676454875" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1676454875" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1676454875" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1676454875" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1676454875" rel="stylesheet">
-    <link href="../../css/theme.css?1676454875" rel="stylesheet">
-    <link href="../../css/devselector.css?1676454875" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1676454875" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1676454875" rel="stylesheet">
+    <link href="../../css/nucleus.css?1676908290" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1676908290" rel="stylesheet">
+    <link href="../../css/hybrid.css?1676908290" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1676908290" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1676908290" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1676908290" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1676908290" rel="stylesheet">
+    <link href="../../css/theme.css?1676908290" rel="stylesheet">
+    <link href="../../css/devselector.css?1676908290" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1676908290" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1676908290" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1676454875"></script>
-    <script src="../../js/devselector.js?1676454875"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1676908290"></script>
+    <script src="../../js/devselector.js?1676908290"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,14 +61,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1676454875"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1676454875"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1676908290"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1676908290"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1676454875"></script>
+<script type="text/javascript" src="../../js/search.js?1676908290"></script>
 
     
   </div>
@@ -741,6 +741,7 @@
       <ul>
         <li><a href="#wat-is-dat-een-build-tool">Wat is dat, een build tool?</a></li>
         <li><a href="#waarom-een-build-tool-gebruiken">Waarom een build tool gebruiken?</a></li>
+        <li><a href="#een-nieuw-gradle-project-maken">Een nieuw Gradle project maken</a></li>
         <li><a href="#gradle-en-maven-integratie">Gradle en Maven integratie</a></li>
         <li><a href="#gradle-en-junit-integratie">Gradle en JUnit integratie</a></li>
         <li><a href="#welke-task-moet-ik-uitvoeren">Welke Task moet ik uitvoeren?</a></li>
@@ -910,6 +911,17 @@ Execution failed for task ':test'.
 <li>Platform-onafhankelijk processen besturen die altijd op dezelfde manier werken: een taak uitvoeren op mijn PC doet exact hetzelfde als bij jou, dankzij de beschrijving van de stappen in de config file.</li>
 </ul>
 <p>Het is bijvoorbeeld bij de oefeningen eenvoudig om een test library als <code>junit</code> mee te leveren, zonder de bestanden zelf aan te leveren, dankzij het toevoegen van twee regels in de dependencies block (zie hieronder: &ldquo;Gradle en JUnit integratie&rdquo;).</p>
+<h3 id="een-nieuw-gradle-project-maken">Een nieuw Gradle project maken</h3>
+<p>Dit kan op twee manieren:</p>
+<ol>
+<li>Via IntelliJ: File -&gt; New Project, kies voor &ldquo;Java&rdquo; of &ldquo;Kotlin&rdquo;, en kies als build tool &ldquo;Gradle&rdquo;. Je kan dan nog kiezen tussen Groovy of Kotlin build files. Dit maakt automatisch de juiste bestanden aan (<code>src/main/java</code>, <code>build.gradle(.kts)</code>, <code>gradle</code> wrapper files)</li>
+<li>Via commandline.</li>
+</ol>
+<p>De tweede manier vereist de installatie van een lokale Gradle tool: zie <a href="https://gradle.org/install/#manually">Gradle Docs: installing manually</a> (package managers zoals <code>brew</code> en <code>apt</code> voorzien meestal een <code>gradle</code> entry). Zorg er net zoals bij De Java installatie ervoor dat de bin folder in je <code>$PATH</code> is toegevoegd (zie documentatie).</p>
+<p>Vanaf dan kan je met het <code>gradle</code> commando in een lege map een nieuw project initialiseren. Zie <a href="https://docs.gradle.org/current/userguide/command_line_interface.html#sec:command_line_bootstrapping_projects">Gradle Docs: Bootstrapping new projects</a></p>
+<pre><code>$ gradle init
+</code></pre><p>Dit start een interactieve shell waarin je dezelfde keuzes als bij een nieuw IntelliJ project moet ingeven (Kotlin/Gradle, &hellip;). Dit maakt de folders gradle, .gradle, lib aan en de files settings.gradle, gradlew, en gradlew.bat. De broncode van je programma (Java code + <code>build.gradle</code>) zit in de <code>lib/</code> folder!</p>
+<p>Het is ook via die <code>gradle</code> commando dat je wrapper bestanden kan aanmaken (<code>gradle wrapper</code>) of updaten.</p>
 <h3 id="gradle-en-maven-integratie">Gradle en Maven integratie</h3>
 <p>Gradle voorziet een plugin genaamd &lsquo;<em>maven-publish</em>&rsquo; die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een <code>publishing</code> tag toe met de volgende properties:</p>
 <pre>
@@ -1468,17 +1480,17 @@ BUILD SUCCESSFUL in 9s
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1676454875"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1676454875"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1676454875"></script>
-    <script src="../../js/jquery.sticky.js?1676454875"></script>
-    <script src="../../js/featherlight.min.js?1676454875"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1676454875"></script>
-    <script src="../../js/learn.js?1676454875"></script>
-    <script src="../../js/hugo-learn.js?1676454875"></script>
+    <script src="../../js/clipboard.min.js?1676908290"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1676908290"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1676908290"></script>
+    <script src="../../js/jquery.sticky.js?1676908290"></script>
+    <script src="../../js/featherlight.min.js?1676908290"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1676908290"></script>
+    <script src="../../js/learn.js?1676908290"></script>
+    <script src="../../js/hugo-learn.js?1676908290"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1676454875"></script>
+            <script src="../../mermaid/mermaid.js?1676908290"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
