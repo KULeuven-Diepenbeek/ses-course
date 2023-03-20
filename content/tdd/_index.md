@@ -517,7 +517,7 @@ We zijn dus geïnteresseerd in **edge cases**. Probeer alle mogelijkheden te con
 
 Clone of fork het <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-2-template
 
-#### A. Misluke login pogingen
+#### A. Mislukte login pogingen
 
 Er is een foutje geslopen in de login module, waardoor Abigail nog steeds kan inloggen, maar Jos plots niet meer. De senior programmeur in ons team heeft de bug geïdentificeerd en beweert dat het in een stukje _oude code_ zit, 
 maar hij heeft geen tijd om dit op te lossen. Nu is het aan jou.

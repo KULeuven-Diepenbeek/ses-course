@@ -14,6 +14,8 @@ Hoe gaat dit in zijn werk? Deze taak bestaat uit verschillende delen:
 
 Hieronder worden deze delen verder toegelicht.
 
+**Deadline en indienen**: zie Toledo.
+
 {{% notice note %}}
 **Lees eerst** ➡️ https://opensource.guide/how-to-contribute/ ⬅️ voor een gedetailleerd overzicht die je stap-voor-stap doorheen het contribution process gidst.
 {{% /notice %}}
