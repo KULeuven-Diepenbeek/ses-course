@@ -182,7 +182,8 @@ Nadat de code voor 1.1 werd gecommit en gepushed op je Git repository, is de vol
 1. Activeer je repository door op https://circleci.com/ in te loggen met je GitHub account, de repository terug te zoeken in de lijst door op `+` te drukken.
 2. Voorzie een `config.yml` bestand in de `.circleci` subdirectory waarin staat beschreven op welke manier je project moet worden gebuild. Het is ook mogelijk om CircleCI deze file te laten genereren, maar **pas op met oude openjdk versies**! Kies voor een recente Docker image, zoals `cimg/openjdk:17.0.5`. Tip: Welke stappen denk je dat CircleCI zou moeten ondernemen op je project te builden? Is enkel builden voldoende? Wat als er een test faalt? 
 3. Stel dat we de gebuilde jar ergens willen uploaden, hoe gaan we dan tewerk? Tip: Klik op de **Artifacts** tab in het dashboard of lees de docs: [storing artifacts - CircleCI](https://circleci.com/docs/artifacts/).
-4. Op welke manier heb je vanuit het CircleCI dashboard toegang tot de gegenereerde HTML reports van Gradle waar van de testverslagen? Tip: kijk in de `build` folder en denk aan vraag 3.
+4. Schrijf een falende test en commit/push ze in je repository. Wordt dit automatisch opgepikt door de CI server? Indien niet heb je een configuratiefout gemaakt. Indien wel, en de build faalt, zoals zou moeten: hoe weet je nu precies waarom deze faalt?
+5. Verder gaand op vraag 4: op welke manier heb je vanuit het CircleCI dashboard toegang tot de gegenereerde HTML reports van Gradle waar van de testverslagen? Tip: kijk in de `build` folder en denk aan vraag 3.
 
 Raadpleeg de documentatie om jezelf te bekwamen in de Yaml syntax (lees zeker de eerste twee links!):
 
@@ -191,6 +192,13 @@ Raadpleeg de documentatie om jezelf te bekwamen in de Yaml syntax (lees zeker de
 - [Examples and Guides Overview - CircleCI](https://circleci.com/docs/examples-and-guides-overview/)
 
 ### Opgave 2
+
+**Fork** een versie van `sessylibrary` op <i class='fab fa-github'></i> GitHub via [https://github.com/KULeuven-Diepenbeek/sessylibrary](https://github.com/KULeuven-Diepenbeek/sessylibrary). Stel CircleCI correct in voor deze repository. Een `config.yml` is reeds aanwezig. 
+
+1. Voeg een `npm install` task actie toe in de `frontend` subfolder (zie bovenstaande Travis voorbeeldcode). Wat is hier precies voor nodig? `npm` is de [JavaScript Node](https://nodejs.org/en/download) build tool. Probeer dit eerst lokaal: wat wordt er dan precies aangemaakt? (Negeer de deprecation warnings)
+2. Voeg de `frontendSync` en `shadowJar` `gradle` task acties toe. Probeer dit eerst lokaal: wat wordt er dan precies aangemaakt, en in welke folder? Zorg ervoor dat dit als **Artifact** downloadbaar is via het CircleCI dashboard.
+
+### Opgave 3
 
 Er duikt plots een onvoorziene periode van boekenschaarste op! Om niet te veel paniek te veroorzaken, willen we gebruik maken van blue/green releasing om het uitleensysteem van [SESsy library](/extra/sessy) gradueel te wijzigen. 
 
