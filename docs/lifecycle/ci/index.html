@@ -12,21 +12,21 @@
     <title>6.1 Continuous Integration &amp; Deployment :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1679315761" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1679315761" rel="stylesheet">
-    <link href="../../css/hybrid.css?1679315761" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1679315761" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1679315761" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1679315761" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1679315761" rel="stylesheet">
-    <link href="../../css/theme.css?1679315761" rel="stylesheet">
-    <link href="../../css/devselector.css?1679315761" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1679315761" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1679315761" rel="stylesheet">
+    <link href="../../css/nucleus.css?1679480292" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1679480292" rel="stylesheet">
+    <link href="../../css/hybrid.css?1679480292" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1679480292" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1679480292" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1679480292" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1679480292" rel="stylesheet">
+    <link href="../../css/theme.css?1679480292" rel="stylesheet">
+    <link href="../../css/devselector.css?1679480292" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1679480292" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1679480292" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1679315761"></script>
-    <script src="../../js/devselector.js?1679315761"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1679480292"></script>
+    <script src="../../js/devselector.js?1679480292"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,14 +61,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1679315761"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1679315761"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1679480292"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1679480292"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1679315761"></script>
+<script type="text/javascript" src="../../js/search.js?1679480292"></script>
 
     
   </div>
@@ -802,22 +802,41 @@
 <p>Dit hele proces verloopt volledig automatisch: niemand drukt op een &ldquo;build&rdquo; knop, maar door middel van ingecheckte code wijzigingen (1) start dit systeem. De CI server haalt wijzigingen op (2), build (3) en test (4) om te kunnen rapporteren of dit lukte of niet (5), via verschillende kanalen (6).</p>
 <p>De Source Control server, zoals Github.com of een lokale <code>git</code> server, werd reeds besproken in labo &lsquo;<a href="../../versiebeheer">versiebeheer</a>&rsquo;. Er zijn voor Java verschillende populaire CI software systemen:</p>
 <ul>
-<li><a href="https://jenkins.io/solutions/java/">Jenkins</a></li>
-<li><a href="www.jetbrains.com/teamcity">TeamCity</a></li>
-<li><a href="https://www.atlassian.com/software/bamboo">Bamboo</a></li>
-<li><a href="https://travis-ci.org">Travis</a></li>
+<li><a href="https://www.jetbrains.com/teamcity">TeamCity</a> van JetBrains, de makers van IntelliJ</li>
+<li><a href="https://www.atlassian.com/software/bamboo">Bamboo</a>&mdash;van Atlassian, de makers van Jira</li>
+<li><a href="https://www.travis-ci.com/">Travis</a>&mdash;de eerste CI die naadloos met GitHub integreerde, maar nu betalend is</li>
+<li><a href="https://circleci.com/">CirlceCi</a>&mdash;een populair hosted alternatief voor Travis</li>
+<li><a href="https://www.jenkins.io/">Jenkins</a>&mdash;een ondertussen oudere speler op de CI markt</li>
+<li><a href="https://www.drone.io/">Drone</a>&mdash;een nieuwe speler met focus op Docker module integratie</li>
+<li><a href="https://dagger.io/">Dagger</a>&mdash;een CI/CD engine die in containers runt en programmeerbaar in plaats van configureerbaar is</li>
 </ul>
-<p>In deze systemen zijn configureerbaar en beschikken over een UI, zoals bijvoorbeeld zichtbaar in de <a href="https://www.jetbrains.com/teamcity/documentation/">TeamCity screencast</a>. Betalende systemen zoals TeamCity en Bamboo zijn erg uitgebreid, maar wij gaan werken met Travis. Travis CI is eenvoudig configureerbaar door middel van een <code>.yml</code> bestand en integreert naadloos (en gratis) met Github.</p>
+<p>In deze systemen zijn configureerbaar en beschikken over een UI, zoals bijvoorbeeld zichtbaar in de <a href="https://www.jetbrains.com/teamcity/documentation/">TeamCity screencast</a>. Betalende systemen zoals TeamCity en Bamboo zijn erg uitgebreid, maar wij gaan werken met CircleCI. CircleCI is eenvoudig configureerbaar door middel van een <code>.yml</code> bestand en het gratis plan integreert naadloos met GitHub. Merk op dat oplossingen zoals Travis en CircleCI betalende <em>Hosted Solutions</em> zijn!</p>
+<p>Nieuwere spelers zoals Dagger focussen niet enkel op container deployment maar ook op &ldquo;pipelining as code&rdquo;. Dat betekent dat je <em>code</em> in plaats van <em>configuratie</em> schrijft, wat als bijkomend voordeel heeft dat deze config-as-code met compilatie sneller fouten rapporteert. Met Dagger schrijf je in Go, Python, TypeScript/JS, of interageer je rechtstreeks met de CLI, met voorkeur van Go: zie de <a href="https://docs.dagger.io/648215/quickstart/">Dagger Quickstart</a> guide.</p>
 <h3 id="12-de-flow-van-een-ci-server">1.2. De flow van een CI server</h3>
-<p>De <a href="../../extra/sessy">SESsy library</a> git repository bevat een <a href="https://github.com/KULeuven-Diepenbeek/sessylibrary/blob/master/.travis.yml">.travis.yml</a> bestand dat de Travis server instrueert wat te doen op welk moment:</p>
-<pre>
-language: java
+<p>De <a href="../../extra/sessy">SESsy library</a> git repository bevat een <a href="https://raw.githubusercontent.com/KULeuven-Diepenbeek/sessylibrary/master/.circleci/config.yml">.circleci/config.yml</a> bestand dat de CircleCI server instrueert wat te doen op welk moment: (onderstaand voorbeeld is een vereenvoudigde versie, zie link voor het volledig config bestand)</p>
+<pre><code>version: 2
+
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:17.0.5
+    working_directory: ~/sessylib
+
+    environment:
+      # eventueel extra opties aan de JVM mee te geven
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - run: gradle dependencies
+      - run: gradle test
+</code></pre><p>Afhankelijk van het gebruik van containers (zoals hierboven) en de specifieke CI syntax zien deze config files er ongeveer hetzelfde uit. Onderstaande is een Travis voorbeeld dat ook terug te vinden is in de Sessylibrary repository, maar niet meer actief is wegens het wegvallen van de gratis <code>travis-ci.org</code> servers (merk op dat dit meer stappen uitvoert door de <code>shadowJar</code> gradle target en de Node <code>before_install</code> scripts, die in CircleCI extra <code>steps</code> punten zouden zijn):</p>
+<pre><code>language: java
 
 jdk:
   - openjdk11
 
 env:
-  - NODE_VERSION="12.10.0"
+  - NODE_VERSION=&quot;12.10.0&quot;
 
 notifications:
   email: false
@@ -834,26 +853,24 @@ install:
   - ./gradlew check
   - ./gradlew frontendSync --stacktrace
   - ./gradlew shadowJar
-</pre>
-<h4 id="1-checkout-code">1. Checkout Code</h4>
-<p><code>git clone [repository]</code> (met de juiste branch). Klaar.</p>
+</code></pre><h4 id="1-checkout-code">1. Checkout Code</h4>
+<p><code>git clone [repository]</code> (met de juiste branch). Klaar. Dit gaat vanzelf met de <code>- checkout</code> step.</p>
 <h4 id="2-setup-environment">2. Setup Environment</h4>
-<p>Elke build op Travis begint met een <em>clean</em> besturingssysteem (standaard Linux) en gegeven basistools. Dat betekent dat als bepaalde versies van <code>node</code> of Java nodig zijn, deze eerst moeten worden geïnstalleerd. Travis voorziet openJDK versies - de Oracle versies moeten zelf worden afgehaald. Voor SESsy library is ook <code>node</code> vereist die de frontend kan builden.</p>
-<p>In <code>before_install</code> plaats je uit te voeren instructies die voor de <code>install</code> stap worden uitgevoerd.</p>
+<p>Elke build op CircleCI begint met een <em>clean</em> Docker image en gegeven basistools. Zie ook <a href="https://circleci.com/docs/examples-and-guides-overview/">CircleCI docs: language guides</a>. De preconfigured convenience image voor Java is de <code>cimg/openjdk</code> waarvan de tags terug te vinden zijn op <a href="https://hub.docker.com/r/cimg/openjdk">https://hub.docker.com/r/cimg/openjdk</a>. Als bepaalde versies van <code>node</code> of Java nodig zijn, deze eerst moeten worden geïnstalleerd: de <code>opendjk</code> image bevat reeds een preconfigured JDK omgeving. CircleCI voorziet openJDK versies&mdash;de Oracle versies moeten zelf worden afgehaald. Voor SESsy library is in principe ook <code>node</code> vereist die de frontend kan builden, dit laten we als een oefening voor de lezer.</p>
 <h4 id="3-build-code">3. Build Code</h4>
-<p>Gebruik <a href="../../dependency-management/gradle">Gradle</a> Tasks:</p>
+<p>Gebruik simpelweg de <a href="../../dependency-management/gradle">Gradle</a> tasks.</p>
+<p>In <code>steps</code> plaats je uit te voeren instructies. Als <code>gradle test</code> zou falen krijg je dit te zien in het CircleCI dashboard.</p>
+<p>Merk op dat bij bovenstaande Travis config ook nog de volgende tasks worden uitgevoerd:</p>
 <ol>
 <li><code>check</code> - installeert de juiste Gradle versie, compileert en test.</li>
 <li><code>frontendSync</code> - build met <code>node</code> de frontend en kopiëert naar <code>src/main/resources</code>.</li>
 </ol>
-<h4 id="4-test-code">4. Test Code</h4>
-<p>Deel van <code>./gradlew check</code>.</p>
-<h4 id="5-package-code--upload-artifact">5. Package Code &amp; Upload Artifact</h4>
+<h4 id="4-package-code--upload-artifact">4. Package Code &amp; Upload Artifact</h4>
 <p><code>./gradlew shadowJar</code> - package alles, inclusief dependencies, in één grote jarfile.</p>
 <p>Zodra één stap mis gaat (zoals een falende test), worden volgende stappen niet uitgevoerd. Als alles goed gaat is de output van het builden de binary die we <em>het artifact</em> noemen, die de huidige buildstamp draagt (meestal een datumcode).</p>
 <p>Alle gebuilde artifacts kunnen daarna worden geupload naar een repository server, zoals de Central Maven Repository, of onze eigen artifact server, waar een historiek wordt bijgehouden.</p>
-<h4 id="6-publish-results">6. Publish Results</h4>
-<p>Op hat dashboard van <a href="https://travis-ci.org">https://travis-ci.org</a> kan je de gepubliceerde resultaten (live) raadplegen:</p>
+<h4 id="5-publish-results">5. Publish Results</h4>
+<p>Op hat dashboard van <a href="https://app.circleci.com/">https://app.circleci.com/</a> kan je de gepubliceerde resultaten (live) raadplegen. De dashboard mechanics werken voor alle CI systemen ongeveer hetzelfde. Hieronder is zichtbaar hoe de sessylibrary repository wordt gebuild in de Travis CI:</p>
 <p><figure>
 	<a href="../../img/teaching/ses/travis.png" data-featherlight="image">
 		<img src="../../img/teaching/ses/travis.png"  >
@@ -867,11 +884,12 @@ install:
 <ul>
 <li><a href="https://octopus.com">Octopus Deploy</a></li>
 <li><a href="https://codeship.com">Codeship</a></li>
+<li>Modules van moderne CI systemen zoals hier boven vermeld, bijvoorbeeld Dagger/Drone Deployment</li>
 <li>Eigen scripts gebaseerd op CI systemen</li>
 <li>Cloud deployment systemen (Amazon AWS, Heroku, Google Apps, &hellip;)</li>
 </ul>
 <p>De <code>shadowJar</code> task genereert één <code>jar</code> bestand die uitvoerbaar is (<code>java -jar [filename].jar</code>), en onze DropWizard server lokaal opstart op poort <code>8000</code>. Eender welke server kan dit programma dus op eenvoudige wijze uitvoeren.</p>
-<p>Automatisch packagen en installeren van programma&rsquo;s stopt hier niet. Een niveau hoger is het automatisch packagen en installeren van <em>hele omgevingen</em>: het virtualiseren van een server. Infrastructuur automatisatie is een vak apart, en wordt vaak uitgevoerd met behulp van tools als Puppet, Docker, Terraform, Ansible of Chef. Dit valt buiten de scope van deze cursus.</p>
+<p>Automatisch packagen en installeren van programma&rsquo;s stopt hier niet. Een niveau hoger is het automatisch packagen en installeren van <em>hele omgevingen</em>: het virtualiseren van een server. Infrastructuur automatisatie is een vak apart, en wordt vaak uitgevoerd met behulp van tools als <a href="https://www.puppet.com/">Puppet</a>, <a href="https://www.docker.com/">Docker</a>, <a href="https://www.terraform.io/">Terraform</a>, <a href="https://www.ansible.com/">Ansible</a> of <a href="https://www.chef.io/">Chef</a>. Dit valt buiten de scope van deze cursus. (Merk op dat CircleCI intern al gebruik maakt van Docker images om builds te triggeren!)</p>
 <h3 id="21-de-flow-van-deployment-en-releases-beheren">2.1. De flow van deployment en releases beheren</h3>
 <p>Nieuwe features in productie plaatsen brengt altijd een risico met zich mee. Het zou kunnen dat bepaalde nieuwe features bugs veroorzaken in de gekende oude features, of dat het (slecht getest) systeem helemaal niet werkt zoals men verwachtte. Om dat zo veel mogelijk te vermijden wordt er een release plan opgesteld waarin men aan &lsquo;<strong>smart routing</strong>&rsquo; doet.</p>
 <p>Stel, onze <a href="../../extra/sessy">SESsy bibliotheek webapplicatie</a> is toe aan vernieuwing. We wensen een nieuw scherm te ontwerpen om efficiënter te zoeken. We zijn echter niet zeker wat de gebruikers gaan vinden van deze nieuwe manier van werken, en beslissen daarom om slechts een <em>aantal gebruikers</em> bloot te stellen aan deze radicale verandering. Dat kan op twee manieren:</p>
@@ -897,7 +915,7 @@ install:
 <p>Versie A en B hoeven dus niet noodzakelijk aparte versies van applicaties te zijn: dit kan binnen dezelfde applicatie, softwarematig dus, worden ingebouwd.</p>
 <h2 id="a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</h2>
 <h3 id="opgave-1">Opgave 1</h3>
-<p>Omwille van privacy instellingen tussen Travis en de KULeuven-Diepenbeek organisatie op Github, wordt voor deze opgave verwacht dat je een <strong>nieuwe repository</strong> zelf aanmaakt vanaf nul, via <a href="https://github.com">Github.com</a>. Geef de repository de naam <code>ses-ci-opgave</code>, zoals in onderstaande screenshot:</p>
+<p>Omwille van privacy instellingen tussen CI systemen en de KULeuven-Diepenbeek organisatie op Github, wordt voor deze opgave verwacht dat je een <strong>nieuwe repository</strong> zelf aanmaakt vanaf nul, via <a href="https://github.com">Github.com</a>. Geef de repository de naam <code>ses-ci-opgave</code>, zoals in onderstaande screenshot:</p>
 <p><figure>
 	<a href="../../img/teaching/ses/ci-newrepo.png" data-featherlight="image">
 		<img src="../../img/teaching/ses/ci-newrepo.png"  >
@@ -905,29 +923,24 @@ install:
 	
 </figure>
 </p>
-<p>Het is belangrijk dat de repository <strong>public</strong> is, anders kan Travis je project niet builden.</p>
+<p>Het is belangrijk dat de repository <strong>public</strong> is, zodat de CI server je project kan builden. CircleCI ondersteunt ook private repositories tegen betaling.</p>
 <h4 id="11-de-calculator-app">1.1 De Calculator app</h4>
 <p>Ontwerp een command-line interface programma, getiteld &lsquo;calculator&rsquo;, dat twee argumenten inleest die terecht komen in de <code>main()</code> methode, en de sommatie ervan afdrukt:</p>
 <p><code>java -cp . Calculator 1 4</code> print <code>5</code> in <code>stdout</code>.</p>
-<p>Uiteraard gebruiken we hier Gradle voor. Zet de berekening in een aparte methode, die ook <em>getest</em> werd. Voorzie dus ook Enkele eenvoudige unit testen in <code>src/main/test</code>.</p>
+<p>Uiteraard gebruiken we hier Gradle voor. Zet de berekening in een aparte methode, die ook <em>getest</em> werd. Voorzie dus ook minstens 2 eenvoudige unit testen in <code>src/main/test</code> om te controleren of de CI server deze testen correct gaat uitvoeren.</p>
 <h4 id="12-de-app-builden-op-travis">1.2 De app builden op Travis</h4>
-<p>Nadat de code voor 1.1 werd gecommit en gepushed op je Git repository, is de volgende stap dit project automatisch te builden op een server, zoals Travis. Om dit te activeren moeten er twee stappen worden uitgevoerd:</p>
+<p>Nadat de code voor 1.1 werd gecommit en gepushed op je Git repository, is de volgende stap dit project automatisch te builden op een hosted CI server zoals CircleCI. Om dit te activeren moeten er twee stappen worden uitgevoerd:</p>
 <ol>
-<li>Activeer je repository door op <a href="https://travis-ci.org">travis-ci.org</a> in te loggen met je Github account, de repository terug te zoeken in de lijst door op <code>+</code> te drukken links, en de slider naar rechts te zetten, zodat Travis changes detecteert. Zie screenshot hieronder.</li>
-<li>Voorzie een <code>.travis.yml</code> bestand waarin staat beschreven op welke manier je project moet worden gebuild.</li>
+<li>Activeer je repository door op <a href="https://circleci.com/">https://circleci.com/</a> in te loggen met je GitHub account, de repository terug te zoeken in de lijst door op <code>+</code> te drukken.</li>
+<li>Voorzie een <code>config.yml</code> bestand in de <code>.circleci</code> subdirectory waarin staat beschreven op welke manier je project moet worden gebuild. Het is ook mogelijk om CircleCI deze file te laten genereren, maar <strong>pas op met oude openjdk versies</strong>! Kies voor een recente Docker image, zoals <code>cimg/openjdk:17.0.5</code>. Tip: Welke stappen denk je dat CircleCI zou moeten ondernemen op je project te builden? Is enkel builden voldoende? Wat als er een test faalt?</li>
+<li>Stel dat we de gebuilde jar ergens willen uploaden, hoe gaan we dan tewerk? Tip: Klik op de <strong>Artifacts</strong> tab in het dashboard of lees de docs: <a href="https://circleci.com/docs/artifacts/">storing artifacts - CircleCI</a>.</li>
+<li>Op welke manier heb je vanuit het CircleCI dashboard toegang tot de gegenereerde HTML reports van Gradle waar van de testverslagen? Tip: kijk in de <code>build</code> folder en denk aan vraag 3.</li>
 </ol>
-<p><figure>
-	<a href="../../img/teaching/ses/ci-enabletravis.png" data-featherlight="image">
-		<img src="../../img/teaching/ses/ci-enabletravis.png"  >
-	</a>
-	
-</figure>
-</p>
-<p>Het verschil tussen de <code>.org</code> en <code>.com</code> websites is dat de eerste enkel publieke repositories kan behandelen, terwijl de laatste (in BETA) ook private repositories aankan. Vergewis je ervan om enkel via de eerste, <a href="https://travis-ci.org">travis-ci.org</a>, je opgave repository te activeren.</p>
-<p>Welke stappen denk je dat Travis zou moeten ondernemen op je project te builden? Is enkel builden voldoende? Wat als er een test faalt? Stel dat we de gebuilde jar ergens willen uploaden, hoe gaan we dan tewerk? Raadpleeg de documentatie om jezelf te bekwamen in de Yaml syntax:</p>
+<p>Raadpleeg de documentatie om jezelf te bekwamen in de Yaml syntax (lees zeker de eerste twee links!):</p>
 <ul>
-<li><a href="https://docs.travis-ci.com/user/customizing-the-build/">Customizing the build - Travis</a></li>
-<li><a href="https://docs.travis-ci.com/user/languages/java/">Building a Java Project - Travis</a></li>
+<li><a href="https://circleci.com/docs/getting-started/">QuickStart Guide - CircleCI</a></li>
+<li><a href="https://circleci.com/docs/introduction-to-yaml-configurations/">YAML Configuration Intro - CircleCI</a></li>
+<li><a href="https://circleci.com/docs/examples-and-guides-overview/">Examples and Guides Overview - CircleCI</a></li>
 </ul>
 <h3 id="opgave-2">Opgave 2</h3>
 <p>Er duikt plots een onvoorziene periode van boekenschaarste op! Om niet te veel paniek te veroorzaken, willen we gebruik maken van blue/green releasing om het uitleensysteem van <a href="../../extra/sessy">SESsy library</a> gradueel te wijzigen.</p>
@@ -939,6 +952,7 @@ install:
 <li>Waarom is het belangrijk om gebuilde artifacts van de CI server bij te houden?</li>
 <li>Wat zijn de voordelen van het werken met een CI en CD systeem, ten opzichte van alles met de hand (of met eigen gemaakte scripts) in te stellen?</li>
 <li>Version control en continuous delivery zijn klassiek gezien vijanden van database migratie (of omgekeerd). Toch is het mogelijk om een database systeem ook automatisch te up- of downgraden, met bijvoorbeeld <a href="https://flywaydb.org">https://flywaydb.org</a>. Hoe gaat zoiets in zijn werk?</li>
+<li>Zou het ook mogelijk zijn om een geautomatiseerde scenariotest uit te voeren in CircleCI? Zo ja, welke wijzigingen zou je moeten doorvoeren aan de <code>config.yml</code>?</li>
 </ul>
 <h2 id="extra-leermateriaal">Extra Leermateriaal</h2>
 <ul>
@@ -1392,17 +1406,17 @@ install:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1679315761"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1679315761"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1679315761"></script>
-    <script src="../../js/jquery.sticky.js?1679315761"></script>
-    <script src="../../js/featherlight.min.js?1679315761"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1679315761"></script>
-    <script src="../../js/learn.js?1679315761"></script>
-    <script src="../../js/hugo-learn.js?1679315761"></script>
+    <script src="../../js/clipboard.min.js?1679480292"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1679480292"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1679480292"></script>
+    <script src="../../js/jquery.sticky.js?1679480292"></script>
+    <script src="../../js/featherlight.min.js?1679480292"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1679480292"></script>
+    <script src="../../js/learn.js?1679480292"></script>
+    <script src="../../js/hugo-learn.js?1679480292"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1679315761"></script>
+            <script src="../../mermaid/mermaid.js?1679480292"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
