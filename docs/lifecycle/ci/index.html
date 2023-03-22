@@ -12,21 +12,21 @@
     <title>6.1 Continuous Integration &amp; Deployment :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1679480292" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1679480292" rel="stylesheet">
-    <link href="../../css/hybrid.css?1679480292" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1679480292" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1679480292" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1679480292" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1679480292" rel="stylesheet">
-    <link href="../../css/theme.css?1679480292" rel="stylesheet">
-    <link href="../../css/devselector.css?1679480292" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1679480292" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1679480292" rel="stylesheet">
+    <link href="../../css/nucleus.css?1679487514" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1679487514" rel="stylesheet">
+    <link href="../../css/hybrid.css?1679487514" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1679487514" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1679487514" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1679487514" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1679487514" rel="stylesheet">
+    <link href="../../css/theme.css?1679487514" rel="stylesheet">
+    <link href="../../css/devselector.css?1679487514" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1679487514" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1679487514" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1679480292"></script>
-    <script src="../../js/devselector.js?1679480292"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1679487514"></script>
+    <script src="../../js/devselector.js?1679487514"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,14 +61,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1679480292"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1679480292"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1679487514"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1679487514"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1679480292"></script>
+<script type="text/javascript" src="../../js/search.js?1679487514"></script>
 
     
   </div>
@@ -752,6 +752,7 @@
       <ul>
         <li><a href="#opgave-1">Opgave 1</a></li>
         <li><a href="#opgave-2">Opgave 2</a></li>
+        <li><a href="#opgave-3">Opgave 3</a></li>
       </ul>
     </li>
     <li><a href="#denkvragen">Denkvragen</a></li>
@@ -934,7 +935,8 @@ install:
 <li>Activeer je repository door op <a href="https://circleci.com/">https://circleci.com/</a> in te loggen met je GitHub account, de repository terug te zoeken in de lijst door op <code>+</code> te drukken.</li>
 <li>Voorzie een <code>config.yml</code> bestand in de <code>.circleci</code> subdirectory waarin staat beschreven op welke manier je project moet worden gebuild. Het is ook mogelijk om CircleCI deze file te laten genereren, maar <strong>pas op met oude openjdk versies</strong>! Kies voor een recente Docker image, zoals <code>cimg/openjdk:17.0.5</code>. Tip: Welke stappen denk je dat CircleCI zou moeten ondernemen op je project te builden? Is enkel builden voldoende? Wat als er een test faalt?</li>
 <li>Stel dat we de gebuilde jar ergens willen uploaden, hoe gaan we dan tewerk? Tip: Klik op de <strong>Artifacts</strong> tab in het dashboard of lees de docs: <a href="https://circleci.com/docs/artifacts/">storing artifacts - CircleCI</a>.</li>
-<li>Op welke manier heb je vanuit het CircleCI dashboard toegang tot de gegenereerde HTML reports van Gradle waar van de testverslagen? Tip: kijk in de <code>build</code> folder en denk aan vraag 3.</li>
+<li>Schrijf een falende test en commit/push ze in je repository. Wordt dit automatisch opgepikt door de CI server? Indien niet heb je een configuratiefout gemaakt. Indien wel, en de build faalt, zoals zou moeten: hoe weet je nu precies waarom deze faalt?</li>
+<li>Verder gaand op vraag 4: op welke manier heb je vanuit het CircleCI dashboard toegang tot de gegenereerde HTML reports van Gradle waar van de testverslagen? Tip: kijk in de <code>build</code> folder en denk aan vraag 3.</li>
 </ol>
 <p>Raadpleeg de documentatie om jezelf te bekwamen in de Yaml syntax (lees zeker de eerste twee links!):</p>
 <ul>
@@ -943,6 +945,12 @@ install:
 <li><a href="https://circleci.com/docs/examples-and-guides-overview/">Examples and Guides Overview - CircleCI</a></li>
 </ul>
 <h3 id="opgave-2">Opgave 2</h3>
+<p><strong>Fork</strong> een versie van <code>sessylibrary</code> op <i class='fab fa-github'></i> GitHub via <a href="https://github.com/KULeuven-Diepenbeek/sessylibrary">https://github.com/KULeuven-Diepenbeek/sessylibrary</a>. Stel CircleCI correct in voor deze repository. Een <code>config.yml</code> is reeds aanwezig.</p>
+<ol>
+<li>Voeg een <code>npm install</code> task actie toe in de <code>frontend</code> subfolder (zie bovenstaande Travis voorbeeldcode). Wat is hier precies voor nodig? <code>npm</code> is de <a href="https://nodejs.org/en/download">JavaScript Node</a> build tool. Probeer dit eerst lokaal: wat wordt er dan precies aangemaakt? (Negeer de deprecation warnings)</li>
+<li>Voeg de <code>frontendSync</code> en <code>shadowJar</code> <code>gradle</code> task acties toe. Probeer dit eerst lokaal: wat wordt er dan precies aangemaakt, en in welke folder? Zorg ervoor dat dit als <strong>Artifact</strong> downloadbaar is via het CircleCI dashboard.</li>
+</ol>
+<h3 id="opgave-3">Opgave 3</h3>
 <p>Er duikt plots een onvoorziene periode van boekenschaarste op! Om niet te veel paniek te veroorzaken, willen we gebruik maken van blue/green releasing om het uitleensysteem van <a href="../../extra/sessy">SESsy library</a> gradueel te wijzigen.</p>
 <p>De klasse <code>BorrowBooksResource</code> is het <em>entry point</em> voor alle calls naar <code>/borrow</code>, zoals de <code>@Path</code> annotatie aanduidt. Deze klasse zal voortaan moeten dienen als API gateway die gebruikers omleidt, ofwel naar het gebruikelijke uitleenproces, ofwel naar een methode die niet meer toestaat dat boeken worden uitgeleend, onafhankelijk van de ingelogde gebruiker of het type boek.</p>
 <p>Maak twee nieuwe klasses aan, <code>BorrowBooksOriginalResource</code> (1) met de originele <code>borrow()</code> implementatie, en <code>BorrowBooksNotAllowedResource</code> (2), die altijd een status <code>FORBIDDEN</code> teruggeeft. Kennis van patterns is een pluspunt hier.</p>
@@ -1406,17 +1414,17 @@ install:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1679480292"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1679480292"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1679480292"></script>
-    <script src="../../js/jquery.sticky.js?1679480292"></script>
-    <script src="../../js/featherlight.min.js?1679480292"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1679480292"></script>
-    <script src="../../js/learn.js?1679480292"></script>
-    <script src="../../js/hugo-learn.js?1679480292"></script>
+    <script src="../../js/clipboard.min.js?1679487514"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1679487514"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1679487514"></script>
+    <script src="../../js/jquery.sticky.js?1679487514"></script>
+    <script src="../../js/featherlight.min.js?1679487514"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1679487514"></script>
+    <script src="../../js/learn.js?1679487514"></script>
+    <script src="../../js/hugo-learn.js?1679487514"></script>
     
         
-            <script src="../../mermaid/mermaid.js?1679480292"></script>
+            <script src="../../mermaid/mermaid.js?1679487514"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
