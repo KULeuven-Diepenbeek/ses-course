@@ -1,4 +1,4 @@
-languageCode = "en-uk"
+languageCode = "nl"
 title = "Software Engineering Skills"
 
 baseurl = "https://kuleuven-diepenbeek.github.io/ses-course/"
@@ -31,6 +31,10 @@ enableGitInfo = true
     noClasses = true
     tabWidth = 4
     style = "monokailight"
+
+  [markup.tableOfContents]
+    endlevel = 4
+    ordered = true
 
 [privacy]
   [privacy.youtube]
