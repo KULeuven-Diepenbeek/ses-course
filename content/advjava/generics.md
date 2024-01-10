@@ -100,6 +100,8 @@ ArrayList<Student> students = new ArrayList<>(); // <- je hoeft geen tweede keer
 
 Dat type is immers al bepaald door het type van de variabele.
 
+### Meerdere type-parameters
+
 Tenslotte kan een type meerdere type-parameters hebben, bijvoorbeeld een tuple van 3 elementen van mogelijk verschillend type:
 
 ```java
@@ -110,6 +112,14 @@ class Tuple3<T1, T2, T3> {
   public T1 getFirst() { return first; }
   /* ... */
 }
+```
+
+### Generische methodes
+
+TODO
+
+```java
+
 ```
 
 ### Oefening: Maybe
@@ -337,7 +347,7 @@ Plane --> Motorized
 /* 6 */  List<Vehicle> carsAsVehicles = cars;
 ```
 
-## Covariantie en contravariantie
+## Covariantie en contravariantie: wildcards
 
 We zagen hierboven dat `List<Cat>` en `List<Animal>` niets met elkaar te maken hebben, ondanks dat `Cat` een subtype is van `Animal`.
 In sommige situaties willen we wel zo'n relatie kunnen leggen.
@@ -471,12 +481,12 @@ public static void copyFromCatsTo(ArrayList<Cat> source, ArrayList<Cat> target) 
 ArrayList<Cat> cats = /* ... */
 
 ArrayList<Cat> otherCats = new ArrayList<>();
+ArrayList<Mammal> mammals = new ArrayList<>();
 ArrayList<Animal> animals = new ArrayList<>();
-ArrayList<Object> objects = new ArrayList<>();
 
 copyFromTo(cats, otherCats); // OK
+copyFromTo(cats, mammals); // niet toegelaten
 copyFromTo(cats, animals); // niet toegelaten
-copyFromTo(cats, objects); // niet toegelaten
 ```
 
 De laatste twee regels zijn niet toegelaten, maar zouden opnieuw erg nuttig kunnen zijn.
@@ -486,16 +496,20 @@ Aparte methodes schrijven leidt opnieuw tot code-duplicatie:
 public static void copyFromCatsToCats(ArrayList<Cat> source, ArrayList<Cat> target) {
   for (Cat cat : source) { target.add(a); }
 }
-public static void copyFromCatsToAnimals(ArrayList<Cat> source, ArrayList<Animal> target) {
+public static void copyFromCatsToMammals(ArrayList<Cat> source, ArrayList<Mammal> target) {
   for (Cat cat : source) { target.add(a); }
 }
-public static void copyFromCatsToObjects(ArrayList<Cat> source, ArrayList<Objects> target) {
+public static void copyFromCatsToAnimals(ArrayList<Cat> source, ArrayList<Animal> target) {
   for (Cat cat : source) { target.add(a); }
 }
 ```
 
+{{% notice note %}}
+Zou het nuttig zijn om een methode `copyFromCatsToBirds(ArrayList<Cat> source, ArrayList<Bird> target)` te voorzien? Waarom (niet)?
+{{% /notice %}}
+
 De oplossing in dit geval is gebruik maken van het **wildcard-type `<? super T>`**.
-Het type `ArrayList<? super Cat>` staat dus voor _"elke ArrayList waar het element-type een supertype is van `Cat`"_ (of het type `Cat` zelf).
+Het type `ArrayList<? super Cat>` staat dus voor _"elke ArrayList waar het element-type een supertype is van `Cat`"_ (inclusief het type `Cat` zelf).
 We kunnen dus schrijven:
 
 ```java
@@ -508,8 +522,8 @@ en kunnen nu hetvolgende uitvoeren:
 
 ```java
 copyFromCatsTo_wildcard(cats, otherCats); // OK
+copyFromCatsTo_wildcard(cats, mammals); // OK
 copyFromCatsTo_wildcard(cats, animals); // OK
-copyFromCatsTo_wildcard(cats, objects); // OK
 ```
 
 Dit heet **contravariantie**: hoewel `Cat` een subtype is van `Animal`, is `ArrayList<Animal>` een subtype van `ArrayList<? super Cat>`.
@@ -519,51 +533,81 @@ De 'contra' in contravariantie wijst erop dat de overervingsrelatie tussen `Cat`
 graph BT
 ALsuperCat["ArrayList#lt;? super Cat>"]
 ALAnimal["ArrayList#lt;Animal>"]
-
+ALMammal["ArrayList#lt;Mammal>"]
+ALCat["ArrayList#lt;Cat>"]
 ALAnimal --> ALsuperCat
+ALMammal --> ALsuperCat
+ALCat --> ALsuperCat
 
-Cat --> Animal
+Cat --> Mammal
+Mammal --> Animal
+classDef cat fill:#f99,stroke:#333,stroke-width:4px;
+classDef mammal fill:#9f9,stroke:#333,stroke-width:4px;
+classDef animal fill:#99f,stroke:#333,stroke-width:4px;
+class ALCat,ALsuperCat,Cat cat;
+class ALMammal,Mammal mammal;
+class ALAnimal,Animal animal;
+
 ```
 
-Als we ook `ArrayList<Object>` en `ArrayList<? super Animal>` toevoegen aan het plaatje, ziet dat er als volgt uit:
+Als we ook `ArrayList<? super Mammal>` en `ArrayList<? super Animal>` toevoegen aan het plaatje, ziet dat er als volgt uit:
 
 ```mermaid
 graph BT
 ALCat["ArrayList#lt;Cat>"]
 ALsuperCat["ArrayList#lt;? super Cat>"]
+ALsuperMammal["ArrayList#lt;? super Mammal>"]
 ALsuperAnimal["ArrayList#lt;? super Animal>"]
+ALMammal["ArrayList#lt;Mammal>"]
 ALAnimal["ArrayList#lt;Animal>"]
-ALObject["ArrayList#lt;Object>"]
 ALCat --> ALsuperCat
 ALAnimal --> ALsuperAnimal
-ALObject --> ALsuperAnimal
-ALsuperAnimal --> ALsuperCat
+ALMammal --> ALsuperMammal
+ALsuperAnimal --> ALsuperMammal
+ALsuperMammal --> ALsuperCat
 
-Cat --> Animal
-Animal --> Object
+Cat --> Mammal
+Mammal --> Animal
+
+classDef cat fill:#f99,stroke:#333,stroke-width:4px;
+classDef mammal fill:#9f9,stroke:#333,stroke-width:4px;
+classDef animal fill:#99f,stroke:#333,stroke-width:4px;
+class ALCat,ALsuperCat,Cat cat;
+class ALMammal,Mammal,ALsuperMammal mammal;
+class ALAnimal,Animal,ALsuperAnimal animal;
 ```
 
-### PECS
+### Covariant of contravariant: PECS
 
-Als we covariantie en contravariantie combineren, krijgen we volgend beeld:
+Als we covariantie en contravariantie combineren, krijgen we volgend beeld (we focussen op de extends- en super-relatie vanaf `Mammal`):
 
 ```mermaid
 graph BT
 ALAnimal["ArrayList#lt;Animal>"]
+ALMammal["ArrayList#lt;Mammal>"]
 ALCat["ArrayList#lt;Cat>"]
-ALsuperCat["ArrayList#lt;? super Cat>"]
-ALsuperAnimal["ArrayList#lt;? super Animal>"]
-ALextendsAnimal["ArrayList#lt;? extends Animal>"]
 
-ALAnimal --> ALextendsAnimal
-ALCat --> ALextendsAnimal
-ALAnimal --> ALsuperAnimal
-ALCat --> ALsuperCat
-ALsuperAnimal --> ALsuperCat
+ALsuperMammal["ArrayList#lt;? super Mammal>"]
+ALextendsMammal["ArrayList#lt;? extends Mammal>"]
 
-Cat --> Animal
-Animal --> Object
+ALMammal --> ALextendsMammal
+ALCat --> ALextendsMammal
+ALAnimal --> ALsuperMammal
+ALMammal --> ALsuperMammal
+
+Cat --> Mammal
+Mammal --> Animal
+
+classDef cat fill:#f99,stroke:#333,stroke-width:4px;
+classDef mammal fill:#9f9,stroke:#333,stroke-width:4px;
+classDef animal fill:#99f,stroke:#333,stroke-width:4px;
+class ALCat,Cat cat;
+class ALMammal,Mammal,ALsuperMammal,ALextendsMammal mammal;
+class ALAnimal,Animal animal;
 ```
+
+Hier zien we dat, met het covariante `ArrayList<? extends Mammal>`, we een `ArrayList<Mammal>` of `ArrayList<Cat>` kunnen gebruiken.
+Met een contravariante `ArrayList<? super Mammal>` kunnen we opnieuw een `ArrayList<Mammal>` gebruiken, maar ook een `ArrayList<Animal>`.
 
 Wanneer gebruik je wat?
 PECS: Producer Extends, Consumer Super

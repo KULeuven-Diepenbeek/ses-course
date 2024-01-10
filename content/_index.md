@@ -1,10 +1,10 @@
 ---
-title: 'Software Engineering Skills'
+title: "Software Engineering Skills"
 ---
 
 # Software Engineering Skills
 
-Laatste aanpassingen voor academiejaar _2022---2023_.
+Laatste aanpassingen voor academiejaar _2023---2024_.
 
 ## _Cursus notities_
 
@@ -14,15 +14,14 @@ Laatste aanpassingen voor academiejaar _2022---2023_.
 
 1. [Versie- en issuebeheer](/versiebeheer)
 2. [Dependency Management](/dependency-management):
-    -  De [Gradle Build Tool](/dependency-management/gradle/)
-    -  [Kotlin-specifics](/dependency-management/kotlin-gradle) voor Gradle
+   - De [Gradle Build Tool](/dependency-management/gradle/)
+   - [Kotlin-specifics](/dependency-management/kotlin-gradle) voor Gradle
 3. [Test-Driven Development](/tdd): Unit-, Integration- (1) en E2E (2) niveau
 4. [TDD In de praktijk](/tdd/in-de-praktijk)
 
-#### Algoritmen & Data Structuren
+#### Advanced Java
 
-1. Hoorcolleges: zie Toledo Cursusmateriaal
-2. [Test-Driven Development met algoritmes](/tdd/capita): Capita Selecta
+#### Recursie en backtracking
 
 #### Design Patterns
 
@@ -49,13 +48,13 @@ Laatste aanpassingen voor academiejaar _2022---2023_.
 ## Syllabus
 
 - **Lesgevers**:<br/>
-Coördinerend Verantwoordelijke: prof. dr. Kris Aerts - <a href="mailto:kris.aerts@kuleuven.be">kris.aerts@kuleuven.be</a><br/>
-Onderwijsassistent: Wouter Groeneveld - <a href="mailto:wouter.groeneveld@kuleuven.be">wouter.groeneveld@kuleuven.be</a>
-- **Kantoor**: Technologiecentrum Diepenbeek, Groep ACRO, D.0.35. 
+  Coördinerend Verantwoordelijke: prof. dr. Kris Aerts - <a href="mailto:kris.aerts@kuleuven.be">kris.aerts@kuleuven.be</a><br/>
+  Onderwijsassistent: Wouter Groeneveld - <a href="mailto:wouter.groeneveld@kuleuven.be">wouter.groeneveld@kuleuven.be</a>
+- **Kantoor**: Technologiecentrum Diepenbeek, Groep ACRO, D.0.35.
 
 #### Cursusbeschrijving
 
-In dit opleidingsonderdeel leer je de nodige skills om een softwareproject op de wereld te brengen volgens de regels van de kunst en met het aandacht voor de courante industriële praktijk. Op microniveau kom je meer te weten over de eigenschappen van algoritmes en datastructuren zodat je zelf de juiste keuze kan maken wanneer je een algoritme moet implementeren. Op macroniveau zorgen design patterns er voor dat je software beter onderhoudbaar wordt en een structuur heeft die herkenbaar is voor experten. Daarnaast gaan we in op de Software Development Life Cycle en het management van zo'n softwareproject met aandacht voor de juiste tools. 
+In dit opleidingsonderdeel leer je de nodige skills om een softwareproject op de wereld te brengen volgens de regels van de kunst en met het aandacht voor de courante industriële praktijk. Op microniveau kom je meer te weten over de eigenschappen van algoritmes en datastructuren zodat je zelf de juiste keuze kan maken wanneer je een algoritme moet implementeren. Op macroniveau zorgen design patterns er voor dat je software beter onderhoudbaar wordt en een structuur heeft die herkenbaar is voor experten. Daarnaast gaan we in op de Software Development Life Cycle en het management van zo'n softwareproject met aandacht voor de juiste tools.
 
 #### Vereiste voorkennis
 
@@ -64,7 +63,7 @@ Het vak '_Software Ontwerp in Java_' (INF1) dient eerst gevolgd te worden. We ga
 #### Doelstellingen
 
 Zie ook [Studiegids UHasselt](https://www.uhasselt.be/studiegids)
-    
+
 De context en het overzicht worden aangereikt in het hoorcollege.
 
 #### Beoordeling en evaluatie
@@ -81,4 +80,3 @@ Zie elke sectie '**meer leermateriaal**' in de labo noties voor materiaal per th
 #### Kalender
 
 Zie [collegeroosters UHasselt](http://collegeroosters.uhasselt.be).
-

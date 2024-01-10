@@ -1,7 +1,7 @@
 ---
-title: "4. Algoritmes en Datastructuren"
-weight: 4
+title: "5. Recursie en backtracking"
+weight: 5
 ---
 
-1. Hoorcolleges: zie Toledo Cursusmateriaal
-2. [Test-Driven Development met algoritmes](/tdd/capita): Capita Selecta
+1. [Recursie](/algoritmes/recursie)
+2. [Backtracking](/algoritmes/backtracking)
