@@ -1,5 +1,5 @@
 ---
-title: '5.4 Decorator'
+title: "6.4 Decorator"
 ---
 
 ## _"Decorator"_ - Design Pattern
@@ -10,12 +10,11 @@ Begeleidende screencast[^host]:
 
 {{< vimeo 398544397 >}}
 
-
 ### Doelstelling
 
-* Voeg dynamisch functionaliteit toe als alternatief voor klassieke overerving. 
-* Gedraagt zich zoals het stukje 'ingepakte' functionaliteit, maar voert extra handelingen uit. 
-* Wordt in Java altijd via `interface` implementaties uitegevoerd.
+- Voeg dynamisch functionaliteit toe als alternatief voor klassieke overerving.
+- Gedraagt zich zoals het stukje 'ingepakte' functionaliteit, maar voert extra handelingen uit.
+- Wordt in Java altijd via `interface` implementaties uitegevoerd.
 
 [Dive Into Design Patterns: Decorator](https://sourcemaking.com/design_patterns/decorator)
 
@@ -23,7 +22,7 @@ Begeleidende screencast[^host]:
 
 #### 1. Opzet
 
-Stel dat we in een fabriek op plaats X een auto samenstellen. De wagen is een zeer eenvoudige Volkswagen Golf, zonder opties. Op een andere locatie, plaats Y, hebben wij als bedrijf ook fabrieken die sportauto's bouwen (Volkswagen Scirocco) en op plaats Z luxe wagens (Volkswagen Passat). 
+Stel dat we in een fabriek op plaats X een auto samenstellen. De wagen is een zeer eenvoudige Volkswagen Golf, zonder opties. Op een andere locatie, plaats Y, hebben wij als bedrijf ook fabrieken die sportauto's bouwen (Volkswagen Scirocco) en op plaats Z luxe wagens (Volkswagen Passat).
 
 <div class="devselect">
 
@@ -38,6 +37,7 @@ public interface Car {
     public void assemble(); // build stuff
 }
 ```
+
 </div>
 
 Fabriek X:
@@ -59,6 +59,7 @@ public class VWGolf implements Car {
     }
 }
 ```
+
 </div>
 
 Fabriek Y:
@@ -80,6 +81,7 @@ public class VWScirocco implements Car {
     }
 }
 ```
+
 </div>
 
 Fabriek Z:
@@ -101,37 +103,38 @@ public class VWPassat implements Car {
     }
 }
 ```
+
 </div>
 
 {{<mermaid>}}
 graph TD;
-    A["VW Golf"]
-    B["VW Scirocco"]
-    C["VW Passat"]
-    Z{Car}
-    Z --> A
-    Z --> B
-    Z --> C
+A["VW Golf"]
+B["VW Scirocco"]
+C["VW Passat"]
+Z{Car}
+Z --> A
+Z --> B
+Z --> C
 {{< /mermaid >}}
 
 #### 2. Probleemstelling
 
-De General Manager belt: hij meldt ons vrolijk dat we zijn opgekocht door Geely, een Chinese autofabriekant. De heren in China wensen een mooie combinatie te maken tussen langs de ene kant **luxe**, en langs de andere kant pure **kracht**. Een combinatie van de technologie van fabriek Y en Z, dus. Dit mag _enkel op aanvraag_ gebeuren, en is dus niet simpelweg een nieuwe variant van een VW assemblage, maar een dynamische combinatie, waarbij soms meer luxe en soms meer kracht wordt gevraagd. Dat hangt natuurlijk van de klant af. 
+De General Manager belt: hij meldt ons vrolijk dat we zijn opgekocht door Geely, een Chinese autofabriekant. De heren in China wensen een mooie combinatie te maken tussen langs de ene kant **luxe**, en langs de andere kant pure **kracht**. Een combinatie van de technologie van fabriek Y en Z, dus. Dit mag _enkel op aanvraag_ gebeuren, en is dus niet simpelweg een nieuwe variant van een VW assemblage, maar een dynamische combinatie, waarbij soms meer luxe en soms meer kracht wordt gevraagd. Dat hangt natuurlijk van de klant af.
 
 We zullen dus een custom optie voorzien:
 
 {{<mermaid>}}
 graph TD;
-    A["VW Golf"]
-    B["VW Scirocco"]
-    C["VW Passat"]
-    D["Custom Car Decorator"]
-    Z{Car}
-    Z --> A
-    Z --> B
-    Z --> C
-    B --> D
-    C --> D
+A["VW Golf"]
+B["VW Scirocco"]
+C["VW Passat"]
+D["Custom Car Decorator"]
+Z{Car}
+Z --> A
+Z --> B
+Z --> C
+B --> D
+C --> D
 {{< /mermaid >}}
 
 #### 3. Oplossing
@@ -172,6 +175,7 @@ public class CustomCarDecorator implements Car {
     }
 }
 ```
+
 </div>
 
 Op deze manier kunnen we zoveel auto types als de klant wenst doorgeven aan de `CustomCarDecorator` instantie, die netjes in de bestaande fabriek logica past, gegeven de volgende fabriek klasse:
@@ -204,15 +208,16 @@ public class Factory {
     }
 }
 ```
+
 </div>
 
-Dit werkt enkel en alleen omdat we met een **interface** werken! 
+Dit werkt enkel en alleen omdat we met een **interface** werken!
 
 ### Eigenschappen van dit patroon
 
-* Een Decorator verandert het contract van de interface niet. De interface wordt uitgebreid, zijnde dat bovenstaande `CustomCarDecorator` extra dingen doet ten opzichte van de standaard VW Golf/andere implementaties. 
-* Een Decorator kan je gebruiken om extra functionaliteiten toe te voegen zonder aan de klasse structuur grote wijzigingen door te voeren. Gebruik hiervoor, zoals de `List<Car> carsToAssemble` member variable, **Compositie**, en niet **Inheritance**. 
-* Een Decorator verandert de flow van de functionaliteit niet: dat doet een _Strategy_ - een decorator voorziet enkel een ander uitzicht. Denk aan een doos in een doos stoppen: daar kan ook stiekem nog een extra doos in worden geplaatst. Maar het blijven dozen.
+- Een Decorator verandert het contract van de interface niet. De interface wordt uitgebreid, zijnde dat bovenstaande `CustomCarDecorator` extra dingen doet ten opzichte van de standaard VW Golf/andere implementaties.
+- Een Decorator kan je gebruiken om extra functionaliteiten toe te voegen zonder aan de klasse structuur grote wijzigingen door te voeren. Gebruik hiervoor, zoals de `List<Car> carsToAssemble` member variable, **Compositie**, en niet **Inheritance**.
+- Een Decorator verandert de flow van de functionaliteit niet: dat doet een _Strategy_ - een decorator voorziet enkel een ander uitzicht. Denk aan een doos in een doos stoppen: daar kan ook stiekem nog een extra doos in worden geplaatst. Maar het blijven dozen.
 
 ## <a name="oef"></a>Labo oefeningen
 
@@ -232,13 +237,13 @@ Werk verder op opgave 1: bouw een nieuwe `Factory` in Zweden. Deze Factory in Zw
 
 ### Opgave 3
 
-[sessy library](/extra/sessy): 
+[sessy library](/extra/sessy):
 
 1. identificeer waar jij denkt dat een decorator nodig zou kunnen zijn. Waar zou mogelijks dynamische logica gebruikt kunnen worden?
-2. Pas het patroon toe waar jij denkt dat het nodig is. 
+2. Pas het patroon toe waar jij denkt dat het nodig is.
 
 ## Denkvragen
 
-* Stel dat de klant altijd een combinatie van twee bepaalde auto's wenst. Wanneer beslissen we om dit permanent op te nemen in ons repertroire, en er een "echte" subklasse van te maken, en wanneer houden we het nog op een decorator? 
-* Op welk patroon trekt dit patroon nog? Waarom? Zie [/](labo noties index) pagina.
-* Kan je dit ook zonder interfaces doen? Denk na over implementaties in andere programmeertalen. 
+- Stel dat de klant altijd een combinatie van twee bepaalde auto's wenst. Wanneer beslissen we om dit permanent op te nemen in ons repertroire, en er een "echte" subklasse van te maken, en wanneer houden we het nog op een decorator?
+- Op welk patroon trekt dit patroon nog? Waarom? Zie [/](labo noties index) pagina.
+- Kan je dit ook zonder interfaces doen? Denk na over implementaties in andere programmeertalen.

@@ -1,5 +1,5 @@
 ---
-title: "5.2 Dependency Injection"
+title: "6.2 Dependency Injection"
 ---
 
 ## _"Dependency Injection (DI)"_ - Design Pattern

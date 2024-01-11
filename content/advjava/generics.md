@@ -1,5 +1,5 @@
 ---
-title: "4.1 Generics"
+title: "4.2 Generics"
 toc: true
 autonumbering: true
 ---
@@ -21,8 +21,9 @@ class ArrayList {
 }
 ```
 
-Als we deze klasse makkelijk willen kunnen herbruiken, en dus algemeen willen houden, kunnen we nu nog niet zeggen wat het type is van de elementen van de lijst.
-Gaan er Student-objecten in de lijst? Of Animal-objecten?
+Stel dat we deze klasse makkelijk willen kunnen herbruiken.
+Dan moeten we ze algemeen houden, en kunnen we nu nog niet zeggen wat het type is van de elementen van de lijst.
+Gaan er Student-objecten in de lijst terechtkomen? Of Animal-objecten?
 Dat weten we nog niet.
 We kiezen daarom voor `Object`, het meest algemene type in Java.
 
@@ -39,35 +40,38 @@ Animal animal = new Animal();
 students.add(animal); // <-- compiler vindt dit OK
 ```
 
-Om dat tegen te gaan, zou je zelf afzonderlijke klassen `AnimalArrayList`, `StudentArrayList`, ... kunnen schrijven waar het bedoelde type van elementen wel duidelijk is, en ook afgedwongen wordt door de compiler.
+Om dat tegen te gaan, zou je afzonderlijke klassen `ArrayListOfStudents`, `ArrayListOfAnimals`, ... kunnen schrijven waar het bedoelde type van elementen wel duidelijk is, en ook afgedwongen wordt door de compiler.
+Bijvoorbeeld:
 
 ```java
-class AnimalArrayList {
-  private Animal[] elements;
-  public void add(Animal element) { /* ... */  }
-  public Animal get(int index) { /* ... */  }
-}
-
-class StudentArrayList {
+class ArrayListOfStudents {
   private Student[] elements;
   public void add(Student element) { /* ... */  }
   public Student get(int index) { /* ... */  }
+}
+
+class ArrayListOfAnimals {
+  private Animal[] elements;
+  public void add(Animal element) { /* ... */  }
+  public Animal get(int index) { /* ... */  }
 }
 ```
 
 Met deze implementaties is het probleem hierboven opgelost:
 
 ```java
-StudentArrayList students = new StudentArrayList();
+ArrayListOfStudents students = new ArrayListOfStudents();
 students.add(student); // OK
-students.add(animal); // compiler error
+students.add(animal);  // compiler error
 ```
 
-De prijs is echter veel quasi-identieke implementaties, die enkel verschillen in het type van de elementen.
+De prijs die we hiervoor betalen is echter dat we nu veel quasi-identieke implementaties moeten maken, die enkel verschillen in het type van de elementen.
 Dat leidt tot veel onnodige en ongewenste code-duplicatie.
 
+### Een generische klasse definiëren
+
 Met generics kan je een _type_ gebruiken als parameter voor een klasse om deze code-duplicatie vermijden.
-Generics geven je dus een combinatie van slechts 1 implementatie hebben (zoals `ArrayList`) en ook het specifiëren van een bepaald type (zoals `StudentArrayList`).
+Generics geven je dus een combinatie van beide opties: er moet slechts 1 implementatie gemaakt worden (zoals bij `ArrayList` hierboven), en deze implementatie kan gebruikt worden om lijsten met een specifiek element-type te maken (zoals bij `ArrayListOfStudents`).
 
 De type-parameter staat tussen `<` en `>`, en je kan deze type-parameter vervolgens gebruiken in heel de klasse.
 Bijvoorbeeld, volgende klasse is een nieuwe versie van de `ArrayList` klasse van hierboven, maar nu met type-parameter `E`, welke vervolgens gebruikt wordt als type van de elements-array, de parameter van de add-method, en het resultaat-type van de get-method:
@@ -80,9 +84,22 @@ class ArrayList<E> {
 }
 ```
 
-Bij het gebruik van deze klasse moet je dan een type opgeven voor de parameter `E`.
+Je zal heel vaak zien dat generische type-parameters slechts bestaan uit 1 letter (bijvoorbeeld `E`, `T`, of `U`). Dat is geen vereiste: onderstaande code mag ook, en is volledig equivalent aan die van hierboven.
+De reden waarom vaak met individuele letters gewerkt wordt, is om duidelijk te maken dat het over een type-parameter gaat, en niet over een bestaande klasse.
+
+```java
+class ArrayList<Element> {
+  private Element[] elements;
+  public void add(Element element) { /_ ... _/ }
+  public Element get(int index) { /_ ... _/ }
+}
+```
+
+### Een generische klasse gebruiken
+
+Bij het gebruik van een generische klasse (bijvoorbeeld `ArrayList<E>` van hierboven) moet je een concreet type opgeven voor de type-parameter (`E`).
 Bijvoorbeeld, als je een lijst met enkel studenten wil, gebruik je `ArrayList<Student>`.
-Je kan dan de klasse gebruiken op dezelfde manier als de `StudentArrayList` hierboven.
+Je kan dan de klasse gebruiken op dezelfde manier als de `ArrayListOfStudents` klasse van hierboven:
 
 ```java
 ArrayList<Student> students = new ArrayList<Student>();
@@ -92,17 +109,19 @@ students.add(someStudent);
 Student firstStudent = students.get(0);
 ```
 
-Java laat toe om, bij het instantiëren, het type weg te laten met behulp van `<>`:
+Merk op hoe de klasse afdwingt en garandeert dat er enkel Student-objecten in terecht kunnen komen.
+
+Om wat typwerk te besparen, laat Java in veel gevallen ook toe om het type weg te laten bij het instantiëren, met behulp van `<>`.
+Dat type is immers al bepaald door het type van de variabele:
 
 ```java
 ArrayList<Student> students = new ArrayList<>(); // <- je hoeft geen tweede keer <Student> te typen
 ```
 
-Dat type is immers al bepaald door het type van de variabele.
-
 ### Meerdere type-parameters
 
-Tenslotte kan een type meerdere type-parameters hebben, bijvoorbeeld een tuple van 3 elementen van mogelijk verschillend type:
+De ArrayList-klasse hierboven had één generische parameter (`E`).
+Een klasse kan ook meerdere type-parameters hebben, bijvoorbeeld een tuple van 3 elementen van mogelijk verschillend type:
 
 ```java
 class Tuple3<T1, T2, T3> {
@@ -114,7 +133,67 @@ class Tuple3<T1, T2, T3> {
 }
 ```
 
-### Generische methodes
+Bij het aanmaken moet je dan voor elke parameter een type opgeven:
+
+```java
+Tuple3<String, Integer, Student> tuple = new Tuple3<>("John", 23, student);
+```
+
+## Generische parameters begrenzen (bounds)
+
+Een type-parameter `<E>` zoals we die tot nu toe gezien hebben kan om het even welke klasse voorstellen.
+Soms willen we dat niet, en willen we beperkingen opleggen.
+Stel bijvoorbeeld dat we volgende klasse-hierarchie hebben:
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; align-items: center;">
+
+```java
+abstract class Animal { /* ... */ }
+class Cat extends Animal { /* ... */ }
+class Dog extends Animal { /* ... */ }
+```
+
+```mermaid
+graph BT
+Cat --> Animal
+Dog --> Animal
+```
+
+</div>
+
+We maken nu een generische klasse `Food`:
+
+```java
+class Food<T> {
+  public void giveTo(T animal) { /* ... */ }
+}
+
+Food<Cat> catFood = new Food<>();       // OK
+Food<String> stringFood = new Food<>(); // ook OK? :(
+```
+
+Deze klasse is enkel bedoeld om met (subklassen van) `Animal` gebruikt te worden.
+Maar het is ook mogelijk om een `Food<String>` te maken.
+Verder zal de compiler ook weigeren om in de methode `giveTo` een `Animal`-specifieke methode op te roepen, omdat de parameter `animal` type `T` heeft, en dat kan eender wat zijn.
+
+We kunnen aangeven dat type `T` een subtype moet zijn van `Animal` via `<T extends Animal>`.
+Je zal dan niet langer `Food<String>` mogen schrijven, aangezien `String` geen subklasse is van `Animal`.
+We **begrenzen** dus de mogelijke types die gebruikt kunnen worden voor de type-parameter `T`.
+
+```java
+class Food<T extends Animal> {
+  public void giveTo(T animal) { /* ... */ }
+}
+
+Food<Cat> catFood = new Food<>();       // nog steeds OK
+Food<String> stringFood = new Food<>(); // <-- compiler error
+```
+
+## Generische methodes
+
+Hierboven hebben we steeds een hele klasse generisch gemaakt.
+In sommige gevallen kan het ook nuttig zijn om een generische **methode** te definiëren.
+Dat kan in een klasse die zelf geen type-parameters heeft:
 
 TODO
 
@@ -122,11 +201,34 @@ TODO
 
 ```
 
-### Oefening: Maybe
+## Oefeningen (1)
 
-Schrijf een generische klasse `Maybe` die een object voorstelt dat nul of één element kan bevatten.
-Het type van het element wordt bepaald door een generische parameter.
-Hieronder zie je hoe de klasse gebruikt kan worden:
+### NonNull-klasse
+
+Schrijf een generische klasse (of record) `NonNull` die een waarde van een bepaald type kan bevatten. Deze waarde mag niet null zijn.
+Het type wordt bepaald door de generische parameter.
+Hieronder vind je enkele tests voor de klasse.
+
+```java
+@Test
+void valueIsStored() {
+    NonNull<String> someString = new NonNull<>("Hello");
+    assertThat(someString.getValue(), is("Hello"));
+}
+@Test
+void nullIsRefused() {
+    assertThrows(NullPointerException.class, () -> {
+        new NonNull<>(null);
+    });
+}
+```
+
+### Maybe-klasse
+
+1. Schrijf een generische klasse (of record) `Maybe` die een object voorstelt dat nul of één waarde van een bepaald type kan bevatten.
+   Dat type wordt bepaald door een generische parameter.
+
+2. Maak de `print`-methode hieronder ook generisch, zodat deze niet enkel werkt voor een `Maybe<String>` maar ook voor andere types dan `String`.
 
 ```java
 public static void print(Maybe<String> maybe) {
@@ -144,34 +246,31 @@ print(maybeAString);
 print(maybeAnotherString);
 ```
 
-### Oefening: SuccessOrFail
+### SuccessOrFail
 
-Schrijf een generische klasse `SuccessOrFail` die een object voorstelt dat één element bevatten.
+Schrijf een generische klasse (of record) `SuccessOrFail` die een object voorstelt dat precies één element bevat.
 Dat element heeft 1 van 2 mogelijke types (die types zijn generische parameters).
 Het eerste type stelt het type van een succesvol resultaat voor; het tweede type is dat van een fout.
-Een voorbeeld van hoe je die klasse kan gebruiken vind je hieronder:
+Je kan objecten enkel aanmaken via de statische methodes `success` en `fail`.
+Een voorbeeld van tests voor die klasse vind je hieronder:
 
 ```java
-// Resultaat van een operatie die een String teruggeeft bij success,
-// en een exception als de operatie gefaald is.
-SuccessOrFail<String, Exception> result = new SuccessOrFail<>("The operation was successful", null);
-if (result.isSuccess()) {
-    System.out.println("Operation was successful: " + result.getResult());
-} else {
-    System.out.println("Operation failed: " + result.getError());
+@Test
+public void success() {
+    SuccessOrFail<String, Exception> result = SuccessOrFail.success("This is the result");
+    assertThat(result.isSuccess(), is(true));
+    assertThat(result.successValue(), is("This is the result"));
 }
 
-// Resultaat van een operatie die een int (Integer) teruggeeft bij success,
-// en een String (foutmelding) als de operatie gefaald is.
-SuccessOrFail<Integer, String> result2 = new SuccessOrFail<>(null, "Division by zero");
-if (result2.isSuccess()) {
-    System.out.println("Operation was successful: " + result2.getResult());
-} else {
-    System.out.println("Operation failed: " + result2.getError());
+@Test
+public void failure() {
+    SuccessOrFail<String, Exception> result = SuccessOrFail.fail(new IllegalStateException());
+    assertThat(result.isSuccess(), is(false));
+    assertThat(result.failValue(), is(instanceOf(IllegalStateException.class)));
 }
 ```
 
-## Behavioral subtyping (substitutie-principe)
+## Generics en behavioral subtyping (substitutie-principe)
 
 Stel we hebben klassen `Animal`, `Mammal`, `Cat`, `Dog`, en `Bird` met een overervingsrelatie:
 
@@ -215,8 +314,8 @@ static void bark(Dog dog) { /* ... */ }
 static void layEgg(Bird bird) { /* ... */ }
 
 Cat cat = new Cat();
-pet(cat); // <- toegelaten (voldoet aan principe)
-bark(cat); // <- niet toegelaten (compiler error)
+pet(cat);    // <- toegelaten (voldoet aan principe)
+bark(cat);   // <- niet toegelaten (compiler error)
 layEgg(cat); // <- niet toegelaten (compiler error)
 ```
 
@@ -226,7 +325,7 @@ Een lijst in Java is een geordende groep van elementen van hetzelfde type.
 `List<E>` is de interface[^2] die aan de basis ligt van alle lijsten.
 `ArrayList<E>` is een klasse die een lijst implementeert met behulp van een array.
 `ArrayList<E>` is een subtype van `List<E>`; volgens het principe kan dus, overal waar een lijst-object verwacht wordt, een lijst gebruikt worden die geïmplementeerd is met arrays.
-Er bestaat ook een interface `Collection<E>`, wat een willekeurige groep van elementen voorstelt (niet enkel een lijst, maar bijvoorbeeld ook verzamelingen (`Set`) of wachtrijen (`Queue`)).
+[Later](/advjava/collections) zullen we ook zien dat er een interface `Collection<E>` bestaat, wat een willekeurige groep van elementen voorstelt: niet enkel een lijst, maar bijvoorbeeld ook verzamelingen (`Set`) of wachtrijen (`Queue`).
 `List<E>` is een subtype van `Collection<E>`. Bijgevolg is ook `ArrayList<E>` een subtype van `Collection<E>`.
 
 In code ziet deze situatie er als volgt uit:
@@ -294,7 +393,7 @@ X3["ArrayList#lt;Animal>"] --> Y3["List#lt;Animal>"] --> Z3["Collection#lt;Anima
 
 </div>
 
-Het lijkt vervolgens misschien logisch dat `ArrayList<Cat>` ook een subtype moet zijn van `ArrayList<Animal>`.
+Het lijkt misschien logisch dat `ArrayList<Cat>` ook een subtype moet zijn van `ArrayList<Animal>`.
 Een lijst van katten lijkt tenslotte toch een speciaal geval te zijn van een lijst van dieren?
 Maar dat is niet het geval.
 
@@ -324,7 +423,7 @@ animals.add(dog); // <- OOPS: er zit nu een hond in de lijst van katten
 ```
 
 Je zou dus honden kunnen toevoegen aan je lijst van katten zonder dat de compiler je waarschuwt, en dat is niet gewenst.
-Om die reden beschouwt Java beide klassen dus niet als subtype van elkaar.
+Om die reden beschouwt Java `ArrayList<Cat>` dus niet als subtype van `ArrayList<Animal>`, ondanks dat `Cat` wél een subtype van `Animal` is.
 
 ### Oefening: behavioral subtyping
 
@@ -352,7 +451,7 @@ Plane --> Motorized
 We zagen hierboven dat `List<Cat>` en `List<Animal>` niets met elkaar te maken hebben, ondanks dat `Cat` een subtype is van `Animal`.
 In sommige situaties willen we wel zo'n relatie kunnen leggen.
 
-### Covariantie: ? extends T
+### Covariantie (extends)
 
 Wat als we een methode willen schrijven die de dieren uit een gegeven lijst toevoegt aan een andere lijst van dieren? Bijvoorbeeld:
 
@@ -361,12 +460,12 @@ public static void copyFromTo(ArrayList<Animal> source, ArrayList<Animal> target
   for (Animal a : source) { target.add(a); }
 }
 
-ArrayList<Animal> target = new ArrayList<>();
+ArrayList<Animal> animals = new ArrayList<>();
 ArrayList<Cat> cats = /* ... */
 ArrayList<Dog> dogs = /* ... */
 /* ... */
-copyFromTo(dogs, target); // niet toegelaten
-copyFromTo(cats, target); // niet toegelaten
+copyFromTo(dogs, animals); // niet toegelaten
+copyFromTo(cats, animals); // niet toegelaten
 ```
 
 Volgens de regels die we hierboven gezien hebben, kunnen we deze methode nu niet gebruiken om de dieren uit een lijst van honden of katten te kopiëren naar een lijst van dieren.
@@ -399,7 +498,7 @@ public static void copyFromTo_wildcard(ArrayList<? extends Animal> source, Array
 }
 ```
 
-Het type `ArrayList<? extends Animal>` staat dus voor _"elke ArrayList waar het element-type een subtype is van `Animal`"_.
+Het type `ArrayList<? extends Animal>` staat dus voor _"elke ArrayList waar het element-type een (niet nader bepaald) subtype is van `Animal`"_.
 Volgende code is nu toegelaten:
 
 ```java
@@ -419,33 +518,56 @@ ALAnimal --> ALextendsAnimal
 ALCat --> ALextendsAnimal
 
 Cat --> Animal
+
+classDef cat fill:#f99,stroke:#333,stroke-width:4px;
+classDef animal fill:#99f,stroke:#333,stroke-width:4px;
+class ALCat,Cat cat;
+class ALAnimal,Animal,ALextendsAnimal animal;
 ```
 
-TODO: relatie List-ArrayList bespreken
-Het plaatje wordt nu heel wat complexer:
+We kunnen ook de relatie met `Mammal` toevoegen:
 
 ```mermaid
 graph BT
 ALCat["ArrayList#lt;Cat>"]
 ALextendsAnimal["ArrayList#lt;? extends Animal>"]
-LCat["List#lt;Cat>"]
-LextendsAnimal["List#lt;? extends Animal>"]
-LAnimal["List#lt;Animal>"]
+ALextendsMammal["ArrayList#lt;? extends Mammal>"]
+ALextendsCat["ArrayList#lt;? extends Cat>"]
 ALAnimal["ArrayList#lt;Animal>"]
-ALCat --> LCat
-LAnimal --> LextendsAnimal
-ALAnimal --> LAnimal
+ALMammal["ArrayList#lt;Mammal>"]
+ALCat --> ALextendsCat
+ALextendsMammal --> ALextendsAnimal
+ALextendsCat --> ALextendsMammal
 ALAnimal --> ALextendsAnimal
-ALextendsAnimal --> LextendsAnimal
-LCat --> LextendsAnimal
-ALCat --> ALextendsAnimal
+ALMammal --> ALextendsMammal
 
-Cat --> Animal
+Cat --> Mammal
+Mammal --> Animal
+
+
+classDef cat fill:#f99,stroke:#333,stroke-width:4px;
+classDef mammal fill:#9f9,stroke:#333,stroke-width:4px;
+classDef animal fill:#99f,stroke:#333,stroke-width:4px;
+class ALCat,Cat,ALextendsCat cat;
+class ALMammal,Mammal,ALextendsMammal mammal;
+class ALAnimal,Animal,ALextendsAnimal animal;
 ```
+
+Tenslotte kan je in Java ook `<?>` schrijven; dat is een verkorte notatie voor `<? extends Object>`. Je interpreteert `<?>` dus als _een willekeurig maar niet gekend type_. Merk op dat `<?>` dus niet hetzelfde is als `<Object>`.
+
+Onderstaande code is ongeldig. Waarom?
+
+```java
+ArrayList<?> lijst = new ArrayList<String>();
+lijst.add("Hello");
+```
+
+Antwoord: de `lijst`-variabele is gedeclareerd als een ArrayList van een ongekend type. Op basis van het type van de variabele kan de compiler niet afleiden dat er Strings toegevoegd mogen worden aan de lijst (het zou evengoed een ArrayList van Animals kunnen zijn).
+Het feit dat `lijst` geinititialiseerd wordt met `<String>` doet hier niet terzake; enkel het type van de declaratie is van belang.
 
 #### Oefening: covariantie
 
-Breid het schema hierboven uit met de wildcard `? extends Cat`.
+Breid het schema hierboven uit met de wildcard `<? extends Cat>`.
 
 ```mermaid
 graph BT
@@ -469,12 +591,12 @@ ALextendsCat --> ALextendsAnimal
 ALextendsCat --> LextendsCat
 ```
 
-### Contravariantie: ? super T
+### Contravariantie (super)
 
-Wat als we het omgekeerde willen van hierboven: een methode die katten uit een gegeven lijst toevoegt aan een andere lijst waarin katten kunnen voorkomen (maar eventueel ook andere objecten)? Bijvoorbeeld:
+Wat als we het omgekeerde willen van hierboven: een methode die de katten uit een gegeven lijst haalt en toevoegt aan een andere lijst van dieren? Bijvoorbeeld:
 
 ```java
-public static void copyFromCatsTo(ArrayList<Cat> source, ArrayList<Cat> target) {
+public static void copyFromCatsTo(ArrayList<Cat> source, ArrayList<Animal> target) {
   for (Cat cat : source) { target.add(a); }
 }
 
@@ -484,12 +606,12 @@ ArrayList<Cat> otherCats = new ArrayList<>();
 ArrayList<Mammal> mammals = new ArrayList<>();
 ArrayList<Animal> animals = new ArrayList<>();
 
-copyFromTo(cats, otherCats); // OK
-copyFromTo(cats, mammals); // niet toegelaten
-copyFromTo(cats, animals); // niet toegelaten
+copyFromTo(cats, otherCats); // niet toegelaten
+copyFromTo(cats, mammals);   // niet toegelaten
+copyFromTo(cats, animals);   // OK
 ```
 
-De laatste twee regels zijn niet toegelaten, maar zouden opnieuw erg nuttig kunnen zijn.
+De eerste twee `copyFromTo`-regels zijn niet toegelaten, maar zouden opnieuw erg nuttig kunnen zijn.
 Aparte methodes schrijven leidt opnieuw tot code-duplicatie:
 
 ```java
@@ -522,8 +644,8 @@ en kunnen nu hetvolgende uitvoeren:
 
 ```java
 copyFromCatsTo_wildcard(cats, otherCats); // OK
-copyFromCatsTo_wildcard(cats, mammals); // OK
-copyFromCatsTo_wildcard(cats, animals); // OK
+copyFromCatsTo_wildcard(cats, mammals);   // OK
+copyFromCatsTo_wildcard(cats, animals);   // OK
 ```
 
 Dit heet **contravariantie**: hoewel `Cat` een subtype is van `Animal`, is `ArrayList<Animal>` een subtype van `ArrayList<? super Cat>`.
@@ -576,6 +698,8 @@ class ALCat,ALsuperCat,Cat cat;
 class ALMammal,Mammal,ALsuperMammal mammal;
 class ALAnimal,Animal,ALsuperAnimal animal;
 ```
+
+Aan de hand van de kleuren kan je zien dat de overervingsrelatie omgekeerd verloopt.
 
 ### Covariant of contravariant: PECS
 
@@ -630,9 +754,34 @@ Er kan dus, tijdens de uitvoering, niet gecontroleerd worden of je steeds het ju
 
 Bij arrays wordt er _wel_ type-informatie bijgehouden na het compileren, en kan dus gecontroleerd worden dat je geen ongeldig getypeerde elementen toevoegt.
 
-## Labo-oefeningen
+## Oefeningen (2)
 
-TODO
+### Animal food
+
+**Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen**
+
+Gebruik generics (met grenzen/bounds) in de code hieronder, zodat de code (behalve de laatste regel) compileert,
+en de compiler enkel katteneten toelaat voor katten, en hondeneten voor honden:
+
+```java
+class Animal {
+  public void eat(Food<?> food) { }
+}
+class Cat extends Animal {}
+class Dog extends Animal {}
+class Food<A extends Animal> {}
+
+Food<Cat> catFood = new Food<>();
+Food<Dog> dogFood = new Food<>();
+
+Cat cat = new Cat();
+Dog dog = new Dog();
+
+cat.eat(catFood); // OK
+dog.eat(dogFood); // OK
+
+cat.eat(dogFood); // <- moet een compiler error geven!
+```
 
 ## Denkvragen
 
@@ -641,3 +790,7 @@ TODO
 ## Extra leermateriaal
 
 Er is erg veel informatie te vinden op het internet over generics in Java.
+
+```
+
+```

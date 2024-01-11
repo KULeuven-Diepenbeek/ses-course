@@ -3,7 +3,8 @@ title: "4. Advanced Java"
 weight: 4
 ---
 
-1. [Generics](/advjava/generics)
-2. [Multithreading en concurrency](/advjava/multithreading)
-3. [Collections](/advjava/collections)
-4. [Streams](/advjava/streams)
+In dit deel bekijken we enkele geavanceerdere Java-concepten.
+Het uiteindelijk doel is uitkomen op een behandeling van Java Collections en Streams,
+en een basis geven om later te werken met [recursie en backtracking](/algoritmes).
+
+{{% children %}}

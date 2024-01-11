@@ -1,5 +1,5 @@
 ---
-title: "4.2 Multithreading"
+title: "4.3 Multithreading"
 ---
 
 ## Wat en waarom?
