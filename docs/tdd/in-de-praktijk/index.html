@@ -12,21 +12,25 @@
     <title>3.1 TDD In de praktijk :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1686665213" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1686665213" rel="stylesheet">
-    <link href="../../css/hybrid.css?1686665213" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1686665213" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1686665213" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1686665213" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1686665213" rel="stylesheet">
-    <link href="../../css/theme.css?1686665213" rel="stylesheet">
-    <link href="../../css/devselector.css?1686665213" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1686665213" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1686665213" rel="stylesheet">
+    <link href="../../css/nucleus.css?1707136035" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1707136035" rel="stylesheet">
+    <link href="../../css/hybrid.css?1707136035" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1707136035" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1707136035" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1707136035" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1707136035" rel="stylesheet">
+    <link href="../../css/theme.css?1707136035" rel="stylesheet">
+    <link href="../../css/autonumbering.css?1707136035" rel="stylesheet">
+    <link href="../../css/devselector.css?1707136035" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1707136035" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1707136035" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1686665213"></script>
-    <script src="../../js/devselector.js?1686665213"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1707136035"></script>
+    <script src="../../js/devselector.js?1707136035"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1686665213"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1686665213"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1707136035"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1707136035"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1686665213"></script>
+<script type="text/javascript" src="../../js/search.js?1707136035"></script>
 
     
   </div>
@@ -755,8 +759,7 @@
                 </div>
                 
                     <div class="progress">
-    <div class="wrapper">
-<nav id="TableOfContents">
+  <div class="wrapper toc"><nav id="TableOfContents">
   <ul>
     <li><a href="#the-java-way-mockito">The Java way: Mockito</a>
       <ul>
@@ -767,8 +770,7 @@
     <li><a href="#the-kotlin-way-mockk">The Kotlin way: MockK</a></li>
     <li><a href="#tdd-in-een-groter-project">TDD in een groter project</a></li>
   </ul>
-</nav>
-    </div>
+</nav></div>
 </div>
 
                 
@@ -789,7 +791,13 @@
 
         
 
+        
 
+
+
+
+
+<article class='content'>
 <h2 id="the-java-way-mockito">The Java way: Mockito</h2>
 <p>Mockito is verreweg het meest populaire Java-specifieke Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen.</p>
 <p><figure>
@@ -1018,6 +1026,7 @@
 <h2 id="tdd-in-een-groter-project">TDD in een groter project</h2>
 <p>De <a href="../../extra/sessy">SESsy library</a> webapplicatie bevat ook unit-, integratie- en endtoend-testen die een meer &lsquo;real-life&rsquo; omgeving simuleren met een grotere codebase. Zij die zoeken naar een beter begrip van het concept TDD en de implementatie ervan in de dagelijkse wereld, kunnen daar hun oren en ogen de kost geven. We moedigen tevens het wijzigen van testen aan om te kijken wat er gebeurt!</p>
 
+</article>
 
 <footer class="footline">
 	
@@ -1479,21 +1488,31 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1686665213"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1686665213"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1686665213"></script>
-    <script src="../../js/jquery.sticky.js?1686665213"></script>
-    <script src="../../js/featherlight.min.js?1686665213"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1686665213"></script>
-    <script src="../../js/learn.js?1686665213"></script>
-    <script src="../../js/hugo-learn.js?1686665213"></script>
-    
-        
-            <script src="../../mermaid/mermaid.js?1686665213"></script>
-        
-        <script>
-            mermaid.initialize({ startOnLoad: true });
-        </script>
+    <script src="../../js/clipboard.min.js?1707136035"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1707136035"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136035"></script>
+    <script src="../../js/jquery.sticky.js?1707136035"></script>
+    <script src="../../js/featherlight.min.js?1707136035"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1707136035"></script>
+    <script src="../../js/learn.js?1707136035"></script>
+    <script src="../../js/hugo-learn.js?1707136035"></script>
+    <script src="../../js/mermaid.min.js?1707136035"></script>
+    <script>
+    window.MathJax = {
+      chtml: {
+        scale: 2,                      
+        minScale: .5,                  
+        matchFontHeight: true,         
+        mtextInheritFont: false,       
+        merrorInheritFont: true,       
+        mathmlSpacing: false,          
+        skipAttributes: {},            
+        exFactor: .5,                  
+        displayAlign: 'center',        
+        displayIndent: '0'             
+      }
+    };
+    </script>
     
     
 
