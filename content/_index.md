@@ -4,39 +4,46 @@ title: "Software Engineering Skills"
 
 # Software Engineering Skills
 
-Laatste aanpassingen voor academiejaar _2023---2024_.
+Academiejaar 2023---2024.
 
-## _Cursus notities_
+In dit opleidingsonderdeel leer je de nodige skills om een softwareproject op de wereld te brengen volgens de regels van de kunst en met het aandacht voor de courante industriële praktijk met topics rond programmeer- en ontwerpvaardigheden en de Software Development Life Cycle.
 
-### Labo noties
+## _Cursusmateriaal_
 
-#### Software Development: Pre-Requirements
+We trachten al het cursusmateriaal voor deze cursus te bundelen op deze website.
+De opgaves voor de labo-oefeningen vind je op een aparte GitHub repository (aangegeven bij elke les).
+Voor sommige delen vind je ook nog slides op Toledo.
+
+### Software Development Life Cycle
 
 1. [Versie- en issuebeheer](/versiebeheer)
 2. [Dependency Management](/dependency-management):
-   - De [Gradle Build Tool](/dependency-management/gradle/)
-   - [Kotlin-specifics](/dependency-management/kotlin-gradle) voor Gradle
 3. [Test-Driven Development](/tdd): Unit-, Integration- (1) en E2E (2) niveau
 4. [TDD In de praktijk](/tdd/in-de-praktijk)
+5. [Continuous Integration &amp; Deployment](/lifecycle/ci)
+6. [Software Management](/lifecycle/management): Skills (1), Scrum (2)
 
-#### Advanced Java
+### Advanced Java
 
-#### Recursie en backtracking
+Hier behandelen we enkele geavanceerde (en nieuwe) concepten uit Java.
+Gelijkaardige concepten bestaan vaak ook in andere programmeertalen.
 
-#### Design Patterns
+1. Records
+2. Generics
+3. Data structures
+4. Multithreading
+5. Streams
 
-[Een introductie tot Design Patterns.](/patterns)
+### Recursie en backtracking
 
-1. [Facade](/patterns/facade) ([<i class='fab fa-github'></i> voorbeeld](https://github.com/KULeuven-Diepenbeek/ses-patterns-facade-template)) (1)
-2. [Dependency Injection](/patterns/di) ([<i class='fab fa-github'></i> voorbeeld](https://github.com/KULeuven-Diepenbeek/ses-patterns-di-template))
-3. [Singleton](/patterns/singleton) ([<i class='fab fa-github'></i> voorbeeld](https://github.com/KULeuven-Diepenbeek/ses-patterns-singleton-template)) (2)
-4. [Decorator](/patterns/decorator) ([<i class='fab fa-github'></i> voorbeeld](https://github.com/KULeuven-Diepenbeek/ses-patterns-decorator-template))
-5. [Factory](/patterns/factory) ([<i class='fab fa-github'></i> voorbeeld](https://github.com/KULeuven-Diepenbeek/ses-patterns-factory-template)) (3)
+Recursie en backtracking zijn krachtige tools om complexe problemen op te lossen.
+We leren hoe na te denken over recursie, alsook templates voor typische backtracking-problemen.
 
-#### Software Development: Life Cycle
+### Design Patterns
 
-4. [Continuous Integration &amp; Deployment](/lifecycle/ci)
-5. [Software Management](/lifecycle/management): Skills (1), Scrum (2)
+Design patterns zijn ontwerpoplossingen voor vaak terugkomende problemen.
+Wanneer je zo'n probleem tegenkomt, biedt het patroon een goed startpunt voor je ontwerp.
+Er bestaan erg veel patronen; we bekijken er enkele zeer gekende en vaak voorkomende.
 
 ### Extra informatie
 
@@ -48,17 +55,15 @@ Laatste aanpassingen voor academiejaar _2023---2024_.
 ## Syllabus
 
 - **Lesgevers**:<br/>
-  Coördinerend Verantwoordelijke: prof. dr. Kris Aerts - <a href="mailto:kris.aerts@kuleuven.be">kris.aerts@kuleuven.be</a><br/>
-  Onderwijsassistent: Wouter Groeneveld - <a href="mailto:wouter.groeneveld@kuleuven.be">wouter.groeneveld@kuleuven.be</a>
-- **Kantoor**: Technologiecentrum Diepenbeek, Groep ACRO, D.0.35.
+  Coördinerend Verantwoordelijke: Prof. dr. ir. Koen Yskout - <a href="mailto:koen.yskout@kuleuven.be">koen.yskout@kuleuven.be</a><br/>
+  Onderwijsassistent: ing. Arne Duyver - <a href="mailto:arne.duyver@kuleuven.be">arne.duyver@kuleuven.be</a>
+- **Kantoor**: Technologiecentrum Diepenbeek, Groep ACRO.
 
-#### Cursusbeschrijving
-
-In dit opleidingsonderdeel leer je de nodige skills om een softwareproject op de wereld te brengen volgens de regels van de kunst en met het aandacht voor de courante industriële praktijk. Op microniveau kom je meer te weten over de eigenschappen van algoritmes en datastructuren zodat je zelf de juiste keuze kan maken wanneer je een algoritme moet implementeren. Op macroniveau zorgen design patterns er voor dat je software beter onderhoudbaar wordt en een structuur heeft die herkenbaar is voor experten. Daarnaast gaan we in op de Software Development Life Cycle en het management van zo'n softwareproject met aandacht voor de juiste tools.
+Het materiaal op deze website bouwt voort op materiaal van Dr. ing. Wouter Groeneveld en Prof. dr. Kris Aerts.
 
 #### Vereiste voorkennis
 
-Het vak '_Software Ontwerp in Java_' (INF1) dient eerst gevolgd te worden. We gaan uit van een basiskennis Java en object-georienteerd programmeren. Werken met commandline en enige kennis van git is een pluspunt.
+Het vak '_Software Ontwerp in Java_' (INF1) dient eerst gevolgd te worden. We gaan uit van een basiskennis Java en object-georiënteerd programmeren. Werken met commandline en enige kennis van git is een pluspunt.
 
 #### Doelstellingen
 
@@ -69,14 +74,15 @@ De context en het overzicht worden aangereikt in het hoorcollege.
 #### Beoordeling en evaluatie
 
 1. Schriftelijke evaluatie tijdens onderwijsperiode: 50%.
-2. Schriftelijk examen: 50%
+2. Schriftelijk examen (gesloten boek): 50%.
 
-Een uitgebreide beschrijving is beschikbaar in de gids van het [Opleidingsonderdeel](https://uhintra03.uhasselt.be/studiegidswww/opleidingsonderdeel.aspx?a=2019&i=4083&n=4&t=01#anker31362). Zie de **kalender** hieronder voor een kort overzicht rond de evaluatie tijdens de onderwijsperiode.
+Een uitgebreide beschrijving is beschikbaar in de gids van het [Opleidingsonderdeel](https://studiegidswww.uhasselt.be/opleidingsonderdeel.aspx?a=2023&i=4083&n=4&t=01#anker47379).
 
 #### Meer leermiddelen
 
-Zie elke sectie '**meer leermateriaal**' in de labo noties voor materiaal per thema.
+Zie elke sectie '**meer leermateriaal**' voor extra materiaal per thema.
+Dit extra materiaal wordt aangeboden ter illustratie of verdieping voor de geïnteresseerde student, en is geen deel van de leerstof.
 
 #### Kalender
 
-Zie [collegeroosters UHasselt](http://collegeroosters.uhasselt.be).
+Zie [MyTimeTable UHasselt](https://mytimetable.uhasselt.be/schedule).

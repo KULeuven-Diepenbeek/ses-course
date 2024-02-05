@@ -54,7 +54,7 @@ enableGitInfo = true
 home = [ "HTML", "RSS", "JSON"]
 
 [Author]
-  name = "Wouter Groeneveld, Kris Aerts"
+  name = "Arne Duyver, Koen Yskout"
   email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"
 
 [[menu.shortcuts]] 
@@ -64,9 +64,9 @@ url = "https://toledo.kuleuven.be/portal/"
 weight = 10
 
 [[menu.shortcuts]] 
-name = "<i class='fa fa-university'></i> ECTS Sheet"
+name = "<i class='fa fa-university'></i>Studiegids"
 identifier = "stud"
-url = "https://uhintra03.uhasselt.be/studiegidswww/opleidingsonderdeel.aspx?a=2022&i=4083&n=4&t=01"
+url = "https://studiegidswww.uhasselt.be/opleidingsonderdeel.aspx?a=2023&i=4083&n=4&t=01#anker47379"
 weight = 1
 
 [[menu.shortcuts]] 
