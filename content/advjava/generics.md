@@ -555,6 +555,8 @@ class ALAnimal,Animal,ALextendsAnimal animal;
 
 Tenslotte kan je in Java ook `<?>` schrijven; dat is een verkorte notatie voor `<? extends Object>`. Je interpreteert `<?>` dus als _een willekeurig maar niet gekend type_. Merk op dat `<?>` dus niet hetzelfde is als `<Object>`.
 
+TODO: ? is onbekend type; twee verschillende wildcards zijn verschillend type (wil je zelfde? naam geven!)
+
 Onderstaande code is ongeldig. Waarom?
 
 ```java
@@ -756,6 +758,11 @@ Bij arrays wordt er _wel_ type-informatie bijgehouden na het compileren, en kan 
 
 ## Oefeningen (2)
 
+### Fruit
+
+Apple/Orange < Fruit
+FruitBasket
+
 ### Animal food
 
 **Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen**
@@ -785,7 +792,8 @@ cat.eat(dogFood); // <- moet een compiler error geven!
 
 ## Denkvragen
 
-TODO
+self-type?
+e.g., assertThat()
 
 ## Extra leermateriaal
 

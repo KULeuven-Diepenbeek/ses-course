@@ -1,8 +1,12 @@
 ---
-title: "4.4 Collections"
+title: "4.3 Collections"
 toc: true
 autonumbering: true
 ---
+
+## De Collection interface
+
+## Iterator en Iterable
 
 ## Lijst (List)
 

@@ -129,6 +129,25 @@ public record Coordinate(double x, double y) {
 }
 ```
 
+## Pattern matching
+
+switch + records
+
+## Sealed classes
+
+```java
+sealed interface Length {
+  public double value();
+
+  public record Meter(double value) implements Length {};
+  public record Kilometer(double value) implements Length {};
+}
+```
+
+TODO
+
+- pattern matching?
+
 ## Oefeningen
 
 ### Email
@@ -146,6 +165,12 @@ Controleer de geldigheid van de String bij het aanmaken van een Email-object:
 Maak (volgens de principes van TDD) een `Money`-record dat een geldbedrag (bijvoorbeeld 20) en een munteenheid (bijvoorbeeld "EUR") bevat.
 Voeg ook methodes toe om twee geldbedragen op te tellen. Dit mag enkel wanneer de munteenheid van beiden gelijk is; zoniet moet er een exception gegooid worden.
 
+### Interval
+
+start, end
+
+validate start <= end
+
 ### Rechthoek
 
 Schrijf (volgens de principes van TDD) een klasse die een rechthoek voorstelt.
@@ -156,3 +181,13 @@ Voeg extra methodes toe:
 - om de hoekpunten linksonder en rechtsboven op te vragen
 - om na te gaan of een gegeven punt zich binnen de rechthoek bevindt
 - om na te gaan of een rechthoek overlapt met een andere rechthoek. (_Hint: bij twee overlappende rechthoeken ligt minstens één hoekpunten van de ene rechthoek binnen de andere_)
+
+### Expression hierarchie
+
+(Arithmetic)
+
+Lit, Var, Sum, Product, Exp < Expr
+
+print operator
+eval operator
+differentiate operator

@@ -43,6 +43,8 @@ public static int bad(int n) {
 
 zou enkel eindigen voor positieve even getallen (overtuig jezelf hiervan).
 
+TODO: Collatz?
+
 Om er zeker van te zijn dat een recursieve methode ooit eindigt, moeten we kunnen aantonen dat elke recursieve oproep ooit een basisgeval zal bereiken.
 Dat is niet altijd eenvoudig of mogelijk.
 Dat is echter wel vanzelfsprekend als elke recursieve oproep de grootte van de invoer strikt kleiner maakt, en de basisgevallen overeenkomen met de kleinst mogelijke invoergrootte(s).
@@ -250,6 +252,8 @@ In dergelijke gevallen is het herschrijven vaak heel eenvoudig.
 In andere gevallen moet je zelf de geheugen-stack reconstrueren met een datastructuur.
 Bijvoorbeeld, ...
 
+## Worker-wrapper? Accumulator?
+
 ## Voorbeelden
 
 ### isDivisibleBy
@@ -270,6 +274,8 @@ public boolean isDivisibleBy(number, divisor) {
 
 ### Palindroom
 
+### Alle prefixen van een String
+
 ### Element zoeken in een lijst
 
 Binary search?
@@ -281,6 +287,8 @@ Linked list?
 ### Maximum in een lijst zoeken
 
 Uitbreiding: index + element in Pair?
+
+### Reverse list
 
 ### Sorteren van een lijst
 
@@ -300,4 +308,6 @@ Gegeven een lijst van munten, bepaal of je een bepaald bedrag exact kan betalen.
 
 ### Doolhof oplossen
 
-### Permutaties berekenen
+### Alle permutaties berekenen
+
+### Evalueer wiskundige expressie
