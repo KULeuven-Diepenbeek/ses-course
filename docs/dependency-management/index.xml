@@ -6,27 +6,27 @@
     <description>Recent content in 2. Dependency Management on Software Engineering Skills</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster>
+    <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Arne Duyver, Koen Yskout)</managingEditor>
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Arne Duyver, Koen Yskout)</webMaster>
     <atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2.1 Cmdline Java Compiling</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/cmdline/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Arne Duyver, Koen Yskout)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/cmdline/</guid>
       <description>Dit is in principe iets wat je in het INF1 vak onbewust reeds uitvoerde door op de groene &amp;ldquo;Compile&amp;rdquo; knop te drukken van je NetBeans/IntelliJ IDE. Het is belangrijk om te weten welke principes hier achter zitten. Hieronder volgt ter herhaling een kort overzicht over het compileren van Java programma&amp;rsquo;s zonder een buildtool. Voor Kotlin gelden dezelfde regels: vervang dan javac door kotlinc.&#xA;Een minimaal programma compileren Als je je JAVA_HOME en PATH omgevingsvariabelen goed hebt ingesteld (zie installatie van gebruikte software), dan kan je in een CMD window de commando&amp;rsquo;s:</description>
     </item>
     <item>
       <title>2.2 Java Gradle projecten</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Arne Duyver, Koen Yskout)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/gradle/</guid>
       <description>Helps teams build, automate and deliver better software, faster.volgens de gradle.org website.&#xA;Wat is dat, een build tool? Gradle is een build tool die de automatisatie van releasen, builden, testen, configureren, dependencies en libraries managen, &amp;hellip; eenvoudiger maakt. Kort gezegd: het maakt het leven van een ontwikkelaar eenvoudiger. In een config bestand genaamd build.gradle schrijft men met Groovy, een dynamische taal bovenop de JVM, op een descriptieve manier hoe Gradle de applicatie moet beheren.</description>
     </item>
     <item>
       <title>2.3 Kotlin Gradle projecten</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/kotlin-gradle/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Arne Duyver, Koen Yskout)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/dependency-management/kotlin-gradle/</guid>
       <description>De build.gradle bestanden die tot nu toe in de cursus zijn beschreven (zie 2.1 Java Gradle Projecten), werden geschreven in de Groovy programmeertaal, een multi-purpose dynamische taal voor het Java platform. Aangezien we voor Kotlin projecten geen Groovy, noch Java, maar Kotlin schrijven, zou het fijn zijn om de syntax van de Gradle configuratie óók te kunnen wijzigen naar Kotlin.&#xA;Dat kan.&#xA;Daarvoor vink je bij het aanmaken van nieuwe projecten in IntelliJ het vinkje Kotlin DSL Build Script aan:</description>
     </item>
