@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="generator" content="Hugo 0.121.2">
     <meta name="description" content="">
 
 
@@ -12,22 +12,22 @@
     <title>2.1 Cmdline Java Compiling :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1707136035" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/hybrid.css?1707136035" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1707136035" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/autonumbering.css?1707136035" rel="stylesheet">
-    <link href="../../css/devselector.css?1707136035" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1707136035" rel="stylesheet">
+    <link href="../../css/nucleus.css?1707136147" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/hybrid.css?1707136147" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1707136147" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/autonumbering.css?1707136147" rel="stylesheet">
+    <link href="../../css/devselector.css?1707136147" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1707136147" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1707136035"></script>
-    <script src="../../js/devselector.js?1707136035"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1707136147"></script>
+    <script src="../../js/devselector.js?1707136147"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1707136035"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1707136035"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1707136147"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1707136147"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1707136035"></script>
+<script type="text/javascript" src="../../js/search.js?1707136147"></script>
 
     
   </div>
@@ -801,51 +801,51 @@
 <li><code>java</code> om te runnen</li>
 </ul>
 <p>uitvoeren. Een simpel voorbeeld:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Main</span> <span style="color:#f92672">{</span>
-
-	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#f92672">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-		<span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;Hallo Wereld!&#34;</span><span style="color:#f92672">);</span>
-	<span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Dit programma heeft <strong>geen package</strong> en moet bewaard worden onder <code>Main.java</code> om de naam van de klasse te respecteren. Compileren en uitvoeren:</p>
-<pre><code>$ javac Main.java
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Main</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">System</span><span style="color:#111">.</span><span style="color:#75af00">out</span><span style="color:#111">.</span><span style="color:#75af00">println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Hallo Wereld!&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>Dit programma heeft <strong>geen package</strong> en moet bewaard worden onder <code>Main.java</code> om de naam van de klasse te respecteren. Compileren en uitvoeren:</p>
+<pre tabindex="0"><code>$ javac Main.java
 $ java Main
 Hallo Wereld
 </code></pre><p>Het <code>javac</code> commando heeft vanuit <code>Main.java</code> een bytecode bestand aangemaakt genaamd <code>Main.class</code>, dat met <code>java</code> wordt uitgevoerd.</p>
 <h2 id="verschillende-bestanden-compileren">Verschillende bestanden compileren</h2>
 <p>Stel dat onze <code>Main</code> klasse een <code>Student</code> instantie aanmaakt en daar de naam van afdrukt. De code wordt dus als volgt:</p>
 <p><code>Main.java</code>:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> <span style="color:#111">student.*</span><span style="color:#f92672">;</span>
-
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Main</span> <span style="color:#f92672">{</span>
-
-	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#f92672">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-		<span style="color:#111">var</span> <span style="color:#111">student</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Student</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;Jos&#34;</span><span style="color:#f92672">);</span>
-		<span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;Hekyes &#34;</span> <span style="color:#f92672">+</span> <span style="color:#111">student</span><span style="color:#f92672">.</span><span style="color:#75af00">getName</span><span style="color:#f92672">());</span>
-	<span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p><code>Student.java</code>:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> <span style="color:#111">student</span><span style="color:#f92672">;</span>
-
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Student</span> <span style="color:#f92672">{</span>
-	<span style="color:#00a8c8">private</span> <span style="color:#111">String</span> <span style="color:#111">name</span><span style="color:#f92672">;</span>
-	
-	<span style="color:#00a8c8">public</span> <span style="color:#75af00">Student</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">name</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-		<span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">name</span> <span style="color:#f92672">=</span> <span style="color:#111">name</span><span style="color:#f92672">;</span>
-	<span style="color:#f92672">}</span>
-
-	<span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">getName</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-		<span style="color:#00a8c8">return</span> <span style="color:#111">name</span><span style="color:#f92672">;</span>
-	<span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p><strong>LET OP</strong>: de <code>Student</code> klasse leeft in package <code>student</code>&mdash;die op zijn beurt wordt geïmporteerd in <code>Main.java</code>. Dat betekent dat we <code>Student.java</code> moeten bewaren in de juiste subfolder ofwel package. Dit zou je moeten herkennen vanuit INF1, waar de structuur ook <code>src/main/java/[pkg1]/[pkg2]</code> is. We hebben dus nu twee bestanden:</p>
-<pre><code>oefening/
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#111">student.*</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Main</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#00a8c8">var</span> <span style="color:#111">student</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Student</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Jos&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#111">System</span><span style="color:#111">.</span><span style="color:#75af00">out</span><span style="color:#111">.</span><span style="color:#75af00">println</span><span style="color:#111">(</span><span style="color:#d88200">&#34;Hekyes &#34;</span> <span style="color:#f92672">+</span> <span style="color:#111">student</span><span style="color:#111">.</span><span style="color:#75af00">getName</span><span style="color:#111">());</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p><code>Student.java</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#111">student</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Student</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">private</span> <span style="color:#111">String</span> <span style="color:#111">name</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">public</span> <span style="color:#75af00">Student</span><span style="color:#111">(</span><span style="color:#111">String</span> <span style="color:#111">name</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">name</span> <span style="color:#f92672">=</span> <span style="color:#111">name</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">getName</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#00a8c8">return</span> <span style="color:#111">name</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p><strong>LET OP</strong>: de <code>Student</code> klasse leeft in package <code>student</code>&mdash;die op zijn beurt wordt geïmporteerd in <code>Main.java</code>. Dat betekent dat we <code>Student.java</code> moeten bewaren in de juiste subfolder ofwel package. Dit zou je moeten herkennen vanuit INF1, waar de structuur ook <code>src/main/java/[pkg1]/[pkg2]</code> is. We hebben dus nu twee bestanden:</p>
+<pre tabindex="0"><code>oefening/
 	Main.java
 	student/
 		Student.java
 </code></pre><p>Alle files apart compileren levert <code>.class</code> files op in diezelfde folders. <code>java Main</code> zoekt dan nog steeds de <code>student/Student.class</code> file vanwege de import. Dit betekent dat je je programma moeilijker kan delen met anderen: er zijn nu twee bestanden én een subdirectory met juiste naamgeving vereist.</p>
 <p>Gelukkig kan je met de juiste argumenten alle <code>.class</code> files in één keer genereren en die in een aparte folder&mdash;meestal genaamd <code>build</code>&mdash;plaatsen:</p>
-<pre><code>$ javac -d ./build **/*.java
+<pre tabindex="0"><code>$ javac -d ./build **/*.java
 $ cd build
 $ ls
 Main.class student
@@ -854,7 +854,7 @@ Heykes Jos
 </code></pre><h2 id="java-programmas-packagen">Java programma&rsquo;s packagen</h2>
 <p>Omdat het vervelend is om verschillende bestanden te kopiëren naar andere computers worden Java programma&rsquo;s typisch verpakt in een <code>.jar</code> bestand: een veredelde <code>.zip</code> met metadata informatie zoals de auteur, de java versie die gebruikt werd om te compileren, welke klasse te starten (die de <code>main()</code> methode bevat), &hellip; Indien deze metadata, in de <code>META-INF</code> subfolder, niet bestaat, worden defaults aangemaakt. Zie de <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/jar/jar.html">JDK Jar file specification</a> voor meer informatie.</p>
 <p>We gebruiken een derde commando, <code>jar</code>, om, na het compileren naar de <code>build</code> folder, alles te verpakkken in één kant-en-klaar programma:</p>
-<pre><code>$ cd build
+<pre tabindex="0"><code>$ cd build
 $ jar cvf programma.jar *
 added manifest
 adding: Main.class(in = 957) (out= 527)(deflated 44%)
@@ -863,7 +863,7 @@ adding: student/Student.class(in = 358) (out= 243)(deflated 32%)
 $ ls
 Main.class    programma.jar student
 </code></pre><p>Nu kunnen we <code>programma.jar</code> makkelijk delen. De vraag is echter: hoe voeren we dit uit, ook met <code>java</code>? Ja, maar met de juiste parameters, want deze moet nu <em>IN</em> het bestand gaan zoeken naar de juiste <code>.class</code> files om die bytecode uit te kunnen voeren:</p>
-<pre><code>$ java -cp programma.jar:. Main
+<pre tabindex="0"><code>$ java -cp programma.jar:. Main
 Heykes Jos
 </code></pre>
 <div class="notices note" ><p>Die <code>:.</code> is nodig om aan te geven dat <code>java</code> binnenin de <code>.jar</code> file moet zoeken. Dit is enkel nodig als je Main klasse <strong>niet</strong> in een package zit (we hebben geen <code>package main</code> in onze <code>Main.java</code> file). Anders is de <a href="https://docs.oracle.com/javase/specs/jls/se11/html/jls-6.html#jls-6.7">fully qualified classname</a> nodig als argument. <br/>Voor meer informatie over de <code>-cp</code> (classpath) parameter, zie de note in sectie <a href="../../dependency-management">Dependency Management</a>.</p>
@@ -1333,15 +1333,15 @@ Heykes Jos
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136035"></script>
-    <script src="../../js/jquery.sticky.js?1707136035"></script>
-    <script src="../../js/featherlight.min.js?1707136035"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1707136035"></script>
-    <script src="../../js/learn.js?1707136035"></script>
-    <script src="../../js/hugo-learn.js?1707136035"></script>
-    <script src="../../js/mermaid.min.js?1707136035"></script>
+    <script src="../../js/clipboard.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136147"></script>
+    <script src="../../js/jquery.sticky.js?1707136147"></script>
+    <script src="../../js/featherlight.min.js?1707136147"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1707136147"></script>
+    <script src="../../js/learn.js?1707136147"></script>
+    <script src="../../js/hugo-learn.js?1707136147"></script>
+    <script src="../../js/mermaid.min.js?1707136147"></script>
     <script>
     window.MathJax = {
       chtml: {

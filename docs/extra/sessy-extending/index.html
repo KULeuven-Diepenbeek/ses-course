@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="generator" content="Hugo 0.121.2">
     <meta name="description" content="">
 
 
@@ -12,22 +12,22 @@
     <title>SESsy Library (2) Uitbreidingen :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1707136035" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/hybrid.css?1707136035" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1707136035" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/autonumbering.css?1707136035" rel="stylesheet">
-    <link href="../../css/devselector.css?1707136035" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1707136035" rel="stylesheet">
+    <link href="../../css/nucleus.css?1707136147" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/hybrid.css?1707136147" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1707136147" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/autonumbering.css?1707136147" rel="stylesheet">
+    <link href="../../css/devselector.css?1707136147" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1707136147" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1707136035"></script>
-    <script src="../../js/devselector.js?1707136035"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1707136147"></script>
+    <script src="../../js/devselector.js?1707136147"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1707136035"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1707136035"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1707136147"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1707136147"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1707136035"></script>
+<script type="text/javascript" src="../../js/search.js?1707136147"></script>
 
     
   </div>
@@ -811,13 +811,13 @@
 <p>IntelliJ biedt hiervoor het &ldquo;TODO window&rdquo; aan (CMD-6 of CTRL-6). Elke regel commentaar die begint met <code>// TODO doe dit of dat</code> verschijnt automatisch in dit venster.</p>
 <h3 id="opgave-1">Opgave 1</h3>
 <p>Neem een kijkje in de klasse <code>BookLendService</code>. De uitleen- en teruggeeffuncties zijn sterk vereenvoudigd:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">lend</span><span style="color:#f92672">(</span><span style="color:#111">Book</span> <span style="color:#111">book</span><span style="color:#f92672">,</span> <span style="color:#111">User</span> <span style="color:#111">user</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#111">book</span><span style="color:#f92672">.</span><span style="color:#75af00">borrow</span><span style="color:#f92672">();</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Waarbij de <code>borrowed</code> flag op <code>true</code> of <code>false</code> wordt gezet. Er ontbreekt hier nog heel wat logica:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">lend</span><span style="color:#111">(</span><span style="color:#111">Book</span> <span style="color:#111">book</span><span style="color:#111">,</span> <span style="color:#111">User</span> <span style="color:#111">user</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">book</span><span style="color:#111">.</span><span style="color:#75af00">borrow</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>Waarbij de <code>borrowed</code> flag op <code>true</code> of <code>false</code> wordt gezet. Er ontbreekt hier nog heel wat logica:</p>
 <ol>
 <li>Mag de gebruiker die binnen komt als parameter dit boek wel uitlenen? In het geval van teruggeven, mag dat? Als die user <code>null</code> is - dus niet ingelogd - wat gebeurt er dan?</li>
-<li>Moeten we valideren of het <code>book</code> object correct is - zijnde, is dat ISBN nummer wel aanwezig in onze database? Ik kan niet aan de lokale bib vragen een boek uit te lenen als het er nooit is geweest. Ik kan ook geen boek &lsquo;terugbrengen&rsquo; om het cadeau te geven.</li>
+<li>Moeten we valideren of het <code>book</code> object correct is - zijnde, is dat ISBN nummer wel aanwezig in onze database? Ik kan niet aan de lokale bib vragen een boek uit te lenen als het er nooit is geweest. Ik kan ook geen boek &rsquo;terugbrengen&rsquo; om het cadeau te geven.</li>
 <li>Het veranderen van de staat van het object wordt momenteel niet gepersisteerd. Dat betekent dat de volgende keer als we zoeken naar boeken, plots het boek terug beschikbaar is. De <code>BooksRepository</code> interface moet dus worden aangesproken, maar die is momenteel nog niet geïnjecteerd.</li>
 </ol>
 <p>Voorzie ook een <code>BookLendServiceTests</code> klasse in de <code>src/test/java</code> map, in de juiste package subfolder. Denk na over het gebruik van unit- of integratietesten. Het spreekt voor zich dat je je implementatie best ook eens manueel, volledig geïntegreerd, test door de applicatie op te starten.</p>
@@ -841,11 +841,11 @@
 </p>
 <p>Vergeet niet dat wijzigingen in de <code>Book</code> datastructuur grote gevolgen hebben voor de rest van de applicatie! De database, aangedreven door <code>BooksRepository</code>, zal ook moeten wijzigen. Een <code>String</code> in Java is een <code>VARCHAR</code> in SQL.</p>
 <p>De front-end Javascript code gaat steeds uit van een <code>borrowed</code> flag die wordt gecontroleerd om de gele &ldquo;uitgeleend&rdquo; waarschuwing weer te geven. Je kan indien gewenst deze code in <code>Zoeken.vue</code> wijzigen, of de boolean laten staan en aan- of uitzetten naargelang de waarde van het nieuwe String veld. Bijvoorbeeld:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">setBorrowedBy</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">user</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">borrowedBy</span> <span style="color:#f92672">=</span> <span style="color:#111">user</span><span style="color:#f92672">;</span>
-    <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">borrowed</span> <span style="color:#f92672">=</span> <span style="color:#111">user</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">null</span> <span style="color:#f92672">?</span> <span style="color:#00a8c8">true</span> <span style="color:#f92672">:</span> <span style="color:#00a8c8">false</span><span style="color:#f92672">;</span> <span style="color:#75715e">// of lege String checken
-</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-</code></pre></div><p>Ik zeg altijd:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">setBorrowedBy</span><span style="color:#111">(</span><span style="color:#111">String</span> <span style="color:#111">user</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">borrowedBy</span> <span style="color:#f92672">=</span> <span style="color:#111">user</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">borrowed</span> <span style="color:#f92672">=</span> <span style="color:#111">user</span> <span style="color:#f92672">!=</span> <span style="color:#00a8c8">null</span> <span style="color:#f92672">?</span> <span style="color:#00a8c8">true</span> <span style="color:#111">:</span> <span style="color:#00a8c8">false</span><span style="color:#111">;</span> <span style="color:#75715e">// of lege String checken</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><p>Ik zeg altijd:</p>
 <blockquote>
 <p><code>./gradlew test</code> is uw vriend!</p>
 </blockquote>
@@ -1315,15 +1315,15 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136035"></script>
-    <script src="../../js/jquery.sticky.js?1707136035"></script>
-    <script src="../../js/featherlight.min.js?1707136035"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1707136035"></script>
-    <script src="../../js/learn.js?1707136035"></script>
-    <script src="../../js/hugo-learn.js?1707136035"></script>
-    <script src="../../js/mermaid.min.js?1707136035"></script>
+    <script src="../../js/clipboard.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136147"></script>
+    <script src="../../js/jquery.sticky.js?1707136147"></script>
+    <script src="../../js/featherlight.min.js?1707136147"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1707136147"></script>
+    <script src="../../js/learn.js?1707136147"></script>
+    <script src="../../js/hugo-learn.js?1707136147"></script>
+    <script src="../../js/mermaid.min.js?1707136147"></script>
     <script>
     window.MathJax = {
       chtml: {

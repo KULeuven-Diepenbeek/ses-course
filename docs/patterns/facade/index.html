@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="generator" content="Hugo 0.121.2">
     <meta name="description" content="">
 
 
@@ -12,22 +12,22 @@
     <title>5.1 Facade :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1707136035" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/hybrid.css?1707136035" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1707136035" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/autonumbering.css?1707136035" rel="stylesheet">
-    <link href="../../css/devselector.css?1707136035" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1707136035" rel="stylesheet">
+    <link href="../../css/nucleus.css?1707136147" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/hybrid.css?1707136147" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1707136147" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/autonumbering.css?1707136147" rel="stylesheet">
+    <link href="../../css/devselector.css?1707136147" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1707136147" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1707136035"></script>
-    <script src="../../js/devselector.js?1707136035"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1707136147"></script>
+    <script src="../../js/devselector.js?1707136147"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1707136035"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1707136035"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1707136147"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1707136147"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1707136035"></script>
+<script type="text/javascript" src="../../js/search.js?1707136147"></script>
 
     
   </div>
@@ -823,36 +823,36 @@
 <h4 id="1-opzet">1. Opzet</h4>
 <p>Stel dat we gegevens van de klant moeten versturen naar een overheidsinstantie. Die instantie beschikt jammer genoeg niet over voldoende budgetten om ook een cutting-edge server interface en implementatie aan te bieden. Het komt er op neer dat we verplicht zijn om tekst bestanden op een FTP server te plaatsen.</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientFtpSender</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">:</span> <span style="color:#111">Client</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-        <span style="color:#75715e">// create ftp connection, upload, ...
-</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientFtpSender</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">upload</span><span style="color:#f92672">(</span><span style="color:#111">Client</span> <span style="color:#111">client</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// create ftp connection, upload, ...
-</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientFtpSender</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">:</span> <span style="color:#111">Client</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// create ftp connection, upload, ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientFtpSender</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">Client</span> <span style="color:#111">client</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// create ftp connection, upload, ...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <p>Deze code gebruiken we als de gebruiker op een knop genaamd <code>export</code>
 klikt:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientHTTPHandler</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">clientRepository</span><span style="color:#111">:</span> <span style="color:#111">ClientRepository</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">onExport</span><span style="color:#111">(</span><span style="color:#111">clientId</span><span style="color:#111">:</span> <span style="color:#111">Int</span><span style="color:#111">):</span> <span style="color:#111">HTTPResponse</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">val</span> <span style="color:#111">client</span> <span style="color:#111">=</span> <span style="color:#111">clientRepository</span><span style="color:#111">.</span><span style="color:#111">getById</span><span style="color:#111">(</span><span style="color:#111">clientId</span><span style="color:#111">)</span>
-        <span style="color:#111">ClientFtpSender</span><span style="color:#111">().</span><span style="color:#111">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">)</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#111">HTTPResponse</span><span style="color:#111">.</span><span style="color:#111">success</span><span style="color:#111">()</span>  <span style="color:#75715e">// 200 OK
-</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientHTTPHandler</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">private</span> <span style="color:#111">ClientRepository</span> <span style="color:#111">clientRepository</span><span style="color:#f92672">;</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#111">HTTPResponse</span> <span style="color:#75af00">onExport</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">clientId</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">Client</span> <span style="color:#111">client</span> <span style="color:#f92672">=</span> <span style="color:#111">clientRepository</span><span style="color:#f92672">.</span><span style="color:#75af00">getById</span><span style="color:#f92672">(</span><span style="color:#111">clientId</span><span style="color:#f92672">);</span>
-        <span style="color:#00a8c8">new</span> <span style="color:#111">ClientFtpSender</span><span style="color:#f92672">().</span><span style="color:#75af00">upload</span><span style="color:#f92672">(</span><span style="color:#111">client</span><span style="color:#f92672">);</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#111">HTTPResponse</span><span style="color:#f92672">.</span><span style="color:#75af00">success</span><span style="color:#f92672">();</span>  <span style="color:#75715e">// 200 OK
-</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientHTTPHandler</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">clientRepository</span><span style="color:#111">:</span> <span style="color:#111">ClientRepository</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">onExport</span><span style="color:#111">(</span><span style="color:#111">clientId</span><span style="color:#111">:</span> <span style="color:#111">Int</span><span style="color:#111">):</span> <span style="color:#111">HTTPResponse</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">val</span> <span style="color:#111">client</span> <span style="color:#111">=</span> <span style="color:#111">clientRepository</span><span style="color:#111">.</span><span style="color:#111">getById</span><span style="color:#111">(</span><span style="color:#111">clientId</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">ClientFtpSender</span><span style="color:#111">().</span><span style="color:#111">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#75af00">HTTPResponse</span><span style="color:#111">.</span><span style="color:#111">success</span><span style="color:#111">()</span>  <span style="color:#75715e">// 200 OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientHTTPHandler</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">private</span> <span style="color:#111">ClientRepository</span> <span style="color:#111">clientRepository</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#111">HTTPResponse</span> <span style="color:#75af00">onExport</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">clientId</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">Client</span> <span style="color:#111">client</span> <span style="color:#f92672">=</span> <span style="color:#111">clientRepository</span><span style="color:#111">.</span><span style="color:#75af00">getById</span><span style="color:#111">(</span><span style="color:#111">clientId</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">new</span> <span style="color:#111">ClientFtpSender</span><span style="color:#111">().</span><span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#111">HTTPResponse</span><span style="color:#111">.</span><span style="color:#75af00">success</span><span style="color:#111">();</span>  <span style="color:#75715e">// 200 OK</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 
 <div class="mermaid" align="center" >
 	
@@ -865,17 +865,17 @@ graph LR;
 <h4 id="2-probleemstelling">2. Probleemstelling</h4>
 <p>We verkopen onze software aan een andere partij, die niet alleen met de overheid wenst te communiceren, maar ook met een derde instantie. Deze instantie biedt ons de mogelijkheid aan om de klant in de vorm van XML met een <code>POST</code> HTTPS call op te sturen. Onze <code>ClientFTPSender</code> is dus niet meer genoeg:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientPOSTSender</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">:</span> <span style="color:#111">Client</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-        <span style="color:#75715e">// secure HTTPS, encode client in XML, post...
-</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientPOSTSender</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">upload</span><span style="color:#f92672">(</span><span style="color:#111">Client</span> <span style="color:#111">client</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// secure HTTPS, encode client in XML, post...
-</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientPOSTSender</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">:</span> <span style="color:#111">Client</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// secure HTTPS, encode client in XML, post...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ClientPOSTSender</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">Client</span> <span style="color:#111">client</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// secure HTTPS, encode client in XML, post...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <p>Deze complexe stukjes software, de <code>POST</code> en <code>FTP</code> senders, willen we niet langer rechtstreeks aanspreken in de HTTP handler. Het is zo dat afhankelijk van een bepaalde instelling, het ene of het andere gebruikt kan worden.</p>
 <h4 id="3-oplossing">3. Oplossing</h4>
 <p>We hebben dus <strong>een facade</strong> nodig, die de juiste delegaties voor ons doorvoert, zoals in het volgende schema:</p>
@@ -894,27 +894,27 @@ graph LR;
 </div>
 <p>Waarbij de Facade een klasse is die de details &ldquo;wegstopt&rdquo; voor onze HTTP handler:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">UploadClientFacade</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">:</span> <span style="color:#111">Client</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">when</span> <span style="color:#111">{</span>
-            <span style="color:#111">settings</span><span style="color:#111">.</span><span style="color:#111">isPOST</span><span style="color:#111">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ClientPOSTSender</span><span style="color:#111">().</span><span style="color:#111">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">)</span>
-            <span style="color:#111">settings</span><span style="color:#111">.</span><span style="color:#111">isSFTP</span><span style="color:#111">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ClientFtpSender</span><span style="color:#111">().</span><span style="color:#111">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">)</span>
-            <span style="color:#00a8c8">else</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">throw</span> <span style="color:#111">UnsupportedOperationException</span><span style="color:#111">(</span><span style="color:#d88200">&#34;settings incorrect?&#34;</span><span style="color:#111">)</span>
-        <span style="color:#111">}</span>
-    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">UploadClientFacade</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">upload</span><span style="color:#f92672">(</span><span style="color:#111">Client</span> <span style="color:#111">client</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#00a8c8">if</span><span style="color:#f92672">(</span><span style="color:#111">settings</span><span style="color:#f92672">.</span><span style="color:#75af00">isPOST</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
-            <span style="color:#00a8c8">new</span> <span style="color:#111">ClientPOSTSender</span><span style="color:#f92672">().</span><span style="color:#75af00">upload</span><span style="color:#f92672">(</span><span style="color:#111">client</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span><span style="color:#f92672">(</span><span style="color:#111">settings</span><span style="color:#f92672">.</span><span style="color:#75af00">isFTP</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
-            <span style="color:#00a8c8">new</span> <span style="color:#111">ClientFtpSender</span><span style="color:#f92672">().</span><span style="color:#75af00">upload</span><span style="color:#f92672">(</span><span style="color:#111">client</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span> <span style="color:#00a8c8">else</span> <span style="color:#f92672">{</span>
-            <span style="color:#00a8c8">throw</span> <span style="color:#00a8c8">new</span> <span style="color:#111">UnsupportedOperationException</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;settings incorrect?&#34;</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">UploadClientFacade</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">:</span> <span style="color:#111">Client</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">when</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">settings</span><span style="color:#111">.</span><span style="color:#111">isPOST</span><span style="color:#111">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ClientPOSTSender</span><span style="color:#111">().</span><span style="color:#111">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">settings</span><span style="color:#111">.</span><span style="color:#111">isSFTP</span><span style="color:#111">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#111">ClientFtpSender</span><span style="color:#111">().</span><span style="color:#111">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00a8c8">else</span> <span style="color:#f92672">-&gt;</span> <span style="color:#00a8c8">throw</span> <span style="color:#111">UnsupportedOperationException</span><span style="color:#111">(</span><span style="color:#d88200">&#34;settings incorrect?&#34;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">UploadClientFacade</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">Client</span> <span style="color:#111">client</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#111">settings</span><span style="color:#111">.</span><span style="color:#75af00">isPOST</span><span style="color:#111">())</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00a8c8">new</span> <span style="color:#111">ClientPOSTSender</span><span style="color:#111">().</span><span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#111">settings</span><span style="color:#111">.</span><span style="color:#75af00">isFTP</span><span style="color:#111">())</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00a8c8">new</span> <span style="color:#111">ClientFtpSender</span><span style="color:#111">().</span><span style="color:#75af00">upload</span><span style="color:#111">(</span><span style="color:#111">client</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">}</span> <span style="color:#00a8c8">else</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#00a8c8">throw</span> <span style="color:#00a8c8">new</span> <span style="color:#111">UnsupportedOperationException</span><span style="color:#111">(</span><span style="color:#d88200">&#34;settings incorrect?&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 
 <div class="notices note" ><p>Merk op dat in Kotlin de <code>when { }</code> block een heel krachtige manier is om selecties te maken. <code>when</code> is een expressie, geen statement: dat betekent dat je toekenningen kan doen, zoals <code>val getal = when(someString) { &quot;twee&quot; -&gt; 2 &quot;drie&quot; -&gt; 3 else -&gt; -1 }</code>. Zie de <a href="https://kotlinlang.org/docs/control-flow.html#if-expression">control flow - when expression Kotlin docs</a> voor meer informatie. <br/>
 Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu <em>Tools - Kotlin - Show Kotlin Bytecode</em>. Dit wordt in bytecode nog steeds vertaald naar een &ldquo;simpele(re)&rdquo; sequentie van Java <code>if {}</code> statements.</p>
@@ -940,14 +940,14 @@ Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode insp
 <li>Op welk moment beslis je dat een Facade écht nodig is? Is het mogelijk om ook een facade te maken zonder bijvoorbeeld nieuwe dieren in oefening 1 of een nieuwe verzendmethode voor de klant bij de probleemstelling?</li>
 <li>Kan een Facade een Facade verbergen? Wanneer is dat nodig, of niet?</li>
 </ul>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>Merk op dat de cursus nu wordt gehost op <a href="https://kuleuven-diepenbeek.github.io/ses-course/">https://kuleuven-diepenbeek.github.io/ses-course/</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p>Merk op dat de cursus nu wordt gehost op <a href="https://kuleuven-diepenbeek.github.io/ses-course/">https://kuleuven-diepenbeek.github.io/ses-course/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
 </article>
 
@@ -1411,15 +1411,15 @@ Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode insp
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136035"></script>
-    <script src="../../js/jquery.sticky.js?1707136035"></script>
-    <script src="../../js/featherlight.min.js?1707136035"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1707136035"></script>
-    <script src="../../js/learn.js?1707136035"></script>
-    <script src="../../js/hugo-learn.js?1707136035"></script>
-    <script src="../../js/mermaid.min.js?1707136035"></script>
+    <script src="../../js/clipboard.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136147"></script>
+    <script src="../../js/jquery.sticky.js?1707136147"></script>
+    <script src="../../js/featherlight.min.js?1707136147"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1707136147"></script>
+    <script src="../../js/learn.js?1707136147"></script>
+    <script src="../../js/hugo-learn.js?1707136147"></script>
+    <script src="../../js/mermaid.min.js?1707136147"></script>
     <script>
     window.MathJax = {
       chtml: {

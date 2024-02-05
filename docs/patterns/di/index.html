@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="generator" content="Hugo 0.121.2">
     <meta name="description" content="">
 
 
@@ -12,22 +12,22 @@
     <title>5.2 Dependency Injection :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1707136035" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/hybrid.css?1707136035" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1707136035" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/autonumbering.css?1707136035" rel="stylesheet">
-    <link href="../../css/devselector.css?1707136035" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1707136035" rel="stylesheet">
+    <link href="../../css/nucleus.css?1707136147" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/hybrid.css?1707136147" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1707136147" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/autonumbering.css?1707136147" rel="stylesheet">
+    <link href="../../css/devselector.css?1707136147" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1707136147" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1707136035"></script>
-    <script src="../../js/devselector.js?1707136035"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1707136147"></script>
+    <script src="../../js/devselector.js?1707136147"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1707136035"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1707136035"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1707136147"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1707136147"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1707136035"></script>
+<script type="text/javascript" src="../../js/search.js?1707136147"></script>
 
     
   </div>
@@ -761,7 +761,7 @@
                     <div class="progress">
   <div class="wrapper toc"><nav id="TableOfContents">
   <ul>
-    <li><a href="#_dependency-injection-di_---design-pattern"><em>&ldquo;Dependency Injection (DI)&quot;</em> - Design Pattern</a>
+    <li><a href="#_dependency-injection-di_---design-pattern"><em>&ldquo;Dependency Injection (DI)&rdquo;</em> - Design Pattern</a>
       <ul>
         <li><a href="#doelstelling">Doelstelling</a></li>
         <li><a href="#voorbeeld">Voorbeeld</a></li>
@@ -805,7 +805,7 @@
 
 
 <article class='content'>
-<h2 id="_dependency-injection-di_---design-pattern"><em>&ldquo;Dependency Injection (DI)&quot;</em> - Design Pattern</h2>
+<h2 id="_dependency-injection-di_---design-pattern"><em>&ldquo;Dependency Injection (DI)&rdquo;</em> - Design Pattern</h2>
 <p>Begeleidende screencast<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
@@ -823,86 +823,86 @@
 <p>Als we verder gaan op het voorbeeld van de <a href="../../patterns/singleton">singleton</a>, zien we dat een database handle nodig is om shopping cart gegevens op te halen. Hoe deze database wordt aangemaakt, daar heeft een typische API geen kaas van gegeten: daar komt meestal een connection string bij kijken met gebruikersnaam, wachtwoord, en IP adres naar de juiste DB server.</p>
 <p>De DB accessor:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75715e">// eigenlijk is dit al DI: de connectionString wordt meegegeven
-</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">DBHandle</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">connectionString</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
-        <span style="color:#75715e">// SELECT * FROM ...
-</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DBHandle</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">private</span> <span style="color:#111">String</span> <span style="color:#111">connectionString</span><span style="color:#f92672">;</span>
-
-    <span style="color:#75715e">// eigenlijk is dit al DI: de connectionString wordt meegegeven
-</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">public</span> <span style="color:#75af00">DBHandle</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">connectionString</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">connectionString</span> <span style="color:#f92672">=</span> <span style="color:#111">connectionString</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// SELECT * FROM ...
-</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#75715e">// eigenlijk is dit al DI: de connectionString wordt meegegeven
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">DBHandle</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">connectionString</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// SELECT * FROM ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DBHandle</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">private</span> <span style="color:#111">String</span> <span style="color:#111">connectionString</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// eigenlijk is dit al DI: de connectionString wordt meegegeven</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#75af00">DBHandle</span><span style="color:#111">(</span><span style="color:#111">String</span> <span style="color:#111">connectionString</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">connectionString</span> <span style="color:#f92672">=</span> <span style="color:#111">connectionString</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// SELECT * FROM ...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <p>Met als REST endpoint:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
-<span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">@GET</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">val</span> <span style="color:#111">conStr</span> <span style="color:#111">=</span> <span style="color:#111">ConfigurationManager</span><span style="color:#111">.</span><span style="color:#111">getConfig</span><span style="color:#111">(</span><span style="color:#d88200">&#34;dbconnection&#34;</span><span style="color:#111">)</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#111">DBHandle</span><span style="color:#111">(</span><span style="color:#111">conStr</span><span style="color:#111">).</span><span style="color:#111">getShoppingCart</span><span style="color:#111">()</span>
-    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Path</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#f92672">)</span>
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#f92672">{</span>
-    <span style="color:#75af00">@GET</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getCart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">String</span> <span style="color:#111">conStr</span> <span style="color:#f92672">=</span> <span style="color:#111">ConfigurationManager</span><span style="color:#f92672">.</span><span style="color:#75af00">getConfig</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;dbconnection&#34;</span><span style="color:#f92672">);</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DBHandle</span><span style="color:#f92672">(</span><span style="color:#111">conStr</span><span style="color:#f92672">).</span><span style="color:#75af00">getShoppingCart</span><span style="color:#f92672">();</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">val</span> <span style="color:#111">conStr</span> <span style="color:#111">=</span> <span style="color:#75af00">ConfigurationManager</span><span style="color:#111">.</span><span style="color:#111">getConfig</span><span style="color:#111">(</span><span style="color:#d88200">&#34;dbconnection&#34;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#111">DBHandle</span><span style="color:#111">(</span><span style="color:#111">conStr</span><span style="color:#111">).</span><span style="color:#111">getShoppingCart</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getCart</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">String</span> <span style="color:#111">conStr</span> <span style="color:#f92672">=</span> <span style="color:#111">ConfigurationManager</span><span style="color:#111">.</span><span style="color:#75af00">getConfig</span><span style="color:#111">(</span><span style="color:#d88200">&#34;dbconnection&#34;</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DBHandle</span><span style="color:#111">(</span><span style="color:#111">conStr</span><span style="color:#111">).</span><span style="color:#75af00">getShoppingCart</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <h4 id="2-probleemstelling">2. Probleemstelling</h4>
 <p>Elke Resource klasse die een <code>DBHandle</code> instance wenst, zal ook via de <code>ConfigurationManager</code> het constructor argument moeten ophalen, om een instantie te kunnen aanmaken. Dit is uiteraard <strong>niet</strong> de juiste manier en introduceert veel duplicatie. Nu is de shopping resource &ldquo;in control&rdquo;, terwijl we in dat geval de Database de controle willen geven: <strong>Inversion of Control</strong> dus.</p>
 <h4 id="3-oplossing">3. Oplossing</h4>
 <p>Een mogelijke oplossing is een Singleton maken: zie <a href="../../patterns/singleton">het Singleton pattern</a>. Maar dan hebben we nog steeds:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
-<span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">@GET</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#111">DBHandle</span><span style="color:#111">.</span><span style="color:#111">getShoppingCart</span><span style="color:#111">()</span>
-    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Path</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#f92672">)</span>
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#f92672">{</span>
-    <span style="color:#75af00">@GET</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getCart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#111">DBHandle</span><span style="color:#f92672">.</span><span style="color:#75af00">getInstance</span><span style="color:#f92672">().</span><span style="color:#75af00">getShoppingCart</span><span style="color:#f92672">();</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#75af00">DBHandle</span><span style="color:#111">.</span><span style="color:#111">getShoppingCart</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getCart</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#111">DBHandle</span><span style="color:#111">.</span><span style="color:#75af00">getInstance</span><span style="color:#111">().</span><span style="color:#75af00">getShoppingCart</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <p>Als we deze methode willen <strong>unit testen</strong>, door <code>getCart()</code> op te roepen, spreken we steeds de échte database aan, wat duidelijk niet het gewenste gedrag is. We willen in dat geval de database <strong>injecteren</strong>. Een tweede stap is om de implementatie te verbergen achter een interface.</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
-<span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">dbHandle</span><span style="color:#111">:</span> <span style="color:#111">DBHandle</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">@GET</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#111">dbHandle</span><span style="color:#111">.</span><span style="color:#111">getShoppingCart</span><span style="color:#111">()</span>
-    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75af00">@Path</span><span style="color:#f92672">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#f92672">)</span>
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">private</span> <span style="color:#00a8c8">final</span> <span style="color:#111">DBHandle</span> <span style="color:#111">dbHandle</span><span style="color:#f92672">;</span>
-
-    <span style="color:#00a8c8">public</span> <span style="color:#75af00">ShoppingResource</span><span style="color:#f92672">(</span><span style="color:#111">DBHandle</span> <span style="color:#111">handle</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#00a8c8">this</span><span style="color:#f92672">.</span><span style="color:#75af00">dbHandle</span> <span style="color:#f92672">=</span> <span style="color:#111">handle</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#75af00">@GET</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getCart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#111">dbHandle</span><span style="color:#f92672">.</span><span style="color:#75af00">getShoppingCart</span><span style="color:#f92672">();</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">dbHandle</span><span style="color:#111">:</span> <span style="color:#111">DBHandle</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">@GET</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#111">dbHandle</span><span style="color:#111">.</span><span style="color:#111">getShoppingCart</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75af00">@Path</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/shoppingcart&#34;</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResource</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">private</span> <span style="color:#00a8c8">final</span> <span style="color:#111">DBHandle</span> <span style="color:#111">dbHandle</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#75af00">ShoppingResource</span><span style="color:#111">(</span><span style="color:#111">DBHandle</span> <span style="color:#111">handle</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">dbHandle</span> <span style="color:#f92672">=</span> <span style="color:#111">handle</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">@GET</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getCart</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#111">dbHandle</span><span style="color:#111">.</span><span style="color:#75af00">getShoppingCart</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 
 <div class="notices note" ><p>Merk op dat de Kotlin implementatie veel korter is dankzij <strong>primary constructors</strong>: alles tussen de haakjes wordt automatisch omgezet in een veld dat injecteerbaar is. Bijkomend, <code>val</code> is automatisch een <code>final</code> veld.<br/>
 Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu <em>Tools - Kotlin - Show Kotlin Bytecode</em>.</p>
@@ -917,46 +917,46 @@ Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode insp
 </ul>
 <p>Als <code>DBHandle</code> een interface is, kunnen we op een eenvoudige manier een dummy implementatie maken en dit injecteren in de klasse ter test:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DummyDBHandle</span> <span style="color:#111">:</span> <span style="color:#111">DBHandle</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">var</span> <span style="color:#111">called</span> <span style="color:#111">=</span> <span style="color:#00a8c8">false</span>
-    
-    <span style="color:#00a8c8">override</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span><span style="color:#111">?</span> <span style="color:#111">{</span>
-        <span style="color:#111">called</span> <span style="color:#111">=</span> <span style="color:#00a8c8">true</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">null</span>
-    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-
-<span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResourceTest</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">@Test</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart_callsGetShoppingCartFromDb</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-        <span style="color:#00a8c8">val</span> <span style="color:#111">dbHandle</span> <span style="color:#111">=</span> <span style="color:#111">DummyDBHandle</span><span style="color:#111">()</span>
-        <span style="color:#75715e">// hier &#34;injecteren&#34; we de dbHandle dummy in de ShoppingResource.
-</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">resource</span> <span style="color:#111">=</span> <span style="color:#111">ShoppingResource</span><span style="color:#111">(</span><span style="color:#111">dbHandle</span><span style="color:#111">)</span>
-        <span style="color:#111">resource</span><span style="color:#111">.</span><span style="color:#111">getCart</span><span style="color:#111">()</span>
-
-        <span style="color:#111">assertThat</span><span style="color:#111">(</span><span style="color:#111">dbHandle</span><span style="color:#111">.</span><span style="color:#111">called</span><span style="color:#111">,</span> <span style="color:#111">Is</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">))</span>
-    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DummyDBHandle</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">DBHandle</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">boolean</span> <span style="color:#111">called</span><span style="color:#f92672">;</span>
-    <span style="color:#75af00">@Override</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">called</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">true</span><span style="color:#f92672">;</span>
-        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">null</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResourceTest</span> <span style="color:#f92672">{</span>
-    <span style="color:#75af00">@Test</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">getCart_callsGetShoppingCartFromDb</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">DummyDBHandle</span> <span style="color:#111">dbHandle</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DummyDBHandle</span><span style="color:#f92672">();</span>
-        <span style="color:#75715e">// hier &#34;injecteren&#34; we de dbHandle dummy in de ShoppingResource.
-</span><span style="color:#75715e"></span>        <span style="color:#111">ShoppingResource</span> <span style="color:#111">resource</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ShoppingResource</span><span style="color:#f92672">(</span><span style="color:#111">dbHandle</span><span style="color:#f92672">);</span>
-        <span style="color:#111">resource</span><span style="color:#f92672">.</span><span style="color:#75af00">getCart</span><span style="color:#f92672">();</span>
-
-        <span style="color:#111">assertThat</span><span style="color:#f92672">(</span><span style="color:#111">dbHandle</span><span style="color:#f92672">.</span><span style="color:#75af00">called</span><span style="color:#f92672">,</span> <span style="color:#111">is</span><span style="color:#f92672">(</span><span style="color:#00a8c8">true</span><span style="color:#f92672">));</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">DummyDBHandle</span> <span style="color:#111">:</span> <span style="color:#111">DBHandle</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">var</span> <span style="color:#111">called</span> <span style="color:#111">=</span> <span style="color:#00a8c8">false</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">override</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#111">():</span> <span style="color:#111">ShoppingCart</span><span style="color:#111">?</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">called</span> <span style="color:#111">=</span> <span style="color:#00a8c8">true</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">null</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResourceTest</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">@Test</span> <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getCart</span><span style="color:#111">_callsGetShoppingCartFromDb</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">val</span> <span style="color:#111">dbHandle</span> <span style="color:#111">=</span> <span style="color:#111">DummyDBHandle</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// hier &#34;injecteren&#34; we de dbHandle dummy in de ShoppingResource.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#00a8c8">val</span> <span style="color:#111">resource</span> <span style="color:#111">=</span> <span style="color:#111">ShoppingResource</span><span style="color:#111">(</span><span style="color:#111">dbHandle</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">resource</span><span style="color:#111">.</span><span style="color:#111">getCart</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">assertThat</span><span style="color:#111">(</span><span style="color:#111">dbHandle</span><span style="color:#111">.</span><span style="color:#111">called</span><span style="color:#111">,</span> <span style="color:#111">Is</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DummyDBHandle</span> <span style="color:#00a8c8">implements</span> <span style="color:#111">DBHandle</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">boolean</span> <span style="color:#111">called</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#111">ShoppingCart</span> <span style="color:#75af00">getShoppingCart</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">called</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">true</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">null</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ShoppingResourceTest</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75af00">@Test</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">getCart_callsGetShoppingCartFromDb</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">DummyDBHandle</span> <span style="color:#111">dbHandle</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">DummyDBHandle</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// hier &#34;injecteren&#34; we de dbHandle dummy in de ShoppingResource.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">ShoppingResource</span> <span style="color:#111">resource</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ShoppingResource</span><span style="color:#111">(</span><span style="color:#111">dbHandle</span><span style="color:#111">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">resource</span><span style="color:#111">.</span><span style="color:#75af00">getCart</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">assertThat</span><span style="color:#111">(</span><span style="color:#111">dbHandle</span><span style="color:#111">.</span><span style="color:#75af00">called</span><span style="color:#111">,</span> <span style="color:#111">is</span><span style="color:#111">(</span><span style="color:#00a8c8">true</span><span style="color:#111">));</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <p>Merk op dat de <code>connectionString</code> van de <code>DBHandle</code> ook via de constructor als argument wordt doorgegeven: dit is evenzeer een vorm van Dependency Injection.</p>
 <h3 id="eigenschappen-van-dit-patroon">Eigenschappen van dit patroon</h3>
 <ul>
@@ -985,14 +985,14 @@ Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode insp
 <li>Dependency Injection kan via de constructor, via setters (of direct op het veld via reflectie). Wat zijn de voor- en nadelen van via de constructor te werken, ten opzichte van via setters?</li>
 <li>Denk je dat de <code>GuiceConfigModule</code> klasse op termijn niet te groot en verwarrend wordt, als dit constant wordt uitgebreid met nieuwe instanties die geregistreerd worden bij Guice? Wat zou je dan doen om dit tegen te gaan?</li>
 </ul>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>Merk op dat de cursus nu wordt gehost op <a href="https://kuleuven-diepenbeek.github.io/ses-course/">https://kuleuven-diepenbeek.github.io/ses-course/</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<li id="fn:1">
+<p>Merk op dat de cursus nu wordt gehost op <a href="https://kuleuven-diepenbeek.github.io/ses-course/">https://kuleuven-diepenbeek.github.io/ses-course/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
 </article>
 
@@ -1459,15 +1459,15 @@ Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode insp
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136035"></script>
-    <script src="../../js/jquery.sticky.js?1707136035"></script>
-    <script src="../../js/featherlight.min.js?1707136035"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1707136035"></script>
-    <script src="../../js/learn.js?1707136035"></script>
-    <script src="../../js/hugo-learn.js?1707136035"></script>
-    <script src="../../js/mermaid.min.js?1707136035"></script>
+    <script src="../../js/clipboard.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136147"></script>
+    <script src="../../js/jquery.sticky.js?1707136147"></script>
+    <script src="../../js/featherlight.min.js?1707136147"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1707136147"></script>
+    <script src="../../js/learn.js?1707136147"></script>
+    <script src="../../js/hugo-learn.js?1707136147"></script>
+    <script src="../../js/mermaid.min.js?1707136147"></script>
     <script>
     window.MathJax = {
       chtml: {

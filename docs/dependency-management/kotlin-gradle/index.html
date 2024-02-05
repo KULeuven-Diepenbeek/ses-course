@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="generator" content="Hugo 0.121.2">
     <meta name="description" content="">
 
 
@@ -12,22 +12,22 @@
     <title>2.3 Kotlin Gradle projecten :: Software Engineering Skills</title>
 
     
-    <link href="../../css/nucleus.css?1707136035" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/hybrid.css?1707136035" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1707136035" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1707136035" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/autonumbering.css?1707136035" rel="stylesheet">
-    <link href="../../css/devselector.css?1707136035" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1707136035" rel="stylesheet">
-    <link href="../../css/theme-kul.css?1707136035" rel="stylesheet">
+    <link href="../../css/nucleus.css?1707136147" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/hybrid.css?1707136147" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1707136147" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1707136147" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/autonumbering.css?1707136147" rel="stylesheet">
+    <link href="../../css/devselector.css?1707136147" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1707136147" rel="stylesheet">
+    <link href="../../css/theme-kul.css?1707136147" rel="stylesheet">
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1707136035"></script>
-    <script src="../../js/devselector.js?1707136035"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1707136147"></script>
+    <script src="../../js/devselector.js?1707136147"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1707136035"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1707136035"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1707136147"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1707136147"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1707136035"></script>
+<script type="text/javascript" src="../../js/search.js?1707136147"></script>
 
     
   </div>
@@ -808,21 +808,21 @@
 </figure>
 </p>
 <p>Dan wordt een <code>build.gradle.kts</code> script file gegenereerd. Onthoud: de <code>.kts</code> extensie betekent dat de Kotlin DSL actief is. Wat betekent dat concreet? De syntax van het bestand is lichtjes gewijzigd. Dit is een typische minimale config file in Kotlin:</p>
-<pre><code>plugins {
-    kotlin(&quot;jvm&quot;) version &quot;1.5.21&quot;
+<pre tabindex="0"><code>plugins {
+    kotlin(&#34;jvm&#34;) version &#34;1.5.21&#34;
 }
 
-group = &quot;org.example&quot;
-version = &quot;1.0-SNAPSHOT&quot;
+group = &#34;org.example&#34;
+version = &#34;1.0-SNAPSHOT&#34;
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation(kotlin(&quot;stdlib&quot;))
-    testImplementation(kotlin(&quot;test&quot;))
-    testImplementation(&quot;org.hamcrest:hamcrest:2.2&quot;)
+    implementation(kotlin(&#34;stdlib&#34;))
+    testImplementation(kotlin(&#34;test&#34;))
+    testImplementation(&#34;org.hamcrest:hamcrest:2.2&#34;)
 }
 
 tasks.test {
@@ -847,10 +847,10 @@ tasks.test {
 <h3 id="geavanceerde-instellingen">Geavanceerde instellingen</h3>
 <p>Dit is geen deel van de cursus maar soms wel handig om te weten.</p>
 <p>Stel een JDK doel in om compatibiliteit met oude Java runtimes te behouden:</p>
-<pre><code>import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+<pre tabindex="0"><code>import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.jvmTarget = &quot;1.6&quot;
+compileKotlin.kotlinOptions.jvmTarget = &#34;1.6&#34;
 </code></pre><p>Zie <a href="https://kotlinlang.org/docs/gradle.html#compiler-options">Kotlin compiler options</a> voor een lijst van mogelijkheden.</p>
 
 </article>
@@ -1318,15 +1318,15 @@ compileKotlin.kotlinOptions.jvmTarget = &quot;1.6&quot;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1707136035"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136035"></script>
-    <script src="../../js/jquery.sticky.js?1707136035"></script>
-    <script src="../../js/featherlight.min.js?1707136035"></script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1707136035"></script>
-    <script src="../../js/learn.js?1707136035"></script>
-    <script src="../../js/hugo-learn.js?1707136035"></script>
-    <script src="../../js/mermaid.min.js?1707136035"></script>
+    <script src="../../js/clipboard.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1707136147"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1707136147"></script>
+    <script src="../../js/jquery.sticky.js?1707136147"></script>
+    <script src="../../js/featherlight.min.js?1707136147"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1707136147"></script>
+    <script src="../../js/learn.js?1707136147"></script>
+    <script src="../../js/hugo-learn.js?1707136147"></script>
+    <script src="../../js/mermaid.min.js?1707136147"></script>
     <script>
     window.MathJax = {
       chtml: {

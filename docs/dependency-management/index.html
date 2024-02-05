@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="generator" content="Hugo 0.121.2">
     <meta name="description" content="">
 
 
@@ -12,22 +12,22 @@
     <title>2. Dependency Management :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1707136035" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1707136035" rel="stylesheet">
-    <link href="../css/hybrid.css?1707136035" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1707136035" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1707136035" rel="stylesheet">
-    <link href="../css/auto-complete.css?1707136035" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1707136035" rel="stylesheet">
-    <link href="../css/theme.css?1707136035" rel="stylesheet">
-    <link href="../css/autonumbering.css?1707136035" rel="stylesheet">
-    <link href="../css/devselector.css?1707136035" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1707136035" rel="stylesheet">
-    <link href="../css/theme-kul.css?1707136035" rel="stylesheet">
+    <link href="../css/nucleus.css?1707136147" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1707136147" rel="stylesheet">
+    <link href="../css/hybrid.css?1707136147" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1707136147" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1707136147" rel="stylesheet">
+    <link href="../css/auto-complete.css?1707136147" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1707136147" rel="stylesheet">
+    <link href="../css/theme.css?1707136147" rel="stylesheet">
+    <link href="../css/autonumbering.css?1707136147" rel="stylesheet">
+    <link href="../css/devselector.css?1707136147" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1707136147" rel="stylesheet">
+    <link href="../css/theme-kul.css?1707136147" rel="stylesheet">
     
 
-    <script src="../js/jquery-3.3.1.min.js?1707136035"></script>
-    <script src="../js/devselector.js?1707136035"></script>
+    <script src="../js/jquery-3.3.1.min.js?1707136147"></script>
+    <script src="../js/devselector.js?1707136147"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1707136035"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1707136035"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1707136147"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1707136147"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1707136035"></script>
+<script type="text/javascript" src="../js/search.js?1707136147"></script>
 
     
   </div>
@@ -117,7 +117,7 @@
   
     
     <li data-nav-id="/dependency-management/" title="2. Dependency Management" class="dd-item
-        parent
+        
         active
         
         ">
@@ -817,17 +817,17 @@ Wat is de beste manier om afhankelijkheden te beheren?</p>
 <p>Het vertrouwen op zo&rsquo;n library houdt in dat een extern bestand, zoals een <code>.jar</code> of <code>.war</code> bestand, download en koppelt wordt aan de applicatie. In Java koppelen we externe libraries door middel van het <code>CLASSPATH</code>: een folder die de compiler gebruikt om te zoeken naar klassen.</p>
 <p>Serialisatie met behulp van Gson kan op deze manier:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">fun</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#111">args</span><span style="color:#111">:</span> <span style="color:#111">Array</span><span style="color:#111">&lt;</span><span style="color:#111">String</span><span style="color:#111">&gt;)</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">val</span> <span style="color:#111">gson</span> <span style="color:#111">=</span> <span style="color:#111">Gson</span><span style="color:#111">()</span>
-    <span style="color:#111">println</span><span style="color:#111">(</span><span style="color:#111">gson</span><span style="color:#111">.</span><span style="color:#111">toJson</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">))</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Main</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#f92672">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">Gson</span> <span style="color:#111">gson</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Gson</span><span style="color:#f92672">();</span>
-        <span style="color:#111">System</span><span style="color:#f92672">.</span><span style="color:#75af00">out</span><span style="color:#f92672">.</span><span style="color:#75af00">println</span><span style="color:#f92672">(</span><span style="color:#111">gson</span><span style="color:#f92672">.</span><span style="color:#75af00">toJson</span><span style="color:#f92672">(</span><span style="color:#111">1</span><span style="color:#f92672">));</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#00a8c8">fun</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#111">args</span><span style="color:#111">:</span> <span style="color:#111">Array</span><span style="color:#111">&lt;</span><span style="color:#111">String</span><span style="color:#111">&gt;)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">val</span> <span style="color:#111">gson</span> <span style="color:#111">=</span> <span style="color:#111">Gson</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">println</span><span style="color:#111">(</span><span style="color:#111">gson</span><span style="color:#111">.</span><span style="color:#111">toJson</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Main</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#111">String</span><span style="color:#f92672">[]</span> <span style="color:#111">args</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">Gson</span> <span style="color:#111">gson</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Gson</span><span style="color:#111">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">System</span><span style="color:#111">.</span><span style="color:#75af00">out</span><span style="color:#111">.</span><span style="color:#75af00">println</span><span style="color:#111">(</span><span style="color:#111">gson</span><span style="color:#111">.</span><span style="color:#75af00">toJson</span><span style="color:#111">(</span><span style="color:#111">1</span><span style="color:#111">));</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <p>Bovenstaande <code>Main.java</code> compileren zonder meer geeft de volgende fout:</p>
 <pre>
 Wouters-MacBook-Air:java wgroeneveld$ javac Main.java
@@ -878,21 +878,21 @@ graph LR;
 <h4 id="apache-maven">Apache Maven</h4>
 <p><a href="https://en.wikipedia.org/wiki/Apache_Maven">Maven</a> is een build tool van de Apache Foundation die zowel de manier waarop de software wordt gecompileerd als zijn afhankelijkheden beheert. Maven is de voorloper van Gradle en bestaat reeds 15 jaar.</p>
 <p>Een Maven project heeft een <code>pom.xml</code> bestand (Project Object Model), waarin in XML formaat wordt beschreven hoe de structuur er uit ziet, welke libraries men gebruikt, en zo voort:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;project&gt;</span>
-  <span style="color:#f92672">&lt;modelVersion&gt;</span>4.0.0<span style="color:#f92672">&lt;/modelVersion&gt;</span>
-  <span style="color:#f92672">&lt;groupId&gt;</span>com.mycompany.app<span style="color:#f92672">&lt;/groupId&gt;</span>
-  <span style="color:#f92672">&lt;artifactId&gt;</span>my-app<span style="color:#f92672">&lt;/artifactId&gt;</span>
-  <span style="color:#f92672">&lt;version&gt;</span>1.0<span style="color:#f92672">&lt;/version&gt;</span>
-  <span style="color:#f92672">&lt;dependencies&gt;</span>
-    <span style="color:#f92672">&lt;dependency&gt;</span>
-      <span style="color:#f92672">&lt;groupId&gt;</span>junit<span style="color:#f92672">&lt;/groupId&gt;</span>
-      <span style="color:#f92672">&lt;artifactId&gt;</span>junit<span style="color:#f92672">&lt;/artifactId&gt;</span>
-      <span style="color:#f92672">&lt;version&gt;</span>3.8.1<span style="color:#f92672">&lt;/version&gt;</span>
-      <span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
-    <span style="color:#f92672">&lt;/dependency&gt;</span>
-  <span style="color:#f92672">&lt;/dependencies&gt;</span>
-<span style="color:#f92672">&lt;/project&gt;</span>
-</code></pre></div><p>Maven is erg populair in de Java wereld, waardoor er verschillende servers zijn die deze <code>pom</code> bestanden samen met hun libraries beheren, zoals de <a href="https://mvnrepository.com">Central Maven Repository</a> en de <a href="https://maven.google.com/web/index.html">Google Maven Repository</a> mirrors. De syntax van het configuratiebestand is echter erg onoverzichtelijk, en er zijn ondertussen betere alternatieven beschikbaar, zoals Gradle.</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;project&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;modelVersion&gt;</span>4.0.0<span style="color:#f92672">&lt;/modelVersion&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;groupId&gt;</span>com.mycompany.app<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;artifactId&gt;</span>my-app<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;version&gt;</span>1.0<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;dependencies&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;groupId&gt;</span>junit<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;artifactId&gt;</span>junit<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;version&gt;</span>3.8.1<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;/dependencies&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/project&gt;</span>
+</span></span></code></pre></div><p>Maven is erg populair in de Java wereld, waardoor er verschillende servers zijn die deze <code>pom</code> bestanden samen met hun libraries beheren, zoals de <a href="https://mvnrepository.com">Central Maven Repository</a> en de <a href="https://maven.google.com/web/index.html">Google Maven Repository</a> mirrors. De syntax van het configuratiebestand is echter erg onoverzichtelijk, en er zijn ondertussen betere alternatieven beschikbaar, zoals Gradle.</p>
 <h4 id="gradle">Gradle</h4>
 <p><strong>Belangrijk</strong>: neem dit eerst door - <a href="../dependency-management/gradle/">Meer informatie over Gradle</a>.</p>
 <p>Gradle is net zoals Maven een automatisatie tool voor de Java wereld (en daarbuiten), die verder bouwt op de populariteit van Maven door bijvoorbeeld compatibel te zijn met de Repository servers, maar de grootste pijnpunten wegneemt: een slorig configuratiebestand in XML, en complexe command-line scripts.</p>
@@ -901,8 +901,8 @@ graph LR;
 <li>Zoek op de <a href="https://mvnrepository.com">Maven Repository</a> website naar de gewenste library.</li>
 <li>Voeg één regel toe in je <code>gradle.build</code> bestand, in het dependencies stuk:</li>
 </ol>
-<pre><code>dependencies {
-    implementation 'com.google.code.gson:gson:2.9.0'
+<pre tabindex="0"><code>dependencies {
+    implementation &#39;com.google.code.gson:gson:2.9.0&#39;
 }
 </code></pre><p>Bij het uitvoeren van <code>gradlew</code> download Gradle automatisch de juiste opgegeven versie. Gradle bewaart lokale kopies van libraries in een submap van je home folder: <code>~/.gradle</code>. Dit kan je controleren door in IntelliJ naar File -&gt; Project Structure te gaan en te klikken op &ldquo;Libraries&rdquo;:</p>
 <p><figure>
@@ -966,14 +966,14 @@ graph LR;
 <li>metadata als <code>md5</code> checksums.</li>
 </ol>
 <p>Het XML bestand beschrijft welke afhankelijkheden deze module op zich heeft. Zo kan een hele <strong>dependency tree</strong> worden opgebouwd! Het beheren van <em>alle</em> afhankelijkheden is complexer dan op het eerste zicht lijkt, en laat je dus beter over aan deze gespecialiseerde tools. Google heeft voor Gson enkel Junit als test dependency aangeduid:</p>
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;dependencies&gt;</span>
-<span style="color:#f92672">&lt;dependency&gt;</span>
-<span style="color:#f92672">&lt;groupId&gt;</span>junit<span style="color:#f92672">&lt;/groupId&gt;</span>
-<span style="color:#f92672">&lt;artifactId&gt;</span>junit<span style="color:#f92672">&lt;/artifactId&gt;</span>
-<span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
-<span style="color:#f92672">&lt;/dependency&gt;</span>
-<span style="color:#f92672">&lt;/dependencies&gt;</span>
-</code></pre></div><p>Grote projecten kunnen makkelijk afhankelijk zijn van tientallen libraries, die op hun beurt weer afhankelijk zijn van libraries. Een typische grote webapplicatie geschreven in java heeft de volgende dependency tree, die opgevraagd kan worden via Gradle of Maven:</p>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dependencies&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;groupId&gt;</span>junit<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;artifactId&gt;</span>junit<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependencies&gt;</span>
+</span></span></code></pre></div><p>Grote projecten kunnen makkelijk afhankelijk zijn van tientallen libraries, die op hun beurt weer afhankelijk zijn van libraries. Een typische grote webapplicatie geschreven in java heeft de volgende dependency tree, die opgevraagd kan worden via Gradle of Maven:</p>
 <p><figure>
 	<a href="../img/teaching/ses/deptree.png" data-featherlight="image">
 		<img src="../img/teaching/ses/deptree.png"  >
@@ -984,50 +984,50 @@ graph LR;
 <p>Gebruik hiervoor de task <code>dependencies</code>: <code>./gradlew dependencies</code>. Detailinformatie voor specifieke dependencies kunnen worden opgevraagd met de <code>dependencyInsight</code> task. Zie ook: <a href="https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html">Viewing and debugging dependencies</a> in de Gradle docs.</p>
 <p>Gradle voorziet een plugin genaamd &lsquo;<em>maven-publish</em>&rsquo; die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een <code>publishing</code> tag toe met de volgende properties:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#111">plugins</span> <span style="color:#111">{</span>
-    <span style="color:#111">java</span>
-    <span style="color:#111">kotlin</span><span style="color:#111">(</span><span style="color:#d88200">&#34;jvm&#34;</span><span style="color:#111">)</span> <span style="color:#111">version</span> <span style="color:#d88200">&#34;1.6.0&#34;</span>
-    <span style="color:#75af00">`maven</span><span style="color:#111">-</span><span style="color:#111">publish</span><span style="color:#960050;background-color:#1e0010">`</span>
-<span style="color:#111">}</span>
-
-<span style="color:#111">publishing</span> <span style="color:#111">{</span>
-    <span style="color:#111">publications</span> <span style="color:#111">{</span>
-        <span style="color:#111">create</span><span style="color:#111">&lt;</span><span style="color:#111">MavenPublication</span><span style="color:#111">&gt;(</span><span style="color:#d88200">&#34;maven&#34;</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-            <span style="color:#111">groupId</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;be.kuleuven&#34;</span>
-            <span style="color:#111">artifactId</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;projectnaam&#34;</span>
-            <span style="color:#111">version</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;1.0-SNAPSHOT&#34;</span>
-
-            <span style="color:#111">from</span><span style="color:#111">(</span><span style="color:#111">components</span><span style="color:#111">[</span><span style="color:#d88200">&#34;java&#34;</span><span style="color:#111">])</span>
-        <span style="color:#111">}</span>
-    <span style="color:#111">}</span>
-    <span style="color:#111">repositories</span> <span style="color:#111">{</span>
-        <span style="color:#111">maven</span> <span style="color:#111">{</span>
-            <span style="color:#111">url</span> <span style="color:#111">=</span> <span style="color:#111">uri</span><span style="color:#111">(</span><span style="color:#111">layout</span><span style="color:#111">.</span><span style="color:#111">buildDirectory</span><span style="color:#111">.</span><span style="color:#111">dir</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span><span style="color:#111">))</span>
-        <span style="color:#111">}</span>
-    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#111">plugins</span> <span style="color:#f92672">{</span>
-    <span style="color:#111">id</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">java</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-    <span style="color:#111">id</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">maven</span><span style="color:#f92672">-</span><span style="color:#111">publish</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#75715e">// toevoegen!
-</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-
-<span style="color:#111">publishing</span> <span style="color:#f92672">{</span>
-    <span style="color:#111">publications</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">maven</span><span style="color:#f92672">(</span><span style="color:#111">MavenPublication</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            <span style="color:#111">groupId</span> <span style="color:#f92672">=</span> <span style="color:#111">project</span><span style="color:#f92672">.</span><span style="color:#75af00">group</span><span style="color:#f92672">.</span><span style="color:#75af00">toString</span><span style="color:#f92672">()</span>
-            <span style="color:#111">version</span> <span style="color:#f92672">=</span> <span style="color:#111">version</span>
-            <span style="color:#111">artifactId</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">projectnaam</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
-
-            <span style="color:#111">from</span> <span style="color:#111">components</span><span style="color:#f92672">.</span><span style="color:#75af00">java</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-    <span style="color:#111">repositories</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">maven</span> <span style="color:#f92672">{</span>
-            <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#111">plugins</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">java</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">kotlin</span><span style="color:#111">(</span><span style="color:#d88200">&#34;jvm&#34;</span><span style="color:#111">)</span> <span style="color:#111">version</span> <span style="color:#d88200">&#34;1.6.0&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#111">maven</span><span style="color:#111">-</span><span style="color:#111">publish</span><span style="color:#960050;background-color:#1e0010">`</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">publishing</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">publications</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">create</span><span style="color:#111">&lt;</span><span style="color:#111">MavenPublication</span><span style="color:#111">&gt;(</span><span style="color:#d88200">&#34;maven&#34;</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">groupId</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;be.kuleuven&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">artifactId</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;projectnaam&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">version</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;1.0-SNAPSHOT&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">from</span><span style="color:#111">(</span><span style="color:#111">components</span><span style="color:#111">[</span><span style="color:#d88200">&#34;java&#34;</span><span style="color:#111">])</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">repositories</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">maven</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">url</span> <span style="color:#111">=</span> <span style="color:#111">uri</span><span style="color:#111">(</span><span style="color:#111">layout</span><span style="color:#111">.</span><span style="color:#111">buildDirectory</span><span style="color:#111">.</span><span style="color:#111">dir</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span><span style="color:#111">))</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#111">plugins</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">id</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">java</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">id</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">maven</span><span style="color:#f92672">-</span><span style="color:#111">publish</span><span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#75715e">// toevoegen!</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#111">publishing</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">publications</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">maven</span><span style="color:#111">(</span><span style="color:#111">MavenPublication</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">groupId</span> <span style="color:#f92672">=</span> <span style="color:#111">project</span><span style="color:#111">.</span><span style="color:#75af00">group</span><span style="color:#111">.</span><span style="color:#75af00">toString</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">version</span> <span style="color:#f92672">=</span> <span style="color:#111">version</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">artifactId</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">projectnaam</span><span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">from</span> <span style="color:#111">components</span><span style="color:#111">.</span><span style="color:#75af00">java</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">repositories</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">maven</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <p>Windows gebruikers dienen in de <code>url</code> value te werken met dubbele backslashes (<code>\\</code>) in plaats van forward slashes (<code>/</code>) om naar het juiste pad te navigeren.</p>
 
 <div class="notices warning" ><p><strong>Opgelet met Kotlin-specifieke build files</strong>: Als je een <code>build.gradle.kts</code> bestand gebruikt (Gradle in Kotlin-script formaat), is de syntax sterk gewijzigd (klik dan hierboven op de tab &ldquo;Kotlin&rdquo;). Zie ook <a href="https://docs.gradle.org/current/userguide/publishing_maven.html">de officiele Gradle documentatie</a> over how to publish in Maven.</p>
@@ -1035,40 +1035,40 @@ graph LR;
 
 <p>Deze uitbreiding voegt de target <code>publish</code> toe aan Gradle. Dus: <code>./gradlew publish</code> publiceert de nodige bestanden in de aangegeven folder. Een Gradle project die daar gebruik van wenst te maken dient enkel een tweede Maven Repository plaats te definiëren:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#111">repositories</span> <span style="color:#111">{</span>
-    <span style="color:#111">mavenCentral</span><span style="color:#111">()</span>
-    <span style="color:#111">maven</span> <span style="color:#111">{</span>
-        <span style="color:#111">url</span> <span style="color:#111">=</span> <span style="color:#111">uri</span><span style="color:#111">(</span><span style="color:#111">layout</span><span style="color:#111">.</span><span style="color:#111">buildDirectory</span><span style="color:#111">.</span><span style="color:#111">dir</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span><span style="color:#111">))</span>
-    <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#111">repositories</span> <span style="color:#f92672">{</span>
-    <span style="color:#111">mavenCentral</span><span style="color:#f92672">()</span>
-    <span style="color:#111">maven</span> <span style="color:#f92672">{</span>
-        <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#111">repositories</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">mavenCentral</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">maven</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">url</span> <span style="color:#111">=</span> <span style="color:#111">uri</span><span style="color:#111">(</span><span style="color:#111">layout</span><span style="color:#111">.</span><span style="color:#111">buildDirectory</span><span style="color:#111">.</span><span style="color:#111">dir</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span><span style="color:#111">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#111">repositories</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">mavenCentral</span><span style="color:#111">()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">maven</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#111">url</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;/Users/wgroeneveld/development/java/maven-repo&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <h2 id="a-nameoefalabo-oefeningen"><a name="oef"></a>Labo oefeningen</h2>
 <p>Neem dit eerst door: <a href="../dependency-management/gradle/">Meer informatie over Gradle</a>.</p>
 <h3 id="opgave-1">Opgave 1</h3>
 <p>Ontwerp een eenvoudige library genaamd &lsquo;<em>scorebord</em>&rsquo; die scores kan bijhouden voor bordspelletjes. Deze library kan kan gebruikt worden door toekomstige digitale Java bordspellen. In een Scorebord kan je spelers toevoegen door middel van een naam en een score. Er is een mogelijkheid om de huidige score van een speler op te vragen, en de winnende speler. Deze gegevens worden met behulp van Gson in een <code>JSON</code> bestand bewaard, zodat bij het heropstarten van een spel de scores behouden blijven. <br/>De API (publieke methodes) van de library ziet er zo uit:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">data</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Speler</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">naam</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">,</span> <span style="color:#00a8c8">val</span> <span style="color:#111">score</span><span style="color:#111">:</span> <span style="color:#111">Int</span><span style="color:#111">)</span>
-<span style="color:#00a8c8">class</span> <span style="color:#75af00">Scorebord</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">voegToe</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">,</span> <span style="color:#111">huidigeScore</span><span style="color:#111">:</span> <span style="color:#111">int</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getTotaleScore</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">):</span> <span style="color:#111">Int</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getWinnaar</span><span style="color:#111">():</span> <span style="color:#111">String</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Speler</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">getNaam</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">getScore</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-<span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Scorebord</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">voegToe</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">x</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">huidigeScore</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">getTotaleScore</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">x</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">getWinnaar</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#00a8c8">data</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Speler</span><span style="color:#111">(</span><span style="color:#00a8c8">val</span> <span style="color:#111">naam</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">,</span> <span style="color:#00a8c8">val</span> <span style="color:#111">score</span><span style="color:#111">:</span> <span style="color:#111">Int</span><span style="color:#111">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Scorebord</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">voegToe</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">,</span> <span style="color:#111">huidigeScore</span><span style="color:#111">:</span> <span style="color:#111">int</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getTotaleScore</span><span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">:</span> <span style="color:#111">String</span><span style="color:#111">):</span> <span style="color:#111">Int</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">getWinnaar</span><span style="color:#111">():</span> <span style="color:#111">String</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Speler</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">getNaam</span><span style="color:#111">()</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">getScore</span><span style="color:#111">()</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Scorebord</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">voegToe</span><span style="color:#111">(</span><span style="color:#111">String</span> <span style="color:#111">x</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">huidigeScore</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">getTotaleScore</span><span style="color:#111">(</span><span style="color:#111">String</span> <span style="color:#111">x</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">getWinnaar</span><span style="color:#111">()</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <p>De klasse <code>Speler</code> is een intern hulpmiddel om te serialiseren. <br/>
 Extra methodes toevoegen mag altijd. De constructor van het scorebord leest automatisch de score van de vorige keer in, als dat bestand bestaat. Denk bij de implementatie aan een collectie om spelers en hun scores bij te houden. Maak via IntelliJ een nieuw <strong>Gradle - Java project</strong>. Groupid: <code>be.kuleuven</code>. Arifactid: <code>scorebord</code>. Vergeet niet op &lsquo;refresh&rsquo; te drukken wanneer je een dependency toevoegt (linksboven op onderstaande screenshot):</p>
 <p><figure>
@@ -1085,17 +1085,17 @@ Extra methodes toevoegen mag altijd. De constructor van het scorebord leest auto
 
 <p>Tip: indien de Gralde wrapper een oudere versie aanmaakt (&lt; v6), update met <code>gradlew wrapper --gradle-version 6.0.1</code>. Gradle versie <code>6</code> of groter is vereist voor JDK <code>13</code> of groter.</p>
 <h3 id="opgave-2">Opgave 2</h3>
-<p>Maak een nieuw Gradle project aan genaamd &lsquo;<em>scorebord-darts</em>&rsquo;, dat bovenstaand scorebord project als een library gaat gebruiken. Bewaar de jar file lokaal in een &lsquo;lib&rsquo; folder en instrueer Gradle zo dat dit als <code>flatDir</code> repository wordt opgenomen (<a href="#flatdir">zie boven</a>). Het tweede project heeft als Artifactid <code>scorebord-darts</code>. De klasse <code>DartsGame</code> ziet er zo uit:</p>
+<p>Maak een nieuw Gradle project aan genaamd &lsquo;<em>scorebord-darts</em>&rsquo;, dat bovenstaand scorebord project als een library gaat gebruiken. Bewaar de jar file lokaal in een &rsquo;lib&rsquo; folder en instrueer Gradle zo dat dit als <code>flatDir</code> repository wordt opgenomen (<a href="#flatdir">zie boven</a>). Het tweede project heeft als Artifactid <code>scorebord-darts</code>. De klasse <code>DartsGame</code> ziet er zo uit:</p>
 <div class="devselect">
-<div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kt" data-lang="kt"><span style="color:#00a8c8">class</span> <span style="color:#75af00">DartsGame</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#00a8c8">private</span> <span style="color:#00a8c8">val</span> <span style="color:#111">player</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;jos&#34;</span>
-    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">throwDart</span><span style="color:#111">()</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
-<span style="color:#111">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DartsGame</span> <span style="color:#f92672">{</span>
-    <span style="color:#00a8c8">private</span> <span style="color:#111">String</span> <span style="color:#111">player</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;jos&#34;</span><span style="color:#f92672">;</span>
-    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">throwDart</span><span style="color:#f92672">()</span> <span style="color:#f92672">{}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kt" data-lang="kt"><span style="display:flex;"><span><span style="color:#00a8c8">class</span> <span style="color:#75af00">DartsGame</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">private</span> <span style="color:#00a8c8">val</span> <span style="color:#111">player</span> <span style="color:#111">=</span> <span style="color:#d88200">&#34;jos&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">fun</span> <span style="color:#75af00">throwDart</span><span style="color:#111">()</span> <span style="color:#111">{</span> <span style="color:#111">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">DartsGame</span> <span style="color:#111">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">private</span> <span style="color:#111">String</span> <span style="color:#111">player</span> <span style="color:#f92672">=</span> <span style="color:#d88200">&#34;jos&#34;</span><span style="color:#111">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">throwDart</span><span style="color:#111">()</span> <span style="color:#111">{}</span>
+</span></span><span style="display:flex;"><span><span style="color:#111">}</span>
+</span></span></code></pre></div></div>
 <p>Als de dependencies goed liggen, kan je een nieuw <code>Scorebord</code> aanmaken, en herkent IntelliJ dit met CTRL+Space:</p>
 <p><figure>
 	<a href="../img/teaching/ses/gradle-dependency-used.png" data-featherlight="image">
@@ -1603,15 +1603,15 @@ Execution failed for task ':Main.main()'.
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1707136035"></script>
-    <script src="../js/perfect-scrollbar.min.js?1707136035"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1707136035"></script>
-    <script src="../js/jquery.sticky.js?1707136035"></script>
-    <script src="../js/featherlight.min.js?1707136035"></script>
-    <script src="../js/modernizr.custom-3.6.0.js?1707136035"></script>
-    <script src="../js/learn.js?1707136035"></script>
-    <script src="../js/hugo-learn.js?1707136035"></script>
-    <script src="../js/mermaid.min.js?1707136035"></script>
+    <script src="../js/clipboard.min.js?1707136147"></script>
+    <script src="../js/perfect-scrollbar.min.js?1707136147"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1707136147"></script>
+    <script src="../js/jquery.sticky.js?1707136147"></script>
+    <script src="../js/featherlight.min.js?1707136147"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1707136147"></script>
+    <script src="../js/learn.js?1707136147"></script>
+    <script src="../js/hugo-learn.js?1707136147"></script>
+    <script src="../js/mermaid.min.js?1707136147"></script>
     <script>
     window.MathJax = {
       chtml: {

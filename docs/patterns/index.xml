@@ -7,72 +7,49 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/patterns/index.xml" rel="self" type="application/rss+xml" />
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster>
+    <atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/patterns/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>5.1 Facade</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/facade/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/facade/</guid>
-      <description>« Terug naar Software Engineering Skills » Naar de labo opgave
-&amp;ldquo;Facade&amp;rdquo; - Design Pattern Begeleidende screencast1:
-  Doelstelling  Scherm een complex stukje software af met behulp van een simpele interface Voorzie éénzelfde interface naar een set van verschillende mogelijke subsystemen. Een Facade is een high-level interface die mogelijks low-level systemen aanspreekt.  Dive Into Design Patterns: Facade
-Voorbeeld 1. Opzet Stel dat we gegevens van de klant moeten versturen naar een overheidsinstantie.</description>
+      <description>« Terug naar Software Engineering Skills » Naar de labo opgave&#xA;&amp;ldquo;Facade&amp;rdquo; - Design Pattern Begeleidende screencast1:&#xA;Doelstelling Scherm een complex stukje software af met behulp van een simpele interface Voorzie éénzelfde interface naar een set van verschillende mogelijke subsystemen. Een Facade is een high-level interface die mogelijks low-level systemen aanspreekt. Dive Into Design Patterns: Facade&#xA;Voorbeeld 1. Opzet Stel dat we gegevens van de klant moeten versturen naar een overheidsinstantie.</description>
     </item>
-    
     <item>
       <title>5.2 Dependency Injection</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/di/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/di/</guid>
-      <description>&amp;ldquo;Dependency Injection (DI)&amp;quot; - Design Pattern Begeleidende screencast1:
-  Doelstelling  Promoot modulariteit door afhankelijkheden te injecteren, zodat aparte modules eenvoudig inplugbaar zijn in andere productiecode. Op deze manier worden modules ook makkelijker tesbaar. Promoot Inversion of Control: een client die services aanroept zou niet mogen weten hoe services worden aangemaakt - deze zou moeten worden &amp;lsquo;geinjecteerd&amp;rsquo;.  Wikipedia: Dependency Injection
-Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we dat een database handle nodig is om shopping cart gegevens op te halen.</description>
+      <description>&amp;ldquo;Dependency Injection (DI)&amp;rdquo; - Design Pattern Begeleidende screencast1:&#xA;Doelstelling Promoot modulariteit door afhankelijkheden te injecteren, zodat aparte modules eenvoudig inplugbaar zijn in andere productiecode. Op deze manier worden modules ook makkelijker tesbaar. Promoot Inversion of Control: een client die services aanroept zou niet mogen weten hoe services worden aangemaakt - deze zou moeten worden &amp;lsquo;geinjecteerd&amp;rsquo;. Wikipedia: Dependency Injection&#xA;Voorbeeld 1. Opzet Als we verder gaan op het voorbeeld van de singleton, zien we dat een database handle nodig is om shopping cart gegevens op te halen.</description>
     </item>
-    
     <item>
       <title>5.3 Singleton</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/singleton/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/singleton/</guid>
-      <description>&amp;ldquo;Singleton&amp;rdquo; - Design Pattern Begeleidende screencast1:
-  Doelstelling  Vermijd de mogelijkheid tot meervoudige instantiatie van een bepaalde klasse. Er kan altijd maar één bepaalde instantie van bestaan. Voorzie een eenvoudige manier om vanuit eender waar in de code toegang te verkrijgen tot die éne instantie. Encapsuleer logica om deze instantie aan te maken, moest code dit raadplegen en dit toevallig de eerste keer zijn (lazy initialization).  Dive Into Design Patterns: Singleton</description>
+      <description>&amp;ldquo;Singleton&amp;rdquo; - Design Pattern Begeleidende screencast1:&#xA;Doelstelling Vermijd de mogelijkheid tot meervoudige instantiatie van een bepaalde klasse. Er kan altijd maar één bepaalde instantie van bestaan. Voorzie een eenvoudige manier om vanuit eender waar in de code toegang te verkrijgen tot die éne instantie. Encapsuleer logica om deze instantie aan te maken, moest code dit raadplegen en dit toevallig de eerste keer zijn (lazy initialization). Dive Into Design Patterns: Singleton</description>
     </item>
-    
     <item>
       <title>5.4 Decorator</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/decorator/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/decorator/</guid>
-      <description>&amp;ldquo;Decorator&amp;rdquo; - Design Pattern Begeleidende screencast1:
-  Doelstelling  Voeg dynamisch functionaliteit toe als alternatief voor klassieke overerving. Gedraagt zich zoals het stukje &amp;lsquo;ingepakte&amp;rsquo; functionaliteit, maar voert extra handelingen uit. Wordt in Java altijd via interface implementaties uitegevoerd.  Dive Into Design Patterns: Decorator
-Voorbeeld 1. Opzet Stel dat we in een fabriek op plaats X een auto samenstellen. De wagen is een zeer eenvoudige Volkswagen Golf, zonder opties. Op een andere locatie, plaats Y, hebben wij als bedrijf ook fabrieken die sportauto&amp;rsquo;s bouwen (Volkswagen Scirocco) en op plaats Z luxe wagens (Volkswagen Passat).</description>
+      <description>&amp;ldquo;Decorator&amp;rdquo; - Design Pattern Begeleidende screencast1:&#xA;Doelstelling Voeg dynamisch functionaliteit toe als alternatief voor klassieke overerving. Gedraagt zich zoals het stukje &amp;lsquo;ingepakte&amp;rsquo; functionaliteit, maar voert extra handelingen uit. Wordt in Java altijd via interface implementaties uitegevoerd. Dive Into Design Patterns: Decorator&#xA;Voorbeeld 1. Opzet Stel dat we in een fabriek op plaats X een auto samenstellen. De wagen is een zeer eenvoudige Volkswagen Golf, zonder opties. Op een andere locatie, plaats Y, hebben wij als bedrijf ook fabrieken die sportauto&amp;rsquo;s bouwen (Volkswagen Scirocco) en op plaats Z luxe wagens (Volkswagen Passat).</description>
     </item>
-    
     <item>
       <title>5.5 Factory</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/factory/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/factory/</guid>
-      <description>&amp;ldquo;Factory&amp;rdquo; - Design Pattern Begeleidende screencast1:
-  Doelstelling  Scherm het aanmaken van bepaalde objecten af door middel van overerving en logica, waarbij die logica éénmalig wordt geïmplementeerd, en op een centrale plaats staat. Promoot een modulair model door de verantwoordlijkheid van object creatie en object gebruik te scheiden.  Dive Into Design Patterns: Factory (method)
-Voorbeeld 1. Opzet Stel, je wilt aan de kassa van een niet al te grote lokale cinema een film kopen.</description>
+      <description>&amp;ldquo;Factory&amp;rdquo; - Design Pattern Begeleidende screencast1:&#xA;Doelstelling Scherm het aanmaken van bepaalde objecten af door middel van overerving en logica, waarbij die logica éénmalig wordt geïmplementeerd, en op een centrale plaats staat. Promoot een modulair model door de verantwoordlijkheid van object creatie en object gebruik te scheiden. Dive Into Design Patterns: Factory (method)&#xA;Voorbeeld 1. Opzet Stel, je wilt aan de kassa van een niet al te grote lokale cinema een film kopen.</description>
     </item>
-    
     <item>
       <title>5.6 Catching Patterns in the Wild</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/patterns/catching-patterns-in-the-wild/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/patterns/catching-patterns-in-the-wild/</guid>
-      <description>De design pattern opgaves tot nu toe zijn vrij kleine self-contained oefeningen geweest die enkel de basisprincipes verduidelijken. In de praktijk worden patronen vooral gecombineerd toegepast. Het is om te beginnen al een kunst om ze te ontdekken in bestaande code.
-Een goede softwareingenieur is een ingenieur die ook veel code leest. Een goede schrijver kan niet schrijven zonder te lezen. Hetzelfde is waar voor code schrijven.
-Gotta Catch &amp;lsquo;em All   Pokemon Leaf Green op de GBA  De opdracht is misleidend eenvoudig: identificeer in onderstaande codebases de vijf aangeleerde software design patterns.</description>
+      <description>De design pattern opgaves tot nu toe zijn vrij kleine self-contained oefeningen geweest die enkel de basisprincipes verduidelijken. In de praktijk worden patronen vooral gecombineerd toegepast. Het is om te beginnen al een kunst om ze te ontdekken in bestaande code.&#xA;Een goede softwareingenieur is een ingenieur die ook veel code leest. Een goede schrijver kan niet schrijven zonder te lezen. Hetzelfde is waar voor code schrijven.&#xA;Gotta Catch &amp;rsquo;em All Pokemon Leaf Green op de GBA De opdracht is misleidend eenvoudig: identificeer in onderstaande codebases de vijf aangeleerde software design patterns.</description>
     </item>
-    
   </channel>
 </rss>

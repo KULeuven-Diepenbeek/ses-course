@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.81.0" />
+    <meta name="generator" content="Hugo 0.121.2">
     <meta name="description" content="">
 
 
@@ -12,22 +12,22 @@
     <title>1. Versie- en issuebeheer :: Software Engineering Skills</title>
 
     
-    <link href="../css/nucleus.css?1707136035" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1707136035" rel="stylesheet">
-    <link href="../css/hybrid.css?1707136035" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1707136035" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1707136035" rel="stylesheet">
-    <link href="../css/auto-complete.css?1707136035" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1707136035" rel="stylesheet">
-    <link href="../css/theme.css?1707136035" rel="stylesheet">
-    <link href="../css/autonumbering.css?1707136035" rel="stylesheet">
-    <link href="../css/devselector.css?1707136035" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1707136035" rel="stylesheet">
-    <link href="../css/theme-kul.css?1707136035" rel="stylesheet">
+    <link href="../css/nucleus.css?1707136147" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1707136147" rel="stylesheet">
+    <link href="../css/hybrid.css?1707136147" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1707136147" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1707136147" rel="stylesheet">
+    <link href="../css/auto-complete.css?1707136147" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1707136147" rel="stylesheet">
+    <link href="../css/theme.css?1707136147" rel="stylesheet">
+    <link href="../css/autonumbering.css?1707136147" rel="stylesheet">
+    <link href="../css/devselector.css?1707136147" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1707136147" rel="stylesheet">
+    <link href="../css/theme-kul.css?1707136147" rel="stylesheet">
     
 
-    <script src="../js/jquery-3.3.1.min.js?1707136035"></script>
-    <script src="../js/devselector.js?1707136035"></script>
+    <script src="../js/jquery-3.3.1.min.js?1707136147"></script>
+    <script src="../js/devselector.js?1707136147"></script>
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
@@ -65,14 +65,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1707136035"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1707136035"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1707136147"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1707136147"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/kuleuven-diepenbeek.github.io\/ses-course\/";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1707136035"></script>
+<script type="text/javascript" src="../js/search.js?1707136147"></script>
 
     
   </div>
@@ -93,7 +93,7 @@
   
     
     <li data-nav-id="/versiebeheer/" title="1. Versie- en issuebeheer" class="dd-item
-        parent
+        
         active
         
         ">
@@ -852,7 +852,7 @@ Wat is de beste manier om source code te bewaren?</p>
 <li>Het <a href="https://git-scm.com/book/en/v2">Pro Git</a> handboek.</li>
 </ol>
 
-<div class="notices note" ><p>SVN, RCS, MS SourceSafe, CVS, &hellip; zijn allemaal <strong>version control systemen</strong> (VCS). Merk op dat Git géén klassieke &ldquo;version control&rdquo; is maar eerder een collaboratieve tool om met meerdere personen tegelijkertijd aan verschillende versies van een project te werken. Er is geen revisienummer dat op elkaar volgt zoals in CVS of SVN (v1, v2, v3, v'), en er is geen logische timestamp. (Zie <a href="https://blog.feld.me/posts/2018/01/git-is-not-revision-control/">git is not revision control</a>).
+<div class="notices note" ><p>SVN, RCS, MS SourceSafe, CVS, &hellip; zijn allemaal <strong>version control systemen</strong> (VCS). Merk op dat Git géén klassieke &ldquo;version control&rdquo; is maar eerder een collaboratieve tool om met meerdere personen tegelijkertijd aan verschillende versies van een project te werken. Er is geen revisienummer dat op elkaar volgt zoals in CVS of SVN (v1, v2, v3, v&rsquo;), en er is geen logische timestamp. (Zie <a href="https://blog.feld.me/posts/2018/01/git-is-not-revision-control/">git is not revision control</a>).
 Ook, in tegenstelling tot bovenstaande tools, kan je Git ook compleet lokaal gebruiken, zonder ooit te pushen naar een upstream server. Het is dus &ldquo;self-sufficient&rdquo;: er is geen &ldquo;server&rdquo; nodig: dat is je PC zelf.</p>
 </div>
 
@@ -935,7 +935,7 @@ Wouters-Air:sessylibrary wgroeneveld$ git branch
 </div>
 
 <h4 id="ik-zie-niet-alle-branches-hoe-komt-dat">Ik zie niet alle branches, hoe komt dat?</h4>
-<p>Een <code>git pull</code> commando zal soms in de console &lsquo;new branch [branchnaam]&rsquo; afdrukken, maar toch zal je deze niet tot je beschikking hebben met het <code>git branch</code> commando. Dat komt omdat branches dan ook nog (lokaal) <strong>getracked</strong> moeten worden:</p>
+<p>Een <code>git pull</code> commando zal soms in de console &rsquo;new branch [branchnaam]&rsquo; afdrukken, maar toch zal je deze niet tot je beschikking hebben met het <code>git branch</code> commando. Dat komt omdat branches dan ook nog (lokaal) <strong>getracked</strong> moeten worden:</p>
 <ol>
 <li>Controleer welke branch je lokaal wilt volgen met <code>git branch -r</code></li>
 <li>Selecteer een bepaalde branch, waarschijnlijk <code>origin/[naam]</code></li>
@@ -1463,15 +1463,15 @@ graph LR;
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1707136035"></script>
-    <script src="../js/perfect-scrollbar.min.js?1707136035"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1707136035"></script>
-    <script src="../js/jquery.sticky.js?1707136035"></script>
-    <script src="../js/featherlight.min.js?1707136035"></script>
-    <script src="../js/modernizr.custom-3.6.0.js?1707136035"></script>
-    <script src="../js/learn.js?1707136035"></script>
-    <script src="../js/hugo-learn.js?1707136035"></script>
-    <script src="../js/mermaid.min.js?1707136035"></script>
+    <script src="../js/clipboard.min.js?1707136147"></script>
+    <script src="../js/perfect-scrollbar.min.js?1707136147"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1707136147"></script>
+    <script src="../js/jquery.sticky.js?1707136147"></script>
+    <script src="../js/featherlight.min.js?1707136147"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1707136147"></script>
+    <script src="../js/learn.js?1707136147"></script>
+    <script src="../js/hugo-learn.js?1707136147"></script>
+    <script src="../js/mermaid.min.js?1707136147"></script>
     <script>
     window.MathJax = {
       chtml: {

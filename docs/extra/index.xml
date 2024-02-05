@@ -7,59 +7,42 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/extra/index.xml" rel="self" type="application/rss+xml" />
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster>
+    <atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/extra/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gebruikte Software</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/software/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/software/</guid>
-      <description>Voor deze cursus werken we met Java en met Git. Dat betekent dat JDK 15.0.2 (en de Gradle build tool, v6.7) en een Git client de enige vereisten zijn.
-Onderstaande lijst kan helpen bij het installeren en configureren van zulke tools:
-Commandline Tools  git-scm gradle  Het is onze intentie om jullie kennis van Linux commando&amp;rsquo;s, opgedaan in het vak Besturingssystemen en C, hier ook van pas te laten komen.</description>
+      <description>Voor deze cursus werken we met Java en met Git. Dat betekent dat JDK 15.0.2 (en de Gradle build tool, v6.7) en een Git client de enige vereisten zijn.&#xA;Onderstaande lijst kan helpen bij het installeren en configureren van zulke tools:&#xA;Commandline Tools git-scm gradle Het is onze intentie om jullie kennis van Linux commando&amp;rsquo;s, opgedaan in het vak Besturingssystemen en C, hier ook van pas te laten komen. Daarom is het aangeraden om dezelfde virtuele machine te gebruiken voor BESC en voor SES.</description>
     </item>
-    
     <item>
       <title>SESsy Library (1) De WebApp</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy/</guid>
-      <description>SESsy Library: Een geïntegreerde oefening Download Locatie: op  Github via https://github.com/KULeuven-Diepenbeek/sessylibrary. Zie README.md op de hoofdpagina. SESsy library is:
- A Library Management Simulation WebApp for the &amp;lsquo;SES&amp;rsquo; (Software Engineering Skills) course
-   Een boek uitlenen in de SESsy Library webapp.  Installatie Download via bovenstaande Github link, of met git clone. Dit is een &amp;ldquo;Gradle&amp;rdquo; project, die de build van ons Java ecosysteem verzorgt. Dat wil zeggen dat het Gradle systeem automatisch libraries (jar bestanden) download van een centrale repository, moesten die nodig zijn.</description>
+      <description>SESsy Library: Een geïntegreerde oefening Download Locatie: op Github via https://github.com/KULeuven-Diepenbeek/sessylibrary. Zie README.md op de hoofdpagina. SESsy library is:&#xA;A Library Management Simulation WebApp for the &amp;lsquo;SES&amp;rsquo; (Software Engineering Skills) course&#xA;Een boek uitlenen in de SESsy Library webapp. Installatie Download via bovenstaande Github link, of met git clone. Dit is een &amp;ldquo;Gradle&amp;rdquo; project, die de build van ons Java ecosysteem verzorgt. Dat wil zeggen dat het Gradle systeem automatisch libraries (jar bestanden) download van een centrale repository, moesten die nodig zijn.</description>
     </item>
-    
     <item>
       <title>SESsy Library (2) Uitbreidingen</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy-extending/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/sessy-extending/</guid>
-      <description>SESsy Library Uitbreiden Lees eerst de installatieinstructies en basics over de SESsy Library app.
-Met de SESsy Library WebApp kunnen verstokte lezers (en mensen die boeken nooit terugbrengen) de database van de lokale bibliotheek raadplegen, en eventueel boeken uitlenen. Het is een simpele webapplicatie met een embedded server die standaard op poort 8080 draait, met een minimale front-end interface:
-   De codebase bevat echter nog heel wat lijntjes TODO commentaar die door de luie ontwikkelaars nooit zijn geïmplementeerd.</description>
+      <description>SESsy Library Uitbreiden Lees eerst de installatieinstructies en basics over de SESsy Library app.&#xA;Met de SESsy Library WebApp kunnen verstokte lezers (en mensen die boeken nooit terugbrengen) de database van de lokale bibliotheek raadplegen, en eventueel boeken uitlenen. Het is een simpele webapplicatie met een embedded server die standaard op poort 8080 draait, met een minimale front-end interface:&#xA;De codebase bevat echter nog heel wat lijntjes TODO commentaar die door de luie ontwikkelaars nooit zijn geïmplementeerd.</description>
     </item>
-    
     <item>
       <title>Taak 1 OSS Contrib.: Feedback</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/taak-oss-feedback/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/taak-oss-feedback/</guid>
-      <description>Contributie/code feedback Studenten die duidelijk lieten zien dat ze geprobeerd hebben actief te zijn in de OSS community hebben hier overduidelijk een streeptje voor&amp;mdash;hetzij via discussies in GitHub issues om hulp te vragen of aan te bieden, hetzij via Discord groepen van de maintainers indien van toepassing.
-De uiteindelijke &amp;ldquo;grootte&amp;rdquo; van aanpassing speelt minder mee: het is vaak moeilijker om de juiste aan te passen regel te vinden dan de effectieve aanpassing door te voeren.</description>
+      <description>Contributie/code feedback Studenten die duidelijk lieten zien dat ze geprobeerd hebben actief te zijn in de OSS community hebben hier overduidelijk een streeptje voor&amp;mdash;hetzij via discussies in GitHub issues om hulp te vragen of aan te bieden, hetzij via Discord groepen van de maintainers indien van toepassing.&#xA;De uiteindelijke &amp;ldquo;grootte&amp;rdquo; van aanpassing speelt minder mee: het is vaak moeilijker om de juiste aan te passen regel te vinden dan de effectieve aanpassing door te voeren.</description>
     </item>
-    
     <item>
       <title>Taak 1: Open Source Contributie</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/extra/taak-oss/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/extra/taak-oss/</guid>
-      <description>De evaluatie van het vak verloopt op twee manieren: 50% examen op papier, 50% praktische taken, waarvan dit één is. Andere taken zullen ook tijdig via Toledo en/of in de lessen worden aangekondigd. Zie de ECTS fiche voor meer informatie betreffrende de puntenverdeling.
-Voor deze taak, een open source software (OSS) contributie, leer je de verschillende aspecten die aan bod komen in de hoofdstukken (versiebeheer, continuous integration, dependencies, unit testing, design patterns, &amp;hellip;) toepassen in een real-life omgeving in plaats van een artifiële en netjes afgebakende oefening.</description>
+      <description>De evaluatie van het vak verloopt op twee manieren: 50% examen op papier, 50% praktische taken, waarvan dit één is. Andere taken zullen ook tijdig via Toledo en/of in de lessen worden aangekondigd. Zie de ECTS fiche voor meer informatie betreffrende de puntenverdeling.&#xA;Voor deze taak, een open source software (OSS) contributie, leer je de verschillende aspecten die aan bod komen in de hoofdstukken (versiebeheer, continuous integration, dependencies, unit testing, design patterns, &amp;hellip;) toepassen in een real-life omgeving in plaats van een artifiële en netjes afgebakende oefening.</description>
     </item>
-    
   </channel>
 </rss>

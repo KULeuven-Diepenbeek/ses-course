@@ -7,28 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
     <managingEditor>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</managingEditor>
-    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster><atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/tdd/index.xml" rel="self" type="application/rss+xml" />
+    <webMaster>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</webMaster>
+    <atom:link href="https://kuleuven-diepenbeek.github.io/ses-course/tdd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>3.1 TDD In de praktijk</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/in-de-praktijk/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/in-de-praktijk/</guid>
-      <description>The Java way: Mockito Mockito is verreweg het meest populaire Java-specifieke Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen.
-   Lees op https://site.mockito.org hoe je het framework moet gebruiken. (Klik op de knoppen WHY en HOW bovenaan! Volledige javadoc) Denk aan de volgende zaken:
- Hoe include ik Mockito als een dependency in mijn project? Hoe gebruik ik de API om een Test Double/mock aan te maken?</description>
+      <description>The Java way: Mockito Mockito is verreweg het meest populaire Java-specifieke Unit Test Framework dat bovenop JUnit wordt gebruikt om heel snel Test Doubles en integratietesten op te bouwen.&#xA;Lees op https://site.mockito.org hoe je het framework moet gebruiken. (Klik op de knoppen WHY en HOW bovenaan! Volledige javadoc) Denk aan de volgende zaken:&#xA;Hoe include ik Mockito als een dependency in mijn project? Hoe gebruik ik de API om een Test Double/mock aan te maken?</description>
     </item>
-    
     <item>
       <title>3.2 TDD Capita Selecta: Algoritmes</title>
       <link>https://kuleuven-diepenbeek.github.io/ses-course/tdd/capita/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>&lt;i&gt;fname&lt;/i&gt;.&lt;i&gt;lname&lt;/i&gt;A T&lt;i&gt;kuleuven.be&lt;/i&gt; (Wouter Groeneveld, Kris Aerts)</author>
       <guid>https://kuleuven-diepenbeek.github.io/ses-course/tdd/capita/</guid>
-      <description>Test-First Een algoritme ontwerpen Neem eerst de volgende noties terug door:
- Test Driven Development principes  Dit labo gaan we ons focussen op het praktisch gebruik van TDD en unit testen ter ondersteuning van het opbouwen van een algoritme, ter oplossing van een probleem. Alle TDD concepten zijn reeds uitgelegd in het Test Driven Development labo. We gaan onmiddellijk verder met de oefeningen:
-Labo oefeningen Maak zelf een nieuwe  GitHub repository aan&amp;mdash;er zijn geen startprojecten voorzien deze keer.</description>
+      <description>Test-First Een algoritme ontwerpen Neem eerst de volgende noties terug door:&#xA;Test Driven Development principes Dit labo gaan we ons focussen op het praktisch gebruik van TDD en unit testen ter ondersteuning van het opbouwen van een algoritme, ter oplossing van een probleem. Alle TDD concepten zijn reeds uitgelegd in het Test Driven Development labo. We gaan onmiddellijk verder met de oefeningen:&#xA;Labo oefeningen Maak zelf een nieuwe GitHub repository aan&amp;mdash;er zijn geen startprojecten voorzien deze keer.</description>
     </item>
-    
   </channel>
 </rss>
