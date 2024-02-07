@@ -53,7 +53,7 @@ enableGitInfo = true
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
 
-[Author]
+[params.author]
   name = "Arne Duyver, Koen Yskout"
   email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"
 
