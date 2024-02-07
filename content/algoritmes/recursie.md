@@ -1,6 +1,6 @@
 ---
 title: "5.1 Recursie"
-autonumber: true
+autonumbering: true
 toc: true
 ---
 
