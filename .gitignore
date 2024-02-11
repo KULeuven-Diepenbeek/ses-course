@@ -1,5 +1,8 @@
 *.sublime-project
 *.sublime-workspace
+*.vscode-project
+*.vscode-workspace
+*.vscode
 
 *.class
 
@@ -15,3 +18,5 @@ node_modules/
 
 docs/
 resources/
+
+themes/
