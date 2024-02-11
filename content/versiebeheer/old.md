@@ -1,6 +1,8 @@
 ---
-title: 'Lokaal versiebeheer: Git'
-weight: 2
+title: 'Versiebeheer oude versie'
+weight: 5
+draft: true
+author: Wouter Groeneveld
 ---
 
 ## In de praktijk: Git

@@ -1,5 +1,6 @@
 ---
 title: 'Remote repositories: Github'
 weight: 3
-author: Arne Duyver
+author: Wouter Groeneveld en Arne Duyver
+draft: true
 ---

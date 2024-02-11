@@ -1,7 +1,8 @@
 ---
-title: 'Extra lesmateriaal en bronnen'
+title: Meer leermateriaal
 weight: 4
-author: Arne Duyver
+author: Wouter Groeneveld en Arne Duyver
+draft: false
 ---
 
 ## Verplicht lesmateriaal
