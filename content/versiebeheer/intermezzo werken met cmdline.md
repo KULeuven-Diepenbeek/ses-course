@@ -21,4 +21,4 @@ We gaan gebruik maken van de Git commands in een CLI om aan versiebeheer te doen
 Zoals de naam zelf al verraadt, gebruiken we in een CLI commando's om ons besturingssyteem dingen te laten doen. Zo kan je met een commando een '.txt'-file openen in de Kladblok applicatie in plaats van te dubbelklikken op de file. 
 
 Hieronder vind je een voorbeeld met Git Bash in Windows 10:
-<img src="/img/versiebeheer/cli_voorbeeld_notepad.png" alt="drawing" style="max-height: 23em;"/>
+<img src="/img/versiebeheer/cli_voorbeeld_notepad.png" alt="drawing" style="max-height: 15em;"/>

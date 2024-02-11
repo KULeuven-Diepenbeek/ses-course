@@ -2,6 +2,7 @@
 title: '1. Versie- en issuebeheer'
 weight: 1
 author: Wouter Groeneveld en Arne Duyver
+draft: false
 ---
 
 > <i class="fa fa-question-circle" aria-hidden="true"></i>

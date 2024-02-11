@@ -11,4 +11,5 @@ draft: false
 - Besturingssysteem = Operating system = OS
 - Directory = folder
 - Bestand = file
-- 
+- GUI (Graphical User Interface)
+- CLI (Command Line Interface)
