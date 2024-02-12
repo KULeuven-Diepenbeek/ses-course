@@ -60,7 +60,7 @@ url = "https://toledo.kuleuven.be/portal/"
 weight = 10
 
 [[menu.shortcuts]] 
-name = "<i class='fa fa-university'></i>Studiegids"
+name = "<i class='fa fa-university'></i> Studiegids"
 identifier = "stud"
 url = "https://studiegidswww.uhasselt.be/opleidingsonderdeel.aspx?a=2023&i=4083&n=4&t=01#anker47379"
 weight = 1

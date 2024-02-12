@@ -1,5 +1,8 @@
 *.sublime-project
 *.sublime-workspace
+*.vscode-project
+*.vscode-workspace
+*.vscode
 
 *.class
 
