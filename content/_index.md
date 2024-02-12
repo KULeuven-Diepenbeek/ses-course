@@ -45,12 +45,12 @@ Design patterns zijn ontwerpoplossingen voor vaak terugkomende problemen.
 Wanneer je zo'n probleem tegenkomt, biedt het patroon een goed startpunt voor je ontwerp.
 Er bestaan erg veel patronen; we bekijken er enkele zeer gekende en vaak voorkomende.
 
-### Extra informatie
+<!-- ### Extra informatie
 
 1. [Gebruikte Software: een overzicht](/extra/software)
 2. [De 'SESsy Library' WebApp: installatie & configuratie](/extra/sessy)
 3. [De 'SESsy Library' WebApp: extra oefeningen](/extra/sessy-extending)
-4. [Taak 1: Open Source Contributie](/extra/taak-oss/)
+4. [Taak 1: Open Source Contributie](/extra/taak-oss/) -->
 
 ## Syllabus
 

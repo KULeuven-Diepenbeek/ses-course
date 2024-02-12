@@ -1,6 +1,7 @@
 ---
 title: '2. Dependency Management'
 weight: 2
+draft: true
 ---
 
 Lees ook: [Meer uitleg over de Gradle build tool](/dependency-management/gradle/).

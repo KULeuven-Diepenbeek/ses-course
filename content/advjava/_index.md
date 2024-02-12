@@ -1,6 +1,7 @@
 ---
 title: "4. Advanced Java"
 weight: 4
+draft: true
 ---
 
 In dit deel bekijken we enkele geavanceerdere Java-concepten.

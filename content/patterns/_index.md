@@ -1,6 +1,7 @@
 ---
 title: "6. Design Patterns"
 weight: 6
+draft: true
 ---
 
 ### Wat is dat, een patroon?

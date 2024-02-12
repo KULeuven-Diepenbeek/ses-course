@@ -1,6 +1,7 @@
 ---
 title: 'Extra informatie'
 weight: 7
+draft: true
 ---
 
 ### Extra informatie
