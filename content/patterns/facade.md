@@ -1,5 +1,5 @@
 ---
-title: '5.1 Facade'
+title: "6.1 Facade"
 ---
 
 &laquo;&nbsp;[Terug naar Software Engineering Skills](/)<br/>
@@ -11,13 +11,12 @@ Begeleidende screencast[^host]:
 
 [^host]: Merk op dat de cursus nu wordt gehost op https://kuleuven-diepenbeek.github.io/ses-course/
 
-
 {{< vimeo 398523177 >}}
 
 ### Doelstelling
 
-* Scherm een complex stukje software af met behulp van een simpele interface
-* Voorzie éénzelfde interface naar een set van verschillende mogelijke subsystemen. Een Facade is een high-level interface die mogelijks low-level systemen aanspreekt. 
+- Scherm een complex stukje software af met behulp van een simpele interface
+- Voorzie éénzelfde interface naar een set van verschillende mogelijke subsystemen. Een Facade is een high-level interface die mogelijks low-level systemen aanspreekt.
 
 [Dive Into Design Patterns: Facade](https://sourcemaking.com/design_patterns/facade)
 
@@ -25,7 +24,7 @@ Begeleidende screencast[^host]:
 
 #### 1. Opzet
 
-Stel dat we gegevens van de klant moeten versturen naar een overheidsinstantie. Die instantie beschikt jammer genoeg niet over voldoende budgetten om ook een cutting-edge server interface en implementatie aan te bieden. Het komt er op neer dat we verplicht zijn om tekst bestanden op een FTP server te plaatsen. 
+Stel dat we gegevens van de klant moeten versturen naar een overheidsinstantie. Die instantie beschikt jammer genoeg niet over voldoende budgetten om ook een cutting-edge server interface en implementatie aan te bieden. Het komt er op neer dat we verplicht zijn om tekst bestanden op een FTP server te plaatsen.
 
 <div class="devselect">
 
@@ -48,7 +47,7 @@ public class ClientFtpSender {
 </div>
 
 Deze code gebruiken we als de gebruiker op een knop genaamd `export`
- klikt:
+klikt:
 
 <div class="devselect">
 
@@ -77,9 +76,9 @@ public class ClientHTTPHandler {
 
 {{<mermaid>}}
 graph LR;
-    A[HTTP Handler]
-    B[FTP Sender]
-    A --> B
+A[HTTP Handler]
+B[FTP Sender]
+A --> B
 {{< /mermaid >}}
 
 #### 2. Probleemstelling
@@ -106,8 +105,7 @@ public class ClientPOSTSender {
 
 </div>
 
-Deze complexe stukjes software, de `POST` en `FTP` senders, willen we niet langer rechtstreeks aanspreken in de HTTP handler. Het is zo dat afhankelijk van een bepaalde instelling, het ene of het andere gebruikt kan worden. 
-
+Deze complexe stukjes software, de `POST` en `FTP` senders, willen we niet langer rechtstreeks aanspreken in de HTTP handler. Het is zo dat afhankelijk van een bepaalde instelling, het ene of het andere gebruikt kan worden.
 
 #### 3. Oplossing
 
@@ -115,15 +113,14 @@ We hebben dus **een facade** nodig, die de juiste delegaties voor ons doorvoert,
 
 {{<mermaid>}}
 graph LR;
-    A[HTTP Handler]
-    POST[POST Sender]
-    FTP[FTP Sender]
-    F{Facade}
-    A --> F
-    F -.-> POST
-    F -.-> FTP
+A[HTTP Handler]
+POST[POST Sender]
+FTP[FTP Sender]
+F{Facade}
+A --> F
+F -.-> POST
+F -.-> FTP
 {{< /mermaid >}}
-
 
 Waarbij de Facade een klasse is die de details "wegstopt" voor onze HTTP handler:
 
@@ -154,17 +151,18 @@ public class UploadClientFacade {
     }
 }
 ```
+
 </div>
 
 {{% notice note %}}
 Merk op dat in Kotlin de `when { }` block een heel krachtige manier is om selecties te maken. `when` is een expressie, geen statement: dat betekent dat je toekenningen kan doen, zoals `val getal = when(someString) { "twee" -> 2 "drie" -> 3 else -> -1 }`. Zie de [control flow - when expression Kotlin docs](https://kotlinlang.org/docs/control-flow.html#if-expression) voor meer informatie. <br/>
-Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu _Tools - Kotlin - Show Kotlin Bytecode_. Dit wordt in bytecode nog steeds vertaald naar een "simpele(re)" sequentie van Java `if {}` statements. 
+Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu _Tools - Kotlin - Show Kotlin Bytecode_. Dit wordt in bytecode nog steeds vertaald naar een "simpele(re)" sequentie van Java `if {}` statements.
 {{% /notice %}}
 
 ### Eigenschappen van dit patroon
 
-* Een Facade is een _nieuwe interface_, niet eentje die oude interfaces herbruikt (Adapter). Beide zijn een soort van **"wrappers"**, die onderliggende implementaties verbergen voor de hogerliggende interface - in ons geval de `ClientHTTPHandler`.
-* Het verschil tussen een Facade en een Factory is dat de facade alles verbergt en **logica uitvoert**, terwijl de Factory enkel de juiste instanties **aanmaakt** en teruggeeft. In dat geval zou de handler nog steeds `upload()` zelf moeten uitvoeren, inclusief eventuele encoding stappen.
+- Een Facade is een _nieuwe interface_, niet eentje die oude interfaces herbruikt (Adapter). Beide zijn een soort van **"wrappers"**, die onderliggende implementaties verbergen voor de hogerliggende interface - in ons geval de `ClientHTTPHandler`.
+- Het verschil tussen een Facade en een Factory is dat de facade alles verbergt en **logica uitvoert**, terwijl de Factory enkel de juiste instanties **aanmaakt** en teruggeeft. In dat geval zou de handler nog steeds `upload()` zelf moeten uitvoeren, inclusief eventuele encoding stappen.
 
 ## <a name="oef"></a>Labo oefeningen
 
@@ -176,12 +174,12 @@ Opgave tekst: zie repository bestand `README.md`!
 
 ### Opgave 2
 
-[sessy library](/extra/sessy): 
+[sessy library](/extra/sessy):
 
-1. identificeer waar jij denkt dat een facade nodig zou kunnen zijn. Waar moet logica worden afgeschermd? 
-2. Pas het patroon toe waar jij denkt dat het nodig is. 
+1. identificeer waar jij denkt dat een facade nodig zou kunnen zijn. Waar moet logica worden afgeschermd?
+2. Pas het patroon toe waar jij denkt dat het nodig is.
 
 ## Denkvragen
 
-* Op welk moment beslis je dat een Facade écht nodig is? Is het mogelijk om ook een facade te maken zonder bijvoorbeeld nieuwe dieren in oefening 1 of een nieuwe verzendmethode voor de klant bij de probleemstelling? 
-* Kan een Facade een Facade verbergen? Wanneer is dat nodig, of niet?
+- Op welk moment beslis je dat een Facade écht nodig is? Is het mogelijk om ook een facade te maken zonder bijvoorbeeld nieuwe dieren in oefening 1 of een nieuwe verzendmethode voor de klant bij de probleemstelling?
+- Kan een Facade een Facade verbergen? Wanneer is dat nodig, of niet?
