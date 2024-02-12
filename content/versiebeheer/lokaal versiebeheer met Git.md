@@ -82,7 +82,7 @@ Het commando **`$ git log`** wordt gebruikt om een lijst te zien van all je comm
 
 Er bestaan commando's die we kunnen gebruiken om naar een vroegere commit terug te keren. Ze werken echter op een verschillende manier en het is belangrijk dat je deze verschillen goed kent. 
 - **`$ git reset <hash van de commit>`**: hiermee ga je terug naar een vorige commit en worden alle commits die erna gebeurden verwijderd.
-- **`$ git revert <hash van de commit>`**: hiermee ga je terug naar de staat van een vorige commit maar dit wordt als een nieuwe commit geregistreerd.
+- **`$ git revert <hash van de commit>`**: hiermee verwijder je specifieke commits.
 
 ### Branching
 
@@ -111,7 +111,7 @@ Soms wil je dat een file niet wordt bijghouden door git. Hier komen we in het ge
 Om bepaalde belangrijke commits snel terug te vinden, kan je gebruik maken van tags. 
 - Je kan de bestaande tags oplijsten met: **`$ git tag`**
 - Je kan de huidige commit taggen met: **`$ git tag -a vX.X`**
-- Je kan een specifieke commit taggen met: **`$ git tag -a vX.X <hascode commit>`**
+- Je kan een specifieke commit taggen met: **`$ git tag -a vX.X <hashcode commit>`**
 - Je kan tags deleten met: **`$ git tag -d vX.X`**
 
 {{% notice warning %}}
@@ -127,20 +127,18 @@ We hebben hier enkel de basis commando's aangehaald met een paar van de meest ge
 4. Gebruik `$ git status` om te zien wat er allemaal gecommit kan worden.
 5. Commit deze veranderingen.
 5. Maak aanpassingen aan de tekstbestanden en commit.
-6. Keer terug naar de eerste commit via `$ git revert`
+6. Keer terug naar de eerste commit via `$ git reset`
 7. Bestudeer de output van `$ git log`
-8. Keer terug naar de eerste commit, maar nu via `$ git reset`
-9. Bestudeer de output van `$ git log` en denk na over het verschil tussen `reset` en `revert`
-10. Maak een nieuwe branch en chechout naar die nieuwe branch
-11. Voeg in deze branch nieuwe textbestanden toe en commit de verandering in die nieuwe branch.
-12. Open File Explorer en doe een checkout terug naar de main branch. Zie je de nieuwe files verdwijnen/verschijnen wanneer je tussen de twee branches wisselt?
-13. Merge je nieuwe branch met de main branch.
-14. Maak veranderingen in de main branch en commit.
-15. Switch terug naar je andere branch en maak op dezelfde plaats veranderingen en commit. Zo kan ga je een mergeconflict opwekken.
-16. Probeer nu weer je nieuwe branch te mergen met je main branch. Je zal eerst het merge conflict moeten oplossen
-17. Tag je eerste commit met `v1.0` en tag je laatste commit met `v2.0`.
-18. Doe een git revert naar je eerste commit door gebruik te maken van je nieuwe tags.
-19. Probeer van alle bovenstaande stappen een schets te maken om zo na te gaan of je alle commando's goed begrijpt.
+8. Maak een nieuwe branch en chechout naar die nieuwe branch
+9. Voeg in deze branch nieuwe textbestanden toe en commit de verandering in die nieuwe branch.
+10. Open File Explorer en doe een checkout terug naar de main branch. Zie je de nieuwe files verdwijnen/verschijnen wanneer je tussen de twee branches wisselt?
+11. Merge je nieuwe branch met de main branch.
+12. Maak veranderingen in de main branch en commit.
+13. Switch terug naar je andere branch en maak op dezelfde plaats veranderingen en commit. Zo kan ga je een mergeconflict opwekken.
+14. Probeer nu weer je nieuwe branch te mergen met je main branch. Je zal eerst het merge conflict moeten oplossen
+15. Tag je eerste commit met `v1.0` en tag je laatste commit met `v2.0`.
+16. Doe een git revert naar je eerste commit door gebruik te maken van je nieuwe tags.
+17. Probeer van alle bovenstaande stappen een schets te maken om zo na te gaan of je alle commando's goed begrijpt.
 ---
 *Indien niet afgewerkt in het applicatiecollege, gelieve thuis af te werken tegen volgende les.*
 
