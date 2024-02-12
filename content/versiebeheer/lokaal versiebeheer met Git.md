@@ -12,7 +12,8 @@ SVN, RCS, MS SourceSafe, CVS, ... zijn allemaal **version control systemen** (VC
 Ook, in tegenstelling tot bovenstaande tools, kan je Git ook compleet lokaal gebruiken, zonder ooit te pushen naar een upstream server. Het is dus "self-sufficient": er is geen "server" nodig: dat is je PC zelf. 
 {{% /notice %}}
 
-<img src="/img/versiebeheer/git_flowchart_staging.png" alt="from Pro Git" style="max-height: 23em;"/>
+![The lifecycle of the status of your file](/img/versiebeheer/git_flowchart_staging.png "from Pro Git handbook")
+([Image Src](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository))
 
 ### Git correct configureren
 
@@ -38,44 +39,64 @@ Er verschijnt een vorborgen folder in je directory genaamd `.git`. In die folder
 
 ### Checking, staging and committing changes
 
-Met het commando `$ git status` kan je controleren in welke staat alle files/directories zich bevinden. Een file/folder kan zich in één van drie toestanden bevinden:
+Met het commando **`$ git status`** kan je controleren in welke staat alle files/directories zich bevinden. Een file/folder kan zich in één van drie toestanden bevinden:
 - **Modified**: de file is aangepast maar nog niet gestaged.
 - **Staged**: de file is gestaged en klaar om gecommit te worden.
 - **Committed**: de file is sinds zijn laatste commit niet meer aangepast.
 - (**Untracked**: dit geldt enkel voor files/folders die juist aangemaakt zijn en nog nooit gecommit werden)
 
-Met het commando `$ git add <filenaam>` kan je afzonderlijk modified files naar de staging area 'verplaatsen'.
+Een voorbeeld output ziet er als volgt uit:
+<pre>
+Work@ALFHEIM MINGW64 ~/Desktop/ses_git (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   voorbeeld.txt
 
-Met het commando `$ git commit` kan je alle files committen die gestaged zijn. Je teksteditor opent en je wordt gevraagd een message mee te geven met de commit. Probeer steeds een concrete boodschap mee te geven met elke commit bv. "Bug opgelost waarbij alles vetgedrukt stond". Probeer elke commit message zo zinvol mogelijk te maken. Dit maakt het later makkelijk om terug te keren naar een belangrijke 'versie' van je broncode. Elke commit krijgt ook een specifieke **hash** zodat je gemakkelijk naar een specifieke 'versie' (commit) kan refereren.
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        haha.txt
 
-- Alle modified files stagen met 1 commando: `$ git add .`
-- Onmiddellijk een commit message meegeven binnenin het commit commando: `$ git commit -m "mijn commit message"`
-- combinatie van de twee bovenstaande commando's: `$ git commit -a -m "mijn commit message"`
+no changes added to commit (use "git add" and/or "git commit -a")
+</pre>
+
+Met het commando **`$ git diff`** kan je de verschillen zien tussen de huidige staat van je files/folders versus de staat van de files/folders in de laatste commit.
+
+Met het commando **`$ git add <filenaam>`** kan je afzonderlijk modified files naar de staging area 'verplaatsen'.
+
+Met het commando **`$ git commit`** kan je alle files committen die gestaged zijn. Je teksteditor opent en je wordt gevraagd een message mee te geven met de commit. Probeer steeds een concrete boodschap mee te geven met elke commit bv. "Bug opgelost waarbij alles vetgedrukt stond". Probeer elke commit message zo zinvol mogelijk te maken. Dit maakt het later makkelijk om terug te keren naar een belangrijke 'versie' van je broncode. Elke commit krijgt ook een specifieke **hash** zodat je gemakkelijk naar een specifieke 'versie' (commit) kan refereren.
+
+- Alle modified files stagen met 1 commando: **`$ git add .`**
+- Onmiddellijk een commit message meegeven binnenin het commit commando: **`$ git commit -m "mijn commit message"`**
+- combinatie van de twee bovenstaande commando's: **`$ git commit -a -m "mijn commit message"`**
 
 #### Undo changes
 `git status` geeft je ook informatie over hoe je files/folders kan unstagen en zelfs de veranderingen van files kan terugbrengen naar hoe ze eruit zagen tijdens de laatste commit.
 
 ### Bekijk de version tree (log)
-Het commando `$ git log` wordt gebruikt om een lijst te zien van all je commits in chronologische volgorde, startend bij de laatste commit. Dat commando geeft veel informatie mee voor elke commit. Wil je liever een korter overzicht? Gebruik dan `$ git log --oneline`.
+Het commando **`$ git log`** wordt gebruikt om een lijst te zien van all je commits in chronologische volgorde, startend bij de laatste commit. Dat commando geeft veel informatie mee voor elke commit. Wil je liever een korter overzicht? Gebruik dan **`$ git log --oneline`**.
 
 ### Teruggaan naar vorige 'versies'
 
 Er bestaan commando's die we kunnen gebruiken om naar een vroegere commit terug te keren. Ze werken echter op een verschillende manier en het is belangrijk dat je deze verschillen goed kent. 
-- `$ git reset <hash van de commit>`: hiermee ga je terug naar een vorige commit en worden alle commits die erna gebeurden verwijderd.
-- `$ git revert <hash van de commit>`: hiermee ga je terug naar de staat van een vorige commit maar dit wordt als een nieuwe commit geregistreerd.
+- **`$ git reset <hash van de commit>`**: hiermee ga je terug naar een vorige commit en worden alle commits die erna gebeurden verwijderd.
+- **`$ git revert <hash van de commit>`**: hiermee ga je terug naar de staat van een vorige commit maar dit wordt als een nieuwe commit geregistreerd.
 
 ### Branching
 
 Het fijne aan Git is dat je parallel aan verschillende versies van je project kan werken door gebruik te maken van **branching**. Je start letterlijk een nieuwe tak waar je eigen commits kan aan toevoegen. Zo kan elk teamlid bijvoorbeeld zijn eigen branch aanmaken. Of je kan een brach aanmaken om aan een nieuwe feature te werken zonder dat je schrik moet hebben om problemen te creëren op de main branch.
 
-Je maakt een nieuwe branch aan met het commando: `$ git branch <branchnaam>`
-Je kan de verschillende branches oplijsten met: `$ git branch --list`
-Je kan naar een bepaalde branch gaan met: `$ git checkout <branchnaam>`
-Je kan een branch deleten mert: `$ git branch -d <branchnaam>`
+Je maakt een nieuwe branch aan met het commando: **`$ git branch <branchnaam>`**
+Je kan de verschillende branches oplijsten met: **`$ git branch`**
+- Het `*` symbool duidt de actieve branch aan.
+Je kan naar een bepaalde branch gaan met: **`$ git checkout <branchnaam>`**
+Je kan een branch deleten mert: **`$ git branch -d <branchnaam>`**
 
 #### Merging
 
-Je kan de commits van een zijtak nu terug toevoegen aan de historie van een andere tak. Dit doe je met het commando `$ git merge <branchname>`. Wil je bijvoorbeeld de wijzingen van de `new_feature` branch mergen met de `main` branch, dan moet je eerst zien dat je je in de `main` branch bevindt en dan gebruik je het volgende commando: `$ git merge new_feature`
+Je kan de commits van een zijtak nu terug toevoegen aan de historie van een andere tak. Dit doe je met het commando **`$ git merge <branchname>`**. Wil je bijvoorbeeld de wijzingen van de `new_feature` branch mergen met de `main` branch, dan moet je eerst zien dat je je in de `main` branch bevindt en dan gebruik je het volgende commando: `$ git merge new_feature`
 
 #### Merge conflicts
 
@@ -83,15 +104,15 @@ Wanneer je op twee verschillende branches echter commits heb die verschillende a
 
 ### .gitignore
 
-Soms wil je dat een file niet wordt bijghouden door git. Hier komen we in het gedeelte over [remote repositories]({{< ref "remote repository met Github" >}}) op terug. De files/folders die niet getracked mogen worden, moeten we in het bestand `.gitignore` toevoegen.
+Soms wil je dat een file niet wordt bijghouden door git. Hier komen we in het gedeelte over [remote repositories](/versiebeheer/remote-repository-met-github) op terug. De files/folders die niet getracked mogen worden, moeten we in het bestand `.gitignore` toevoegen.
 
 ### Tagging
 
 Om bepaalde belangrijke commits snel terug te vinden, kan je gebruik maken van tags. 
-- Je kan de bestaande tags oplijsten met: `$ git tag`
-- Je kan de huidige commit taggen met: `$ git tag -a vX.X`
-- Je kan een specifieke commit taggen met: `$ git tag -a vX.X <hascode commit>`
-- Je kan tags deleten met: `$ git tag -d vX.X`
+- Je kan de bestaande tags oplijsten met: **`$ git tag`**
+- Je kan de huidige commit taggen met: **`$ git tag -a vX.X`**
+- Je kan een specifieke commit taggen met: **`$ git tag -a vX.X <hascode commit>`**
+- Je kan tags deleten met: **`$ git tag -d vX.X`**
 
 {{% notice warning %}}
 In de lessen gaan we **tags** gebruiken om finale versie van een opdracht terug te kunnen vinden.
@@ -122,3 +143,14 @@ We hebben hier enkel de basis commando's aangehaald met een paar van de meest ge
 19. Probeer van alle bovenstaande stappen een schets te maken om zo na te gaan of je alle commando's goed begrijpt.
 ---
 *Indien niet afgewerkt in het applicatiecollege, gelieve thuis af te werken tegen volgende les.*
+
+
+## Extra
+
+### Wildcards en commando's aaneenschakelen
+
+**Wildcards** kunnen gebruikt worden om naar meerdere files tegelijk te verwijzen. Zo kan je de wildcard '<b>*</b>' gebruiken om naar alle files die eindigen op '.txt' te verwijzen. 
+</br> Bijvoorbeeld: **`$ git add *.txt`**
+
+Je kan commando's ook **aaneenschakelen** met '<b>;</b>' zodat meerdere commando's onmiddellijk na elkaar uitgevoerd worden 
+</br> Bijvoorbeeld: **`$ git add . ; git commit -m "initial commit"`**

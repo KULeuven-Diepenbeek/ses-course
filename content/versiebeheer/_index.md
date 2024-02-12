@@ -14,7 +14,7 @@ draft: false
 
 Een versiebeheer systeem bewaart alle _wijzigingen_ aan (tekst)bestanden. Dat betekent dat eender welke wijziging, door wie dan ook, teruggedraaid kan worden. Zonder versiebeheer is het onmogelijk om code op één centrale plaats te bewaren als er met meerdere personen aan wordt gewerkt. Zelfs met maar één persoon is het toch nog steeds sterk aan te raden om te werken met versionering. Fouten worden immers snel gemaakt. Een bewaarde wijziging aan een bestand is permanent op je lokale harde schijf: de volgende dag kan je niet het origineel terug boven halen. Er wordt samen met delta's ook veel metadata bewaard (tijdstippen, commit comments, gebruikers, bestandsgroottes, ...)
 
-Zie [extra lesmateriaal en bronnen]({{< ref "extra bronnen" >}}) voor meer informatie.
+Zie [extra lesmateriaal en bronnen](/versiebeheer/extra-bronnen) voor meer informatie. 
 
 ### Waarom versioneren?
 
