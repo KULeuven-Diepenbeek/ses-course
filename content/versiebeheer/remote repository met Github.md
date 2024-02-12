@@ -70,8 +70,23 @@ Voeg files met gevoelige informatie zoals wachtwoorden onmiddellijk toe aan je *
 Door een teamgenoot als collaborator toe te voegen aan je remote repository kan hij/zij de repo lokaal clonen en ook wijzigingen kunnen `pushen` en `pullen`. Door dit te combineren met `branching` waarbij elke collaborator bijvoorbeeld een eigen branch aanmaakt, kan je zeer efficiënte online workflow creëren om remote te kunnen samen werken aan software projecten.
 </br>In principe kan iedereen een *public* remote repository clonen, maar ze gaan geen veranderingen kunnen pushen. (Hiervoor gebruik je `fork` en `pull requests`)
 
+**Collaborative workflow:** to minimize merge conflicts and other problems
+- Regularly `pull` all changes into your local directory.
+- Regularly keep your branch up-to-date by merging master branch into it.
+- (Merge the changes on your branch to the master branch when nessecary)
+- Regularly `push` to remote directory.
+
 ### Forking en pull requests
-<!-- TODO -->
+Je kan een public repository waar je geen collaborator van bent `forken` (&asymp; kopiëren) naar je eigen Github. Zo kan je toch nieuwe aanpassingen pushen naar 'jouw kopie' van de repository. Github houd echter bij vanwaar jouw fork afkomstig is. Op die manier kan je een `pull request` aanvragen aan de eigenaar van de originele repo. Die persoon kan jouw aanpassingen dan nakijken en toevoegen aan zijn/haar repo door de `pull request` te accepteren en `mergen`.
+
+Een waarheidsgetrouw voorbeeld ziet er als volgt uit:
+- Je wil een kleine software developer helpen door een bug op te lossen.
+- Je `forked` de repository van de software.
+- Je fixed de bug, commit en pushed de aanpassing naar jouw fork van de software repo.
+- Je dient een `pull request` in bij de originele repo van de software.
+- De eigenaar vindt jouw oplossing geweldig en `merged` hem met zijn eigen repo.
+
+Op deze manier kan je zeer gemakkelijk je steentje bijdragen aan de wereld van open source software en dit maakt het principe van open source ook juist mede zo aantrekkelijk.
 
 ## Oefeningen
 1. Maak in je Github een repository aan voor je Git directory uit [de vorige oefenreeks](/versiebeheer/lokaal-versiebeheer-met-git/#oefeningen).
