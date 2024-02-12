@@ -32,4 +32,6 @@ Zonder versionering stuurt iedereen e-mail attachments door naar elkaar, in de v
 
 Het wordt al snel duidelijk dat het delen van celdata beter wordt overgelaten aan Google Sheets, waar verschillende mensen tegelijkertijd gegevens in kunnen plaatsen. Hetzelfde geldt voor source code: dit wordt beter overgelaten aan een versiebeheer systeem. 
 
+> What is “version control”, and why should you care? Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later
+> <cite><a href="https://git-scm.com/book/en/v2">Pro Git</a></cite>
 

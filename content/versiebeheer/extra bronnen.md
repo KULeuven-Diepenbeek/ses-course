@@ -5,10 +5,8 @@ author: Wouter Groeneveld en Arne Duyver
 draft: false
 ---
 
-## Verplicht lesmateriaal
-- [Pro Git](https://git-scm.com/book/en/v2) handboek, hoofdstuk 1 tot en met 3.
-
 ## Extra lesmateriaal en bronnen
+- [Pro Git](https://git-scm.com/book/en/v2) handboek, vooral hoofdstuk 1 tot en met 3.
 - [git - the simple guide](http://rogerdudler.github.io/git-guide/)
 - [Code Forest: Git VS SVN](https://www.codeforest.net/git-vs-svn)
 - [the Harvard.edu guide to Git](https://cs61.seas.harvard.edu/site/ref/git/)
