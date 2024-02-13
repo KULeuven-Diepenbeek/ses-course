@@ -2,7 +2,7 @@
 title: Bijlage B - Java in een notendop
 weight: 2
 author: Koen Yskout
-draft: true
+draft: false
 toc: true
 autonumbering: true
 ---
@@ -143,7 +143,7 @@ Bijvoorbeeld:
 
 ```java
 int sum = 0;
-for (int number = 0; number < 10; number++>) {
+for (int number = 0; number < 10; number++) {
   sum += number;
 }
 ```
@@ -211,11 +211,11 @@ String result = switch (<expression>) {
 
 Een klasse heeft
 
-- een of meerdere constructoren, die opgeroepen worden wanneer een object aangemaakt wordt. Indien je geen constructor schrijft, wordt een default constructor voorzien (zonder argumenten).
+- een of meerdere constructoren, die opgeroepen worden wanneer een object aangemaakt wordt. Indien je geen constructor schrijft, wordt een default constructor voorzien (zonder parameters).
 - velden/attributen: de eigenschappen van een object, telkens met een type
 - methodes: de acties die uitgevoerd kunnen worden door een object. Elke methode heeft
-  - precies 1 terugkeertype, of `void` indien de methode geen resultaat teruggeeft
-  - 0 of meer argumenten
+  - precies 1 terugkeertype, of `void` indien de methode geen resultaat teruggeeft. Je geeft een waarde terug via een `return`-statement.
+  - 0 of meer parameters
 
 Een voorbeeld:
 
@@ -395,7 +395,7 @@ Over het algemeen is het gebruik van `instanceof` een 'code smell', en kijk je b
 
 ### Polymorfisme en dynamic dispatch
 
-In Java kan je methodes overloaden (zelfde naam maar verschillende argument-types binnen eenzelfde klasse) en overriden (zelfde naam en parameters in super- en subklasse). Bij het overriden van een methode kan voor een object dezelfde methode dus bestaan in de klasse en in een of meerdere van de superklassen.
+In Java kan je methodes overloaden (zelfde naam maar verschillende parameter-types binnen eenzelfde klasse) en overriden (zelfde naam en parameters in super- en subklasse). Bij het overriden van een methode kan voor een object dezelfde methode dus bestaan in de klasse en in een of meerdere van de superklassen.
 Daarom is er een mechanisme nodig om te bepalen welke methode uiteindelijk uitgevoerd zal worden. Dat wordt in Java bepaald door
 
 - het gedeclareerde (statisch) type van de argumenten (at compile time)
@@ -463,3 +463,26 @@ try {
 
 Er wordt eerst gekeken naar een try-catch blok in de methode die de methode opgeroepen heeft waarin een uitzondering gegooid werd. Is daar geen try-catch block aanwezig, wordt gekeken in de methode die die methode opgeroepen heeft, etc, tot in de `main`-methode.
 Als er geen enkele try-catch block gevonden wordt die de uitzondering kan afhandelen, stopt het programma.
+
+Hierboven gebruikten we **unchecked exceptions**; alle unchecked exceptions erven over van de klasse `RuntimeException`. Java heeft ook **checked exceptions**; deze erven over van de klasse `Exception`. Checked exceptions moeten vermeld worden in de methode-hoofding, en code die de methode oproept moet ze opvangen of ze opnieuw vermelden in de methode-hoofding.
+
+```java
+class NoemerIsNul extends Exception {}
+
+class Breuk {
+  private final int teller, noemer;
+  public Breuk(int teller, int noemer) throws NoemerIsNul { // <- exception moet vermeld worden in hoofding
+    if (noemer == 0) throw new NoemerIsNul();
+    this.teller = teller;
+    this.noemer = noemer;
+  }
+}
+
+try {
+  Breuk breuk = new Breuk(3, 0); // compiler geeft een fout als NoemerIsNul niet opgevangen wordt
+} catch (NoemerIsNul e) {
+  System.out.println("Oeps");
+}
+```
+
+Checked exceptions maken het vaak lastig om iets te programmeren, en de voorkeur wordt tegenwoordig vaak gegeven aan unchecked exceptions.
