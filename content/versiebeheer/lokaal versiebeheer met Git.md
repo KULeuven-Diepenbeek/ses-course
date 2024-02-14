@@ -124,8 +124,8 @@ Soms wil je dat een file niet wordt bijghouden door git. Hier komen we in het ge
 Om bepaalde belangrijke commits snel terug te vinden, kan je gebruik maken van tags.
 
 - Je kan de bestaande tags oplijsten met: **`$ git tag`**
-- Je kan de huidige commit taggen met: **`$ git tag -a vX.X`**
-- Je kan een specifieke commit taggen met: **`$ git tag -a vX.X <hashcode commit>`**
+- Je kan de huidige commit taggen met: **`$ git tag vX.X`**
+- Je kan een specifieke commit taggen met: **`$ git tag vX.X <hashcode commit>`**
 - Je kan tags deleten met: **`$ git tag -d vX.X`**
 
 {{% notice warning %}}
