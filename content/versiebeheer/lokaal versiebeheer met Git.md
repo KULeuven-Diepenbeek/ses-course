@@ -83,7 +83,7 @@ Het commando **`$ git log`** wordt gebruikt om een lijst te zien van all je comm
 Er bestaan commando's die we kunnen gebruiken om naar een vroegere commit terug te keren. Ze werken echter op een verschillende manier en het is belangrijk dat je deze verschillen goed kent. 
 - **`$ git reset <hash van de commit>`**: hiermee ga je terug naar een vorige commit en worden alle commits die erna gebeurden verwijderd.
 - **`$ git checkout <hash van de commit>`**: hiermee kan je tijdelijk terugkeren naar een vorige commit. Je zit hier dan in een soort viruele omgeving waar je ook commits kan aanbrengen. Om dan terug te keren naar de HEAD van de versiegeschiedenis gebruik je:
-  - **`$ git switch <branchname>`** : om je nieuwe virtuele commits op te slaan in een echte nieuwe branch.
+  - **`$ git switch -c <branchname>`** : om je nieuwe virtuele commits op te slaan in een echte nieuwe branch.
   - **`$ git switch -`** : om terug te keren zonder je nieuwe virtuele commits bij te houden.
 
 ### Branching
