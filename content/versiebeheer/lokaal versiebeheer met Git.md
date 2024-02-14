@@ -26,7 +26,7 @@ We gaan in de volgende les een account aanmaken op een cloudplatform waarmee we 
 
 Soms ga een texteditor moeten gebruiken om bijvoorbeeld een boodschap mee te geven bij elke nieuwe 'versie' die we gaan opslaan. Standaard wordt hier Vim voor gebruikt. Dat is een CLI-texteditor, maar aangezien dit niet zo beginnersvriendelijk is, verandere we de default liever naar iets anders zoals Notepad. Dit doe je via het volgende commando:
 ```bash
-$ git config --global core.edito notepad
+$ git config --global core.editor notepad
 ```
 
 ### Een directory intialiseren als een Git directory
@@ -82,7 +82,9 @@ Het commando **`$ git log`** wordt gebruikt om een lijst te zien van all je comm
 
 Er bestaan commando's die we kunnen gebruiken om naar een vroegere commit terug te keren. Ze werken echter op een verschillende manier en het is belangrijk dat je deze verschillen goed kent. 
 - **`$ git reset <hash van de commit>`**: hiermee ga je terug naar een vorige commit en worden alle commits die erna gebeurden verwijderd.
-- **`$ git revert <hash van de commit>`**: hiermee verwijder je specifieke commits.
+- **`$ git checkout <hash van de commit>`**: hiermee kan je tijdelijk terugkeren naar een vorige commit. Je zit hier dan in een soort viruele omgeving waar je ook commits kan aanbrengen. Om dan terug te keren naar de HEAD van de versiegeschiedenis gebruik je:
+  - **`$ git switch <branchname>`** : om je nieuwe virtuele commits op te slaan in een echte nieuwe branch.
+  - **`$ git switch -`** : om terug te keren zonder je nieuwe virtuele commits bij te houden.
 
 ### Branching
 
