@@ -1,5 +1,8 @@
 ---
-title: '2.1 Cmdline Java Compiling'
+title: 'Cmdline Java Compiling'
+weight: 1
+draft: false
+author: Wouter Groeneveld
 ---
 
 Dit is in principe iets wat je in het INF1 vak onbewust reeds uitvoerde door op de groene "Compile" knop te drukken van je NetBeans/IntelliJ IDE. Het is belangrijk om te weten welke principes hier achter zitten. Hieronder volgt ter herhaling een kort overzicht over het compileren van Java programma's _zonder_ een buildtool. Voor Kotlin gelden dezelfde regels: vervang dan `javac` door `kotlinc`.

@@ -2,6 +2,7 @@
 title: '2. Dependency Management'
 weight: 2
 draft: true
+author: Wouter Groeneveld
 ---
 
 Lees ook: [Meer uitleg over de Gradle build tool](/dependency-management/gradle/).
@@ -22,13 +23,6 @@ Het vertrouwen op zo'n library houdt in dat een extern bestand, zoals een `.jar`
 Serialisatie met behulp van Gson kan op deze manier:
 
 <div class="devselect">
-
-```kt
-fun main(args: Array<String>) {
-    val gson = Gson()
-    println(gson.toJson(1))
-}
-```
 
 ```java
 public class Main {

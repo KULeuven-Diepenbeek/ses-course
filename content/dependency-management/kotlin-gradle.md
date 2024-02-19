@@ -1,5 +1,8 @@
 ---
 title: '2.3 Kotlin Gradle projecten'
+draft: true
+weight: 3
+author: Wouter Groeneveld
 ---
 
 De `build.gradle` bestanden die tot nu toe in de cursus zijn beschreven (zie [2.1 Java Gradle Projecten](/dependency-management/gradle)), werden geschreven in de [Groovy programmeertaal](http://www.groovy-lang.org/), een multi-purpose dynamische taal voor het Java platform. Aangezien we voor Kotlin projecten geen Groovy, noch Java, maar Kotlin schrijven, zou het fijn zijn om de syntax van de Gradle configuratie óók te kunnen wijzigen naar Kotlin. 

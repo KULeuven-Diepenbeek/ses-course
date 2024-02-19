@@ -1,5 +1,8 @@
 ---
-title: '2.2 Java Gradle projecten'
+title: 'Java Gradle projecten'
+weight: 2
+draft: false
+author: Wouter Groeneveld
 ---
 
 
