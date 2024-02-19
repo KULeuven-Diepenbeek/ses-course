@@ -1,7 +1,7 @@
 ---
 title: 'Java Gradle projecten'
 weight: 2
-draft: false
+draft: true
 author: Wouter Groeneveld
 ---
 
