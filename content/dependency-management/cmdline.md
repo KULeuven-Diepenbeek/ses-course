@@ -5,7 +5,7 @@ draft: false
 author: Wouter Groeneveld
 ---
 
-Dit is in principe iets wat je in het INF1 vak onbewust reeds uitvoerde door op de groene "Compile" knop te drukken van je NetBeans/IntelliJ IDE. Het is belangrijk om te weten welke principes hier achter zitten. Hieronder volgt ter herhaling een kort overzicht over het compileren van Java programma's _zonder_ een buildtool. Voor Kotlin gelden dezelfde regels: vervang dan `javac` door `kotlinc`.
+Dit is in principe iets wat je in het INF1 vak onbewust reeds uitvoerde door op de groene "Compile" knop te drukken van je NetBeans/IntelliJ IDE. Het is belangrijk om te weten welke principes hier achter zitten. Hieronder volgt ter herhaling een kort overzicht over het compileren van Java programma's _zonder_ een buildtool.
 
 ## Een minimaal programma compileren
 
@@ -85,7 +85,7 @@ Alle files apart compileren levert `.class` files op in diezelfde folders. `java
 Gelukkig kan je met de juiste argumenten alle `.class` files in één keer genereren en die in een aparte folder---meestal genaamd `build`---plaatsen:
 
 ```
-$ javac -d ./build **/*.java
+$ javac -d ./build *.java
 $ cd build
 $ ls
 Main.class student
@@ -113,12 +113,16 @@ Main.class    programma.jar student
 Nu kunnen we `programma.jar` makkelijk delen. De vraag is echter: hoe voeren we dit uit, ook met `java`? Ja, maar met de juiste parameters, want deze moet nu _IN_ het bestand gaan zoeken naar de juiste `.class` files om die bytecode uit te kunnen voeren:
 
 ```
-$ java -cp programma.jar:. Main
+$ java -cp "programma.jar;." Main
 Heykes Jos
 ```
 
+{{% notice warning %}}
+Java classpath separators zijn [OS-specifiek](https://howtodoinjava.com/java/basics/java-classpath/)! Unix: `:` in plaats van Windows: `;`.
+{{% /notice %}}
+
 {{% notice note %}}
-Die `:.` is nodig om aan te geven dat `java` binnenin de `.jar` file moet zoeken. Dit is enkel nodig als je Main klasse **niet** in een package zit (we hebben geen `package main` in onze `Main.java` file). Anders is de [fully qualified classname](https://docs.oracle.com/javase/specs/jls/se11/html/jls-6.html#jls-6.7) nodig als argument. <br/>Voor meer informatie over de `-cp` (classpath) parameter, zie de note in sectie [Dependency Management](/dependency-management). 
+Die `;.` is nodig om aan te geven dat `java` binnenin de `.jar` file moet zoeken. Dit is enkel nodig als je Main klasse **niet** in een package zit (we hebben geen `package main` in onze `Main.java` file). Anders is de [fully qualified classname](https://docs.oracle.com/javase/specs/jls/se11/html/jls-6.html#jls-6.7) nodig als argument. <br/>Voor meer informatie over de `-cp` (classpath) parameter, zie de note in sectie [Dependency Management](/dependency-management). 
 {{% /notice %}}
 
 Vanaf nu kan je `programma.jar` ook uploaden naar een Maven repository of gebruiken als dependency in een ander project. Merk opnieuw op dat dit handmatig aanroepen van `javac` in de praktijk wordt overgelaten aan de gebruikte build tool---in ons geval, Gradle.
