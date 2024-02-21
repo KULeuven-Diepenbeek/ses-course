@@ -61,9 +61,9 @@ Vergeet je **tags** ook niet te pushen naar je remote repository op Github.
 *@param height - Specifies the height of the grid (extra for checking if 1D grid is complete given the specified width) 
 *@param indexToCheck - Specifies the index of the element which neighbours that need to be checked 
 */ 
-Public static Iterable<Int> getSameNeighboursIds(Iterable<Int> grid,int width, int height, int indexToCheck){ 
-//write you code below 
-Return result; 
+public static Iterable<int> getSameNeighboursIds(Iterable<int> grid,int width, int height, int indexToCheck){ 
+  //write you code below 
+  return result; 
 } 
 ``` 
 
