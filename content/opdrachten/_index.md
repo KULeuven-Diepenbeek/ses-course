@@ -45,9 +45,37 @@ Er is 1 deadline voor alle opdrachten van het eerste deel van SES: vrijdag 15/03
 Vergeet je **tags** ook niet te pushen naar je remote repository op Github.
 {{% /notice %}}
 
-<!-- TOOD: add and uncomment
-
 ### Dependency management
-#### Opdracht 1: 
+#### Opdracht 5:
+- Voeg in je directory een java-project met gradle toe. (gebruik hiervoor IntelliJ) 
+- Kopiëer de .ignore file die gradle aangemaakt heeft naar de root folder van je git directory (overschrijf je eigen .gitignore)
 
--->
+- Maak een java klasse "CheckNeighboursInGrid" aan in je Gradle project. Maak in de klasse minstens 1 public static method: 
+
+```java
+/** 
+* This method takes a 1D Iterable and an element in the array and gives back an iterable containing the indexes of all neighbours with the same value as the specified element 
+*@return - Returns a 1D Iterable of ints, the Integers represent the indexes of all neighbours with the same value as the specified element on index 'indexToCheck'. 
+*@param grid - This is a 1D Iterable containing all elements of the grid. The elements are integers. 
+*@param width - Specifies the width of the grid. 
+*@param height - Specifies the height of the grid (extra for checking if 1D grid is complete given the specified width) 
+*@param indexToCheck - Specifies the index of the element which neighbours that need to be checked 
+*/ 
+Public static Iterable<Int> getSameNeighboursIds(Iterable<Int> grid,int width, int height, int indexToCheck){ 
+//write you code below 
+Return result; 
+} 
+``` 
+
+Voorbeeld: voor het volgende grid: 
+
+[ 0, 0, 1, 0, <br>
+  1, 1, 0, 2, <br>
+  2, 0, 1, 3, <br>
+  0, 1, 1, 1 ] 
+
+-> getSameNeighboursIds(grid, 4, 4, 5) returns [2,4,10] 
+
+Genereer een .jar file van deze Javaklasse in de libs directory van je gradle project. Kopiëer de jar-file naar de root folder van je git repository. 
+
+Commit nu de veranderingen in je directory en tag als `v5.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github 
