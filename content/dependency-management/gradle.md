@@ -1,7 +1,7 @@
 ---
 title: 'Java Gradle projecten'
 weight: 2
-draft: true
+draft: false
 author: Wouter Groeneveld
 ---
 
@@ -23,7 +23,8 @@ Naast het beheren van compilaties, verzorgt Gradle ook libraries. Het is dus ook
 
 #### Ontleding van een Gradle config file
 
-De meest eenvoudige buildfile is terug te vinden in de [singleton oefening](https://github.com/KULeuven-Diepenbeek/ses-patterns-singleton-template/blob/master/build.gradle):
+Een voorbeeld van een eenvoudige buildfile is hieronder terug te vinden:
+<!-- De meest eenvoudige buildfile is terug te vinden in de [singleton oefening](https://github.com/KULeuven-Diepenbeek/ses-patterns-singleton-template/blob/master/build.gradle): -->
 
 <pre>
 plugins {
@@ -66,16 +67,16 @@ Dependencies vallen (meestal) in twee categorieën:
 
 Merk op dat een typisch gradle project **geen jars** mee zipt, zoals de oefeningen. Die worden dus automatisch door deze tool gedownload, en in de juiste map geplaatst. 
 
-Voor het [SESsy Library](/extra/sessy) project wordt ook Gradle gebruikt, en is de config file iets ingewikkelder, door de inclusie van eigen "tasks". (te raadplegen op <i class='fab fa-github'></i> [Github](https://github.com/KULeuven-Diepenbeek/sessylibrary/blob/master/build.gradle))
+<!-- Voor het [SESsy Library](/extra/sessy) project wordt ook Gradle gebruikt, en is de config file iets ingewikkelder, door de inclusie van eigen "tasks". (te raadplegen op <i class='fab fa-github'></i> [Github](https://github.com/KULeuven-Diepenbeek/sessylibrary/blob/master/build.gradle)) -->
 
 {{% notice note %}}
-Merk op dat bij Gradle 6.x, t.o.v. de vorige versies, de de runtime dependencies nu `implementation` in plaats van `compile` heten, en de test dependencies `testImplementation` en `testRuntimeOnly` in plaats van `testCompile`. Zie ook: [Declaring dependencies](https://docs.gradle.org/current/userguide/declaring_dependencies.html) in de Gradle docs. 
+Merk op dat bij Gradle 6.x, t.o.v. de vorige versies, de runtime dependencies nu `implementation` in plaats van `compile` heten, en de test dependencies `testImplementation` en `testRuntimeOnly` in plaats van `testCompile`. Zie ook: [Declaring dependencies](https://docs.gradle.org/current/userguide/declaring_dependencies.html) in de Gradle docs. 
 {{% /notice %}}
 
 
 #### Ontleding van een Gradle project mappenstructuur
 
-Als we kijken naar de bestanden- en mappenstructuur van [singleton oefening](https://github.com/KULeuven-Diepenbeek/ses-patterns-singleton-template/blob/master/), vinden we dit terug:
+Als we kijken naar de bestanden- en mappenstructuur van een voorbeeld Gradle project, vinden we dit terug:
 
 <pre>
 build/
@@ -85,13 +86,11 @@ src/
             be/
                 package1/
                     ClassMain
-                    ClassZ
     test/
         java/
             be/
                 package1/
                     ClassMainTest
-                    ClassZTest
 resources/
     css/
     js/
@@ -155,7 +154,7 @@ Het is bijvoorbeeld bij de oefeningen eenvoudig om een test library als `junit` 
 
 Dit kan op twee manieren:
 
-1. Via IntelliJ: File -> New Project, kies voor "Java" of "Kotlin", en kies als build tool "Gradle". Je kan dan nog kiezen tussen Groovy of Kotlin build files. Dit maakt automatisch de juiste bestanden aan (`src/main/java`, `build.gradle(.kts)`, `gradle` wrapper files)
+1. Via IntelliJ: File -> New Project, kies voor "Java", en kies als build tool "Gradle". Je moet dan nog kiezen voor de Groovy build files. Dit maakt automatisch de juiste bestanden aan (`src/main/java`, `build.gradle(.kts)`, `gradle` wrapper files)
 2. Via commandline. 
 
 De tweede manier vereist de installatie van een lokale Gradle tool: zie [Gradle Docs: installing manually](https://gradle.org/install/#manually) (package managers zoals `brew` en `apt` voorzien meestal een `gradle` entry). Zorg er net zoals bij De Java installatie ervoor dat de bin folder in je `$PATH` is toegevoegd (zie documentatie). 
@@ -194,7 +193,7 @@ publishing {
     }
     repositories {
         maven {
-            url = "/Users/wgroeneveld/development/java/maven-repo"
+            url = "C:\\Users\\u0158802\\development\\java\\maven-repo"
         }
     }
 }
@@ -206,7 +205,7 @@ Deze uitbreiding voegt de target `publish` toe aan Gradle. Dus: `./gradlew publi
 repositories {
     mavenCentral()
     maven {
-        url = "/Users/wgroeneveld/development/java/maven-repo"
+        url = "C:\\Users\\u0158802\\development\\java\\maven-repo"
     }
 }
 </pre>
@@ -218,7 +217,7 @@ JUnit 5 splitst de test library op in een aantal submodules, waarvan er twee bel
 1. `junit-jupiter-api` - nodig om testen te SCHRIJVEN (de API waar `@BeforeEach` e.a. in zitten)
 2. `junit-jupiter-engine` - nodig om testen UIT TE VOEREN (cmdline interface)
 
-Aangezien Gradle verschillende test bibliotheken ondersteund, zoals ook TestNG, dient men in de Gradle build file ondersteuning voor elk framework te activeren. Dit is _enkel nodig bij cmdline uitvoeren van de testen_. Als je beslist om enkel binnen IntelliJ testen uit te voeren, verzorgt IntelliJ zelf dit, en is de jupiter-engine ook niet nodig. 
+Aangezien Gradle verschillende test bibliotheken ondersteund, zoals ook TestNG, dient men in de Gradle build file ondersteuning voor elk framework te activeren. Dit is _enkel nodig bij cmdline uitvoeren van de testen_. Als je beslist om enkel binnen IntelliJ testen uit te voeren, verzorgt IntelliJ dit zelf, en is de jupiter-engine ook niet nodig. 
 
 <pre>
 test {
@@ -263,13 +262,6 @@ Onderstaande screenshot is een voorbeeld van een Unit Test HTML rapport voor de 
 
 De standaard output geeft enkel weer of er iets gelukt is of niet:
 
-<pre>
-Wouters-Air:sessylibrary wgroeneveld$ ./gradlew shadowjar
-
-BUILD SUCCESSFUL in 9s
-3 actionable tasks: 1 executed, 2 up-to-date
-</pre>
-
 Meer informatie kan met de volgende parameters:
 
 - `--info`, output LogLevel `INFO`. Veel irrelevante info wordt ook getoond.
@@ -282,10 +274,7 @@ Indien de Gralde wrapper een oudere versie aanmaakt (< v6), update met `gradle w
 
 [Gradle/Java compatibiliteitsmatrix](https://docs.gradle.org/current/userguide/compatibility.html#java): 
 
-- JDK `12` of ouder: Gradle `5.x`
-- JDK `13`: Gradle `6.x` of nieuwer
-- JDK `14`: Gradle `6.3` of nieuwer
-- JDK `15`: Gradle `6.7` of nieuwer
+- JDK `21`: Gradle `8.5` of nieuwer
 
 Indien je de fout "Could not initialize class `org.codehaus.groovy.reflection.ReflectionCache`" krijgt, betekent dit dat je JDK te nieuw is voor de gradle versie (bijvoorbeeld JDK `17` met Gradle `6.7` in plaats van `7.0` of nieuwer). Controleer de huidige gralde versie met `gradle --info` of kijk in `gradle/wrapper/gradle-wrapper.properties`. 
 
@@ -295,3 +284,7 @@ Indien je de fout "Could not initialize class `org.codehaus.groovy.reflection.Re
 - Officiële Gradle [guides: creating a new build](https://guides.gradle.org/creating-new-gradle-builds/)
 - [Gradle cheatsheet voorbeeld config file](https://gist.github.com/jahe/59557d507f43574b0d96)
 - [Gradle common commands](https://www.polyglotdeveloper.com/cheatsheet/2015-01-08-Gradle-cheatsheet/)
+
+### Opgave
+
+Maak een nieuw JavaFX (gradle) project aan. Maak een kleine darts-applicatie die gebruik maakt van de scorebord-library die je in het vorige deel hebt aangemaakt. De JavaFX applicatie bestaat uit een dartsbord met 3 concentrische cirkels. Je kan je naam ingeven in een tekstveld. Je kan op de cirkels klikken om een score te krijgen. Binnenste cirkel is 3 punten, middenste cirkel is 2 punten, buitenste cirkel is 1 punt. Dit punt wordt direct toegevoegd aan je scorebord. Met een load-knop moet een vorig scorebord ingeladen worden, met een save-knop moet je het huidige scorebord kunnen opslaan. De huidige winnaar moet ook steeds getoond worden in een label.
