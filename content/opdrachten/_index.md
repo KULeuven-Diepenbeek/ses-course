@@ -78,4 +78,26 @@ Voorbeeld: voor het volgende grid:
 
 Genereer een .jar file van deze Javaklasse in de libs directory van je gradle project. Kopiëer de jar-file naar de root folder van je git repository. 
 
+Je gitrepo heeft nu dus volgende structuur:
+```
+/mijnGitDirectory
+|
++--- .git/
+|
++--- .gitignore
+|
++--- ...
+|
++--- mijnJarFile.jar
+|
++--- mijnIntelliJProject/
+     |
+     +--- gradle/
+     |
+     +--- src/
+     |
+     + ...
+
+```
+
 Commit nu de veranderingen in je directory en tag als `v5.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github 
