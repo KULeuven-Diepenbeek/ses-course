@@ -1,5 +1,6 @@
 ---
 title: '3.2 TDD Capita Selecta: Algoritmes'
+draft: true
 ---
 
 ## Test-First Een algoritme ontwerpen

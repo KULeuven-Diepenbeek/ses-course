@@ -1,7 +1,8 @@
 ---
 title: '3. Test Driven Development'
 weight: 3
-draft: true
+author: Wouter Groeneveld
+draft: false
 ---
 
 > <i class="fa fa-question-circle" aria-hidden="true"></i>
@@ -23,21 +24,13 @@ graph LR;
     C --> T
 {{< /mermaid >}}
 
-Testen worden in opgenomen in een build omgeving, waardoor alle testen automatisch worden gecontroleerd bij bijvoorbeeld het compileren, starten, of packagen van de applicatie. Op deze manier krijgt men **onmiddellijk feedback** van modules die door bepaalde wijzigingen niet meer werken zoals beschreven in de test. 
+Testen worden opgenomen in een build omgeving, waardoor alle testen automatisch worden gecontroleerd bij bijvoorbeeld het compileren, starten, of packagen van de applicatie. Op deze manier krijgt men **onmiddellijk feedback** van modules die door bepaalde wijzigingen niet meer werken zoals beschreven in de test. 
 
 ### Een TDD Scenario
 
 Stel dat een programma een notie van periodes nodig heeft, waarvan elke periode een start- en einddatum heeft, die al dan niet ingevuld kunnen zijn. Een contract bijvoorbeeld geldt voor een periode van _bepaalde duur_, waarvan beide data ingevuld zijn, of voor gelukkige werknemers voor een periode van _onbepaalde duur_, waarvan de einddatum ontbreekt:
 
 <div class="devselect">
-
-```kt
-class Contract() {
-    private lateinit periode: Periode
-}
-
-data class Periode(val startDatum: LocalDate, val eindDatum: LocalDate)
-```
 
 ```java
 public class Contract {
@@ -54,25 +47,21 @@ public class Periode {
 
 We wensen aan de `Periode` klasse een methode toe te voegen om te controleren of periodes overlappen, zodat de volgende statement mogelijk is: `periode1.overlaptMet(periode2)`.
 
+{{% notice note %}}
+Als je meer info wil hebben over de werking van het Date object, dan kan je met `ctrl + q` de javadoc laten weergeven.
+{{% /notice %}}
+
 #### 1. Schrijf Falende Testen
 
-Voordat de methode wordt opgevuld met een implementatie dienen we na te denken over de mogelijke gevallen van een periode. Wat kan overlappen met wat? Wanneer geeft de methode `true` terug, en wanneer `false`? Wat met lege waardes? 
+Bij het aanmaken van het project in IntelliJ, heeft de IDE je al een heel stuk geholpen om het testraamwerk op te stellen. Testen over een bepaalde klasse bundel je namelijk in een file onder de `test`-directory. Zorg er ook voor dat de testfile zich in dezelfde package onder de testdiretory bevindt. De conventie is dat we de testfile dezelfde naam geven als de klasse die we willen testen met `Test` achter. In principe is dit ook gewoon een javaklasse die we op een speciale manier gaan gebruiken.
+
+<img src="/img/tdd/test_file_structuur.png" alt="test file structuur" style="max-height: 23em;"/>
+
+Voordat de methode wordt opgevuld met een implementatie dienen we na te denken over de mogelijke gevallen van een periode. Wat kan overlappen met wat? Wanneer geeft de methode `true` terug, en wanneer `false`? Wat met lege waardes?
 
 - Het standaard geval: beide periodes hebben start- en einddatum ingevuld, en de periodes overlappen. 
 
 <div class="devselect">
-
-```kt
-@Test
-fun `Gegeven biede periodes met datum ingevuld Wanneer overlaptMet Dan is true`() {
-    val jandec19 = Periode(LocalDate.of(2019, 1, 1),
-        LocalDate.of(2019, 12, 31))
-    val maartnov19 = Periode(LocalDate.of(2019, 3, 1),
-        LocalDate.of(2019, 11, 31))
-
-    assertTrue { jandec19.overlaptMet(maartnov19) }
-}
-```
 
 ```java
 @Test
@@ -82,7 +71,7 @@ public void GegevenBeidePeriodesDatumIngevuld_Wanneeroverlapt_DanIsTrue() {
     var maartnov19 = new Periode(new Date(2019, 03, 01),
             new Date(2019, 11, 31));
 
-    assertThat(jandec19.overlaptMet(maartnov19), is(true));
+    assert(jandec19.overlaptMet(maartnov19) == true);
 }
 ```
 
@@ -92,18 +81,6 @@ public void GegevenBeidePeriodesDatumIngevuld_Wanneeroverlapt_DanIsTrue() {
 
 <div class="devselect">
 
-```kt
-@Test
-fun `Gegeven niet overlappende periodes Wanneer overlaptMet Dan is false`() {
-    val jandec19 = Periode(LocalDate.of(2019, 1, 1), 
-        LocalDate.of(2019, 12, 31))
-    val maartnov20 = Periode(LocalDate.of(2020, 3, 1), 
-        LocalDate.of(2020, 11, 31))
-
-    assertFalse { jandec19.overlaptMet(maartnov20) }
-}
-```
-
 ```java
 @Test
 public void gegevenNietOverlappendePeriodes_WanneerOverlaptMet_DanIsFalse() {
@@ -112,29 +89,22 @@ public void gegevenNietOverlappendePeriodes_WanneerOverlaptMet_DanIsFalse() {
     var maartnov20 = new Periode(new Date(2020, 03, 01),
             new Date(2020, 11, 31));
 
-    assertThat(jandec19.overlaptMet(maartnov20), is(false));
+    assert(jandec19.overlaptMet(maartnov20) == false);
 }
 ```
-
 </div>
+
+Merk op dat de namen van de testen zeer descriptief zijn. Op die manier wordt in één opslag duidelijk waar er problemen opduiken in je code.
 
 - ... Er zijn nog tal van mogelijkheden, waarvan voornamelijk de extreme gevallen belangrijk zijn om **de kans op bugs te minimaliseren**. Immers, gebruikers van onze `Periode` klasse kunnen onbewust `null` mee doorgeven, waardoor de methode onverwachte waardes teruggeeft. 
 
 {{% notice note %}}
-In Kotlin is het mogelijk om een volle zin te gebruiken als functienaam met behulp van backtics. Dit wordt in de praktijk vaak gebruik in testen op voorwaarde dat je je strict houdt aan een conventie voor de naamgeving. Zoals hierboven alle testen in de vorm van **Gegeven... Wanneer... Dan...** geschreven zijn. Zulke testen zijn niet alleen in code makkelijker te lezen en begrijpen, maar ook in het JUnit output window. Java enthousiastelingen zullen zich moeten beperken tot camelCase of snake_case.
+We maken gebruik van CamelCase and snake_case om alle testen de vorm te geven van **gegevenDit_wanneerDezeMethodeEropToegepastWordt_danMoetDitDeUitkomstZijn**. 
 {{% /notice %}}
 
 De testen compileren niet, omdat de methode `overlaptMet()` nog niet bestaat. Voordat we overschakelen naar het schrijven van de implementatie willen we eerst de testen zien ROOD kleuren, waarbij wel de bestaande code nog compileert:
 
 <div class="devselect">
-
-```kt
-data class Periode(val startDatum: LocalDate, val eindDatum: LocalDate) {
-    fun overlaptMet(anderePeriode: Periode): Boolean {
-        throw UnsupportedOperationException()
-    }
-}
-```
 
 ```java
 public class Periode {
@@ -152,16 +122,9 @@ De aanwezigheid van het skelet van de methode zorgt er voor dat de testen compil
 
 #### 2. Schrijf Implementatie
 
-Pas nadat er minstens 4 verschillende testen werden voorzien (standaard gevallen, edge cases, null cases, ...), kan aan met een gerust hart aan de implementatie worden gewerkt:
+Pas nadat er minstens 4 verschillende testen werden voorzien (standaard gevallen, edge cases, null cases, ...), kan met een gerust hart aan de implementatie worden gewerkt:
 
 <div class="devselect">
-
-```kt
-fun overlaptMet(ander: Periode): Boolean =
-    startDatum.isAfter(ander.startDatum) &&
-        eindDatum.isBefore(ander.eindDatum)
-}
-```
 
 ```java
 public boolean overlaptMet(Periode anderePeriode) {
@@ -224,23 +187,9 @@ Gradle en het JUnit harnas verzamelen data van testen in de vorm van HTML rappor
 
 Naast het harnas, die zorgt voor het uitvoeren van testen, hebben we ook een _verificatie framework_ nodig, dat fouten genereert wanneer nodig, om te bepalen of een test al dan niet geslaagd is. Dit gebeurt typisch met **assertions**, die vereisten dat een argument een bepaalde waarde heeft. Is dit niet het geval, wordt er een `AssertionError` exception gegooid, die door het harnas herkent wordt, met als resultaat een falende test. 
 
-Assertions zijn er in alle kleuren en gewichten, waarbij in de oefeningen de statische methode `assertThat()` wordt gebruikt, die leeft in ` org.hamcrest.MatcherAssert`. Hamcrest is een plugin library die ons in staat stelt om een _fluent API_ te gebruiken in plaats van moeilijk leesbare assertions:
+Assertions zijn er in alle kleuren en gewichten, waarbij in de oefeningen de statische methode `assertThat()` wordt gebruikt, die leeft in `org.assertj.core.api.Assertions`. AssertJ is een plugin library die ons in staat stelt om een _fluent API_ te gebruiken in plaats van moeilijk leesbare assertions:
 
 <div class="devselect">
-
-```kt
-import org.hamcrest.CoreMatchers.`is` as Is
-@Test
-fun `test with default assertions`() {
-    val result = doStuff()
-    AssertEquals(result, 3)    // arg1: expected, arg2: actual
-}
-@Test
-fun `test with hamcrest matchers`() {
-    val result = doStuff()
-    assertThat(result, Is(3))
-}
-```
 
 ```java
 @Test
@@ -249,43 +198,53 @@ public void testWithDefaultAssertions() {
     AssertEquals(result, 3);    // arg1: expected, arg2: actual
 }
 @Test
-public void testWithHamcrestMatchers() {
+public void testWithAssertJMatchers() {
     var result = doStuff();
-    assertThat(result, is(3));
+    assertThat(result).isEqualTo(3);
 }
 ```
 
 </div>
 
+
 Het tweede voorbeeld leest als een vloeiende zin, terwijl de eerste `AssertEquals()` vereist dat als eerste argument de expected value wordt meegegeven - dit is vaak het omgekeerde van wat wij verwachten! 
 
-[HamCrest Matchers API Documentation](http://hamcrest.org/JavaHamcrest/javadoc/)
+[AssertJ core API Documentation](https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html)
 
-Een populair alternatief voor HamCrest is bijvoorbeeld [AssertJ](https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html)---en voor Kotlin-only code is [MockK](https://mockk.io/) de betere keuze. De keuze is aan jou: alle frameworks bieden ongeveer dezelfde fluent API aan met ongeveer dezelfde features. 
+Een populair alternatief voor AssertJ is bijvoorbeeld [Hamcrest](http://hamcrest.org/JavaHamcrest/javadoc/). De keuze is aan jou: alle frameworks bieden ongeveer dezelfde fluent API aan met ongeveer dezelfde features. 
 
-{{% notice note %}}
-Merk op dat in Kotlin `is` een reserved keyword is. Oplossing 1: gebruik backticks. Oplossing 2: import als uppercase `Is` met behulp van ` import org.hamcrest.CoreMatchers.`\`is\`` as Is` (enkele backtick). Opossing 3: Gebruik een Kotlin-idiomatic assertion framework zoals [MockK](https://mockk.io/). Zie [TDD in de praktijk](/tdd/in-de-praktijk) voor meer informatie.
+{{% notice info %}}
+Je kan testen met AssertJ op exceptions op de volgende manier:
 {{% /notice %}}
+```java
+@Test
+public void myTest(){
+    // when
+    Throwable thrown = catchThrowable(() -> {
+        // ...
+    });
+
+    // then
+    assertThat(thrown)
+    .isInstanceOf(Exception.class)
+    .hasMessageContaining("/ by zero");
+}
+
+@Test
+public void myTest(){
+    assertThatExceptionOfType(Exception.class)
+        .isThrownBy(() -> {
+            // ...
+        }).withMessageContaining("Substring in message");
+}
+
+```
 
 #### Arrange, Act, Assert
 
 De body van een test bestaat typisch uit drie delen:
 
 <div class="devselect">
-
-```kt
-@Test
-fun `Given arranged When acting Then some expected result`() {
-    // 1. Arrange 
-    val instance = ClassToTest(arg1, arg2)
-
-    // 2. Act
-    val result = instance.callStuff()
-
-    // 3. Assert
-    assertThat(result, Is(true))
-}
-```
 
 ```java
 @Test
@@ -297,7 +256,7 @@ public void givenArranged_whenActing_thenSomeExpectedResult() {
     var result = instance.callStuff();
 
     // 3. Assert
-    assertThat(result, is(true));
+    assertThat(result).isEqualTo(true);
 }
 ```
 
@@ -311,7 +270,7 @@ public void givenArranged_whenActing_thenSomeExpectedResult() {
 
 Wanneer de **Arrange** stap dezelfde is voor een serie van testen, kunnen we dit veralgemenen naar een `@Before` methode, die voor het uitvoeren van bepaalde of alle testen wordt uitgevoerd. Op dezelfde manier kan data worden opgekuist na elke test met een `@After` methode - dit noemt men de _teardown_ stap. 
 
-JUnit 4 en JUnit 5 verschillen hierin op niveau van gebruik. Vanaf JUnit 5 werkt men met `@BeforeEach`/`@BeforeAll`. Raadpleeg [de documentatie](https://junit.org/junit5/docs/current/user-guide/) voor meer informatie over het verschil tussen each/all en tussen v4/v5. Voorbeelden van JUnit 5 testen zijn terug te vinden in de [SESsy Library applicatie](/extra/sessy).
+JUnit 4 en JUnit 5 verschillen hierin op niveau van gebruik. Vanaf JUnit 5 werkt men met `@BeforeEach`/`@BeforeAll`. Raadpleeg [de documentatie](https://junit.org/junit5/docs/current/user-guide/) voor meer informatie over het verschil tussen each/all en tussen v4/v5.
 
 ### Soorten van Testen
 
@@ -340,20 +299,6 @@ Stel dat we een `Service` en een `Repository` klasse hebben gemaakt, waarvan de 
 
 <div class="devselect">
 
-```kt
-class Repository() {
-    fun save(c: Customer) {
-        // insert into...
-    }
-}
-class Service(val repository: Repository) {
-    fun updateCustomerWallet(c: Customer, balance: double) {
-        c.balance = balance
-        repository.save(c)
-    }
-}
-```
-
 ```java
 public class Repository {
     public void save(Customer c) {
@@ -379,23 +324,6 @@ Hoe testen we de `updateCustomerWallet()` methode, zonder de effectieve implemen
 Zoals Arnie in zijn films bij gevaarlijke scenes een stuntman lookalike gebruikt, zo gaan wij in onze code een `Repository` lookalike gebruiken, zodat de `Service` dénkt dat hij `save()` aanroept, terwijl dit in werkelijkheid niet zo is. Daarvoor moet de repository een interface zijn. We passen in principe een design pattern toe, waarbij in de service een repository instantie wordt geïnjecteerd:
 
 <div class="devselect">
-
-```kt
-interface Repository {
-    fun save(c: Customer)
-}
-class RepositoryDBImpl : Repository {
-    override fun save(c: Cusomter) {
-        // insert into...
-    }
-}
-class RepositoryForTesting : Repository {
-    override fun save(c: Customer) {
-        // do nothing!
-    }
-}
-class Service(val repository: Repository)
-```
 
 ```java
 public interface Repository {
@@ -423,13 +351,12 @@ public class Service {
 
 </div>
 
-In de test wordt een instantie van `RepositoryForTesting` in service gebruikt in plaats van de effectieve `RepositoryDBImpl`. De test klasse _gedraagt_ zich als een `Repository`, omdat deze de betreffende interface implementeert. De `Service` klasse weet niet welke implementatie van de interface binnen komt: daar kan bij het integration testing handig gebruk van worden gemaakt.
+In de test wordt een instantie van `RepositoryForTesting` in service gebruikt in plaats van de effectieve `RepositoryDBImpl`. De test klasse _gedraagt_ zich als een `Repository`, omdat deze de betreffende interface implementeert. De `Service` klasse weet niet welke implementatie van de interface binnen komt: daar kan bij het integration testing handig gebruik van worden gemaakt.
 
-Een werkend voorbeeld hiervan is terug te vinden in de [SESsy library applicatie](/extra/sessy). 
 
 #### 3. End-To-End Testing (ROOD)
 
-Een laatste groep van testen genaamd _end-to-end_ testen, ofwel **scenario testen**, testen de héle applicatie, van UI tot DB. Voor een webapplicatie betekent dit het simuleren van de acties van de gebruiker, door op knoppen te klikken en te navigeren doorheen de applicatie, waarbij bepaalde verwachtingen worden afgetoetst. Bijvoorbeeld, klik op 'voeg toe aan winkelmandje', ga naar 'winkelmandje', controleer of het item effectief is toegevoegd.
+Een laatste groep van testen genaamd _end-to-end_ testen, ofwel **scenario testen**, testen de héle applicatie, van UI tot DB. Voor een GUI applicatie bijvoorbeeld betekent dit het simuleren van de acties van de gebruiker, door op knoppen te klikken en te navigeren doorheen de applicatie, waarbij bepaalde verwachtingen worden afgetoetst. Bijvoorbeeld, klik op 'voeg toe aan winkelmandje', ga naar 'winkelmandje', controleer of het item effectief is toegevoegd.
 
 Typische eigenschappen van end-to-end testen:
 
@@ -438,13 +365,9 @@ Typische eigenschappen van end-to-end testen:
 - Traag, moeilijker onderhoudbaar.
 - Test integratie van alle lagen.
 
-Een werkend voorbeeld hiervan is terug te vinden in de [SESsy library applicatie](/extra/sessy).
+![](/img/tdd/selenium.png)
 
-De SESsy applicatie maakt gebruik van **WebDriver**, een interface die **Selenium** aanstuurt die browsers automatiseert. Op die manier kan men eenvoudig commando's doorsturen zoals surf naar daar, klik hier op, wacht x seconden, verifieer dat hier dat staat, ... Dit is één test scenario in totaal. 
-
-![](/img/teaching/ses/selenium.png)
-
-In plaats van dit in (Java) code te schrijven, is het echter ook mogelijk om de [Selenium IDE](https://selenium.dev/selenium-ide/) extentie voor Google Chrome of [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/) te gebruiken. Deze browser extentie laat recorden in de browser zelf toe, en vergemakkelijkt het gebruik (er is geen nood meer aan het vanbuiten kennen van zulke commando's). Dit wordt in de praktijk vaak gebruikt door software analisten of testers die niet de technische kennis hebben om te programmeren, maar toch deel zijn van het ontwikkelteam. 
+In plaats van dit in (Java) code te schrijven, is het ook mogelijk om de [Selenium IDE](https://selenium.dev/selenium-ide/) extentie voor Google Chrome of [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/) te gebruiken. Deze browser extentie laat recorden in de browser zelf toe, en vergemakkelijkt het gebruik (er is geen nood meer aan het vanbuiten kennen van zulke commando's). Dit wordt in de praktijk vaak gebruikt door software analisten of testers die niet de technische kennis hebben om te programmeren, maar toch deel zijn van het ontwikkelteam. 
 
 Recente versies van de Selenium IDE plugin bewaren scenario's in `.side` bestanden, wat een JSON-notatie is. Oudere versies bewaren commando's in het `.html` formaat. deze bestanden bevatten een lijst van je opgenomen records:
 
@@ -470,11 +393,6 @@ Recente versies van de Selenium IDE plugin bewaren scenario's in `.side` bestand
         ...
 ```
 
-
-{{% notice note %}}
-Er zijn moderne alternatieven voor Webdriver-based Java testen. De front-end van de SESsy library werkt met Vue.js, en dit kan je makkelijk testen met behulp van https://webdriver.io/ in JavaScript. Een voorbeeldje van zo'n geautomatiseerde test staat op de front page. WebdriverIO integreert ook met ChromeDevTools, waardoor je kan doen alsof je met een smartphone surft naar een pagina: `browser.emulateDevice('iPhone X')`.
-{{% /notice %}}
-
 ## <a name="oef"></a>Labo oefeningen
 
 Clone of fork het <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-1-template
@@ -488,12 +406,6 @@ De methode, in de klasse `Speculaas`, zou er zo uit moeten zien:
 
 <div class="devselect">
 
-```kt
-    fun beoordeel(): Int {
-        // TODO ...
-    }
-```
-
 ```java
     public int beoordeel() {
         // TODO ...
@@ -506,64 +418,66 @@ De functie geeft een nummer terug - hoe hoger dit nummer, hoe beter de beoordeli
 
 Het principe is simpel: hoe meer ingrediënten, hoe beter de beoordeling.
 
-Kijk naar een voorbeeld test hoe de methodes te hanteren. Er zijn al enkele testen voorzien. Die kan je uitvoeren met IntelliJ door op het groen pijltje te drukken, of met Gralde: `./gradlew.bat test` (Op Unix: `./gradlew test`). Dit genereert een **test rapport** HTML bestand in de `build/test` map.
+Kijk naar een voorbeeld test hoe de methodes te hanteren. Er zijn al enkele testen voorzien. Die kan je uitvoeren met IntelliJ door op het groen pijltje te drukken, of met Gralde: `./gradlew test`. Dit genereert een **test rapport** HTML bestand in de `build/test` map.
 
 We zijn dus geïnteresseerd in **edge cases**. Probeer alle mogelijkheden te controleren. Denk bij het testen aan de volgende zaken:
 
 - Hoe zit het met een industriële speculaas, zonder kruiden of boter? 
-- Wat doet de funcite beoordeel als het argument `null` is?
+- Wat doet de functie beoordeel als het argument `null` is?
 - Wat als een speculaas wordt meegegeven zonder ingrediënten?
 
 ### Opgave 2
 
 Clone of fork het <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-2-template
 
+
 #### A. Mislukte login pogingen
 
-Er is een foutje geslopen in de login module, waardoor Abigail nog steeds kan inloggen, maar Jos plots niet meer. De senior programmeur in ons team heeft de bug geïdentificeerd en beweert dat het in een stukje _oude code_ zit, 
-maar hij heeft geen tijd om dit op te lossen. Nu is het aan jou.
+Er is een foutje geslopen in de login module, waardoor `Abigail` altijd kan inloggen, maar `jos` soms wel en soms niet. De senior programmeur in ons team heeft de bug geïdentificeerd en beweert dat het in een stukje _oude code_ zit, 
+maar hij heeft geen tijd om dit op te lossen. Nu is het aan jou. De `logins.json` file bevat alle geldige login namen die mogen inloggen. Er kan kunnen geen twee gebruikers met dezelfde voornaam zijn.
+(Andere namen die moeten kunnen inloggen zijn "James", "Emma", "Isabella" ...)
+(Andere namen die niet mogen kunnen inloggen zijn "Arne", "Kris", "Markske" ...)
 
 <div class="devselect">
 
-```kt
-import java.util.regex.Pattern;
-import java.util.regex.Pattern.CASE_INSENSITIVE;
-
-fun control(username: String): Boolean {
-    val pattern = Pattern.compile("^(?=[a-z]{2})(?=.{4,26})(?=[^.]*\\.?[^.]*$)(?=[^_]*_?[^_]*$)[\\w.]+$", CASE_INSENSITIVE)
-    return pattern.matcher(username).matches()
-}
-```
-
 ```java
-import java.util.regex.Pattern;
-import static java.util.regex.Pattern.CASE_INSENSITIVE;
 
-public static boolean control(String username) {
-    Pattern pattern = Pattern.compile("^(?=[a-z]{2})(?=.{4,26})(?=[^.]*\\.?[^.]*$)(?=[^_]*_?[^_]*$)[\\w.]+$", CASE_INSENSITIVE);
-    return pattern.matcher(username).matches();
+public class LoginChecker {
+    public static boolean control(String username) {
+        ArrayList<String> loginList = new ArrayList<>();
+        try {
+            Gson gson = new Gson();
+            JsonReader reader = new JsonReader(new FileReader("./logins.json"));
+            JsonArray data = gson.fromJson(reader, JsonArray.class);
+            for (JsonElement jo : data) {
+                String login = gson.fromJson(jo, String.class);
+                loginList.add(login);
+            }
+        }catch(FileNotFoundException fnfe){
+            fnfe.printStackTrace();
+        }
+
+        boolean found = false;
+        for (String naam : loginList) {
+            if (naam.equals(username)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
 }
 ```
 
 </div>
 
-Deze functie geeft `true` terug als Abigail probeert in te loggen, en `false` als Jos probeert in te loggen. Hoe komt dit? Schrijf éérst een falende test!
+Deze methode geeft `true` terug als Abigail probeert in te loggen, en `false` als Jos probeert in te loggen. Hoe komt dit? Schrijf éérst een falende test!
 
 #### B. URL Verificatie fouten
 
 Een tweede bug wordt gemeld: URL verificatie features werken plots niet meer. Deze methode faalt steeds, ook al zijn er reeds unit testen voorzien. Het probleem is dat **HTTPS** URLs met een SSL certificaat niet werken. Je onderzocht de URL verificatie code en vond de volgende verdachte regels:
 
 <div class="devselect">
-
-```kt
-import java.util.regex.Pattern;
-import java.util.regex.Pattern.CASE_INSENSITIVE;
-
-fun verifyUrl(url: String): Boolean {
-    val pattern = Pattern.compile("http:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)", CASE_INSENSITIVE)
-    return pattern.matcher(url).matches()
-}
-```
 
 ```java
 import java.util.regex.Pattern;
@@ -590,16 +504,9 @@ Dit is een vervolgopgave van de code van **Opgave 1**. Werk verder op dat bestaa
 {{% /notice %}}
 
 Een verkoopster werkt in een (goede) speculaasfabriek. De verkoopster wilt graag 2 EUR aanrekenen per speculaas die de fabriek produceert. 
-Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worden aangerekend. 
+Echter, als de klant meer dan 5 stuks verkoopt, mag er een korting van 10% worden aangerekend. In dit voorbeeld gaan we ervan uit dat een fabriek een willekeurig aantal speculaas per dag maakt en dat de klant steeds alle speculazen koopt. De verkoop gebeurt in de Verkoopsterklasse en het bakken van de speculazen gebeurt in de SpeculaasFabriek. Als we nu willen testen of onze `verkoop` methode uit de `Verkoopster`-klasse werkt, dan willen we dit **isolated** doen. We willen dus de onzekerheid van de Fabriek weghalen door specifieke gevallen aan te halen. Dit kan echter niet via de standaard `SpeculaasFabriek`. Daarom gaan we een **test double** gebruiken. Hiervoor gaan we deze keer een **mock** gebruiken zoals verder duidelijk wordt.
 
 <div class="devselect">
-
-```kt
-    fun verkoop(): Double {
-        val gebakken = speculaasFabriek.bak()
-        // TODO ...
-    }
-```
 
 ```java
     public double verkoop() {
@@ -634,27 +541,25 @@ Lees op [https://site.mockito.org](https://site.mockito.org) **hoe** je het fram
 - Hoe gebruik ik de API om een Test Double/mock aan te maken?
 - Hoe valideer ik verwachtingen die ik heb van deze Test Double?
 
-[Het gebruik van Mockito en MockK: een uitgewerkt voorbeeld](/tdd/in-de-praktijk).
+##### Mocking
+Meer info rond faking vs. mocking vindt je [hier](https://www.educative.io/answers/what-is-faking-vs-mocking-vs-stubbing):
+<blockquote>Fakes are objects that have working implementations. On the other hand, mocks are objects that have predefined behavior. Lastly, stubs are objects that return predefined values. When choosing a test double, we should use the simplest test double to get the job done.
+</blockquote>
 
 ### Opgave 5
 
-Gebruik Selenium IDE om een test scenario op te nemen van de SESsy applicatie. Start deze eerst lokaal, en vertrek vanuit het localhost base address [http://localhost:8080/#/](http://localhost:8080/#/). Hanteer de volgende scenario's:
+Gebruik Selenium IDE om een test scenario op te nemen van het volgende scenarios op de website [https://www.saucedemo.com/](https://www.saucedemo.com/). :
 
-1. Als anoniempje, zoek op 'art', klik op detail, klik op uitlenen. Verifieer dat er een waarschuwingsboodschap verschijnt dat je niet kan uitlenen.
-2. Als slechte uitlener, zoek op 'art', klik op detail, klik op uitlenen. Verifieer dat er een boodschap verschijnt dat het gelukt is, en dat de knop veranderde naar 'Terugbrengen?'. Klik op terugbrengen. Verifieer dat er een boodschap verschijnt dat het gelukt is. 
-3. Als anoniempje, log in (een van beide rollen). Verifieer dat login naar logout verandert. Logout. Verifieer dat logout naar login verandert. 
+1. Log in met "locked_out_user" en wachtwoord "secret_sauce" en verifieer dat je een error boodschap krijgt. 
+2. Log in met "standard_user" en wachtwoord "secret_sauce", klik op het eerste item, voeg toe aan je winkelmandje, ga naar je winkelmandje. Verifieer dat er een product inzit.
+3. Log in met "standard_user" en wachtwoord "secret_sauce" en test of de afbeeldingen van de producten verschillend zijn.
+4. Log in met "problem_user" en wachtwoord "secret_sauce" en test of de afbeeldingen van de producten verschillend zijn. (Deze test moet nu falen omdat je je voordoet als een user die een bug ervaart.)  
 
 {{% notice info %}}
 **Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_ (of `.side` voor nieuwe versies)** in de root de [repository van opgave 1](https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-1-template).
 {{% /notice %}}
 
-Je zal voor deze opgave dus de lokale [SESsy applicatie](/extra/sessy) moeten starten, en de Selenium (Chromium/Firefox) plugin moeten installeren: zie hierboven.
-
-
-## Denkvragen
-
-- Wat doe je met opgenomen test materiaal in Selenium IDE? Hoe integreeg je dit in een build systeen? Met andere woorden, hoe zorg je er voor dat deze testen automatisch draaien, telkens er iets in de code wordt gewijzigd?
-- Hoe vertaal je de Selenium IDE commando's naar WebDriver Java commando's?
+Je zal voor deze opgave dus de Selenium (Chromium/Firefox) plugin moeten installeren: zie hierboven.
 
 ## Extra leermateriaal
 
@@ -663,5 +568,4 @@ Lees de volgende artikels om een beter inzicht te krijgen in de capaciteiten van
 - [The Art of Agile Development: Test-Driven Development](https://www.jamesshore.com/Agile-Book/test_driven_development.html)
 - [Benefits of TDD: Wikipedia](https://en.wikipedia.org/wiki/Test-driven_development)
 - [Let's Play: TDD Screencasts](https://www.jamesshore.com/Blog/Lets-Play)
-- [HamCrest Matchers API Documentation](http://hamcrest.org/JavaHamcrest/javadoc/)
 - [Integration Testing: Mocks Aren't Stubs (Martin Fowler)](http://martinfowler.com/articles/mocksArentStubs.html)
