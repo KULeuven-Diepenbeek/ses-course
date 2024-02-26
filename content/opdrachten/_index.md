@@ -7,7 +7,7 @@ draft: false
 # Permanente evaluatie 2024
 ## Algemene informatie
 Om de permanente evaluatie opdrachten in te dienen voor het vak Software Engineering Skills maken we gebruik van Github. In de lessen zal je onder begeleiding een gratis account aanmaken op dit platform. Voor elke opdracht zal je een repository gebruiken voor het indienen van je opdrachten. Elke student is verplicht een link door te geven naar die repository voor het evalueren van de opdrachten. 
-De link naar je repository vul je aan in de [online Excel file](link_naar_file) die beschikbaar wordt gesteld via Toledo. 
+De link naar je repository vul je aan in de [online Excel file](https://kuleuven-my.sharepoint.com/:x:/g/personal/koen_yskout_kuleuven_be/EcY4jplKXppFlj2tKbjM7UYBQYTlTcv6HnnEU1H8G6aEGg?e=tNfkXd). Je kan bewerken met het wachtwoord `SES_Github`. 
 
 Om de verschillende (sub)opdrachten te identificeren wordt er gebruik gemaakt van "tags" bij het committen van je finale resultaat. (In de eerste lessen worden deze onderwerpen klassikaal uitgelegd zodat alle studenten de juiste werkwijze gebruiken).  
 De naamgeving: voor het committen van je resultaat van "Opdracht 1" gebruik je de tag `v1.0`. Het laatste cijfer kan je verhogen indien je een andere versie van je opdracht wil indienen. Bijvoorbeeld: indien je voor opdracht 1 twee versies indient getagged als `v1.0` en `v1.1`. Dan wordt enkel met `v1.1` rekening gehouden in de evaluatie aangezien dit de laatste versie van opdracht 1 moet zijn.  
