@@ -7,9 +7,11 @@ autonumbering: true
 ## Wat zijn records
 
 Een **record** in Java is een eenvoudige klasse die een waarde voorstelt.
-Met een waarde bedoelen we een object waarvoor de identiteit volledig bepaald wordt door de attributen, en het dus niet uitmaakt welke instantie je bekijkt.
-De attributen van een waarde mogen ook niet veranderen doorheen de tijd (het object is dus **immutable**).
-Twee waarde-objecten met dezelfde attribuut-waarden worden bijgevolg als volledig equivalent beschouwd.
+Met een waarde bedoelen we een object waarvoor de identiteit volledig bepaald wordt door de attribuut-waarden, en het dus niet uitmaakt welke instantie je bekijkt.
+Welgekende voorbeelden zijn een coordinaat (bestaande uit een x- en y-attribuut), een geldbedrag (een bedrag en een munteenheid), een adres (straat, huisnummer, postcode, gemeente), etc.
+
+Een record-object dient dus als data-drager, waarbij verschillende objecten met dezelfde attribuut-waarden volledig inwisselbaar (equivalent) zijn.
+De attributen van een record-object mogen daarom niet veranderen doorheen de tijd (het object is dus **immutable**).
 
 Als voorbeeld definiëren we een coordinaat-klasse als een record, met 2 attributen: een x- en y-coordinaat.
 
@@ -45,6 +47,8 @@ Een record is eigenlijk een gewone klasse, waarbij de Java-compiler zelf enkele 
 - een `toString`-methode om een leesbare versie van het record uit te printen; en
 - een `equals`- en `hashCode`-methode, die ervoor zorgen dat objecten met dezelfde parameters als gelijk worden beschouwd.
 
+De klasse is ook `final`, zodat er geen subklassen van gemaakt kunnen worden.
+
 Met deze speciale syntax kan je zo heel wat typwerk (en kans op fouten) besparen.
 De coordinaat-definitie van hierboven is equivalent aan volgende klasse-definitie:
 
@@ -70,7 +74,7 @@ public final class Coordinate {
 
 ## Methodes toevoegen aan een record
 
-Je kan zelf extra methodes toevoegen aan een record op dezelfde manier als bij een gewone Java klasse:
+Je kan zelf extra methodes toevoegen aan een record op dezelfde manier als bij een gewone Java-klasse:
 
 ```java
 public record Coordinate(double x, double y) {
@@ -84,7 +88,7 @@ public record Coordinate(double x, double y) {
 
 ## Constructor van een record
 
-Als je geen constructor definieert, krijgt een record een standaard constructor met de attributen.
+Als je geen constructor definieert, krijgt een record een standaard constructor met de opgegeven attributen als parameters.
 
 Maar je kan ook zelf een of meerdere constructoren definiëren voor een record, net zoals bij klassen.
 Je moet dan zelf zorgen dat je alle attributen van de record initialiseert.
@@ -131,22 +135,72 @@ public record Coordinate(double x, double y) {
 
 ## Pattern matching
 
-switch + records
-
-## Sealed classes
+Je kan records ook gebruiken in switch statements.
+Dit heet 'pattern matching', en is vooral nuttig wanneer je meerdere record-types hebt die eenzelfde interface implementeren.
+Bijvoorbeeld:
 
 ```java
-sealed interface Length {
-  public double value();
+interface Shape {}
+record Square(double side) implements Shape {}
+record Circle(double radius) implements Shape {}
+record Rectangle(Coordinate topLeft, Coordinate bottomRight) implements Shape {}
+```
 
-  public record Meter(double value) implements Length {};
-  public record Kilometer(double value) implements Length {};
+Je kan dan een switch expressie gebruiken, bijvoorbeeld om een methode te implementeren die de oppervlakte van een vorm berekent:
+
+```java
+public double area(Shape shape) {
+  return switch(shape) {
+    case Square s -> s.side() * s.side();
+    case Circle(double radius) -> Math.PI * radius * radius;
+    case Rectangle(Coordinate(double topLeftX, double topLeftY), Coordinate bottomRight) ->
+         (bottomRight.x() - topLeftX) * (bottomRight.y() - topLeftY);
+    default -> throw new IllegalArgumentException("Unknown shape");
+  };
 }
 ```
 
-TODO
+Merk op dat je zowel kan matchen op het object als geheel (`Square s` in het voorbeeld hierboven), individuele argumenten (`Circle(double radius)` in het voorbeeld), en zelfs geneste patronen (`Rectangle(Coordinate(double topLeftX, double topLeftY), Coordinate bottomRight)`).
 
-- pattern matching?
+De switch-expressie hierboven is verschillend van het (oudere) switch-statement in Java:
+
+- er wordt `->` gebruikt in plaats van `:`
+- er is geen `break` nodig op het einde van elke case
+- de switch-expressie geeft een waarde terug die kan toegekend worden aan een variabele, of gebruikt kan worden in een `return`-statement (zoals in het voorbeeld hierboven).
+
+## Sealed classes
+
+Wanneer je alle klassen kent die een bepaalde interface zullen implementeren (of van een abstracte klasse zullen overerven), kan je van de klasse of interface een **sealed** klasse of interface maken.
+Met een `permits` clausule kan je aangeven welke klassen de interface mogen implementeren:
+
+```java
+public sealed interface Shape permits Square, Circle, Rectangle {}
+record Square(double side) implements Shape {}
+record Circle(double radius) implements Shape {}
+record Rectangle(double length, double width) implements Shape {}
+```
+
+Indien je geen permits-clausule opgeeft, zijn enkel de klassen in hetzelfde bestand toegestaan.
+
+Voor een sealed klasse of interface zoals `Shape` zal de compiler niet toelaten dat je er later een andere klasse van laat overerven:
+
+```java
+record Triangle(double base, double height) implements Shape {} // <- compiler error
+```
+
+Omdat de compiler kan nagaan wat alle mogelijkheden zijn, kan je bij pattern matching op een sealed klasse in een switch statement ook de default case weglaten:
+
+```java
+public double area(Shape shape) {
+  return switch(shape) {
+    case Square s -> s.side() * s.side();
+    case Circle(double radius) -> Math.PI * radius * radius;
+    case Rectangle(double width, double height) -> width * height;
+  };
+}
+```
+
+Omgekeerd zal de compiler je ook waarschuwen wanneer er een geval ontbreekt.
 
 ## Oefeningen
 
@@ -167,13 +221,15 @@ Voeg ook methodes toe om twee geldbedragen op te tellen. Dit mag enkel wanneer d
 
 ### Interval
 
-start, end
+Maak (volgens de principes van TDD) een `Interval`-record dat een periode tussen twee tijdstippen voorstelt, bijvoorbeeld voor een vergadering. Elk tijdstip wordt voorgesteld door een niet-negatieve long-waarde.
+Het eind-tijdstip mag niet voor het start-tijdstip liggen.
 
-validate start <= end
+Voeg een methode toe om na te kijken of een interval overlapt met een ander interval.
+Intervallen worden beschouwd als half-open: twee aansluitende intervallen overlappen niet, bijvoorbeeld [15, 16) en [16, 17).
 
 ### Rechthoek
 
-Schrijf (volgens de principes van TDD) een klasse die een rechthoek voorstelt.
+Schrijf (volgens de principes van TDD) een record die een rechthoek voorstelt.
 Een rechthoek wordt gedefinieerd door 2 punten (linksboven en rechtsonder); gebruik een Coordinaat-record om deze punten voor te stellen.
 
 Voeg extra methodes toe:
@@ -182,12 +238,25 @@ Voeg extra methodes toe:
 - om na te gaan of een gegeven punt zich binnen de rechthoek bevindt
 - om na te gaan of een rechthoek overlapt met een andere rechthoek. (_Hint: bij twee overlappende rechthoeken ligt minstens één hoekpunten van de ene rechthoek binnen de andere_)
 
-### Expression hierarchie
+### Expressie-hierarchie
 
-(Arithmetic)
+Maak een set van records om een wiskundige uitdrukking voor te stellen.
+Alle records moeten een interface `Expression` implementeren.
 
-Lit, Var, Sum, Product, Exp < Expr
+De mogelijke expressies zijn:
 
-print operator
-eval operator
-differentiate operator
+- een `Literal`: een constante getal-waarde (een double)
+- een `Variable`: een naam (een String), bijvoorbeeld "x"
+- een `Sum`: bevat twee expressies, een linker en een rechter
+- een `Product`: gelijkaardig aan Som, maar stelt een product voor
+- een `Power`: een expressie tot een (constante) macht
+
+De veelterm `3x^2 + 5` kan dus voorgesteld worden als:
+
+```java
+var poly = new Sum(new Product(new Literal(3), new Power(new Variable("x"), new Literal(2))), new Literal(5))
+```
+
+Maak vervolgens, gebruik makend van pattern matching, ook een methodes `String prettyPrint(Expression expr)` die de expressie omzet in een string, bijvoorbeeld `prettyPrint(poly)` geeft `(3 * x^2) + 5`. (Uitbreiding: zorg ervoor dat er geen onnodige haakjes verschijnen, door rekening te houden met de volgorde van de bewerkingen).
+
+Indien je nog verder wil oefenen, kan je methodes proberen te schrijven om een expressie te vereenvoudigen, te evalueren voor een bepaalde waarde van een variabele, af te leiden, ...
