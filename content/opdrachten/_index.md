@@ -100,4 +100,42 @@ Je gitrepo heeft nu dus volgende structuur:
 
 ```
 
-Commit nu de veranderingen in je directory en tag als `v5.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github 
+Commit nu de veranderingen in je directory en tag als `v5.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
+
+### Test Driven Development
+#### Opdracht 6: (Aanzet wordt in de les gegeven)
+
+Maak een JavaFX (gebruik Gradle) project aan met als projectnaam candycrush.
+
+Je gitrepo heeft nu dus volgende structuur:
+```
+/mijnGitDirectory
+|
++--- .git/
+|
++--- .gitignore
+|
++--- ...
+|
++--- mijnJarFile.jar
+|
++--- mijnJarFileProject/
+|
++--- CandyCrushIntelliJProject/
+     |
+     +--- gradle/
+     |
+     +--- src/
+     |
+     ...
+     |
+     +--- libs/
+          |
+          +--- mijnJarFile.jar
+```
+
+Het project moet gebruik maken van Model - View - Controller. Wanneer je applicatie start moet je een startscherm krijgen waarmee je inlogt in het spel. Dan moet je naar de spelpagina gebracht worden. Het spel moet minstens een grid bevatten waar nummers instaan (de verschillende snoepjes, 1 tot en met 5). Je moet op een snoepje kunnen klikken en wanneer dat snoepje 3 of meer reschtstreekse buren van hetzelfde type heeft, verwijder je die snoepjes en moeten die vakjes met willekeurige getallen terug gevuld worden. Elke snoepje dat je verwijderd is een punt waard. Voorzie ook een reset knop een nieuw spel te kunnen starten.
+
+Voor het model moeten er minstens 10 unit testen geschreven worden. Maak ook gebruik van de debugger om problemen op te lossen in plaats van print out statements te gebruiken.
+
+Commit nu de veranderingen in je directory en tag als `v6.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.

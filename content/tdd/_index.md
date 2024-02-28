@@ -393,6 +393,9 @@ Recente versies van de Selenium IDE plugin bewaren scenario's in `.side` bestand
         ...
 ```
 
+### TDD voor JavaFX
+Er bestaan een aantal frameworks om end-to-end testing uit te voeren op JavaFX projecten. Deze vallen echter buiten de scope van dit vak. Je kan echter wel goede coding conventies gebruiken om UI-elementen te testen zoals we in lessen gaan zien.
+
 ## <a name="oef"></a>Labo oefeningen
 
 Clone of fork het <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-1-template
@@ -569,3 +572,5 @@ Lees de volgende artikels om een beter inzicht te krijgen in de capaciteiten van
 - [Benefits of TDD: Wikipedia](https://en.wikipedia.org/wiki/Test-driven_development)
 - [Let's Play: TDD Screencasts](https://www.jamesshore.com/Blog/Lets-Play)
 - [Integration Testing: Mocks Aren't Stubs (Martin Fowler)](http://martinfowler.com/articles/mocksArentStubs.html)
+
+
