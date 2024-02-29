@@ -168,6 +168,21 @@ De switch-expressie hierboven is verschillend van het (oudere) switch-statement 
 - er is geen `break` nodig op het einde van elke case
 - de switch-expressie geeft een waarde terug die kan toegekend worden aan een variabele, of gebruikt kan worden in een `return`-statement (zoals in het voorbeeld hierboven).
 
+Tenslotte is er in een switch-expressie de mogelijkheid om een conditie toe te voegen door middel van een `when`-clause:
+
+```java
+public double area(Shape shape) {
+  return switch(shape) {
+    case Square s -> s.side() * s.side();
+    case Circle(double radius) -> Math.PI * radius * radius;
+    case Rectangle(Coordinate(double topLeftX, double topLeftY), Coordinate bottomRight)
+         when topLeftX <= bottomRight.x() && topLeftY <= bottomRight.y() ->
+         (bottomRight.x() - topLeftX) * (bottomRight.y() - topLeftY);
+    default -> throw new IllegalArgumentException("Unknown shape");
+  };
+}
+```
+
 ## Sealed classes
 
 Wanneer je alle klassen kent die een bepaalde interface zullen implementeren (of van een abstracte klasse zullen overerven), kan je van de klasse of interface een **sealed** klasse of interface maken.
