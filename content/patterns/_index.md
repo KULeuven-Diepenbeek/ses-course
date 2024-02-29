@@ -4,6 +4,12 @@ weight: 7
 draft: true
 ---
 
+TODO: gemeenschappelijke taal
+
+TODO: visitor -> pattern matching
+TODO: singleton -> enum
+TODO: observer
+
 ### Wat is dat, een patroon?
 
 Patronen zijn voor het mensenlijk brein eenvoudig herkenbaar: we zien stukjes van iets die we al eens ergens anders gezien hebben. Blokjes op een bepaalde manier ingekleurd, gehaakte patroontjes van een dekbed, Fibonacci spiralen in bloemblaadjes en zaadjes, ... Wanneer we programmeren, geldt dit principe ook: blokken code die herbruikt worden om eenvoudige oplossingen te bieden voor complexe problemen.
