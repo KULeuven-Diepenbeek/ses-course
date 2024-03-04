@@ -36,7 +36,7 @@ Nieuwere spelers zoals Dagger focussen niet enkel op container deployment maar o
 
 ### 1.2. De flow van een CI server
 
-Je Github Actions moeten gedefinieerd worden in de folder `.github/workflows` in een `.yml`-bestand. Github helpt je echter om een snel veelgebruikte actions op te stellen op basis van je code in de repository. 
+Je Github Actions moeten gedefinieerd worden in de folder `.github/workflows` in een `.yml`-bestand. Github helpt je echter om snel veelgebruikte actions op te stellen op basis van je code in de repository. 
 
 Via het `Actions` tabblad worden enkele voorstellen gedaan. Je kan gebruik maken van de Gradle test template. Je `.yml`-bestand wordt automatisch aangemaakt en zie er uit zoals op onderstaande figuut is weergegeven
 
