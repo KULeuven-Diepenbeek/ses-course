@@ -42,7 +42,7 @@ Via het `Actions` tabblad worden enkele voorstellen gedaan. Je kan gebruik maken
 
 ![example.yml](/img/ci-cd/githubActionsCiGradleExample.png)
 
-**Let op de yml-syntax is zeer gevoelig aan het juiste gebruik van tabs en spaces (gelijkaardig aan python)**
+**Let op: de yml-syntax is zeer gevoelig aan het juiste gebruik van tabs en spaces (gelijkaardig aan python)**
 
 #### 1. on
 
