@@ -1,6 +1,6 @@
 ---
-title: "6. Design Patterns"
-weight: 6
+title: "7. Design Patterns"
+weight: 7
 draft: true
 ---
 
