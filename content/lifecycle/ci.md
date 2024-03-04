@@ -30,7 +30,7 @@ De Source Control server, zoals Github.com of een lokale `git` server, werd reed
 - [Drone](https://www.drone.io/)---een nieuwe speler met focus op Docker module integratie
 - [Dagger](https://dagger.io/)---een CI/CD engine die in containers runt en programmeerbaar in plaats van configureerbaar is
 
-In deze systemen zijn configureerbaar en beschikken over een UI, zoals bijvoorbeeld zichtbaar in de [TeamCity screencast](https://www.jetbrains.com/teamcity/documentation/). Betalende systemen zoals TeamCity en Bamboo zijn erg uitgebreid, en er zijn ook een aantal gratis alternatieven zoals CircleCI. CircleCI is eenvoudig configureerbaar door middel van een `.yml` bestand en het gratis plan integreert naadloos met GitHub. Wij gaan echter rechtstreeks via Github Actions werken aangezien dit rechtstreeks via Github kan geconfigureerd worden en op zeer gelijkaardige manier werkt zoals bovenstaande services.
+Deze systemen zijn configureerbaar en beschikken over een UI, zoals bijvoorbeeld zichtbaar in de [TeamCity screencast](https://www.jetbrains.com/teamcity/documentation/). Betalende systemen zoals TeamCity en Bamboo zijn erg uitgebreid, en er zijn ook een aantal gratis alternatieven zoals CircleCI. CircleCI is eenvoudig configureerbaar door middel van een `.yml` bestand en het gratis plan integreert naadloos met GitHub. Wij gaan echter rechtstreeks via Github Actions werken aangezien dit rechtstreeks via Github kan geconfigureerd worden en op zeer gelijkaardige manier werkt zoals bovenstaande services.
 <!-- 
 Nieuwere spelers zoals Dagger focussen niet enkel op container deployment maar ook op "pipelining as code". Dat betekent dat je _code_ in plaats van _configuratie_ schrijft, wat als bijkomend voordeel heeft dat deze config-as-code met compilatie sneller fouten rapporteert. Met Dagger schrijf je in Go, Python, TypeScript/JS, of interageer je rechtstreeks met de CLI, met voorkeur van Go: zie de [Dagger Quickstart](https://docs.dagger.io/648215/quickstart/) guide. -->
 
@@ -128,9 +128,11 @@ Ontwerp een 'calculator' applicatie die 2 getallen kan optellen, aftrekken, het 
 2. Maak een github repository aan en gebruik Github Actions om je applicatie automatisch te laten testen bij een push naar de main branch.  
 
 ### Opgave 2
-Gerbuik een andere `workflow.yml` om je repo uit opgave 1 te beveiligen tegen pull-requests. Zorg ervoor dat eerst je testen moeten slagen en je applicatie gebuild kan worden voordat je een pull request kan toelaten. (Test dit ook uit met een medestudent).
+Gebruik een andere `workflow.yml` om je repo uit opgave 1 te beveiligen tegen pull-requests. Zorg ervoor dat eerst je testen moeten slagen en je applicatie gebuild kan worden voordat je een pull request kan toelaten. (Test dit ook uit met een medestudent).
 
 Kijk in Github bij de `settings van je repo -> branches -> require status checks`
+
+**Let op: je repo moet hiervoor public zijn. Je kan zoeken op status checks via de `job` names in je `.yml` action files**
 
 ### Opgave 3
 

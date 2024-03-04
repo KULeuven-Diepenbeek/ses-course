@@ -127,3 +127,4 @@ Die `;.` is nodig om aan te geven dat `java` binnenin de `.jar` file moet zoeken
 
 Vanaf nu kan je `programma.jar` ook uploaden naar een Maven repository of gebruiken als dependency in een ander project. Merk opnieuw op dat dit handmatig aanroepen van `javac` in de praktijk wordt overgelaten aan de gebruikte build tool---in ons geval, Gradle.
 
+<!-- TODO voeg shadowjar toe -->
