@@ -61,8 +61,7 @@ We moeten er natuurlijk ook voor zorgen dat alle applicaties aanwezig zijn om on
 Nu kunnen we simpelweg gebruik maken van de [Gradle](/dependency-management/gradle) tasks.
 
 #### 4. Package Code & Upload Artifact
-<!-- 
-`./gradlew shadowJar` - package alles, inclusief dependencies, in één grote jarfile. -->
+<!-- `./gradlew shadowJar` - package alles, inclusief dependencies, in één grote jarfile. -->
 
 Zodra één stap mis gaat (zoals een falende test), worden volgende stappen niet uitgevoerd. Als alles goed gaat is de output van het builden de binary die we _het artifact_ noemen, die de huidige buildstamp draagt (meestal een datumcode).
 
@@ -130,7 +129,7 @@ Ontwerp een 'calculator' applicatie die 2 getallen kan optellen, aftrekken, het 
 ### Opgave 2
 Gebruik een andere `workflow.yml` om je repo uit opgave 1 te beveiligen tegen pull-requests. Zorg ervoor dat eerst je testen moeten slagen en je applicatie gebuild kan worden voordat je een pull request kan toelaten. (Test dit ook uit met een medestudent).
 
-Kijk in Github bij de `settings van je repo -> branches -> require status checks`
+Kijk in [Github](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule) bij de `settings van je repo -> branches -> require status checks`
 
 **Let op: je repo moet hiervoor public zijn. Je kan zoeken op status checks via de `job` names in je `.yml` action files**
 
