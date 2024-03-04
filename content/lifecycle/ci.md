@@ -46,7 +46,7 @@ Via het `Actions` tabblad worden enkele voorstellen gedaan. Je kan gebruik maken
 
 #### 1. on
 
-Onder de `on` sectie ga je definieren bij welke specifieke acties de onderstaande jobs uitevoerd moeten worden.
+Onder de `on` sectie ga je definieren bij welke specifieke acties de onderstaande jobs uitgevoerd moeten worden.
 
 #### 2. Setup Environment
 
