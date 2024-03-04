@@ -1,5 +1,6 @@
 ---
 title: '6.2 Software Management Skills'
+draft: true
 ---
 
 ## De chaos van het Werk
