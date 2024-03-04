@@ -139,3 +139,8 @@ Het project moet gebruik maken van Model - View - Controller. Wanneer je applica
 Voor het model moeten er minstens 10 unit testen geschreven worden. Maak ook gebruik van de debugger om problemen op te lossen in plaats van print out statements te gebruiken.
 
 Commit nu de veranderingen in je directory en tag als `v6.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
+
+<!-- ### Continuous Integration and Continuous Deployment
+#### Opdracht 7:
+
+Commit nu de veranderingen in je directory en tag als `v7.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github. -->
