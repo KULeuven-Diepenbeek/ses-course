@@ -350,10 +350,6 @@ Bovenstaande screenshot geeft aan dat IntelliJ methodes herkent van de `Scorebor
 
 Genereer met behulp van Gradle van de [SESsy library](/dependency-management/sessy) een dependency tree en inspecteer welke dpendencies transitief zijn en welke direct.  -->
 
-## Extra leermateriaal
-
-- Opfriscursus Java nodig? Neem je INF1 cursus er terug bij, of volg een van de talrijke online cursussen, zoals [Learn Java](https://www.codecademy.com/learn/learn-java/) van Codeacademy. Concepten zoals packages, structuur, imports, klasses, objecten en instances, containers, ... zijn voor dit vak elementaire basiskennis. 
-
 <!-- ## Denkvragen
 
 - Hoe zou je transitieve dependencies handmatig kunnen beheren? Wat zijn de voor- en nadelen?

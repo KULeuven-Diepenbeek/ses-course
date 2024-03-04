@@ -278,12 +278,7 @@ Indien de Gralde wrapper een oudere versie aanmaakt (< v6), update met `gradle w
 
 Indien je de fout "Could not initialize class `org.codehaus.groovy.reflection.ReflectionCache`" krijgt, betekent dit dat je JDK te nieuw is voor de gradle versie (bijvoorbeeld JDK `17` met Gradle `6.7` in plaats van `7.0` of nieuwer). Controleer de huidige gralde versie met `gradle --info` of kijk in `gradle/wrapper/gradle-wrapper.properties`. 
 
-### Meer links en tutorials:
 
-- Officiële Gradle [docs](https://docs.gradle.org/current/userguide/userguide.html).
-- Officiële Gradle [guides: creating a new build](https://guides.gradle.org/creating-new-gradle-builds/)
-- [Gradle cheatsheet voorbeeld config file](https://gist.github.com/jahe/59557d507f43574b0d96)
-- [Gradle common commands](https://www.polyglotdeveloper.com/cheatsheet/2015-01-08-Gradle-cheatsheet/)
 
 ### Opgave
 

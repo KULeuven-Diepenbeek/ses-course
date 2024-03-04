@@ -1,5 +1,6 @@
 ---
 title: 'Continuous Integration & Deployment'
+weight: 1
 draft: false
 author: Wouter Groeneveld
 ---
@@ -148,8 +149,3 @@ Simuleer nu Continuous Development door de achtergrond kleur groen te maken voor
 - Version control en continuous delivery zijn klassiek gezien vijanden van database migratie (of omgekeerd). Toch is het mogelijk om een database systeem ook automatisch te up- of downgraden, met bijvoorbeeld https://flywaydb.org. Hoe gaat zoiets in zijn werk?
 - Zou het ook mogelijk zijn om een geautomatiseerde scenariotest uit te voeren in CircleCI? Zo ja, welke wijzigingen zou je moeten doorvoeren aan de `config.yml`? -->
 
-## Extra Leermateriaal
-
-- [Martin Fowler on Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html)
-- [Martin Fowler on Canary Releases](https://martinfowler.com/bliki/CanaryRelease.html)
-- [Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation](https://www.amazon.com/dp/0321601912?tag=duckduckgo-d-20&linkCode=osi&th=1&psc=1)
