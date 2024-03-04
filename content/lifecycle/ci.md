@@ -50,11 +50,11 @@ Onder de `on` sectie ga je definieren bij welke specifieke acties de onderstaand
 
 #### 2. Setup Environment
 
-In de jobs sectie kunnen we dan verschillende jobs oplijsten. In het begin van elke job moeten we vermelden op welk besturingssysteem we onze job willen uitvoeren. (Bv. Windows, Mac, Linux). 
+In de `jobs` sectie kunnen we dan verschillende jobs oplijsten. In het begin van elke job moeten we vermelden op welk besturingssysteem we onze job willen uitvoeren. (Bv. Windows, Mac, Linux). 
 
 _Je kan jobs ook automatisch op meerdere besturingssystemen laten uitvoeren._
 
-We moeten er natuurlijk ook voor zorgen dat alle applicaties aanwezig zijn om onze code te kunnen compileren en runnen.
+We moeten er natuurlijk ook voor zorgen dat alle applicaties aanwezig zijn om onze code te kunnen compileren en runnen. Daarvoor moeten we de nodige tools installeren in deze virtuele omgeving!
 
 #### 3. Build Code
 
