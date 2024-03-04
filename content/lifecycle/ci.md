@@ -99,7 +99,7 @@ Automatisch packagen en installeren van programma's stopt hier niet. Een niveau 
 
 Nieuwe features in productie plaatsen brengt altijd een risico met zich mee. Het zou kunnen dat bepaalde nieuwe features bugs veroorzaken in de gekende oude features, of dat het (slecht getest) systeem helemaal niet werkt zoals men verwachtte. Om dat zo veel mogelijk te vermijden wordt er een release plan opgesteld waarin men aan '**smart routing**' doet. 
 
-Stel, onze website is toe aan vernieuwing. We wensen een nieuw scherm te ontwerpen om efficiënter te zoeken. We zijn echter niet zeker wat de gebruikers gaan vinden van deze nieuwe manier van werken, en beslissen daarom om slechts een _aantal gebruikers_ bloot te stellen aan deze radicale verandering. Dat kan op twee manieren:
+Stel, onze bibliotheek-website is toe aan vernieuwing. We wensen een nieuw scherm te ontwerpen om efficiënter te zoeken. We zijn echter niet zeker wat de gebruikers gaan vinden van deze nieuwe manier van werken, en beslissen daarom om slechts een _aantal gebruikers_ bloot te stellen aan deze radicale verandering. Dat kan op twee manieren:
 
 1. _Blue/green releasing_: Een 'harde switch' in het systeem bepaalt welke personen (bijvoorbeeld op regio of IP) naar versie van het zoekscherm worden begeleid. 
 2. _Canary releasing_: Een load balancer verdeelt het netwerkverkeer over verschillende servers, waarvan op één server de nieuwe versie is geïnstalleerd. In het begin gaat `90%` van de bezoekers nog steeds naar de oude versie. Dit kan gradueel worden verhoogd, totdat de oude server wordt uitgeschakeld. 
@@ -136,7 +136,7 @@ Kijk in Github bij de `settings van je repo -> branches -> require status checks
 
 Neem je JavaFX darts applicatie van het applicatie-college over dependecy management. Voeg de moeglijkheid toe om in te loggen.
 
-Simuleer nu Continuous Integration door de achtergrond kleur groen te maken voor alle gebruikers, maar rood voor alle gebruikers wiens gebruikersnaam start met de letter 'A'. 
+Simuleer nu Continuous Development door de achtergrond kleur groen te maken voor alle gebruikers, maar rood voor alle gebruikers wiens gebruikersnaam start met de letter 'A'. 
 
 
 
