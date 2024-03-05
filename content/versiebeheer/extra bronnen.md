@@ -12,3 +12,4 @@ draft: false
 - [the Harvard.edu guide to Git](https://cs61.seas.harvard.edu/site/ref/git/)
 
 - [Beginner vriendelijke Git en Github tutorials](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV)
+- [Tools & Concepts for Mastering Version Control with Git](https://www.youtube.com/watch?v=Uszj_k0DGsg)

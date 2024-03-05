@@ -78,6 +78,7 @@ Met het commando **`$ git commit`** kan je alle files committen die gestaged zij
 - Alle modified files stagen met 1 commando: **`$ git add .`**
 - Onmiddellijk een commit message meegeven binnenin het commit commando: **`$ git commit -m "mijn commit message"`**
 - combinatie van de twee bovenstaande commando's: **`$ git commit -a -m "mijn commit message"`**
+  - **Opgelet** Met `$ git commit -a` worden nieuwe files niet toegevoegd. Gebruik hier dus nog `$ git add` voor.
 
 #### Undo changes
 
@@ -106,6 +107,8 @@ Je kan de verschillende branches oplijsten met: **`$ git branch`**
 - Het `*` symbool duidt de actieve branch aan.
   Je kan naar een bepaalde branch gaan met: **`$ git checkout <branchnaam>`**
   Je kan een branch deleten mert: **`$ git branch -d <branchnaam>`**
+
+_Om een grafische voorstelling van de braches te laten printen bij het log commando gebruik je de `--graph` flag._
 
 #### Merging
 
@@ -163,6 +166,8 @@ _Indien niet afgewerkt in het applicatiecollege, gelieve thuis af te werken tege
 ## Extra
 
 ### Wildcards en commando's aaneenschakelen
+
+**De amend flag**: Ben je iets klein vergeten toepassen aan je vorige commit? Dan kan je nieuwe aanpassingen (moeten wel eerst gestaged zijn) nog toevoegen aan de vorige commit met: `$ git commit --amend`
 
 **Wildcards** kunnen gebruikt worden om naar meerdere files tegelijk te verwijzen. Zo kan je de wildcard '<b>_</b>' gebruiken om naar alle files die eindigen op '.txt' te verwijzen.
 </br> Bijvoorbeeld: \*\*`$ git add _.txt`\*\*
