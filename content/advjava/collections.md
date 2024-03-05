@@ -5,6 +5,8 @@ autonumbering: true
 draft: true
 ---
 
+## Tijdscomplexiteit
+
 ## De Collection interface
 
 ## Iterator en Iterable
@@ -34,3 +36,9 @@ Sublist bespreken!
 ## Verzameling (Set)
 
 ### HashSet
+
+## Oefeningen
+
+### Multimap
+
+Schrijf een klasse `MultiMap` die een map voorstelt, maar waar bij elke key een verzameling van waarden hoort in plaats van slechts één waarde.
