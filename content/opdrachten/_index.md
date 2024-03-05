@@ -36,7 +36,7 @@ Er is 1 deadline voor alle opdrachten van het eerste deel van SES: vrijdag 15/03
 1. Maak op Github een lege public repository aan en push (--all) je git directory naar de nieuwe remote repository. 
 2. Maak op Github een nieuwe branch aan voor je repository genaamd “pull-requests”.
 3. Fork de repository van een medestudent en onderaan zijn/haar "Candy_Crush_spelregels.txt" het volgende toe:<br/> 
-`Nagekeken door \<je naam\>`<br/>
+`Nagekeken door <je naam>`<br/>
 4. Doe een pull request naar de originele student zijn/haar repository (gebruik de pull-request branch) 
 5. Kijk in je eigen repository de pull request na en merge pull in de pull-request branch 
 6. Merge in je eigen repository de pull-request branch in je main branch. (Lokaal of via Github) Tag die merge commit met de tag `v4.x`.
