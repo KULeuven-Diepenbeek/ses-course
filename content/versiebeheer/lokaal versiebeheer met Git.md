@@ -156,7 +156,7 @@ We hebben hier enkel de basis commando's aangehaald met een paar van de meest ge
 13. Switch terug naar je andere branch en maak op dezelfde plaats veranderingen en commit. Zo kan ga je een mergeconflict opwekken.
 14. Probeer nu weer je nieuwe branch te mergen met je main branch. Je zal eerst het merge conflict moeten oplossen
 15. Tag je eerste commit met `v1.0` en tag je laatste commit met `v2.0`.
-16. Doe een git revert naar je eerste commit door gebruik te maken van je nieuwe tags.
+16. Doe een git checkout naar je eerste commit door gebruik te maken van je nieuwe tags.
 17. Probeer van alle bovenstaande stappen een schets te maken om zo na te gaan of je alle commando's goed begrijpt.
 
 ---
