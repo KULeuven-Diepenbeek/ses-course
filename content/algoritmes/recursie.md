@@ -29,32 +29,6 @@ De recursie eindigt wanneer een basisgeval bereikt wordt.
 Dat is een situatie (meestal een zeer eenvoudige) waar het antwoord onmiddellijk gekend is, en geen recursieve oproep meer nodig is.
 In bovenstaande code voor `fibonacci` zijn de basisgevallen de oproepen waarin `n` kleiner is dan 2.
 
-## Eindigheid en invoergrootte
-
-Indien ze niet zorgvuldig gedefinieerd wordt, bestaat de kans dat een recursieve methode nooit eindigt.
-Bijvoorbeeld, onderstaande recursieve methode `bad`
-
-```java
-public static int bad(int n) {
-  if (n == 0) return 0;
-  return bad(n-2);
-}
-```
-
-zou enkel eindigen voor positieve even getallen (overtuig jezelf hiervan).
-
-TODO: Collatz?
-
-Om er zeker van te zijn dat een recursieve methode ooit eindigt, moeten we kunnen aantonen dat elke recursieve oproep ooit een basisgeval zal bereiken.
-Dat is niet altijd eenvoudig of mogelijk.
-Dat is echter wel vanzelfsprekend als elke recursieve oproep de grootte van de invoer strikt kleiner maakt, en de basisgevallen overeenkomen met de kleinst mogelijke invoergrootte(s).
-Aangezien een invoergrootte steeds (per definitie) een niet-negatief getal moet zijn, moet een voortdurende verkleining ervan ooit stoppen.
-
-Typische invoergroottes bij recursieve problemen zijn
-
-- de waarde van een parameter, indien dit een natuurlijk getal is (bijvoorbeeld `n` in fibonacci hierboven)
-- het aantal elementen in een datastructuur (lijst, set, ...) die gebruikt wordt
-
 ## Recursie achter de schermen
 
 Als we een recursieve functie uitvoeren, doet Java achter de schermen heel wat boekhouding voor ons.
@@ -96,11 +70,61 @@ class f0_1,f0_2 base
 class f1_1,f1_2,f1_3 base
 ```
 
+### Stack
+
 {{% todo message="leg uit hoe Stack gebruikt wordt" %}}
 
-{{% todo message="gevaar van Stack overflow" %}}
+### Stack overflow
+
+{{% todo message="gevaar van Stack overflow; stack size vergroten" %}}
+
+### Efficientie
 
 {{% todo message="efficientie van oplossing" %}}
+repeated calls, memoization (fibonacci)
+
+## Eindigheid en invoergrootte
+
+Indien een recursieve methode niet zorgvuldig gedefinieerd wordt, bestaat de kans dat ze nooit eindigt.
+Bijvoorbeeld, onderstaande recursieve methode `bad`
+
+```java
+public static int bad(int n) {
+  if (n == 0) return 0;
+  return bad(n-2);
+}
+```
+
+zou enkel eindigen voor positieve even getallen (overtuig jezelf hiervan).
+
+Om er zeker van te zijn dat een recursieve methode ooit eindigt, moeten we kunnen aantonen dat elke recursieve oproep ooit een basisgeval zal bereiken.
+Dat is niet altijd eenvoudig of mogelijk.
+Neem bijvoorbeeld volgende welgekende functie van Collatz:
+
+```java
+public static boolean collatz(int n) {
+  if (n == 1) {
+    return true;
+  } else if (n % 2 == 0) {
+    return collatz(n / 2);
+  } else {
+    return collatz(3*n + 1);
+  }
+}
+```
+
+Wanneer we die uitvoeren voor `n=5` krijgen we als waarden voor n achtereenvolgens `5, 16, 8, 4, 2, 1` en eindigt de recursie dus na 6 oproepen.
+Voor `n=12` krijgen we `12, 6, 3, 10, 5, 16, 8, 4, 2, 1`, en voor `n=19` krijgen we `19, 58, 29, 88, 44, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1`.
+De reeks waarden in deze voorbeelden lijkt dus steeds te eindigen op `n=1`, maar is dit zo voor elke beginwaarde van `n`?
+Er zijn geen gekende tegenvoorbeelden, maar er is ook geen bewijs dat dit het geval is voor elke beginwaarde van n.
+
+Bewijzen dat een recursieve functie eindigt is echter wel vanzelfsprekend als elke recursieve oproep de grootte van de invoer strikt kleiner maakt, en de basisgevallen overeenkomen met de kleinst mogelijke invoergrootte(s).
+Aangezien een invoergrootte steeds (per definitie) een niet-negatief getal moet zijn, moet een voortdurende verkleining ervan ooit stoppen.
+
+Typische invoergroottes bij recursieve problemen zijn
+
+- de waarde van een parameter, indien dit een natuurlijk getal is (bijvoorbeeld `n` in fibonacci hierboven)
+- het aantal elementen in een datastructuur (lijst, set, ...) die gebruikt wordt
 
 ## Recursief denken
 
@@ -269,6 +293,8 @@ public boolean isDivisibleBy(number, divisor) {
 ```java
 
 ```
+
+### (Snelle) macht
 
 ### Sum of digits
 
