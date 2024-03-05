@@ -1,3 +1,5 @@
+![Deploy to GitHub Pages](https://github.com/KULeuven-Diepenbeek/ses-course/actions/workflows/hugo.yml/badge.svg)
+
 # Software Engineering Skills
 
 Deze repository bevat de cursus voor het 2Bach IIW EA-ICT/INF vak **Software Engineering Skills**.

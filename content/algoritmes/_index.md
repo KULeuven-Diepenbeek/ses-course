@@ -1,6 +1,6 @@
 ---
-title: "5. Recursie en backtracking"
-weight: 5
+title: "6. Recursie en backtracking"
+weight: 6
 draft: true
 ---
 
