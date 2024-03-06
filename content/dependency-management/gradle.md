@@ -283,3 +283,37 @@ Indien je de fout "Could not initialize class `org.codehaus.groovy.reflection.Re
 ### Opgave
 
 Maak een nieuw JavaFX (gradle) project aan. Maak een kleine darts-applicatie die gebruik maakt van de scorebord-library die je in het vorige deel hebt aangemaakt. De JavaFX applicatie bestaat uit een dartsbord met 3 concentrische cirkels. Je kan je naam ingeven in een tekstveld. Je kan op de cirkels klikken om een score te krijgen. Binnenste cirkel is 3 punten, middenste cirkel is 2 punten, buitenste cirkel is 1 punt. Dit punt wordt direct toegevoegd aan je scorebord. Met een load-knop moet een vorig scorebord ingeladen worden, met een save-knop moet je het huidige scorebord kunnen opslaan. De huidige winnaar moet ook steeds getoond worden in een label.
+
+{{% notice warning %}}
+Aangezien IntelliJ je JavaFX project automatich als een module instelt is het belangrijk ook je eigen libraries in modules te steken. (Normaal gezien wordt er een naamloze module aangemaakt in het geval je dit niet doet, maar IntelliJ laat je met de standaard instellingen niet toe die naamloze modules te gebruiken.)
+
+Voeg daarom aan je library project een `module-info.java` file toe in de `./src/main/java` directory. Hieronder zie je een voorbeeld van hoe de file er moet uitzien voor je scorebord library. En hoe je JavaFX module-info file er moet uitzien om de library te kunnen gebruiken.
+
+(Je moet de library zelf ook nog altijd als dependency toevoegen in je `build.gradle` file zoals we al gewoon zijn)
+{{% /notice %}}
+
+**In de scorebord source files**
+```java
+//module-info.java
+
+//De naam van de module mag je in principe kiezen. In dit geval is het "be.kuleuven.scorebord"
+module be.kuleuven.scorebord {
+    requires com.google.gson; // Je moet alle modules oplijsten waarvan jouw project afhankelijk is
+    exports be.kuleuven;      // Moet de juiste package naam zijn
+
+    opens be.kuleuven to com.google.gson; // Geef je dependencies ook toegang tot je package
+}
+```
+
+**In de darts JavaFX source files**
+```java
+//module-info.java
+module be.kuleuven.darts {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires be.kuleuven.scorebord;  // Mijn scorebord module
+
+    opens be.kuleuven.darts to javafx.fxml;
+    exports be.kuleuven.darts;
+}
+```

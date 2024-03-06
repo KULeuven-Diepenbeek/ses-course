@@ -1,7 +1,10 @@
 ---
-title: '6.2 Software Management Skills'
-draft: true
+title: 'Software Management Skills'
+weight: 2
+draft: false
+author: Wouter Groeneveld
 ---
+
 
 ## De chaos van het Werk
 
@@ -57,7 +60,7 @@ Stel dat een simpel loginscherm reeds werd ontwikkeld. Men schat dan de moeilijk
 
 #### 3. Een iteratie
 
-Elke iteratie bestaande uit bijvoobeeld 30 dagen kan een team een bepaald aantal ingeschatte punten verwerken, zoals `30`. Men kiest een aantal taken waarvan de som van de inschatting niet dit maximum overschrijdt, en men begint aan de iteratie. 
+Elke iteratie bestaande uit bijvoorbeeld 30 dagen kan een team een bepaald aantal ingeschatte punten verwerken, zoals `30`. Men kiest een aantal taken waarvan de som van de inschatting niet dit maximum overschrijdt, en men begint aan de iteratie. 
 
 Elke dag is er 's morgens een **scrum stand-up**: een korte, rechtstaande vergadering, waarin iedereen vertelt:
 
@@ -126,9 +129,9 @@ Het effect is erg uitgesproken op de tweede grafiek. Op dag 3 valt het team voll
 
 Deze informatie is erg belangrijk omdat het kan worden gebruikt om toekomstige sprints in te plannen. Grafieken worden ge-extrapoleerd om een betere inschatting te kunnen maken van het toekomstige werk. Een consistent goed presterend team - de remaining effort lijn ligt onder de remaining time - kan in de toekomst bijvoorbeeld meer werk aan binnen dezelfde iteratie. Het is dan aan de team leider om dit naargelang in te plannen.
 
-_Lees meer over de burndown chart via het extra leermateriaal._
+_Lees meer over de burndown chart via de extra bronnen._
 
-## <a name="oef"></a>Labo oefeningen
+<!-- ## <a name="oef"></a>Labo oefeningen
 
 ### Opgave 1
 
@@ -160,11 +163,7 @@ Denk aan de juiste taken voor de juiste rollen!
 - Wat is het voordeel van taken of stories relatief ten opzichte van een referentiestory in te schatten, in plaats van een hoeveelheid in tijd zoals dagen of uren te gebruiken? 
 - Wat is het verschil in taak tussen de Product Owner en de Customer Proxy?
 - Hoe lang moet een ideale iteratie volgens jou zijn, in dagen? Beargumenteer.
-- Waarvoor kan een burndown chart gebruikt worden? Bedenk minstens drie verschillende mogelijkheden en beargumenteer. 
+- Waarvoor kan een burndown chart gebruikt worden? Bedenk minstens drie verschillende mogelijkheden en beargumenteer.  -->
 
-## Extra Leermateriaal
 
-- [Ken Schwaber, Jeff Sutherland: What is Scrum?](https://www.scrum.org/resources/what-is-scrum/)
-- [Dusan Kocurek: Understanding the Scrum Burndown Chart](http://www.methodsandtools.com/archive/scrumburndown.php)
-- [Martin Fowler: Agile Software Guide](https://martinfowler.com/agile.html)
 
