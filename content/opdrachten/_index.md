@@ -140,7 +140,9 @@ Voor het model moeten er minstens 10 unit testen geschreven worden. Maak ook geb
 
 Commit nu de veranderingen in je directory en tag als `v6.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
 
-<!-- ### Continuous Integration and Continuous Deployment
+### Continuous Integration and Continuous Deployment
 #### Opdracht 7:
 
-Commit nu de veranderingen in je directory en tag als `v7.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github. -->
+Gebruik Github Actions om een CI-pipeline aan te maken die steeds je testen van je JavaFX candycrush applicatie uitvoert wanneer je naar de `main` branch pusht. Voorzie ook een badge in een README.md in de root folder van je git directory zodat je in één opslag kan zien wanneer de tests falen. Bescherm ten slotte je `main` branch tegen pull request, zodat eerst de CI-pipeline succesvol moet zijn voordat mensen een pull-request kunnen indienen.
+
+Commit nu de veranderingen in je directory en tag als `v7.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
