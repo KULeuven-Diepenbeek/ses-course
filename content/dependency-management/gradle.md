@@ -286,9 +286,7 @@ Maak een nieuw JavaFX (gradle) project aan. Maak een kleine darts-applicatie die
 
 {{% notice warning %}}
 Aangezien IntelliJ je JavaFX project automatich als een module instelt is het belangrijk ook je eigen libraries in modules te steken. (Normaal gezien wordt er een naamloze module aangemaakt in het geval je dit niet doet, maar IntelliJ laat je met de standaard instellingen niet toe die naamloze modules te gebruiken.)
-
 Voeg daarom aan je library project een `module-info.java` file toe in de `./src/main/java` directory. Hieronder zie je een voorbeeld van hoe de file er moet uitzien voor je scorebord library. En hoe je JavaFX module-info file er moet uitzien om de library te kunnen gebruiken.
-
 (Je moet de library zelf ook nog altijd als dependency toevoegen in je `build.gradle` file zoals we al gewoon zijn)
 {{% /notice %}}
 
