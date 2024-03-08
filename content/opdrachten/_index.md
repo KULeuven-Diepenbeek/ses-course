@@ -106,6 +106,7 @@ Commit nu de veranderingen in je directory en tag als `v5.x` ('x' start bij 0 en
 #### Opdracht 6: (Aanzet wordt in de les gegeven)
 
 Maak een JavaFX (gebruik Gradle) project aan met als projectnaam candycrush.
+(Je han [hier](https://github.com/KULeuven-Diepenbeek/ses-demos-exercises-student/tree/main/opdrachten/CandycrushJavaFXstartProject/candycrush) een start 'candycrush' javaFX project terugvinden.)
 
 Je gitrepo heeft nu dus volgende structuur:
 ```
