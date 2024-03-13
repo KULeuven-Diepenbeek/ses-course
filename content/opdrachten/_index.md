@@ -102,6 +102,8 @@ Je gitrepo heeft nu dus volgende structuur:
 
 Commit nu de veranderingen in je directory en tag als `v5.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
 
+_Krijg je je `.jar` file niet te zien in Github, dan kan het zijn dat je deze nog forcably moet toevoegen aan git via het commando `$ add -f *.jar`_
+
 ### Test Driven Development
 #### Opdracht 6: (Aanzet wordt in de les gegeven)
 
