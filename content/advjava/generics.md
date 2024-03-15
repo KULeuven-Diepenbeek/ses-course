@@ -72,6 +72,8 @@ Dat leidt tot veel onnodige en ongewenste code-duplicatie.
 ### Een generische klasse definiëren
 
 Met generics kan je een _type_ gebruiken als parameter voor een klasse om deze code-duplicatie vermijden.
+Met andere woorden, je kan een generische klasse ook zien als een soort functie (soms een _type constructor_ genoemd) die een een nieuw type maakt, gebaseerd op één of meerdere gegeven types.
+
 Generics geven je dus een combinatie van beide opties: er moet slechts 1 implementatie gemaakt worden (zoals bij `ArrayList` hierboven), en deze implementatie kan gebruikt worden om lijsten met een specifiek element-type te maken (zoals bij `ArrayListOfStudents`).
 
 De type-parameter staat tussen `<` en `>`, en je kan deze type-parameter vervolgens gebruiken in heel de klasse.
@@ -91,8 +93,8 @@ De reden waarom vaak met individuele letters gewerkt wordt, is om duidelijk te m
 ```java
 class ArrayList<Element> {
   private Element[] elements;
-  public void add(Element element) { /_ ... _/ }
-  public Element get(int index) { /_ ... _/ }
+  public void add(Element element) { /* ... */ }
+  public Element get(int index) { /* ... */ }
 }
 ```
 
@@ -140,6 +142,12 @@ Bij het aanmaken moet je dan voor elke parameter een type opgeven:
 Tuple3<String, Integer, Student> tuple = new Tuple3<>("John", 23, student);
 ```
 
+{{% notice note %}}
+Merk op dat het aan te raden is om het gebruik van dergelijk tuple-type te vermijden in je code, niet omdat het drie generische parameters heeft, maar wel omdat het niets zegt over de betekenis van de velden.
+Gebruik veel liever een record waar je de individuele componenten namen kan geven.
+Bijvoorbeeld: `record ExtractedStudentInfo(String firstName, int age, Student student) {}`.
+{{% /notice %}}
+
 ## Generische parameters begrenzen (bounds)
 
 Een type-parameter `<E>` zoals we die tot nu toe gezien hebben kan om het even welke klasse voorstellen.
@@ -149,9 +157,18 @@ Stel bijvoorbeeld dat we volgende klasse-hierarchie hebben:
 <div style="display: grid; grid-template-columns: 1fr 1fr; align-items: center;">
 
 ```java
-abstract class Animal { /* ... */ }
-class Cat extends Animal { /* ... */ }
-class Dog extends Animal { /* ... */ }
+abstract class Animal {
+  /* ... */
+  abstract void showLike();
+}
+class Cat extends Animal {
+  /* ... */
+  void showLike() { System.out.println("Purring"); }
+}
+class Dog extends Animal {
+  /* ... */
+  void showLike() { System.out.println("Wagging tail"); }
+}
 ```
 
 ```mermaid
@@ -162,11 +179,14 @@ Dog --> Animal
 
 </div>
 
-We maken nu een generische klasse `Food`:
+We maken nu een generische klasse `Food`, geparametriseerd met het type dier (`T`) dat dat voedsel eet:
 
 ```java
 class Food<T> {
-  public void giveTo(T animal) { /* ... */ }
+  public void giveTo(T animal) {
+    /* ... */
+    animal.showLike(); // <= compiler error :(
+  }
 }
 
 Food<Cat> catFood = new Food<>();       // OK
@@ -175,7 +195,7 @@ Food<String> stringFood = new Food<>(); // ook OK? :(
 
 Deze klasse is enkel bedoeld om met (subklassen van) `Animal` gebruikt te worden.
 Maar het is ook mogelijk om een `Food<String>` te maken.
-Verder zal de compiler ook weigeren om in de methode `giveTo` een `Animal`-specifieke methode op te roepen, omdat de parameter `animal` type `T` heeft, en dat kan eender wat zijn.
+Verder zal de compiler ook weigeren om in de methode `giveTo` een `Animal`-specifieke methode op te roepen (bv. `showLike`), omdat de parameter `animal` type `T` heeft, en dat kan eender wat zijn.
 
 We kunnen aangeven dat type `T` een subtype moet zijn van `Animal` via `<T extends Animal>`.
 Je zal dan niet langer `Food<String>` mogen schrijven, aangezien `String` geen subklasse is van `Animal`.
@@ -183,7 +203,10 @@ We **begrenzen** dus de mogelijke types die gebruikt kunnen worden voor de type-
 
 ```java
 class Food<T extends Animal> {
-  public void giveTo(T animal) { /* ... */ }
+  public void giveTo(T animal) {
+    /* ... */
+    animal.showLike(); // <= OK!
+  }
 }
 
 Food<Cat> catFood = new Food<>();       // nog steeds OK
@@ -196,11 +219,51 @@ Hierboven hebben we steeds een hele klasse generisch gemaakt.
 In sommige gevallen kan het ook nuttig zijn om een generische **methode** te definiëren.
 Dat kan in een klasse die zelf geen type-parameters heeft:
 
-TODO
+```java
+class AnimalHelper {
+  public static <T extends Animal> ArrayList<T> findHappyAnimals(ArrayList<T> animals) { /* ... */ }
+}
+
+ArrayList<Cat> cats = new ArrayList<>();
+/* ... */
+ArrayList<Cat> happyCats = AnimalHelper.findHappyAnimals(cats);
+```
+
+Merk op hoe we, door het type `T` te gebruiken in zowel de parameter als het terugkeertype, kunnen garanderen dat de teruggegeven lijst precies hetzelfde type elementen heeft als de parameter (zonder dat we moeten weten welk type dier dat precies is).
+
+Op dezelfde manier kan je ook het type van meerdere parameters (en eventueel het terugkeertype) aan elkaar verbinden.
+In het voorbeeld hieronder zie je een methode die paren kan maken tussen dieren; de methode kan gebruikt worden voor elk type dier, maar maakt enkel paren van dezelfde soort.
+Je ziet meteen ook een voorbeeld van een generisch record-type `AnimalPair`.
 
 ```java
+class AnimalHelper {
+  public record AnimalPair<T extends Animal>(T male, T female) {} // <= voorbeeld van een generisch record
+  public static <T extends Animal> ArrayList<AnimalPair<T>> makePairs(ArrayList<T> males, ArrayList<T> females) { /* ... */ }
+}
 
+ArrayList<Cat> maleCats = ...
+ArrayList<Cat> femaleCats = ...
+ArrayList<Dog> femaleDogs = ...
+ArrayList<AnimalPair<Cat>> pairedCats = makePairs(maleCats, femaleCats); // OK
+
+ArrayList<AnimalPair<Animal>> pairedMix = makePairs(maleCats, femaleDogs); // niet OK (compiler error)
 ```
+
+Als het type `T` niet van belang is, omdat het niet terugkomt in het terugkeertype van de methode of een andere parameter, heb je geen genersiche methode nodig.
+Je kan dan ook gewoon het wildcard-type `? extends X` (of gewoon `?` indien het type niet begrensd moet worden) gebruiken (zie later).
+In plaats van
+
+```java
+  public static <T extends Animal> void feedAll(ArrayList<T> animals) { /* ... */ }
+```
+
+kan je dus ook de generische parameter weglaten, en hetvolgende schrijven:
+
+```java
+  public static void feedAll(ArrayList<? extends Animal> animals) { /* ... */ }
+```
+
+Je leest deze methode-signatuur als 'de methode `feedAll` neemt als parameter een lijst met elementen van een specifiek maar onbekend subtype van `Animal`'.
 
 ## Oefeningen (1)
 
