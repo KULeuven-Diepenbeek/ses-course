@@ -263,54 +263,85 @@ kan je dus ook de generische parameter weglaten, en hetvolgende schrijven:
   public static void feedAll(ArrayList<? extends Animal> animals) { /* ... */ }
 ```
 
-Je leest deze methode-signatuur als 'de methode `feedAll` neemt als parameter een lijst met elementen van een specifiek maar onbekend subtype van `Animal`'.
+Je leest deze methode-signatuur als 'de methode `feedAll` neemt als parameter een lijst met elementen van een niet nader bepaald subtype van `Animal`'.
 
 ## Oefeningen (1)
 
-### NonNull-klasse
-
-Schrijf een generische klasse (of record) `NonNull` die een waarde van een bepaald type kan bevatten. Deze waarde mag niet null zijn.
-Het type wordt bepaald door de generische parameter.
-Hieronder vind je enkele tests voor de klasse.
-
-```java
-@Test
-void valueIsStored() {
-    NonNull<String> someString = new NonNull<>("Hello");
-    assertThat(someString.getValue(), is("Hello"));
-}
-@Test
-void nullIsRefused() {
-    assertThrows(NullPointerException.class, () -> {
-        new NonNull<>(null);
-    });
-}
-```
+Voor de tests maken we gebruik van [assertJ](https://assertj.github.io/doc).
 
 ### Maybe-klasse
 
 1. Schrijf een generische klasse (of record) `Maybe` die een object voorstelt dat nul of één waarde van een bepaald type kan bevatten.
-   Dat type wordt bepaald door een generische parameter.
+   Dat type wordt bepaald door een generische parameter. Je kan Maybe-objecten enkel aanmaken via de statische methodes `some` en `none`.
+   Hieronder vind je twee tests:
+
+```java
+@Test
+public void maybeWithValue() {
+    Maybe<String> maybe = Maybe.some("Yes");
+    assertThat(maybe.hasValue()).isTrue();
+    assertThat(maybe.getValue()).isEqualTo("Yes");
+}
+
+@Test
+public void maybeWithoutValue() {
+    Maybe<String> maybe = Maybe.none();
+    assertThat(maybe.hasValue()).isFalse();
+    assertThat(maybe.getValue()).isNull();
+}
+```
 
 2. Maak de `print`-methode hieronder ook generisch, zodat deze niet enkel werkt voor een `Maybe<String>` maar ook voor andere types dan `String`.
 
 ```java
-public static void print(Maybe<String> maybe) {
-  if (maybe.hasValue()) {
-    System.out.println("Contains a value: " + maybe.getValue());
-  } else {
-    System.out.println("No value :(");
+class MaybePrint {
+  public static void print(Maybe<String> maybe) {
+    if (maybe.hasValue()) {
+      System.out.println("Contains a value: " + maybe.getValue());
+    } else {
+      System.out.println("No value :(");
+    }
+  }
+
+  public static void main(String[] args) {
+    Maybe<String> maybeAString = Maybe.some("yes");
+    Maybe<String> maybeAnotherString = Maybe.none();
+
+    print(maybeAString);
+    print(maybeAnotherString);
   }
 }
-
-Maybe<String> maybeAString = new Maybe<>("yes");
-Maybe<String> maybeAnotherString = new Maybe<>(null);
-
-print(maybeAString);
-print(maybeAnotherString);
 ```
 
-### SuccessOrFail
+3. Voeg aan `Maybe` een generische methode `map` toe die een `java.util.function.Function<T, R>`-object als parameter heeft, en die een nieuw Maybe-object teruggeeft, met daarin het resultaat van de functie toegepast op het element als er een element is, of een leeg Maybe-object in het andere geval.
+   Zie de tests hieronder voor een voorbeeld van hoe deze map-functie gebruikt wordt:
+
+```java
+@Test
+public void maybeMapWithValue() {
+    Maybe<String> maybe = Maybe.some("Hello");
+    Maybe<Integer> result = maybe.map((str) -> str.length());
+    assertThat(result.hasValue()).isTrue();
+    assertThat(result.getValue()).isEqualTo(5);
+}
+
+@Test
+public void maybeMapWithValue2() {
+    Maybe<String> maybe = Maybe.some("Hello");
+    Maybe<String> result = maybe.map((str) -> str + "!");
+    assertThat(result.hasValue()).isTrue();
+    assertThat(result.getValue()).isEqualTo("Hello!");
+}
+
+@Test
+public void maybeMapWithoutValue() {
+    Maybe<String> maybe = Maybe.none();
+    Maybe<Integer> result = maybe.map((str) -> str.length());
+    assertThat(result.hasValue()).isFalse();
+}
+```
+
+### (extra) SuccessOrFail
 
 Schrijf een generische klasse (of record) `SuccessOrFail` die een object voorstelt dat precies één element bevat.
 Dat element heeft 1 van 2 mogelijke types (die types zijn generische parameters).
@@ -322,15 +353,15 @@ Een voorbeeld van tests voor die klasse vind je hieronder:
 @Test
 public void success() {
     SuccessOrFail<String, Exception> result = SuccessOrFail.success("This is the result");
-    assertThat(result.isSuccess(), is(true));
-    assertThat(result.successValue(), is("This is the result"));
+    assertThat(result.isSuccess()).isTrue();
+    assertThat(result.successValue()).isEqualTo("This is the result");
 }
 
 @Test
 public void failure() {
     SuccessOrFail<String, Exception> result = SuccessOrFail.fail(new IllegalStateException());
-    assertThat(result.isSuccess(), is(false));
-    assertThat(result.failValue(), is(instanceOf(IllegalStateException.class)));
+    assertThat(result.isSuccess()).isFalse();
+    assertThat(result.failValue()).isInstanceOf(IllegalStateException.class);
 }
 ```
 
@@ -360,7 +391,7 @@ Bird --> Animal
 
 Het behavioral subtyping-principe (soms ook het Liskov substitutie-principe genoemd) zegt dat **overal waar een object van type `T` verwacht wordt, ook een object van een subtype van `T` toegelaten wordt**.
 De Java compiler zal deze regel respecteren.
-Bijvoorbeeld, volgende toekenningen maken gebruik van het dit principe, en zijn dus toegelaten:
+Bijvoorbeeld, volgende toekenningen maken gebruik van dit principe, en zijn dus toegelaten:
 
 ```java
 Animal animal = new Cat();
@@ -388,7 +419,7 @@ layEgg(cat); // <- niet toegelaten (compiler error)
 Een lijst in Java is een geordende groep van elementen van hetzelfde type.
 `List<E>` is de interface[^2] die aan de basis ligt van alle lijsten.
 `ArrayList<E>` is een klasse die een lijst implementeert met behulp van een array.
-`ArrayList<E>` is een subtype van `List<E>`; volgens het principe kan dus, overal waar een lijst-object verwacht wordt, een lijst gebruikt worden die geïmplementeerd is met arrays.
+`ArrayList<E>` is een subtype van `List<E>`; volgens het principe kan dus, overal waar een `List`-object verwacht wordt, ook een `ArrayList` gebruikt worden.
 [Later](/advjava/collections) zullen we ook zien dat er een interface `Collection<E>` bestaat, wat een willekeurige groep van elementen voorstelt: niet enkel een lijst, maar bijvoorbeeld ook verzamelingen (`Set`) of wachtrijen (`Queue`).
 `List<E>` is een subtype van `Collection<E>`. Bijgevolg is ook `ArrayList<E>` een subtype van `Collection<E>`.
 
@@ -517,7 +548,7 @@ In sommige situaties willen we wel zo'n relatie kunnen leggen.
 
 ### Covariantie (extends)
 
-Wat als we een methode willen schrijven die de dieren uit een gegeven lijst toevoegt aan een andere lijst van dieren? Bijvoorbeeld:
+Wat als we een methode `copyFromTo` willen schrijven die de dieren uit een gegeven (bron-)lijst toevoegt aan een andere (doel-)lijst van dieren? Bijvoorbeeld:
 
 ```java
 public static void copyFromTo(ArrayList<Animal> source, ArrayList<Animal> target) {
@@ -566,8 +597,8 @@ Het type `ArrayList<? extends Animal>` staat dus voor _"elke ArrayList waar het 
 Volgende code is nu toegelaten:
 
 ```java
-copyFromTo_wildcard(dogs, target); // OK!
-copyFromTo_wildcard(cats, target); // OK!
+copyFromTo_wildcard(dogs, animals); // OK!
+copyFromTo_wildcard(cats, animals); // OK!
 ```
 
 Dit heet **covariantie**: omdat `Cat` een subtype is van `Animal`, is `ArrayList<Cat>` een subtype van `ArrayList<? extends Animal>`.
@@ -589,6 +620,8 @@ class ALCat,Cat cat;
 class ALAnimal,Animal,ALextendsAnimal animal;
 ```
 
+Merk op dat `ArrayList<Animal>` ook een subtype is van `ArrayList<? extends Animal>`.
+
 We kunnen ook de relatie met `Mammal` toevoegen:
 
 ```mermaid
@@ -599,11 +632,11 @@ ALextendsMammal["ArrayList#lt;? extends Mammal>"]
 ALextendsCat["ArrayList#lt;? extends Cat>"]
 ALAnimal["ArrayList#lt;Animal>"]
 ALMammal["ArrayList#lt;Mammal>"]
-ALCat --> ALextendsCat
-ALextendsMammal --> ALextendsAnimal
-ALextendsCat --> ALextendsMammal
 ALAnimal --> ALextendsAnimal
+ALextendsMammal --> ALextendsAnimal
 ALMammal --> ALextendsMammal
+ALextendsCat --> ALextendsMammal
+ALCat --> ALextendsCat
 
 Cat --> Mammal
 Mammal --> Animal
@@ -619,9 +652,27 @@ class ALAnimal,Animal,ALextendsAnimal animal;
 
 Tenslotte kan je in Java ook `<?>` schrijven; dat is een verkorte notatie voor `<? extends Object>`. Je interpreteert `<?>` dus als _een willekeurig maar niet gekend type_. Merk op dat `<?>` dus niet hetzelfde is als `<Object>`.
 
-TODO: ? is onbekend type; twee verschillende wildcards zijn verschillend type (wil je zelfde? naam geven!)
+Hou er ook rekening mee dat elk voorkomen van `<?>` voor een ander type staat (of kan staan). Hetvolgende kan dus niet:
 
-Onderstaande code is ongeldig. Waarom?
+```java
+public void copyMammalsFromTo(
+      ArrayList<? extends Mammal> source,
+      ArrayList<? extends Mammal> target) {
+  for (Mammal m : source) { target.add(m); } // compileert niet!
+}
+```
+
+omdat de eerste `ArrayList<? extends Mammal>` (`source`) bijvoorbeeld een `ArrayList<Cat>` kan zijn, en de tweede (`target`) een `ArrayList<Dog>`. Als je de types van beide parameters wil linken, gebruik je een generische methode (zoals eerder gezien):
+
+```java
+public <T extends Mammal> void copyMammalsFromTo(
+    ArrayList<T> source,
+    ArrayList<T> target) {
+  for (Mammal m : source) { target.add(m); } // OK!
+}
+```
+
+Onderstaande code is ook ongeldig. Waarom?
 
 ```java
 ArrayList<?> lijst = new ArrayList<String>();
@@ -633,36 +684,35 @@ Het feit dat `lijst` geinititialiseerd wordt met `<String>` doet hier niet terza
 
 #### Oefening: covariantie
 
-Breid het schema hierboven uit met de wildcard `<? extends Cat>`.
+Maak een schema met de overervingsrelaties tussen
 
-```mermaid
-graph BT
-ALCat["ArrayList#lt;Cat>"]
-ALextendsAnimal["ArrayList#lt;? extends Animal>"]
-ALextendsCat["ArrayList#lt;? extends Cat>"]
-LCat["List#lt;Cat>"]
-LextendsCat["List#lt;? extends Cat>"]
-LextendsAnimal["List#lt;? extends Animal>"]
-LAnimal["List#lt;Animal>"]
-ALAnimal["ArrayList#lt;Animal>"]
-ALCat --> ALextendsCat
-ALCat --> LCat
-LCat --> LextendsCat
-LextendsCat --> LextendsAnimal
-LAnimal --> LextendsAnimal
-ALAnimal --> LAnimal
-ALAnimal --> ALextendsAnimal
-ALextendsAnimal --> LextendsAnimal
-ALextendsCat --> ALextendsAnimal
-ALextendsCat --> LextendsCat
-```
+- `List<Cat>`
+- `List<? extends Cat>`
+- `ArrayList<Cat>`
+- `ArrayList<? extends Cat>`
+- `List<Animal>`
+- `List<? extends Animal>`
+- `ArrayList<Animal>`
+- `ArrayList<? extends Animal>`
+
+{{%expand "Oplossing" %}}
+
+- `ArrayList<Cat>` is een subtype van `List<Cat>` en van `ArrayList<? extends Cat>`.
+- `List<Cat>` is een subtype van `List<? extends Cat>`
+- `ArrayList<? extends Cat>` is een subtype van `List<? extends Cat>` en van `ArrayList<? extends Animal>`
+- `ArrayList<Animal>` is een subtype van `ArrayList<? extends Animal>` en `List<Animal>`
+- `List<? extends Cat>`, `ArrayList<? extends Animal>` en `List<Animal>` zijn alledrie subtypes van `List<? extends Animal>`
+
+{{% /expand %}}
 
 ### Contravariantie (super)
 
 Wat als we het omgekeerde willen van hierboven: een methode die de katten uit een gegeven lijst haalt en toevoegt aan een andere lijst van dieren? Bijvoorbeeld:
 
 ```java
-public static void copyFromCatsTo(ArrayList<Cat> source, ArrayList<Animal> target) {
+public static void copyFromCatsTo(
+      ArrayList<Cat> source,
+      ArrayList<Animal> target) {
   for (Cat cat : source) { target.add(a); }
 }
 
@@ -678,7 +728,17 @@ copyFromTo(cats, animals);   // OK
 ```
 
 De eerste twee `copyFromTo`-regels zijn niet toegelaten, maar zouden opnieuw erg nuttig kunnen zijn.
-Aparte methodes schrijven leidt opnieuw tot code-duplicatie:
+Extends helpt ook niet:
+
+```java
+public static void copyFromCatsTo(
+      ArrayList<Cat> source,
+      ArrayList<? extends Animal> target) {
+  for (Cat cat : source) { target.add(a); } // ook niet toegelaten
+}
+```
+
+En aparte methodes schrijven leidt opnieuw tot code-duplicatie:
 
 ```java
 public static void copyFromCatsToCats(ArrayList<Cat> source, ArrayList<Cat> target) {
@@ -714,31 +774,28 @@ copyFromCatsTo_wildcard(cats, mammals);   // OK
 copyFromCatsTo_wildcard(cats, animals);   // OK
 ```
 
-Dit heet **contravariantie**: hoewel `Cat` een subtype is van `Animal`, is `ArrayList<Animal>` een subtype van `ArrayList<? super Cat>`.
+Dit heet **contravariantie**: hoewel `Cat` een **subtype** is van `Animal`, is `ArrayList<? super Cat>` een **supertype** van`ArrayList<Animal>`.
 De 'contra' in contravariantie wijst erop dat de overervingsrelatie tussen `Cat` en `Animal` in de omgekeerde richting loopt als die tussen `ArrayList<? super Cat>` en `ArrayList<Animal>`.
+Bekijk volgende figuur aandachtig:
 
 ```mermaid
 graph BT
 ALsuperCat["ArrayList#lt;? super Cat>"]
 ALAnimal["ArrayList#lt;Animal>"]
-ALMammal["ArrayList#lt;Mammal>"]
 ALCat["ArrayList#lt;Cat>"]
 ALAnimal --> ALsuperCat
-ALMammal --> ALsuperCat
 ALCat --> ALsuperCat
 
-Cat --> Mammal
-Mammal --> Animal
+Cat --> Animal
 classDef cat fill:#f99,stroke:#333,stroke-width:4px;
 classDef mammal fill:#9f9,stroke:#333,stroke-width:4px;
 classDef animal fill:#99f,stroke:#333,stroke-width:4px;
 class ALCat,ALsuperCat,Cat cat;
-class ALMammal,Mammal mammal;
 class ALAnimal,Animal animal;
 
 ```
 
-Als we ook `ArrayList<? super Mammal>` en `ArrayList<? super Animal>` toevoegen aan het plaatje, ziet dat er als volgt uit:
+Als we ook `ArrayList<Mammal`, `ArrayList<? super Mammal>`, en `ArrayList<? super Animal>` toevoegen aan het plaatje, ziet dat er als volgt uit:
 
 ```mermaid
 graph BT
@@ -765,9 +822,9 @@ class ALMammal,Mammal,ALsuperMammal mammal;
 class ALAnimal,Animal,ALsuperAnimal animal;
 ```
 
-Aan de hand van de kleuren kan je zien dat de overervingsrelatie omgekeerd verloopt.
+Aan de hand van de kleuren kan je snel zien dat de overervingsrelatie omgekeerd verloopt.
 
-### Covariant of contravariant: PECS
+### Covariantie of contravariantie: PECS
 
 Als we covariantie en contravariantie combineren, krijgen we volgend beeld (we focussen op de extends- en super-relatie vanaf `Mammal`):
 
@@ -799,12 +856,93 @@ class ALAnimal,Animal animal;
 Hier zien we dat, met het covariante `ArrayList<? extends Mammal>`, we een `ArrayList<Mammal>` of `ArrayList<Cat>` kunnen gebruiken.
 Met een contravariante `ArrayList<? super Mammal>` kunnen we opnieuw een `ArrayList<Mammal>` gebruiken, maar ook een `ArrayList<Animal>`.
 
-Wanneer gebruik je wat?
-PECS: Producer Extends, Consumer Super
+Hoe weet je nu wanneer je wat gebruikt? Wanneer kies je extends, en wanneer super?
+Een goede vuistregel is het acroniem **PECS**, wat staat voor **P**roducer **E**xtends, **C**onsumer **S**uper.
+Dus:
+
+- Wanneer de lijst gebruikt wordt als een producent van `T`'s (met andere woorden, het geeft `T`-objecten aan de code om te gebruiken), gebruik je `<? extends T>`.
+- Wanneer de lijst gebruikt wordt als een consument van `T`'s (met andere woorden, het neemt `T`-objecten van de code aan), gebruik je `<? super T>`.
+- Wanneer de lijst zowel als consument als als producent gebruikt wordt, gebruik je gewoon `<T>` (dus geen co- of contra-variantie).
+
+Een voorbeeld: we willen een methode `copyFromTo` die zo flexibel mogelijk is, om elementen uit een lijst van zoogdieren te kopiëren naar een andere lijst.
+
+```java
+void copyMammalsFromTo(
+    ??? source,
+    ??? target) {
+  for (Mammal m : source) {
+    target.add(m);
+  }
+}
+```
+
+De `source`-lijst is de **producent**: daaruit halen we Mammal-objecten op. Daar gebruiken we dus **extends**:
+
+```java
+void copyMammalsFromTo(
+    List<? extends Mammal> source,
+    ??? target) {
+  for (Mammal m : source) {
+    target.add(m);
+  }
+}
+```
+
+De `target`-lijst is de **consument**: daar steken we Mammal-objecten in. Daar gebruiken we dus **super**:
+
+```java
+void copyMammalsFromTo(
+    List<? extends Mammal> source,
+    List<? super Mammal> target) {
+  for (Mammal m : source) {
+    target.add(m);
+  }
+}
+```
+
+Met deze methode kunnen we nu alle zinvolle operaties uitvoeren, terwijl de zinloze operaties tegengehouden worden door de compiler:
+
+```java
+ArrayList<Cat> cats = /* ... */
+ArrayList<Dog> dogs = /* ... */
+ArrayList<Bird> birds = /* ... */
+ArrayList<Mammal> mammals = /* ... */
+ArrayList<Animal> animals = /* ... */
+
+copyMammalsFromTo(cats, animals); // OK
+copyMammalsFromTo(cats, mammals); // OK
+copyMammalsFromTo(cats, cats); // OK
+
+copyMammalsFromTo(mammals, animals); // OK
+
+copyMammalsFromTo(cats, dogs);
+// compiler error (Dog is geen supertype van Mammal)
+
+copyMammalsFromTo(birds, animals);
+// compiler error (Bird is geen subtype van Mammal)
+```
+
+Merk op dat het type Mammal in onze laatste versie van `copyMammalsFromTo` hierboven eigenlijk onnodig is. We kunnen de methode nog verder veralgemenen door er een generische methode van te maken, die werkt voor alle lijsten:
+
+```java
+<T> void copyFromTo(
+    List<? extends T> source,
+    List<? super T> target) {
+  for (T element : source) {
+    target.add(element);
+  }
+}
+```
+
+Met deze versie kunnen we ook Birds kopiëren:
+
+```java
+copyFromTo(birds, animals); // OK
+```
 
 ### Arrays en type erasure
 
-In tegenstelling tot ArrayLists (en andere generische types), beschouwt Java arrays wel als co-variant.
+In tegenstelling tot ArrayLists (en andere generische types), beschouwt Java arrays wel altijd als co-variant.
 Dat betekent dat `Cat[]` een subtype is van `Animal[]`.
 Volgende code compileert dus (maar gooit een uitzondering bij het uitvoeren):
 
@@ -813,7 +951,7 @@ Animal[] cats = new Cat[2];
 cats[0] = new Dog(); // compileert, maar faalt tijdens het uitvoeren
 ```
 
-De reden hiervoor is, in het kort, dat informatie over generics gewist wordt bij het compileren.
+De reden hiervoor is, in het kort, dat informatie over generics gewist wordt bij het compileren van de code.
 Dit heet **type erasure**.
 In de gecompileerde code is een `ArrayList<Animal>` en `ArrayList<Cat>` dus exact hetzelfde.
 Er kan dus, tijdens de uitvoering, niet gecontroleerd worden of je steeds het juiste type gebruikt.
@@ -822,42 +960,117 @@ Bij arrays wordt er _wel_ type-informatie bijgehouden na het compileren, en kan 
 
 ## Oefeningen (2)
 
-### Fruit
+### Shop
 
-Apple/Orange < Fruit
-FruitBasket
+Maak een klasse `Shop` die een winkel voorstelt die items (subklasse van `StockItem`) aankoopt.
+Een Shop-object wordt geparametriseerd met het type items dat aangekocht kan worden. We beschouwen hier `Fruit` en `Electronics`.
+
+`Shop` heeft twee methodes:
+
+- `buy`, die een lijst van items toevoegt aan de stock;
+- `addStockToInventory`, die de lijst van items in stock toevoegt aan de meegegeven inventaris-lijst.
+
+Voor het fruit maak je een abstracte klasse `Fruit`, en subklassen `Apple` en `Orange`.
+Maak daarnaast nog een abstracte klasse `Electronics`, met als subklasse `Smartphone`.
+
+Zorg dat onderstaande code (ongewijzigd) compileert en dat de test slaagt:
+
+```java
+@Test
+public void testGenerics() {
+  Shop<Fruit> fruitShop = new Shop<>();
+  Shop<Electronics> electronicsShop = new Shop<>();
+
+  List<Apple> apples = List.of(new Apple(), new Apple());
+  List<Fruit> oranges = List.of(new Orange(), new Orange(), new Orange());
+
+  List<Smartphone> phones = List.of(new Smartphone(), new Smartphone());
+
+  fruitShop.buy(apples);
+  fruitShop.buy(oranges);
+
+  electronicsShop.buy(phones);
+
+  List<StockItem> inventory = new ArrayList<>();
+  fruitShop.addStockToInventory(inventory);
+  Assertions.assertThat(inventory).hasSize(5);
+
+  electronicsShop.addStockToInventory(inventory);
+
+  Assertions.assertThat(inventory).hasSize(7);
+}
+```
 
 ### Animal food
 
 **Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen**
 
-Gebruik generics (met grenzen/bounds) in de code hieronder, zodat de code (behalve de laatste regel) compileert,
+Voeg generics (met grenzen/bounds) toe aan de code hieronder, zodat de code (behalve de laatste regel) compileert,
 en de compiler enkel katteneten toelaat voor katten, en hondeneten voor honden:
 
 ```java
 class Animal {
-  public void eat(Food<?> food) { }
+  public void eat(Food food) { }
 }
 class Cat extends Animal {}
 class Dog extends Animal {}
-class Food<A extends Animal> {}
+class Food {}
 
-Food<Cat> catFood = new Food<>();
-Food<Dog> dogFood = new Food<>();
+class Main {
+  public static void main(String[] args) {
+    Food catFood = new Food();
+    Food dogFood = new Food();
 
-Cat cat = new Cat();
-Dog dog = new Dog();
+    Cat cat = new Cat();
+    Dog dog = new Dog();
 
-cat.eat(catFood); // OK
-dog.eat(dogFood); // OK
+    cat.eat(catFood); // OK
+    dog.eat(dogFood); // OK
 
-cat.eat(dogFood); // <- moet een compiler error geven!
+    cat.eat(dogFood); // <- moet een compiler error geven!
+  }
+}
 ```
 
-## Denkvragen
+(Hint: Begin met het type `Food` te parametriseren met een generische parameter die het `Animal`-type voorstelt dat dit voedsel eet.)
 
-self-type?
-e.g., assertThat()
+### Self-type
+
+**Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen**
+
+Heb je je al eens afgevraagd hoe `assertThat(obj)` uit AssertJ werkt?
+Afhankelijk van het type van `obj` dat je meegeeft, worden er andere assertions beschikbaar die door de compiler aanvaard worden:
+
+```java
+// een List<String>
+List<String> someListOfStrings = List.of("hello", "there", "how", "are", "you");
+assertThat(someListOfStrings).isNotNull().hasSize(5).containsItem("hello");
+
+// een String
+String someString = "hello";
+assertThat(someString).isNotNull().isEqualToIgnoringCase("hello");
+
+// een Integer
+Integer someInteger = 4;
+assertThat(someInteger).isNotNull().isGreaterThan(4);
+
+assertThat(someInteger).isNotNull().isEqualToIgnoringCase("hello"); // <= compileert niet
+```
+
+Sommige assertions (zoals `isNotNull`) zijn echter generiek, en wil je slechts op 1 plaats implementeren.
+Probeer zelf een assertThat-methode te schrijven die werkt zoals bovenstaande, maar waar `isNotNull` slechts op 1 plaats geïmplementeerd is.
+
+Hint 1: maak verschillende klassen, bijvoorbeeld `ListAssertion`, `StringAssertion`, `IntegerAssertion` die de type-specifieke methodes bevatten. Begin met `isNotNull` toe te voegen aan elk van die klassen (dus door de implementatie te kopiëren).
+
+Hint 2: in een zogenaamde 'fluent interface' geeft een operatie zoals hasSize() het this-object op het einde terug (`return this;`).
+
+Hint 3: maak nu een `GenericAssertion` die `isNotNull` bevat, en waarvan de andere assertions overerven. Verwijder de andere implementaties.
+
+Hint 4: In `isNotNull` is geen informatie beschikbaar over het type dat gebruikt moet worden als terugkeertype van `isNotNull`. `assertThat(someString).isNotNull()` moet bijvoorbeeld opnieuw een `StringAssertion` teruggeven. Dat kan je oplossen met generics.
+
+Hint 5: Je zal een zogenaamd 'self-type' moeten gebruiken. Dat is een generische parameter die wijst naar de klasse zelf.
+
+Hint 6: op [deze pagina](http://web.archive.org/web/20130721224442/http:/passion.forco.de/content/emulating-self-types-using-java-generics-simplify-fluent-api-implementation) wordt uitgelegd hoe AssertJ dit doet. Probeer eerst zelf, zonder dit te lezen!
 
 ## Extra leermateriaal
 
