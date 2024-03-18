@@ -227,3 +227,13 @@ Commit nu de veranderingen in je directory en tag als `v7.x` ('x' start bij 0 en
    Op dit moment moet je repository 'clean' zijn: enkel jouw candycrush broncode, de spelregels, en git en gradle files horen nog thuis in je repository.
 
 Tag het resultaat als `v8.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
+
+#### Opdracht 9: Generics
+
+1. Een rechthoekig spelbord met cellen kan voor meer spellen gebruikt worden dan Candycrush; denk bijvoorbeeld aan schaken, dammen, zeeslag, go, ... .
+   Maak daarom een generische versie van de `Board`-klasse, met een generische parameter die het type van elke cel weergeeft.
+   Deze klasse maakt gebruik van `BoardSize` en `Position` uit opdracht 8.
+
+2. Gebruik die klasse in je model van Candycrush.
+
+Tag het resultaat als `v9.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.

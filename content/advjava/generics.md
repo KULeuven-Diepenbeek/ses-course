@@ -341,6 +341,10 @@ public void maybeMapWithoutValue() {
 }
 ```
 
+4. (optioneel) Herschrijf `Maybe` als een sealed interface met twee record-subklassen `None` en `Some`.
+   Geef een voorbeeld van hoe je deze klasse gebruikt met pattern matching.
+   Kan je ervoor zorgen dat je getValue() nooit kan oproepen als er geen waarde is (compiler error)?
+
 ### (extra) SuccessOrFail
 
 Schrijf een generische klasse (of record) `SuccessOrFail` die een object voorstelt dat precies één element bevat.
@@ -998,6 +1002,29 @@ public void testGenerics() {
   electronicsShop.addStockToInventory(inventory);
 
   Assertions.assertThat(inventory).hasSize(7);
+}
+```
+
+### Functie compositie
+
+Schrijf een generische functie `compose` die twee functies als parameters heeft, en een nieuwe functie teruggeeft die de compositie voorstelt: eerst wordt de eerste functie uitgevoerd, en dan wordt de tweede functie uitgevoerd op het resultaat van de eerste. Voor types van functies kan je opnieuw `java.util.function.Function<T, R>` gebruiken.
+Pas de PECS-regel toe om ook functies te kunnen samenstellen die niet exact overeenkomen qua type.
+Bijvoorbeeld, volgende code moet compileren en de test moet slagen:
+
+```java
+interface Ingredient {}
+record Fruit() implements Ingredient {}
+record PeeledFruit(Fruit fruit) implements Ingredient {}
+record Chopped(Ingredient food) implements Ingredient {}
+
+@Test
+public void testCompose() {
+    Function<Fruit, PeeledFruit> peelFruit = (var fruit) -> new PeeledFruit(fruit);
+    Function<Ingredient, Chopped> chopIngredient = (var food) -> new Chopped(food);
+
+    var makeFruitSalad = compose(peelFruit, chopIngredient);
+
+    assertThat(makeFruitSalad.apply(new Fruit())).isEqualTo(new Chopped(new PeeledFruit(new Fruit())));
 }
 ```
 
