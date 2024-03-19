@@ -2,7 +2,7 @@
 title: "5.2 Generics"
 toc: true
 autonumbering: true
-draft: true
+draft: false
 ---
 
 Vooraleer we de discussie over datastructuren kunnen starten, is het nuttig om eerst te kijken naar **generics**, aangezien generics veelvuldig gebruikt worden in datastructuren.
