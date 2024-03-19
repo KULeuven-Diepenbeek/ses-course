@@ -230,10 +230,19 @@ Tag het resultaat als `v8.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe 
 
 #### Opdracht 9: Generics
 
-1. Een rechthoekig spelbord met cellen kan voor meer spellen gebruikt worden dan Candycrush; denk bijvoorbeeld aan schaken, dammen, zeeslag, go, ... .
-   Maak daarom een generische versie van de `Board`-klasse, met een generische parameter die het type van elke cel weergeeft.
-   Deze klasse maakt gebruik van `BoardSize` en `Position` uit opdracht 8.
+1. Een rechthoekig spelbord met cellen kan ook voor andere spellen dan Candycrush gebruikt worden; denk bijvoorbeeld aan schaken, dammen, zeeslag, go, ... .
+   Maak daarom een generische `Board`-klasse, met een generische parameter die het type van elke cel weergeeft.
+   Deze klasse moet gebruik maken van `BoardSize` en `Position` uit opdracht 8.
 
-2. Gebruik die klasse in je model van Candycrush.
+2. Voeg methodes toe:
+
+   - `getCellAt(position)` om de cel op een gegeven positie van het bord op te vragen.
+   - `replaceCellAt(position, newCell)` om de cel op een gegeven positie te vervangen door een meegegeven object.
+   - `fill(cellCreator)` om het hele bord te vullen. De `fill`-functie heeft als parameter een `Function`-object (`cellCreator`) die, gegeven een Positie-object, een nieuw cel-object teruggeeft.
+   - een methode `copyTo(otherBoard)` die alle cellen van het huidige bord kopieert naar het meegegeven bord. Als het meegegeven bord niet dezelfde afmetingen heeft, gooi je een exception.
+
+   Zorg dat deze methodes zo algemeen mogelijk zijn qua type, en schrijf telkens een test om dit aan te tonen.
+
+3. Gebruik de Board-klasse in je model van Candycrush, waarbij de cellen `Candy`-objecten zijn.
 
 Tag het resultaat als `v9.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.

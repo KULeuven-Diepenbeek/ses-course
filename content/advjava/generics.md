@@ -72,12 +72,13 @@ Dat leidt tot veel onnodige en ongewenste code-duplicatie.
 ### Een generische klasse definiëren
 
 Met generics kan je een _type_ gebruiken als parameter voor een klasse om deze code-duplicatie vermijden.
-Met andere woorden, je kan een generische klasse ook zien als een soort functie (soms een _type constructor_ genoemd) die een een nieuw type maakt, gebaseerd op één of meerdere gegeven types.
+Met andere woorden, je kan een generische klasse ook zien als een soort functie (soms een _type constructor_ genoemd) die een een nieuw type (een nieuwe klasse) maakt, gebaseerd op één of meerdere gegeven types.
 
 Generics geven je dus een combinatie van beide opties: er moet slechts 1 implementatie gemaakt worden (zoals bij `ArrayList` hierboven), en deze implementatie kan gebruikt worden om lijsten met een specifiek element-type te maken (zoals bij `ArrayListOfStudents`).
 
 De type-parameter staat tussen `<` en `>`, en je kan deze type-parameter vervolgens gebruiken in heel de klasse.
-Bijvoorbeeld, volgende klasse is een nieuwe versie van de `ArrayList` klasse van hierboven, maar nu met type-parameter `E`, welke vervolgens gebruikt wordt als type van de elements-array, de parameter van de add-method, en het resultaat-type van de get-method:
+Bijvoorbeeld, volgende klasse is een nieuwe versie van de `ArrayList`-klasse van hierboven, maar nu met type-parameter `E`.
+De type-parameter wordt vervolgens gebruikt als type van de elements-array, de parameter van de add-method, en het resultaat-type van de get-method:
 
 ```java
 class ArrayList<E> {
@@ -112,7 +113,7 @@ students.add(someStudent);
 Student firstStudent = students.get(0);
 ```
 
-Merk op hoe de klasse afdwingt en garandeert dat er enkel Student-objecten in terecht kunnen komen.
+Merk op hoe de compiler afdwingt en garandeert dat er enkel Student-objecten in terecht kunnen komen.
 
 Om wat typwerk te besparen, laat Java in veel gevallen ook toe om het type weg te laten bij het instantiëren, met behulp van `<>`.
 Dat type is immers al bepaald door het type van de variabele:
@@ -143,14 +144,15 @@ Tuple3<String, Integer, Student> tuple = new Tuple3<>("John", 23, student);
 ```
 
 {{% notice note %}}
-Merk op dat het aan te raden is om het gebruik van dergelijk tuple-type te vermijden in je code, niet omdat het drie generische parameters heeft, maar wel omdat het niets zegt over de betekenis van de velden.
-Gebruik veel liever een record waar je de individuele componenten namen kan geven.
+Merk op dat het af te raden is om dergelijk tuple-type te gebruiken in je code.
+Niet omdat het drie generische parameters heeft, maar wel omdat het niets zegt over de betekenis van de velden.
+Gebruik veel liever een record waar je de individuele componenten een naam kan geven.
 Bijvoorbeeld: `record ExtractedStudentInfo(String firstName, int age, Student student) {}`.
 {{% /notice %}}
 
 ## Generische parameters begrenzen (bounds)
 
-Een type-parameter `<E>` zoals we die tot nu toe gezien hebben kan om het even welke klasse voorstellen.
+Een type-parameter `<E>` zoals we die tot nu toe gezien hebben kan om het even welk type voorstellen.
 Soms willen we dat niet, en willen we beperkingen opleggen.
 Stel bijvoorbeeld dat we volgende klasse-hierarchie hebben:
 
@@ -217,7 +219,7 @@ Food<String> stringFood = new Food<>(); // <-- compiler error
 
 Hierboven hebben we steeds een hele klasse generisch gemaakt.
 In sommige gevallen kan het ook nuttig zijn om een generische **methode** te definiëren.
-Dat kan in een klasse die zelf geen type-parameters heeft:
+Dat kan ook in een klasse die zelf geen type-parameters heeft:
 
 ```java
 class AnimalHelper {
@@ -229,7 +231,7 @@ ArrayList<Cat> cats = new ArrayList<>();
 ArrayList<Cat> happyCats = AnimalHelper.findHappyAnimals(cats);
 ```
 
-Merk op hoe we, door het type `T` te gebruiken in zowel de parameter als het terugkeertype, kunnen garanderen dat de teruggegeven lijst precies hetzelfde type elementen heeft als de parameter (zonder dat we moeten weten welk type dier dat precies is).
+Merk op hoe we, door het type `T` te gebruiken in zowel de parameter als het terugkeertype, kunnen garanderen dat de teruggegeven lijst precies hetzelfde type elementen heeft als de parameter, zonder dat we in de methode `findHappyAnimals` moeten weten welk type dier dat precies is.
 
 Op dezelfde manier kan je ook het type van meerdere parameters (en eventueel het terugkeertype) aan elkaar verbinden.
 In het voorbeeld hieronder zie je een methode die paren kan maken tussen dieren; de methode kan gebruikt worden voor elk type dier, maar maakt enkel paren van dezelfde soort.
@@ -250,7 +252,7 @@ ArrayList<AnimalPair<Animal>> pairedMix = makePairs(maleCats, femaleDogs); // ni
 ```
 
 Als het type `T` niet van belang is, omdat het niet terugkomt in het terugkeertype van de methode of een andere parameter, heb je geen genersiche methode nodig.
-Je kan dan ook gewoon het wildcard-type `? extends X` (of gewoon `?` indien het type niet begrensd moet worden) gebruiken (zie later).
+Je kan dan ook gewoon het wildcard-type `? extends X` gebruiken, of gewoon `?` indien het type niet begrensd moet worden (zie later).
 In plaats van
 
 ```java
@@ -424,7 +426,7 @@ Een lijst in Java is een geordende groep van elementen van hetzelfde type.
 `List<E>` is de interface[^2] die aan de basis ligt van alle lijsten.
 `ArrayList<E>` is een klasse die een lijst implementeert met behulp van een array.
 `ArrayList<E>` is een subtype van `List<E>`; volgens het principe kan dus, overal waar een `List`-object verwacht wordt, ook een `ArrayList` gebruikt worden.
-[Later](/advjava/collections) zullen we ook zien dat er een interface `Collection<E>` bestaat, wat een willekeurige groep van elementen voorstelt: niet enkel een lijst, maar bijvoorbeeld ook verzamelingen (`Set`) of wachtrijen (`Queue`).
+Later (in het hoofdstuk rond Collections) zullen we ook zien dat er een interface `Collection<E>` bestaat, wat een willekeurige groep van elementen voorstelt: niet enkel een lijst, maar bijvoorbeeld ook verzamelingen (`Set`) of wachtrijen (`Queue`).
 `List<E>` is een subtype van `Collection<E>`. Bijgevolg is ook `ArrayList<E>` een subtype van `Collection<E>`.
 
 In code ziet deze situatie er als volgt uit:
@@ -523,6 +525,7 @@ animals.add(dog); // <- OOPS: er zit nu een hond in de lijst van katten
 
 Je zou dus honden kunnen toevoegen aan je lijst van katten zonder dat de compiler je waarschuwt, en dat is niet gewenst.
 Om die reden beschouwt Java `ArrayList<Cat>` dus niet als subtype van `ArrayList<Animal>`, ondanks dat `Cat` wél een subtype van `Animal` is.
+Hieronder zullen we zien hoe we dit met wildcards in sommige gevallen wel kunnen toelaten.
 
 ### Oefening: behavioral subtyping
 
@@ -607,6 +610,7 @@ copyFromTo_wildcard(cats, animals); // OK!
 
 Dit heet **covariantie**: omdat `Cat` een subtype is van `Animal`, is `ArrayList<Cat>` een subtype van `ArrayList<? extends Animal>`.
 De 'co' in covariantie wijst erop dat de overervingsrelatie tussen `Cat` en `Animal` in dezelfde richting loopt als die tussen `ArrayList<Cat>` en `ArrayList<? extends Animal>` (in tegenstelling tot contravariantie, wat zodadelijk aan bod komt).
+Dat zie je op de afbeelding hieronder:
 
 ```mermaid
 graph BT
@@ -711,13 +715,13 @@ Maak een schema met de overervingsrelaties tussen
 
 ### Contravariantie (super)
 
-Wat als we het omgekeerde willen van hierboven: een methode die de katten uit een gegeven lijst haalt en toevoegt aan een andere lijst van dieren? Bijvoorbeeld:
+Wat als we een methode willen die de objecten uit een gegeven lijst van katten kopieert naar een lijst van willekeurige dieren? Bijvoorbeeld:
 
 ```java
 public static void copyFromCatsTo(
       ArrayList<Cat> source,
       ArrayList<Animal> target) {
-  for (Cat cat : source) { target.add(a); }
+  for (Cat cat : source) { target.add(cat); }
 }
 
 ArrayList<Cat> cats = /* ... */
@@ -738,7 +742,7 @@ Extends helpt ook niet:
 public static void copyFromCatsTo(
       ArrayList<Cat> source,
       ArrayList<? extends Animal> target) {
-  for (Cat cat : source) { target.add(a); } // ook niet toegelaten
+  for (Cat cat : source) { target.add(cat); } // ook niet toegelaten
 }
 ```
 
@@ -799,7 +803,7 @@ class ALAnimal,Animal animal;
 
 ```
 
-Als we ook `ArrayList<Mammal`, `ArrayList<? super Mammal>`, en `ArrayList<? super Animal>` toevoegen aan het plaatje, ziet dat er als volgt uit:
+Als we ook `ArrayList<Mammal>`, `ArrayList<? super Mammal>`, en `ArrayList<? super Animal>` toevoegen aan het plaatje, ziet dat er als volgt uit:
 
 ```mermaid
 graph BT
@@ -857,15 +861,15 @@ class ALMammal,Mammal,ALsuperMammal,ALextendsMammal mammal;
 class ALAnimal,Animal animal;
 ```
 
-Hier zien we dat, met het covariante `ArrayList<? extends Mammal>`, we een `ArrayList<Mammal>` of `ArrayList<Cat>` kunnen gebruiken.
-Met een contravariante `ArrayList<? super Mammal>` kunnen we opnieuw een `ArrayList<Mammal>` gebruiken, maar ook een `ArrayList<Animal>`.
+Hier zien we dat `ArrayList<? extends Mammal>` (covariant) als subtypes `ArrayList<Mammal>` en `ArrayList<Cat>` heeft.
+Het contravariante `ArrayList<? super Mammal>` heeft óók `ArrayList<Mammal>` als subtype, maar ook `ArrayList<Animal>`.
 
-Hoe weet je nu wanneer je wat gebruikt? Wanneer kies je extends, en wanneer super?
+Hoe weet je nu wanneer je wat gebruikt als type voor een parameter? Wanneer kies je 'extends', en wanneer 'super'?
 Een goede vuistregel is het acroniem **PECS**, wat staat voor **P**roducer **E**xtends, **C**onsumer **S**uper.
 Dus:
 
-- Wanneer de lijst gebruikt wordt als een producent van `T`'s (met andere woorden, het geeft `T`-objecten aan de code om te gebruiken), gebruik je `<? extends T>`.
-- Wanneer de lijst gebruikt wordt als een consument van `T`'s (met andere woorden, het neemt `T`-objecten van de code aan), gebruik je `<? super T>`.
+- Wanneer de lijst gebruikt wordt als een producent van `T`'s (met andere woorden, de lijst levert `T`-objecten aan aan de code om te gebruiken), gebruik je `<? extends T>`.
+- Wanneer de lijst gebruikt wordt als een consument van `T`'s (met andere woorden, het neemt `T`-objecten aan van de code), gebruik je `<? super T>`.
 - Wanneer de lijst zowel als consument als als producent gebruikt wordt, gebruik je gewoon `<T>` (dus geen co- of contra-variantie).
 
 Een voorbeeld: we willen een methode `copyFromTo` die zo flexibel mogelijk is, om elementen uit een lijst van zoogdieren te kopiëren naar een andere lijst.
@@ -959,8 +963,9 @@ De reden hiervoor is, in het kort, dat informatie over generics gewist wordt bij
 Dit heet **type erasure**.
 In de gecompileerde code is een `ArrayList<Animal>` en `ArrayList<Cat>` dus exact hetzelfde.
 Er kan dus, tijdens de uitvoering, niet gecontroleerd worden of je steeds het juiste type gebruikt.
+Dat moet de compiler dus doen, en die moet het zekere voor het onzekere nemen.
 
-Bij arrays wordt er _wel_ type-informatie bijgehouden na het compileren, en kan dus gecontroleerd worden dat je geen ongeldig getypeerde elementen toevoegt.
+Bij arrays wordt er _wel_ type-informatie bijgehouden na het compileren, en kan dus gecontroleerd worden dat je geen ongeldig getypeerde elementen toevoegt. De compiler hoeft het niet af te dwingen --- maar het wordt wel nog steeds gecontroleerd tijdens de uitvoering, en kan leiden tot een exception.
 
 ## Oefeningen (2)
 
@@ -1030,7 +1035,7 @@ public void testCompose() {
 
 ### Animal food
 
-**Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen**
+**Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen.**
 
 Voeg generics (met grenzen/bounds) toe aan de code hieronder, zodat de code (behalve de laatste regel) compileert,
 en de compiler enkel katteneten toelaat voor katten, en hondeneten voor honden:
@@ -1063,7 +1068,7 @@ class Main {
 
 ### Self-type
 
-**Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen**
+**Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen.**
 
 Heb je je al eens afgevraagd hoe `assertThat(obj)` uit AssertJ werkt?
 Afhankelijk van het type van `obj` dat je meegeeft, worden er andere assertions beschikbaar die door de compiler aanvaard worden:
@@ -1078,7 +1083,7 @@ String someString = "hello";
 assertThat(someString).isNotNull().isEqualToIgnoringCase("hello");
 
 // een Integer
-Integer someInteger = 4;
+int someInteger = 4;
 assertThat(someInteger).isNotNull().isGreaterThan(4);
 
 assertThat(someInteger).isNotNull().isEqualToIgnoringCase("hello"); // <= compileert niet
@@ -1089,20 +1094,12 @@ Probeer zelf een assertThat-methode te schrijven die werkt zoals bovenstaande, m
 
 Hint 1: maak verschillende klassen, bijvoorbeeld `ListAssertion`, `StringAssertion`, `IntegerAssertion` die de type-specifieke methodes bevatten. Begin met `isNotNull` toe te voegen aan elk van die klassen (dus door de implementatie te kopiëren).
 
-Hint 2: in een zogenaamde 'fluent interface' geeft een operatie zoals hasSize() het this-object op het einde terug (`return this;`).
+Hint 2: in een zogenaamde 'fluent interface' geeft elke operatie zoals `hasSize` het this-object op het einde terug (`return this`), zodat je oproepen na elkaar kan doen. Bijvoorbeeld `.isNotNull().hasSize(5)`.
 
-Hint 3: maak nu een `GenericAssertion` die `isNotNull` bevat, en waarvan de andere assertions overerven. Verwijder de andere implementaties.
+Hint 3: maak nu een abstracte `GenericAssertion` die `isNotNull` bevat, en waarvan de andere assertions overerven. Verwijder de andere implementaties.
 
-Hint 4: In `isNotNull` is geen informatie beschikbaar over het type dat gebruikt moet worden als terugkeertype van `isNotNull`. `assertThat(someString).isNotNull()` moet bijvoorbeeld opnieuw een `StringAssertion` teruggeven. Dat kan je oplossen met generics.
+Hint 4: In `isNotNull` is geen informatie beschikbaar over het type dat gebruikt moet worden als terugkeertype van `isNotNull`. `assertThat(someString).isNotNull()` moet bijvoorbeeld opnieuw een `StringAssertion` teruggeven. Dat kan je oplossen met generics, en een abstracte methode die het juiste object teruggeeft.
 
-Hint 5: Je zal een zogenaamd 'self-type' moeten gebruiken. Dat is een generische parameter die wijst naar de klasse zelf.
+Hint 5: Je zal een zogenaamd 'self-type' moeten gebruiken. Dat is een generische parameter die wijst naar de (sub)klasse zelf.
 
 Hint 6: op [deze pagina](http://web.archive.org/web/20130721224442/http:/passion.forco.de/content/emulating-self-types-using-java-generics-simplify-fluent-api-implementation) wordt uitgelegd hoe AssertJ dit doet. Probeer eerst zelf, zonder dit te lezen!
-
-## Extra leermateriaal
-
-Er is erg veel informatie te vinden op het internet over generics in Java.
-
-```
-
-```
