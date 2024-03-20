@@ -37,6 +37,8 @@ Sublist bespreken!
 
 ### HashSet
 
+## Invarianten
+
 ## Oefeningen
 
 ### Multimap
