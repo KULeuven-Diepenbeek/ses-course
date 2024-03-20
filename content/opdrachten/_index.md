@@ -241,7 +241,7 @@ Tag het resultaat als `v8.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe 
    - `fill(cellCreator)` om het hele bord te vullen. De `fill`-functie heeft als parameter een `Function`-object (`cellCreator`) die, gegeven een Positie-object, een nieuw cel-object teruggeeft.
    - een methode `copyTo(otherBoard)` die alle cellen van het huidige bord kopieert naar het meegegeven bord. Als het meegegeven bord niet dezelfde afmetingen heeft, gooi je een exception.
 
-   Zorg dat deze methodes zo algemeen mogelijk zijn qua type, en schrijf telkens een test om dit aan te tonen.
+   Zorg dat deze laatste twee methodes zo algemeen mogelijk zijn qua type, en schrijf telkens een test waarin je hier gebruik van maakt.
 
 3. Gebruik de Board-klasse in je model van Candycrush, waarbij de cellen `Candy`-objecten zijn.
 
