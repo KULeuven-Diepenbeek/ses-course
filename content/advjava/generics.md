@@ -7,6 +7,8 @@ draft: false
 
 Vooraleer we de discussie over datastructuren kunnen starten, is het nuttig om eerst te kijken naar **generics**, aangezien generics veelvuldig gebruikt worden in datastructuren.
 
+Je vindt alle startcode voor dit hoofdstuk [op deze GitHub-repository](https://github.com/KULeuven-Diepenbeek/ses-demos-exercises-student).
+
 ## Wat en waarom?
 
 Generics zijn een manier om klassen en methodes te voorzien van type-parameters.
