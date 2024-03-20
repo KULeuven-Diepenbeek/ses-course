@@ -227,3 +227,22 @@ Commit nu de veranderingen in je directory en tag als `v7.x` ('x' start bij 0 en
    Op dit moment moet je repository 'clean' zijn: enkel jouw candycrush broncode, de spelregels, en git en gradle files horen nog thuis in je repository.
 
 Tag het resultaat als `v8.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
+
+#### Opdracht 9: Generics
+
+1. Een rechthoekig spelbord met cellen kan ook voor andere spellen dan Candycrush gebruikt worden; denk bijvoorbeeld aan schaken, dammen, zeeslag, go, ... .
+   Maak daarom een generische `Board`-klasse, met een generische parameter die het type van elke cel weergeeft.
+   Deze klasse moet gebruik maken van `BoardSize` en `Position` uit opdracht 8.
+
+2. Voeg methodes toe:
+
+   - `getCellAt(position)` om de cel op een gegeven positie van het bord op te vragen.
+   - `replaceCellAt(position, newCell)` om de cel op een gegeven positie te vervangen door een meegegeven object.
+   - `fill(cellCreator)` om het hele bord te vullen. De `fill`-functie heeft als parameter een `Function`-object (`cellCreator`) die, gegeven een Positie-object, een nieuw cel-object teruggeeft.
+   - een methode `copyTo(otherBoard)` die alle cellen van het huidige bord kopieert naar het meegegeven bord. Als het meegegeven bord niet dezelfde afmetingen heeft, gooi je een exception.
+
+   Zorg dat deze laatste twee methodes zo algemeen mogelijk zijn qua type, en schrijf telkens een test waarin je hier gebruik van maakt.
+
+3. Gebruik de Board-klasse in je model van Candycrush, waarbij de cellen `Candy`-objecten zijn.
+
+Tag het resultaat als `v9.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
