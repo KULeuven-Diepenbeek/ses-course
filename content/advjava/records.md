@@ -1,7 +1,8 @@
 ---
-title: "4.1 Records"
+title: "5.1 Records"
 toc: true
 autonumbering: true
+draft: false
 ---
 
 ## Wat zijn records
@@ -38,6 +39,40 @@ var coordinate2 = new Coordinate(3, 5);
 assertEquals(coordinate1, coordinate2);
 ```
 
+## Wanneer gebruik je een record
+
+Er zijn meerdere situaties waarin het aangeraden is om een record te gebruiken, bijvoorbeeld:
+
+1. wanneer je meerdere waarden (die logisch bij elkaar horen) wil bundelen:
+
+```java
+record Address(String street, int number, int zipcode, String city, String country) {}
+```
+
+2. wanneer je een methode meerdere waarden wil laten teruggeven
+
+```java
+record ElementFound(int index, int value) {}
+
+public ElementFound findMaximum(ArrayList<Integer> values) { ... }
+```
+
+3. wanneer je een type wil definiëren dat overeenkomt met een ander, reeds bestaand datatype, maar met beperkingen.
+
+```java
+record PositiveNumber(int number) {
+  public PositiveNumber {
+    if (number <= 0) throw new IllegalArgumentException("Number must be larger than 0");
+  }
+}
+```
+
+4. wanneer je een (immutable) datatype wil maken dat zonder probleem door meerdere threads gebruikt kan worden; dit komt later nog aan bod in het onderwerp _Multithreading en concurrency_.
+
+Merk op dat bij records in de eerste plaats gaat over het creëren van een nieuw datatype, door (primitievere) data te bundelen of te beperken qua mogelijke waarden.
+Je maakt dus als het ware een nieuw primitief datatype, zoals int, double, of String.
+Dit in tegenstelling tot klassen, waar gedrag om het object aan te passen (mutatie-methodes) en identiteit ook essentieel zijn.
+
 ## Achter de schermen
 
 Een record is eigenlijk een gewone klasse, waarbij de Java-compiler zelf enkele zaken voorziet:
@@ -49,7 +84,6 @@ Een record is eigenlijk een gewone klasse, waarbij de Java-compiler zelf enkele 
 
 De klasse is ook `final`, zodat er geen subklassen van gemaakt kunnen worden.
 
-Met deze speciale syntax kan je zo heel wat typwerk (en kans op fouten) besparen.
 De coordinaat-definitie van hierboven is equivalent aan volgende klasse-definitie:
 
 ```java
@@ -72,6 +106,8 @@ public final class Coordinate {
 }
 ```
 
+Met de speciale syntax voor records kan je jezelf dus heel wat typwerk (en kans op fouten) besparen.
+
 ## Methodes toevoegen aan een record
 
 Je kan zelf extra methodes toevoegen aan een record op dezelfde manier als bij een gewone Java-klasse:
@@ -88,10 +124,22 @@ public record Coordinate(double x, double y) {
 
 ## Constructor van een record
 
-Als je geen constructor definieert, krijgt een record een standaard constructor met de opgegeven attributen als parameters.
+Als je geen constructor definieert, krijgt een record een standaard constructor met de opgegeven attributen als parameters (in dezelfde volgorde).
 
 Maar je kan ook zelf een of meerdere constructoren definiëren voor een record, net zoals bij klassen.
 Je moet dan zelf zorgen dat je alle attributen van de record initialiseert.
+
+```java
+public record Coordinate(double x, double y) {
+  public Coordinate(double x, double y) {
+    this.x = x;
+    this.y = y;
+  }
+  public Coordinate(double x) { // constructor for points on the x-axis
+    this(x, 0);
+  }
+}
+```
 
 Er is ook een verkorte notatie, waarbij je de parameters niet meer moet herhalen (die staan immers al achter de naam van het record).
 Je hoeft met deze notatie ook de parameters niet toe te kennen aan de velden; dat gebeurt automatisch.
@@ -108,7 +156,7 @@ public record Coordinate(double x, double y) {
 
 ## Records en overerving
 
-Een record is gelijkaardig aan een `final` klasse.
+Zoals eerder al vermeldt komt een record overeen met een `final` klasse.
 Je kan er dus niet van overerven.
 
 Een record zelf kan ook geen subklasse zijn van een andere klasse of record, maar kan wel interfaces implementeren.
@@ -133,10 +181,35 @@ public record Coordinate(double x, double y) {
 }
 ```
 
+{{% notice note %}}
+**Let op!** Als een van de attributen van het object zelf gewijzigd kan worden, kan dat attribuut nog steeds aangepast worden.
+Vermijd deze situatie!
+{{% /notice %}}
+
+Bijvoorbeeld:
+
+```java
+public record Song(String title, String artist) {}
+public record Playlist(ArrayList<Song> songs) {}
+
+var songs = new ArrayList<>(List.of(new Song("Hello", "Adele")));
+var playlist1 = new Playlist(songs);
+var playlist2 = new Playlist(new ArrayList<>(songs));
+System.out.println(playlist1.equals(playlist2)); // => true: beide playlists bevatten dezelfde liedjes
+songs.add(new Song("Bye bye bye", "NSYNC"));
+System.out.println(playlist1.equals(playlist2)); // => false
+```
+
+Hier zijn twee record-objecten eerst gelijk, maar later niet meer.
+Dat schendt het principe dat de identiteit van het object niet uitmaakt.
+Overal waar `playlist1` gebruikt wordt, zou ook `playlist2` gebruikt moeten kunnen worden en vice versa.
+Twee record-objecten die gelijk zijn, moeten altijd gelijk blijven, onafhankelijk van wat er later nog gebeurt.
+Gebruik dus steeds immutable data types in een record.
+
 ## Pattern matching
 
 Je kan records ook gebruiken in switch statements.
-Dit heet 'pattern matching', en is vooral nuttig wanneer je meerdere record-types hebt die eenzelfde interface implementeren.
+Dit heet **pattern matching**, en is vooral nuttig wanneer je meerdere record-types hebt die eenzelfde interface implementeren.
 Bijvoorbeeld:
 
 ```java
@@ -168,9 +241,24 @@ De switch-expressie hierboven is verschillend van het (oudere) switch-statement 
 - er is geen `break` nodig op het einde van elke case
 - de switch-expressie geeft een waarde terug die kan toegekend worden aan een variabele, of gebruikt kan worden in een `return`-statement (zoals in het voorbeeld hierboven).
 
-## Sealed classes
+Tenslotte is er in een switch-expressie de mogelijkheid om een conditie toe te voegen door middel van een `when`-clausule:
 
-Wanneer je alle klassen kent die een bepaalde interface zullen implementeren (of van een abstracte klasse zullen overerven), kan je van de klasse of interface een **sealed** klasse of interface maken.
+```java
+public double area(Shape shape) {
+  return switch(shape) {
+    case Square s -> s.side() * s.side();
+    case Circle(double radius) -> Math.PI * radius * radius;
+    case Rectangle(Coordinate(double topLeftX, double topLeftY), Coordinate bottomRight)
+         when topLeftX <= bottomRight.x() && topLeftY <= bottomRight.y() -> // <= when-clausule
+         (bottomRight.x() - topLeftX) * (bottomRight.y() - topLeftY);
+    default -> throw new IllegalArgumentException("Unknown or invalid shape");
+  };
+}
+```
+
+## Sealed interfaces
+
+Wanneer je alle klassen kent die een bepaalde interface zullen implementeren (of van een abstracte klasse zullen overerven), kan je van deze interface (of klasse) een **sealed** interface (of klasse) maken.
 Met een `permits` clausule kan je aangeven welke klassen de interface mogen implementeren:
 
 ```java
@@ -180,7 +268,7 @@ record Circle(double radius) implements Shape {}
 record Rectangle(double length, double width) implements Shape {}
 ```
 
-Indien je geen permits-clausule opgeeft, zijn enkel de klassen in hetzelfde bestand toegestaan.
+Indien je geen permits-clausule opgeeft, zijn enkel de klassen die in hetzelfde bestand toegestaan.
 
 Voor een sealed klasse of interface zoals `Shape` zal de compiler niet toelaten dat je er later een andere klasse van laat overerven:
 
@@ -202,7 +290,27 @@ public double area(Shape shape) {
 
 Omgekeerd zal de compiler je ook waarschuwen wanneer er een geval ontbreekt.
 
+```java
+public double area(Shape shape) {
+  return switch(shape) {
+    case Square s -> s.side() * s.side();
+    case Circle(double radius) -> Math.PI * radius * radius;
+    // <= compiler error: ontbrekende case voor 'Rectangle'
+  };
+}
+```
+
 ## Oefeningen
+
+### Klasse of record?
+
+Geef enkele voorbeelden van types die volgens jou best als record gecodeerd worden, en ook enkele types die best als klasse gecodeerd worden.
+
+Kan je, voor een van je voorbeelden, een situatie bedenken waarin je van record naar klasse zou gaan, en omgekeerd?
+
+### Sealed interface
+
+Kan je een voorbeeld bedenken van een sealed interface?
 
 ### Email
 
@@ -212,7 +320,13 @@ Het mail-adres wordt voorgesteld door een String.
 Controleer de geldigheid van de String bij het aanmaken van een Email-object:
 
 - de String mag niet null zijn
-- de String moet exact één @-teken bevatten (de echte regels voor een emailadres zijn uiteraard veel complexer)
+- de String moet exact één @-teken bevatten
+- de String moet eindigen op ".com" of ".be"
+
+{{% notice note %}}
+De echte regels voor een geldig emailadres zijn uiteraard _veel_ complexer.
+Zie bijvoorbeeld de [voorbeelden van geldige e-mailadressen op deze Wikipedia-pagina](https://en.wikipedia.org/wiki/Email_address#Valid_email_addresses).
+{{% /notice %}}
 
 ### Money
 
@@ -230,13 +344,15 @@ Intervallen worden beschouwd als half-open: twee aansluitende intervallen overla
 ### Rechthoek
 
 Schrijf (volgens de principes van TDD) een record die een rechthoek voorstelt.
-Een rechthoek wordt gedefinieerd door 2 punten (linksboven en rechtsonder); gebruik een Coordinaat-record om deze punten voor te stellen.
+Een rechthoek wordt gedefinieerd door 2 punten (linksboven en rechtsonder).
+Gebruik een Coordinaat-record om deze hoekpunten voor te stellen.
+Zorg ervoor dat enkel geldige rechthoeken aangemaakt kunnen worden (dus: het hoekpunt linksboven ligt zowel links als boven het hoekpunt rechtsonder).
 
 Voeg extra methodes toe:
 
-- om de hoekpunten linksonder en rechtsboven op te vragen
+- om de twee andere hoekpunten (linksonder en rechtsboven) op te vragen
 - om na te gaan of een gegeven punt zich binnen de rechthoek bevindt
-- om na te gaan of een rechthoek overlapt met een andere rechthoek. (_Hint: bij twee overlappende rechthoeken ligt minstens één hoekpunten van de ene rechthoek binnen de andere_)
+- om na te gaan of een rechthoek overlapt met een andere rechthoek. (_Hint: bij twee overlappende rechthoeken ligt minstens één hoekpunt van de ene rechthoek binnen de andere_)
 
 ### Expressie-hierarchie
 
@@ -257,6 +373,11 @@ De veelterm `3x^2 + 5` kan dus voorgesteld worden als:
 var poly = new Sum(new Product(new Literal(3), new Power(new Variable("x"), new Literal(2))), new Literal(5))
 ```
 
-Maak vervolgens, gebruik makend van pattern matching, ook een methodes `String prettyPrint(Expression expr)` die de expressie omzet in een string, bijvoorbeeld `prettyPrint(poly)` geeft `(3 * x^2) + 5`. (Uitbreiding: zorg ervoor dat er geen onnodige haakjes verschijnen, door rekening te houden met de volgorde van de bewerkingen).
+Maak vervolgens, gebruik makend van pattern matching, ook een methodes `String prettyPrint(Expression expr)` die de expressie omzet in een string, bijvoorbeeld `prettyPrint(poly)` geeft `((3 * x^2) + 5)`.
 
-Indien je nog verder wil oefenen, kan je methodes proberen te schrijven om een expressie te vereenvoudigen, te evalueren voor een bepaalde waarde van een variabele, af te leiden, ...
+Uitbreidingen (optioneel):
+
+- zorg ervoor dat er geen onnodige haakjes verschijnen, door rekening te houden met de volgorde van de bewerkingen.
+- schrijf een methode om een expressie te vereenvoudigen.
+- schrijf een methode om een expressie te evalueren voor een bepaalde waarde van een variabele.
+- schrijf een methode om de afgeleide van de expressie in een variabele te berekenen.
