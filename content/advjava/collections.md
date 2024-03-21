@@ -2,7 +2,8 @@
 title: "5.3 Collections"
 toc: true
 autonumbering: true
-draft: true
+author: "Koen Yskout"
+draft: false
 ---
 
 Totnogtoe hebben we enkel gewerkt met een Java array (vaste grootte), en met `ArrayList` (kan groter of kleiner worden).
@@ -126,9 +127,9 @@ Er gebeuren in totaal dus
 $$ T(n) = (n-1) + (n-2) + \ldots + 1 + 0 = \frac{n(n-1)}{2} = \frac{n^2}{2} - \frac{n}{2}$$ vergelijkingen van elementen.
 Daaruit leren we dat, als we de invoer 10 keer groter maken, we
 $$ \frac{T(10n)}{T(n)} = \frac{(10n)^2/2-10n/2}{n^2/2-n/2} = 100 + 90/(n-1) $$
-keer zoveel operaties uitvoeren. Als \\( n \\) voldoende groot is, komt dat dus neer op ongeveer 100 keer zoveel werk, en dus 100 keer trager, wanneer de invoer 10 keer groter wordt.
+keer zoveel operaties uitvoeren. Als \\( n \\) voldoende groot is, zal de lijst 10 keer langer maken dus neerkomen op ongeveer 100 keer zoveel werk, en dus zal selectionsort 100 keer trager zijn.
 
-In dit hoofdstuk over datastructuren gaan we verder voornamelijk kijken naar één specifieke basisoperatie, namelijk het aantal keer dat een element uit het geheugen (of uit een array) bezocht (uitgelezen) worden.
+In de rest van dit hoofdstuk over datastructuren gaan we verder voornamelijk werken met één specifieke basisoperatie, namelijk het aantal keer dat een element uit het geheugen (of uit een array) bezocht (uitgelezen) worden.
 
 ### Grote O-notatie
 
@@ -147,7 +148,7 @@ Formeel betekent \\( T(n) \in \mathcal{O}(f(n)) \\) dat \\( \exists c, n_0.\ \fo
 
 {{% notice note %}}
 Er zijn nog andere notaties die vaak gebruikt worden in de context van tijdscomplexiteit, waaronder grote theta (\\( \Theta \\)), grote omega (\\( \Omega \\)), en tilde (~). Deze hebben allen een andere formele definitie.
-In de dagelijkse praktijk wordt vaak grote O gebruikt, zelfs als eigenlijk een van deze andere bedoeld wordt.
+In de dagelijkse (informele) praktijk wordt vaak grote O gebruikt, zelfs als eigenlijk een van deze andere bedoeld wordt.
 {{% /notice %}}
 
 ### Vaak voorkomende complexiteitsklassen
@@ -182,20 +183,23 @@ Deze API bestaat uit
 - implementaties van die interface (bv. `ArrayList`, `LinkedList`, `Vector`, `Stack`, `ArrayDeque`, `PriorityQueue`, `HashSet`, `LinkedHashSet`, `TreeSet`, en `TreeMap`)
 - algoritmes voor veel voorkomende operaties (bv. `shuffle`, `sort`, `swap`, `reverse`, ...)
 
+Je vindt een overzicht van de hele API op [deze pagina](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/doc-files/coll-reference.html).
+
 We beginnen bij de basisinterface: `Iterable`.
 
 ## Iterable en Iterator
 
-`Iterable` is de meest algemene interface in de Java Collections-API.
-
-Een `Iterable` is een object dat, één voor één, meerdere objecten van hetzelfde type kan teruggeven.
+[`Iterable`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Iterable.html) maakt eigenlijk geen deel uit van de Java Collections API.
+Het is er wel sterk aan verwant.
+Een `Iterable` is namelijk een object dat meerdere objecten van hetzelfde type één voor één kan teruggeven.
 Er moet slechts 1 methode geïmplementeerd worden, namelijk `iterator()`, die een `Iterator`-object teruggeeft.
-Die `Iterator` is een object dat bepaalt
 
-- of er nog objecten zijn om terug te geven, en
-- als er nog objecten zijn, wat het volgende object is dat teruggegeven wordt.
+Een [`Iterator`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Iterator.html) is een object met twee methodes:
 
-Zo'n iterator bevat dus twee methodes: `hasNext()` en `next()`.
+- `hasNext()`, wat aangeeft of er nog objecten zijn om terug te geven, en
+- `next()`, wat (als er nog objecten zijn) het volgende object teruggeeft.
+
+Elke keer je `next()` oproept krijg je een ander object, tot `hasNext()` false teruggeeft. Vanaf dan krijg je een exception.
 
 Elke klasse die `Iterable` implementeert, kan gebruikt worden in een 'enhanced for-statement':
 
@@ -206,7 +210,7 @@ for (var element : iterable) {
 }
 ```
 
-Achter de schermen wordt hierbij een iterator gebruikt. Het enhanced for-statement van hierboven is equivalent aan:
+Achter de schermen wordt hierbij de iterator gebruikt. Het enhanced for-statement van hierboven is equivalent aan:
 
 ```java
 Iterable<E> iterable = ...
@@ -217,9 +221,10 @@ while (iterator.hasNext()) {
 }
 ```
 
-Elk collectie-type wat een verzameling elementen voorstelt (dus alles behalve `Map`), implementeert deze interface.
+Alle collectie-types die een verzameling elementen voorstellen (dus alles behalve `Map`), implementeren deze interface.
 Dat betekent dus dat je elk van die collecties in een enhanced for-lus kan gebruiken.
-Je kan daarenboven ook zelf nieuwe klassen maken die deze interface implementeren, die vervolgens gebruikt kunnen worden in een enhanced for-loop.
+Je kan daarenboven ook zelf een nieuwe klasse maken die deze interface implementeert, en die vervolgens gebruikt kan worden in een enhanced for-loop.
+Dat doen we in volgende oefening.
 
 ### Oefening: IntRange
 
@@ -272,7 +277,7 @@ classDiagram
 ```
 
 Zoals je hierboven zag, kan een `Iterable` dus enkel elementen opsommen.
-De basisinterface `Collection` erft hiervan over maar is iets uitgebreider: het stelt een groep objecten voor.
+De basisinterface [`Collection`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collection.html) erft hiervan over maar is iets uitgebreider: het stelt een groep objecten voor.
 Er zit nog steeds bitter weinig structuur in een Collection:
 
 - de volgorde van de elementen in een Collection ligt niet vast
