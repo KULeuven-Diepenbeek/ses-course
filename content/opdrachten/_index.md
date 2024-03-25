@@ -246,3 +246,13 @@ Tag het resultaat als `v8.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe 
 3. Gebruik de Board-klasse in je model van Candycrush, waarbij de cellen `Candy`-objecten zijn.
 
 Tag het resultaat als `v9.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
+
+#### Opdracht 10: Collections
+
+1. Hou in je klasse `Board` de elementen (cellen) bij via een `Map`, met `Position` als de sleutel.
+2. Hou ook een omgekeerde `Map` bij, van een element (cel) naar alle posities waarop dat element voorkomt. Deze structuur moet altijd overeenkomen met de andere map.
+   Zorg er dus voor dat andere klassen die de klasse Board gebruiken beide maps enkel via gepaste methodes kunnen aanpassen.
+3. Voorzie een methode `getPositionsOfElement` die alle posities teruggeeft waarop het gegeven element (cel) voorkomt.
+   De teruggegeven collectie moet immutable zijn (de ontvanger mag ze niet kunnen aanpassen).
+
+Tag het resultaat als `v10.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.

@@ -472,7 +472,7 @@ Als de lijst op een gegeven moment \\(n\\) elementen bevat, en de capaciteit tel
 | Verwijderen | \\(\mathcal{O}(1)\\) (laatste element)                                                    | \\(\mathcal{O}(n)\\) (eerste element)              |
 | Zoeken      | \\(\mathcal{O}(1)\\) (gezochte element is eerste element)                                 | \\(\mathcal{O}(n)\\) (gezochte element is laatste) |
 
-#### Oefening
+#### Oefening: MyArrayList
 
 Schrijf zelf een simpele klasse `MyArrayList<E>` die werkt zoals de ArrayList uit Java.
 Voorzie in je lijst een initiële capaciteit van 4, maar zonder elementen.
@@ -867,7 +867,9 @@ Deze implementatie is zeer efficiënt voor de vaak voorkomende operaties. De wor
 
 Nagaan of de queue een element bevat, alsook een willekeurig element verwijderen, is \\(\mathcal{O}(n)\\) --- maar beiden zijn geen typisch gebruik van een queue.
 
-### Oefening: MyFIFO
+### Oefeningen
+
+#### Oefening: MyFIFO
 
 Implementeer zelf een klasse `MyFIFO<E>` die een FIFO queue voorstelt met beperkte capaciteit, en die gebruik maakt van een array om de elementen te bewaren.
 De capaciteit wordt opgegeven bij het aanmaken.
@@ -909,7 +911,7 @@ public void my_fifo_test() {
 Wat zou je moeten doen om je MyFIFO-klasse dynamisch te laten groeien als er meer elementen aan toegevoegd worden?
 {{% /notice %}}
 
-### Oefening: Priority boarding
+#### Oefening: Priority boarding
 
 Hieronder is een record die een vliegtuigpassagier voorstelt.
 
@@ -922,7 +924,7 @@ Passagiers mogen het vliegtuig betreden volgens afnemende prioriteit (prioriteit
 Maak daarvoor twee operaties in je klasse:
 
 - `checkin(Passenger p)` om een passagier toe te voegen aan de lijst van passagiers die kunnen instappen
-- `Passenger nextPassenger()` die de volgende passagier teruggeeft die mag instappen.
+- `Passenger nextPassenger()` die de volgende passagier teruggeeft die mag instappen, of `null` indien er geen passagiers meer zijn.
 
 Hint: schrijf een Comparator. Je kan daarbij gebruik maken van de statische methodes uit de Comparator-interface.
 
@@ -960,9 +962,9 @@ We bekijken twee implementaties van hoe dat efficiënter kan: HashSet en TreeSet
 Een HashSet kan gebruikt worden om willekeurige objecten in een set bij te houden.
 De objecten worden bijgehouden in een **hashtable** (in essentie een gewone array).
 Om te voorkomen dat we een reeds bestaand element een tweede keer toevoegen, moeten we echter snel kunnen nagaan of het toe te voegen element al in de set voorkomt.
-De hele hashtable overlopen kost teveel tijd (\\(\mathcal{O}(n)\\)), dus dat moeten we verbeteren.
+De hele hashtable overlopen kost teveel tijd (\\(\mathcal{O}(n)\\) met \\(n\\) het aantal objecten in de set), dus dat moeten we verbeteren.
 
-Een `HashSet` kan nagaan of een element bestaat, alsook een element toevoegen en verwijderen, in (\\(\mathcal{O}(1)\\)).
+Een `HashSet` kan nagaan of een element bestaat, alsook een element toevoegen en verwijderen, in \\(\mathcal{O}(1)\\).
 De sleutel om dat te doen is de `hashCode()` methode die ieder object in Java heeft.
 Die methode moet, voor elk object, een hashCode (een int) teruggeven, zodanig dat als twee objecten gelijk zijn volgens hun `equals`-methode, ook hun hashcodes gelijk zijn.
 Gewoonlijk zal je, als je `equals` zelf implementeert, ook `hashCode` moeten implementeren en omgekeerd.
@@ -970,29 +972,31 @@ De hashCode moet niet uniek zijn: meerdere objecten mogen dezelfde hashCode hebb
 
 {{% notice note %}}
 Java records voorzien standaard een zinvolle equals- en hashCode-methode die afhangt van de attributen van het record.
-Deze hoef je dus nooit zelf te voorzien.
+Deze hoef je dus normaliter niet zelf te voorzien.
 {{% /notice %}}
 
 De hashCode wordt gebruikt om een index te bepalen in de onderliggende hashtable (array).
-Het element wordt opgeslagen op die index.
-Als we later willen nagaan of een element al voorkomt in de hashtable, berekenen we opnieuw de index aan de hand van de hashCode en kijken we of het element zich effectief op die index bevindt.
+De plaats in die hashtable is een **bucket**.
+Het element wordt opgeslagen in de bucket op die index.
+Als we later willen nagaan of een element al voorkomt in de hashtable, berekenen we opnieuw de index aan de hand van de hashCode en kijken we of het element zich effectief in de overeenkomstige bucket bevindt.
 
 Idealiter geeft elk object dus een unieke hashCode, en zorgen die voor perfecte spreiding van alle objecten in de hashtable.
 Er zijn echter twee problemen in de praktijk:
 
 - twee verschillende objecten kunnen dezelfde hashCode hebben. Dat is een **collision**. Hiermee moeten we kunnen omgaan.
-- als er teveel elementen toegevoegd worden, moet de onderliggende hashtable dynamisch kunnen uitbreiden. Dat maakt dat elementen plots op een andere plaats (index) terecht kunnen komen als voorheen.
+- als er teveel elementen toegevoegd worden, moet de onderliggende hashtable dynamisch kunnen uitbreiden. Dat maakt dat elementen plots op een andere plaats (index) terecht kunnen komen als voorheen. Uitbreiden vraagt vaak **rehashing**, oftwel het opnieuw berekenen van de index (nu in een grotere hashtable) aan de hand van de hashcodes. De **load factor** van de hash table geeft aan hoe vol de hashtable mag zijn voor ze uitgebreid wordt. Bijvoorbeeld, een load factor van 0.75 betekent dat het aantal elementen in de hashtable tot 75% van het aantal buckets mag gaan.
 
 Beide problemen zijn al goed onderzocht in de computerwetenschappen.
 We overlopen twee technieken voor het eerste probleem (collisions): chaining en probing.
 
 #### Chaining
 
-Bij chaining houden we in de hashtable niet rechtstreeks de elementen bij, maar wijzen we bij elke index naar een afzonderlijke gelinkte lijst.
-Elke keer wanneer we een element toevoegen, voegen we een knoop toe aan de gelinkte lijst op de index die bepaald wordt met de hashCode.
+Bij chaining houden we in de hashtable niet rechtstreeks de elementen bij, maar wijzen we in elke bucket naar een afzonderlijke gelinkte lijst.
+Elke keer wanneer we een element toevoegen, voegen we een knoop toe aan de gelinkte lijst in de bucket.
 Wanneer we een element opvragen, doorlopen we de gelinkte lijst om na te gaan of het element daarin voorkomt.
 Als er veel collisions zijn, verliezen we zo natuurlijk het performantie-voordeel van de hashtable.
 Inderdaad, in extremis hebben alle objecten dezelfde hashcode, en bevat de hashtable slechts één gelinkte lijst met daarin alle elementen.
+Een goede hashfunctie, die elemnten goed verspreidt over de verschillende buckets, is dus essentieel voor de performantie.
 
 ```mermaid
 block-beta
@@ -1043,7 +1047,7 @@ block-beta
 #### Probing (open addressing)
 
 Een andere techniek om om te gaan met collisions is **probing**.
-Als we een element willen toevoegen op een index, en er al een (ander) element op die index staat, berekenen we een volgende index, en proberen we daar opnieuw.
+Als we een element willen toevoegen op een index, en er al een (ander) element op die index staat, berekenen we (volgens een deterministische formule) een volgende index, en proberen we daar opnieuw.
 Dat doen we tot we een lege plaats tegenkomen, waar we het element kunnen bijhouden.
 Die volgende index kan bijvoorbeeld (heel eenvoudig) index+1 zijn, maar we kunnen ook complexere formules bedenken waarmee we naar een heel andere plaats in de lijst springen.
 Bij het opzoeken volgen we hetzelfde stramien: blijven zoeken tot we het element terugvinden, of een lege plaats tegenkomen.
@@ -1051,14 +1055,25 @@ Een element verwijderen wordt nu wel wat complexer: we moeten ervoor zorgen dat 
 
 ### SortedSet en TreeSet
 
+Naast `Set` bestaat ook de interface [`SortedSet`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SortedSet.html).
 In tegenstelling tot een Set, kan een SortedSet geen willekeurige objecten bevatten.
 De objecten moeten een volgorde hebben (hetzij door Comparable te implementeren, hetzij door een Comparator-object mee te geven).
-De elementen worden in volgorde opgeslagen.
+De elementen worden steeds in gesorteerde volgorde opgeslagen en teruggegeven.
 
-TreeSet is een implementatie van SortedSet die gebruik maakt van een boomstructuur.
-Alle basisoperaties (add, remove, contains) hebben tijdscomplexiteit \\(\mathcal{O}(n)\\).
+De [`TreeSet`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeSet.html) klasse is een implementatie van SortedSet die gebruik maakt van een boomstructuur.
 
-## Afbeelding (Map)
+Alle basisoperaties (add, remove, contains) hebben worst-case tijdscomplexiteit \\(\mathcal{O}(\log n)\\).
+
+#### Oefening: Scheduler
+
+Maak een record `Job` met attributen time (je kan gewoon een double gebruiken) en een description (String).
+Maak ook een klasse `Scheduler` die een TreeSet gebruikt om volgende methodes te implementeren:
+
+- `schedule(Job job)` om de gegeven job toe te voegen aan de scheduler
+- `List<Job> allJobs()` om alle jobs (in volgorde) terug te krijgen
+- `Job nextJob(double after)` om de eerstvolgende job op of na het gegeven tijdstip terug te vinden.
+
+## Map (Dictionary)
 
 De collecties hierboven stellen allemaal een groep elementen voor, en erven over van de `Collection`-interface.
 Een [`Map`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html) is iets anders.
@@ -1071,7 +1086,7 @@ De interface `Map<K, V>` heeft twee generische parameters: een (`K`) voor het ty
 Elementen toevoegen aan een `Map<K, V>` gaat via de `put(K key, V value)`-methode.
 De waarde opvragen kan via de methode `V get(K key)`.
 Verder zijn er methodes om na te gaan of een map een bepaalde sleutel of waarde bevat.
-Belangrijk om te onthouden is dat een Map geoptimaliseerd is om waardes op te vragen aan de hand van hun sleutels.
+Een Map is vaak geoptimaliseerd voor deze operaties; deze hebben vaak tijdscomplexiteit \\(\mathcal{O}(1)\\) (hashtable-gebaseerde implementaties) of \\(\mathcal{O}(\log n)\\) (boom-gebaseerde implementaties).
 
 Er zijn verder ook drie manieren om een `Map<K, V>` als `Collection` te beschouwen:
 
@@ -1079,17 +1094,44 @@ Er zijn verder ook drie manieren om een `Map<K, V>` als `Collection` te beschouw
 - de `values`: de collectie waarden (een `Collection<V>`, want dubbels zijn mogelijk)
 - de `entrySet`: een verzameling (`Set<Entry<K, V>>`) van sleutel-waarde paren (de _entries_).
 
+Belangrijk om te onthouden is dat een Map geoptimaliseerd is om waardes op te vragen aan de hand van hun sleutels.
+
 ### HashMap
 
 Net zoals bij Set kunnen we de Map-interface implementeren met een hashtable.
 Dat gebeurt in de `HashMap` klasse.
+Entries in een hashmap worden in een niet-gespecifieerde volgorde bijgehouden.
 
-### Oefening: Set implementeren met Map
+De werking van een hashmap is zeer gelijkaardig aan wat we besproken hebben bij HashSet hierboven.
+Meer zelfs, de implementatie van HashSet in Java maakt gebruik van een HashMap.
+Het belangrijkste verschil met de HashSet is dat we in een HashMap, naast de waarde, ook de sleutel moeten bewaren.
+
+### SortedMap en TreeMap
+
+Een [`SortedMap`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SortedMap.html) is een map waarbij de **sleutels** (dus niet de waarden) gesorteerd worden bijgehouden (zoals bij een SortedSet).
+
+De [TreeMap](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html) klasse implementeert een SortedMap aan de hand van een boomstructuur.
+
+### Oefeningen
+
+#### Oefening: Set implementeren met Map
 
 Leg uit hoe je een HashSet zou kunnen implementeren gebruik makend van een HashMap.
 (Dit is ook wat Java (en Python) doen in de praktijk.)
 
-### Oefening: Multimap
+#### Oefening: Parking
+
+Maak een klasse `Parking` die gebruikt wordt voor betalend parkeren.
+Kies een of meerdere datastructuren om volgende methodes te implementeren:
+
+- `enterParking(String licencePlate)`: een auto rijdt de parking binnen
+- `double amountToPay(String licensePlate)`: bereken het te betalen bedrag voor de gegeven auto (nummerplaat). De parking kost 2 euro per begonnen uur.
+- `pay(String licensePlate)`: markeer dat de auto met de gegeven nummerplaat betaald heeft
+- `boolean leaveParking(String licensePlate)`: geef terug of de gegeven auto de parking mag verlaten (betaald heeft), en verwijder de auto uit het systeem indien betaald werd.
+
+Om te werken met huidige tijd en intervallen tussen twee tijdstippen, kan je gebruik maken van [`java.time.Instant`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html).
+
+#### Oefening: Multimap
 
 Schrijf een klasse `MultiMap` die een map voorstelt, maar waar bij elke key een _verzameling_ (Set) van waarden hoort in plaats van slechts één waarde.
 Gebruik een `Map` in je implementatie.
