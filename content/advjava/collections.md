@@ -1060,9 +1060,66 @@ In tegenstelling tot een Set, kan een SortedSet geen willekeurige objecten bevat
 De objecten moeten een volgorde hebben (hetzij door Comparable te implementeren, hetzij door een Comparator-object mee te geven).
 De elementen worden steeds in gesorteerde volgorde opgeslagen en teruggegeven.
 
-De [`TreeSet`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeSet.html) klasse is een implementatie van SortedSet die gebruik maakt van een boomstructuur.
+De [`TreeSet`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeSet.html) klasse is een implementatie van SortedSet die gebruik maakt van een gebalanceerde boomstructuur (een [red-black tree](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree) --- de werking daarvan is hier niet van belang).
 
-Alle basisoperaties (add, remove, contains) hebben worst-case tijdscomplexiteit \\(\mathcal{O}(\log n)\\).
+Alle basisoperaties (add, remove, contains) hebben worst-case tijdscomplexiteit \\(\mathcal{O}(\log n)\\); invoegen en verwijderen zijn best-case \\(\mathcal{O}(1)\\).
+
+#### Oefening: veranderende hashcode
+
+Is het nodig dat de hashCode van een object hetzelfde blijft doorheen de levensduur van het object, of mag deze veranderen?
+Verklaar je antwoord.
+
+#### Oefening: boomstructuur
+
+```mermaid
+flowchart TB
+subgraph s0 ["d=0"]
+direction LR
+R
+end
+subgraph s1 ["d=1"]
+direction LR
+A
+X10[" "]
+X11[" "]
+B
+end
+subgraph s2 ["d=2"]
+direction LR
+C
+D
+X20[" "]
+X21[" "]
+X22[" "]
+end
+subgraph s3 ["d=3"]
+direction LR
+X30[" "]
+X31[" "]
+E
+X32[" "]
+X33[" "]
+X34[" "]
+end
+R --> A
+R --> B
+A --> C
+A --> D
+D --> E
+
+classDef empty fill:none,stroke:none
+classDef depth stroke:none
+class X10,X11,X20,X21,X22,X30,X31,X32,X33,X34 empty
+class s0,s1,s2,s3 depth
+```
+
+Stel dat je een binaire boom hebt: een boomstructuur hebt waar elke knoop in de boom maximaal 2 kinderen heeft, zoals het voorbeeld hierboven.
+De diepte van een knoop is de afstand van die knoop tot de wortelknoop (bv. in de boom hierboven heeft knoop A diepte 1, knoop E diepte 3, en knoop R diepte 0).
+De hoogte van de boom is de maximale diepte van alle knopen (dus: de diepte van de knoop die het verst van de wortel ligt; E in het voorbeeld hierboven).
+
+- wat is de **maximale** hoogte van een binaire boom met \\(n\\) knopen?
+- wat is het maximaal aantal elementen met diepte gelijk aan \\(d\\) in een binaire boom?
+- wanneer heeft een binaire boom met \\(n\\) knopen een **minimale** hoogte? Wat is die hoogte?
 
 #### Oefening: Scheduler
 
