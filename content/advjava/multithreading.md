@@ -1,5 +1,8 @@
 ---
 title: "5.4 Multithreading en concurrency"
+toc: true
+autonumbering: true
+author: "Koen Yskout"
 draft: true
 ---
 
