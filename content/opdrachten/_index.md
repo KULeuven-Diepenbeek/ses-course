@@ -270,9 +270,9 @@ Tag het resultaat als `v11.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe
 
 #### Opdracht 12: Streams
 
-**Elke methode die hieronder vermeld wordt moet volledig geïmplementeerd worden met streams**.
+**Elke methode** die hieronder vermeld wordt moet **volledig geïmplementeerd worden met streams**.
 In het bijzonder mogen er _geen_ for- of while-lussen gebruikt worden.
-_(Als een methode je echt niet lukt met streams, mag je wel lussen gebruiken --- dat zal je wel een deel van de punten kosten.)_
+_(Als een methode je echt niet lukt met streams, mag je wel lussen gebruiken --- dat zal je wel een deel van de punten op deze opdracht kosten.)_
 
 1. Maak in klasse `Position` vier methodes.
 
@@ -284,13 +284,13 @@ _(Als een methode je echt niet lukt met streams, mag je wel lussen gebruiken ---
    Elk van die methodes geeft een stream terug met alle (geldige) posities die links, rechts, boven, of onder de this-positie liggen.
    De streams starten met de positie zelf, dan de positie die vlak naast de this-positie ligt, dan die daarnaast, enzovoort.
 
-2. Maak (in je model-klasse) een methode `Set<List<Position>> findAllMatches()` die een Set teruggeeft met daarin alle matches van het bord.
+2. Maak (bijvoorbeeld in je model-klasse) een methode `Set<List<Position>> findAllMatches()` die een Set teruggeeft met daarin alle matches van het bord.
    Een match is de langste opeenvolging van 3 of meer dezelfde snoepjes naast elkaar (allemaal horizontaal, of allemaal vertikaal).
    Een match wordt voorgesteld als een lijst van posities (namelijk alle posities die deel uitmaken van de match en waarop hetzelfde soort snoepje staat, in volgorde van links naar rechts of van boven naar onder).
 
-   Om deze `findAllMatches`-methode te implementeren, zijn volgende hulpfuncties handig (zet deze ook in je model-klasse):
+   Om deze `findAllMatches`-methode te implementeren, zijn volgende hulpfuncties handig (zet deze ook in je model-klasse, of waar je `findAllMatches` gaat implementeren):
 
-   - `boolean firstTwoHaveCandy(Candy candy, Stream<Position> positions)`. Deze methode geeft terug of op de eerste twee posities in de gegeven stream het gegeven soort snoepje staat (als de stream slechts 1 element heeft, kijk je enkel naar dat ene element).
+   - `boolean firstTwoHaveCandy(Candy candy, Stream<Position> positions)`. Deze methode geeft terug of op de eerste twee posities in de gegeven stream het gegeven soort snoepje staat (als de stream slechts 1 positie bevat, kijk je enkel naar die ene positie).
    - `Stream<Position> horizontalStartingPositions()` en `Stream<Position> verticalStartingPositions()`. Deze methodes geven een stream terug van alle posities op het bord waar _links_ respectievelijk _boven_ die positie een _ander_ soort snoepje staat. Deze posities zijn dus de mogelijke startposities van een horizontale respectievelijk vertikale match. (Die match, als die bestaat, loopt dus naar rechts respectievelijk onder van elke positie in de stream). _Hint: Maak gebruik van `firstTwoHaveSameCandy` en de walk-methodes._
    - `List<Position> longestMatchToRight(Position pos)` en `List<Position> longestMatchDown(Position pos)`. Deze methodes geven de langste match terug als lijst van posities, vertrekkend vanop de gegeven positie en in de richting aangegeven door de methodenaam. (_Hint: gebruik de walk-methodes van Position_).
 
