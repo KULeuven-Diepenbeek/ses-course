@@ -1,5 +1,5 @@
 ---
-title: "5.1 Recursie"
+title: "6.1 Recursie"
 autonumbering: true
 toc: true
 ---
