@@ -274,7 +274,9 @@ Tag het resultaat als `v11.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe
 In het bijzonder mogen er _geen_ for- of while-lussen gebruikt worden.
 _(Als een methode je echt niet lukt met streams, mag je wel lussen gebruiken --- dat zal je wel een deel van de punten op deze opdracht kosten.)_
 
-1. Maak in klasse `Position` vier methodes.
+1. Verander in `BoardSize` het return type van `positions()` van `Iterable` naar `Collection`, zodat je straks makkelijk een stream van alle posities kan maken. Dit zou slechts een beperkt effect op de rest van je code mogen hebben, aangezien Collection een sub-interface is van Iterable.
+
+2. Maak in klasse `Position` vier methodes.
 
    - `public Stream<Position> walkLeft()`
    - `public Stream<Position> walkRight()`
@@ -284,7 +286,7 @@ _(Als een methode je echt niet lukt met streams, mag je wel lussen gebruiken ---
    Elk van die methodes geeft een stream terug met alle (geldige) posities die links, rechts, boven, of onder de this-positie liggen.
    De streams starten met de positie zelf, dan de positie die vlak naast de this-positie ligt, dan die daarnaast, enzovoort.
 
-2. Maak (bijvoorbeeld in je model-klasse) een methode `Set<List<Position>> findAllMatches()` die een Set teruggeeft met daarin alle matches van het bord.
+3. Maak (bijvoorbeeld in je model-klasse) een methode `Set<List<Position>> findAllMatches()` die een Set teruggeeft met daarin alle matches van het bord.
    Een match is de langste opeenvolging van 3 of meer dezelfde snoepjes naast elkaar (allemaal horizontaal, of allemaal vertikaal).
    Een match wordt voorgesteld als een lijst van posities (namelijk alle posities die deel uitmaken van de match en waarop hetzelfde soort snoepje staat, in volgorde van links naar rechts of van boven naar onder).
 
