@@ -6,20 +6,30 @@ toc: true
 
 ## Wat is recursie?
 
-Wiskundig gezien zijn recursieve functies functies die zichself één of meerdere keren oproepen.
+Wiskundig gezien zijn recursieve functies functies die zichzelf één of meerdere keren oproepen.
 Een gekend voorbeeld is **faculteit**: $$ n! = n \times (n-1)! \quad\textrm{met}\quad 0! = 1 $$
+Bijvoorbeeld $$\begin{align} 
+5! & = 5 \times 4! \\\\
+& = 5 \times (4 \times 3!) \\\\
+& = 5 \times (4 \times (3 \times 2!)) \\\\
+& = 5 \times (4 \times (3 \times (2 \times 1!))) \\\\
+& = 5 \times (4 \times (3 \times (2 \times (1 \times 0!)))) \\\\
+& = 5 \times (4 \times (3 \times (2 \times (1 \times 1)))) \\\\
+& = 120
+\end{align}$$
 
-Een ander gekend voorbeeld zijn de **Fibonacci**-getallen:
+Een ander gekend voorbeeld zijn de **Fibonacci**-getallen \\( 0, 1, 1, 2, 3, 5, 8, 13, 21, \ldots \\), gegeven door volgende recursieve vergelijking:
 $$ F(n) = F(n-1) + F(n-2) \quad\textrm{met}\quad F(1) = 1 \quad\textrm{en}\quad F(0) = 0 $$.
 
-In Java kunnen we ook recursieve functies definiëren, bijvoorbeeld om Fibonacci-getallen te berekenen:
+In Java kunnen we ook recursieve methodes definiëren.
+Hier is bijvoorbeeld een methode om het n-de Fibonacci-getal te berekenen:
 
 ```java
-public static int fibonacci(int n) {
+public static int fib(int n) {
   if (n < 0) throw new IllegalArgumentException("n must be non-negative");
   if (n == 0) return 0;
   if (n == 1) return 1;
-  return fibonacci(n-1) + fibonacci(n-2);
+  return fib(n-1) + fib(n-2);
 }
 ```
 
@@ -27,61 +37,384 @@ Merk op hoe de functie zichzelf tweemaal oproept.
 
 De recursie eindigt wanneer een basisgeval bereikt wordt.
 Dat is een situatie (meestal een zeer eenvoudige) waar het antwoord onmiddellijk gekend is, en geen recursieve oproep meer nodig is.
-In bovenstaande code voor `fibonacci` zijn de basisgevallen de oproepen waarin `n` kleiner is dan 2.
+In bovenstaande code voor `fib` zijn de basisgevallen de oproepen waarin `n` kleiner is dan 2.
+We zouden ook een versie kunnen maken met meer basisgevallen; op zich maakt dat (buiten een klein beetje efficiëntie-winst) weinig verschil.
+
+```java
+public static int fib_alt(int n) {
+  if (n < 0) throw new IllegalArgumentException("n must be non-negative");
+  if (n == 0) return 0;
+  if (n == 1) return 1;
+  if (n == 2) return 1;
+  if (n == 3) return 2;
+  if (n == 4) return 3;
+  if (n == 5) return 5;
+  return fib_alt(n-1) + fib_alt(n-2);
+}
+```
+
+Het belangrijkste bij een recursieve functie is dat de ketting van recursieve oproepen ooit eindigt.
+Volgende recursieve definitie van Fibonacci zou dus niet goed zijn:
+
+> Waarom niet?
+
+```java
+public static int fib_bad(int n) {
+  if (n == 0) return 0;
+  return fib_bad(n-1) + fib_bad(n-2);
+}
+```
 
 ## Recursie achter de schermen
 
-Als we een recursieve functie uitvoeren, doet Java achter de schermen heel wat boekhouding voor ons.
-Bekijk onderstaande illustratie die aangeeft wat er gebeurt om `fibonacci(4)` te berekenen:
+Wanneer we een recursieve functie uitvoeren, doet Java achter de schermen heel wat boekhouding voor ons.
+Bekijk onderstaande illustratie die aangeeft wat er allemaal gebeurt om `fib(5)=5` te berekenen:
 
 ```mermaid
 graph TB
-t["main"]
-f4["fibonacci(4)"]
-f3["fibonacci(3)"]
-f2_1["fibonacci(2)"]
-f2_2["fibonacci(2)"]
-f1_1["fibonacci(1)"]
-f1_2["fibonacci(1)"]
-f1_3["fibonacci(1)"]
-f0_1["fibonacci(0)"]
-f0_2["fibonacci(0)"]
-t --> |"n=4"| f4
-f4 -->|"n=3"| f3
-  f3 -->|"n=2"| f2_1
-    f2_1 -->|"n=1"| f1_1
-      f1_1 -->|1| f2_1
-    f2_1 -->|"n=0"| f0_1
-      f0_1 -->|0| f2_1
-    f2_1 -->|1| f3
-  f3 -->|"n=1"| f1_2
-    f1_2 -->|1| f3
-  f3 -->|2| f4
-f4 -->|"n=2"| f2_2
-  f2_2 -->|"n=1"| f1_3
-    f1_3 -->|1| f2_2
-  f2_2 -->|"n=0"| f0_2
-    f0_2 -->|0| f2_2
-  f2_2 -->|1| f4
-f4 -->|3| t
+t[" "]
+f5["return fib(4) + fib(3)"]
+f4["return fib(3) + fib(2)"]
+f3["return fib(2) + fib(1)"]
+f2_1["return fib(1) + fib(0)"]
+f2_2["return fib(1) + fib(0)"]
+f1_1["return 1"]
+f1_2["return 1"]
+f1_3["return 1"]
+f0_1["return 0"]
+f0_2["return 0"]
+
+f3_2["return fib(2) + fib(1)"]
+f2_3["return fib(1) + fib(0)"]
+f1_4["return 1"]
+f1_5["return 1"]
+f0_3["return 0"]
+
+t --> |"fib(5)"| f5
+f5 --> |"fib(4)"| f4
+  f4 -->|"fib(3)"| f3
+    f3 -->|"fib(2)"| f2_1
+      f2_1 -->|"fib(1)"| f1_1
+        f1_1 -->|1| f2_1
+      f2_1 -->|"fib(0)"| f0_1
+        f0_1 -->|0| f2_1
+      f2_1 -->|1| f3
+    f3 -->|"fib(1)"| f1_2
+      f1_2 -->|1| f3
+    f3 -->|2| f4
+  f4 -->|"fib(2)"| f2_2
+    f2_2 -->|"fib(1)"| f1_3
+      f1_3 -->|1| f2_2
+    f2_2 -->|"fib(0)"| f0_2
+      f0_2 -->|0| f2_2
+    f2_2 -->|1| f4
+f5 --> |"fib(3)"| f3_2
+  f3_2 -->|"fib(2)"| f2_3
+      f2_3 -->|"fib(1)"| f1_4
+        f1_4 -->|1| f2_3
+      f2_3 -->|"fib(0)"| f0_3
+        f0_3 -->|0| f2_3
+      f2_3 -->|1| f3_2
+    f3_2 -->|"fib(1)"| f1_5
+      f1_5 -->|1| f3_2
+    f3_2 -->|2| f5
+f4 -->|3| f5
+f5 -->|5| t
 
 classDef base fill:#fcc,stroke:#933
-class f0_1,f0_2 base
-class f1_1,f1_2,f1_3 base
+class f0_1,f0_2,f0_3 base
+class f1_1,f1_2,f1_3,f1_4,f1_5 base
 ```
 
 ### Stack
 
-{{% todo message="leg uit hoe Stack gebruikt wordt" %}}
+De uitvoering van recursieve methodes maakt (net zoals de uitvoering van gewone methodes) gebruik van een **stack**.
+We herschrijven `fib` lichtjes om de uitleg te vergemakkelijken:
+
+```java
+public static int fib(int n) {
+  if (n < 0) throw new IllegalArgumentException("n must be non-negative");
+  if (n == 0) return 0;
+  if (n == 1) return 1;
+  int fib_n1 = fib(n-1);
+  int fib_n2 = fib(n-2);
+  int result = fib_n1 + fib_n2;
+  return result;
+}
+```
+
+Elke methode-oproep voegt een _stackframe_ toe; in dat stackframe worden de waarden van alle parameters (bv. `n` voor `fib` hierboven) en lokale variabelen (`fib_n1`, `fib_n2`, en `result`) bewaard.
+Het bovenste stackframe is het actieve stackframe.
+Wanneer de methode-oproep voltooid is (bijvoorbeeld na het uitvoeren van een `return`-statement) verdwijnt dat stackframe, en wordt het vorige stackframe terug geactiveerd.
+
+<div style="display: flex; align-items: flex-end; gap: 1em;">
+<div>
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph BT
+main["`**main**`"]
+f5["`**fib**
+n=5
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+main --> f5
+classDef active stroke:#363,fill:#afa
+class f5 active
+```
+
+</div>
+<div>
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph BT
+main["`**main**`"]
+f5["`**fib**
+n=5
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+f4["`**fib**
+n=4
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+main --> f5
+f5 --> f4
+classDef active stroke:#363,fill:#afa
+class f4 active
+```
+
+</div>
+
+<div>
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph BT
+main["`**main**`"]
+f5["`**fib**
+n=5
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+f4["`**fib**
+n=4
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+f3["`**fib**
+n=3
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+main --> f5
+f5 --> f4
+f4 --> f3
+classDef active stroke:#363,fill:#afa
+class f3 active
+```
+
+</div>
+
+<div style="align-self: center; font-size: 2rem;">...</div>
+
+<div>
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph BT
+main["`**main**`"]
+f5["`**fib**
+n=5
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+f4["`**fib**
+n=4
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+f3["`**fib**
+n=3
+fib_n1=1
+fib_n2=1
+**result=2**`"]
+main --> f5
+f5 --> f4
+f4 --> f3
+classDef active stroke:#363,fill:#afa
+class f3 active
+```
+
+</div>
+
+<div>
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph BT
+main["`**main**`"]
+f5["`**fib**
+n=5
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+f4["`**fib**
+n=4
+fib_n1=2
+**fib_n2=???**
+result=???`"]
+f3["`**fib**
+n=3
+fib_n1=1
+fib_n2=1
+result=2`"]
+main --> f5
+f5 --> f4
+f4 ~~~ f3
+classDef active stroke:#363,fill:#afa;
+classDef removed stroke:#aaa,fill:#ddd,color:#aaa;
+class f4 active
+class f3 removed
+```
+
+</div>
+
+<div>
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph BT
+main["`**main**`"]
+f5["`**fib**
+n=5
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+f4["`**fib**
+n=4
+fib_n1=2
+**fib_n2=???**
+result=???`"]
+f2["`**fib**
+n=2
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+main --> f5
+f5 --> f4
+f4 --> f2
+classDef active stroke:#363,fill:#afa
+class f2 active
+```
+
+</div>
+
+<div style="align-self: center; font-size: 2rem;">...</div>
+
+<div>
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph BT
+main["`**main**`"]
+f5["`**fib**
+n=5
+**fib_n1=???**
+fib_n2=???
+result=???`"]
+f4["`**fib**
+n=4
+fib_n1=2
+fib_n2=1
+**result=3**`"]
+main --> f5
+f5 --> f4
+classDef active stroke:#363,fill:#afa
+class f4 active
+```
+
+</div>
+
+<div>
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph BT
+main["`**main**`"]
+f4["`**fib**
+n=4
+fib_n1=2
+fib_n2=1
+result=3`"]
+f5["`**fib**
+n=5
+fib_n1=3
+**fib_n2=???**
+result=???`"]
+main --> f5
+f5 ~~~ f4
+classDef active stroke:#363,fill:#afa
+classDef removed stroke:#aaa,fill:#ddd,color:#aaa;
+class f5 active
+class f4 removed
+```
+
+</div>
+
+<div style="align-self: center; font-size: 2rem;">...</div>
+
+<div>
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+graph BT
+main["`**main**`"]
+f5["`**fib**
+n=5
+fib_n1=3
+fib_n2=2
+**result=5**`"]
+main --> f5
+classDef active stroke:#363,fill:#afa
+class f5 active
+```
+
+</div>
+
+</div>
 
 ### Stack overflow
 
-{{% todo message="gevaar van Stack overflow; stack size vergroten" %}}
+Zoals je hierboven kan zien, groeit de stack bij elke recursieve oproep.
+Elke stack-frame neemt een bepaalde hoeveelheid geheugen in.
+De totale grootte van de stack is echter beperkt.
+Wanneer de stack te groot wordt, krijg je een **stack overflow**.
+In Java uit zich dat door het gooien van een `StackOverflowException`.
 
-### Efficientie
+Je kan de grootte die gereserveerd wordt voor de stack vergroten door bij de uitvoering een argument (`-Xss`) mee te geven aan de Java virtual machine (JVM).
+Bijvoorbeeld, om een stack van 4 megabyte te voorzien (de standaardgrootte is gewoonlijk 1 MB):
 
-{{% todo message="efficientie van oplossing" %}}
-repeated calls, memoization (fibonacci)
+```
+java -Xss4m Program
+```
+
+In IntelliJ kan je die optie toevoegen in de 'Run configuration'.
+
+Gewoonlijk zal dat niet nodig zijn; enkel wanneer je gebruik maakt van recursie voor grotere problemen.
+Een meer waarschijnlijke oorzaak van een `StackOverflowException` is een recursieve operatie die niet eindigt in een basisgeval.
+
+### Efficiëntie
+
+Als je goed kijkt naar de uitvoeringsboom van `fib(5)` hierboven zie je dat er delen van de boom zijn die terugkeren.
+Bijvoorbeeld, `fib(3)` wordt tweemaal opnieuw berekend, `fib(2)` driemaal, en `fib(1)` komt vijfmaal voor.
+Dat is natuurlijk niet erg efficiënt.
+
+Technieken zoals 'dynamisch programmeren' (_dynamic programming_) en _memoization_ kunnen hier soelaas bieden.
+We verkennen deze technieken niet verder binnen deze cursus.
 
 ## Eindigheid en invoergrootte
 
@@ -95,19 +428,19 @@ public static int bad(int n) {
 }
 ```
 
-zou enkel eindigen voor positieve even getallen (overtuig jezelf hiervan).
+eindigt enkel voor positieve even getallen (overtuig jezelf hiervan).
 
 Om er zeker van te zijn dat een recursieve methode ooit eindigt, moeten we kunnen aantonen dat elke recursieve oproep ooit een basisgeval zal bereiken.
 Dat is niet altijd eenvoudig of mogelijk.
-Neem bijvoorbeeld volgende welgekende functie van Collatz:
+Neem bijvoorbeeld volgende welgekende functie van Collatz, gedefinieerd voor \\( n \geq 1 \\):
 
 ```java
 public static boolean collatz(int n) {
   if (n == 1) {
     return true;
-  } else if (n % 2 == 0) {
+  } else if (n % 2 == 0) { // n is even
     return collatz(n / 2);
-  } else {
+  } else { // n is oneven > 1
     return collatz(3*n + 1);
   }
 }
@@ -123,37 +456,38 @@ Aangezien een invoergrootte steeds (per definitie) een niet-negatief getal moet 
 
 Typische invoergroottes bij recursieve problemen zijn
 
-- de waarde van een parameter, indien dit een natuurlijk getal is (bijvoorbeeld `n` in fibonacci hierboven)
-- het aantal elementen in een datastructuur (lijst, set, ...) die gebruikt wordt
+- de waarde van een parameter, indien dit een natuurlijk getal is (bijvoorbeeld `n` in `fib` hierboven)
+- het aantal elementen in een datastructuur (lijst, set, ...) die gebruikt wordt.
 
 ## Recursief denken
 
 Recursie biedt vaak een erg krachtige manier om complexe algoritmische problemen op te lossen.
 Je moet hiervoor wel op de juiste manier redeneren over recursie.
-Een grote valkuil is nadenken over de volledige uitvoeringsboom, zoals we hierboven getoond hebben voor fibonacci.
+Een grote valkuil is nadenken over de volledige uitvoeringsboom, zoals we hierboven getoond hebben voor de Fibonacci-functie.
 De complexiteit hiervan is gigantisch, en staat een elegante oplossing en helder redeneren in de weg.
 
 Een betere manier om na te denken over recursie gaat als volgt.
-Je wil een probleem van een bepaalde grootte (`n`) oplossen.
-Stel nu dat je mag veronderstellen dat je (magischerwijze) dat probleem al kan oplossen voor alle (strikt kleinere) groottes `n' < n`.
+Je wil een probleem van een bepaalde grootte \\( n \\) oplossen.
+Stel nu dat je mag veronderstellen dat je (magischerwijze) datzelfde probleem al kan oplossen, maar dan alleen voor alle (strikt kleinere) groottes \\( n' < n \\).
 Hoe kan dit je helpen om het volledige probleem op te lossen?
 Met andere woorden, welke manieren zie je om een oplossing van een deel van het probleem te transformeren in een oplossing voor het hele probleem?
+Of nog anders gezegd: recursie gaat om _vertrouwen_: vertrouw erop dat het kleinere probleem juist opgelost wordt, en besteed enkel aandacht aan hoe je de oplossing voor een kleiner probleem kan gebruiken om de oplossing voor het grotere probleem te vinden.
 Eens je deze denkwijze onder de knie hebt, wordt recursie bijna een magisch stuk gereedschap.
 
 We bekijken twee voorbeelden van deze denkwijze.
 
 ### Voorbeeld 1: grootste element
 
-Bijvoorbeeld: je wil het grootste element uit een lijst van getallen bepalen.
-We noemen de lengte van die lijst `n`.
-Stel nu dat we reeds beschikken over een magische oplossing (een functie) om het grootste element te vinden in alle lijsten met een lengte tot en met `n-1`.
-Hoe kunnen we deze oplossing gebruiken om het probleem op te lossen voor een lijst van lengte `n`?
+Veronderstel dat je het grootste element uit een lijst van getallen wil bepalen (vergeet even dat we dat ook makkelijk kunnen met behulp van een lus).
+We noemen de lengte van die lijst \\( n \\).
+Stel nu dat we reeds beschikken over een magische oplossing (een functie) om het grootste element te vinden in alle lijsten met een lengte tot en met \\( n-1 \\).
+Hoe kunnen we deze oplossing gebruiken om het probleem op te lossen voor een lijst van lengte \\( n \\)?
 
 > Denk hier even zelf over na!
 
 Er zijn verschillende mogelijkheden.
 We weten bijvoorbeeld dat het grootste element ofwel het eerste element is, ofwel voorkomt in de rest van de lijst (alle elementen behalve het eerste).
-We kunnen onze magische functie dus gebruiken om het grootste element uit de rest van de lijst te zoeken, en dat te vergelijken met het eerste.
+We kunnen onze magische functie dus gebruiken om het grootste element uit de rest van de lijst te zoeken, en dat vervolgens te vergelijken met het eerste.
 Dat leidt tot volgende recursieve implementatie:
 
 ```java
@@ -172,8 +506,11 @@ public static int largestElement(ArrayList<Integer> list) {
 ```
 
 De basisgevallen hier zijn een lege lijst (er is dan geen grootste element) en een lijst met slechts één element (dat ene element moet het grootste element zijn).
+Merk op hoe we een `subList` gebruiken om makkelijk een kleinere lijst (zonder het element op index 0) te creëren voor de recursieve oproep.
+Zoals je je misschien herinnert, is het resultaat van `subList` een _view_ op de originele lijst --- er worden geen elementen gekopieerd.
+Dat is dus zeer efficiënt.
 
-Maar er waren ook andere oplossingsstrategieën mogelijk met een gelijkaardige denkwijze.
+Er waren ook andere oplossingsstrategieën mogelijk met een gelijkaardige denkwijze.
 Bijvoorbeeld, we hadden het laatste element kunnen afzonderen in plaats van het eerste.
 Of we hadden het maximum van de eerste helft van de elementen kunnen vergelijken met het maximum van de tweede helft:
 
@@ -195,31 +532,35 @@ public static int largestElement_alt(ArrayList<Integer> list) {
 
 Recursief denken lijkt voor dit voorbeeld misschien wat overbodig.
 Het maximum zoeken kan je inderdaad ook heel eenvoudig iteratief (met een for-lus).
-Daarom volgend tweede voorbeeld.
+Daarom volgt een tweede voorbeeld, waar een iteratieve oplossing niet voor de hand ligt.
 
 ### Voorbeeld 2: Toren van Hanoi
 
 Je kent misschien de puzzel van de [toren van Hanoi](https://en.wikipedia.org/wiki/Tower_of_Hanoi).
-We hebben drie stapels (A, B, en C), en op elke stapen mogen schijven liggen, van groot (onderaan) naar klein (bovenaan).
+We hebben drie stapels (A, B, en C), en op elke stapel mogen schijven liggen, van groot (onderaan) naar klein (bovenaan).
 De puzzel bestaat eruit om alle schijven van één stapel naar een andere te verplaatsen.
 Daarbij zijn er twee regels:
 
 1. Je mag slechts 1 schijf per keer verplaatsen.
-2. Er mag nooit een grote op een kleine schijf terecht komen.
+2. Een schijf mag nooit op een kleinere schijf terecht komen.
+
+<img src="/img/hanoi-start.png" alt="drawing" style="max-width: 1024px;"/>
 
 > Hoe moeilijk/lang verwacht je dat een algoritme wordt om deze puzzel op te lossen?
 
 Dit probleem wordt heel eenvoudig als we recursief denken.
-We moeten `n` schijven verplaatsen van een bronstapel (bijvoorbeeld A) naar een doelstapel (bijvoorbeeld C), en we hebben een extra stapel (B) die we als hulpstapel kunnen gebruiken.
-We mogen bovendien veronderstellen dat we een magische oplossing (recursie!) hebben om `n-1` (of minder) schijven te verplaatsen van een willekeurige stapel naar een andere willekeurige stapel, volgens de regels van de puzzel.
-Hoe kunnen we die magische oplossing gebruiken voor het hele probleem?
+We moeten \\( n \\) schijven verplaatsen van een bronstapel (bijvoorbeeld A) naar een doelstapel (bijvoorbeeld C), en we hebben een extra stapel (B) die we als hulpstapel kunnen gebruiken.
+We vertrouwen er bovendien op dat we een magische oplossing (recursie!) hebben om \\( n-1 \\) (of minder) schijven te verplaatsen van een willekeurige stapel naar een andere willekeurige stapel, volgens de regels van de puzzel.
+Hoe kunnen we die magische oplossing gebruiken om het hele probleem op te lossen?
 
 > Denk hier zelf even over na!
 
-We kunnen eerst de bovenste `n-1` schijven verplaatsen van stapel A naar stapel B (de hulpstapel).
+We kunnen eerst de bovenste \\( n-1 \\) schijven verplaatsen van stapel A naar stapel B (de hulpstapel).
 De laatste overblijvende schijf op stapel A (de grootste schijf) verplaatsen we nu naar doelstapel C.
-Tenslotte verplaatsen we de `n-1` schijven van hulpstapel B ook naar doelstapel C (opnieuw via onze magische oplossing).
+Tenslotte verplaatsen we de \\( n-1\\) schijven van hulpstapel B ook naar doelstapel C (opnieuw via onze magische oplossing).
 Het basisgeval is heel eenvoudig: indien we 0 schijven moeten verplaatsen, doen we niets.
+
+<img src="/img/hanoi.png" alt="drawing" style="max-width: 1024px;"/>
 
 Dat geeft volgende oplossing in code, met `n` het aantal schijven en `from`, `to`, en `helper` de namen van de stapels, (bijvoorbeeld "A", "B", en "C", of "links", "midden", en "rechts"):
 
@@ -256,19 +597,142 @@ Verplaats de bovenste schijf van stapel B naar stapel C
 
 Ga na dat dit een correcte oplossing is voor het probleem, bijvoorbeeld via [deze simulator](https://www.mathsisfun.com/games/towerofhanoi.html).
 
+Ter illustratie: de volledige uitvoeringsboom die bij bovenstaande uitvoer hoort ziet er als volgt uit; je leest de oplossing van boven naar onder af in de groene nodes.
+Het spreekt hopelijk voor zich dat denken over recursie in termen van zo'n bijhorende uitvoeringsboom niet de makkelijkste of duidelijkste manier is.
+
+```mermaid
+graph LR
+H4ACB["1: hanoi(4,A,C,B)"]
+H4ACBH3ABC["2: hanoi(3,A,B,C)"]
+H4ACBH3ABCH2ACB["3: hanoi(2,A,C,B)"]
+H4ACBH3ABCH2ACBH1ABC["4: hanoi(1,A,B,C)"]
+H4ACBH3ABCH2ACBH1ABCH0ACB["5: hanoi(0,A,C,B)"]
+H4ACBH3ABCH2ACBH1ABC --> H4ACBH3ABCH2ACBH1ABCH0ACB
+H4ACBH3ABCH2ACBH1ABC --> H4ACBH3ABCH2ACBH1ABCm["6: Move A to B"]:::move
+H4ACBH3ABCH2ACBH1ABCH0CBA["7: hanoi(0,C,B,A)"]
+H4ACBH3ABCH2ACBH1ABC --> H4ACBH3ABCH2ACBH1ABCH0CBA
+H4ACBH3ABCH2ACB --> H4ACBH3ABCH2ACBH1ABC
+H4ACBH3ABCH2ACB --> H4ACBH3ABCH2ACBm["8: Move A to C"]:::move
+H4ACBH3ABCH2ACBH1BCA["9: hanoi(1,B,C,A)"]
+H4ACBH3ABCH2ACBH1BCAH0BAC["10: hanoi(0,B,A,C)"]
+H4ACBH3ABCH2ACBH1BCA --> H4ACBH3ABCH2ACBH1BCAH0BAC
+H4ACBH3ABCH2ACBH1BCA --> H4ACBH3ABCH2ACBH1BCAm["11: Move B to C"]:::move
+H4ACBH3ABCH2ACBH1BCAH0ACB["12: hanoi(0,A,C,B)"]
+H4ACBH3ABCH2ACBH1BCA --> H4ACBH3ABCH2ACBH1BCAH0ACB
+H4ACBH3ABCH2ACB --> H4ACBH3ABCH2ACBH1BCA
+H4ACBH3ABC --> H4ACBH3ABCH2ACB
+H4ACBH3ABC --> H4ACBH3ABCm["13: Move A to B"]:::move
+H4ACBH3ABCH2CBA["14: hanoi(2,C,B,A)"]
+H4ACBH3ABCH2CBAH1CAB["15: hanoi(1,C,A,B)"]
+H4ACBH3ABCH2CBAH1CABH0CBA["16: hanoi(0,C,B,A)"]
+H4ACBH3ABCH2CBAH1CAB --> H4ACBH3ABCH2CBAH1CABH0CBA
+H4ACBH3ABCH2CBAH1CAB --> H4ACBH3ABCH2CBAH1CABm["17: Move C to A"]:::move
+H4ACBH3ABCH2CBAH1CABH0BAC["18: hanoi(0,B,A,C)"]
+H4ACBH3ABCH2CBAH1CAB --> H4ACBH3ABCH2CBAH1CABH0BAC
+H4ACBH3ABCH2CBA --> H4ACBH3ABCH2CBAH1CAB
+H4ACBH3ABCH2CBA --> H4ACBH3ABCH2CBAm["19: Move C to B"]:::move
+H4ACBH3ABCH2CBAH1ABC["20: hanoi(1,A,B,C)"]
+H4ACBH3ABCH2CBAH1ABCH0ACB["21: hanoi(0,A,C,B)"]
+H4ACBH3ABCH2CBAH1ABC --> H4ACBH3ABCH2CBAH1ABCH0ACB
+H4ACBH3ABCH2CBAH1ABC --> H4ACBH3ABCH2CBAH1ABCm["22: Move A to B"]:::move
+H4ACBH3ABCH2CBAH1ABCH0CBA["23: hanoi(0,C,B,A)"]
+H4ACBH3ABCH2CBAH1ABC --> H4ACBH3ABCH2CBAH1ABCH0CBA
+H4ACBH3ABCH2CBA --> H4ACBH3ABCH2CBAH1ABC
+H4ACBH3ABC --> H4ACBH3ABCH2CBA
+H4ACB --> H4ACBH3ABC
+H4ACB --> H4ACBm["24: Move A to C"]:::move
+H4ACBH3BCA["25: hanoi(3,B,C,A)"]
+H4ACBH3BCAH2BAC["26: hanoi(2,B,A,C)"]
+H4ACBH3BCAH2BACH1BCA["27: hanoi(1,B,C,A)"]
+H4ACBH3BCAH2BACH1BCAH0BAC["28: hanoi(0,B,A,C)"]
+H4ACBH3BCAH2BACH1BCA --> H4ACBH3BCAH2BACH1BCAH0BAC
+H4ACBH3BCAH2BACH1BCA --> H4ACBH3BCAH2BACH1BCAm["29: Move B to C"]:::move
+H4ACBH3BCAH2BACH1BCAH0ACB["30: hanoi(0,A,C,B)"]
+H4ACBH3BCAH2BACH1BCA --> H4ACBH3BCAH2BACH1BCAH0ACB
+H4ACBH3BCAH2BAC --> H4ACBH3BCAH2BACH1BCA
+H4ACBH3BCAH2BAC --> H4ACBH3BCAH2BACm["31: Move B to A"]:::move
+H4ACBH3BCAH2BACH1CAB["32: hanoi(1,C,A,B)"]
+H4ACBH3BCAH2BACH1CABH0CBA["33: hanoi(0,C,B,A)"]
+H4ACBH3BCAH2BACH1CAB --> H4ACBH3BCAH2BACH1CABH0CBA
+H4ACBH3BCAH2BACH1CAB --> H4ACBH3BCAH2BACH1CABm["34: Move C to A"]:::move
+H4ACBH3BCAH2BACH1CABH0BAC["35: hanoi(0,B,A,C)"]
+H4ACBH3BCAH2BACH1CAB --> H4ACBH3BCAH2BACH1CABH0BAC
+H4ACBH3BCAH2BAC --> H4ACBH3BCAH2BACH1CAB
+H4ACBH3BCA --> H4ACBH3BCAH2BAC
+H4ACBH3BCA --> H4ACBH3BCAm["36: Move B to C"]:::move
+H4ACBH3BCAH2ACB["37: hanoi(2,A,C,B)"]
+H4ACBH3BCAH2ACBH1ABC["38: hanoi(1,A,B,C)"]
+H4ACBH3BCAH2ACBH1ABCH0ACB["39: hanoi(0,A,C,B)"]
+H4ACBH3BCAH2ACBH1ABC --> H4ACBH3BCAH2ACBH1ABCH0ACB
+H4ACBH3BCAH2ACBH1ABC --> H4ACBH3BCAH2ACBH1ABCm["40: Move A to B"]:::move
+H4ACBH3BCAH2ACBH1ABCH0CBA["41: hanoi(0,C,B,A)"]
+H4ACBH3BCAH2ACBH1ABC --> H4ACBH3BCAH2ACBH1ABCH0CBA
+H4ACBH3BCAH2ACB --> H4ACBH3BCAH2ACBH1ABC
+H4ACBH3BCAH2ACB --> H4ACBH3BCAH2ACBm["42: Move A to C"]:::move
+H4ACBH3BCAH2ACBH1BCA["43: hanoi(1,B,C,A)"]
+H4ACBH3BCAH2ACBH1BCAH0BAC["44: hanoi(0,B,A,C)"]
+H4ACBH3BCAH2ACBH1BCA --> H4ACBH3BCAH2ACBH1BCAH0BAC
+H4ACBH3BCAH2ACBH1BCA --> H4ACBH3BCAH2ACBH1BCAm["45: Move B to C"]:::move
+H4ACBH3BCAH2ACBH1BCAH0ACB["46: hanoi(0,A,C,B)"]
+H4ACBH3BCAH2ACBH1BCA --> H4ACBH3BCAH2ACBH1BCAH0ACB
+H4ACBH3BCAH2ACB --> H4ACBH3BCAH2ACBH1BCA
+H4ACBH3BCA --> H4ACBH3BCAH2ACB
+H4ACB --> H4ACBH3BCA
+
+classDef move stroke:green,fill:#afa
+```
+
 ## Recursie vs. iteratie
 
-In sommige gevallen kan je een recursieve methode eenvoudig herschrijven naar een versie zonder recursie, door middel van iteratie, en omgekeerd.
+In sommige gevallen kan je een for- of while-lus eenvoudig herschrijven tot een recursieve methode en omgekeerd.
+Die omzetting volgt vaak eenzelfde patroon; in pseudocode:
 
-Bijvoorbeeld, faculteit van hierboven wordt
+```java
+initialize result
+while (!finished) {
+  update result
+}
+return result
+```
+
+wordt
+
+```java
+public R solve(input) {
+  return solve(T, initialResult);
+}
+public R solve(input, R resultSoFar) {
+  if (finished) return resultSoFar;
+  update resultSoFar
+  solve(smaller input, resultSoFar);
+}
+```
+
+Bijvoorbeeld, de iteratieve versie om faculteit te berekenen ziet er als volgt uit:
 
 ```java
 int result = 1;
-for (int i = 1; i <= n; i++) {
-  result *= i;
+while (n > 0) {
+  result *= n;
+  n -= 1;
 }
 return result;
 ```
+
+En de bijhorende recursieve versie:
+
+```java
+public int factorial(int n) {
+  if (n < 0) throw new IllegalArgumentException("n must be positive");
+  return factorial(n, 1);
+}
+private int factorial(int n, int result) {
+  if (n == 0) return result;
+  return factorial(n-1, n * result);
+}
+```
+
+Merk op dat onze recursieve oplossing bestaat uit 2 methodes (waar faculteit vroeger slechts 1 recursieve methode was). De reden is dat we het **worker-wrapper patroon** gebruiken: de state wordt bijhouden en een _tail-recursive_ oproep doen.
 
 De functie factorial is **tail-recursive**: de recursieve oproep is de laatste bewerking die gebeurt voor de functie eindigt.
 In dergelijke gevallen is het herschrijven vaak heel eenvoudig.
@@ -278,7 +742,41 @@ Bijvoorbeeld, ...
 
 ## Worker-wrapper? Accumulator?
 
-## Voorbeelden
+worker -> voeg accumulator toe
+wrapper -> zorg voor initialisatie
+
+## Oefeningen
+
+TODO: more ideas on https://www.techiedelight.com/recursion-practice-problems-with-solutions/
+
+### Palindroom
+
+Schrijf een recursieve functie die nagaat of een String een palindroom is.
+Een String is een palindroom als die hetzelfde is van links naar rechts als van rechts naar links, bijvoorbeeld
+
+- racecar
+- level
+- deified
+- lepel
+- droomoord
+- redder
+- meetsysteem
+- koortsmeetsysteemstrook
+
+### String omkeren
+
+Schrijf een recursieve methode om een String om te keren, bijvoorbeeld:
+
+- Hello -> olleH
+- racecar -> racecar
+
+### Duplicaten verwijderen
+
+Schrijf een recursieve methode die opeenvolgende duplicaten uit een String verwijdert.
+Bijvoorbeeld:
+
+- AAABBCDDD -> ABCD
+-
 
 ### isDivisibleBy
 
@@ -297,8 +795,6 @@ public boolean isDivisibleBy(number, divisor) {
 ### (Snelle) macht
 
 ### Sum of digits
-
-### Palindroom
 
 ### Alle prefixen van een String
 
@@ -322,18 +818,56 @@ Selection sort (ahv index maximum)
 
 ### Toren van Hanoi (uitbreiding)
 
-Meer stapels
+Los de toren van Hanoi op voor \\( n\\) schijven op 4 stapels (dus 2 hulpstapels).
+Je kan je oplossing manueel uittesten [via deze simulator](https://towersofhanoi.info/Play.aspx).
+_(In de simulator moet je klikken, niet slepen)_
 
 ### Trap beklimmen
 
-Hoeveel manieren zijn er om een trap op te gaan, als je bij elke stap kan kiezen om 1 of 2 tredes te nemen?
+Schrijf een functie om te berekenen hoeveel _verschillende_ manieren er zijn om een trap met \\( n \\) treden op te gaan, als je bij elke stap kan kiezen om 1 of 2 treden tegelijk te nemen.
+Bijvoorbeeld, een trap met \\( n = 4 \\) treden kan je op 5 verschillende manieren beklimmen:
+
+<div style="max-width: 500px">
+
+```goat
+               _________
+            ___|
+         ___|
+      ___|
+______|
+```
+
+</div>
+
+1. 1 trede, 1 trede, 1 trede, 1 trede
+2. 1 trede, 1 trede, 2 treden
+3. 1 trede, 2 treden, 1 trede
+4. 2 treden, 1 trede, 1 trede
+5. 2 treden, 2 treden
 
 ### Exact betalen
 
 Gegeven een lijst van munten, bepaal of je een bepaald bedrag exact kan betalen.
+
+### Pattern match
+
+TODO: backtracking
+
+Schrijf een methode die nagaat of een String voldoet aan een geven patroon.
+Het patroon bestaat uit letters, waar elke letter staat voor een deel van de string.
+Bijvoorbeeld:
+
+- "hoihoihoi" voldoet aan het patroon "XXX" (waarbij X=hoi)
+- "choochoo" en "redder" voldoen aan het patroon "XX" maar niet aan "XXX"
+- "appelmoes" voldoet aan het patroon "X", maar ook aan "XY", "XYZ", ...
+- "meetsysteem" voldoet aan het patroon "ABCXYXCBA"
 
 ### Doolhof oplossen
 
 ### Alle permutaties berekenen
 
 ### Evalueer wiskundige expressie
+
+```
+
+```
