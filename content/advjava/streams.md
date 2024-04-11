@@ -10,23 +10,32 @@ draft: true
 
 [Streams](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/package-summary.html) vormen een krachtig concept om efficiënt data te verwerken.
 Ze vormen een abstractie voor sequentiële en parallele operaties op datasets, zoals filteren, transformeren, en aggregeren, zonder de onderliggende datastructuur te wijzigen.
-Bovendien maakt het gebruik van streams het mogelijk om declaratief te programmeren: je beschrijft op hoog niveau _wát_ je met de dataset wilt doen, in plaats van stap voor stap _hoe_ dat moet gebeuren.
+Bovendien maakt het gebruik van streams het mogelijk om declaratief te programmeren: je beschrijft op hoog niveau _wát_ je met de dataset wilt doen, in plaats van stap voor stap te beschrijven _hoe_ dat moet gebeuren.
 
 Een stream zelf is _geen_ datastructuur of collectie; een stream is een pijplijn --- een ketting van operaties die uitgevoerd moeten worden op de data.
 Die operaties kunnen de data filteren, transformeren, groeperen, reduceren, ...
+Een stream stelt dus één grote bewerking voor op de data, samengesteld uit meerdere operaties.
 Elke stream bestaat uit 3 delen:
 
 - een **bron** voor de data (een _stroom_ van data, vandaar de naam). Die bron kan een datastructuur zijn (bv. een array, ArrayList, HashSet, ...), maar ook andere bronnen zijn mogelijk (bijvoorbeeld een oneindige sequentie van getallen, zoals de natuurlijke getallen)
-- **intermediaire operaties** (mogelijk meerdere na elkaar) die de data verwerken (transformeren). Elke operatie neemt het resultaat van de vorige operatie (of de bron) en doet daar iets mee; het resultaat daarvan dient als invoer voor de volgende operatie.
+- **intermediaire operaties** (mogelijk meerdere na elkaar) die de data verwerken (transformeren). Elke operatie neemt het resultaat van de vorige operatie (of de bron) en doet daar iets mee; het resultaat daarvan dient als invoer voor de volgende operatie. Zo krijg je een pijplijn waar de data doorheen stroomt terwijl ze bewerkt wordt.
 - een **terminale operatie**: deze beëindigt de ketting en geeft het uiteindelijke resultaat terug.
+
+```mermaid
+graph LR
+Source --> Op1 --> Op2 --> Op3 --> Terminal
+style Source stroke:black,fill:#afa
+style Terminal stroke:black,fill:#faa
+```
 
 Je kan een stream slechts **éénmaal** doorlopen. Als je na het uitvoeren van de operaties nog een sequentie van operaties wil uitvoeren op dezelfde bron-elementen, moet je een nieuwe stream maken.
 
-Streams zijn **lazy**: er worden slechts zoveel elementen verwerkt als nodig om het resultaat te berekenen.
-Dat maakt dat de bron bijvoorbeeld oneindig veel elementen kan aanleveren; zolang de rest van de pijplijn er slechts een eindig aantal nodig heeft, vormt dat geen probleem.
-Enkel de elementen die nuttig zijn voor het resultaat worden gebruikt.
+Streams zijn ook **lazy**: er worden slechts zoveel elementen verwerkt als nodig om het resultaat te berekenen.
+Dat maakt dat de bron oneindig veel elementen mag aanleveren; zolang de rest van de pijplijn er slechts een eindig aantal nodig heeft, vormt dat geen probleem.
+Enkel de elementen die nuttig zijn om het resultaat te bekomen worden gebruikt.
+We zullen hier later nog op terugkomen.
 
-Een concrete situatie waarin streams nuttig zijn, is elke keer wanneer je van plan bent om code te schrijven met volgende vorm:
+Een zeer concrete situatie waarin streams nuttig zijn, is wanneer je van plan bent om code te schrijven met volgende vorm:
 
 ```java
 Collection<E> source = ...
@@ -41,17 +50,15 @@ for (E element : source) {
 return result;
 ```
 
+Dit patroon komt zeer vaak voor in code.
 Neem, als eenvoudig voorbeeld om te starten, de situatie waarin je de gemiddelde leeftijd wil berekenen van de eerste 20 meerderjarige personen in een lijst.
-Je kan dat als volgt schrijven (merk op dat we het patroon hierboven volgen):
+Je kan dat als volgt schrijven (merk op hoe dit het patroon van hierboven volgt):
 
 ```java
 List<Person> people = ...
 double average = 0;
 int count = 0;
-int index = 0;
-while (index < people.size() && count < 20) {
-    var person = people.get(index);
-    index++;
+for (var person : people) {
     if (person.age() >= 18) {
         average += person.age();
         count++;
@@ -117,7 +124,7 @@ De implementatie van `selectPeople` voldoet aan het patroon van code waarvoor st
 Inderdaad, deze operatie komt overeen met de `filter`-methode op streams.
 {{% /notice %}}
 
-We geven nu 5 manieren om de `selectPeople` methode te gebruiken.
+We overlopen nu 5 manieren om de `selectPeople` methode te gebruiken.
 Een eerste manier is een klasse maken (bv. `IsAdult`) die de interface implementeert, en die nagaat of de persoon meerderjarig is.
 Dat werkt, maar is nogal omslachtig:
 
@@ -147,10 +154,10 @@ System.out.println(selectPeople(people, new PersonPredicate() {
 // => [Person[name=Vandeneynde, age=16]]
 ```
 
-Sinds Java lambda-functies ondersteunt, kan je de code eenvoudiger schrijven.
+Sinds Java lambda-functies ondersteunt, kan je dergelijke code veel eenvoudiger schrijven.
 In \[3] en \[4] hieronder zie je hoe je een lambda-functie kan gebruiken die hetzelfde doet als de vorige voorbeelden, maar dan zonder een klasse te schrijven.
 Merk op dat het toegelaten is om de lambda-functies te gebruiken waar een `PersonPredicate` verwacht wordt.
-De lambda-functies zijn inderdaad functies die een Persoon-object als argument hebben, en een boolean teruggeven.
+De lambda-functies zijn inderdaad functies die een Person-object als argument hebben, en een boolean teruggeven, en komen dus qua type overeen met de `test`-methode in `PersonPredicate`.
 
 ```java
 /* [3] */
@@ -166,27 +173,64 @@ Tenslotte kunnen we ook een methode-referentie gebruiken:
 
 ```java
 /* [5] */
-boolean isAdult(Person person) { return person.age() >= 18; }
+boolean isAdult(Person person) {
+  return person.age() >= 18;
+}
 System.out.println(selectPeople(people, this::isAdult));
 ```
 
-In plaats van zelf interfaces zoals `PersonPredicate` te schrijven, kan je vaak beroep doen op een voorgedefinieerde functie-interface.
+Dat is vooral nuttig als er al een methode bestaat, of als de implementatie van de methode te omslachtig is om als lambda te schrijven.
+
+In plaats van zelf een interface zoals `PersonPredicate` te schrijven, kan je vaak beroep doen op een voorgedefinieerde functie-interface.
 Je vindt de lijst daarvan [in de documentatie](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/package-summary.html).
 We lijsten hier de belangrijkste functionele interfaces op die gebruikt worden in de context van streams:
 
-- [`Function<T, R>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html): een functie met 1 argument, die een `T` omzet in een `R`. Er zijn ook varianten voor primitieve resultaat-types, bijvoorbeeld [`ToIntFunction<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/ToIntFunction.html), die een `T` omzet in een int. De methode-referentie `Person::age` voldoet aan dit type: het zet een Person-object om in een int (namelijk de leeftijd van die persoon).
-- [`Predicate<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Predicate.html): een functie met 1 argument van type `T`, die `true` of `false` teruggeeft. Ook hier bestaan varianten voor primitieve types, bijvoorbeeld [`IntPredicate`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/IntPredicate.html). De lambda-expressie `p -> p.age() >= 18` uit de code hierboven kan gebruikt worden als `Predicate<Person>`: het geeft aan of de persoon meerderjarig is of niet.
-- [`BiFunction<T, U, R>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/BiFunction.html): een functie met 2 argumenten, die een `T` en een `U` omzet in een `R`.
-- [`UnaryOperator<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/UnaryOperator.html): een operator met 1 argument van type `T`, en een resultaat van type `T`. Dit is dus een speciaal geval van een `Function`, namelijk een `Function<T, T>`.
-- [`BinaryOperator<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/BinaryOperator.html): een functie met 2 argumenten, beide van type `T`, die een `T` teruggeeft. Dit is dus een speciaal geval van een `BiFunction`, namelijk een `BiFunction<T, T, T>`.
-- [`Supplier<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Supplier.html): een operatie zonder argumenten, die een `T` teruggeeft. Een invocatie van de supplier mag telkens hetzelfde of een ander object teruggeven. Een supplier kan dus gebruikt worden als generator.
-- [`Consumer<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Consumer.html): een operatie met 1 argument van type `T`, met een void return type. De consumer 'verbruikt' het meegegeven object, zonder een resultaat terug te geven.
-- [`BiConsumer<T, U>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/BiConsumer.html): een consumer met 2 argumenten van type `T` en `U`, die niets teruggeeft.
+- [`Function<T, R>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Function.html): een functie met 1 argument, die een `T` omzet in een `R`. Er zijn ook varianten voor primitieve resultaat-types, zoals [`ToIntFunction<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/ToIntFunction.html), die een `T` omzet in een int. Bijvoorbeeld:
+  ```java
+  Function<Person, String> getLowercaseName = person -> person.name().toLowerCase();
+  ToIntFunction<Person> getAge = Person::age;
+  ```
+- [`Predicate<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Predicate.html): een functie met 1 argument van type `T`, die `true` of `false` teruggeeft. Ook hier bestaan varianten voor primitieve types, bijvoorbeeld [`IntPredicate`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/IntPredicate.html). Bijvoorbeeld:
+
+  ```java
+  Predicate<Person> isAdult = person -> person.age() >= 18;
+  IntPredicate isNonNegative = i -> i >= 0;
+  ```
+
+- [`BiFunction<T, U, R>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/BiFunction.html): een functie met 2 argumenten, die een `T` en een `U` omzet in een `R`. Bijvoorbeeld:
+  ```java
+  BiFunction<Person, Integer, String> f = (person, nbPets) -> "Person " + person.name() + " has " + nbPets + " pets";
+  ```
+- [`UnaryOperator<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/UnaryOperator.html): een operator met 1 argument van type `T`, en een resultaat van type `T`. Dit is dus een speciaal geval van een `Function`, namelijk een `Function<T, T>`. Bijvoorbeeld:
+  ```java
+  UnaryOperator<String> indentOnce = s -> "  " + s;
+  ```
+- [`BinaryOperator<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/BinaryOperator.html): een functie met 2 argumenten, beide van type `T`, die een `T` teruggeeft. Dit is dus een speciaal geval van een `BiFunction`, namelijk een `BiFunction<T, T, T>`. Bijvoorbeeld:
+  ```java
+  BinaryOperator<String> joinWithSpace = (s1, s2) -> s1 + " " + s2;
+  ```
+- [`Supplier<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Supplier.html): een operatie zonder argumenten, die een `T` teruggeeft. Een invocatie van de supplier mag telkens hetzelfde of een ander object teruggeven. Een supplier kan dus gebruikt worden als generator. Bijvoorbeeld:
+  ```java
+  Supplier<String> constant = () -> "Hello";
+  Random rnd = new Random();
+  Supplier<Integer> randomInt = rnd::nextInt();
+  ```
+- [`Consumer<T>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/Consumer.html): een operatie met 1 argument van type `T`, met een void return type. De consumer 'verbruikt' het meegegeven object, zonder een resultaat terug te geven. Bijvoorbeeld:
+  ```java
+  Consumer<Person> printPerson = (person) -> System.out.println(person.name() + " (age " + person.age() + ")");
+  ```
+- [`BiConsumer<T, U>`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/BiConsumer.html): een consumer met 2 argumenten van type `T` en `U`, die niets teruggeeft. Bijvoorbeeld:
+  ```java
+  BiConsumer<Person, Integer> printNTimes = (person, n) -> {
+    for (int i = 0; i < n; i++)
+      System.out.println(person.name() + " (age " + person.age() + ")");
+  };
+  ```
 
 ## Streams aanmaken
 
-Een stream van `T`-objecten is een object van de klasse `Stream<T>`.
-Voor streams van primitieve types zijn er ook specifieke klassen, bijvoorbeeld `IntStream`, `DoubleStream`, ...
+Een stream van `T`-objecten wordt aangeduid met de interface `Stream<T>`.
+Voor streams van primitieve types zijn er ook specifieke interfaces, bijvoorbeeld `IntStream`, `DoubleStream`, ...
 
 Om een stream aan te maken, start je steeds met een bron voor de data die verwerkt zal worden.
 Dat kan op verschillende manieren.
@@ -223,9 +267,9 @@ Dat kan op verschillende manieren.
   Stream.generate(() -> rnd.nextBoolean()) // => true, false, true, true, true, false, false, true, false, ...
   ```
 
-- `Stream.iterate(seed, unaryOp)` maakt een stream waarvij de elementen gegenereerd worden door `unaryOp` herhaald toe te passen, beginnend bij seed. De elementen van de stream zijn dus `seed, unaryOp(seed), unaryOp(unaryOp(seed)), ...`. Dit is een stream van alle niet-negatieve getallen:
+- `Stream.iterate(seed, unaryOp)` maakt een stream waarvan de elementen gegenereerd worden door `unaryOp` herhaald toe te passen, beginnend bij seed. De elementen van de stream zijn dus `seed, unaryOp(seed), unaryOp(unaryOp(seed)), ...`. Dit is bijvoorbeeld een (oneindige) stream van alle strikt positieve getallen[^1]:
   ```java
-  Stream.iterate(0, (n) -> n + 1) // => 0, 1, 2, 3, ...
+  Stream.iterate(1, (n) -> n + 1) // => 1, 2, 3, 4, ...
   ```
 - Je kan ook een stream maken via een `StreamBuilder`, die je maakt via `Stream.builder()`. Dat laat toe om elementen één voor één toe te voegen (via `add(...)`), en daar uiteindelijk een stream van te maken via de `build()`-methode. Deze manier geeft je veel controle en is daardoor zeer flexibel, maar zal slechts zeer uitzonderlijk nodig zijn.
   ```java
@@ -234,6 +278,8 @@ Dat kan op verschillende manieren.
   builder.add(str2);
   var stream = builder.build(); // => str1, str2
   ```
+
+[^1]: Omdat `int` maar een eindig aantal waarden kan hebben (de hoogste waarde is \\( 2^{31}-1 \\)), zal deze stream ooit negatieve getallen beginnen produceren: ..., 2147483646, 2147483647, -2147483648, -2147483647, .... De stream is wel nog steeds oneindig.
 
 ## Tussentijdse (intermediate) operaties
 
@@ -877,8 +923,8 @@ De laatste terminale operatie die we bekijken is `collect`.
 Deze is gelijkaardig aan `reduce`, maar laat toe om de set van terminale operaties uit te breiden via [Collector](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collector.html)-objecten.
 Een Collector-object bevat 4 elementen:
 
-- een `supplier`-functie (type Supplier) die wordt gebruikt om een startwaarde te verkrijgen, vergelijkbaar met de `identity` bij `reduce`
-- een `accumulator`-functie (type BiConsumer) die een nieuw data-element toevoegt aan het voorlopige resultaat (vergelijkbaar met de accumulator van `reduce`)
+- een `supplier`-functie (type Supplier) die wordt gebruikt om een startwaarde (state) te verkrijgen, vergelijkbaar met de `identity` bij `reduce`
+- een `accumulator`-functie (type BiConsumer) die een nieuw data-element toevoegt aan het voorlopige resultaat (de state); vergelijkbaar met de accumulator van `reduce`
 - een `combiner`-functie (type BinaryOperator) die twee voorlopige resultaten kan combineren (vooral nuttig bij parallelle uitvoering; zie later)
 - een `finisher`-functie (type Function) die, op het einde, het voorlopige resultaat omzet naar het finale resultaat.
 
@@ -900,7 +946,10 @@ return collector.finisher(tempResult);
 Schematisch ziet dat er zo uit:
 <img src="/img/streams-collector.png" alt="drawing" style="max-width: 500px;"/>
 
-We geven één voorbeeld van een Collector-implementatie, namelijk een collector die (voor een stream van Strings) de `StringJoiner`-klasse gebruikt om de strings aan elkaar te plakken, gescheiden door komma's:
+Merk op dat, in tegenstelling tot de accumulator bij `reduce`, er bij die van een collector niets wordt teruggegeven; de verwachting is dat het tijdelijke resultaat zelf geüpdated wordt (en dus stateful is).
+
+We geven één voorbeeld van een Collector-implementatie, namelijk een collector die (voor een stream van Strings) de `StringJoiner`-klasse gebruikt om de strings aan elkaar te plakken, gescheiden door komma's.
+(De StringJoiner is een stateful klasse, vergelijkbaar met een StringBuilder).
 
 ```java
 class StringJoiningCollector implements Collector<String, StringJoiner, String> {
@@ -926,7 +975,7 @@ class StringJoiningCollector implements Collector<String, StringJoiner, String> 
 }
 ```
 
-We kunnen deze collector als volgt gebruiken:
+We kunnen deze collector nu als volgt gebruiken:
 
 ```java
 Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(new StringJoiningCollector()); // => "Alpha, Bravo, Charlie, Delta"
@@ -992,39 +1041,43 @@ Alle oefeningen moeten opgelost worden **zonder for- of while-lussen**.
 
 ### Personen
 
-We gaan werken met een dataset van Person-records:
+We gaan werken met een dataset van personen, onderverdeeld in volwassenen en kinderen:
 
 ```java
-record Person(String firstName, String lastName, int age, String zipCode, List<Person> children) { }
+interface Person { String firstName(); String lastName(); int age(); String zipCode(); }
+record Adult(String firstName, String lastName, int age, String zipCode, List<Child> children) implements Person {}
+record Child(String firstName, String lastName, int age, String zipCode) implements Person {}
 ```
 
 De dataset vind je in het bestand `Data.java`, en ziet er als volgt uit:
 
 ```java
-public static final List<Person> DATASET = List.of(
-  new Person("John", "Doe", 30, "12345", List.of(
-          new Person("Alice", "Doe", 5, "12345", new ArrayList<>()),
-          new Person("Liam", "Doe", 7, "12345", new ArrayList<>()))),
+public static final List<Adult> DATASET = List.of(
+        new Adult("John", "Doe", 30, "12345", List.of(
+                new Child("Alice", "Doe", 5, "12345"),
+                new Child("Liam", "Doe", 7, "12345"))),
   ...
 );
 ```
 
-Los volgende oefeningen op:
+Los volgende oefeningen op met streams.
 
-1. Geef enkele statistieken (minimum, maximum, gemiddelde) van de leeftijd van alle personen in de dataset die ten minste 30 jaar oud zijn.
-2. Ga na of er iemand in de dataset zit waarvan de voornaam "Joseph" is.
-3. Groepeer alle personen in een Map volgens hun postcode.
-4. Tel het aantal kinderen in de dataset.
-5. Tel het aantal personen met kinderen in de dataset.
-6. Maak een gesorteerde lijst met alle unieke voornamen van alle kinderen van alle personen in de dataset.
-7. Geef een String met de 5 oudste personen terug, in het formaat "voornaam achternaam leeftijd", gesorteerd volgens voornaam, 1 persoon per lijn.
-8. Bereken de gemiddelde leeftijd van alle kinderen in de dataset die een ouder hebben die ouder is dan 40.
-9. Zoek de persoon met de langste achternaam.
-10. Geef enkele statistieken (minimum, maximum, gemiddelde) over de lengte van de achternamen in de dataset.
+1. Print alle namen van de volwassenen in de dataset.
+2. Ga na dat alle volwassenen in de dataset inderdaad ouder dan 18 zijn.
+3. Ga na of er minstens één volwassene in de dataset zit waarvan de voornaam "Joseph" is.
+4. Geef enkele statistieken (minimum, maximum, gemiddelde) van de leeftijd van alle volwassenen in de dataset die ten minste 30 jaar oud zijn.
+5. Zoek de volwassene met de langste achternaam.
+6. Groepeer alle volwassenen in een Map volgens hun postcode.
+7. Geef een String met de 5 oudste volwassenen terug, in het formaat "voornaam achternaam leeftijd", gesorteerd volgens voornaam, 1 persoon per lijn.
+8. Tel het totaal aantal kinderen in de dataset.
+9. Tel het aantal volwassenen met kinderen in de dataset.
+10. Geef het minimum en maximum aantal kinderen dat een volwassene heeft.
 11. Zoek alle personen die precies 6 keer zo oud zijn als een van hun kinderen.
-
-(Uitdagend) Je hebt bovenstaande oefeningen (waarschijnlijk) uitgevoerd op (een stream van) de lijst van ouders in de dataset.
-Schrijf nu een methode `Stream<Person> allPeople()` die een stream van _alle_ personen de dataset (ouders en kinderen) teruggeeft. (_Hint: gebruik flatMap of mapMulti_). Gebruik deze methode nu als basis voor vorige oefeningen.
+12. Maak een lijst van alle kind-objecten in de dataset.
+13. Maak een gesorteerde lijst met alle unieke voornamen van alle kinderen in de dataset.
+14. Bereken de gemiddelde leeftijd van alle kinderen in de dataset die een ouder hebben die ouder is dan 40.
+15. Maak een lijst van alle personen (volwassenen + kinderen) in de dataset, gesorteerd volgens voornaam.
+16. Bereken de gemiddelde leeftijd van alle personen (volwassenen + kinderen) in de dataset.
 
 ### Extra: mapValues
 
@@ -1032,8 +1085,8 @@ Schrijf, gebruik makend van streams, een generische methode `mapAllValues(map, f
 Bijvoorbeeld, in onderstaande code gebruiken we deze functie om alle String-values in de map te vervangen door hun lengte:
 
 ```java
-var myMap = Map.of("first", "333", "second", "55555"); // => {first="333", second="55555"}
-var result = mapAllValues(myMap, String::length);
+Map<String, String> myMap = Map.of("first", "333", "second", "55555"); // => {first="333", second="55555"}
+Map<String, Integer> result = mapAllValues(myMap, String::length);
 System.out.println(result); // => {first=3, second=5}
 ```
 
@@ -1051,8 +1104,8 @@ Map<Object, Object> result = mapAllValues(myMap, fn);
 ## Nog meer streams? (optioneel)
 
 In onderstaande presentatie zie je hoe er momenteel gewerkt wordt om streams nog uitbreidbaarder te maken.
-Via de Collector-API kan je zelf nieuwe collectors toevoegen.
-Voor de tussentijdse operaties ben je in de huidige versie van de streams API echter beperkt tot de reeds gedefinieerde tussentijdse operaties; maar je kan er veel meer bedenken.
+Via de Collector-API kan je, zoals we gezien hebben, zelf al nieuwe collectors toevoegen.
+Voor de tussentijdse operaties ben je in de huidige versie van de streams API echter beperkt tot de voorgedefinieerde tussentijdse operaties; maar je kan er veel meer bedenken.
 De oplossing die onderzocht wordt komt in de vorm van een `Gatherer`-interface.
 {{< youtube 8fMFa6OqlY8 >}}
 
