@@ -257,7 +257,11 @@ Tag het resultaat als `v9.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe 
 
 Tag het resultaat als `v10.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
 
-#### Opdracht 11: Concurrency
+#### Opdracht 11: _(bonus)_ Concurrency
+
+{{% notice info %}}
+Deze opdracht is **niet verplicht**. Als je ze wel maakt en indient kan je hiermee een bonuspunt verdienen op het deel van je taken.
+{{% /notice %}}
 
 1. Maak je `Board`-klasse (en alle methodes ervan) thread-safe. Als een programmeur die je klasse wil gebruiken zelf nog iets moet doen om de klasse thread-safe te gebruiken, moet je dat expliciet documenteren.
 2. Schrijf een client-programma (`MultithreadingClient` met een main-methode) waarin een bord-object gemaakt wordt, en daarna twee threads tegelijk en continu `replaceCellAt` gebruiken om op willekeurige plaatsen een willekeurig snoepje te zetten. Dit client-programma moet geen GUI starten en/of JavaFX gebruiken.
