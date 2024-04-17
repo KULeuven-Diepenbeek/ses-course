@@ -300,34 +300,67 @@ _(Als een methode je echt niet lukt met streams, mag je wel lussen gebruiken ---
 
 Tag het resultaat als `v12.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
 
-#### Opdracht 13: Recursie
+### Opdracht 13: Recursie
 
-**Elke methode** die hieronder vermeld wordt moet **recursief geïmplementeerd worden**. Je mag extra parameters en/of hulpmethodes toevoegen indien nodig.
+**Elke methode** die hieronder vermeld wordt moet **recursief geïmplementeerd worden**. Dat wil zeggen dat ze minstens 1 nuttige recursieve oproep moeten bevatten. Je mag daarnaast ook for- en while-lussen gebruiken, en ook extra parameters en/of hulpmethodes toevoegen indien nodig.
 _(Als een methode je echt niet lukt met recursie, mag je ze ook op een andere manier implementeren --- dat zal je wel een deel van de punten op deze opdracht kosten.)_
 
-1. Maak een recursieve methode `clearMatch(List<Position> match)` die alle snoepjes die deel uitmaken van de gegeven match (= één van de matches gevonden door `findAllMatches` uit opdracht 11) van het speelbord verwijdert.
-   <div style="max-width: 200px;">
+1. Maak een recursieve methode `clearMatch(List<Position> match)` die alle snoepjes die deel uitmaken van de gegeven match (= één van de matches gevonden door `findAllMatches` uit opdracht 11) van het speelbord verwijdert. De plaatsen waar zo'n snoepje opstond blijven leeg.
 
-2. Maak een recursieve methode `fallDown` die alle snoepjes naar beneden laat vallen, tot ze op een ander snoepje (of de onderkant van het bord) liggen.
+2. Maak een recursieve methode `fallDownTo(Position pos)` die alle snoepjes die boven positie `pos` staan naar beneden laat vallen, tot ze op een ander snoepje of positie `pos` terecht komen. Bijvoorbeeld, in onderstaande situatie (met `pos` aangegeven door het pijltje) verandert de methode de situatie aan de linkerkant in die van de rechterkant.
 
-   <div style="width: 400px; display: grid; grid: auto-flow / 100px 20px 100px; gap: 50px; align-items: center;">
+   <div style="width: 400px; display: grid; grid: auto-flow / repeat(8, 50px); gap: 30px; align-items: center;">
 
    ```goat
-   * * o *
-   o o * o
-   o o o o
-   * * o *
+      *
+      o
+      *
+      *
+   -> o
+      o
+      *
    ```
 
-   ⇨
+   wordt
 
    ```goat
-   o o o o
-   o o o o
-   * * o *
-   * * * *
+      o
+      o
+      *
+      *
+   -> *
+      o
+      *
+   ```
+
+   <div style="grid-column: span 2; justify-self: center;">en</div>
+
+   ```goat
+      o
+      *
+      o
+      *
+   -> *
+      o
+      *
+   ```
+
+   wordt
+
+   ```goat
+      o
+      o
+      *
+      *
+   -> *
+      o
+      *
    ```
 
    </div>
 
-3. Maak een recursieve methode `boolean updateBoard()` die alle matches verwijdert en de overblijvende snoepjes naar beneden laat vallen (gebruik hiervoor de methodes `findAllMatches`, `clearMatch`, en `fallDown`). Als er hierdoor nieuwe matches ontstaan, moeten die ook weer verwijderd worden etc., tot er geen matches meer zijn. De methode moet `true` teruggeven indien er minstens één match verwijderd werd, en `false` indien dat niet zo is.
+3. Maak een recursieve methode `boolean updateBoard()` die alle matches verwijdert en de overblijvende snoepjes naar beneden laat vallen (gebruik hiervoor de methodes `findAllMatches`, `clearMatch`, en `fallDownTo`). Als er hierdoor nieuwe matches ontstaan, moeten die ook weer verwijderd worden en moeten de snoepjes weer naar beneden vallen etc., totdat er geen matches meer zijn. De methode moet `true` teruggeven indien er minstens één match verwijderd werd, en `false` indien dat niet zo is.
+
+Merk dus op dat we het bord _niet_ terug opvullen met nieuwe snoepjes. In onze variant van CandyCrush is het de bedoeling om het bord zo leeg mogelijk te maken. Om alles zo eenvoudig mogelijk te houden, negeren we ook de effecten van de speciale snoepjes.
+
+Tag het resultaat als `v13.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.

@@ -22,7 +22,18 @@ Een ander gekend voorbeeld zijn de **Fibonacci**-getallen \\( 0, 1, 1, 2, 3, 5, 
 $$ F(n) = F(n-1) + F(n-2) \quad\textrm{met}\quad F(1) = 1 \quad\textrm{en}\quad F(0) = 0 $$.
 
 In Java kunnen we ook recursieve methodes definiëren.
-Hier is bijvoorbeeld een methode om het n-de Fibonacci-getal te berekenen:
+Hier is bijvoorbeeld een recursieve methode om de faculteit van een getal te berekenen:
+
+```java
+public static int fac(int n) {
+  if (n < 0) throw new IllegalArgumentException("n must be non-negative");
+  if (n == 0) return 1;
+  return n * fac(n-1);
+}
+```
+
+Merk op hoe dicht de implementatie aanleunt bij de wiskundige definitie.
+Dat geldt ook voor de methode om het n-de Fibonacci-getal te berekenen:
 
 ```java
 public static int fib(int n) {
@@ -688,38 +699,64 @@ In sommige gevallen kan je een for- of while-lus eenvoudig herschrijven tot een 
 Die omzetting volgt vaak eenzelfde patroon; in pseudocode:
 
 ```java
+input = ...
 initialize result
+initialize helpers
 while (!finished) {
+  update result and helpers
+}
+return result
+```
+
+en (voor een for-lus)
+
+```java
+input = ...
+for (initialize helpers; !finished; update helpers) {
   update result
 }
 return result
 ```
 
-wordt
+geeft volgende recursieve versie (in pseudo-code):
 
 ```java
-public R solve(input) {
-  return solve(T, initialResult);
+R solve(input) {
+  return solve(input, initialResult, initialHelpers);
 }
-public R solve(input, R resultSoFar) {
-  if (finished) return resultSoFar;
-  update resultSoFar
-  solve(smaller input, resultSoFar);
+R solve(input, result, helpers) {
+  if (finished) return result;
+  update result and helpers
+  solve((smaller) input, result, helpers);
 }
 ```
 
-Bijvoorbeeld, de iteratieve versie om faculteit te berekenen ziet er als volgt uit:
+Bijvoorbeeld, de iteratieve versie om faculteit te berekenen met een for-lus ziet er als volgt uit:
 
 ```java
 int result = 1;
-while (n > 0) {
-  result *= n;
-  n -= 1;
+for (int x = n; x > 0; x--) {
+  result *= x;
 }
 return result;
 ```
 
 En de bijhorende recursieve versie:
+
+```java
+public int factorial(int n) {
+  if (n < 0) throw new IllegalArgumentException("n must be positive");
+  return factorial(n, 1);
+}
+private int factorial(int x, int result) {
+  if (x == 0) return result;
+  result *= x;
+  x--;
+  return factorial(x, result);
+}
+```
+
+Dat laatste kunnen we nog wat korter schrijven:
 
 ```java
 public int factorial(int n) {
@@ -732,18 +769,12 @@ private int factorial(int n, int result) {
 }
 ```
 
-Merk op dat onze recursieve oplossing bestaat uit 2 methodes (waar faculteit vroeger slechts 1 recursieve methode was). De reden is dat we het **worker-wrapper patroon** gebruiken: de state wordt bijhouden en een _tail-recursive_ oproep doen.
-
-De functie factorial is **tail-recursive**: de recursieve oproep is de laatste bewerking die gebeurt voor de functie eindigt.
-In dergelijke gevallen is het herschrijven vaak heel eenvoudig.
-
-In andere gevallen moet je zelf de geheugen-stack reconstrueren met een datastructuur.
-Bijvoorbeeld, ...
-
-## Worker-wrapper? Accumulator?
-
-worker -> voeg accumulator toe
-wrapper -> zorg voor initialisatie
+Deze recursieve oplossing bestaat uit 2 methodes (waar de `fac`-methode aan het begin van deze pagina slechts 1 recursieve methode was).
+Dit is het **worker-wrapper patroon** voor recursie.
+De methode met 2 parameters is de _worker_ (daar gebeurt het eigenlijke werk), en de methode met 1 parameter is de _wrapper_ (die roept enkel de worker op met beginwaarden voor de extra parameters).
+Hulpvariabelen (hier `result`) worden doorgegeven als parameters van de worker-methode (de 'accumulator').
+Op deze manier wordt de methode **tail-recursive**.
+Dat betekent dat de recursieve oproep de laatste bewerking is die gebeurt voor de functie eindigt (ze staat direct achter de 'return').
 
 ## Oefeningen
 
@@ -777,6 +808,15 @@ Bijvoorbeeld:
 
 - AAABBCDDD -> ABCD
 -
+
+### reduce
+
+Schrijf een recursieve reduce-operatie die werkt op een lijst, naar analogie met de reduce-operatie op streams.
+
+```java
+List<Integer> lst = List.of(1, 2, 3, 4);
+int sum = reduce(lst, 0, (sum, x) -> sum + y); // sum == 10
+```
 
 ### isDivisibleBy
 
