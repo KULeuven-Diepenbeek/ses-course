@@ -299,3 +299,35 @@ _(Als een methode je echt niet lukt met streams, mag je wel lussen gebruiken ---
    Eens je beschikt over deze hulpmethodes werken, kan je `findAllMatches` implementeren. (_Hint: je moet mogelijk twee streams concateneren._)
 
 Tag het resultaat als `v12.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
+
+#### Opdracht 13: Recursie
+
+**Elke methode** die hieronder vermeld wordt moet **recursief geïmplementeerd worden**. Je mag extra parameters en/of hulpmethodes toevoegen indien nodig.
+_(Als een methode je echt niet lukt met recursie, mag je ze ook op een andere manier implementeren --- dat zal je wel een deel van de punten op deze opdracht kosten.)_
+
+1. Maak een recursieve methode `clearMatch(List<Position> match)` die alle snoepjes die deel uitmaken van de gegeven match (= één van de matches gevonden door `findAllMatches` uit opdracht 11) van het speelbord verwijdert.
+   <div style="max-width: 200px;">
+
+2. Maak een recursieve methode `fallDown` die alle snoepjes naar beneden laat vallen, tot ze op een ander snoepje (of de onderkant van het bord) liggen.
+
+   <div style="width: 400px; display: grid; grid: auto-flow / 100px 20px 100px; gap: 50px; align-items: center;">
+
+   ```goat
+   * * o *
+   o o * o
+   o o o o
+   * * o *
+   ```
+
+   ⇨
+
+   ```goat
+   o o o o
+   o o o o
+   * * o *
+   * * * *
+   ```
+
+   </div>
+
+3. Maak een recursieve methode `boolean updateBoard()` die alle matches verwijdert en de overblijvende snoepjes naar beneden laat vallen (gebruik hiervoor de methodes `findAllMatches`, `clearMatch`, en `fallDown`). Als er hierdoor nieuwe matches ontstaan, moeten die ook weer verwijderd worden etc., tot er geen matches meer zijn. De methode moet `true` teruggeven indien er minstens één match verwijderd werd, en `false` indien dat niet zo is.
