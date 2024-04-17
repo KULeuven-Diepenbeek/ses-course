@@ -1041,7 +1041,7 @@ Alle oefeningen moeten opgelost worden **zonder for- of while-lussen**.
 
 ### Personen
 
-We gaan werken met een dataset van personen, onderverdeeld in volwassenen en kinderen:
+We gaan werken met [een dataset van personen](https://github.com/KULeuven-Diepenbeek/ses-demos-exercises-student/tree/main/streams/src/main/java/streams/exercises/exercise1), onderverdeeld in volwassenen en kinderen:
 
 ```java
 interface Person { String firstName(); String lastName(); int age(); String zipCode(); }
