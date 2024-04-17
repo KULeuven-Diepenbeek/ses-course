@@ -292,7 +292,7 @@ _(Als een methode je echt niet lukt met streams, mag je wel lussen gebruiken ---
 
    Om deze `findAllMatches`-methode te implementeren, zijn volgende hulpfuncties handig (zet deze ook in je model-klasse, of waar je `findAllMatches` gaat implementeren):
 
-   - `boolean firstTwoHaveCandy(Candy candy, Stream<Position> positions)`. Deze methode geeft terug of op de eerste twee posities in de gegeven stream het gegeven soort snoepje staat (als de stream slechts 1 positie bevat, kijk je enkel naar die ene positie).
+   - `boolean firstTwoHaveCandy(Candy candy, Stream<Position> positions)`. Deze methode geeft terug of op de eerste twee posities in de gegeven stream het gegeven soort snoepje staat (als de stream minder dan 2 posities bevat, geef je `false` terug).
    - `Stream<Position> horizontalStartingPositions()` en `Stream<Position> verticalStartingPositions()`. Deze methodes geven een stream terug van alle posities op het bord waar _links_ respectievelijk _boven_ die positie een _ander_ soort snoepje staat. Deze posities zijn dus de mogelijke startposities van een horizontale respectievelijk vertikale match. (Die match, als die bestaat, loopt dus naar rechts respectievelijk onder van elke positie in de stream). _Hint: Maak gebruik van `firstTwoHaveSameCandy` en de walk-methodes._
    - `List<Position> longestMatchToRight(Position pos)` en `List<Position> longestMatchDown(Position pos)`. Deze methodes geven de langste match terug als lijst van posities, vertrekkend vanop de gegeven positie en in de richting aangegeven door de methodenaam. (_Hint: gebruik de walk-methodes van Position_).
 
