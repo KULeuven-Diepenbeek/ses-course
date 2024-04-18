@@ -1,5 +1,5 @@
 ---
-title: "5.2 Backtracking"
+title: "6.2 Backtracking"
 autonumbering: true
 toc: true
 ---
@@ -40,11 +40,13 @@ public class Problem {
 
 ## Efficiëntie van backtracking
 
-## Oefening: n-queens
+## Oefeningen
 
-## Oefening: knight tour
+### n-queens
 
-## Oefening: Task scheduler
+### knight tour
+
+### Task scheduler
 
 Precedence constraints between tasks
 
@@ -52,4 +54,19 @@ Find valid schedule with minimal total time
 
 Extension: multiple CPU's; task pinned to one CPU
 
-## Oefening: Uurrooster planner
+### Uurrooster planner
+
+### SEND+MORE=MONEY
+
+### Pattern match
+
+TODO: backtracking
+
+Schrijf een methode die nagaat of een String voldoet aan een geven patroon.
+Het patroon bestaat uit letters, waar elke letter staat voor een deel van de string.
+Bijvoorbeeld:
+
+- "hoihoihoi" voldoet aan het patroon "XXX" (waarbij X=hoi)
+- "choochoo" en "redder" voldoen aan het patroon "XX" maar niet aan "XXX"
+- "appelmoes" voldoet aan het patroon "X", maar ook aan "XY", "XYZ", ...
+- "meetsysteem" voldoet aan het patroon "ABCXYXCBA"

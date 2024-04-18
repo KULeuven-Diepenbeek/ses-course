@@ -502,17 +502,13 @@ We kunnen onze magische functie dus gebruiken om het grootste element uit de res
 Dat leidt tot volgende recursieve implementatie:
 
 ```java
-public static int largestElement(ArrayList<Integer> list) {
-  if (list.size() == 0) return NoSuchElementException();
-  if (list.size() == 1) return list.get(0);
+public static int largestElement(List<Integer> list) {
+    if (list.isEmpty()) throw new NoSuchElementException();
+    if (list.size() == 1) return list.getFirst();
 
-  var firstElement = list.get(0);
-  var largestRest = largestElement(list.subList(1, list.size()));
-  if (firstElement >= largestRest) {
-    return firstElement;
-  } else {
-    return largestRest;
-  }
+    var firstElement = list.getFirst();
+    var largestRest = largestElement(list.subList(1, list.size()));
+    return Math.max(firstElement, largestRest);
 }
 ```
 
@@ -526,18 +522,14 @@ Bijvoorbeeld, we hadden het laatste element kunnen afzonderen in plaats van het 
 Of we hadden het maximum van de eerste helft van de elementen kunnen vergelijken met het maximum van de tweede helft:
 
 ```java
-public static int largestElement_alt(ArrayList<Integer> list) {
-  int n = list.size();
-  if (n == 0) return NoSuchElementException();
-  if (n == 1) return list.get(0);
+public static int largestElement_alt(List<Integer> list) {
+    if (list.isEmpty()) throw new NoSuchElementException();
+    if (list.size() == 1) return list.getFirst();
 
-  var largestFirstHalf = largestElement(list.subList(0, n/2));
-  var largestSecondHalf = largestElement(list.subList(n/2, n));
-  if (largestFirstHalf >= largestSecondHalf) {
-    return largestFirstHalf;
-  } else {
-    return largestSecondHalf;
-  }
+    int n = list.size();
+    var largestFirstHalf = largestElement(list.subList(0, n/2));
+    var largestSecondHalf = largestElement(list.subList(n/2, n));
+    return Math.max(largestFirstHalf, largestSecondHalf);
 }
 ```
 
@@ -696,85 +688,109 @@ classDef move stroke:green,fill:#afa
 ## Recursie vs. iteratie
 
 In sommige gevallen kan je een for- of while-lus eenvoudig herschrijven tot een recursieve methode en omgekeerd.
-Die omzetting volgt vaak eenzelfde patroon; in pseudocode:
+Die omzetting volgt vaak eenzelfde patroon. Gegeven volgende while- of for-lus (in pseudocode):
 
-```java
-input = ...
-initialize result
-initialize helpers
-while (!finished) {
-  update result and helpers
-}
-return result
-```
-
-en (voor een for-lus)
-
-```java
-input = ...
-for (initialize helpers; !finished; update helpers) {
-  update result
-}
-return result
-```
-
-geeft volgende recursieve versie (in pseudo-code):
+<div style="display: grid; grid-template-columns: repeat(2, 50%); gap: 20px; align-items: top;">
 
 ```java
 R solve(input) {
-  return solve(input, initialResult, initialHelpers);
+  initialize result
+  initialize helpers
+  while (!finished) {
+    update result and helpers
+  }
+  return result
 }
-R solve(input, result, helpers) {
+```
+
+```java
+R solve(input) {
+  initialize result
+  for (initialize helpers; !finished; update helpers) {
+    update result
+  }
+  return result
+}
+```
+
+</div>
+
+kunnen we volgende equivalente recursieve versie schrijven (opnieuw in pseudo-code):
+
+```java
+R solve(input) {
+  return solve_worker(input, initialResult, initialHelpers);
+}
+
+R solve_worker(input, result, helpers) {
   if (finished) return result;
   update result and helpers
-  solve((smaller) input, result, helpers);
+  return solve_worker((smaller) input, result, helpers);
 }
 ```
 
 Bijvoorbeeld, de iteratieve versie om faculteit te berekenen met een for-lus ziet er als volgt uit:
 
 ```java
-int result = 1;
-for (int x = n; x > 0; x--) {
-  result *= x;
+public int factorial(int n) {
+  if (n < 0) throw new IllegalArgumentException("n must be positive");
+  int result = 1;
+  for (int x = n; x > 0; x--) {
+    result *= x;
+  }
+  return result;
 }
-return result;
 ```
 
-En de bijhorende recursieve versie:
+En de bijhorende recursieve versie (volgens bovenstaand schema):
 
 ```java
 public int factorial(int n) {
   if (n < 0) throw new IllegalArgumentException("n must be positive");
-  return factorial(n, 1);
+  return factorial_worker(n, 1);
 }
-private int factorial(int x, int result) {
-  if (x == 0) return result;
+
+private int factorial_worker(int x, int result) {
+  if (x <= 0) return result;
   result *= x;
   x--;
-  return factorial(x, result);
+  return factorial_worker(x, result);
 }
 ```
 
-Dat laatste kunnen we nog wat korter schrijven:
+De `factorial_worker` methode kunnen we ook nog wat korter schrijven:
 
 ```java
 public int factorial(int n) {
   if (n < 0) throw new IllegalArgumentException("n must be positive");
-  return factorial(n, 1);
+  return factorial_worker(n, 1);
 }
-private int factorial(int n, int result) {
+
+private int factorial_worker(int n, int result) {
   if (n == 0) return result;
-  return factorial(n-1, n * result);
+  return factorial_worker(n - 1, n * result);
 }
 ```
 
-Deze recursieve oplossing bestaat uit 2 methodes (waar de `fac`-methode aan het begin van deze pagina slechts 1 recursieve methode was).
-Dit is het **worker-wrapper patroon** voor recursie.
-De methode met 2 parameters is de _worker_ (daar gebeurt het eigenlijke werk), en de methode met 1 parameter is de _wrapper_ (die roept enkel de worker op met beginwaarden voor de extra parameters).
-Hulpvariabelen (hier `result`) worden doorgegeven als parameters van de worker-methode (de 'accumulator').
-Op deze manier wordt de methode **tail-recursive**.
+Deze recursieve oplossing bestaat uit 2 methodes; je herinnert je misschien nog dat de `fac`-methode aan het begin van deze pagina uit slechts 1 recursieve methode bestond:
+
+```java
+public static int fac(int n) {
+  if (n < 0) throw new IllegalArgumentException("n must be non-negative");
+  if (n == 0) return 1;
+  return n * fac(n-1);
+}
+```
+
+Het verschil is dat we bij `factorial` gebruik maakten van het **worker-wrapper patroon** voor recursie.
+Dat patroon zie je vaak opduiken.
+De `factorial_worker`-methode (met 2 parameters) is de _worker_ (daar gebeurt het eigenlijke werk), en de `factorial`-methode met 1 parameter is de _wrapper_ (die roept enkel de worker op met beginwaarden voor de extra parameters).
+Hulpvariabelen (hier het voorlopige resultaat, namelijk `result`) worden doorgegeven als parameters van de worker-methode.
+Die parameter wordt ook vaak de 'accumulator' genoemd, aangezien die het resultaat bijhoudt van al het werk dat tot dan toe gebeurd is.
+
+De `factorial_worker`-methode is ook **tail-recursive**.
 Dat betekent dat de recursieve oproep de laatste bewerking is die gebeurt voor de functie eindigt (ze staat direct achter de 'return').
+In sommige programmeertalen (maar niet in Java) worden dergelijke tail-recursive oproepen geoptimaliseerd door de compiler: aangezien er geen werk meer uitgevoerd moet worden na de recursieve oproep, kan het stackframe verwijderd worden. Je loopt dan geen risico op een stack overflow door teveel recursieve oproepen.
 
 ## Oefeningen
 
@@ -782,79 +798,86 @@ TODO: more ideas on https://www.techiedelight.com/recursion-practice-problems-wi
 
 ### Palindroom
 
-Schrijf een recursieve functie die nagaat of een String een palindroom is.
+Schrijf een recursieve functie `isPalindrome` die nagaat of een String een palindroom is.
 Een String is een palindroom als die hetzelfde is van links naar rechts als van rechts naar links, bijvoorbeeld
 
-- racecar
-- level
-- deified
-- lepel
-- droomoord
-- redder
-- meetsysteem
-- koortsmeetsysteemstrook
+- `racecar`
+- `level`
+- `deified`
+- `lepel`
+- `droomoord`
+- `redder`
+- `meetsysteem`
+- `koortsmeetsysteemstrook`
 
 ### String omkeren
 
-Schrijf een recursieve methode om een String om te keren, bijvoorbeeld:
+Schrijf een recursieve methode `reverse` om een String om te keren, bijvoorbeeld:
 
-- Hello -> olleH
-- racecar -> racecar
+- `Hello` -> `olleH`
+- `racecar` -> `racecar`
+
+### Element zoeken in lijst
+
+Schrijf een recursieve functie `search(element, list)` die nagaat of het gegeven element voorkomt in de gegeven lijst.
+Als het element voorkomt, wordt de index teruggegeven, anders -1.
+
+- Maak eerst een versie die werkt voor een willekeurige (niet-gesorteerde) lijst.
+- Maar vervolgens een versie die werkt voor een _gesorteerde_ lijst, door de lijst telkens te halveren.
 
 ### Duplicaten verwijderen
 
-Schrijf een recursieve methode die opeenvolgende duplicaten uit een String verwijdert.
+Schrijf een recursieve methode `removeDuplicateCharacters` die opeenvolgende dezelfde karakters uit een String verwijdert.
 Bijvoorbeeld:
 
-- AAABBCDDD -> ABCD
--
+- `aaaaa` -> `a`
+- `koortsmeetsysteemstrook` -> `kortsmetsystemstrok`
+- `AAAbbCddd` -> `AbCd`
 
-### reduce
+### Gepast betalen
 
-Schrijf een recursieve reduce-operatie die werkt op een lijst, naar analogie met de reduce-operatie op streams.
+Schrijf een recursieve methode `boolean kanGepastBetalen(int bedrag, List<Integer> munten)` die nagaat of je het gegeven bedrag (uitgedrukt in eurocent) gepast kan betalen met (een deel van) de gegeven munten (en briefjes).
+Bijvoorbeeld:
 
-```java
-List<Integer> lst = List.of(1, 2, 3, 4);
-int sum = reduce(lst, 0, (sum, x) -> sum + y); // sum == 10
-```
-
-### isDivisibleBy
-
-```java
-public boolean isDivisibleBy(number, divisor) {
-
-}
-```
-
-### Greatest common divisor
-
-```java
-
-```
-
-### (Snelle) macht
-
-### Sum of digits
+- `kanGepastBetalen(20, List.of(50, 10, 10, 5))` geeft **true** terug, want 10+10 = 20.
+- `kanGepastBetalen(125, List.of(100, 100, 50, 20, 10, 5 ))` geeft **true** terug, want 100+20+5 = 125.
+- `kanGepastBetalen(260, List.of(100, 100, 50, 20, 5 ))` geeft **false** terug: er is geen combinatie van munten die samen 260 geeft.
 
 ### Alle prefixen van een String
 
-### Element zoeken in een lijst
+Schrijf een recursieve functie `allPrefixes` die een Set teruggeeft met alle prefixen van een gegeven String.
+Bijvoorbeeld:
 
-Binary search?
+- `allPrefixes("cat") == { "", "c", "ca", "cat" }`
+- `allPrefixes("Hello") == { "", "H", "He", "Hel", "Hell", "Hello" }`
 
-ArrayList -> lst.subList()
+### Alle interleavings van twee strings
 
-Linked list?
+Schrijf een recursieve functie `allInterleavings(String s1, String s2)` die een Set teruggeeft met alle interleavings van de twee strings `s1` en `s2`.
+Een interleaving is een nieuwe string met daarin alle karakters van de eerste en de tweede string, in dezelfde volgorde waarin ze in elk van de originele strings voorkomen, maar mogelijk door elkaar.
+Bijvoorbeeld:
 
-### Maximum in een lijst zoeken
+- `allInterleavings("A", "B") = [AB, BA]`
+- `allInterleavings("ABC", "x") = [ABCx, ABxC, AxBC, xABC]`
+- `allInterleavings("AB", "xy") = [ABxy, AxBy, AxyB, xABy, xAyB, xyAB]`
+- `allInterleavings("ABC", "xy") = [ABCxy, ABxCy, ABxyC, AxBCy, AxByC, AxyBC, xABCy, xAByC, xAyBC, xyABC]`
 
-Uitbreiding: index + element in Pair?
+### Powerset
 
-### Reverse list
+Schrijf een recursieve functie `Set<Set<T>> powerset(Set<T> s)` die de powerset berekent van de gegeven set `s`.
+De powerset is de set van alle deelverzamelingen van `s`.
+Bijvoorbeeld:
 
-### Sorteren van een lijst
+- `powerset(Set.of("A", "B")) = [[], [A], [B], [A, B]]`
+- `powerset(Set.of("A", "B", "C")) = [[], [A], [B], [C], [A, B], [A, C], [B, C], [A, B, C]]`
 
-Selection sort (ahv index maximum)
+### Alle permutaties van een lijst berekenen
+
+Schrijf een functie `allPermutations` die een Set teruggeeft met alle permutaties van een gegeven lijst.
+Bijvoorbeeld:
+
+- `allPermutations(List.of("A", "B")) = { ["A", "B"], ["B", "A"] }`
+- `allPermutations(List.of("A", "B", "C")) = { ["A", "B", "C"], ["A", "C", "B"], ["B", "A", "C"], ["B", "C", "A"], ["C", "A", "B"], ["C", "B", "A"] }`
 
 ### Toren van Hanoi (uitbreiding)
 
@@ -885,28 +908,54 @@ ______|
 4. 2 treden, 1 trede, 1 trede
 5. 2 treden, 2 treden
 
-### Exact betalen
+### reduce
 
-Gegeven een lijst van munten, bepaal of je een bepaald bedrag exact kan betalen.
+Schrijf een recursieve `reduce`-operatie die werkt op een lijst, naar analogie met de reduce-operatie op streams.
 
-### Pattern match
+```java
+List<Integer> lst = List.of(1, 2, 3, 4);
+int sum = reduce(lst, 0, (sum, x) -> sum + y); // sum == 10
+```
 
-TODO: backtracking
+### Gebalanceerde haakjes
 
-Schrijf een methode die nagaat of een String voldoet aan een geven patroon.
-Het patroon bestaat uit letters, waar elke letter staat voor een deel van de string.
+Schrijf een recursieve methode `boolean balancedParentheses(String s)` die nagaat of alle haakjes in de gegeven string gebalanceerd zijn.
 Bijvoorbeeld:
 
-- "hoihoihoi" voldoet aan het patroon "XXX" (waarbij X=hoi)
-- "choochoo" en "redder" voldoen aan het patroon "XX" maar niet aan "XXX"
-- "appelmoes" voldoet aan het patroon "X", maar ook aan "XY", "XYZ", ...
-- "meetsysteem" voldoet aan het patroon "ABCXYXCBA"
+- `()` geeft **true** terug
+- `())` geeft **false** terug
+- `()()` geeft **true** terug
+- `)(` geeft **false** terug
+- `((` geeft **false** terug
+- `abc(def(xy))z` geeft **true** terug
+- `a(bc(def(xy))z` geeft **false** terug
 
-### Doolhof oplossen
+### Longest common subsequence
 
-### Alle permutaties berekenen
+Schrijf een recursieve methode `String longestCommonSubsequence(String s1, String s2)` die de langste reeks karakters teruggeeft die in beide strings in dezelfde volgorde terugkomen (niet noodzakelijk aaneensluitend). Als er meerdere oplossingen zijn, maakt het niet uit welke je teruggeeft.
+Bijvoorbeeld:
 
-### Evalueer wiskundige expressie
+- `longestCommonSubsequence("gitaarsnaar", "imaginair") == "ginar" of "ianar"`: <pre style="display: inline;">**gi**taars**na**a**r**</pre> en <pre style="display: inline">ima**gina**i**r**</pre>, of <pre style="display: inline">g**i**t**a**ars**na**a**r**</pre> en <pre style="display: inline">**i**m**a**gi**na**i**r**</pre>
+- `longestCommonSubsequence("aardappel", "adoptie") == "adpe"`: <pre style="display: inline">**a**ar**d**a**p**p**e**l</pre> en <pre style="display: inline">**ad**o**p**ti**e**</pre>
+
+**Uitbreiding**: zoek _alle_ longest common subsequences tussen 2 strings.
+
+### Maximum in een lijst zoeken
+
+Uitbreiding: index + element in Pair?
+
+### Sorteren van een lijst
+
+Selection sort (ahv index maximum)
+
+### Greatest common divisor
+
+Schrijf een functie `gcd` die de grootste gemene deler bepaalt tussen twee getallen.
+Als \\( x \geq y \\), dan is \\( \gcd(x, y) = \gcd(y, x \\% y) \\) met % de modulo-operatie, en \\( \gcd(x, 0) = x \\).
+
+### (Snelle) macht
+
+### Sum of digits
 
 ```
 
