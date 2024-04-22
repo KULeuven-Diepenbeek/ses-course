@@ -879,6 +879,8 @@ public static int fib(int n) {
 
 ## Oefeningen
 
+Je vind tests en skelet-code voor de oefeningen op [Github](https://github.com/KULeuven-Diepenbeek/ses-demos-exercises-student/tree/main), in de folder 'recursie'.
+
 ### Palindroom
 
 Schrijf een recursieve functie `isPalindrome` die nagaat of een String een palindroom is.
