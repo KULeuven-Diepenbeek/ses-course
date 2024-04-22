@@ -418,18 +418,9 @@ In IntelliJ kan je die optie toevoegen in de 'Run configuration'.
 Gewoonlijk zal dat niet nodig zijn; enkel wanneer je gebruik maakt van recursie voor grotere problemen.
 Een meer waarschijnlijke oorzaak van een `StackOverflowException` is een recursieve operatie die niet eindigt in een basisgeval.
 
-### Efficiëntie
-
-Als je goed kijkt naar de uitvoeringsboom van `fib(5)` hierboven zie je dat er delen van de boom zijn die terugkeren.
-Bijvoorbeeld, `fib(3)` wordt tweemaal opnieuw berekend, `fib(2)` driemaal, en `fib(1)` komt vijfmaal voor.
-Dat is natuurlijk niet erg efficiënt.
-
-Technieken zoals 'dynamisch programmeren' (_dynamic programming_) en _memoization_ kunnen hier soelaas bieden.
-We verkennen deze technieken niet verder binnen deze cursus.
-
 ## Eindigheid en invoergrootte
 
-Indien een recursieve methode niet zorgvuldig gedefinieerd wordt, bestaat de kans dat ze nooit eindigt.
+Indien een recursieve methode niet zorgvuldig gedefinieerd wordt, bestaat de kans dat de recursie nooit stopt, en de methode dus nooit eindigt (tenzij met een `StackOverflowException`).
 Bijvoorbeeld, onderstaande recursieve methode `bad`
 
 ```java
@@ -441,7 +432,7 @@ public static int bad(int n) {
 
 eindigt enkel voor positieve even getallen (overtuig jezelf hiervan).
 
-Om er zeker van te zijn dat een recursieve methode ooit eindigt, moeten we kunnen aantonen dat elke recursieve oproep ooit een basisgeval zal bereiken.
+Om er zeker van te zijn dat een recursieve methode ooit zal eindigen, moeten we kunnen aantonen dat elke recursieve oproep ooit een basisgeval zal bereiken.
 Dat is niet altijd eenvoudig of mogelijk.
 Neem bijvoorbeeld volgende welgekende functie van Collatz, gedefinieerd voor \\( n \geq 1 \\):
 
@@ -469,6 +460,8 @@ Typische invoergroottes bij recursieve problemen zijn
 
 - de waarde van een parameter, indien dit een natuurlijk getal is (bijvoorbeeld `n` in `fib` hierboven)
 - het aantal elementen in een datastructuur (lijst, set, ...) die gebruikt wordt.
+
+> Maakt de collatz-methode de invoer steeds strikt kleiner?
 
 ## Recursief denken
 
@@ -784,17 +777,106 @@ public static int fac(int n) {
 
 Het verschil is dat we bij `factorial` gebruik maakten van het **worker-wrapper patroon** voor recursie.
 Dat patroon zie je vaak opduiken.
-De `factorial_worker`-methode (met 2 parameters) is de _worker_ (daar gebeurt het eigenlijke werk), en de `factorial`-methode met 1 parameter is de _wrapper_ (die roept enkel de worker op met beginwaarden voor de extra parameters).
+De recursieve `factorial_worker`-methode (met 2 parameters) is de _worker_ (daar gebeurt het eigenlijke werk), en de (niet-recursieve) `factorial`-methode met 1 parameter is de _wrapper_ (die roept enkel de worker op met beginwaarden voor de extra parameters).
 Hulpvariabelen (hier het voorlopige resultaat, namelijk `result`) worden doorgegeven als parameters van de worker-methode.
 Die parameter wordt ook vaak de 'accumulator' genoemd, aangezien die het resultaat bijhoudt van al het werk dat tot dan toe gebeurd is.
 
 De `factorial_worker`-methode is ook **tail-recursive**.
 Dat betekent dat de recursieve oproep de laatste bewerking is die gebeurt voor de functie eindigt (ze staat direct achter de 'return').
-In sommige programmeertalen (maar niet in Java) worden dergelijke tail-recursive oproepen geoptimaliseerd door de compiler: aangezien er geen werk meer uitgevoerd moet worden na de recursieve oproep, kan het stackframe verwijderd worden. Je loopt dan geen risico op een stack overflow door teveel recursieve oproepen.
+In sommige programmeertalen (maar niet in Java) worden dergelijke tail-recursive oproepen geoptimaliseerd door de compiler: aangezien er geen werk meer uitgevoerd moet worden na de recursieve oproep, kan het stackframe meteen ook verwijderd worden. Je loopt dan geen risico op een stack overflow door teveel recursieve oproepen.
+
+## Efficiëntie
+
+Wie goed kijkt naar de uitvoeringsboom van `fib(5)` hierboven kan zien dat er delen van de boom zijn die terugkeren.
+Bijvoorbeeld, `fib(3)` wordt tweemaal opnieuw berekend, `fib(2)` driemaal, en `fib(1)` komt vijfmaal voor.
+Dat is natuurlijk niet erg efficiënt.
+
+Technieken zoals 'dynamisch programmeren' (_dynamic programming_) en _memoization_ kunnen hier soelaas bieden.
+We gebruiken deze technieken niet verder binnen deze cursus, maar illustreren hier kort even het achterliggende idee.
+
+Een voorbeeld van hoe _memoization_ gebruikt kan worden voor Fibonacci gaat als volgt (merk op dat we ook het worker-wrapper patroon gebruiken):
+
+```java
+public static int fib(int n) {
+    if (n < 0) throw new IllegalArgumentException();
+    int[] memo = new int[n+1];
+    Arrays.fill(memo, -1);
+    return fib_memoized(n, memo);
+}
+
+private static int fib_memoized(int n, int[] memo) {
+    var result = memo[n];
+    if (result == -1) {
+        if (n == 0) result = 0;
+        else if (n == 1) result = 1;
+        else result = fib_memoized(n-1, memo) + fib_memoized(n-2, memo);
+        memo[n] = result;
+    }
+    return result;
+}
+```
+
+We maken gebruik van een array `memo`.
+Initieel zijn alle elementen daarvan gelijk aan -1, wat hier betekent dat ze nog niet berekend zijn.
+Telkens het n-de Fibonacci-getal berekend wordt, slaan we het op op plaats `memo[n]`.
+Wanneer dit getal later opnieuw opgevraagd wordt, berekenen we het niet opnieuw, maar herbruiken we gewoon het resultaat van de vorige keer.
+
+Voor \\( n=20 \\) gebeuren er in de gewone implementatie 6765 oproepen van de `fib`-methode.
+De versie met memoization doet in totaal 39 oproepen van `fib_memoized`; alle andere oproepen werden vervangen door het uitlezen van het resultaat uit de `memo`-array.
+
+Je kan dit nog verder optimaliseren: je weet dat elke oproep alleen de vorige twee waarden nodig heeft: om het n-de fibonacci-getal te berekenen heb je enkel het (n-1)'ste en (n-2)'de fibonacci-getal nodig.
+Je hoeft dus niet alle waarden bij te houden in een array, enkel de laatste twee (dat kan met twee variabelen).
+En in plaats van te vertrekken bij het n-de Fibonacci-getal en naar kleinere Fibonacci-getallen te gaan, kunnen we ook beginnen bij de kleinste Fibonacci-getallen en omhoog gaan tot we uiteindelijk bij het n-de uitkomen.
+
+<img src="/img/fib.png" alt="drawing" style="max-width: 500px;"/>
+
+Dat leidt tot volgende recursieve oplossing (opnieuw met het worker-wrapper patroon), waar `prevprev` en `prev` de vorige twee waarden voorstellen.
+
+```java
+public static int fib(int n) {
+    if (n < 0) throw new IllegalArgumentException();
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    return fib_worker(n, 2, 0, 1); // n >= 2
+}
+private static int fib_worker(int targetN, int currentN, int prevprev, int prev) {
+    if (currentN == targetN) return prevprev + prev; // fib(n-2) + fib(n-1)
+    return fib_worker(targetN, currentN+1, prev, prevprev+prev);
+}
+```
+
+Hieronder zie je de oproepen van `fib_worker` om `fib(6)` te berekenen.
+
+| targetN | currentN | prevprev | prev | returns                      |
+| ------- | -------- | -------- | ---- | ---------------------------- |
+| 6       | 2        | 0        | 1    | `fib_worker(6, 3, 1, 0+1=1)` |
+| 6       | 3        | 1        | 1    | `fib_worker(6, 4, 1, 1+1=2)` |
+| 6       | 4        | 1        | 2    | `fib_worker(6, 5, 2, 1+2=3)` |
+| 6       | 5        | 2        | 3    | `fib_worker(6, 6, 3, 2+3=5)` |
+| 6       | 6        | 3        | 5    | `3 + 5 = 8`                  |
+
+Deze versie kan ook makkelijk iteratief geschreven worden:
+
+```java
+public static int fib(int n) {
+    if (n < 0) throw new IllegalArgumentException();
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    int prevprev = 0;
+    int prev = 1;
+    for (int x = 2; x != n; x++) {
+      int newprevprev = prev;
+      int newprev = prevprev + prev;
+      prevprev = newprevprev;
+      prev = newprev;
+    }
+    return prevprev + prev;
+}
+```
+
+> Onderzoek de gelijkenissen en verschillen tussen de recursieve en iteratieve versie.
 
 ## Oefeningen
-
-TODO: more ideas on https://www.techiedelight.com/recursion-practice-problems-with-solutions/
 
 ### Palindroom
 
@@ -819,11 +901,11 @@ Schrijf een recursieve methode `reverse` om een String om te keren, bijvoorbeeld
 
 ### Element zoeken in lijst
 
-Schrijf een recursieve functie `search(element, list)` die nagaat of het gegeven element voorkomt in de gegeven lijst.
+Schrijf een recursieve functie `<T> int search(List<T> list, T element)` die nagaat of het gegeven element voorkomt in de gegeven lijst.
 Als het element voorkomt, wordt de index teruggegeven, anders -1.
 
 - Maak eerst een versie die werkt voor een willekeurige (niet-gesorteerde) lijst.
-- Maar vervolgens een versie die werkt voor een _gesorteerde_ lijst, door de lijst telkens te halveren.
+- Maar vervolgens een snellere versie die werkt voor een _gesorteerde_ lijst, door het te doorzoeken stuk van de lijst telkens halveert en slechts in één van die helften verder gaat zoeken. (_Dit is 'binary search'_)
 
 ### Duplicaten verwijderen
 
@@ -832,58 +914,23 @@ Bijvoorbeeld:
 
 - `aaaaa` -> `a`
 - `koortsmeetsysteemstrook` -> `kortsmetsystemstrok`
-- `AAAbbCddd` -> `AbCd`
+- `AAAbbCdddAAA` -> `AbCdA`
 
-### Gepast betalen
+### Greatest common divisor
 
-Schrijf een recursieve methode `boolean kanGepastBetalen(int bedrag, List<Integer> munten)` die nagaat of je het gegeven bedrag (uitgedrukt in eurocent) gepast kan betalen met (een deel van) de gegeven munten (en briefjes).
-Bijvoorbeeld:
+Schrijf een functie `gcd` die de grootste gemene deler bepaalt tussen twee getallen.
+Maak gebruik van het feit dat, als \\( x \geq y \\), dat dan \\( \gcd(x, y) = \gcd(y, x \\% y) \\) met % de modulo-operatie, en dat \\( \gcd(x, 0) = x \\).
 
-- `kanGepastBetalen(20, List.of(50, 10, 10, 5))` geeft **true** terug, want 10+10 = 20.
-- `kanGepastBetalen(125, List.of(100, 100, 50, 20, 10, 5 ))` geeft **true** terug, want 100+20+5 = 125.
-- `kanGepastBetalen(260, List.of(100, 100, 50, 20, 5 ))` geeft **false** terug: er is geen combinatie van munten die samen 260 geeft.
+### Snelle macht
 
-### Alle prefixen van een String
+Schrijf een recursieve functie `double power(double x, int n)` die \\( x^n \\) berekent met zo weinig mogelijk berekeningen.
+Maak gebruik van het feit dat \\( x^{2n} = x^n \cdot x^n \\) en \\( x^{2n+1} = x \cdot x^{2n} \\).
 
-Schrijf een recursieve functie `allPrefixes` die een Set teruggeeft met alle prefixen van een gegeven String.
-Bijvoorbeeld:
+### Sum of digits
 
-- `allPrefixes("cat") == { "", "c", "ca", "cat" }`
-- `allPrefixes("Hello") == { "", "H", "He", "Hel", "Hell", "Hello" }`
-
-### Alle interleavings van twee strings
-
-Schrijf een recursieve functie `allInterleavings(String s1, String s2)` die een Set teruggeeft met alle interleavings van de twee strings `s1` en `s2`.
-Een interleaving is een nieuwe string met daarin alle karakters van de eerste en de tweede string, in dezelfde volgorde waarin ze in elk van de originele strings voorkomen, maar mogelijk door elkaar.
-Bijvoorbeeld:
-
-- `allInterleavings("A", "B") = [AB, BA]`
-- `allInterleavings("ABC", "x") = [ABCx, ABxC, AxBC, xABC]`
-- `allInterleavings("AB", "xy") = [ABxy, AxBy, AxyB, xABy, xAyB, xyAB]`
-- `allInterleavings("ABC", "xy") = [ABCxy, ABxCy, ABxyC, AxBCy, AxByC, AxyBC, xABCy, xAByC, xAyBC, xyABC]`
-
-### Powerset
-
-Schrijf een recursieve functie `Set<Set<T>> powerset(Set<T> s)` die de powerset berekent van de gegeven set `s`.
-De powerset is de set van alle deelverzamelingen van `s`.
-Bijvoorbeeld:
-
-- `powerset(Set.of("A", "B")) = [[], [A], [B], [A, B]]`
-- `powerset(Set.of("A", "B", "C")) = [[], [A], [B], [C], [A, B], [A, C], [B, C], [A, B, C]]`
-
-### Alle permutaties van een lijst berekenen
-
-Schrijf een functie `allPermutations` die een Set teruggeeft met alle permutaties van een gegeven lijst.
-Bijvoorbeeld:
-
-- `allPermutations(List.of("A", "B")) = { ["A", "B"], ["B", "A"] }`
-- `allPermutations(List.of("A", "B", "C")) = { ["A", "B", "C"], ["A", "C", "B"], ["B", "A", "C"], ["B", "C", "A"], ["C", "A", "B"], ["C", "B", "A"] }`
-
-### Toren van Hanoi (uitbreiding)
-
-Los de toren van Hanoi op voor \\( n\\) schijven op 4 stapels (dus 2 hulpstapels).
-Je kan je oplossing manueel uittesten [via deze simulator](https://towersofhanoi.info/Play.aspx).
-_(In de simulator moet je klikken, niet slepen)_
+Schrijf een recursieve methode `int sumOfDigits(long number)` die de som van de cijfers van een (niet-negatief) getal berekent, en dat herhaalt tot die som kleiner is dan 10.
+Bijvoorbeeld: `62984` geeft `6+2+9+8+4 = 29`; dat wordt vervolgens `2+9 = 11`; en dat wordt uiteindelijk `1+1 = 2`.
+Het resultaat is dus 2.
 
 ### Trap beklimmen
 
@@ -908,14 +955,83 @@ ______|
 4. 2 treden, 1 trede, 1 trede
 5. 2 treden, 2 treden
 
-### reduce
+### Gepast betalen
 
-Schrijf een recursieve `reduce`-operatie die werkt op een lijst, naar analogie met de reduce-operatie op streams.
+Schrijf een recursieve methode `boolean kanGepastBetalen(int bedrag, List<Integer> munten)` die nagaat of je het gegeven bedrag (uitgedrukt in eurocent) gepast kan betalen met (een deel van) de gegeven munten (en briefjes).
+Bijvoorbeeld:
+
+- `kanGepastBetalen(20, List.of(50, 10, 10, 5))` geeft **true** terug, want 10+10 = 20.
+- `kanGepastBetalen(125, List.of(100, 100, 50, 20, 10, 5 ))` geeft **true** terug, want 100+20+5 = 125.
+- `kanGepastBetalen(260, List.of(100, 100, 50, 20, 5 ))` geeft **false** terug: er is geen combinatie van munten die samen 260 geeft.
+
+### Gepast betalen (bis)
+
+Gegeven een lijst van muntwaarden (bv. 5, 10, 20, 50, 100, 200), schrijf een recursieve methode `int countChange(int amount, List<Integer> coinValues)` die bepaal **op hoeveel manieren** je een specifiek bedrag kan betalen.
+Je mag nu veronderstellen dat je een voldoende aantal (of oneindig veel) munten van elke opgegeven waarde hebt.
+
+Bijvoorbeeld, met bovenstaande muntwaarden
+
+- kan je een bedrag van 35 betalen op 6 manieren:
+  - 7×5
+  - 1×10 en 5×5
+  - 1×10 en 1×20 en 1×5
+  - 2×10 en 5×5
+  - 3×10 en 1×5
+  - 1×20 en 3×5
+- kan je een bedrag van 260 betalen op 646 manieren
+- kan je een bedrag van 1000 betalen op 98411 manieren
+
+### Alle prefixen van een String
+
+Schrijf een recursieve functie `allPrefixes` die een Set teruggeeft met alle prefixen van een gegeven String.
+Bijvoorbeeld:
+
+- `allPrefixes("cat") == { "", "c", "ca", "cat" }`
+- `allPrefixes("Hello") == { "", "H", "He", "Hel", "Hell", "Hello" }`
+
+### Alle interleavings van twee strings
+
+Schrijf een recursieve functie `allInterleavings(String s1, String s2)` die een Set teruggeeft met alle interleavings van de twee strings `s1` en `s2`.
+Een interleaving is een nieuwe string met daarin alle karakters van de eerste en de tweede string, in dezelfde volgorde waarin ze in elk van de originele strings voorkomen, maar mogelijk door elkaar.
+Bijvoorbeeld:
+
+- `allInterleavings("A", "B") = [AB, BA]`
+- `allInterleavings("ABC", "x") = [ABCx, ABxC, AxBC, xABC]`
+- `allInterleavings("AB", "xy") = [ABxy, AxBy, AxyB, xABy, xAyB, xyAB]`
+- `allInterleavings("ABC", "xy") = [ABCxy, ABxCy, ABxyC, AxBCy, AxByC, AxyBC, xABCy, xAByC, xAyBC, xyABC]`
+
+### Vliegtuigreis
+
+Gegeven een record `Item`:
 
 ```java
-List<Integer> lst = List.of(1, 2, 3, 4);
-int sum = reduce(lst, 0, (sum, x) -> sum + y); // sum == 10
+record Item(String name, int weight) {}
 ```
+
+schrijf een methode `List<Item> pack(List<Item> choices, int maxWeight)` die een keuze maakt uit de gegeven lijst van items, zodanig dat je zoveel mogelijk items kan meenemen zonder dat het totale gewicht hoger wordt dan het maximumgewicht (opgelegd door de vliegtuigmaatschappij).
+
+Bijvoorbeeld, met 3 items (A: 50, B: 20, C: 10, en D: 5):
+
+- met een totaal toegelaten gewicht van 100 kan je alle items meenemen;
+- met een totaal toegelaten gewicht van 40 kan je maximaal 3 items meenemen (B, C, en D);
+- met een totaal toegelaten gewicht van 20 kan je maximaal 2 items meenemen (C en D);
+
+### Powerset
+
+Schrijf een recursieve functie `Set<Set<T>> powerset(Set<T> s)` die de powerset berekent van de gegeven set `s`.
+De powerset is de set van alle deelverzamelingen van `s`.
+Bijvoorbeeld:
+
+- `powerset(Set.of("A", "B")) = [[], [A], [B], [A, B]]`
+- `powerset(Set.of("A", "B", "C")) = [[], [A], [B], [C], [A, B], [A, C], [B, C], [A, B, C]]`
+
+### Alle permutaties van een lijst berekenen
+
+Schrijf een functie `allPermutations` die een Set teruggeeft met alle permutaties van een gegeven lijst.
+Bijvoorbeeld:
+
+- `allPermutations(List.of("A", "B")) = [ [A, B], [B, A] ]`
+- `allPermutations(List.of("A", "B", "C")) = [ [A, B, C], [A, C, B], [B, A, C], [B, C, A], [C, A, B], [C, B, A] ]`
 
 ### Gebalanceerde haakjes
 
@@ -940,23 +1056,110 @@ Bijvoorbeeld:
 
 **Uitbreiding**: zoek _alle_ longest common subsequences tussen 2 strings.
 
-### Maximum in een lijst zoeken
+### Boomstructuur
 
-Uitbreiding: index + element in Pair?
+Gegeven onderstaande record om een boomstructuur op te bouwen:
+
+```java
+public record TreeNode<T>(T value, TreeNode<T> left, TreeNode<T> right){}
+```
+
+De boom
+
+<div style="max-width: 150px">
+
+```goat
+      A
+     / \
+    /   \
+   B     E
+  / \   /
+ /   \ /
+C    D F
+```
+
+</div>
+
+kan je hiermee aanmaken als:
+
+```java
+var tree = new TreeNode<>("A",
+              new TreeNode<>("B",
+                new TreeNode<>("C", null, null),
+                new TreeNode<>("D", null, null)),
+              new TreeNode<>("E",
+                new TreeNode<>("F", null, null),
+                null));
+```
+
+1. Schrijf een recursieve methode `int treeSize(TreeNode<?> tree)` om het totale aantal knopen in de boom te berekenen. Voor de boom hierboven is de grootte 6.
+2. Schrijf een recursieve methode `int treeHeight(TreeNode<?> tree)` om de hoogte van de boom te berekenen. De hoogte is het maximum aantal stappen van de wortel ("A" hierboven) tot een kind ("C", "D", of "F"). In het voorbeeld is de hoogte dus 2.
+3. Schrijf een recursieve methode `<T> void visitDepthFirstPreOrder(TreeNode<T> tree, Consumer<T> consumer)` die de elementen van de boom overloopt in depth-first, pre-order volgorde. Dat houdt in: eerst de huidige knoop, dan de knopen van de linkertak (opnieuw in depth-first pre-order volgorde) en daarna die van de rechtertak. Voor de boom hierboven worden dus achtereenvolgens knopen "A", "B", "C", "D", "E", en "F" bezocht en doorgegeven aan de consumer. Een voorbeeld van het gebruik van de methode om de knopen uit te printen:
+   ```java
+   visitDepthFirstPreOrder(tree, System.out::print);
+   System.out.println();
+   ```
+4. Schrijf een recursieve methode `<T> void visitDepthFirstInOrder(TreeNode<T> tree, Consumer<T> consumer)` die de elementen van de boom overloopt in depth-first, in-order volgorde. Dat houdt in: eerst de linkertak (in depth-first in-order volgorde), dan de knoop zelf, dan de rechtertak. Voor de boom hierboven worden dus achtereenvolgens knopen "C", "B", "D", "A", "F", en "E" bezocht en doorgegeven aan de consumer.
+5. Schrijf een recursieve methode `<T> TreeNode<T> mirrorTree(TreeNode<T> tree)` om een willekeurige boom te spiegelen: het resultaat moet een nieuwe boom zijn, waar de linker-takken de rechtertakken geworden zijn en omgekeerd.
+   De gespiegelde versie van de boom hierboven is dus:
+
+<div style="max-width: 150px">
+
+```goat
+      A
+     / \
+    /   \
+   E     B
+    \   / \
+     \ /   \
+     F D   C
+```
+
+</div>
+
+6. (**extra**) Schrijf een methode `String prettyPrint(TreeNode<?> tree)` die een ASCII-voorstelling van de boom maakt.
+   De voorbeeldboom wordt bijvoorbeeld:
+   ```
+   A
+   |
+   +-- B
+   |   |
+   |   +-- C
+   |   '-- D
+   '-- E
+       |
+       +-- F
+   ```
+
+### Stack omkeren
+
+Schrijf een recursieve methode `<T> void reverse(Deque<T> stack)` die de volgorde van de items in een stack (Deque) omdraait, zonder gebruik te maken van een extra datastructuur (dus zonder een andere array, lijst, set, ...).
+Maak enkel gebruik van de `isEmpty()`-, `pollFirst()` en `addFirst()`-methodes van de Deque-interface.
+
+```java
+var stack = new LinkedList<>(List.of("A", "B", "C", "D", "E", "F"));
+System.out.println(stack); // [A, B, C, D, E, F]
+reverse(stack);
+System.out.println(stack); // [F, E, D, C, B, A]
+```
+
+_Hint: je zal waarschijnlijk een hulpoperatie nodig hebben; die kan je ook recursief schrijven._
+
+### Toren van Hanoi (uitbreiding)
+
+Los de toren van Hanoi op voor \\( n\\) schijven op 4 stapels (dus 2 hulpstapels).
+Je kan je oplossing manueel uittesten [via deze simulator](https://towersofhanoi.info/Play.aspx).
+_(In de simulator moet je klikken, niet slepen)_
 
 ### Sorteren van een lijst
 
-Selection sort (ahv index maximum)
+Schrijf een recursieve methode om een lijst van getallen te sorteren. De sortering moet _in-place_ gebeuren (je past de lijst zelf aan door elementen van volgorde te wisselen, en geeft dus geen nieuwe lijst terug).
 
-### Greatest common divisor
+### reduce
 
-Schrijf een functie `gcd` die de grootste gemene deler bepaalt tussen twee getallen.
-Als \\( x \geq y \\), dan is \\( \gcd(x, y) = \gcd(y, x \\% y) \\) met % de modulo-operatie, en \\( \gcd(x, 0) = x \\).
+Schrijf een recursieve `reduce`-operatie die werkt op een lijst, naar analogie met de reduce-operatie op streams.
 
-### (Snelle) macht
-
-### Sum of digits
-
-```
-
+```java
+List<Integer> lst = List.of(1, 2, 3, 4);
+int sum = reduce(lst, 0, (sum, x) -> sum + y); // sum == 10
 ```
