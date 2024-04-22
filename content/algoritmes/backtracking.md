@@ -2,6 +2,7 @@
 title: "6.2 Backtracking"
 autonumbering: true
 toc: true
+draft: true
 ---
 
 ## Wat is backtracking?
