@@ -2,6 +2,7 @@
 title: "6.1 Recursie"
 autonumbering: true
 toc: true
+draft: false
 ---
 
 ## Wat is recursie?
