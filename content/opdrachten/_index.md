@@ -364,3 +364,63 @@ _(Als een methode je echt niet lukt met recursie, mag je ze ook op een andere ma
 Merk dus op dat we het bord _niet_ terug opvullen met nieuwe snoepjes: in onze variant van CandyCrush is het de bedoeling om het bord zo leeg mogelijk te maken. Om alles zo eenvoudig mogelijk te houden, negeren we ook de effecten van de speciale snoepjes.
 
 Tag het resultaat als `v13.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
+
+### Opdracht 14: Backtracking
+
+Schrijf (gebruik makend van een backtracking-algoritme) een methode `maximizeScore` die de beste sequentie van wissels zoekt voor een gegeven spel. De beste sequentie is deze die de hoogste score oplevert.
+Enkele spelregels:
+
+- Je mag enkel snoepjes van plaats wisselen die vlak naast elkaar liggen.
+- Je mag geen snoepje wisselen met een lege plaats, enkel met een ander snoepje.
+- De score verhoogt telkens er snoepjes verwijderd worden, en dat met het aantal snoepjes dat verwijderd wordt. Dus 3 snoepjes verwijderen verhoogt de score met 3.
+- Als er meerdere sequenties zijn die tot dezelfde score leiden, maakt het niet uit welke je teruggeeft.
+
+Je kan hiervoor zeker gebruik maken van `updateBoard()` uit opdracht 13.
+Hieronder volgen nog enkele hints voor andere hulpmethodes die misschien nuttig kunnen zijn. Je moet deze niet implementeren of gebruiken; andere manieren zijn ook zeker mogelijk! Ze staan hier enkel ter inspiratie.
+
+- `boolean replacingFirstWouldCreateNewMatch(List<Position> seq, Candy newCandy)`: als het snoepje op de eerste positie in de reeks `seq` zou vervangen door `newCandy`, leidt dat dan tot een nieuwe match van (minstens) de eerste drie elementen? (Veronderstel dat `seq` een reeks van naburige/aansluitende posities is).
+
+  <div style="max-width: 100px">
+
+  ```goat
+    *
+    |
+    v
+    @ * * o *
+  ```
+
+  </div>
+
+- `boolean replacingWouldCreateNewMatchInAnyDirection(Position target, Position source)`: als je het snoepje op positie `target` zou vervangen door (of verwisselen met) dat op (de aangrenzende) plaats `source`, ontstaat er dan een nieuwe match in een van de richtingen (links, rechts, boven, onder) die gebruik maakt van het nieuwe snoepje op positie `target`? Bijvoorbeeld, in de situatie hieronder zal het zwarte snoepje op de bovenste rij naar links verplaatsen leiden tot een nieuwe verticale match:
+
+   <div style="max-width: 150px">
+
+  ```goat
+      .-.
+      | |
+      v |
+    o @ * o           o * @ o
+    o * # o   ====>   o * # o
+    o * # o           o * # o
+  ```
+
+  </div>
+
+  _Hint:_ Let op met de richting waarin `source` voorkomt: het kan lijken dat er een match ontstaat wanneer dat niet het geval is. Bijvoorbeeld, in onderstaande situatie ontstaat er géén match:
+
+   <div style="max-width: 150px">
+
+  ```goat
+     .-.        /
+     | |     ==/=>
+     v |      /
+   o @ * *          o * * *
+  ```
+
+  </div>
+
+- `getUsefulSwitchesInvolving(Position pos)`: geef alle mogelijke wissels terug van het snoepje op positie `pos` die leiden tot een nieuwe match.
+
+Tag het resultaat als `v14.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
+
+_Dit was de laatste opdracht voor het vak._
