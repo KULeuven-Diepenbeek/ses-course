@@ -978,7 +978,7 @@ Bijvoorbeeld, met bovenstaande muntwaarden
   - 7×5
   - 1×10 en 5×5
   - 1×10 en 1×20 en 1×5
-  - 2×10 en 5×5
+  - 2×10 en 3×5
   - 3×10 en 1×5
   - 1×20 en 3×5
 - kan je een bedrag van 260 betalen op 646 manieren
