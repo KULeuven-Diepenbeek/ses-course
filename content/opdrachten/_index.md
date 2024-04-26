@@ -367,59 +367,78 @@ Tag het resultaat als `v13.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe
 
 ### Opdracht 14: Backtracking
 
+De enige operatie die de speler kan uitvoeren is twee naburige snoepjes van plaats wisselen, om zo nieuwe matches te creëren, die vervolgens verdwijnen. Daardoor verandert het bord en kan er opnieuw een wissel gedaan worden. Het doel van het spel is om het bord zo leeg mogelijk te krijgen. Omdat het bord verandert na elke wissel, is de volgorde van die wissels belangrijk.
+
 Schrijf (gebruik makend van een backtracking-algoritme) een methode `maximizeScore` die de beste sequentie van wissels zoekt voor een gegeven spel. De beste sequentie is deze die de hoogste score oplevert.
-Enkele spelregels:
+De spelregels nog eens samengevat:
 
-- Je mag enkel snoepjes van plaats wisselen die vlak naast elkaar liggen.
-- Je mag geen snoepje wisselen met een lege plaats, enkel met een ander snoepje.
+- De speler mag enkel snoepjes van plaats wisselen die vlak naast elkaar liggen.
+- Twee snoepjes van plaats proberen te wisselen zonder dat dat onmiddellijk leidt tot een match is niet toegelaten; beide snoepjes blijven dan op hun oorspronkelijke plaats.
+- De speler mag geen snoepje wisselen met een lege plaats, enkel met een ander snoepje.
 - De score verhoogt telkens er snoepjes verwijderd worden, en dat met het aantal snoepjes dat verwijderd wordt. Dus 3 snoepjes verwijderen verhoogt de score met 3.
-- Als er meerdere sequenties zijn die tot dezelfde score leiden, maakt het niet uit welke je teruggeeft.
 
-Je kan hiervoor zeker gebruik maken van `updateBoard()` uit opdracht 13.
-Hieronder volgen nog enkele hints voor andere hulpmethodes die misschien nuttig kunnen zijn. Je moet deze niet implementeren of gebruiken; andere manieren zijn ook zeker mogelijk! Ze staan hier enkel ter inspiratie.
+Als er meerdere sequenties zijn die tot dezelfde score leiden, geef je de kortste terug. Zijn er meerdere met dezelfde score en lengte, dan maakt het niet uit welke je daarvan teruggeeft.
 
-- `boolean replacingFirstWouldCreateNewMatch(List<Position> seq, Candy newCandy)`: als het snoepje op de eerste positie in de reeks `seq` zou vervangen door `newCandy`, leidt dat dan tot een nieuwe match van (minstens) de eerste drie elementen? (Veronderstel dat `seq` een reeks van naburige/aansluitende posities is).
+_Hints:_
 
-  <div style="max-width: 100px">
+- Een wissel kan je voorstellen als de 2 posities van het bord waarop de snoepjes gewisseld worden.
+- Maak zeker gebruik van de `updateBoard()`-methode uit opdracht 13. Je kan die uitbreiden om de score bij te houden.
+- Het kan ook handig zijn om een nieuwe methode `boolean matchAfterSwitch(...)` te voorzien, die nagaat of er matches zijn na het uitvoeren van een bepaalde wissel (zonder die match te verwijderen en/of snoepjes te laten vallen). Om dat te doen kan je bijvoorbeeld de wissel uitvoeren, `findAllMatches()` gebruiken, en daarna de wissel terug ongedaan maken.
+- Besteed niet te veel aandacht aan efficiëntie; kies liever voor duidelijkheid.
+- Om je methode te testen kan het handig zijn om snel een bord te kunnen maken vanuit een ASCII-voorstelling. Volgende methodes kunnen als startpunt dienen. (Java laat multi-line strings toe als je `"""` gebruikt)
 
-  ```goat
-    *
-    |
-    v
-    @ * * o *
-  ```
+```java
+CandycrushModel model1 = createBoardFromString("""
+   @@o#
+   o*#o
+   @@**
+   *#@@""");
 
-  </div>
+CandycrushModel model2 = createBoardFromString("""
+   #oo##
+   #@o@@
+   *##o@
+   @@*@o
+   **#*o""");
 
-- `boolean replacingWouldCreateNewMatchInAnyDirection(Position target, Position source)`: als je het snoepje op positie `target` zou vervangen door (of verwisselen met) dat op (de aangrenzende) plaats `source`, ontstaat er dan een nieuwe match in een van de richtingen (links, rechts, boven, onder) die gebruik maakt van het nieuwe snoepje op positie `target`? Bijvoorbeeld, in de situatie hieronder zal het zwarte snoepje op de bovenste rij naar links verplaatsen leiden tot een nieuwe verticale match:
+CandycrushModel model3 = createBoardFromString("""
+   #@#oo@
+   @**@**
+   o##@#o
+   @#oo#@
+   @*@**@
+   *#@##*""");
 
-   <div style="max-width: 150px">
 
-  ```goat
-      .-.
-      | |
-      v |
-    o @ * o           o * @ o
-    o * # o   ====>   o * # o
-    o * # o           o * # o
-  ```
+public static CandycrushModel createBoardFromString(String configuration) {
+   var lines = configuration.toLowerCase().lines().toList();
+   BoardSize size = new BoardSize(lines.size(), lines.getFirst().length());
+   var model = createNewModel(size); // deze moet je zelf voorzien
+   for (int row = 0; row < lines.size(); row++) {
+      var line = lines.get(row);
+      for (int col = 0; col < line.length(); col++) {
+            model.setCandyAt(new Position(row, col, size), characterToCandy(line.charAt(col)));
+      }
+   }
+   return model;
+}
 
-  </div>
+private static Candy characterToCandy(char c) {
+   return switch(c) {
+      case 'o' -> null;
+      case '*' -> new NormalCandy(1);
+      case '#' -> new NormalCandy(2);
+      case '@' -> new NormalCandy(3);
+      default -> throw new IllegalArgumentException("Unexpected value: " + c);
+   };
+}
+```
 
-  _Hint:_ Let op met de richting waarin `source` voorkomt: het kan lijken dat er een match ontstaat wanneer dat niet het geval is. Bijvoorbeeld, in onderstaande situatie ontstaat er géén match:
+De voorbeelden hierboven hebben volgende oplossing:
 
-   <div style="max-width: 150px">
-
-  ```goat
-     .-.        /
-     | |     ==/=>
-     v |      /
-   o @ * *          o * * *
-  ```
-
-  </div>
-
-- `getUsefulSwitchesInvolving(Position pos)`: geef alle mogelijke wissels terug van het snoepje op positie `pos` die leiden tot een nieuwe match.
+- `model1`: maximumscore 16 na 4 wissels
+- `model2`: maximumscore 24 na 7 wissels
+- `model3`: maximumscore 35 na 10 wissels (dit kan een tijdje duren).
 
 Tag het resultaat als `v14.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
 
