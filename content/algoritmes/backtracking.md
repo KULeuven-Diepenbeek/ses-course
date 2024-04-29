@@ -452,7 +452,7 @@ Schrijf een backtracking-algoritme om te zoeken hoe je, op een schaakbord van 8x
 
 <img src="/img/queens1.png" alt="schaakbord" style="max-width: 350px;"/>
 
-(Een koningin kan elk andere koningin staan die zich in dezelfde rij, kolom, of diagonaal bevindt).
+(Een koningin kan elke andere koningin slaan die zich in dezelfde rij, kolom, of diagonaal bevindt).
 
 <div style="max-width: 150px" >
 
