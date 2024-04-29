@@ -468,7 +468,7 @@ o * o * o * o
 
 </div>
 
-**Uitbreiding 1:** Zoek alle oplossingen in plaats van 1 oplossing.
+**Uitbreiding 1:** Zoek alle oplossingen in plaats van 1 oplossing (voor een bord van 5x5).
 
 **Uitbreiding 2:** Doe dit voor een schaakbord van willekeurige grootte n, in plaats van 8.
 
@@ -493,45 +493,32 @@ o o o o o o o
 
 </div>
 
-**Uitbreiding 1:** Zoek alle oplossingen in plaats van 1 oplossing.
+_Hint als je oplossing te lang duurt:_ Begin met een kleiner bord (5x5), en overloop de mogelijke volgende posities volgens de wijzers van de klok.
 
-**Uitbreiding 2:** Doe dit voor een schaakbord van willekeurige grootte n, in plaats van 8.
-
-### Pattern match
-
-Schrijf een methode die nagaat of een String voldoet aan een geven patroon.
-Het patroon bestaat uit letters, waar elke letter staat voor een deel van de string.
-Verschillende letters kunnen voor dezelfde string staan.
-
-Bijvoorbeeld:
-
-- "hoihoihoi" voldoet aan het patroon "XXX" (waarbij X=hoi)
-- "choochoo" en "redder" voldoen beiden aan het patroon "XX", maar niet aan "XXX"
-- "appelmoes" voldoet aan het patroon "X", maar ook aan "XY", "XYZ", ...
-- "meetsysteem" voldoet aan het patroon "ABCXYXCBA"
+**Uitbreiding:** Zoek alle oplossingen in plaats van 1 oplossing, voor een klein bord (5x5). Zoek op hoeveel oplossingen er bestaan voor een 8x8 bord.
 
 ### SEND+MORE=MONEY
 
 Schrijf een backtracking-algoritme om een letterpuzzel op te lossen zodanig dat de som klopt.
 Elke letter komt overeen met een cijfer (0--9), en geen twee letters staan voor hetzelfde cijfer.
+De getallen beginnen niet met 0 (geen _leading zeros_).
 
 Bijvoorbeeld:
 
-<pre>
+```
     S E N D
 +   M O R E
 -----------
   M O N E Y
-</pre>
+```
 
 of
 
-<pre>
-    O N E
-+   T W O
----------
-    S I X
-</pre>
+- `ONE + TWO = SIX`
+- `SUN + FUN = SWIM`
+- `CRACK + HACK = ERROR`
+- `MATH + MYTH = HARD`
+- `BASE + BALL = GAMES`
 
 _Hint_: onderstaande hulpfuncties kunnen misschien handig zijn. Ook `Integer.parseInt(String s)` om een String om te zetten naar een int kan nuttig zijn.
 
@@ -545,12 +532,34 @@ private static boolean containsLetter(String str) {
 }
 ```
 
-### Task scheduler
+**Uitbreiding:** Laat toe om meer dan twee termen op te tellen, bijvoorbeeld `ONE + TWO + SIX = NINE`.
 
-Precedence constraints between tasks
-
-Find valid schedule with minimal total time
-
-Extension: multiple CPU's; task pinned to one CPU
+**Uitbreiding:** Zoek alle oplossingen.
 
 ### Uurrooster planner
+
+Schrijf een programma om een conflict-vrije uurrooster te maken voor een aantal vakken.
+Bij elk vak hoort een verzameling van personen (bv. leerkracht en studenten).
+We vereenvoudigen het uurrooster tot een verzameling van vaste slots waarop vakken ingepland kunnen worden.
+Elk slot stellen we voor door een positief getal.
+Zo kan slot 1 bijvoorbeeld staan voor maandagmorgen om 8u30, slot 2 voor maandagmorgen om 10u30, etc.
+
+Enkele beperkingen waaraan het rooster moet voldoen:
+
+- (optimaal) Het uiteindelijke uurrooster moet gebruik maken van zo weinig mogelijk slots.
+- (conflict-vrij) Een persoon mag nooit voor 2 verschillende vakken in hetzelfde slot ingeroosterd worden.
+- (capaciteitsconform) Er mogen nooit meer dan 5 vakken op hetzelfde slot ingepland worden, zodat er steeds voldoende lokalen zijn.
+
+### Woorden samentrekken
+
+Maak een methode die de kortste samentrekking zoekt van een gegeven verzameling van woorden.
+We spreken van een samentrekking wanneer het einde van een woord overeenkomt met het begin van het woord dat daarop volgt.
+Bijvoorbeeld: `banaananas` is een samentrekking van `ananas` en `banaan`, waar de letters `an` overlappen.
+
+- Voor de woorden `"besturend", "declaratiesysteem", "deelgemeente", "gemeentebesturen", "merendeel", "programmeren", "sturende", "urendeclaraties"` bekom je als kortste samentrekking `"programmerendeelgemeentebesturendeclaratiesysteem"`.
+
+- Voor `[samentrekking, trekkingsdata, datavoorziening, voorzieningsfonds, fondsmanager, managersfuncties, functiesysteem, systeemdata]` wordt dat `samentrekkingsdatavoorzieningsfondsmanagersfunctiesysteemdata`.
+
+Soms bestaat er geen samentrekking.
+
+**Uitbreiding:** Zoek ook de langste samentrekking. Voor het eerste voorbeeld hierboven is dat `programmerendeelgemeentebesturendeclaratiesturendeclaratiesysteem`. Voor het tweede `functiesysteemdatavoorzieningsfondsmanagersfunctiesamentrekkingsdata`.
