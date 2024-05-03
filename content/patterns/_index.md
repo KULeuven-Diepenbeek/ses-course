@@ -1,62 +1,50 @@
 ---
 title: "7. Design Patterns"
 weight: 7
-draft: true
+toc: true
+autonumbering: true
+draft: false
 ---
 
-TODO: gemeenschappelijke taal
+## Wat is een patroon?
 
-TODO: visitor -> pattern matching
-TODO: singleton -> enum
-TODO: observer
+Wanneer we software schrijven, is het niet efficiënt om steeds het wiel opnieuw uit te vinden.
+Daarom maken we vaak gebruik van bibliotheken (libraries): code die door iemand anders geschreven en getest werd, en die we zo kunnen herbruiken in ons project.
+Het eenvoudigste voorbeeld in de context van dit vak zijn de klassen die deel uitmaken van de Java API (bv. collecties en streams).
 
-### Wat is dat, een patroon?
+Soms is het geen code die we willen herbruiken, maar een idee voor een ontwerp.
+Voor bepaalde problemen is de cruciale vraag immers niet 'bestaat er een bibliotheek die dit oplost' maar 'hoe structureer ik mijn software het best gegeven deze context'.
+In die situatie spelen **ontwerppatronen** de rol van de bibliotheek (library).
+Een ontwerppatroon is een beschrijving van een herbruikbare oplossing voor een vaak terugkerend ontwerpprobleem.
+Patronen worden niet uitgevonden, maar omvatten kennis over werkende oplossingen die door middel van ervaring en expertise werden opgebouwd.
+De meest populaire software engineering design patterns zijn beschreven in het boek [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns) (1995).
 
-Patronen zijn voor het mensenlijk brein eenvoudig herkenbaar: we zien stukjes van iets die we al eens ergens anders gezien hebben. Blokjes op een bepaalde manier ingekleurd, gehaakte patroontjes van een dekbed, Fibonacci spiralen in bloemblaadjes en zaadjes, ... Wanneer we programmeren, geldt dit principe ook: blokken code die herbruikt worden om eenvoudige oplossingen te bieden voor complexe problemen.
+Een patroon geeft in de eerste plaats een **naam** aan een herbruikbare oplossingsstrategie.
+Op die manier gaan patroonnamen deel uitmaken van het ontwerpvocabularium, en volstaat een zin als "Heb je al eens aan een _visitor_ gedacht?" om een hele oplossingsstrategie te beschrijven aan een collega.
 
-![](/img/creativepatterns.jpg "Een (creatief) patroon?")
+In sommige gevallen is het ontstaan van een patroon het gevolg van een tekortkoming van een programmeertaal.
+We zullen later bijvoorbeeld zien dat het visitor-patroon, wat lange tijd populair was in Java, aan relevantie inboet sinds de taal uitgebreid werd met sealed interfaces en pattern matching.
+Die laatsten voorzien immers een ingebouwde manier om hetzelfde te doen.
+In veel gevallen zijn patronen dan ook taal-afhankelijk.
+De nood aan het Observer-patroon in Java wordt in C# bijvoorbeeld (gedeeltelijk) weggenomen door de _delegates_- en _event_-constructies in de taal.
 
-Een _pattern_ is een herkenbaar en herhalende blok van eigenschappen die herbruikt kan worden. In het geval van softwareontwikkeling zijn patterns structuren in code die herbruikt worden om code eenvoudiger, beter leesbaar, en beter in onderhoud te maken. Deze structuren zijn in feite **pre-fab oplossingen** voor gelijkaardige problemen.
+In de cursus "Software-ontwerp in Java" heb je reeds kennis gemaakt met een design pattern, namelijk _Model-View-Controller_.
+We beginnen onze verkenning met dat patroon.
 
-#### Ingebouwde patronen
+## Model-View-Controller
 
-Een _constructor_ is een begrip in Java dat ook geclassificeerd kan worden als patroon, omdat het constant terugkomt bij de creatie van objecten en een hulpmiddel is dat een bepaalt probleem helpt oplossen: het voert stukjes code uit bij het aanmaken van een object.
-
-<div class="devselect">
-
-```kt
-class Appel {
-    val kcal = 160
-}
-```
-
-```java
-public class Appel {
-    private int kcal;
-
-    public Appel() {
-        kcal = 160;
-    }
-}
-```
-
-</div>
-
-Een nieuwe appel aanmaken, `Appel jonagold = new Appel();` stelt `kcal` automatisch gelijk aan `160`. Dit is uiteraard een ingebouwd principe dat deel uitmaakt van de programmeertaal zelf. Dit concept kunnen we verder doortrekken door patronen van oplossingen te maken die het ons makkelijker maakt om toekomstige gelijkaardige problemen aan te pakken.
-
-#### Model-View-Controller
-
-Een van de meest populaire patronen is het Model-View-Controller (_MVC_) systeem. Dit patroon stelt dat om UI logica eenvoudig te scheiden van domein logica, men drie aparte lagen dient aan te maken.
+Een van de meest populaire patronen is Model-View-Controller (_MVC_).
+Dit patroon stelt voor om UI-logica eenvoudig te scheiden van domein logica door drie aparte lagen te maken.
 
 1. Het model, het belangrijkste, stelt ons domein voor: de objecten waar het om draait in de applicatie.
-2. De view, de UI, is de presentatielaag die de gebruiker te zien krijgt als hij de applicatie hanteert. Achterliggend wordt er met model objecten gewerkt.
-3. De controller verbindt de UI met het model en onderliggende lagen. Events vanuit de UI worden hier bijvoorbeeld opgevangen.
+2. De view, de UI, is de presentatielaag die de gebruiker te zien krijgt als hij de applicatie hanteert. Achterliggend wordt er door de view informatie uit de model-objecten gehaald.
+3. De controller handelt acties van de gebruiker (UI events, bv. het klikken op een knop) af, en vertaalt deze naar operaties op het model. De controller verwittigt ook de view dat die zich moet updaten.
 
 {{<mermaid>}}
 graph TD;
-M[Model]
 V[View]
 C[Controller]
+M[Model]
 C --> V
 V --> M
 C --> M
@@ -64,49 +52,27 @@ C --> M
 
 De controller kent zowel de view als het model. De view kent enkel het model. Het model kent niemand buiten zichzelf. Op die manier is het eenvoudig om in de applicatie te migreren naar nieuwe presentatie lagen, zoals van een typische client-server applicatie naar een moderne website, gehost op een (virtuele) server. Dit principe kan telkens opnieuw worden toegepast, voor ontelbare applicaties. Men spreekt hier dus van een herhalend patroon, dat kan helpen bij het oplossen van een probleem.
 
-### Types van patronen
+## Observer
 
-Er zijn op elk niveau patronen in code te herkennen. Zoals de constructor aantoont, zijn er op niveau van de compiler en/of taal zelf verschillende patronen die we constant onbewust hanteren:
+MVC: Controller zou view niet moeten vertellen om te updaten (vereist kennis van wat effect op model is).
+Kan View 'luisteren' naar het model, zodat alle wijzigingen aan het model die relevant zijn voor de view doorgegeven worden?
 
-- klasse structuren
-- constructors
-- properties
-- subklassen
-- interfacing
-- formatting
-- threading
-- ...
+**Dependency inversion principe**
 
-Dit zijn allemaal structuren die in elk programma terug komt.
+callback
 
-Op **applicatie niveau**, in de code zelf, zijn er eveneens talloze mogelijkheden. De meest populaire software engineering design patterns zijn beschreven in het boek [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns). <br/>
-Op **enterprise niveau**, tussen applicaties in, onderscheiden we ook patronen, om bijvoorbeeld efficiënte te communiceren tussen verschillende partijen. Gegevensuitwisseling kan door middel van REST/SOAP/FTP/... Die vorm van berichtgeving is op zijn beurt weer _herbruikbaar_.
+`Consumer<T>`
 
-Voor het vak Software Engineering Skills beperken we ons tot enkele voorbeelden van software design patterns op applicatie niveau. Een overzicht is terug te vinden op de [hoofdpagina van het vak](/).
+## Singleton
 
-### Waarvoor staat het woord 'design'?
+### Singleton en multi-threading
 
-Het proces van idee tot software doorloopt verschillende stappen, in verschillende iteraties, waarvan één de _design_ stap:
+## Factory method
 
-{{<mermaid>}}
-graph LR;
-I["Idee "]
-D[Design]
-C[Code]
-T[Test]
-De[Deploy]
-I --> D
-I --> I
-D --> C
-D --> D
-C --> T
-C --> C
-T --> De
-T --> T
-{{< /mermaid >}}
+## Visitor
 
-Nadenken over **het ontwerp** voordat je jezelf overgeeft aan het schrijven van code is een belangrijke stap, zoals we gezien hebben in het vak 'Software ontwerp in Java'. Tijdens het ontwerpen, of nadenken over de oplossing, houden ervaren ontwikkelaars ook al rekening met de welgende patronen. Het is dus belangrijk om te weten dat het gebruiken van patronen zich niet beperkt tot de code schrijven stap.
+### Visitor vs. sealed classes
 
-{{% notice warning %}}
-Vanaf nu veronderstellen we dat jullie weten hoe een nieuw **Kotlin-specifiek** project aan te maken voor wie de design patterns oefeningen in Kotlin wenst op te lossen. De repositories op GitHub bevatten vanaf hier enkel nog Java code. Zie de [TDD Exercises GitHub repositories](https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-1-template) voor Kotlin templates.
-{{% /notice %}}
+## Builder
+
+## Port-adapter
