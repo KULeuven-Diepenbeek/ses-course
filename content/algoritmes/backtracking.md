@@ -563,3 +563,39 @@ Bijvoorbeeld: `banaananas` is een samentrekking van `ananas` en `banaan`, waar d
 Soms bestaat er geen samentrekking.
 
 **Uitbreiding:** Zoek ook de langste samentrekking. Voor het eerste voorbeeld hierboven is dat `programmerendeelgemeentebesturendeclaratiesturendeclaratiesysteem`. Voor het tweede `functiesysteemdatavoorzieningsfondsmanagersfunctiesamentrekkingsdata`.
+
+### Traveling sales person
+
+Gegeven een lijst van plaatsen met bijhorende coördinaten en een startplaats, zoek de kortste tour (dus met de kleinste totale afgelegde afstand) die terug uitkomt op de startplaats en onderweg elke gegeven plaats exact één keer bezoekt.
+
+```java
+private static Route shortestRoute(Location start, List<Location> otherLocations) { ... }
+```
+
+<div style="display: flex; flex-direction: row; max-width: 700px;">
+    <img src="/img/tsp1.png" width="45%" />
+    <img src="/img/tsp2.png" width="45%" />
+</div>
+
+Bijvoorbeeld, voor de volgende lijst van locaties heeft de kortste tour vertrekkend en eindigend bij A een lengte 3.7485395 (deze tour is hierboven weergegeven).
+
+```
+"A",	0,   0
+"L0",	0.723174203,	0.990898897
+"L1",	0.253293106,	0.60880037
+"L2",	0.805869514,	0.875412785
+"L3",	0.716048511,	0.071917022
+"L4",	0.796260972,	0.578716937
+"L5",	0.908125618,	0.148914579
+"L6",	0.975219897,	0.06559603
+"L7",	0.069517882,	0.090752294
+"L8",	0.424466728,	0.874391044
+"L9",	0.575103864,	0.39649687
+"L10",	0.25831525,	0.152792153
+"L11",	0.26042993,	0.461681947
+"L12",	0.439100791,	0.211405433
+"L13",	0.614212143,	0.033457912
+"L14",	0.688896121,	0.6841128
+```
+
+**Uitbreiding**: Alle volgordes van locaties proberen leidt tot enorm veel mogelijkheden (_hoeveel?_), en dus een zeer traag algoritme. Bedenk één of meer opties om de zoektocht wat te versnellen (al zal het algoritme traag blijven voor veel coördinaten; hoop niet op een oplossing die voldoende snel werkt voor meer dan een 20-tal locaties).
