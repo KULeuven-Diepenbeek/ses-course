@@ -18,6 +18,9 @@ In die situatie spelen **ontwerppatronen** de rol van de bibliotheek (library).
 Een ontwerppatroon is een beschrijving van een herbruikbare oplossing voor een vaak terugkerend ontwerpprobleem.
 Patronen worden niet uitgevonden, maar omvatten kennis over werkende oplossingen die door middel van ervaring en expertise werden opgebouwd.
 De meest populaire software engineering design patterns zijn beschreven in het boek [Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns) (1995).
+Deze patronen richten zich in eerste instantie op een goed software-ontwerp, in termen van _lage koppeling_ en _hoge cohesie_.
+Dat houdt kort gezegd in dat functionaliteit vervat zit in logische, afgescheiden modules (bijvoorbeeld klassen of packages in Java), en dat er niet teveel afhankelijkheden zijn tussen die modules.
+In een systeem met hoge cohesie en lage koppeling is het steeds duidelijk waar een aanpassing moet gebeuren (hoge cohesie) en zal een aanpassing enkel een lokaal effect hebben, en dus niet doorsijpelen naar de rest van het systeem (lage koppeling).
 
 Een patroon geeft in de eerste plaats een **naam** aan een herbruikbare oplossingsstrategie.
 Op die manier gaan patroonnamen deel uitmaken van het ontwerpvocabularium, en volstaat een zin als "Heb je al eens aan een _visitor_ gedacht?" om een hele oplossingsstrategie te beschrijven aan een collega.
@@ -40,6 +43,8 @@ Dit patroon stelt voor om UI-logica eenvoudig te scheiden van domein logica door
 2. De view, de UI, is de presentatielaag die de gebruiker te zien krijgt als hij de applicatie hanteert. Achterliggend wordt er door de view informatie uit de model-objecten gehaald.
 3. De controller handelt acties van de gebruiker (UI events, bv. het klikken op een knop) af, en vertaalt deze naar operaties op het model. De controller verwittigt ook de view dat die zich moet updaten.
 
+Op dit diagram geven de pijlen aan wie wie kent:
+
 {{<mermaid>}}
 graph TD;
 V[View]
@@ -50,14 +55,14 @@ V --> M
 C --> M
 {{< /mermaid >}}
 
-De controller kent zowel de view als het model. De view kent enkel het model. Het model kent niemand buiten zichzelf. Op die manier is het eenvoudig om in de applicatie te migreren naar nieuwe presentatie lagen, zoals van een typische client-server applicatie naar een moderne website, gehost op een (virtuele) server. Dit principe kan telkens opnieuw worden toegepast, voor ontelbare applicaties. Men spreekt hier dus van een herhalend patroon, dat kan helpen bij het oplossen van een probleem.
+De controller kent zowel de view als het model. De view kent enkel het model. Het model kent niemand buiten zichzelf. Op die manier is het eenvoudig om in de applicatie te migreren naar nieuwe presentatievorm, zoals van een typische client-server applicatie naar een moderne website. Dit principe kan telkens opnieuw worden toegepast, voor ontelbare applicaties. Men spreekt hier dus van een herhalend patroon, dat kan helpen bij het oplossen van een probleem.
 
 ## Observer
 
 In het MVC patroon zou je misschien willen dat de controller de view niet hoeft te vertellen dat er een update moet gebeuren.
-Dat vereist namelijk dat de controller weet wanneer er veranderingen gebeuren die relevant zijn voor de view, of (als de controller de view na elke operatie laat updaten) dat er misschien nodeloos updates van de view gebeuren.
+Dat vereist namelijk dat de controller weet wanneer er veranderingen gebeurd zijn aan het model die relevant zijn voor de view, of (als de controller de view na elke operatie laat updaten) dat er misschien nodeloos updates van de view gebeuren.
 
-Idealiter vertelt het model aan de view dat er iets gewijzigd is, waardoor de view kan beslissen of die zichzelf moet updaten.
+Idealiter vertelt het model zelf aan de view dat er iets gewijzigd is, waardoor de view kan beslissen of die zichzelf moet updaten.
 Maar we willen het model onafhankelijk houden van de view.
 
 ### Doelstelling
@@ -65,13 +70,14 @@ Maar we willen het model onafhankelijk houden van de view.
 - Breng één of meerdere objecten (van verschillende klassen) op de hoogte van een gebeurtenis in een object van een andere klasse.
 - Vermijd dat de gewijzigde klasse moet weten wie er allemaal op de hoogte gebracht moet worden (_lage koppeling_).
 
-Het **observer**-patroon laat toe dat een klasse 'luistert' naar veranderingen in een andere klasse, zonder dat de klasse die wijzigingen ondergaat moet weten wie er precies luistert, of waarom.
+Het **observer**-patroon beschrijft een techniek die toelaat dat een klasse 'luistert' naar veranderingen in een andere klasse, zonder dat de klasse die wijzigingen ondergaat moet weten wie er precies luistert, of waarom.
 
 ### Structuur
 
-We doen dat door gebruik te maken van een _Observer_-interface.
-Het idee is om de klasse die kan wijzigen (de _Subject_) een lijst van Observer-objecten te laten bijhouden.
+De oplossing bestaat eruit om gebruik te maken van een _Observer_-interface.
+Het idee is om de klasse die kan wijzigen (het _Subject_) een lijst van Observer-objecten te laten bijhouden.
 Het subject weet niet wat de concrete klassen zijn, enkel dat ze de Observer-interface implementeren.
+Een Observer kan zichzelf opgeven als geïnteresseerde (en zich ook weer verwijderen).
 
 ```mermaid
 classDiagram
@@ -88,6 +94,22 @@ class Subject {
 
 Observer <|-- UI
 ```
+
+```mermaid
+sequenceDiagram
+participant Observer1
+participant Observer2
+participant Subject
+
+Observer1 ->> Subject: attach()
+Observer2 ->> Subject: attach()
+
+Observer2 ->> Subject: change()
+Subject ->> Observer1: notifyChanged()
+Subject ->> Observer2: notifyChanged()
+```
+
+Dit patroon maakt gebruik van een **callback**: door de Observer mee te geven aan de subject, kan die later de `notifyChanged`-methode van die Observer oproepen.
 
 Dit patroon wordt soms ook **publish-subscribe** genoemd.
 Een klasse (hier Subject) publiceert wijzigingen naar al wie ingeschreven is (de observers).
@@ -140,6 +162,7 @@ Denk hierbij bijvoorbeeld aan een pool van database-connecties, logging, caching
 Wanneer je meerdere objecten van eenzelfde klasse kan aanmaken, kunnen die objecten elkaars werking misschien verstoren.
 
 Het **singleton**-patroon biedt een manier aan om ten hoogste één instantie van een klasse te maken, die globaal toegankelijk is.
+In dat opzicht laat een singleton toe om een 'globale variabele' te emuleren (iets wat niet bestaat in Java).
 
 ### Doelstelling
 
@@ -148,142 +171,164 @@ Het **singleton**-patroon biedt een manier aan om ten hoogste één instantie va
 
 ### Voorbeeld
 
-#### 2. Probleemstelling
-
-Tien gebruikers die op de site terecht komen wensen allemaal hun winkelwagentje te raadplegen. Er zijn maar twee DB connecties beschikbaar, dit opgelegd door de database zelf. Iemand moet die dus beheren (locken, vrijgeven, locken, ... - dit heet _database pooling_).
-
-Als we twee instanties van `DBHandle` maken, kunnen er plots 2x2 connecties open worden gemaakt naar de database. Die zal dit ook blokkeren, wat resulteert in 2 klanten die een crash ervaren, en twee die hun winkelwagen kunnen raadplegen zonder verdere problemen.
-
-{{<mermaid>}}
-graph TD;
-A[ShoppingResource Inst1]
-B[ShoppingResource Inst2]
-C[DBHandle Inst1]
-D[DBHandle Inst2]
-A -->|nieuwe instance| C
-B -->|nieuwe instance| D
-{{< /mermaid >}}
-
-De `getCart()` methode mag dus in geen geval telkens een nieuwe `DBHandle` aanmaken.
-
-#### 3. Oplossing
-
-We hebben in dit geval een _singleton_ instance nodig:
-
-<div class="devselect">
-
-```kt
-@Path("/shoppingcart")
-class ShoppingResource {
-    @GET
-    fun getCart(): ShoppingCart {
-        return DBHandle.getShoppingCart()
-    }
-}
-```
+De eenvoudigste implementatie van een singleton ziet er als volgt uit:
 
 ```java
-@Path("/shoppingcart")
-public class ShoppingResource {
-    @GET
-    public ShoppingCart getCart() {
-        return DBHandle.getInstance().getShoppingCart();
-    }
+public class Cache {
+  public static final Cache INSTANCE = new Cache(); // de enige instance
+
+  private Cache() {
+    // private constructor
+  }
 }
 ```
 
-</div>
+We hebben een publiek statisch INSTANCE-veld wat eenmalig geïnitialiseerd wordt met een nieuw Cache-object.
+De Cache-constructor is privaat, zodat er geen andere instanties aangemaakt kunnen worden.
 
-Waarbij de klasse `DBHandle` wordt uitgebreid tot:
+### Lazy initialisatie
 
-<div class="devselect">
-
-```kt
-object DBHandle {
-    fun getShoppingCart(): ShoppingCart {
-        // SELECT * FROM ...
-    }
-}
-```
+Als het aanmaken van het object een dure operatie is, die niet steeds nodig is, kan je ook werken met _lazy_ initialisatie.
+Hierbij maak je het object aan wanneer het voor de eerste keer opgevraagd wordt.
+Je kan dat dan niet doen met een veld, maar je moet een methode gebruiken:
 
 ```java
-public class DBHandle {
-    private static DBHandle instance;
+public class Cache {
+  private static Cache INSTANCE = null;
 
-    public static DBHandle getInstance() {
-        if(instance == null) {
-            instance = new DBHandle();
+  public static Cache getInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new Cache();
+    }
+    return INSTANCE;
+  }
+
+  private Cache() {
+    // private constructor
+  }
+}
+```
+
+#### Lazy initialisatie en concurrency
+
+Het gebruik van lazy initialisatie en concurrency gaan niet goed samen.
+
+> Denk zelf even na wat er mis kan gaan in deze situatie
+
+Wanneer twee threads tegelijkertijd `getInstance()` oproepen, kan het zijn dat er twee objecten gemaakt worden.
+Om dat te vermijden kan je de `getInstance()`-methode `synchronized` maken.
+Dat heeft echter als gevolg dat threads slechts één voor één de instance kunnen opvragen, terwijl daar (eens de variabele geinitialiseerd is) geen reden meer toe is.
+
+Een ander patroon is _double checked locking_:
+
+```java
+public class Cache {
+  private static Cache INSTANCE = null;
+
+  public static Cache getInstance() {
+    if (INSTANCE == null) {
+      synchronized(Cache.class) { // synchronizeer (op het klasse-object)
+        if (INSTANCE == null) {
+          INSTANCE = new Cache();
         }
-        return instance;
+      }
     }
+    return INSTANCE;
+  }
 
-    private DBHandle() {
-    }
-
-    public ShoppingCart getShoppingCart() {
-        // SELECT * FROM ...
-    }
+  private Cache() {
+    // private constructor
+  }
 }
 ```
 
-</div>
+> Leg uit waarom dit patroon 1) efficiënter is dan heel de methode synchronized te maken, en 2) de garantie biedt dat er nooit twee instanties zullen gemaakt worden.
 
-{{% notice note %}}
-Merk op dat [Kotlin ingebouwde features heeft voor singleton](https://blog.mindorks.com/how-to-create-a-singleton-class-in-kotlin): namelijk het `object` keyword dat `class` vervangt in bovenstaande code. Dit is véél meer werk in Java. De "Java way" moet ook gekend zijn! Bijkomend, Kotlin heeft geen `static` keyword. <br/>
-Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu _Tools - Kotlin - Show Kotlin Bytecode_. Een `object` bevat automatisch een statische referentie naar zichzelf, zoals we in Java handmatig moeten schrijven: `public static final DBHandle INSTANCE;`. Calls naar Kotlin's `DBHandle.getShoppingCart()` worden automatisch vervangen door Java's `DBHandle.INSTANCE.getShoppingCart();`
-{{% /notice %}}
+> Waarom is de tweede `INSTANCE == null`-check nodig? Kan die niet weg?
 
-{{<mermaid>}}
-graph TD;
-A[ShoppingResource Inst1]
-B[ShoppingResource Inst2]
-C[DBHandle Inst]
-A -->|zelfde instance| C
-B -->|zelfde instance| C
-{{< /mermaid >}}
+### Denkvragen
 
-Op die manier is het aanmaken van een `DBHandle` instance beperkt tot de klasse zelf, door de `private` constructor. In de statische methode wordt er eerst gecontroleerd of de instantie `null` is of niet. In principe zou er maar één keer tijdens de uitvoering van het programma de `new DBHandle()` regel worden uitgevoerd[^conc].
-
-[^conc]: Dit klopt niet helemaal als we kijken naar concurrency problemen, waarbij twee gebruikers op exact hetzelfde tijdstip de methode aanroepen. Dit laten we buiten beschouwing voor dit vak.
-
-### Eigenschappen van dit patroon
-
-- Definiëer de enige instantie als een ontoegankelijke `static` variabele, die door één enkele `public static` methode wordt bewaakt.
-- Singleton klassen hebben enkel een `private` constructor om te voorkomen dat dit nog elders kan worden aangemaakt.
-- Er wordt meestal een `null` check gedaan, zodat de code die de getter aanroept dit niet opnieuw moet doen. Dit voorkomt onnodige duplicatie op verschillende plaatsen in de codebase.
-
-## <a name="oef"></a>Labo oefeningen
-
-Clone of fork <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-patterns-singleton-template
-
-### Opgave 1
-
-Hierin is bovenstaande voorbeeld verwerkt, maar nog zonder Singleton... Voer de unit testen uit in `src/main/test`: het resultaat zijn gefaalde testen (ROOD), omdat `DBHandle` verschillende keren wordt aangemaakt. Zorg er voor dat alle testen slagen (GROEN) door het singleton patroon te implementeren!
-
-### Opgave 2
-
-Pas ook `ShoppingCartResource` aan naar een singleton. Is dat nodig om de database niet te overbelasten, als de andere klasse reeds een singleton is, of niet?
-
-### Opgave 3
-
-[sessy library](/extra/sessy):
-
-1. identificeer welke klassen een kans maken om een Singleton te worden. Denk aan bovenstaande voorbeeld. Is er reeds ergens een Singleton patroon geïmplementeerd?
-2. Pas het patroon toe waar jij denkt dat het nodig is.
-3. Hoe kan je afleiden welke gebruikte frameworks op bepaalde plekken Singleton klasses hebben?
-
-## Denkvragen
-
-- Dit patroon klinkt aanlokkelijk: eenvoudig, lost problemen op, dus waarom niet overal toepassen. Denk eens na over de verantwoordelijkheden van objecten. Waarom zou je zo veel mogelijk moeten **vermijden** om dit patroon toe te passen? Wie mag wel `DBHandle.getInstance()` (of in geval van Kotlin, de functies zelf) aanroepen, en wie niet?
-- Wat gebeurt er als 10 mensen tegelijkertijd de eerste keer de `getInstance()` methode aanroepen? Hoe kunnen we dit oplossen?
-
-### Singleton en multi-threading
-
-## Factory method
+Dit patroon klinkt aanlokkelijk: eenvoudig, lost problemen op, dus waarom niet overal toepasse? Denk eens na over de verantwoordelijkheden van objecten. Waarom zou je zo veel mogelijk moeten **vermijden** om dit patroon toe te passen?
 
 ## Visitor
 
+Het visitor-patroon wordt gebruikt om een operatie voor te stellen op een object-structuur.
+De object-structuur bestaat uit een aantal subklassen, en de implementatie van de operatie is afhankelijk van het precieze subtype.
+
+Je kan dat natuurlijk al doen via overerving, door de operatie toe te voegen aan alle klassen.
+Bijvoorbeeld, bij een klasse-structuur van vormen kan je het berekenen van de oppervlakte als `area()`-operatie toevoegen:
+
+```java
+abstract class Shape {
+  public abstract void area();
+}
+class Square extends Shape {
+  public void area() {
+    return side * side;
+  }
+}
+class Circle extends Shape {
+  public void area() {
+    return radius * radius * Math.PI;
+  }
+}
+```
+
+Dat werkt goed, maar het nadeel hiervan is dat, zodra er meer operaties komen, dat die allemaal in dezelfde klasse terechtkomen.
+Dat zorgt voor een negatief effect op de cohesie.
+Stel bijvoorbeeld dat we, naast `area`, ook operaties moeten toevoegen voor `circumference`, `transform`, `draw`, `print`, `validate`, `saveToFile`, ...
+Al die operaties toevoegen leidt tot een klasse met nog maar weinig cohesie: het enige gemeenschappelijke is dat alle operaties over dezelfde vorm gaan.
+
+Het visitor-patroon biedt een alternatief: we maken, in essentie, een aparte klasse per operatie.
+
+```java
+interface ShapeVisitor<T> {
+  T visitSquare(Square square);
+  T visitCircle(Circle circle);
+}
+abstract class Shape {
+  abstract <T> T accept(ShapeVisitor<T> visitor);
+}
+class Square extends Shape {
+  void accept(ShapeVisitor visitor) {
+    return visitor.visitSquare(this);
+  }
+}
+class Circle extends Shape {
+  void accept(ShapeVisitor visitor) {
+    return visitor.visitCircle(this);
+  }
+}
+
+class AreaCalculator implements ShapeVisitor<Double> {
+  double visitSquare(Square square) {
+    return square.side * square.side;
+  }
+  double visitCircle(Circle circle) {
+    return circle.radius * circle.radius * Math.PI;
+  }
+}
+
+Square square = new Square(2.0);
+Circle circle = new Circle(2.0);
+AreaCalculator calc = new AreaCalculator();
+double squareArea = square.accept(calc); // 4.0
+double circleArea = circle.accept(calc); // 12.566
+```
+
+Het visitor-patroon maakt gebruik van de **double dispatch** techniek om operaties toe te voegen aan klassen zonder die klassen te wijzigen.
+Double dispatch betekent dat de operatie die uitgevoerd wordt afhangt van 2 types:
+
+- het type van de visitor (bv. AreaCalculator)
+- het type van de subklasse uit de object-structuur (bv. Square).
+
+Om dat te verwezenlijken wordt de `accept`-methode opgeroepen op de subklasse, dewelke vervolgens de overeenkomstige `visit*`-methode oproept op het visitor-object.
+
+### Voorbeeld
+
 ### Visitor vs. sealed classes
+
+## Factory method
 
 ## Builder
 
