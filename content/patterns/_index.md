@@ -54,16 +54,228 @@ De controller kent zowel de view als het model. De view kent enkel het model. He
 
 ## Observer
 
-MVC: Controller zou view niet moeten vertellen om te updaten (vereist kennis van wat effect op model is).
-Kan View 'luisteren' naar het model, zodat alle wijzigingen aan het model die relevant zijn voor de view doorgegeven worden?
+In het MVC patroon zou je misschien willen dat de controller de view niet hoeft te vertellen dat er een update moet gebeuren.
+Dat vereist namelijk dat de controller weet wanneer er veranderingen gebeuren die relevant zijn voor de view, of (als de controller de view na elke operatie laat updaten) dat er misschien nodeloos updates van de view gebeuren.
 
-**Dependency inversion principe**
+Idealiter vertelt het model aan de view dat er iets gewijzigd is, waardoor de view kan beslissen of die zichzelf moet updaten.
+Maar we willen het model onafhankelijk houden van de view.
 
-callback
+### Doelstelling
 
-`Consumer<T>`
+- Breng één of meerdere objecten (van verschillende klassen) op de hoogte van een gebeurtenis in een object van een andere klasse.
+- Vermijd dat de gewijzigde klasse moet weten wie er allemaal op de hoogte gebracht moet worden (_lage koppeling_).
+
+Het **observer**-patroon laat toe dat een klasse 'luistert' naar veranderingen in een andere klasse, zonder dat de klasse die wijzigingen ondergaat moet weten wie er precies luistert, of waarom.
+
+### Structuur
+
+We doen dat door gebruik te maken van een _Observer_-interface.
+Het idee is om de klasse die kan wijzigen (de _Subject_) een lijst van Observer-objecten te laten bijhouden.
+Het subject weet niet wat de concrete klassen zijn, enkel dat ze de Observer-interface implementeren.
+
+```mermaid
+classDiagram
+
+class Observer {
+  +notifyChanged()
+}
+class Subject {
+  -observers
+  +attach(Observer obs)
+  +detach(Observer obs)
+}
+<<interface>> Observer
+
+Observer <|-- UI
+```
+
+Dit patroon wordt soms ook **publish-subscribe** genoemd.
+Een klasse (hier Subject) publiceert wijzigingen naar al wie ingeschreven is (de observers).
+
+### In Java
+
+In Java kan je, in plaats van een speciale Observer-interface te maken, ook functionele interfaces (bv. Runnable) en lambda's gebruiken om hetzelfde te bereiken, bijvoorbeeld:
+
+```java
+class Subject {
+  private List<Runnable> observers;
+
+  public void change() {
+    ...
+    notifyObservers();
+  }
+
+  public void attach(Runnable observer) {
+    observers.add(observer);
+  }
+
+  public void detach(Runnable observer) {
+    observers.remove(observer);
+  }
+
+  protected void notifyObservers() {
+    for (var observer : this.observers) {
+      observer.run();
+    }
+  }
+}
+
+
+class UI {
+  public UI(Subject model) {
+    this.model = model;
+    model.attach(this::modelUpdated)
+  }
+
+  private void modelUpdated() {
+    ...
+  }
+}
+```
 
 ## Singleton
+
+In sommige gevallen is het belangrijk dat in een applicatie bepaalde functionaliteit gecentraliseerd wordt op één punt.
+Denk hierbij bijvoorbeeld aan een pool van database-connecties, logging, caching, of communicatie met hardware.
+Wanneer je meerdere objecten van eenzelfde klasse kan aanmaken, kunnen die objecten elkaars werking misschien verstoren.
+
+Het **singleton**-patroon biedt een manier aan om ten hoogste één instantie van een klasse te maken, die globaal toegankelijk is.
+
+### Doelstelling
+
+- Beperk een bepaalde klasse tot één instantie (object), in plaats van meerdere.
+- Maak die ene instantie eenvoudig toegankelijk vanaf eender waar in de code.
+
+### Voorbeeld
+
+#### 2. Probleemstelling
+
+Tien gebruikers die op de site terecht komen wensen allemaal hun winkelwagentje te raadplegen. Er zijn maar twee DB connecties beschikbaar, dit opgelegd door de database zelf. Iemand moet die dus beheren (locken, vrijgeven, locken, ... - dit heet _database pooling_).
+
+Als we twee instanties van `DBHandle` maken, kunnen er plots 2x2 connecties open worden gemaakt naar de database. Die zal dit ook blokkeren, wat resulteert in 2 klanten die een crash ervaren, en twee die hun winkelwagen kunnen raadplegen zonder verdere problemen.
+
+{{<mermaid>}}
+graph TD;
+A[ShoppingResource Inst1]
+B[ShoppingResource Inst2]
+C[DBHandle Inst1]
+D[DBHandle Inst2]
+A -->|nieuwe instance| C
+B -->|nieuwe instance| D
+{{< /mermaid >}}
+
+De `getCart()` methode mag dus in geen geval telkens een nieuwe `DBHandle` aanmaken.
+
+#### 3. Oplossing
+
+We hebben in dit geval een _singleton_ instance nodig:
+
+<div class="devselect">
+
+```kt
+@Path("/shoppingcart")
+class ShoppingResource {
+    @GET
+    fun getCart(): ShoppingCart {
+        return DBHandle.getShoppingCart()
+    }
+}
+```
+
+```java
+@Path("/shoppingcart")
+public class ShoppingResource {
+    @GET
+    public ShoppingCart getCart() {
+        return DBHandle.getInstance().getShoppingCart();
+    }
+}
+```
+
+</div>
+
+Waarbij de klasse `DBHandle` wordt uitgebreid tot:
+
+<div class="devselect">
+
+```kt
+object DBHandle {
+    fun getShoppingCart(): ShoppingCart {
+        // SELECT * FROM ...
+    }
+}
+```
+
+```java
+public class DBHandle {
+    private static DBHandle instance;
+
+    public static DBHandle getInstance() {
+        if(instance == null) {
+            instance = new DBHandle();
+        }
+        return instance;
+    }
+
+    private DBHandle() {
+    }
+
+    public ShoppingCart getShoppingCart() {
+        // SELECT * FROM ...
+    }
+}
+```
+
+</div>
+
+{{% notice note %}}
+Merk op dat [Kotlin ingebouwde features heeft voor singleton](https://blog.mindorks.com/how-to-create-a-singleton-class-in-kotlin): namelijk het `object` keyword dat `class` vervangt in bovenstaande code. Dit is véél meer werk in Java. De "Java way" moet ook gekend zijn! Bijkomend, Kotlin heeft geen `static` keyword. <br/>
+Om te begrijpen wat er gebeurt in de JVM kan je de Kotlin-compiled bytecode inspecteren via menu _Tools - Kotlin - Show Kotlin Bytecode_. Een `object` bevat automatisch een statische referentie naar zichzelf, zoals we in Java handmatig moeten schrijven: `public static final DBHandle INSTANCE;`. Calls naar Kotlin's `DBHandle.getShoppingCart()` worden automatisch vervangen door Java's `DBHandle.INSTANCE.getShoppingCart();`
+{{% /notice %}}
+
+{{<mermaid>}}
+graph TD;
+A[ShoppingResource Inst1]
+B[ShoppingResource Inst2]
+C[DBHandle Inst]
+A -->|zelfde instance| C
+B -->|zelfde instance| C
+{{< /mermaid >}}
+
+Op die manier is het aanmaken van een `DBHandle` instance beperkt tot de klasse zelf, door de `private` constructor. In de statische methode wordt er eerst gecontroleerd of de instantie `null` is of niet. In principe zou er maar één keer tijdens de uitvoering van het programma de `new DBHandle()` regel worden uitgevoerd[^conc].
+
+[^conc]: Dit klopt niet helemaal als we kijken naar concurrency problemen, waarbij twee gebruikers op exact hetzelfde tijdstip de methode aanroepen. Dit laten we buiten beschouwing voor dit vak.
+
+### Eigenschappen van dit patroon
+
+- Definiëer de enige instantie als een ontoegankelijke `static` variabele, die door één enkele `public static` methode wordt bewaakt.
+- Singleton klassen hebben enkel een `private` constructor om te voorkomen dat dit nog elders kan worden aangemaakt.
+- Er wordt meestal een `null` check gedaan, zodat de code die de getter aanroept dit niet opnieuw moet doen. Dit voorkomt onnodige duplicatie op verschillende plaatsen in de codebase.
+
+## <a name="oef"></a>Labo oefeningen
+
+Clone of fork <i class='fab fa-github'></i> GitHub project https://github.com/KULeuven-Diepenbeek/ses-patterns-singleton-template
+
+### Opgave 1
+
+Hierin is bovenstaande voorbeeld verwerkt, maar nog zonder Singleton... Voer de unit testen uit in `src/main/test`: het resultaat zijn gefaalde testen (ROOD), omdat `DBHandle` verschillende keren wordt aangemaakt. Zorg er voor dat alle testen slagen (GROEN) door het singleton patroon te implementeren!
+
+### Opgave 2
+
+Pas ook `ShoppingCartResource` aan naar een singleton. Is dat nodig om de database niet te overbelasten, als de andere klasse reeds een singleton is, of niet?
+
+### Opgave 3
+
+[sessy library](/extra/sessy):
+
+1. identificeer welke klassen een kans maken om een Singleton te worden. Denk aan bovenstaande voorbeeld. Is er reeds ergens een Singleton patroon geïmplementeerd?
+2. Pas het patroon toe waar jij denkt dat het nodig is.
+3. Hoe kan je afleiden welke gebruikte frameworks op bepaalde plekken Singleton klasses hebben?
+
+## Denkvragen
+
+- Dit patroon klinkt aanlokkelijk: eenvoudig, lost problemen op, dus waarom niet overal toepassen. Denk eens na over de verantwoordelijkheden van objecten. Waarom zou je zo veel mogelijk moeten **vermijden** om dit patroon toe te passen? Wie mag wel `DBHandle.getInstance()` (of in geval van Kotlin, de functies zelf) aanroepen, en wie niet?
+- Wat gebeurt er als 10 mensen tegelijkertijd de eerste keer de `getInstance()` methode aanroepen? Hoe kunnen we dit oplossen?
 
 ### Singleton en multi-threading
 
