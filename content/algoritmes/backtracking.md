@@ -599,3 +599,25 @@ Bijvoorbeeld, voor de volgende lijst van locaties heeft de kortste tour vertrekk
 ```
 
 **Uitbreiding**: Alle volgordes van locaties proberen leidt tot enorm veel mogelijkheden (_hoeveel?_), en dus een zeer traag algoritme. Bedenk één of meer opties om de zoektocht wat te versnellen (al zal het algoritme traag blijven voor veel coördinaten; hoop niet op een oplossing die voldoende snel werkt voor meer dan een 20-tal locaties).
+
+### Doolhof
+
+Schrijf een functie om het kortste pad door een doolhof te vinden van een begin- naar een eindpunt.
+Een doolhof wordt voorgesteld als een string, met
+
+- `@` voor het startpunt
+- `$` voor het eindpunt
+- `.` voor een vrije cel (hier kan je doorgaan)
+- `X` voor een cel met een muur (hier kan je niet doorheen gaan)
+
+Bijvoorbeeld:
+
+```
+@..X.....X
+X.XXX.X.X.
+..X.X.X...
+.XX...XX.X
+....XXX..$
+```
+
+Je kan je enkel horizontaal of verticaal verplaatsen naar een naburige vrije cel.
