@@ -20,7 +20,7 @@ De naamgeving: voor het committen van je resultaat van "Opdracht 1" gebruik je d
 
 Er is 1 deadline voor alle opdrachten van het eerste deel van SES: vrijdag 15/03/2024 23u59.
 
-De deadline voor alle opdrachten van het tweede deel is vrijdag 15/05 23u59.
+De deadline voor alle opdrachten van het tweede deel is zondag 19/05 23u59.
 
 ## Opdrachten deel 1
 
@@ -425,7 +425,8 @@ public static CandycrushModel createBoardFromString(String configuration) {
 
 private static Candy characterToCandy(char c) {
    return switch(c) {
-      case 'o' -> null;
+      case '.' -> null;
+      case 'o' -> new NormalCandy(0);
       case '*' -> new NormalCandy(1);
       case '#' -> new NormalCandy(2);
       case '@' -> new NormalCandy(3);
