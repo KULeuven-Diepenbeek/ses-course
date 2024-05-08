@@ -441,6 +441,13 @@ De voorbeelden hierboven hebben volgende oplossing:
 - `model2`: maximumscore 24 na 7 wissels
 - `model3`: maximumscore 35 na 10 wissels (dit kan een tijdje duren).
 
+(**Update 8/5/2024**) Ter info: Voor model2 zijn er 4 verschillende sequenties van 7 wissels die tot een eindscore van 24 leiden:
+
+- (r2,c0) ⇄ (r2,c1) ; (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
+- (r3,c3) ⇄ (r3,c4) ; (r2,c0) ⇄ (r2,c1) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
+- (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c0) ⇄ (r2,c1) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
+- (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c0) ⇄ (r2,c1) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
+
 Tag het resultaat als `v14.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
 
 _Dit was de laatste opdracht voor het vak._
