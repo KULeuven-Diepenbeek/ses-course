@@ -781,6 +781,7 @@ class Smartphone {
     public Builder standardPhone() {
       this.ram = 8;
       this.storage = 64;
+      return this;
     }
     public Builder upgradeRAM(int ram) {
       this.ram = ram;
