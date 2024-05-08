@@ -560,17 +560,17 @@ abstract class Shape {
 }
 class Square extends Shape {
   void accept(ShapeVisitor visitor) {
-    return visitor.visitSquare(this);
+    visitor.visitSquare(this);
   }
 }
 class Circle extends Shape {
   void accept(ShapeVisitor visitor) {
-    return visitor.visitCircle(this);
+    visitor.visitCircle(this);
   }
 }
 class Rectangle extends Shape {
   void accept(ShapeVisitor visitor) {
-    return visitor.visitRectangle(this);
+    visitor.visitRectangle(this);
   }
 }
 
