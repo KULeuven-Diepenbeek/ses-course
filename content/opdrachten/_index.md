@@ -436,6 +436,7 @@ private static Candy characterToCandy(char c) {
 ```
 
 De voorbeelden hierboven hebben volgende oplossing:
+
 (**Update 13/5/2024**) Sommige maximumscores, wissels en sequenties hieronder waren fout; deze zijn nu verbeterd.
 Deze gaan ervan uit dat een snoepje in een L-vorm _niet_ dubbel geteld wordt bij het verwijderen.
 
