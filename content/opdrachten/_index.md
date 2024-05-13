@@ -448,6 +448,13 @@ De voorbeelden hierboven hebben volgende oplossing:
 - (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c0) ⇄ (r2,c1) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
 - (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c0) ⇄ (r2,c1) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
 
+Voor model3:
+
+- (r1,c2) ⇄ (r1,c3) ; (r2,c3) ⇄ (r2,c4) ; (r2,c2) ⇄ (r3,c2) ; (r2,c4) ⇄ (r2,c5) ; (r3,c3) ⇄ (r3,c4) ; (r3,c2) ⇄ (r4,c2) ; (r5,c1) ⇄ (r5,c2) ; (r2,c0) ⇄ (r2,c1) ; (r5,c0) ⇄ (r5,c1) ; (r5,c2) ⇄ (r5,c3)
+- (r1,c2) ⇄ (r1,c3) ; (r2,c3) ⇄ (r2,c4) ; (r2,c2) ⇄ (r3,c2) ; (r2,c4) ⇄ (r2,c5) ; (r3,c3) ⇄ (r3,c4) ; (r3,c2) ⇄ (r4,c2) ; (r2,c0) ⇄ (r2,c1) ; (r5,c1) ⇄ (r5,c2) ; (r5,c0) ⇄ (r5,c1) ; (r5,c2) ⇄ (r5,c3)
+- (r1,c2) ⇄ (r1,c3) ; (r2,c3) ⇄ (r2,c4) ; (r2,c4) ⇄ (r2,c5) ; (r3,c3) ⇄ (r3,c4) ; (r2,c2) ⇄ (r3,c2) ; (r3,c2) ⇄ (r4,c2) ; (r5,c1) ⇄ (r5,c2) ; (r2,c0) ⇄ (r2,c1) ; (r5,c0) ⇄ (r5,c1) ; (r5,c2) ⇄ (r5,c3)
+- (r1,c2) ⇄ (r1,c3) ; (r2,c3) ⇄ (r2,c4) ; (r2,c4) ⇄ (r2,c5) ; (r3,c3) ⇄ (r3,c4) ; (r2,c2) ⇄ (r3,c2) ; (r3,c2) ⇄ (r4,c2) ; (r2,c0) ⇄ (r2,c1) ; (r5,c1) ⇄ (r5,c2) ; (r5,c0) ⇄ (r5,c1) ; (r5,c2) ⇄ (r5,c3)
+
 Tag het resultaat als `v14.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
 
 _Dit was de laatste opdracht voor het vak._
