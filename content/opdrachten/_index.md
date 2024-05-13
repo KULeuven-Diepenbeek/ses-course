@@ -436,24 +436,29 @@ private static Candy characterToCandy(char c) {
 ```
 
 De voorbeelden hierboven hebben volgende oplossing:
+(**Update 13/5/2024**) Sommige maximumscores, wissels en sequenties hieronder waren fout; deze zijn nu verbeterd.
+Deze gaan ervan uit dat een snoepje in een L-vorm _niet_ dubbel geteld wordt bij het verwijderen.
 
 - `model1`: maximumscore 16 na 4 wissels
-- `model2`: maximumscore 24 na 7 wissels
-- `model3`: maximumscore 35 na 10 wissels (dit kan een tijdje duren).
+- `model2`: maximumscore 23 na 7 wissels (of score 24 als je een snoepje in een L-vorm dubbel telt)
+- `model3`: maximumscore 33 na 9 wissels (dit kan een tijdje duren).
 
-(**Update 8/5/2024**) Ter info: Voor model2 zijn er 4 verschillende sequenties van 7 wissels die tot een eindscore van 24 leiden:
+Ter info: Voor model2 zijn er 4 verschillende sequenties van 7 wissels die tot een eindscore van 23 leiden:
 
 - (r2,c0) ⇄ (r2,c1) ; (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
 - (r3,c3) ⇄ (r3,c4) ; (r2,c0) ⇄ (r2,c1) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
 - (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c0) ⇄ (r2,c1) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
 - (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c0) ⇄ (r2,c1) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
 
-Voor model3:
+Voor model3 (score 33 na 9 wissels) zijn er volgende 7 sequenties:
 
-- (r1,c2) ⇄ (r1,c3) ; (r2,c3) ⇄ (r2,c4) ; (r2,c2) ⇄ (r3,c2) ; (r2,c4) ⇄ (r2,c5) ; (r3,c3) ⇄ (r3,c4) ; (r3,c2) ⇄ (r4,c2) ; (r5,c1) ⇄ (r5,c2) ; (r2,c0) ⇄ (r2,c1) ; (r5,c0) ⇄ (r5,c1) ; (r5,c2) ⇄ (r5,c3)
-- (r1,c2) ⇄ (r1,c3) ; (r2,c3) ⇄ (r2,c4) ; (r2,c2) ⇄ (r3,c2) ; (r2,c4) ⇄ (r2,c5) ; (r3,c3) ⇄ (r3,c4) ; (r3,c2) ⇄ (r4,c2) ; (r2,c0) ⇄ (r2,c1) ; (r5,c1) ⇄ (r5,c2) ; (r5,c0) ⇄ (r5,c1) ; (r5,c2) ⇄ (r5,c3)
-- (r1,c2) ⇄ (r1,c3) ; (r2,c3) ⇄ (r2,c4) ; (r2,c4) ⇄ (r2,c5) ; (r3,c3) ⇄ (r3,c4) ; (r2,c2) ⇄ (r3,c2) ; (r3,c2) ⇄ (r4,c2) ; (r5,c1) ⇄ (r5,c2) ; (r2,c0) ⇄ (r2,c1) ; (r5,c0) ⇄ (r5,c1) ; (r5,c2) ⇄ (r5,c3)
-- (r1,c2) ⇄ (r1,c3) ; (r2,c3) ⇄ (r2,c4) ; (r2,c4) ⇄ (r2,c5) ; (r3,c3) ⇄ (r3,c4) ; (r2,c2) ⇄ (r3,c2) ; (r3,c2) ⇄ (r4,c2) ; (r2,c0) ⇄ (r2,c1) ; (r5,c1) ⇄ (r5,c2) ; (r5,c0) ⇄ (r5,c1) ; (r5,c2) ⇄ (r5,c3)
+- (r1,c0) ⇄ (r2,c0) ; (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+- (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r1,c0) ⇄ (r2,c0) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+- (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r5,c0) ⇄ (r5,c1) ; (r2,c2) ⇄ (r3,c2) ; (r4,c0) ⇄ (r5,c0) ; (r4,c4) ⇄ (r5,c4)
+- (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r1,c0) ⇄ (r2,c0) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+- (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r1,c0) ⇄ (r2,c0) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+- (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r1,c0) ⇄ (r2,c0) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+- (r2,c3) ⇄ (r2,c4) ; (r1,c0) ⇄ (r2,c0) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
 
 Tag het resultaat als `v14.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
 
