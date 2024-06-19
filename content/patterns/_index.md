@@ -968,6 +968,10 @@ public class Main {
 
 ## Andere bronnen (optioneel)
 
+Koppeling en cohesie:
+
+- [https://devopedia.org/cohesion-vs-coupling](https://devopedia.org/cohesion-vs-coupling)
+
 Je vindt heel wat informatie over deze en andere ontwerppatronen op het internet, bijvoorbeeld
 
 - [https://refactoring.guru](https://refactoring.guru/)

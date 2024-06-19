@@ -5,6 +5,23 @@ autonumbering: true
 draft: false
 ---
 
+```
+TODO:
+verschil duiden tussen generische parameter (met evt. extends/super) en argument (zonder extends/super, eventueel ook gewoon type)
+void do(? extends T param) => oververving laat automatisch al alle subtypes toe
+
+Generische parameter als variabele
+- declaratie bovenaan klasse (of voor methode bij generische methode)
+- gebruik tussen <> bij extends/implements klasse/interface, parameters van methode, types van variabelen
+
+Niet duidelijk waar extends wel/niet mag
+=> verschil parameter/argument
+=> in generische methode moet generische parameter T gedeclareerd zijn
+bv.
+class FightAction implements Action<T extends CanFight>
+void execute(? extends A character)
+```
+
 Vooraleer we de discussie over datastructuren kunnen starten, is het nuttig om eerst te kijken naar **generics**, aangezien generics veelvuldig gebruikt worden in datastructuren.
 
 Je vindt alle startcode voor dit hoofdstuk [op deze GitHub-repository](https://github.com/KULeuven-Diepenbeek/ses-demos-exercises-student).
