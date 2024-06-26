@@ -5,25 +5,8 @@ autonumbering: true
 draft: false
 ---
 
-```
-TODO:
-verschil duiden tussen generische parameter (met evt. extends/super) en argument (zonder extends/super, eventueel ook gewoon type)
-void do(? extends T param) => oververving laat automatisch al alle subtypes toe
-
-Generische parameter als variabele
-- declaratie bovenaan klasse (of voor methode bij generische methode)
-- gebruik tussen <> bij extends/implements klasse/interface, parameters van methode, types van variabelen
-
-Niet duidelijk waar extends wel/niet mag
-=> verschil parameter/argument
-=> in generische methode moet generische parameter T gedeclareerd zijn
-bv.
-class FightAction implements Action<T extends CanFight>
-void execute(? extends A character)
-```
-
+[TODO: generische methodes](#generische-methodes)
 [TODO: overerven van generisch type](#overerven-van-een-generisch-type)
-[TODO: bounds vs co/contra](#bounds-vs-co-contravariantie-en-wildcards)
 
 Vooraleer we de discussie over datastructuren kunnen starten, is het nuttig om eerst te kijken naar **generics**, aangezien generics veelvuldig gebruikt worden in datastructuren.
 
@@ -310,10 +293,7 @@ Onthoud dus: op de plaatsen waar je een nieuwe parameter (een nieuwe 'letter') i
 
 ## Generische methodes
 
-```
-TODO
-Gebruik generische methodes: type opgeven (maar meestal niet nodig - type inference).
-```
+TODO: Gebruik generische methodes: type opgeven (maar meestal niet nodig - type inference).
 
 In de voorbeelden hierboven hebben we steeds een hele klasse generisch gemaakt.
 We vermeldden dat het ook mogelijk is om een generische **methode** te definiëren, wat soms nuttig kan zijn.
@@ -657,7 +637,7 @@ Plane --> Motorized
 
 ### Overerven van een generisch type
 
-TODO
+TODO: nog verder uit te schrijven
 
 Hierboven gebruikten we vooral `ArrayList` als voorbeeld van een generische klasse.
 We hebben echter ook gezien dat je zelf generische klassen kan definiëren, en daarvan kan je uiteraard ook overerven.
@@ -1146,10 +1126,12 @@ Bij arrays wordt er _wel_ type-informatie bijgehouden na het compileren, en kan 
 
 #### Enkel bij generische types!
 
-Tenslotte nog een opmerking, aangezien hier vaak fouten tegen gemaakt worden.
-Co- en contra-variantie (extends en super dus) zijn enkel van toepassing op **generische** types.
-Alles wat we hierboven gezien hebben is dus enkel nuttig op plaatsen waar je een generisch type (`List<T>`, `Food<T>`, ...) gebruikt.
-Je kan deze constructies bijgevolg niet gebruiken met gewone types; onderstaande code is dus **ongeldig**:
+Tenslotte nog een opmerking.
+Co- en contra-variantie (extends, super, en wildcards dus) zijn enkel van toepassing op **generische** types.
+Alles wat we hierboven gezien hebben is dus enkel nuttig op plaatsen waar je een generisch type (`List<T>`, `Food<T>`, ...) gebruikt voor een parameter, terugkeertype, variabele, ....
+Dergelijke types kan je met behulp van co-/contra-variantie en wildcards verrijken tot bijvoorbeeld `List<? extends T>`, `Food<? super T>`, ...
+Maar je kan deze constructies niet gebruiken op plaatsen waar een gewoon type verwacht wordt, bijvoorbeeld bij een parameter of terugkeertype.
+Onderstaande regels code zijn dus allemaal **ongeldig**:
 
 ```java
 public void pet(? extends Mammal mammal) { ... } // ONGELDIG! ❌
@@ -1157,22 +1139,31 @@ public void pet(<? extends Mammal> mammal) { ... } // ONGELDIG! ❌
 public void pet(<? super Cat> mammal) { ... } // ONGELDIG! ❌
 ```
 
-Schrijf in dat geval dus gewoon
+Schrijf in dat geval gewoon
 
 ```java
 public void pet(Mammal mammal) { ... }
 ```
 
-Op die manier kan de methode opgeroepen worden met een `Cat`-object, `Dog`-object, of elk ander type `Mammal`.
-Je hebt hier geen co- of contra-variantie van generische types nodig; je maakt gewoon gebruik van subtypes uit objectgeoriënteerd programmeren.
+Deze methode kan óók al opgeroepen worden met een `Cat`-object, `Dog`-object, of elk ander type `Mammal` als argument.
+Je hebt hier geen co- of contra-variantie van generische types nodig; je maakt gewoon gebruik van overerving uit objectgeoriënteerd programmeren.
 
 #### Bounds vs co-/contravariantie en wildcards
 
-```
-TODO
-Nog eens benadrukken wat het verschil is tussen begrenzen van een parameter,
-en het gebruik van covariantie/wildcards
-```
+Tot slot is het nuttig om nog eens te benadrukken dat er een verschil is tussen het begrenzen van een generische parameter (met `extends`) enerzijds, en het gebruik van co-variantie, contra-variantie en wildcards (`? extends T`, `? super T`) anderzijds. Het feit dat `extends` in beide gevallen gebruikt wordt, kan misschien tot wat verwarring leiden.
+
+Een begrenzing (via `<T extends SomeClass>`) **beperkt** welke types geldige waarden zijn voor de type-parameter `T`. Dus: elke keer wanneer je een concreet type wil meegeven in de plaats van `T` moet dat type voldoen aan bepaalde eisen.
+Je kan zo'n begrenzing enkel aangeven op de plaats waar je een nieuwe generische parameter (`T`) introduceert (dus bij een nieuwe klasse-definitie of methode-definitie).
+Bijvoorbeeld: `class Food<T extends Animal>` laat later enkel toe om `Food<X>` te schrijven als type wanneer `X` ook een subtype is van `Animal`.
+
+Door **co- en contra-variantie** (met `<? extends X>` en `<? super X>`) te gebruiken **verbreed** je de toegelaten types.
+Een methode-parameter met als type `Food<? extends Animal>` laat een `Food<Animal>` toe als argument, maar ook een `Food<Cat>` of `Food<Dog>`.
+Omgekeerd zal een parameter met als type `Food<? super Cat>` een `Food<Cat>` toelaten, maar ook een `Food<Animal>`.
+Er wordt in beide gevallen dus meer toegelaten, wat meer flexibiliteit biedt.
+
+Je kan co- en contravariantie toepassen op elke plaats waar je een generisch type gebruikt (en waar dat gepast is volgens de PECS regels).
+Het kan dus perfect zijn dat je de ene keer in je code eens `Food<Cat>` gebruikt, ergens anders `Food<? extends Cat>`, en nog ergens anders `Food<? super Cat>`.
+Bij begrenzing is dat niet zo; dat legt de grenzen eenmalig vast, en die moeten overal gerespecteerd worden waar het generisch type gebruikt wordt.
 
 ## Oefeningen (2)
 
