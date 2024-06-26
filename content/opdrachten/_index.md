@@ -119,6 +119,7 @@ Je gitrepo heeft nu dus volgende structuur:
      + ...
 
 ```
+<!--  TODO: orden lijst, noem specifieke naar voor jar en voeg toe aan gitignore -->
 
 Commit nu de veranderingen in je directory en tag als `v5.x` ('x' start bij 0 en verhoogt met 1 bij elke nieuwe ingestuurde versie) en push dit naar je remote repository op Github.
 
