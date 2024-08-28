@@ -6,6 +6,8 @@ author: "Koen Yskout"
 draft: false
 ---
 
+TODO: antipattern 'forEach' + externe mutatie
+
 ## Wat en waarom?
 
 [Streams](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/package-summary.html) vormen een krachtig concept om efficiënt data te verwerken.

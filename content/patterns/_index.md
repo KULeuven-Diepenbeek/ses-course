@@ -6,6 +6,11 @@ autonumbering: true
 draft: false
 ---
 
+```
+TODO 2425
+'fluent interface' pattern? (streams, Builder)
+```
+
 ## Wat is een ontwerppatroon?
 
 Wanneer we software schrijven, is het niet efficiënt om steeds het wiel opnieuw uit te vinden.
