@@ -21,6 +21,13 @@ enableGitInfo = true
   [markup.goldmark.renderer]
     unsafe= true
 
+  [markup.goldmark.extensions.passthrough]
+    enable = true
+
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [['\[', '\]'], ['$$', '$$']]
+    inline = [['\(', '\)'], ['$', '$']]
+
   [markup.highlight]
     codeFences = true
     guessSyntax = false
@@ -49,9 +56,10 @@ enableGitInfo = true
     disableInlineCopyToClipBoard = true
     ordersectionsby = "weight"
 
-# see https://learn.netlify.com/en/basics/configuration/
 [outputs]
-home = [ "HTML", "RSS", "JSON"]
+  home = ['html', 'rss', 'json', 'print', 'search']
+  page = ['html', 'rss', 'print']
+  section = ['html', 'rss', 'print']  
 
 [params.author]
   name = "Arne Duyver, Koen Yskout"
@@ -74,4 +82,3 @@ name = "<i class='fab fa-github'></i> Course Git Repository"
 identifier = "cgit"
 url = "https://github.com/kuleuven-diepenbeek/ses-course/"
 weight = 20
-
