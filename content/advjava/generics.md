@@ -837,12 +837,10 @@ ArrayList<?> lijst = new ArrayList<String>();
 lijst.add("Hello");
 ```
 
-{{%expand "Antwoord" %}}
+> [!tip]- Antwoord
+> De `lijst`-variabele is gedeclareerd als een ArrayList van een ongekend type. Op basis van het type van de variabele kan de compiler niet afleiden dat er  Strings toegevoegd mogen worden aan de lijst (het zou evengoed een ArrayList van Animals kunnen zijn).
+> Het feit dat `lijst` geinititialiseerd wordt met `<String>` doet hier niet terzake; enkel het type van de declaratie is van belang.
 
-De `lijst`-variabele is gedeclareerd als een ArrayList van een ongekend type. Op basis van het type van de variabele kan de compiler niet afleiden dat er Strings toegevoegd mogen worden aan de lijst (het zou evengoed een ArrayList van Animals kunnen zijn).
-Het feit dat `lijst` geinititialiseerd wordt met `<String>` doet hier niet terzake; enkel het type van de declaratie is van belang.
-
-{{% /expand %}}
 
 #### Oefening: covariantie
 
@@ -857,15 +855,12 @@ Maak een schema met de overervingsrelaties tussen
 - `ArrayList<Animal>`
 - `ArrayList<? extends Animal>`
 
-{{%expand "Antwoord" %}}
-
-- `ArrayList<Cat>` is een subtype van `List<Cat>` en van `ArrayList<? extends Cat>`.
-- `List<Cat>` is een subtype van `List<? extends Cat>`
-- `ArrayList<? extends Cat>` is een subtype van `List<? extends Cat>` en van `ArrayList<? extends Animal>`
-- `ArrayList<Animal>` is een subtype van `ArrayList<? extends Animal>` en `List<Animal>`
-- `List<? extends Cat>`, `ArrayList<? extends Animal>` en `List<Animal>` zijn alledrie subtypes van `List<? extends Animal>`
-
-{{% /expand %}}
+> [!tip]- Antwoord
+> - `ArrayList<Cat>` is een subtype van `List<Cat>` en van `ArrayList<? extends Cat>`.
+> - `List<Cat>` is een subtype van `List<? extends Cat>`
+> - `ArrayList<? extends Cat>` is een subtype van `List<? extends Cat>` en van `ArrayList<? extends Animal>`
+> - `ArrayList<Animal>` is een subtype van `ArrayList<? extends Animal>` en `List<Animal>`
+> - `List<? extends Cat>`, `ArrayList<? extends Animal>` en `List<Animal>` zijn alledrie subtypes van `List<? extends Animal>`
 
 ### Contravariantie (super)
 
