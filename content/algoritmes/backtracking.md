@@ -621,3 +621,8 @@ X.XXX.X.X.
 ```
 
 Je kan je enkel horizontaal of verticaal verplaatsen naar een naburige vrije cel.
+
+### Handdoeken
+Advent of code 2024
+
+https://adventofcode.com/2024/day/19

@@ -57,13 +57,20 @@ enableGitInfo = true
     ordersectionsby = "weight"
 
 [outputs]
-  home = ['html', 'rss', 'json', 'print', 'search']
+  home = ['html', 'rss', 'print']
   page = ['html', 'rss', 'print']
   section = ['html', 'rss', 'print']  
 
 [params.author]
   name = "Arne Duyver, Koen Yskout"
   email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"
+
+[[params.boxStyle]]
+  color = 'red'
+  i18n = ''
+  icon = 'tasks'
+  identifier = 'todo'
+  title = 'TODO'
 
 [[menu.shortcuts]] 
 name = "<i class='fa fa-university'></i> Toledo"

@@ -6,10 +6,9 @@ autonumbering: true
 draft: false
 ---
 
-```
-TODO 2425
-'fluent interface' pattern? (streams, Builder)
-```
+> [!todo]
+> 'fluent interface' pattern? (streams, Builder)
+
 
 ## Wat is een ontwerppatroon?
 
@@ -162,6 +161,7 @@ Een Observer kan zichzelf opgeven als geïnteresseerde (en zich ook weer verwijd
 classDiagram
 
 class Observer {
+  <<interface>>
   +notifyChanged()
 }
 class Subject {
@@ -169,7 +169,6 @@ class Subject {
   +attach(Observer obs)
   +detach(Observer obs)
 }
-<<interface>> Observer
 
 Observer <|-- UI
 ```

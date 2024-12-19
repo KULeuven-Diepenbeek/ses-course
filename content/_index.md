@@ -2,13 +2,11 @@
 title: "Software Engineering Skills"
 ---
 
-# Software Engineering Skills
-
-Academiejaar 2023---2024.
+Academiejaar 2024---2025.
 
 In dit opleidingsonderdeel leer je de nodige skills om een softwareproject op de wereld te brengen volgens de regels van de kunst en met het aandacht voor de courante industriële praktijk met topics rond programmeer- en ontwerpvaardigheden en de Software Development Life Cycle.
 
-## _Cursusmateriaal_
+## Cursusmateriaal
 
 We trachten al het cursusmateriaal voor deze cursus te bundelen op deze website.
 De opgaves voor de labo-oefeningen vind je op een aparte GitHub repository (aangegeven bij elke les).
@@ -61,28 +59,28 @@ Er bestaan erg veel patronen; we bekijken er enkele zeer gekende en vaak voorkom
 
 Het materiaal op deze website bouwt voort op materiaal van Dr. ing. Wouter Groeneveld en Prof. dr. Kris Aerts.
 
-#### Vereiste voorkennis
+### Vereiste voorkennis
 
 Het vak '_Software Ontwerp in Java_' (INF1) dient eerst gevolgd te worden. We gaan uit van een basiskennis Java en object-georiënteerd programmeren. Werken met commandline en enige kennis van git is een pluspunt.
 
-#### Doelstellingen
+### Doelstellingen
 
 Zie ook [Studiegids UHasselt](https://www.uhasselt.be/studiegids)
 
 De context en het overzicht worden aangereikt in het hoorcollege.
 
-#### Beoordeling en evaluatie
+### Beoordeling en evaluatie
 
 1. Schriftelijke evaluatie tijdens onderwijsperiode: 50%.
 2. Schriftelijk examen (gesloten boek): 50%.
 
 Een uitgebreide beschrijving is beschikbaar in de gids van het [Opleidingsonderdeel](https://studiegidswww.uhasselt.be/opleidingsonderdeel.aspx?a=2023&i=4083&n=4&t=01#anker47379).
 
-#### Meer leermiddelen
+### Meer leermiddelen
 
 Zie elke sectie '**meer leermateriaal**' voor extra materiaal per thema.
 Dit extra materiaal wordt aangeboden ter illustratie of verdieping voor de geïnteresseerde student, en is geen deel van de leerstof.
 
-#### Kalender
+### Kalender
 
 Zie [MyTimeTable UHasselt](https://mytimetable.uhasselt.be/schedule).

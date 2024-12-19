@@ -6,7 +6,8 @@ author: "Koen Yskout"
 draft: false
 ---
 
-TODO: antipattern 'forEach' + externe mutatie
+> [!todo]
+> TODO: antipattern 'forEach' + externe mutatie
 
 ## Wat en waarom?
 

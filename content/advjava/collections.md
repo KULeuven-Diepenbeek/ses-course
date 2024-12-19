@@ -4,7 +4,7 @@ toc: true
 autonumbering: true
 author: "Koen Yskout"
 draft: false
-disableMathJax: false
+math: true
 ---
 
 Totnogtoe hebben we enkel gewerkt met een Java array (vaste grootte), en met `ArrayList` (kan groter of kleiner worden).

@@ -5,8 +5,9 @@ autonumbering: true
 draft: false
 ---
 
-[TODO: generische methodes](#generische-methodes)
-[TODO: overerven van generisch type](#overerven-van-een-generisch-type)
+> [!todo]
+> - [TODO: generische methodes](#generische-methodes)
+> - [TODO: overerven van generisch type](#overerven-van-een-generisch-type)
 
 Vooraleer we de discussie over datastructuren kunnen starten, is het nuttig om eerst te kijken naar **generics**, aangezien generics veelvuldig gebruikt worden in datastructuren.
 
@@ -576,8 +577,6 @@ X1["ArrayList#lt;Cat>"] --> Y1["List#lt;Cat>"] --> Z1["Collection#lt;Cat>"]
 X2["ArrayList#lt;Dog>"] --> Y2["List#lt;Dog>"] --> Z2["Collection#lt;Dog>"]
 X3["ArrayList#lt;Animal>"] --> Y3["List#lt;Animal>"] --> Z3["Collection#lt;Animal>"]
 ```
-
-</div>
 
 </div>
 

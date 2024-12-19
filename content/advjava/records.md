@@ -5,6 +5,10 @@ autonumbering: true
 draft: false
 ---
 
+> [!todo]
+> data-oriented programming (niet value classes)
+
+
 ## Wat zijn records
 
 Een **record** in Java is een eenvoudige klasse die een waarde voorstelt.
