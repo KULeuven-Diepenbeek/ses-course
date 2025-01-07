@@ -6,7 +6,7 @@ draft: false
 ---
 
 > [!todo]
-> data-oriented programming (niet value classes)
+> data-oriented programming (niet value classes): opt out of internal state/encapsulation (value = opt out of identity)
 
 
 ## Wat zijn records
