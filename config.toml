@@ -72,6 +72,13 @@ enableGitInfo = true
   identifier = 'todo'
   title = 'TODO'
 
+[[params.boxStyle]]
+  color = 'green'
+  i18n = ''
+  icon = 'tasks'
+  identifier = 'task'
+  title = 'Oefening'
+
 [[menu.shortcuts]] 
 name = "<i class='fa fa-university'></i> Toledo"
 identifier = "tol"
