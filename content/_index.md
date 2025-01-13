@@ -12,7 +12,7 @@ We trachten al het cursusmateriaal voor deze cursus te bundelen op deze website.
 De opgaves voor de labo-oefeningen vind je op een aparte GitHub repository (aangegeven bij elke les).
 Voor sommige delen vind je ook nog slides op Toledo.
 
-### Software Development Life Cycle
+### Deel 1: Software Development Tools
 
 1. [Versie- en issuebeheer](/versiebeheer)
 2. [Dependency Management](/dependency-management):
@@ -21,7 +21,7 @@ Voor sommige delen vind je ook nog slides op Toledo.
 5. [Continuous Integration &amp; Deployment](/lifecycle/ci)
 6. [Software Management](/lifecycle/management): Skills (1), Scrum (2)
 
-### Advanced Java
+### Deel 2: Advanced Java
 
 Hier behandelen we enkele geavanceerde (en nieuwe) concepten uit Java.
 Gelijkaardige concepten bestaan vaak ook in andere programmeertalen.
@@ -32,12 +32,12 @@ Gelijkaardige concepten bestaan vaak ook in andere programmeertalen.
 4. Multithreading
 5. Streams
 
-### Recursie en backtracking
+### Deel 3: Recursie en backtracking
 
 Recursie en backtracking zijn krachtige tools om complexe problemen op te lossen.
 We leren hoe na te denken over recursie, alsook templates voor typische backtracking-problemen.
 
-### Design Patterns
+### Deel 4: Design Patterns
 
 Design patterns zijn ontwerpoplossingen voor vaak terugkomende problemen.
 Wanneer je zo'n probleem tegenkomt, biedt het patroon een goed startpunt voor je ontwerp.
