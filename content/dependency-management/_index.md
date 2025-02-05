@@ -1,7 +1,7 @@
 ---
 title: '2. Dependency Management'
 weight: 2
-draft: false
+draft: true
 author: Wouter Groeneveld
 ---
 

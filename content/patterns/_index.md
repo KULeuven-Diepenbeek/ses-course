@@ -3,7 +3,7 @@ title: "7. Design Patterns"
 weight: 7
 toc: true
 autonumbering: true
-draft: false
+draft: true
 ---
 
 > [!todo]
