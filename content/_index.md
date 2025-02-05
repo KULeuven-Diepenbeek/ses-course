@@ -9,7 +9,7 @@ Academiejaar 2024---2025
 In dit opleidingsonderdeel (SES) leer je de nodige skills om een softwareproject op de wereld te brengen volgens de regels van de kunst en met het aandacht voor de courante industriële praktijk.
 We besteden aandacht aan software development tools en de moderne software development lifecycle, alsook programmeer- en ontwerpvaardigheden.
 
-Het eerste deel van dit vak (software development tools and practices) wordt ook gevolgd door de studenten ICT-elektronica (EES).
+Het eerste deel van dit vak (software development tools and practices) wordt ook gevolgd door de studenten elektronica (EA) als deel van het vak Electronic Engineering Skills (EES).
 
 ## Cursusmateriaal
 
