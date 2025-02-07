@@ -1,6 +1,6 @@
 ---
 title: "6. Recursie en backtracking"
-weight: 6
+weight: 60
 draft: true
 ---
 

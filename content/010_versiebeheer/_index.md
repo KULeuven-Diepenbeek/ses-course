@@ -1,6 +1,6 @@
 ---
 title: "1. Versie- en issuebeheer"
-weight: 1
+weight: 10
 author: Wouter Groeneveld en Arne Duyver
 draft: true
 ---

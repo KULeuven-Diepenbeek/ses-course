@@ -1,6 +1,6 @@
 ---
 title: "7. Design Patterns"
-weight: 7
+weight: 70
 toc: true
 autonumbering: true
 draft: true
