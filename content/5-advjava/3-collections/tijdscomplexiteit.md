@@ -1,6 +1,7 @@
 ---
-title: "5.3 Collections"
+title: "Tijdscomplexiteit"
 toc: true
+weight: 10
 autonumbering: true
 author: "Koen Yskout"
 draft: false
@@ -12,6 +13,8 @@ In dit hoofdstuk kijken we in meer detail naar ArrayList, en behandelen we ook v
 De meeste van die types vind je ook (soms onder een andere naam) terug in andere programmeertalen.
 
 Je kan je afvragen waarom we andere collectie-types nodig hebben; uiteindelijk kan je (met genoeg werk) alles toch implementeren met een ArrayList? Dat klopt, maar de collectie-types verschillen in welke operaties snel zijn, en welke meer tijd vragen. Om dat wat preciezer te maken, kijken we eerst even naar de notie van **tijdscomplexiteit**.
+
+{{% children %}}
 
 ## Tijdscomplexiteit
 
