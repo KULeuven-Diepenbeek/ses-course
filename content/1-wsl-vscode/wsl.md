@@ -407,6 +407,8 @@ Dit is een test file.
 ```
 **copy en paste**: Dit zal voor verschillende terminal emulators anders zijn. In Windows terminal kan je simpelweg `Ctrl+c` en `Ctrl+v` gebruiken, in WSL kan je `Ctrl+c` gebruiken voor copy en `rechtermuisklik` voor paste en een andere veel gebruikte toetsencombinatie is `Ctrl+Shift+c` en `Ctrl+Shift+v`.
 
+_**Maak nu de oefeningen van oefenreeks 1 van de volgende pagina**_
+
 **chown** - 'change ownership': Met dit commando verander je de eigenaar van het opgegeven bestand.
 ```bash
 $ sudo chown [gebruiker]:[groep] [bestandsnaam]
@@ -600,6 +602,7 @@ arne@LT3210121:~$ echo "Hello" > test.txt
 arne@LT3210121:~$ cat test.txt
 Hello
 ```
+_**Maak nu de oefeningen van oefenreeks 2 en 3 van de volgende pagina**_
 
 ## Shell scripts
 Een shell script is een tekstbestand dat een reeks commando's bevat die door een Unix-shell worden uitgevoerd. Shell scripts worden vaak gebruikt om taken te automatiseren, zoals systeembeheer, batchverwerking en het uitvoeren van complexe commando's. Een belangrijk onderdeel van een shell script is de shebang (`#!`), die aangeeft welke interpreter moet worden gebruikt om het script uit te voeren. Voor een Bash-script wordt vaak de volgende shebang gebruikt: `#!/bin/bash`. Dit vertelt het systeem dat het script moet worden uitgevoerd met de Bash-shell.
@@ -653,6 +656,7 @@ echo "Voer je naam in:"
 read NAAM
 echo "Hallo, $NAAM! Welkom bij het shell scripting."
 ```
+_**Maak nu de oefeningen van oefenreeks 4 van de volgende pagina**_
 
 ## Wat moet ik hier nu allemaal van kennen/kunnen?
 Het doel van deze informatie is dat je vlot je weg kan vinden in een OS met behulp van enkel een CLI. Je hoeft geen theorie te kennen, maar je moet wel simpele commando's kunnen gebruiken en kennen zoals: *Met welk commando navigeer je naar de directory `/home/arne/test` door gebruik te maken van een relatief pad wanneer je je in de directory `/home/arne` bevindt? OPLOSSING: `$ cd test` of `$ cd ./test`.*
