@@ -39,9 +39,9 @@ Je kunt op verschillende niveaus instellingen aanpassen in Visual Studio Code (V
 
 - **Gebruikersniveau:** Instellingen die op gebruikersniveau worden aangepast, gelden voor alle projecten en werkruimten die je opent in VSCode. Deze instellingen worden opgeslagen in een JSON-bestand dat je kunt openen en bewerken via de Command Palette door te zoeken naar "Preferences: Open Settings (JSON)".
 
--**Workspace niveau:** Instellingen op workspace niveau gelden alleen voor de specifieke werkruimte of het project dat je hebt geopend. Dit is handig als je verschillende configuraties nodig hebt voor verschillende projecten. Workspace-instellingen worden opgeslagen in een `.vscode`-map binnen je projectdirectory.
+- **Workspace niveau:** Instellingen op workspace niveau gelden alleen voor de specifieke werkruimte of het project dat je hebt geopend. Dit is handig als je verschillende configuraties nodig hebt voor verschillende projecten. Workspace-instellingen worden opgeslagen in een `.vscode`-map binnen je projectdirectory.
 
--**Directory niveau:** Binnen een werkruimte kun je ook instellingen aanpassen voor specifieke mappen. Dit kan nuttig zijn als je een project hebt met meerdere mappen die elk hun eigen configuratie vereisen.
+- **Directory niveau:** Binnen een werkruimte kun je ook instellingen aanpassen voor specifieke mappen. Dit kan nuttig zijn als je een project hebt met meerdere mappen die elk hun eigen configuratie vereisen.
 
 _Je kan extenties ook op die verschillende niveaus enablen/disablen._
 
