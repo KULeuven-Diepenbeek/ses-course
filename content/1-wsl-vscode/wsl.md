@@ -603,7 +603,23 @@ arne@LT3210121:~$ cat test.txt
 Hello
 ```
 
+**Wildcards (*)**: Met de wildcard operator kun je patronen specificeren die overeenkomen met meerdere bestanden of directories in één keer. Dit is vooral handig bij het uitvoeren van bewerkingen op groepen bestanden zonder dat je elk bestand afzonderlijk hoeft te specificeren. Bijvoorbeeld kopieer alle bestanden met een bepaalde extensie naar een map: `cp *.txt doelmap/`
+
 _**[Maak nu de oefeningen van oefenreeks 2 en 3 van de volgende pagina](/1-wsl-vscode/wsl_exercises.md/#oefeningenreeks-2)**_
+
+**EXTRA**: hier nog een lijst van nuttige commando's en principes die we voorlopig niet verder in diepgang gaan bespreken, maar wel handig kunnen zijn in je ingenieurs carrière:
+- `grep`
+- het principe van piping `|`
+- `ssh`
+- het principe van background processes met `&` of `Ctrl+z`
+- `fg`
+- `curl`
+- `ping`
+- het principe van de `bashrc`-file 
+- `source`
+- fancy printouts
+- het principe van signal interrupts
+- regular expressions
 
 ## Shell scripts
 Een shell script is een tekstbestand dat een reeks commando's bevat die door een Unix-shell worden uitgevoerd. Shell scripts worden vaak gebruikt om taken te automatiseren, zoals systeembeheer, batchverwerking en het uitvoeren van complexe commando's. Een belangrijk onderdeel van een shell script is de shebang (`#!`), die aangeeft welke interpreter moet worden gebruikt om het script uit te voeren. Voor een Bash-script wordt vaak de volgende shebang gebruikt: `#!/bin/bash`. Dit vertelt het systeem dat het script moet worden uitgevoerd met de Bash-shell.
@@ -647,6 +663,7 @@ Om dit script uit te voeren, geef je de naam op als argument:
 ```bash
 ./script.sh Alice
 ```
+_Merk op dat `$0` het commando zelf is!_
 
 **Voorbeeld: Invoer tijdens de uitvoering**
 ```bash
@@ -657,6 +674,75 @@ echo "Voer je naam in:"
 read NAAM
 echo "Hallo, $NAAM! Welkom bij het shell scripting."
 ```
+
+**Voorbeeld: conditional statements**
+```bash
+#!/bin/bash
+# Dit script controleert de waarde van een variabele en geeft een bericht weer op basis van de waarde.
+
+echo "Voer een getal in:"
+read getal
+
+if [ $getal -lt 10 ]; then
+  echo "Het getal is kleiner dan 10."
+elif [ $getal -eq 10 ]; then
+  echo "Het getal is precies 10."
+else
+  echo "Het getal is groter dan 10."
+fi
+```
+_Merk op dat je eindigt met `fi`_
+
+[Lijst met conditions](https://www.geeksforgeeks.org/basic-operators-in-shell-scripting/):
+- `&&`: logische AND
+- `||`: logische OR
+- `!`: logische NOT
+- `-eq` of `==`: equals
+- `-ne` of `!=`: not equals
+- `-lt` of `<`: less than
+- `-le` of `<=`: less than or equals
+- `-gt` of `>`: greater than
+- `-le` of `>=`: greater than or equals
+
+**Voorbeeld: for-loop**
+```bash
+#!/bin/bash
+# Dit script gebruikt een for-loop om een reeks bestanden te maken met oplopende getallen in de bestandsnamen.
+
+# Beginwaarde van het getal
+start=1
+
+# Eindwaarde van het getal
+eind=5
+
+# Gebruik een for-loop om door de reeks getallen te itereren
+for ((i=start; i<=eind; i++)); do
+  bestandsnaam="bestand_$i.txt"
+  touch "$bestandsnaam"
+  echo "Bestand aangemaakt: $bestandsnaam"
+done
+```
+_Merk op dat je eindigt met `done`_
+
+**Voorbeeld: while-loop**
+```bash
+#!/bin/bash
+# Dit script gebruikt een while-loop om een getal te verhogen en weer te geven totdat het een bepaalde waarde bereikt.
+
+# Beginwaarde van het getal
+getal=1
+
+# Eindwaarde van het getal
+eind=5
+
+# Gebruik een while-loop om het getal te verhogen en weer te geven
+while [ $getal -le $eind ]; do
+  echo "Huidig getal: $getal"
+  getal=$((getal + 1))
+done
+```
+_Merk op dat je eindigt met `done`_
+
 _**[Maak nu de oefeningen van oefenreeks 4 van de volgende pagina](/1-wsl-vscode/wsl_exercises.md/#oefeningenreeks-4)**_
 
 
