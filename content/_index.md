@@ -15,8 +15,9 @@ Het eerste deel van dit vak (software development tools and practices) wordt ook
 
 We trachten al het cursusmateriaal voor deze cursus te bundelen op deze website.
 Deze wordt doorheen het jaar aangevuld.
-De opgaves voor de labo-oefeningen vind je op de [opdrachten-pagina](opdrachten).
 Voor sommige delen vind je ook nog slides op [Toledo](https://toledo.kuleuven.be).
+
+De opgaves voor de labo-oefeningen vind je op de [opdrachten-pagina](opdrachten).
 
 ### Deel 1: Software Development Tools and Practices (SES+EES)
 
