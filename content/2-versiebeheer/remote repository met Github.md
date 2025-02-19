@@ -5,12 +5,15 @@ author: Wouter Groeneveld en Arne Duyver
 draft: false
 ---
 
-
 ## Types van versiebeheer systemen
 
 Git is een _gedecentraliseerd_ versiebeheer systeem waarbij de hele repository inclusief historiek lokaal wordt geplaatst zodra een `clone` commando wordt uitgevoerd. Oudere _gecentraliseerde_ systemen zoals SVN en CVS bewaren (meta-)data op één centrale plaats: de version control server. Voor dit vak wordt resoluut voor git gekozen. 
 
-Onderstaande Figuur geeft het verschil weer tussen een _gecentraliseerd_ versioneringssysteem, zoals SVN, CVS en MS SourceSafe, en een _gedecentraliseerd_ systeem, zoals Git. Elke gebuiker heeft een kopie van de volledige repository op zijn lokale harde schijf staan. Bij SVN communiceren 'working copies' met de server. Bij Git communiceren repositories (inclusief volledige history) met eender welke andere repository. 'Toevallig' is dat meestal een centrale server, zoals [Github.com](https://github.com), [Gitlab.com](https://gitlab.com) of [BitBucket.com](https://bitbucket.com). 
+{{% notice info %}}
+Een **repository (of repo)** is een opslagplaats waar alle bestanden **en hun geschiedenis** van een project worden bewaard. In de context van Git is een repository een verzamelplaats voor alle projectbestanden, inclusief hun revisiegeschiedenis. Dit betekent dat elke wijziging die je aanbrengt in de bestanden wordt bijgehouden, zodat je altijd kunt terugkeren naar een eerdere versie als dat nodig is.
+{{% /notice %}}
+
+Onderstaande Figuur geeft het verschil weer tussen een _gecentraliseerd_ versioneringssysteem, zoals SVN, CVS en MS SourceSafe, en een _gedecentraliseerd_ systeem, zoals Git. Elke gebruiker heeft een kopie van de volledige repository op zijn lokale harde schijf staan. Bij SVN communiceren 'working copies' met de server. Bij Git communiceren repositories (inclusief volledige history) met eender welke andere repository. 'Toevallig' is dat meestal een centrale server, zoals [Github.com](https://github.com), [Gitlab.com](https://gitlab.com) of [BitBucket.com](https://bitbucket.com). 
 
 ![](/img/teaching/ses/svngit.png "SVN VS Git")
 
@@ -30,18 +33,18 @@ Ook, in tegenstelling tot bovenstaande tools, kan je Git ook compleet lokaal geb
 
 Cloud based storage is zeer populair geworden en voor goede redenen:
 - Je hebt een backup van al je data.
-- Je kan op meerdere verschillende pc's aan hetzelde project werken zonder met een USB-stick dingen te copy pasten.
+- Je kan op meerdere verschillende pc's aan hetzelfde project werken zonder met een USB-stick dingen te copy pasten.
 - Je kan met meerdere personen aan hetzelfde project werken zonder doorsturen van verschillende file versies via mail.
 
 Github is zeer populair en wordt door veel softwareontwikkelaars en bedrijven gebruikt. Wij zullen dit platform dan ook gebruiken in dit opleidingsonderdeel en het is ook aangeraden dit in de toekomst voor je softwareprojecten te gebruiken.
 
-*GitHub is nu eigendom van Microsoft en is closed source software. Je kan het wel de meeste features wel volledig gratis gebruiken. Wil je later toch liever een open source alternatief gebruiken? Dan is Gitlab een goed alternatief en werkt zeer gelijkaardig aan Github*
+*GitHub is nu eigendom van Microsoft en is closed source software. Je kan wel de meeste features volledig gratis gebruiken. Wil je later toch liever een open source alternatief gebruiken? Dan is Gitlab een goed alternatief en werkt zeer gelijkaardig aan Github. Gitea is een goed self-hosted optie*
 
 ### Een account aanmaken, 2FA instellen, SSH key toevoegen
 Voordat we van start kunnen gaan moeten we eerst een gratis account aanmaken. Verder moeten we ook nog een aantal belangrijke instellingen veranderen voordat we van de services gebruik kunnen maken.
 
 Aangezien het stappenplan voor het aanmaken van een account en de gewenste instellingen wel eens kan wijzigen refereren we hieronder naar de officiële bronnen die door de ontwikkelaar up-to-date gehouden worden:
-- **[Account aanmaken op Github](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)** (**Let op!** gebruik hetzelfde emailadres en dezelfde username die je hebt geconfigureerd hebt in Git om het process zo vlot mogelijk te laten verlopen)
+- **[Account aanmaken op Github](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github)** (**Let op!** gebruik hetzelfde email adres en dezelfde username die je hebt geconfigureerd in je lokale Git om het process zo vlot mogelijk te laten verlopen)
 - **[2FA instellen voor je account](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa)** (**Let op!** Verplicht sinds eind 2023)
 - **[SSH instellen voor je account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)** (**Let op!** Je kan geen contributies meer pushen naar repositories over `https` met enkel je username en wachtwoord)
 
@@ -57,8 +60,8 @@ Vanaf nu bestaat er een link tussen de lokale repository en de remote repository
     - **`$ git pull`**: Dit haalt alle veranderingen binnen en past ze onmiddelijk toe
     - **`$ git fetch`**: Dit haalt alle veranderingen binnen maar zo worden nog niet gemerged met jouw lokale versie. Dit doe je met **`$ git merge`**. (`git pull` is dus eigenlijk een aaneenschakeling van `git fetch` en `git merge`)
 - Je kan nieuwe aanpassingen van je lokale repository `pushen` naar je remote repo met:
-    - **`$ git push origin`**: Dit pusht enkel je huidige brach.
-    - **`$ git push origin --all`**: Dit pusht de wijzigingen op alle braches.
+    - **`$ git push origin`**: Dit pusht enkel je huidige branch.
+    - **`$ git push origin --all`**: Dit pusht de wijzigingen op alle branches.
     - **`$ git push origin --tags`**: Dit pusht alle tags die nog niet aanwezig zijn op de remote repo.
 
 {{% notice warning %}}
@@ -67,7 +70,7 @@ Voeg files met gevoelige informatie zoals wachtwoorden onmiddellijk toe aan je *
 
 ### Collaboration made easy
 
-Door een teamgenoot als collaborator toe te voegen aan je remote repository kan hij/zij de repo lokaal clonen en ook wijzigingen kunnen `pushen` en `pullen`. Door dit te combineren met `branching` waarbij elke collaborator bijvoorbeeld een eigen branch aanmaakt, kan je zeer efficiënte online workflow creëren om remote te kunnen samen werken aan software projecten.
+Door een teamgenoot als collaborator toe te voegen aan je remote repository kan hij/zij de repo lokaal clonen en ook wijzigingen via `pushen` en `pullen`. Door dit te combineren met `branching` waarbij elke collaborator bijvoorbeeld een eigen branch aanmaakt, kan je een zeer efficiënte online workflow creëren om remote te kunnen samen werken aan software projecten.
 </br>In principe kan iedereen een *public* remote repository clonen, maar ze gaan geen veranderingen kunnen pushen. (Hiervoor gebruik je `fork` en `pull requests`)
 
 **Collaborative workflow:** to minimize merge conflicts and other problems
