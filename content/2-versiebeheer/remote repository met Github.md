@@ -168,3 +168,8 @@ graph LR;
 ### Versiebeheer met je favoriete IDE
 
 Sommige IDE's komen met built-in tools of plug-ins om gemakkelijk gebruik te maken van Version Control en remote repositories. Ik raad je echter aan **eerst** voldoende te oefenen met de command line tools zodat je altijd weet wat je aan het doen bent. Op die manier ga je beter en vooral sneller problemen kunnen oplossen. Indien je de 'hard' way onder de knie hebt, kan je natuurlijk overschakelen naar eender welke tool jij het handigste vindt.
+
+### Github Classroom
+GitHub Classroom is een hulpmiddel waarmee docenten eenvoudig programmeeropdrachten kunnen beheren en beoordelen via GitHub. Met deze tool kunnen docenten repositories aanmaken voor studenten, opdrachten automatisch toewijzen en versiebeheer integreren in het leerproces. Studenten werken in **hun eigen repository**, waardoor docenten de voortgang kunnen volgen en feedback kunnen geven op basis van commits en pull requests. Dit vereenvoudigt het beheer van opdrachten en stimuleert het gebruik van professionele ontwikkelpraktijken in het onderwijs.
+
+**Opdracht**: _zie opdrachten_
