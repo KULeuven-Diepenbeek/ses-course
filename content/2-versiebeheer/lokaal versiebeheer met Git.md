@@ -255,3 +255,4 @@ Je kan commando's ook **aaneenschakelen** met '<b>;</b>' zodat meerdere commando
 
 - [Beginner vriendelijke Git en Github tutorials](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV)
 - [Tools & Concepts for Mastering Version Control with Git](https://www.youtube.com/watch?v=Uszj_k0DGsg)
+- Wil je meer inzicht in hoe git achter de schermen precies werkt? Lees dan zeker [dit artikel](https://get-git.readthedocs.io/en/latest/internal.html#internal) eens! Die geeft je op een toegankelijke manier uitleg over hoe git wijzigingen opslaat, wat de staging area precies is, etc. (Opmerking: het artikel begint met een vergelijking met SVN; dat is een ander/ouder versiecontrolesysteem.)
