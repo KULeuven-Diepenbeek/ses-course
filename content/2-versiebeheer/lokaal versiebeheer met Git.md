@@ -112,6 +112,8 @@ Gebruik: `git rm --cached <file>...` om te unstagen en `git restore <file>...` o
 
 Het commando **`$ git log`** wordt gebruikt om een lijst te zien van all je commits in chronologische volgorde, startend bij de laatste commit. Dat commando geeft veel informatie mee voor elke commit. Wil je liever een korter overzicht? Gebruik dan **`$ git log --oneline`**. (Met de `--graph` flag kan je ook de boomstructuur weergeven waar we zo dadelijk op terugkomen)
 
+_**Met de flag `--all` kan je ervoor zorgen dat je zeker ben dat je alle `branch information` en `tags` te zien krijgt**_
+
 ### Teruggaan naar vorige 'versies'
 
 Er bestaan commando's die we kunnen gebruiken om naar een vroegere commit terug te keren. Ze werken echter op een verschillende manier en het is belangrijk dat je deze verschillen goed kent.
