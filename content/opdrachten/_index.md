@@ -30,7 +30,7 @@ De deadline voor alle opdrachten van het tweede deel (enkel SES) is **vrijdag 23
 
 ## Opdrachten deel 1
 
-Deze opdrachten worden door **alle** studenten (SES+EES) gemaakt en ingediend.
+Deze opdrachten worden door **alle** studenten (SES+EES) gemaakt en ingediend via Github Classroom. Klik [hier](https://classroom.github.com/a/ucHZpfam) voor de invite van de assignment "Opdrachten deel 1".
 
 ### Versiebeheer
 
