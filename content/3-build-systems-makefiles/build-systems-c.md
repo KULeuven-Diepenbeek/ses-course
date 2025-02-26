@@ -277,12 +277,13 @@ all: $(TARGET)
 # van alle object files, want enkel dan kunnen we linken tot een binary
 $(TARGET): $(OBJECTS)
 	$(CC) -o $@ $^
+# Hierboven verwijzen we met $@ naar alles links van de `:` en met $^ alle elementen er rechts van
 
 # Maar onze OBJECTS zijn op hun beurt weer afhankelijk van hun corresponderende .c files ...
 # we gebruiken hier regular expressions waardoor % een wildcard is
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -c -o $@ $^
-# Hierboven verwijzen we met $@ naar alles links van de `:` en met $^ alles er rechts van
+	$(CC) $(CFLAGS) -c -o $@ $<
+# Hierboven verwijzen we met $@ naar alles links van de `:` en met $< (het corresponderende element) er rechts van
 
 clean: 
 	rm -rf $(TARGET) $(OBJECTS)
@@ -291,7 +292,44 @@ run: $(TARGET)
 	./$(TARGET)
 ```
 
+We declareren als eerst de `all`-rule omdat wanneer je standaard geen command meegeeft aan make, de eerste rule uitgevoerd zal worden.
+
 _Met deze structuur zal er wanneer je `make run` ingeeft enkel gecompileerd worden wat gewijzigt is! Voor mog meer info kan je [hier](https://www.youtube.com/watch?v=DtGrdB8wQ_8) terecht_
+
+
+### Maar we kunnen nog beter
+Nu moeten we nog manueel alle source-files gaan benoemen, maar hier bestaat echter ook wat makefile 'magic' voor om dit te automatiseren: zie voorbeeld hieronder:
+
+```makefile
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c11
+SRCDIR = ./src
+BUILDDIR = ./build
+
+# declareer alle .c files en gebruik de * wildcard om simpelweg alle .c bestanden te selecteren in de SRCDIR
+CFILES = $(wildcard $(SRCDIR)/*.c)
+# declareer de corresponderende .o files via subsititutie en renaming
+OBJECTS = $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(CFILES))
+
+TARGET = program.bin
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CC) -o $@ $^
+
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+clean: 
+	rm -rf $(TARGET) $(OBJECTS)
+
+run: $(TARGET)
+	./$(TARGET)
+```
+
+### Nog steeds niet perfect maar buiten scope van deze cursus
+Makefiles blijven een aantal beperkingen hebben waaronder dat wanneer je een CONSTANT in een header file aanpast, make niet noodzakelijk doorheeft dat je de file die gebruik maakt van de constant moet updaten. Dit valt op te lossen met wat 'elbow grease' aan de make-syntax maar dat valt buiten de scope van deze cursus. Later gaan we toch ook gebruik maken van meer advanced build systems.
 
 ## Oefening
 Maak nu een Makefile voor de game van hierboven die dezelfde functionaliteit biedt als je gemaakte shell script.
