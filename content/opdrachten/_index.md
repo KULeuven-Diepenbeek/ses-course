@@ -73,8 +73,9 @@ Vergeet je **tags** ook niet te pushen naar je remote repository op Github.
 
 <!-- TODO: plaats alles wat je voorlopig hebt in een folder genaamd 'git-github' -->
 
+### Build systems
 
-#### Opdracht 4: build systems
+#### Opdracht 4: 
 1. Maak een folder in de root directory van deze git repository aan genaamd 'build-systems'. Maak hierin 3 subdirectories: 'c', 'java' en 'python'.
 2. Extract alle files in [dit zip bestand](/files/build_system_c-start.zip) naar de `./build-systems/c` directory en los alle TODO's in de documenten op. _(Je kan met de TODO tree extensie in VSCode gemakkelijk zien of je alle TODO's gedaan hebt)_ OF clone [de repository](https://github.com/ArneDuyver/ses-friendshiptester-c-start) van het startproject into `./build-systems/c`.
    - Je moet de makefile aanpassen zodat het C-programma kan gecompiled+gelinked worden met `make compile`, dat de binaries en object files gedeletet worden met `make clean` en dat je project gerund kan worden met `make run` (je moet hier ook flags kunnen meegeven). De uiteindelijk binary moet in de root van je c-project directory staan met als naam `friendshiptester.bin`
