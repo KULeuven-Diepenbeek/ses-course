@@ -111,7 +111,7 @@ Extract alle files in [dit zip bestand](/files/monstergame-c.zip) naar een direc
 - `run` : Voert de binary uit (bouwt eerst als die nog niet bestaat) en geeft eventuele flags door (`bv --hp 12`)
 
 <!-- EXSOL -->
-<!-- <details closed>
+<details closed>
 <summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
 <p>
 
@@ -181,7 +181,7 @@ fi
 ```
 
 </p>
-</details> -->
+</details>
 
 ### Moeilijkheden
 
@@ -232,7 +232,6 @@ TARGET = program.bin
 
 # Je kan zoals in de commando's simpelweg wildcards gebruiken
 compile: 
-	make clean
 	gcc -c $(SRCDIR)/header.c -o ./build/header.o
 	gcc -c ./src/main.c -o ./build/main.o
 	gcc -o $(TARGET) ./build/*.o
@@ -284,6 +283,8 @@ $(TARGET): $(OBJECTS)
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 # Hierboven verwijzen we met $@ naar alles links van de `:` en met $< (het corresponderende element) er rechts van
+
+compile: $(TARGET)
 
 clean: 
 	rm -rf $(TARGET) $(OBJECTS)
