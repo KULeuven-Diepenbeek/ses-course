@@ -2,7 +2,7 @@
 title: 'Dependency management'
 weight: 2
 draft: false
-author: Wouter Groeneveld
+author: Wouter Groeneveld en Arne Duyver
 ---
 
 Lees ook: [Meer uitleg over de Gradle build tool](/dependency-management/gradle/).
@@ -18,7 +18,7 @@ Een dependency, of _afhankelijkheid_, is een externe bibliotheek die wordt gebru
 2. [Google Gson](https://github.com/google/gson)
 3. [JUnit](https://junit.org/junit5/)
 
-Het vertrouwen op zo'n library houdt in dat een extern bestand, zoals een `.jar` of `.war` bestand, download en koppelt wordt aan de applicatie. In Java koppelen we externe libraries door middel van het `CLASSPATH`: een folder die de compiler gebruikt om te zoeken naar klassen. 
+Het vertrouwen op zo'n library houdt in dat een extern bestand, zoals een `.jar` of `.war` bestand, gedownload en gekoppeld wordt aan de applicatie. In Java koppelen we externe libraries door middel van het `CLASSPATH`: een folder die de compiler gebruikt om te zoeken naar klassen. 
 
 Serialisatie met behulp van [Gson](https://jar-download.com/artifacts/io.github.palexdev/gson/2.9.0/source-code) kan op deze manier:
 
@@ -262,12 +262,9 @@ repositories {
 ```
 
 </div>
+ 
 
-## Opgaven
-
-Neem dit eerst door: [Meer informatie over Gradle](/dependency-management/gradle/). 
-
-### Opgave 1
+### Oefening 1 <!-- TODO: hoger lager -->
 
 Ontwerp een eenvoudige library genaamd '_scorebord_' die scores kan bijhouden voor bordspelletjes. Deze library kan dan gebruikt worden door toekomstige digitale Java bordspellen. In een Scorebord kan je spelers toevoegen door middel van een naam en een score. Er is een mogelijkheid om de huidige score van een speler op te vragen, en de winnende speler. Deze gegevens worden met behulp van Gson in een `JSON` bestand bewaard, zodat bij het heropstarten van een spel de scores behouden blijven. <br/>De API (publieke methodes) van de library ziet er zo uit:
 
@@ -341,6 +338,50 @@ Execution failed for task ':Main.main()'.
 </pre>
 
 Dit werkt _niet_ omdat we een library gebruiken (ScoreBord), die op zijn beurt een library gebruikt (Gson), die niet in onze huidige Gradle file is gedefiniëerd. Om dit op te lossen dienen we over te schakelen naar een lokale Maven repository, die ook transitieve dependencies automatisch inlaadt. Verwijder de `flatDir` en voeg een lokale maven URL toe. Publiceer in het scorebord project naar diezelfde URL volgens de instructies van de `maven-publish` plugin.
+
+
+<!-- TODO op de juiste plaats plaatsen
+
+### Gradle en Maven integratie
+
+Gradle voorziet een plugin genaamd '_maven-publish_' die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een `publishing` tag toe met de volgende properties:
+
+<pre>
+plugins {
+    id 'java'
+    id 'maven-publish' // toevoegen!
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group.toString()
+            version = version
+            artifactId = 'projectnaam'
+
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url = "C:\\Users\\u0158802\\development\\java\\maven-repo"
+        }
+    }
+}
+</pre>
+
+Deze uitbreiding voegt de target `publish` toe aan Gradle. Dus: `./gradlew publish` publiceert de nodige bestanden in de aangegeven folder. Een Gradle project die daar gebruik van wenst te maken dient enkel een tweede Maven Repository plaats te definiëren:
+
+<pre>
+repositories {
+    mavenCentral()
+    maven {
+        url = "C:\\Users\\u0158802\\development\\java\\maven-repo"
+    }
+}
+</pre>
+
+ -->
 
 <!-- ### Opgave 3 (extra)
 

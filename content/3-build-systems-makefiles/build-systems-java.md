@@ -1,8 +1,8 @@
 ---
 title: 'Cmdline Java Compiling'
-weight: 1
-draft: false
-author: Wouter Groeneveld
+weight: 2
+draft: true
+author: Wouter Groeneveld en Arne Duyver
 ---
 
 Dit is in principe iets wat je in het INF1 vak onbewust reeds uitvoerde door op de groene "Compile" knop te drukken van je NetBeans/IntelliJ IDE. Het is belangrijk om te weten welke principes hier achter zitten. Hieronder volgt ter herhaling een kort overzicht over het compileren van Java programma's _zonder_ een buildtool.
@@ -128,3 +128,18 @@ Die `;.` is nodig om aan te geven dat `java` binnenin de `.jar` file moet zoeken
 Vanaf nu kan je `programma.jar` ook uploaden naar een Maven repository of gebruiken als dependency in een ander project. Merk opnieuw op dat dit handmatig aanroepen van `javac` in de praktijk wordt overgelaten aan de gebruikte build tool---in ons geval, Gradle.
 
 <!-- TODO voeg shadowjar toe -->
+
+<!-- 
+Inspect jar file
+javr tf app.jar
+
+Inspect manifest
+unzip -q -c myarchive.jar META-INF/MANIFEST.MF
+
+Run class inside jar
+java -cp app.jar be.ses.higher_lower.App
+-->
+
+<!-- TODO ### Virtual environment met Java
+Compilen en linken in java versus C + anders want Java Virtual Machine => niet builden naar specifieke hardware
+-->

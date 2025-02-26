@@ -1,6 +1,6 @@
 ---
 title: "2. Versie- en issuebeheer"
-weight: 10
+weight: 20
 author: Wouter Groeneveld en Arne Duyver
 ---
 

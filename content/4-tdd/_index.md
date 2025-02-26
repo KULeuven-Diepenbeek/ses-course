@@ -8,6 +8,38 @@ draft: true
 > <i class="fa fa-question-circle" aria-hidden="true"></i>
  Wat is de beste manier om het aantal bugs in code te reduceren?
 
+
+<!-- TODO op de juist plaats zetten
+### Gradle en JUnit integratie
+
+JUnit 5 splitst de test library op in een aantal submodules, waarvan er twee belangrijke zijn die we nodig hebben om te testen:
+
+1. `junit-jupiter-api` - nodig om testen te SCHRIJVEN (de API waar `@BeforeEach` e.a. in zitten)
+2. `junit-jupiter-engine` - nodig om testen UIT TE VOEREN (cmdline interface)
+
+Aangezien Gradle verschillende test bibliotheken ondersteund, zoals ook TestNG, dient men in de Gradle build file ondersteuning voor elk framework te activeren. Dit is _enkel nodig bij cmdline uitvoeren van de testen_. Als je beslist om enkel binnen IntelliJ testen uit te voeren, verzorgt IntelliJ dit zelf, en is de jupiter-engine ook niet nodig. 
+
+<pre>
+test {
+    useJUnitPlatform()
+    testLogging.showStandardStreams = true
+}
+
+dependencies {
+    // for WRITING tests, this will suffice:
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    // for RUNNING tests (cmdline, without IntelliJ), this is also needed:
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+</pre>
+
+Optionele test libraries zoals Hamcrest en Selenium/WebDriver kunnen daarna ook worden toegevoegd onder de `testImplementation` groep.
+
+{{% notice note %}}
+Merk op dat dit betekent dat dependencies in de `testRuntimeOnly` groep eigenlijk _runtime dependencies_ zijn: deze worden niet gebruikt om mee te builden. Denk aan het verschil tussen statisch en dynamisch linken in C. 
+{{% /notice %}}
+
+ -->
 ## Test-Driven Development
 
 TDD (Test-Driven Development) is een hulpmiddel bij softwareontwikkeling om minder fouten te maken en sneller fouten te vinden, door éérst een test te schrijven en dan pas de implementatie. Die (unit) test zal dus eerst **falen** (ROOD), want er is nog helemaal geen code, en na de correcte implementatie uiteindelijk **slagen** (GROEN). 

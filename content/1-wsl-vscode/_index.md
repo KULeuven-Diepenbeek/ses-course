@@ -1,6 +1,6 @@
 ---
 title: "1. Windows Subsystem for Linux en VSCode"
-weight: 8
+weight: 10
 author: Arne Duyver
 draft: false
 ---

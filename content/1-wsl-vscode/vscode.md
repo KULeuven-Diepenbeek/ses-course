@@ -73,3 +73,48 @@ In de instellingen kan je voor specifieke programmeertalen het pad naar de corre
 - _(code templates)_
 
 _Deze zijn meestal programmeertaal specifiek en moet je dus voor elke taal apart instellen. Soms kan je ook pakketten van extensies downloaden_
+
+
+## Enkele development environments:
+
+### C development environment
+Om broncode in `C` te runnen op je WSL ga je een aantal prerequisites nodig hebben: 
+- `gcc`: Install via `sudo apt install gcc -y`. De **GNU Compiler Collection** is een verzameling van compilers voor verschillende programmeertalen zoals C, C++, Objective-C, Fortran, Ada, en meer.
+- `make`: Install via `sudo apt install make -y`. Dit is een tool die de bouw van softwareprojecten automatiseert door gebruik te maken van een **Makefile** om rules en dependencies te definiëren.
+
+Verder kunnen volgende VSCode extensies handig zijn om je development proces te optimaliseren:
+- **C C++ Extension Pack**: dit bevat volgende extensies
+  - **C/C++**: _The C/C++ extension adds language support for C/C++ to Visual Studio Code, including editing (IntelliSense) and debugging features._
+  - **C/C++ Themes**
+  - **CMake Tools**: _CMake Tools provides the native developer a full-featured, convenient, and powerful workflow for CMake-based projects in Visual Studio Code._
+
+### Java development environment
+Om `Java`code te runnen en te compileren op je WSL ga je een aantal prerequisites nodig hebben:
+- `java`: Install via `sudo apt install default-jre -y`. De **Java Runtime Environment (JRE)** is een softwarelaag die nodig is om Java-applicaties uit te voeren. Het bevat de Java Virtual Machine (JVM), kernbibliotheken en andere componenten die nodig zijn om Java-programma's te draaien.
+- `javac`: Install via `sudo apt install default-jdk -y`. De **Java Development Kit (JDK)** is een softwaredeveloperskit die de tools en bibliotheken bevat die nodig zijn om Java-applicaties te ontwikkelen en te compileren. Het omvat de Java Runtime Environment, een compiler (`javac`), en andere hulpmiddelen zoals een debugger en documentatiegenerator.
+- `gradle`: Install via `sudo snap install gradle --classic`. **Gradle** is een open-source build automation tool die wordt gebruikt voor het ontwikkelen van softwareprojecten. Het ondersteunt het bouwen, testen, en implementeren van applicaties en is vooral populair in Java- en Android-ontwikkeling vanwege zijn flexibiliteit en krachtige configuratiemogelijkheden.
+  - create gradle project in directory: `gradle init`
+  - update gradle version per project: `gradle wrapper --gradle-version x.x.x`.
+
+Verder kunnen volgende VSCode extensies handig zijn om je development proces te optimaliseren:
+- **Extension Pack for Java**: dit bevat volgende extensies
+  - **Language Support for Java(TM) by Red Hat**: Java Linting, Intellisense, formatting, refactoring, Maven/Gradle support and more... Java Linting, Intellisense, formatting, refactoring, Maven/Gradle support and more... Provides Java ™ language support via Eclipse ™ JDT Language Server, which utilizes Eclipse ™ JDT, M2Eclipse and Buildship.
+  - **Debugger for Java**:  A lightweight Java Debugger based on Java Debug Server which extends the Language Support for Java by Red Hat. It allows users to debug Java code using Visual Studio Code (VS Code).
+  - **Test Runner for Java**: A lightweight extension to run and debug Java test cases in Visual Studio Code.
+  - **Maven for Java**: Maven extension for VS Code. It provides a project explorer and shortcuts to execute Maven commands, improving user experience for Java developers who use Maven.
+  - **Gradle for Java**: This VS Code extension provides a visual interface for your Gradle build. You can use this interface to view Gradle Tasks and Project dependencies, or run Gradle Tasks as VS Code Task. The extension also offers better Gradle file (e.g. build.gradle) authoring experience including syntax highlighting, error reporting and auto completion.
+  - **Project Manager for Java**: A lightweight extension to provide additional Java project explorer features. It works with Language Support for Java by Red Hat.
+  - **IntelliCode**: The Visual Studio IntelliCode extension provides AI-assisted development features for Python, TypeScript/JavaScript and Java developers in Visual Studio Code, with insights based on understanding your code context combined with machine learning.
+
+
+### Python development environment
+Om `Python`code te runnen (en te compileren) op je WSL ga je een aantal prerequisites nodig hebben:
+- `python3`: Install via `sudo apt install python3 -y`. Het package **python3** heb je nodig om Python 3 scripts en programma's uit te voeren. Het bevat de **interpreter** en de standard libraries die essentieel zijn voor het draaien van Python 3 code.
+- `pip`: Install via `sudo apt-get install python3-pip`. **Pip** is een package manager voor Python die wordt gebruikt om Python-packages te installeren en te beheren.
+  - update pip via `pip install --upgrade pip`
+- `pyinstaller`: Install via `pip install pyinstaller`. **PyInstaller** is een tool dat Python-scripts bundelt tot stand-alone executables voor Windows, macOS en Linux. Het maakt het mogelijk om Python-applicaties te distribueren zonder dat gebruikers een Python-omgeving hoeven te installeren.
+
+Verder kunnen volgende VSCode extensies handig zijn om je development proces te optimaliseren:
+- **Python**: A Visual Studio Code extension with rich support for the Python language (for all actively supported Python versions), providing access points for extensions to seamlessly integrate and offer support for IntelliSense (Pylance), debugging (Python Debugger), formatting, linting, code navigation, refactoring, variable explorer, test explorer, and more!
+- **Python Debugger**: A Visual Studio Code extension that supports Python debugging with debugpy. Python Debugger provides a seamless debugging experience by allowing you to set breakpoints, step through code, inspect variables, and perform other essential debugging tasks. The debugpy extension offers debugging support for various types of Python applications including scripts, web applications, remote processes, and multi-threaded processes.
+- **Pylance**: Pylance is an extension that works alongside Python in Visual Studio Code to provide performant language support. Under the hood, Pylance is powered by Pyright, Microsoft's static type checking tool. Using Pyright, Pylance has the ability to supercharge your Python IntelliSense experience with rich type information, helping you write better code faster.
