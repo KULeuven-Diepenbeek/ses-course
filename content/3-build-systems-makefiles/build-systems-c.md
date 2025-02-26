@@ -322,6 +322,8 @@ $(TARGET): $(OBJECTS)
 $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
+compile: $(TARGET)
+
 clean: 
 	rm -rf $(TARGET) $(OBJECTS)
 
