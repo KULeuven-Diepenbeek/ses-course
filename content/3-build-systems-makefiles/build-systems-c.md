@@ -392,6 +392,107 @@ clean:
     - _(Geniet hierbij van het feit dat je een gemakkelijke makefile hebt om snel wijzigingen aan de code te testen.)_
     - _De `cJSON`-library is een voorbeeld van een dependency, we gaan hier nog dieper over in in het deel rond 'Dependency management'_
 
+<details closed>
+<summary><i><b>Klik hier om de code te zien/verbergen van een voorbeeld <code>main.c</code> programma dat gebruik maakt van cJSON</b></i>🔽</summary>
+<p>
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "cJSON.h"
+
+// Function to read the JSON file
+char *read_file(const char *filename)
+{
+  FILE *file = fopen(filename, "rb");
+  if (!file)
+  {
+    return NULL;
+  }
+  fseek(file, 0, SEEK_END);
+  long length = ftell(file);
+  fseek(file, 0, SEEK_SET);
+  char *data = (char *)malloc(length + 1);
+  fread(data, 1, length, file);
+  data[length] = '\0';
+  fclose(file);
+  return data;
+}
+
+// Function to write the JSON file
+void write_file(const char *filename, const char *data)
+{
+  FILE *file = fopen(filename, "wb");
+  if (!file)
+  {
+    perror("File opening failed");
+    return;
+  }
+  fwrite(data, 1, strlen(data), file);
+  fclose(file);
+}
+
+int main()
+{
+  const char *filename = "scores.json";
+
+  // Read the JSON file
+  char *json_data = read_file(filename);
+  cJSON *root;
+
+  if (!json_data)
+  {
+    // File does not exist, create a new JSON object
+    root = cJSON_CreateArray();
+  }
+  else
+  {
+    // Parse the existing JSON data
+    root = cJSON_Parse(json_data);
+    if (!root)
+    {
+      printf("Error parsing JSON data\n");
+      free(json_data);
+      return 1;
+    }
+    free(json_data);
+  }
+
+  // Create a new JSON object to add
+  cJSON *new_entry = cJSON_CreateObject();
+  cJSON_AddStringToObject(new_entry, "name", "Jane Doe");
+  cJSON_AddNumberToObject(new_entry, "score", 95);
+
+  // Add the new entry to the JSON array
+  cJSON_AddItemToArray(root, new_entry);
+
+  // Convert JSON object to string
+  char *updated_json_data = cJSON_Print(root);
+
+  // Write the updated JSON data back to the file
+  write_file(filename, updated_json_data);
+
+  // Clean up
+  cJSON_Delete(root);
+  free(updated_json_data);
+
+  return 0;
+}
+```
+
+</p>
+</details>
+
+<!-- EXSOL -->
+<!-- <details closed>
+<summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
+<p>
+
+</p>
+</details> -->
+
+
 ## Interessante bronnen
 - [Understanding C program Compilation Process](https://www.youtube.com/watch?v=VDslRumKvRA&t=21s)
 
