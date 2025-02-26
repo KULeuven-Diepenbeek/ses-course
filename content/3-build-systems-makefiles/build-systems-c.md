@@ -332,7 +332,7 @@ run: $(TARGET)
 Makefiles blijven een aantal beperkingen hebben waaronder dat wanneer je een CONSTANT in een header file aanpast, make niet noodzakelijk doorheeft dat je de file die gebruik maakt van de constant moet updaten. Dit valt op te lossen met wat 'elbow grease' aan de make-syntax maar dat valt buiten de scope van deze cursus. Later gaan we toch ook gebruik maken van meer advanced build systems.
 
 ## Oefening
-Maak nu een Makefile voor de game van hierboven die dezelfde functionaliteit biedt als je gemaakte shell script.
+1. Maak nu een Makefile voor de game van hierboven die dezelfde functionaliteit biedt als je gemaakte shell script.
 <!-- EXSOL -->
 <!-- <details closed>
 <summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
@@ -384,6 +384,13 @@ clean:
 
 </p>
 </details> -->
+
+2. Breid de functionaliteit van je spel verder uit, door nieuwe Monsters te spawnen wanneer je een monster verslaat. Hou dan ook bij hoeveel monsters je verslagen hebt. Dat is je uitendelijke score wanneer je sterft.
+    - Zoek op hoe je de library `cJSON` downloaden, toevoegen aan je applicatie en kan gebruiken in de `main.c` file.
+    - Laat wanneer je sterft de applicatie de naam van de speler vragen en een JSON object aanmaken van de speler met naam en score en dit toevoegen aan een `/resources/highscore.json` bestand.
+    - Voeg aan het begin van de game toe dat de huidige highscores van de json file geladen worden en getoond worden aan de speler.
+    - _(Geniet hierbij van het feit dat je een gemakkelijke makefile hebt om snel wijzigingen aan de code te testen.)_
+    - _De `cJSON`-library is een voorbeeld van een dependency, we gaan hier nog dieper over in in het deel rond 'Dependency management'_
 
 ## Interessante bronnen
 - [Understanding C program Compilation Process](https://www.youtube.com/watch?v=VDslRumKvRA&t=21s)
