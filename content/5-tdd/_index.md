@@ -1,6 +1,6 @@
 ---
-title: '3. Test Driven Development'
-weight: 30
+title: '5. Test Driven Development'
+weight: 50
 author: Wouter Groeneveld
 draft: true
 ---

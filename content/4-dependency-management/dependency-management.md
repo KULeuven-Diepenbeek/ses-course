@@ -3,6 +3,8 @@ title: 'Dependency management'
 weight: 2
 draft: false
 author: Wouter Groeneveld en Arne Duyver
+toc: true
+autonumbering: true
 ---
 
 Lees ook: [Meer uitleg over de Gradle build tool](/dependency-management/gradle/).

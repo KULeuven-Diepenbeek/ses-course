@@ -3,6 +3,7 @@ title: 'Java Gradle projecten'
 weight: 1
 draft: false
 author: Wouter Groeneveld en Arne Duyver
+toc: true
 ---
 
 
