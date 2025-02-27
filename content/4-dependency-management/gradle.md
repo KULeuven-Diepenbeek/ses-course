@@ -49,7 +49,7 @@ Split functionality across multiple subprojects?:
   2: yes - application and library projects
 Enter selection (default: no - only one application project) [1..2] 1
 
-# Nu vraagt Gradle te kiezen tussen programmeertalen voor ons build script (de taal waarmee we onze buil.gradle file gaan programmeren), we kiezen voor 2. Groovy
+# Nu vraagt Gradle te kiezen tussen programmeertalen voor ons build script (de taal waarmee we onze build.gradle file gaan programmeren), we kiezen voor 2. Groovy
 Select build script DSL:
   1: Groovy
   2: Kotlin
@@ -331,17 +331,24 @@ public class App {
 </p>
 </details>
 
-5. Test je programma: Aangezien we input vragen via de scanner moeten we ook op een speciale manier ons project runnen: gebruik `./gradlew --console plain run` of `gradlew -q --console plain run` om helemaal geen output van gradle tasks ertussen te zien.
+5. Test je programma: Aangezien we input vragen via de scanner moeten we ook op een speciale manier ons project runnen: gebruik `./gradlew --console plain run` (of `./gradlew -q --console plain run` om helemaal geen output van gradle tasks ertussen te zien.)
 
 ### Compile to JAR
 Zoals we in het hoofdstuk rond [build systems in Java](/3-build-systems-makefiles/build-systems-java.md) gezien hebben kan je alle bestanden groeperen in een `.jar` bestand om er een executable van te maken dat gerund kan worden met de JVM. Hiervoor gebruik je het commando: `./gradlew jar`. Er wordt dan een `main_classname.jar` aangemaakt in je `/app/build/libs` directory.
 <!-- TODO no main class in manifest file => update build.gradle -->
 
-#### TODO Shadowjar
-
+Zonder extra opties in je `build.gradle` wordt er echter geen `'Main-Class'`-attribuut toegevoegd aan de MANIFEST file van je jar. Daarom kan je volgende optie instellen in je `build.gradle` waarbij `application.mainClass` een referentie is naar de value die je daar hebt ingesteld:
+```groovy
+jar {
+  manifest {
+    attributes(
+      'Main-Class': application.mainClass
+    )
+  }
+}
+```
 
 ### Oefening
 6. Ga verder op de oefening `higher_lower` en build een .jar file.
 7. Copy de `app/build/libs/app.jar`-file naar een andere directory en hernoem naar `higherLower.jar`.
 8. Run het jar programma via de CLI.
-9. Doe hetzelfde maar gebruik een shadow jar.

@@ -131,9 +131,11 @@ Vanaf nu kan je `programma.jar` ook uploaden naar een Maven repository of gebrui
 
 <!-- 
 Inspect jar file
-javr tf app.jar
+jar -tf app.jar
 
-Inspect manifest
+java -jar app.jar => no main manifest attribute, in app.jar
+
+Inspect manifest (temp unzip)
 unzip -q -c myarchive.jar META-INF/MANIFEST.MF
 
 Run class inside jar

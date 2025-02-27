@@ -383,6 +383,8 @@ repositories {
 
  -->
 
+<!-- #### TODO Shadowjar -->
+
 <!-- ### Opgave 3 (extra)
 
 Bovenstaande screenshot geeft aan dat IntelliJ methodes herkent van de `Scorebord` klasse. Er is echter geen javadoc voorzien die uitlegt wat welke parameter doet. Voorzie javadoc bij alle publieke methodes. Dit moet ook mee worden verpakt in het `jar` bestand, zodat het ander project deze kan herkennen. Probeer uit te zoeken wat je hier voor moet doen in het `build.gradle` bestand. -->
