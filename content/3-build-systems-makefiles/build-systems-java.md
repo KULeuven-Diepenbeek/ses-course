@@ -138,8 +138,10 @@ java -jar app.jar => no main manifest attribute, in app.jar
 Inspect manifest (temp unzip)
 unzip -q -c myarchive.jar META-INF/MANIFEST.MF
 
-Run class inside jar
+Run class inside jar (-cp staat voor classpath)
 java -cp app.jar be.ses.higher_lower.App
+
+`java -cp "gson-2.9.0.jar:." Main`
 -->
 
 <!-- TODO ### Virtual environment met Java

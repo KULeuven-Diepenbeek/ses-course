@@ -38,16 +38,24 @@ public class Main {
 
 Bovenstaande `Main.java` compileren zonder meer geeft de volgende fout:
 
-<pre>
-PS C:\Users\u0158802\OneDrive - KU Leuven\Desktop\java_example_2> javac  Main.java
+```bash
+arne@LT3210121:~/ses/depmanag$ javac Main.java 
 Main.java:3: error: cannot find symbol
         Gson gson = new Gson();
         ^
   symbol:   class Gson
   location: class Main
-</pre>
+Main.java:3: error: cannot find symbol
+        Gson gson = new Gson();
+                        ^
+  symbol:   class Gson
+  location: class Main
+2 errors
+```
 
-De klasse `Gson` is immers iets dat we niet hebben zelfgemaakt, maar wensen te importeren via het `import com.google.gson.*;` statement. Er is een manier nodig om de [gedownloade library](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.9.0) te linken met onze bestaande code: `javac -cp gson-2.9.0.jar Main.java`. Het programma uitvoeren kan met `java -cp "gson-2.9.0.jar;." Main`. Er worden dus 2 zaken aan het classpath meegegeven: de Google jar, en de huidige directory (`.`), om `Main.class` terug te vinden.
+De klasse `Gson` is immers iets dat we niet hebben zelfgemaakt, maar wensen te importeren via het `import com.google.gson.*;` statement. Er is een manier nodig om de [gedownloade library](https://mvnrepository.com/artifact/com.google.code.gson/gson/2.9.0) te linken met onze bestaande code: `javac -cp gson-2.9.0.jar Main.java`. _(Je kan de jar ook rechtstreeks downloaden met behulp van `curl` via `$ curl https://repo1.maven.org/maven2/com/google/code/gson/gson/2.9.0/gson-2.9.0.jar --output gson-2.9.0.jar`. Indien je curl nog niet geïnstalleerd hebt doe dat dan eerst!)_
+
+Het programma uitvoeren kan nu met `java -cp "gson-2.9.0.jar:." Main`. Er worden dus 2 zaken aan het classpath meegegeven: de Google jar, en de huidige directory (`.`), om `Main.class` terug te vinden.
 
 {{% notice warning %}}
 Java classpath separators zijn [OS-specifiek](https://howtodoinjava.com/java/basics/java-classpath/)! Unix: `:` in plaats van Windows: `;`.
@@ -101,10 +109,9 @@ Een Maven project heeft een `pom.xml` bestand (Project Object Model), waarin in 
   <version>1.0</version>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.0</version>
     </dependency>
   </dependencies>
 </project>
@@ -116,7 +123,7 @@ Maven is erg populair in de Java wereld, waardoor er verschillende servers zijn 
 
 **Belangrijk**: neem dit eerst door - [Meer informatie over Gradle](/dependency-management/gradle/). 
 
-Gradle is net zoals Maven een automatisatie tool voor de Java wereld (en daarbuiten), die verder bouwt op de populariteit van Maven door bijvoorbeeld compatibel te zijn met de Repository servers, maar de grootste pijnpunten wegneemt: een slorig configuratiebestand in XML, en complexe command-line scripts.
+Gradle is net zoals Maven een automatisatie tool voor de Java wereld (en daarbuiten), die verder bouwt op de populariteit van Maven door bijvoorbeeld compatibel te zijn met de Repository servers, maar de grootste pijnpunten wegneemt: een slordig configuratiebestand in XML, en complexe command-line scripts.
 
 De volgende procedure volg je als je Gradle dependencies laat beheren:
 
@@ -129,14 +136,29 @@ dependencies {
 }
 ```
 
-Bij het uitvoeren van `gradlew` download Gradle automatisch de juiste opgegeven versie. Gradle bewaart lokale kopies van libraries in een submap van je home folder: `~/.gradle`. Dit kan je controleren door in IntelliJ naar File -> Project Structure te gaan en te klikken op "Libraries":
+Bij het uitvoeren van `gradlew` download Gradle automatisch de juiste opgegeven versie. Gradle bewaart lokale kopies van libraries in een submap van je home folder: `~/.gradle`. Dit kan je controleren door `ls ~/.gradle/caches/modules-2/files-2.1/`. Waar je nu dus ook de `com.google.code.gson`-directory terug vind. Met `tree ~/.gradle/caches/modules-2/files-2.1/com.google.code.gson` kan je eens inspecteren hoe die directory er juist uitziet. _(Indien je `tree` nog niet geïnstalleerd hebt doe dat dan eerst!)_
 
-![](/img/gradlepath.png "Het lokale path naar de auto-cached libraries.")
+```
+arne@LT3210121:~/ses/depgradle$ tree ~/.gradle/caches/modules-2/files-2.1/com.google.code.gson
+/home/arne/.gradle/caches/modules-2/files-2.1/com.google.code.gson
+├── gson
+│   └── 2.9.0
+│       ├── 8a1167e089096758b49f9b34066ef98b2f4b37aa
+│       │   └── gson-2.9.0.jar
+│       └── bfedf86dd09fdbb51b11621570b75d0697bf7a2a
+│           └── gson-2.9.0.pom
+└── gson-parent
+    └── 2.9.0
+        └── c6a7218f3573c254d33ffac6aa6efe7cb4f8186b
+            └── gson-parent-2.9.0.pom
+
+8 directories, 3 files
+```
 
 Voordelen van het gebruik van deze methode:
 
 1. Het zoeken van libraries beperkt zich tot één centrale (Maven Repository) website, waar alle verschillende versie revisies duidelijk worden vermeld.
-2. Het downloaden van libraries beperkt zich tot één centrale locatie op je harde schijf: 10 verschillende Java projecten die gebruik maken van Gson vereisen linken naar dezelfde gradle bestanden. 
+2. Het downloaden van libraries beperkt zich tot één centrale locatie op je harde schijf (`~/.gradle/caches/modules-2/files-2.1/`): 10 verschillende Java projecten die gebruik maken van Gson vereisen linken naar dezelfde gradle bestanden. Je hebt dus geen 10 kopieën nodig van de Gson.jar.
 3. Het beheren van dependencies en versies beperkt zich tot één centraal configuratiebestand: `build.gradle`. Dit is (terecht) een **integraal deel van het project**! 
 
 Lees ook: [Declaring dependencies](https://docs.gradle.org/current/userguide/declaring_dependencies.html) in de Gradle docs. 
@@ -153,20 +175,18 @@ repositories {
 }
 </pre>
 
-`mavenCentral()`, `jcenter()`, en `google()` zijn ingebouwde repositories. Eigen Maven folders en URLs toevoegen kan ook, evenals een lokale folder:
+`mavenCentral()`, `jcenter()`, en `google()` zijn ingebouwde repositories. [Eigen Maven folders](#publiceren-naar-een-maven-repository) en URLs toevoegen kan ook, evenals een lokale folder:
 <a name="flatdir"></a>
 
-<pre>
+```groovy
 repositories {
-    maven {
-        // dit kan zowel een folder als HTTP(s) URL zijn
-        url "C:\\Users\\u0158802\\development\\java\\maven-repo"
-    }
     flatDir {
         dirs 'lib'
     }
 }
-</pre>
+```
+
+Door nu de nodige `.jar` files toe te voegen aan de folder `./app/lib` kunnen de juiste dependencies ook gevonden worden. Indien de `./app/lib` directory nog niet bestaat, ga je die eerst moeten toevoegen.
 
 #### Transitieve dependencies
 
@@ -211,16 +231,18 @@ Grote projecten kunnen makkelijk afhankelijk zijn van tientallen libraries, die 
 
 Gebruik hiervoor de task `dependencies`: `./gradlew dependencies`. Detailinformatie voor specifieke dependencies kunnen worden opgevraagd met de `dependencyInsight` task. Zie ook: [Viewing and debugging dependencies](https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html) in de Gradle docs. 
 
-Gradle voorziet een plugin genaamd '_maven-publish_' die deze bestanden automatisch aanmaakt. 
-<!-- Activeer de plugin en voeg een `publishing` tag toe met de volgende properties: -->
+Gradle voorziet een plugin genaamd '_maven-publish_' die deze bestanden automatisch aanmaakt, zodat je jouw project kan uploaden naar een online repository, zoals Maven central, of een lokale maven repository. op die manier kunnen andere projecten jouw project dan weer als dependency gaan gebruiken. Activeer de plugin en voeg een `publishing` tag toe met de volgende properties:
 
-<div class="devselect">
-
-```java
+```groovy
 plugins {
     id 'java'
     id 'maven-publish' // toevoegen!
 }
+
+group = 'be.ses'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = 21
 
 publishing {
     publications {
@@ -234,21 +256,56 @@ publishing {
     }
     repositories {
         maven {
-            url = "C:\\Users\\u0158802\\development\\java\\maven-repo"
+            url = "/home/arne/local-maven-repo"
         }
     }
 }
 ```
-
-</div>
+**Indien die directory nog niet bestaat wordt deze aangemaakt!**
 
 Windows gebruikers dienen in de `url` value te werken met dubbele backslashes (`\\`) in plaats van forward slashes (`/`) om naar het juiste pad te navigeren.
 
-<!-- {{% notice warning %}}
-**Opgelet met Kotlin-specifieke build files**: Als je een `build.gradle.kts` bestand gebruikt (Gradle in Kotlin-script formaat), is de syntax sterk gewijzigd (klik dan hierboven op de tab "Kotlin"). Zie ook [de officiele Gradle documentatie](https://docs.gradle.org/current/userguide/publishing_maven.html) over how to publish in Maven.
-{{% /notice %}} -->
+Deze uitbreiding voegt de target `publish` toe aan Gradle. Dus: `./gradlew publish` publiceert de nodige bestanden in de aangegeven folder. 
 
-Deze uitbreiding voegt de target `publish` toe aan Gradle. Dus: `./gradlew publish` publiceert de nodige bestanden in de aangegeven folder. Een Gradle project die daar gebruik van wenst te maken dient enkel een tweede Maven Repository plaats te definiëren:
+De aangemaakte lokale Maven repository ziet er nu zo uit:
+
+```bash
+arne@LT3210121:~/ses/depgradle$ tree /home/arne/local-maven-repo
+/home/arne/local-maven-repo
+└── be
+    └── ses
+        └── projectnaam
+            ├── 1.0-SNAPSHOT
+            │   ├── maven-metadata.xml
+            │   ├── maven-metadata.xml.md5
+            │   ├── maven-metadata.xml.sha1
+            │   ├── maven-metadata.xml.sha256
+            │   ├── maven-metadata.xml.sha512
+            │   ├── projectnaam-1.0-20250227.143923-1.jar
+            │   ├── projectnaam-1.0-20250227.143923-1.jar.md5
+            │   ├── projectnaam-1.0-20250227.143923-1.jar.sha1
+            │   ├── projectnaam-1.0-20250227.143923-1.jar.sha256
+            │   ├── projectnaam-1.0-20250227.143923-1.jar.sha512
+            │   ├── projectnaam-1.0-20250227.143923-1.module
+            │   ├── projectnaam-1.0-20250227.143923-1.module.md5
+            │   ├── projectnaam-1.0-20250227.143923-1.module.sha1
+            │   ├── projectnaam-1.0-20250227.143923-1.module.sha256
+            │   ├── projectnaam-1.0-20250227.143923-1.module.sha512
+            │   ├── projectnaam-1.0-20250227.143923-1.pom
+            │   ├── projectnaam-1.0-20250227.143923-1.pom.md5
+            │   ├── projectnaam-1.0-20250227.143923-1.pom.sha1
+            │   ├── projectnaam-1.0-20250227.143923-1.pom.sha256
+            │   └── projectnaam-1.0-20250227.143923-1.pom.sha512
+            ├── maven-metadata.xml
+            ├── maven-metadata.xml.md5
+            ├── maven-metadata.xml.sha1
+            ├── maven-metadata.xml.sha256
+            └── maven-metadata.xml.sha512
+
+5 directories, 25 files
+```
+
+Een Gradle project dat nu gebruik wilt maken van de libraries in die lokale Maven repository dient enkel een tweede Maven Repository plaats te definiëren:
 
 <div class="devselect">
 
@@ -256,13 +313,56 @@ Deze uitbreiding voegt de target `publish` toe aan Gradle. Dus: `./gradlew publi
 repositories {
     mavenCentral()
     maven {
-        url = "C:\\Users\\u0158802\\development\\java\\maven-repo"
+        url = "/home/arne/local-maven-repo"
     }
 }
 ```
 
 </div>
- 
+
+### shadowJar
+Standaard probeert een build tool zoals Gradle zo weinig mogelijk te compilen in een jar file. De dependencies worden namelijk standaard niet bij in jouw jar file gestoken. Dat is logisch want geeft Gradle de voorkeur aan het scheiden van de applicatiecode en de dependencies. Hierdoor blijft de jar file kleiner en wordt het eenvoudiger om dependencies te beheren en bij te werken.
+
+Wil je nu toch dat een gebruiker bijvoorbeeld niet zelf aan dependency management moet doen, dan is het mogelijk om ook alle dependecies te compilen binnenin één grote jar file. Dit wordt een **shadowJar** genoemd. Een gebruiker heeft dan alles om je code uit te voeren zolang hij/zij over de juiste versie van de JVM beschikt. 
+
+Je kan Gradle zo een `shadowJar` laten aanmaken via: 
+1. Voeg de Shadow plugin toe aan je `build.gradle` bestand:
+```groovy
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+```
+2. Configureer de plugin om een shadow jar te maken:
+```groovy
+shadowJar {
+    archiveClassifier.set('')
+    mergeServiceFiles()
+}
+```
+3. Bouw je project met de shadow jar taak: `./gradlew shadowJar`
+
+**Hieronder zie je het verschil tussen compileren tot een shadowJar of een gewone jar:**
+```bash
+arne@LT3210121:~/ses/depgradle/app/build/libs$ ls
+app-1.0-SNAPSHOT-shadow.jar  app-1.0-SNAPSHOT.jar
+
+# Trying to run normal jar via cli manually
+arne@LT3210121:~/ses/depgradle/app/build/libs$ java -jar app-1.0-SNAPSHOT.jar 
+Exception in thread "main" java.lang.NoClassDefFoundError: com/google/gson/Gson
+        at be.ses.depgradle.App.main(App.java:10)
+Caused by: java.lang.ClassNotFoundException: com.google.gson.Gson
+        at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+        at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+        at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+        ... 1 more
+
+# Trying to run shadowJar via cli manually
+arne@LT3210121:~/ses/depgradle/app/build/libs$ java -jar app-1.0-SNAPSHOT-shadow.jar 
+1
+```
+
+_Aangezien we toch meestal gebruik gaan maken van build tools zoals Gradle die steeds zelf de nodige dependecies download en toevoegt is het gebruik van de shadowJar echter beperkt_
 
 ### Oefening 1 <!-- TODO: hoger lager -->
 
@@ -271,23 +371,23 @@ Ontwerp een eenvoudige library genaamd '_scorebord_' die scores kan bijhouden vo
 <div class="devselect">
 
 ```java
-public class Speler {
-    public String getNaam() { }
+public class Player {
+    public String getName() { }
     public int getScore() { }
 }
 public class Scorebord {
-    public void voegToe(String x, int huidigeScore) { }
-    public int getTotaleScore(String x) { }
-    public String getWinnaar() { }
+    public void add(String name, int currentScore) { }
+    public int getTotalScore(String name) { }
+    public String getWinner() { }
+    public static void saveToJson(String filename) { }
+    public static Scorebord getScorebordFromJson(String filename) { }
 }
 ```
 
 </div>
 
 De klasse `Speler` is een intern hulpmiddel om te serialiseren. <br/>
-Extra methodes toevoegen mag altijd. De constructor van het scorebord leest automatisch de score van de vorige keer in, als dat bestand bestaat. Denk bij de implementatie aan een collectie om spelers en hun scores bij te houden. Maak via IntelliJ een nieuw **Gradle - Java project**. Groupid: `be.kuleuven`. Arifactid: `scorebord`. Vergeet niet op 'refresh' te drukken wanneer je een dependency toevoegt (linksboven op onderstaande screenshot):
-
-![](/img/teaching/ses/gradle-refresh.png)
+Extra methodes toevoegen mag altijd. De constructor van het scorebord leest automatisch de score van de vorige keer in, als dat bestand bestaat. Denk bij de implementatie aan een collectie om spelers en hun scores bij te houden. Maak via de CLI een nieuw **Gradle - Java project**. Groupid: `be.ses`. Geef je project de naam: `scorebord`:
 
 Met het commando `gradlew jar` creëer je het bestand `scorebord-1.0-SNAPSHOT.jar` in de `build/libs` folder. 
 
@@ -295,107 +395,160 @@ Met het commando `gradlew jar` creëer je het bestand `scorebord-1.0-SNAPSHOT.ja
 Denk na over het bijhouden van `Speler`s in `Scorebord`. Een simpele `ArrayList` zal volstaan. Gebruik `Gson` in een methode als `save()` om gewoon de lijst (of het object zelf) naar de HDD te serialiseren. Tip: [java.nio.files.write](https://www.logicbig.com/how-to/code-snippets/jcode-java-io-files-write.html).
 {{% /notice %}}
 
-Tip: indien de Gralde wrapper een oudere versie aanmaakt (< v6), update met `gradlew wrapper --gradle-version 6.0.1`. Gradle versie `6` of groter is vereist voor JDK `13` of groter. 
+_Tip: je update best je gradle wrappen naar versie 8.12._
 
 ### Opgave 2
 
-Maak een nieuw Gradle project aan genaamd '_scorebord-darts_', dat bovenstaand scorebord project als een library gaat gebruiken. Bewaar de jar file lokaal in een 'lib' folder en instrueer Gradle zo dat dit als `flatDir` repository wordt opgenomen ([zie boven](#flatdir)). Het tweede project heeft als Artifactid `scorebord-darts`. De klasse `DartsGame` ziet er zo uit:
+Voeg dat bovenstaand scorebord project als een library toe aan [de `higher_lower`-applicatie van vorig hoofdstuk](/4-dependency-management/gradle.md#oefening). Bewaar de jar `scorebord.jar`-jarfile lokaal in een `./app/lib` folder en instrueer Gradle zo dat dit als `flatDir` repository wordt opgenomen ([zie boven](#custom-repository-urls-voorzien)). Update nu ook de Main klasse in de `higher_lower`-applicatie:
 
-<div class="devselect">
-
+<details closed>
+<summary><i><b> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
+<p>
 
 ```java
-public class DartsGame {
-    private String player = "jos";
-    public void throwDart() {}
+
+package be.ses.higher_lower;
+
+import java.util.Random;
+import java.util.Scanner;
+import be.ses.scorebord.*;
+
+public class App {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        Scorebord scorebord = Scorebord.getScorebordFromJson("highscores.json");
+
+        System.out.println("Welcome to the Higher or Lower game!");
+        System.out.println("This is the current leaderboard: \n" + scorebord + "\n\n");
+        System.out.println("Guess if the next number will be higher or lower.");
+
+        int currentNumber = random.nextInt(100) + 1;
+        boolean playing = true;
+        int score = 0;
+
+        while (playing) {
+            System.out.println("Current number: " + currentNumber);
+            System.out.print("Will the next number be higher or lower? (h/l): ");
+            String guess = scanner.next().toLowerCase();
+
+            int nextNumber = random.nextInt(100) + 1;
+
+            if ((guess.equals("h") && nextNumber > currentNumber)
+                    || (guess.equals("l") && nextNumber < currentNumber)) {
+                System.out.println("Correct! The next number was: " + nextNumber);
+                score++;
+            } else {
+                System.out.println("Wrong! The next number was: " + nextNumber);
+                playing = false;
+            }
+
+            currentNumber = nextNumber;
+        }
+
+        System.out.println("Game over! Your final score: " + score);
+        System.out.println("What is your name?");
+        String name = scanner.next();
+        scorebord.add(name, score);
+        System.out.println("This is the new leaderboard: \n" + scorebord + "\n\n");
+        Scorebord.saveToJson("highscores.json", scorebord);
+        scanner.close();
+    }
+}
+
+```
+
+</p>
+</details>
+
+Als de dependencies goed liggen, kan je een nieuw `Scorebord` aanmaken, en herkent VSCode dit met CTRL+Space. Hieronder een voorbeeld van `Gson`:
+
+<figure style="display: flex; align-items: center; flex-direction: column;">
+    <img src="/img/gradlevscodectrlspace.png" style="max-height: 40rem;"/>
+    <figcaption ><strong><i>Gradle extention for VSCode <code>Ctrl+space</code></i></strong></figcation>
+</figure>
+
+_Het project builden of runnen werkt echter **niet** omdat we een library gebruiken (ScoreBord), die op zijn beurt een library gebruikt (Gson), die niet in onze huidige Gradle file is gedefiniëerd. Om dit op te lossen dienen we over te schakelen naar een lokale Maven repository, die ook transitieve dependencies automatisch inlaadt. Verwijder de `flatDir` en voeg een lokale maven URL toe. Publiceer het scorebord project naar diezelfde URL volgens de instructies van de `maven-publish` plugin._
+
+<!-- EXSOL -->
+<!-- <details closed>
+<summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen van de `build.gradle`</b></i>🔽</summary>
+<p>
+
+```groovy
+/*
+ * This file was generated by the Gradle 'init' task.
+ *
+ * This generated file contains a sample Java application project to get you started.
+ * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
+ * User Manual available at https://docs.gradle.org/7.2/userguide/building_java_projects.html
+ */
+
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+    // flatDir {
+    //     dirs 'lib'
+    // }
+    maven {
+        url = "/home/arne/local-maven-repo"
+    }
+}
+
+dependencies {
+    // Use JUnit test framework.
+    testImplementation 'junit:junit:4.13.2'
+
+    // This dependency is used by the application.
+    implementation 'com.google.guava:guava:30.1.1-jre'
+
+    // Als je kiest voor flat-dir
+    //implementation 'be.ses:scorebord' 
+    implementation 'be.ses:scorebord:1.0-SNAPSHOT'
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'be.ses.higher_lower.App'
+}
+
+run {
+    standardInput = System.in
+}
+
+jar {
+  manifest {
+    attributes(
+      'Main-Class': application.mainClass
+    )
+  }
 }
 ```
 
-</div>
-
-Als de dependencies goed liggen, kan je een nieuw `Scorebord` aanmaken, en herkent IntelliJ dit met CTRL+Space:
-
-![](/img/teaching/ses/gradle-dependency-used.png)
-
-Maak een `Main` klasse met een `public static void main(String[] args)` methode, waarin een darts spel wordt opgezet, en een aantal keer ter test wordt 'gegooid'. Druk de totale score en de winnaar af, dat opgevraagd kan worden via het spelbord. Krijg je deze klasse opgestart? 
-
-<pre>
-> Task :Main.main() FAILED
-Exception in thread "main" java.lang.NoClassDefFoundError: com/google/gson/Gson
-    at be.kuleuven.scorebord.Scorebord.<init>(Scorebord.java:24)
-    at be.kuleuven.DartsGame.<init>(DartsGame.java:11)
-    at be.kuleuven.Main.main(Main.java:6)
-Caused by: java.lang.ClassNotFoundException: com.google.gson.Gson
-    at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:583)
-    at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
-    at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
-    ... 3 more
-
-Caused by: java.lang.ClassNotFoundException: com.google.gson.Gson
-
-Execution failed for task ':Main.main()'.
-> Process 'command '/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/bin/java'' finished with non-zero exit value 1
-</pre>
-
-Dit werkt _niet_ omdat we een library gebruiken (ScoreBord), die op zijn beurt een library gebruikt (Gson), die niet in onze huidige Gradle file is gedefiniëerd. Om dit op te lossen dienen we over te schakelen naar een lokale Maven repository, die ook transitieve dependencies automatisch inlaadt. Verwijder de `flatDir` en voeg een lokale maven URL toe. Publiceer in het scorebord project naar diezelfde URL volgens de instructies van de `maven-publish` plugin.
-
-
-<!-- TODO op de juiste plaats plaatsen
-
-### Gradle en Maven integratie
-
-Gradle voorziet een plugin genaamd '_maven-publish_' die deze bestanden automatisch aanmaakt. Activeer de plugin en voeg een `publishing` tag toe met de volgende properties:
-
-<pre>
-plugins {
-    id 'java'
-    id 'maven-publish' // toevoegen!
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = project.group.toString()
-            version = version
-            artifactId = 'projectnaam'
-
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            url = "C:\\Users\\u0158802\\development\\java\\maven-repo"
-        }
-    }
-}
-</pre>
-
-Deze uitbreiding voegt de target `publish` toe aan Gradle. Dus: `./gradlew publish` publiceert de nodige bestanden in de aangegeven folder. Een Gradle project die daar gebruik van wenst te maken dient enkel een tweede Maven Repository plaats te definiëren:
-
-<pre>
-repositories {
-    mavenCentral()
-    maven {
-        url = "C:\\Users\\u0158802\\development\\java\\maven-repo"
-    }
-}
-</pre>
-
- -->
-
-<!-- #### TODO Shadowjar -->
+</p>
+</details> -->
 
 <!-- ### Opgave 3 (extra)
 
 Bovenstaande screenshot geeft aan dat IntelliJ methodes herkent van de `Scorebord` klasse. Er is echter geen javadoc voorzien die uitlegt wat welke parameter doet. Voorzie javadoc bij alle publieke methodes. Dit moet ook mee worden verpakt in het `jar` bestand, zodat het ander project deze kan herkennen. Probeer uit te zoeken wat je hier voor moet doen in het `build.gradle` bestand. -->
 
-<!-- ### Opgave 4 (extra)
-
-Genereer met behulp van Gradle van de [SESsy library](/dependency-management/sessy) een dependency tree en inspecteer welke dpendencies transitief zijn en welke direct.  -->
-
-<!-- ## Denkvragen
+## Denkvragen
 
 - Hoe zou je transitieve dependencies handmatig kunnen beheren? Wat zijn de voor- en nadelen?
+<!-- EXSOL -->
+<!-- _**<span style="color: #03C03C;">Solution:</span>**_  Het handmatig beheren van transitieve dependencies houdt in dat je expliciet alle dependencies en hun afhankelijkheden in je buildscript definieert zoals bijvoorbeeld een `makefile`, wat je volledige controle geeft over de gebruikte versies (**voordeel**) en consistentie in je build waarborgt. **Nadelen:** Dit kan echter tijdrovend zijn en minder flexibel, omdat je elke wijziging handmatig moet bijwerken, wat ook de kans op fouten vergroot. Voor de meeste projecten is het efficiënter om Gradle de transitieve dependencies automatisch te laten beheren, tenzij je specifieke controle nodig hebt. -->
 - Wat gebeurt er als project1-1.0 afhankelijk is van lib1-1.0 en lib1-2.0, en lib1-1.0 van lib2-1.0 - een oudere versie dus? 
-- Heb je altijd test dependencies nodig? Wat gebeurt er met een test dependency, libtest-1.0, van lib1-1.0, als project1-1.0 afhankelijk is van lib1-1.0?
-- Als ik publiceer naar een lokale folder, welke bestanden zijn dan absoluut noodzakelijk voor iemand om mijn library te kunnen gebruiken?  -->
+<!-- EXSOL -->
+<!-- _**<span style="color: #03C03C;">Solution:</span>**_ In dit geval ontstaat er een afhankelijkheidsconflict, ook wel bekend als een "dependency hell". Dit gebeurt omdat project1-1.0 afhankelijk is van zowel lib1-1.0 als lib1-2.0, terwijl lib1-1.0 op zijn beurt afhankelijk is van lib2-1.0, een oudere versie van lib2. -->
+- Als ik publiceer naar een lokale folder, welke bestanden zijn dan absoluut noodzakelijk voor iemand om mijn library te kunnen gebruiken? 
+<!-- EXSOL -->
+<!-- _**<span style="color: #03C03C;">Solution:</span>**_ Bij het publiceren van een library naar een lokale folder, zijn de essentiële bestanden: de gecompileerde library bestanden (zoals .jar, .dll, of .so), een README met gebruiksinstructies, een licentiebestand (LICENSE), eventuele configuratiebestanden, een lijst of map met benodigde afhankelijkheden en gedetailleerde documentatie over de API en functionaliteiten. Deze zorgen ervoor dat anderen je library correct kunnen gebruiken. -->
+
+
+<!-- EXTRA -->
+<!-- - Heb je altijd test dependencies nodig? Wat gebeurt er met een test dependency, libtest-1.0, van lib1-1.0, als project1-1.0 afhankelijk is van lib1-1.0? -->

@@ -150,7 +150,7 @@ We zouden nu ook zelf een kleine taks kunnen coderen in Groovy die simpelweg de 
 task example {
     println project.group
 }
-// Gebruik via `./gradlew example`
+// Gebruik via './gradlew example'
 ```
 {{% /notice %}}
 
@@ -335,7 +335,6 @@ public class App {
 
 ### Compile to JAR
 Zoals we in het hoofdstuk rond [build systems in Java](/3-build-systems-makefiles/build-systems-java.md) gezien hebben kan je alle bestanden groeperen in een `.jar` bestand om er een executable van te maken dat gerund kan worden met de JVM. Hiervoor gebruik je het commando: `./gradlew jar`. Er wordt dan een `main_classname.jar` aangemaakt in je `/app/build/libs` directory.
-<!-- TODO no main class in manifest file => update build.gradle -->
 
 Zonder extra opties in je `build.gradle` wordt er echter geen `'Main-Class'`-attribuut toegevoegd aan de MANIFEST file van je jar. Daarom kan je volgende optie instellen in je `build.gradle` waarbij `application.mainClass` een referentie is naar de value die je daar hebt ingesteld:
 ```groovy
@@ -345,8 +344,17 @@ jar {
       'Main-Class': application.mainClass
     )
   }
+  archiveBaseName = 'myJarName'
 }
 ```
+
+### Gradle in VSCode
+Je kan Gradle nu ook simpel gebruiken in VSCode met de juiste extenties, zie [Java development environment in VSCode](/1-wsl-vscode/vscode.md#java-development-environment).
+
+<figure style="display: flex; align-items: center; flex-direction: column;">
+    <img src="/img/gradlevscode.png" style="max-height: 40rem;"/>
+    <figcaption ><strong><i>Gradle extention for VSCode</i></strong></figcation>
+</figure>
 
 ### Oefening
 6. Ga verder op de oefening `higher_lower` en build een .jar file.
