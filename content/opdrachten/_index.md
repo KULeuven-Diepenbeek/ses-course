@@ -79,10 +79,22 @@ Vergeet je **tags** ook niet te pushen naar je remote repository op Github.
 1. Maak een folder in de root directory van deze git repository aan genaamd 'build-systems'. Maak hierin 3 subdirectories: 'c', 'java' en 'python'.
 2. Extract alle files in [dit zip bestand](/files/build_system_c-start.zip) naar de `./build-systems/c` directory en los alle TODO's in de documenten op. _(Je kan met de TODO tree extensie in VSCode gemakkelijk zien of je alle TODO's gedaan hebt)_ OF clone [de repository](https://github.com/ArneDuyver/ses-friendshiptester-c-start) van het startproject into `./build-systems/c`.
    - Je moet de makefile aanpassen zodat het C-programma kan gecompiled+gelinked worden met `make compile`, dat de binaries en object files gedeletet worden met `make clean` en dat je project gerund kan worden met `make run` (je moet hier ook flags kunnen meegeven). De uiteindelijk binary moet in de root van je c-project directory staan met als naam `friendshiptester.bin`
-<!--
-3. Doe hetzelfde voor [het java zip bestand](/files/build_system_java-start.zip) in de `./build-systems/java`-directory voor de java makefile en [het python zip bestand](/files/build_system_python-start.zip) in de `./build-systems/python`-directory voor de java makefile. 
-4. Commit nu de veranderingen en tag als `v4`.
--->
+
+3. In de `./build-systems/java`-directory:
+Extract alle files in [dit zip bestand](/files/ses-friendshiptester-java-start.zip) OF clone [de repository](https://github.com/ArneDuyver/ses-friendshiptester-java-start). Schrijf een simpele makefile dat de volgende dingen kan doen en plaats het in de root van je directory:
+- `compile`: Compileert de bronbestanden naar de `/build`-directory
+- `jar` : packaged alle klassen naar een jar genaamd 'app.jar' in de 'build'-directory met entrypoint de 'App'-klasse.
+- `run` : Voert de jar file uit
+- `clean`: Verwijdert de '.class'-bestanden en het '.jar'-bestand uit de 'build'-directory 
+
+4. in de `./build-systems/python`-directory:
+Extract alle files in [dit zip bestand](/files/ses-friendshiptester-python-start.zip) OF clone [de repository](https://github.com/ArneDuyver/ses-friendshiptester-python-start). Schrijf een simpele makefile dat de volgende dingen kan doen en plaats het in de root van je directory:
+- `compile`: Compileert de bronbestanden naar de single 'friendshiptester.bin' file in de "/dist"-directory
+- `clean`: Verwijdert het '.bin'-bestand
+- `run` : Voert de 'friendshiptester.bin' uit
+- `test` : Voert de 'app.py' uit
+
+5. Commit nu de veranderingen en tag als `v4`.
 
 <!-- 
 #### TODO candycrush tester Opdracht 5: dependency management
