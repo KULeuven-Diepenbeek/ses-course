@@ -12,8 +12,8 @@ Het verschil met **compiled languages** is dat bij deze talen de broncode eerst 
 
 Een tussenoplossing tussen interpreted en compiled languages is **Just-In-Time (JIT) compiling**. JIT-compiling combineert aspecten van beide benaderingen door de broncode tijdens de uitvoering te compileren naar machinecode. Dit betekent dat de code aanvankelijk wordt geïnterpreteerd, maar dat veelgebruikte delen van de code tijdens de uitvoering worden gecompileerd naar machinecode om de prestaties te verbeteren. Talen zoals Java en C# maken gebruik van JIT-compiling om een balans te vinden tussen de flexibiliteit van interpreted languages en de snelheid van compiled languages.
 
-## Compilen naar .exe
-Iedereen kan dus in principe door het `python`-commando te gebruiken je python bronbestanden runnen. We willen het de eindgebruiker echter zo simpel mogelijk maken, daarom gaan we met behulp van `pinstaller` al onze python files kunnen "compileren" naar een single binary, dat je dan op Linux kan runnen. (Of naar een Windows executable, `.exe`)
+## Compilen naar .bin
+Iedereen kan dus in principe door het `python`-commando te gebruiken je python bronbestanden runnen. We willen het de eindgebruiker echter zo simpel mogelijk maken, daarom gaan we met behulp van `pinstaller` al onze python files kunnen "compileren" naar een single binary, dat je dan kan runnen.
 
 Je kan pyinstaller installeren met: `sudo pip install pyinstaller --break-system-packages`
 
