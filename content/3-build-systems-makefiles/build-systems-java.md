@@ -7,7 +7,7 @@ author: Wouter Groeneveld en Arne Duyver
 
 Dit is in principe iets wat je in het INF1 vak onbewust reeds uitvoerde door op de groene "Compile" knop te drukken van je NetBeans/IntelliJ IDE. Het is belangrijk om te weten welke principes hier achter zitten net als in C. Hieronder volgt dus een kort overzicht over het compileren van Java programma's _zonder_ een buildtool, later gaan we hier meestal een buildtool voor gebruiken om ons leven gemakkelijk te maken.
 
-## Prereqiusites
+## Prerequisites
 
 Zoals in [Java development environment in VSCode](/1-wsl-vscode/vscode.md#java-development-environment) kan zien heb je twee programma's nodig:
 - de Java Runtime Environment (JRE) om het commando `java` te gebruiken om gecompileerde Java programma's te kunnen runnen.
@@ -175,7 +175,7 @@ Extract alle files in [dit zip bestand](/files/ses-monstergame-java-start.zip) n
 - `clean`: Verwijdert de '.class'-bestanden en het '.jar'-bestand uit de 'build'-directory
 
 <!-- EXSOL -->
-<!-- <details closed>
+<details closed>
 <summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
 <p>
 
@@ -205,4 +205,4 @@ jar:
 ```
 
 </p>
-</details> -->
+</details>
