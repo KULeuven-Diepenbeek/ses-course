@@ -52,10 +52,7 @@ De **Command Palette** in VSCode is een krachtige tool die je toegang geeft tot 
 Om connectie te maken met je WSL in VSCode heb je de extensie WSL nodig. Daarna kan je onderaan links op de blauwe of groene knop met `><` pijlen klikken om connectie te maken met je WSL, op die manier kan je (de meeste) van je extensies behouden wanneer je 
 
 ## Enkele nuttige algemene extensies
-- Material Theme
-- Material Icon
 - Prettier: Coder formatter
-- Bracket colorizer: Geeft corresponderende brackets dezelfde kleur.
 - _TODO Tree_: Hiervan gaan we in de lessen gebruik maken om oefeningen aan te geven binnen in bronbestanden.
 
 ## Een ontwikkelomgeving opstellen voor de gewenste programmeertaal/het gewenste framework
