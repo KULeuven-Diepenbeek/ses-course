@@ -1,5 +1,5 @@
 ---
-title: 'Dependency management in C'
+title: 'In C (met CMake)'
 weight: 3
 draft: true
 author: Arne Duyver

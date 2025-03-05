@@ -2,7 +2,7 @@
 title: Meer leermateriaal
 weight: 5
 author: Wouter Groeneveld en Arne Duyver
-draft: false
+draft: true
 ---
 
 ## Extra leermateriaal

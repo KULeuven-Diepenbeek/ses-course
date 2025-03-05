@@ -1,5 +1,5 @@
 ---
-title: 'Dependency management in Python'
+title: 'In Python (met pip/venv)'
 weight: 4
 draft: true
 author: Arne Duyver
