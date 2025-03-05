@@ -113,9 +113,12 @@ if __name__ == '__main__':
 </p>
 </details>
 
-### Bestand: libs/init.py
+### Bestand: libs/__init__.py
 Dit bestand kan leeg zijn, maar het zorgt ervoor dat Python de map libs als package herkent.
 
+{{% notice info %}}
+Wil je meer info over de conventies over het werken met interne libraries in python projecten, bekijk dan [deze video](https://www.youtube.com/watch?v=EH-TFaX-R-o).
+{{% /notice %}}
 
 ### Interne dependency: scorebord.py
 Dit is de interne dependency die het scorebord beheert. Hierin gebruiken we de externe JSON-library (simplejson) om de gegevens op te slaan en te laden.
@@ -167,6 +170,10 @@ class Scoreboard:
 
 </p>
 </details>
+
+{{% notice info %}}
+Meer info over het gebruik van classes in Python vind je [hier](https://www.youtube.com/watch?v=ZDa-Z5JzLYM).
+{{% /notice %}}
 
 ### Builden/runnen
 Je zou dit project nu kunnen laten compileren tot een binary met bijvoorbeeld `pyinstaller` zoals we gezien hebben in [build tools voor python](/3-build-systems-makefiles/build-systems-python.md), maar we kunnen het project ook simpelweg uitvoeren met python via:
