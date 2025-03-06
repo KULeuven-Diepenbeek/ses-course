@@ -468,10 +468,10 @@ Zonder extra opties in je `build.gradle` wordt er echter geen `'Main-Class'`-att
 jar {
   manifest {
     attributes(
-      'Main-Class': application.mainClass
+      'Main-Class': application.mainClass // dit maakt een verwijzing naar de mainClass eigenschap die je in het application {} blok hebt ingesteld
     )
   }
-  archiveBaseName = 'myJarName'
+  archiveBaseName = 'myJarName'  // enkel als je de naam van de gegenereerde jar wil wijzigen
 }
 ```
 
@@ -573,6 +573,13 @@ repositories {
 ```
 Door nu de nodige `.jar` files toe te voegen aan de folder `./app/lib` kunnen de juiste dependencies ook gevonden worden. Indien de `./app/lib` directory nog niet bestaat, ga je die eerst moeten toevoegen.
 Deze laatste manier is vooral handig wanneer je een library (`.jar`) wil gebruiken die niet via een repository beschikbaar zijn. Zo kan je deze dependencies toch nog via Gradle beheren.
+
+Een jar uit zo'n flatDir repository als dependency toevoegen doe je als volgt:
+```groovy
+dependencies {
+    implementation files('./lib/scorebord-1.0.0.jar')
+}
+```
 
 #### Wat zit er in een Maven Repository
 
@@ -696,6 +703,10 @@ Dat laatste doet immers veel van de voordelen van het gebruik van Gradle teniet.
 
 ### Oefening 1: Hoger lager
 1. Maak een nieuw Gradle project aan met de naam: `higher_lower` en gebruik de packagenaam `be.ses.higher_lower`.
+{{% notice tip "Hint" %}}
+Om een packagenaam in te stellen in recentere versies van gradle, moet je het `--package` argument meegeven:
+`gradle init --package be.ses.higher_lower`.
+{{% /notice %}}
 2. Delete de test in `app/src/test/java/be/ses/higher_lower/App.java`. Anders zal je je project niet kunnen runnen.
 3. Aangezien we input aan de gebruiker gaan vragen moeten we een extra optie instellen in de `app/build.gradle`:
 ```groovy
@@ -756,7 +767,7 @@ public class App {
 
 7. Copy de `app/build/libs/app.jar`-file naar een andere directory en hernoem naar `higherLower.jar`.
 
-8. Run de jar via de terminal.
+8. Run de jar via de terminal: `java -jar higherLower.jar`. Je krijgt een foutmelding gerelateerd aan het niet vinden van een main-klasse. Los die op (zie [de uitleg hierboven](#compile-to-jar)) en probeer opnieuw.
 
 ### Oefening 2: Scorebord-library
 
