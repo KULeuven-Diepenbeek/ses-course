@@ -1,7 +1,7 @@
 ---
 title: 'In C (met CMake)'
 weight: 3
-draft: true
+draft: false
 author: Arne Duyver
 ---
 

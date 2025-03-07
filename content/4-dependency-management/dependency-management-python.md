@@ -1,7 +1,7 @@
 ---
 title: 'In Python (met pip/venv)'
 weight: 4
-draft: true
+draft: false
 author: Arne Duyver
 ---
 
