@@ -126,6 +126,7 @@ Extract alle files in [dit zip bestand](/files/ses-friendshiptester-python-start
 
 #### Opdracht 5: 
 1. Maak een folder in de root directory van je git repository aan genaamd 'dependency-management'. Maak een javaproject met gradle aan in een subdirectory genaamd "checkneighbours" met package "be.ses".
+   - _Je kan de package name meegeven met het 'gradle init' commando op de volgende manier: `gradle init --package be.ses`_
 2. Voeg het volgende toe aan de `.gitignore`-file in de root van je repository.
 ```.gitignore
 ./dependency-management/checkneighbours/.gradle/
