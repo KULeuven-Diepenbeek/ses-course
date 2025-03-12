@@ -34,7 +34,7 @@ Er zijn drie grote types van testen:
 
 #### 1. Unit Testing (GROEN)
 
-Een unit test test zaken op _individueel niveau_, per klasse dus. De methodes van de `Periode` klasse testen zijn unit testen: er zijn geen andere klasses mee gemoeid. De meeste testen zijn unit testen. Hoe kleiner het blokje op bovenstaande figuur, hoe beter de **F.I.R.S.T. principes** kunnen nageleefd worden. Immers, hoe meer systemen opgezet moeten worden voordat het assertion framework zijn ding kan doen, hoe meer tijd verloren, en hoe meer tijd de test in totaal nodig heeft om zijn resultaat te verwerken. 
+Een unit test test zaken op _individueel niveau_, per klasse dus. De meeste testen zijn unit testen. Hoe kleiner het blokje op bovenstaande figuur, hoe beter de **F.I.R.S.T. principes** kunnen nageleefd worden. Immers, hoe meer systemen opgezet moeten worden voordat het assertion framework zijn ding kan doen, hoe meer tijd verloren, en hoe meer tijd de test in totaal nodig heeft om zijn resultaat te verwerken. 
 
 #### 2. Integration Testing (ORANJE)
 
@@ -95,12 +95,7 @@ Gebruik Selenium IDE om een test scenario op te nemen van het volgende scenarios
 3. Log in met "standard_user" en wachtwoord "secret_sauce" en test of de afbeeldingen van de producten verschillend zijn.
 4. Log in met "problem_user" en wachtwoord "secret_sauce" en test of de afbeeldingen van de producten verschillend zijn. (Deze test moet nu falen omdat je je voordoet als een user die een bug ervaart.)  
 
-{{% notice info %}}
-**Bewaar dit scenario, opgenomen met de Selenium IDE, in bestand _opgave5.html_ (of `.side` voor nieuwe versies)** in de root de [repository van opgave 1](https://github.com/KULeuven-Diepenbeek/ses-tdd-exercise-1-template).
-{{% /notice %}}
-
 Je zal voor deze opgave dus de Selenium (Chromium/Firefox) plugin moeten installeren: zie hierboven.
-
 
 {{% notice important %}}
 **In de volgende delen wordt er dieper ingegaan op de verschillende concepten die komen kijken bij Test Driven Development. We gaan de theoretische concepten echter enkel aanhalen in de tekst rond TDD in Java, maar die zijn natuurlijk wel van toepassing op alle talen zoals Python en C. We halen later bij de pagina's rond TDD in Python en C die theoretische kant niet zo zwaar meer boven en houden ons daar meer bezig met de praktische kant.**
