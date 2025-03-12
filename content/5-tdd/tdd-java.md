@@ -535,10 +535,6 @@ De code blijkt reeds **unit testen** te hebben, dus schrijf éérst een falende 
 
 ### Opgave 3
 
-Werk een volledige implementatie van `Periode.overlaptMet()` uit, zoals hierboven uitgelegd. 
-
-### Opgave 4
-
 {{% notice info %}}
 Dit is een vervolgopgave van de code van **Opgave 1**. Werk verder op dat bestaand project, in diezelfde repository!
 {{% /notice %}}
@@ -567,7 +563,6 @@ Hoe kunnen we dan toch nog testen wat we willen testen? Mogelijke scenario's:
 2. De fabriek produceert minder dan 5 speculaasjes. De klant betaalt per stuk, 2 EUR.
 3. De fabriek produceert meer dan 5 stuks. De klant krijgt 10% korting op zijn totaal.
 
-### Hoe controleer ik het gedrag van de fabriek?
 
 
 
