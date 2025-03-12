@@ -132,7 +132,7 @@ Extract alle files in [dit zip bestand](/files/ses-friendshiptester-python-start
 ./dependency-management/checkneighbours/.gradle/
 ./dependency-management/checkneighbours/build/
 ```
-3. In je `checkneigbours` gradle project, moet je nu onderstaande klasse implementeren en de **TODO** oplossen:
+3. In je `checkneigbours` gradle project, moet je nu een klasse 'CheckNeighboursInGrid' maken en onderstaande static method in implementeren, los ook de **TODO** op:
 {{% notice style="code" title="CheckNeighboursInGrid.java (klik om te verbergen/tonen)" expanded=true %}}
 ```java
 /**
@@ -177,3 +177,18 @@ Voorbeeld: voor het volgende grid:
 ```
 
 4. Commit nu de veranderingen en tag als `v6`.
+
+
+### Test Driven Development
+
+#### Opdracht 7:
+
+1. Voeg minstens 6 unittesten toe aan je gradle project `checkneighbours` waarbij de unittesten je oplossing voor de `getSameNeighboursIds`-methode testen van de `CheckNeighboursInGrid`-klasse. De testen moeten aan volgende vereisten voldoen:
+- Gebruik de correcte naamgeving voor de testen
+- Gebruik het correcte Arrange, Act, Assert principe
+- Maak minstens 1 test die een `Exception` test
+- Probeer de randgevallen te testen en elke test moet een ander scenario testen. (bv. 1 test waarbij je een element aan de linker rand test mag maar 1 keer voorkomen. Eentje in een hoek testen kan dan wel al een ander scenario zijn.)
+
+2. Commit nu de veranderingen en tag als `v6`.
+
+<!-- #### Opdracht 8: getSameNeighboursIds functie in python testen -->
