@@ -174,7 +174,7 @@ Een 'harnas' is het concept waar alle testen aan worden opgehangen. Het harnas i
 
 Gradle en het JUnit harnas verzamelen data van testen in de vorm van HTML rapporten.
 
-_Hiervoor dient dus de dependency `testRuntimeOnly 'org.junit.platform:junit-platform-launcher'` in onze `gradle.build`-file._
+_Hiervoor dient dus de dependency `testImplementation libs.junit` in onze `gradle.build`-file._
 
 ##### 2. Het Assertion Framework
 
@@ -185,7 +185,7 @@ Assertions zijn er in alle kleuren en gewichten, waarbij in de oefeningen de sta
 <div class="devselect">
 
 ```java
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 @Test
 public void testWithDefaultAssertions() {
     var result = doStuff();
@@ -206,7 +206,7 @@ Het tweede voorbeeld leest als een vloeiende zin, terwijl de eerste `AssertEqual
 
 [AssertJ core API Documentation](https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html)
 
-_Je kan simpelweg de dependency `testCompile("org.assertj:assertj-core:3.11.1")` in de `gradle.build`-file toevoegen. En de import van `import static org.junit.jupiter.api.Assertions.*;` in de test file veranderen naar `import static org.assertj.core.api.Assertions.*;`_
+_Je kan simpelweg de dependency `testImplementation "org.assertj:assertj-core:3.11.1"` in de `gradle.build`-file toevoegen. En de import van `import static org.junit.Assert.*;` in de test file veranderen naar `import static org.assertj.core.api.Assertions.*;`_
 
 Een populair alternatief voor AssertJ is bijvoorbeeld [Hamcrest](http://hamcrest.org/JavaHamcrest/javadoc/). De keuze is aan jou: alle frameworks bieden ongeveer dezelfde fluent API aan met ongeveer dezelfde features. 
 
@@ -279,9 +279,8 @@ JUnit 4 en JUnit 5 verschillen hierin op niveau van gebruik. Vanaf JUnit 5 werkt
 1. Om testen op de correcte manier uit te kunnen voeren gaan we starten met de juiste dependencies in te stellen in onze `build.gradle` file:
 ```groovy
 dependencies {
-    // Use JUnit Jupiter for testing.
-    testImplementation libs.junit.jupiter
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Use JUnit 4 for testing.
+    testImplementation libs.junit
 
     testImplementation "org.assertj:assertj-core:3.11.1"
 
@@ -303,7 +302,7 @@ public class Calculator {
 ```java
 package be.ses;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
@@ -317,7 +316,7 @@ We willen aan onze calculator een `divide`-methode toevoegen die 2 parameters me
 ```java
 package be.ses;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
