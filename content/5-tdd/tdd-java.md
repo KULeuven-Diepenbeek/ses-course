@@ -391,7 +391,7 @@ public class Calculator {
 
 ## Integration testen
 
-##### Test Doubles
+### Test Doubles
 Stel dat we nu een andere klasse hebben `Doubler` die een methode heeft `doubleCalculator`. Die methode neemt 3 parameters: `operation`,`x`,`y` en voert dus de gekozen operatie uit met de `Calculator` klasse en verdubbeld gewoon het resultaat.  
 
 Hoe testen we de `doubleCalculator()` methode, zonder de effectieve implementatie van `Calculator` te moeten gebruiken? Want testen moeten geïsoleerd zijn. 
@@ -400,9 +400,9 @@ Door middel van _test doubles_.
 
 ![](/img/testdouble.jpg "I'll Be Back.")
 
-Zoals Arnie in zijn films bij gevaarlijke scenes een stuntman lookalike gebruikt, zo gaan wij in onze code een `Calculator` lookalike gebruiken, zodat de `Doubler`-klasse dénkt dat hij `Calculator`-methoden aanroept, terwijl dit in werkelijkheid niet zo is. Daarvoor gaan we **Mocks** gebruiken. (Je kan ook een interface `CalculatorInterface` zodat je overal waar je `Calculator` wil gebruiken ook een eigen `CalculatorMock`-klasse kan gebruiken met dezelfde methodes maar waar je een aantal testscenarios gewoon hardcode, maar dit gaan we hier niet voordoen.)
+Zoals Arnie in zijn films bij gevaarlijke scenes een stuntman lookalike gebruikt, zo gaan wij in onze code een `Calculator` lookalike gebruiken, zodat de `Doubler`-klasse dénkt dat hij `Calculator`-methoden aanroept, terwijl dit in werkelijkheid niet zo is. Daarvoor gaan we **Mocks** gebruiken. (Je kan ook een interface `CalculatorInterface` voorzien zodat je overal waar je `Calculator` wil gebruiken ook een eigen `CalculatorMock`-klasse kan gebruiken met dezelfde methodes maar waar je een aantal testscenarios gewoon hardcode, dit gaan we hier niet voordoen.)
 
-### Mocking
+#### Mocking
 
 Meer info rond faking vs. mocking vindt je [hier](https://www.educative.io/answers/what-is-faking-vs-mocking-vs-stubbing):
 <blockquote>Fakes are objects that have working implementations. On the other hand, mocks are objects that have predefined behavior. Lastly, stubs are objects that return predefined values. When choosing a test double, we should use the simplest test double to get the job done.
@@ -414,28 +414,78 @@ Mockito is verreweg het meest populaire Unit Test Framework dat bovenop JUnit wo
 
 Op [https://site.mockito.org](https://site.mockito.org) kan je lezen **hoe** je het framework moet gebruiken. (Volledige [javadoc](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html)) 
 
-We gaan nu Mockito gebruiken om in onze testen een PowerMock te doen wat wil zeggen dat als er in een test `new` aangeroepen wordt voor een klasse die wij met Mockito kiezen dan gaan we die nu met onze testdouble klasse verwisselen. Hiervoor heb je enkele dependencies en nodig:
-<!-- ```groovy
-testImplementation 'org.powermock:powermock-api-mockito2:2.0.9'
-testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
+Het ideale gedrag dat we met zo een mock willen bekomen is dat overal waar we een andere klasse gebruiken met `new` in onze testen dat we dit kunnen onderscheppen en in de plaats onze "Test Double" kunnen meegeven. Dit kon vroeger gedaan worden met PowerMocks. Dit kan lukt echter niet meer in de nieuwere versies van de Java JVM en met goede reden. 
+
+Wanneer je binnen een bepaald klasse een andere klasse wil gebruiken, maak je best gebruik van **Dependency Injection**, wat wil zeggen dat je niet in een methode een instantie aanmaakt van een andere klasse, maar op voorhand een object aanmaakt van die klasse en dan als parameter aan de methode of datamember van de klasse meegeeft. Op die manier kunnen we ook veel simpeler testen. Als we nu de methode oproepen kunnen we als parameter simpelweg onze Test Double meegeven in plaats van een echt object.
+
+We gaan hiervoor dus Mockito gebruiken om in onze testen. Hiervoor heb je volgende dependency nodig:
+```groovy
 testImplementation 'org.mockito:mockito-core:3.12.4'
 ```
 
-Hieronder vind je een klein voorbeeld in verband met het voorbeeld dat hierboven werd aangehaald:
+Hieronder vind je een implementatie in verband met het voorbeeld dat hierboven werd aangehaald:
 
-We voegen eerst Mockito toe aan onze dependencies met `testImplementation 'org.mockito:mockito-core:2.1.0'`.
+De `Doubler` klasse ziet er als volgt uit, waarbij we rekening houden met het principe van dependency injection:
+```java
+package be.ses;
 
-De `Doubler` klasse ziet er als volgt uit:
+public class Doubler {
+
+  public float doubleCalculator(Calculator calculator, String operation, float x, float y) {
+    if (operation == "divide") {
+      return calculator.divide(x, y) * 2;
+    } else {
+      throw new UnsupportedOperationException("Wrong calculator operation selected");
+    }
+  }
+
+}
 ```
 
-``` -->
+De test klasse ziet er dan als volgt uit:
+```java
+package be.ses;
 
+import org.junit.Test;
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+public class DoublerTest {
+  @Test
+  public void gegevenOperationDivideX2Y1_wanneerDoubleCalculator_danResultIs4() {
+    Calculator calculatorMock = mock(Calculator.class);
+    when(calculatorMock.divide(2f, 1f)).thenReturn(2.0f);
+
+    Doubler doubler = new Doubler();
+    float result = doubler.doubleCalculator(calculatorMock, "divide", 2, 1);
+
+    assertThat(result).isEqualTo(4.0f).withFailMessage("result was " + result + " but expected 4.0.");
+    verify(calculatorMock).divide(2f, 1f);
+  }
+}
+```
+
+_Merk op dat we met de laatste regel nog even dubbel checken dat wel zeker de Test Double (`calculatorMock`) gebruikt werd met de juiste methode en parameters._
+
+### Oefening
+- Breid de `Doubler` klasse uit om ook `add`, `subtract` en `multiply` te doen. En schrijf natuurlijk eerst enkele tests en gebruik correct Test Doubles/Mocks.
 
 ## End-to-end testen
 
 _Zie [TDD-pagina](/5-tdd/_index.md#3-end-to-end-testing-rood)_
 
-## Opgaven
+## Testing met Gradle
+
+Als je nu de Gradle task `test` gebruikt om je testen uit te voeren, wordt er door Gradle automatisch een interactief verslag in de vorm van een webpagina gegenereerd in de `build/reports/test/test`-directory. Je vind hier een file `index.html`. Deze file openen in de browser geeft bijvoorbeeld volgend verslag:
+
+![Gradle test report example](/img/gradletestreport.png)
+
+## Extra oude Opgaven: geen verplichting
+
+<details closed>
+<summary><i><b>Klik hier om de opgaven te bekijken</b></i>🔽</summary>
+<p>
+
 ### Opgave 1
 
 De Artisanale Bakkers Associatie vertrouwt op uw technische bekwaamheid om hun probleem op te lossen. 
@@ -562,6 +612,7 @@ Hoe kunnen we dan toch nog testen wat we willen testen? Mogelijke scenario's:
 2. De fabriek produceert minder dan 5 speculaasjes. De klant betaalt per stuk, 2 EUR.
 3. De fabriek produceert meer dan 5 stuks. De klant krijgt 10% korting op zijn totaal.
 
-
+</p>
+</details>
 
 

@@ -1,30 +1,29 @@
 ---
-title: '5: Debugging'
-pre: "<i class='far fa-keyboard'></i> "
-draft: true
-weight: 5
-author: Wouter Groenveld
+title: 'TDD in C'
+draft: false
+weight: 4
+author: Wouter Groenveld en Arne Duyver
 ---
 
-### Chapter 5.0
+## TDD in C
 
-# Debugging in C
+Dit is een stuk complexer en wordt ook net iets minder gebruikt dan in de higher level languages zoals Python en Java, maar nog altijd zeer handig. Je moet echter de juiste instellingen voor je compiler en dergelijke instellen. Om die reden laten we dit als zelfstudie voor de student die hierin geïnteresseerd is en refereren naar een [video](https://www.youtube.com/watch?v=zfgFphZ63UY) die gebruik maakt van CMake en Gtests om TDD in C mogelijk te maken. 
 
-Important concepts to grasp:
+{{% notice warning %}}
+Hoewel dat de tutorial gemaakt is rond C++ files, maakt dit niet uit omdat je hier ook gewoon C functies kan gebruiken. Het is echter wel waar dat de testen zelf WEL in een `.cpp`-file (C++) geschreven moeten zijn!
+{{% /notice %}}
+
+<!-- 
+## Debugging in C
+
+Belangrijke concepten:
 
 - Breakpoints, stepping into/over, continuing
 - Inspecting the stack and the heap
 - Disassembling, objdumping
 
 
-## Recommended Reading
-
-- [The GNU Project Debugger Documentation](https://www.gnu.org/software/gdb/documentation/)
-- [Hackme: exploiting heap bugs](https://tc.gtisc.gatech.edu/cs6265/2016/l/lab10-heap/README-tut.txt
-)
-- [Google Test Primer](https://github.com/google/googletest/blob/master/googletest/docs/primer.md)
-
-## 5.1. The easy way: Debugging using an IDE
+## Debugging met behulp van een IDE
 
 
 Arguably one of the better integrated C/C++ IDEs out there is [CLion](www.jetbrains.com/clion), a toolkit from Jetbrains based on the IDEA platform you all know from IntelliJ. It has exactly the same tools and capabilities but is fully geared towards C and C++. Cross-compiling and toolchain setup is also very easy using CLion. The Figure below is a screen capture of CLion showcasing it's integrated unit testing capabilities which we will expand upon in the coming sections. 
@@ -396,3 +395,11 @@ Things to try out:
 {{% notice task %}}
 Take a moment to fiddle with `ddd` after correctly installing it. Try to inspect the same heap variable as the previous exercises, but this time visualize them in the main window. It should be (slightly) easier to accomplish.
 {{% /notice %}}
+
+## Recommended Reading
+
+- [The GNU Project Debugger Documentation](https://www.gnu.org/software/gdb/documentation/)
+- [Hackme: exploiting heap bugs](https://tc.gtisc.gatech.edu/cs6265/2016/l/lab10-heap/README-tut.txt
+)
+- [Google Test Primer](https://github.com/google/googletest/blob/master/googletest/docs/primer.md) 
+-->

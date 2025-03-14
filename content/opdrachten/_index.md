@@ -191,4 +191,10 @@ Voorbeeld: voor het volgende grid:
 
 2. Commit nu de veranderingen en tag als `v6`.
 
-<!-- #### Opdracht 8: getSameNeighboursIds functie in python testen -->
+#### Opdracht 8: getSameNeighboursIds functie in python testen
+
+1. Maak een folder in de root van je repository aan genaamd "./tdd/".
+2. Extract het volgende python project in [dit zip bestand](/files/tdd_python_opdracht-start.zip) naar die `./tdd` directory OF clone via subtree [de repository](https://github.com/ArneDuyver/tdd_python_opdracht-start)  het startproject into `./tdd`.
+   - Het project bevat een `checkneighbours.py`-bestand met een implementatie van de functie `get_same_neighbours_ids()`
+   - Het project bevat ook een file `checkneighbours_test.py` met het geraamte van het unittest framework al ingevuld. 
+

@@ -18,3 +18,6 @@ Een debugger in een geïntegreerde ontwikkelomgeving (IDE) is een tool waarmee j
 - **Call stack en uitvoeringspad**: Een debugger biedt informatie over de call stack en het uitvoeringspad van het programma. Dit helpt ontwikkelaars om te begrijpen welke functies worden aangeroepen en in welke volgorde, wat kan helpen bij het opsporen van bugs die zich voordoen als gevolg van onverwachte uitvoeringspaden.
 
 _Over het algemeen biedt een debugger een krachtige set van tools voor het effectief debuggen van code, waardoor ontwikkelaars efficiënter problemen kunnen oplossen en complexe codebases beter kunnen begrijpen. Het is een essentiële tool voor elke software developper._
+
+## Debuggen met VSCode
+VSCode biedt voor verschillende talen (eventueel met behulp van extensies) de mogelijkheid om programma's te debuggen met een geïntegreerde debugger. 
