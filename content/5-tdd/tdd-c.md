@@ -10,7 +10,7 @@ author: Wouter Groenveld en Arne Duyver
 Dit is een stuk complexer en wordt ook net iets minder gebruikt dan in de higher level languages zoals Python en Java, maar nog altijd zeer handig. Je moet echter de juiste instellingen voor je compiler en dergelijke instellen. Om die reden laten we dit als zelfstudie voor de student die hierin geïnteresseerd is en refereren naar een [video](https://www.youtube.com/watch?v=zfgFphZ63UY) die gebruik maakt van CMake en Gtests om TDD in C mogelijk te maken. 
 
 {{% notice warning %}}
-Hoewel dat de tutorial gemaakt is rond C++ files, maakt dit niet uit omdat je hier ook gewoon C functies kan gebruiken. Het is echter wel waar dat de testen zelf WEL in een `.cpp`-file (C++) geschreven moeten zijn!
+Hoewel dat de tutorial gemaakt is rond C++ files, maakt dit niet uit omdat je hier ook gewoon C functies kan gebruiken. Het is echter wel waar dat de testen zelf WEL in een `.cpp`-file (C++) geschreven moeten zijn! In de oude cursus [Besturingssystemen & C](https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/testing/) kan je ook nog eens de nodige info terugvinden indien gewenst.
 {{% /notice %}}
 
 <!-- 
