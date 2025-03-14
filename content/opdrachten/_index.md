@@ -178,6 +178,9 @@ Voorbeeld: voor het volgende grid:
 
 4. Commit nu de veranderingen en tag als `v6`.
 
+{{% notice warning %}}
+Krijg je een type error in de `main` method van `App.java` in het 'checkneighbours_example' project. Verwissel de code ``
+{{% /notice %}}
 
 ### Test Driven Development
 
@@ -189,7 +192,7 @@ Voorbeeld: voor het volgende grid:
 - Maak minstens 1 test die een `Exception` test
 - Probeer de randgevallen te testen en elke test moet een ander scenario testen. (bv. 1 test waarbij je een element aan de linker rand test mag maar 1 keer voorkomen. Eentje in een hoek testen kan dan wel al een ander scenario zijn.)
 
-2. Commit nu de veranderingen en tag als `v6`.
+2. Commit nu de veranderingen en tag als `v7` en push.
 
 #### Opdracht 8: getSameNeighboursIds functie in python testen
 
@@ -198,3 +201,4 @@ Voorbeeld: voor het volgende grid:
    - Het project bevat een `checkneighbours.py`-bestand met een implementatie van de functie `get_same_neighbours_ids()`
    - Het project bevat ook een file `checkneighbours_test.py` met het geraamte van het unittest framework al ingevuld. 
 
+3. Commit nu de veranderingen en tag als `v8` en push.
