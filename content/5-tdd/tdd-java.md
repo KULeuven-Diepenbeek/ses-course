@@ -191,7 +191,9 @@ public void testWithDefaultAssertions() {
     var result = doStuff();
     AssertEquals(result, 3);    // arg1: expected, arg2: actual
 }
+```
 
+```java
 import static org.assertj.core.api.Assertions.*;
 @Test
 public void testWithAssertJMatchers() {
