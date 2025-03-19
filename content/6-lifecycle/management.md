@@ -134,7 +134,8 @@ _Lees meer over de burndown chart via de extra bronnen._
 
 ## Opdrachten
 
-Neem deze webpagina zelfstandig door tegen de volgende les. Tijdens die les zal een externe uit het werkveld wat meer uitleg geven over hoe zij omgaan met software management. Door deze leerstof op voorhand door te nemen kom je niet uit de lucht gevallen wanneer ze spreken over een 'SCRUM' of een 'sprint'.
+Dit deel bevat geen opdrachten maar kennis ervan zal afgetoetst worden tijdens het schriftelijk examen. Bijvoorbeeld wat betekent `SCRUM` en wat is `Agile Development`.
+<!-- Neem deze webpagina zelfstandig door tegen de volgende les. Tijdens die les zal een externe uit het werkveld wat meer uitleg geven over hoe zij omgaan met software management. Door deze leerstof op voorhand door te nemen kom je niet uit de lucht gevallen wanneer ze spreken over een 'SCRUM' of een 'sprint'. -->
 
 <!-- ## <a name="oef"></a>Labo oefeningen
 

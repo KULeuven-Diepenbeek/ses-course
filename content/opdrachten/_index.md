@@ -202,3 +202,13 @@ Krijg je een type error in de `main` method van `App.java` in het 'checkneighbou
    - Het project bevat ook een file `checkneighbours_test.py` met het geraamte van het unittest framework al ingevuld. 
 
 3. Commit nu de veranderingen en tag als `v8` en push.
+
+### Continuous Integration and Continuous Deployment
+
+#### Opdracht 9:
+
+1. Gebruik Github Actions om een CI-pipeline aan te maken die steeds je testen van je 'checkneighbours' uit opdracht 7 uitvoert wanneer je naar de `main` branch pusht. Voorzie ook een badge in een README.md in de root folder van je git directory zodat je in één opslag kan zien wanneer de tests falen.
+
+2. **Let op!** Je wil nu dus de testen runnen van een specifiek gradle project dat in een subdirectory staat. Meer info [hier](https://stackoverflow.com/questions/57806624/github-actions-how-to-build-project-in-sub-directory)
+
+3. Commit nu de veranderingen en tag als `v9` en push.
