@@ -6,20 +6,21 @@ autonumbering: true
 draft: false
 ---
 
-> [!todo]
-> data-oriented programming (niet value classes): opt out of internal state/encapsulation (value = opt out of identity)
-
-
 ## Wat zijn records
 
-Een **record** in Java is een eenvoudige klasse die een waarde voorstelt.
-Met een waarde bedoelen we een object waarvoor de identiteit volledig bepaald wordt door de attribuut-waarden, en het dus niet uitmaakt welke instantie je bekijkt.
-Welgekende voorbeelden zijn een coordinaat (bestaande uit een x- en y-attribuut), een geldbedrag (een bedrag en een munteenheid), een adres (straat, huisnummer, postcode, gemeente), etc.
+Wanneer we object-georiënteerd programmeren, maken we gebruik van *encapsulatie*: we maken de velden van een klasse gewoonlijk privaat, zodat ze worden afgeschermd van andere klassen. Op die manier kunnen we de interne representatie (de velden en hun types) makkelijk aanpassen: zolang de publieke methodes hetzelfde blijven, heeft dit geen effect op de gebruikers van de klasse.
 
-Een record-object dient dus als data-drager, waarbij verschillende objecten met dezelfde attribuut-waarden volledig inwisselbaar (equivalent) zijn.
+Maar soms is dat niet nodig: sommige klassen zijn niet meer dan een bundeling van verschillende waarden.
+Welgekende voorbeelden zijn een coordinaat (bestaande uit een x- en y-attribuut), een geldbedrag (een bedrag en een munteenheid), een adres (straat, huisnummer, postcode, gemeente), etc.
+Deze objecten hoeven niet aanpasbaar te zijn; je kan makkelijk een nieuw object maken met andere waarden.
+We noemen dit **data-oriented programming**. 
+Voor dergelijke klassen heeft encapsulatie weinig zin.
+
+Een **record** in Java is een eenvoudige klasse die zo'n waarde voorstelt die gebruikt kan worden voor data-oriented programming.
+Een record-object dient voornamelijk als data-drager, waarbij verschillende objecten met dezelfde attribuut-waarden gewoonlijk volledig inwisselbaar (equivalent) zijn.
 De attributen van een record-object mogen daarom niet veranderen doorheen de tijd (het object is dus **immutable**).
 
-Als voorbeeld definiëren we een coordinaat-klasse als een record, met 2 attributen: een x- en y-coordinaat.
+Als voorbeeld definiëren we een coördinaat-klasse als een record, met 2 attributen: een x- en y-coördinaat.
 
 ```java
 public record Coordinate(double x, double y) {
@@ -36,7 +37,7 @@ System.out.println(coord);
 // => Coordinate[x=3.0, y=5.0]
 ```
 
-Twee coordinaat-objecten met dezelfde x- en y-coordinaat worden als equivalent beschouwd, ook al zijn het twee verschillende objecten:
+Twee coördinaat-objecten met dezelfde x- en y-coordinaat worden als equivalent beschouwd, ook al zijn het twee verschillende objecten:
 
 ```java
 var coordinate1 = new Coordinate(3, 5);
@@ -76,7 +77,7 @@ record PositiveNumber(int number) {
 
 Merk op dat bij records in de eerste plaats gaat over het creëren van een nieuw datatype, door (primitievere) data te bundelen of te beperken qua mogelijke waarden.
 Je maakt dus als het ware een nieuw primitief datatype, zoals int, double, of String.
-Dit in tegenstelling tot klassen, waar gedrag om het object aan te passen (mutatie-methodes) en identiteit ook essentieel zijn.
+Dit in tegenstelling tot klassen, waar gedrag om het object aan te passen (mutatie-methodes) ook essentieel zijn.
 
 ## Achter de schermen
 
@@ -89,7 +90,7 @@ Een record is eigenlijk een gewone klasse, waarbij de Java-compiler zelf enkele 
 
 De klasse is ook `final`, zodat er geen subklassen van gemaakt kunnen worden.
 
-De coordinaat-definitie van hierboven is equivalent aan volgende klasse-definitie:
+De coördinaat-record van hierboven is equivalent aan volgende klasse-definitie:
 
 ```java
 public final class Coordinate {
@@ -127,12 +128,18 @@ public record Coordinate(double x, double y) {
 }
 ```
 
+Merk wel op dat, omdat de klasse immutable is, je in een methode geen nieuwe waarde kan toekennen aan de velden. Code als
+```java
+  this.x = 5;
+```
+in een methode van een record is dus ongeldig, en leidt tot een foutmelding van de compiler.
+
 ## Constructor van een record
 
 Als je geen constructor definieert, krijgt een record een standaard constructor met de opgegeven attributen als parameters (in dezelfde volgorde).
 
 Maar je kan ook zelf een of meerdere constructoren definiëren voor een record, net zoals bij klassen.
-Je moet dan zelf zorgen dat je alle attributen van de record initialiseert.
+Je moet dan zelf zorgen dat alle attributen van de record geïnitialiseerd worden.
 
 ```java
 public record Coordinate(double x, double y) {
