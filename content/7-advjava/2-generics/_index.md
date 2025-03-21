@@ -5,6 +5,13 @@ autonumbering: true
 draft: false
 ---
 
+{{% notice info "In andere programmeertalen" %}}
+De concepten in andere programmeertalen die het dichtst aanleunen bij Java generics zijn
+- templates in C++
+- generic types in Python (as type hints)
+- generics in C#
+{{% /notice %}}
+
 > [!todo]
 > - [TODO: generische methodes](#generische-methodes)
 > - [TODO: overerven van generisch type](#overerven-van-een-generisch-type)

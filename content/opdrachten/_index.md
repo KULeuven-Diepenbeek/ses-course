@@ -212,3 +212,89 @@ Krijg je een type error in de `main` method van `App.java` in het 'checkneighbou
 2. **Let op!** Je wil nu dus de testen runnen van een specifiek gradle project dat in een subdirectory staat. Meer info [hier](https://stackoverflow.com/questions/57806624/github-actions-how-to-build-project-in-sub-directory)
 
 3. Commit nu de veranderingen en tag als `v9` en push.
+
+
+## Opdrachten deel 2
+
+Deze opdrachten worden **enkel door de studenten van SES**  gemaakt en ingediend via Github Classroom.
+
+### Setup
+
+Maak [hier (via GitHub Classroom)](https://classroom.github.com/a/OhUGgJxZ) je repository aan voor de assignment "Opdrachten deel 2". Deze repository is nog leeg.
+Clone jouw (lege) repository naar je eigen machine, en voeg vervolgens een **tweede remote** repository toe, namelijk `git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2425.git` onder de naam `startcode`. Dat kan je met volgend commando:
+```bash
+git remote add startcode git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2425.git
+```
+
+Je lokale repository heeft nu dus **twee** remote repositories:
+- **origin**: je eigen GitHub repository
+- **startcode**: de GitHub repository met de startcode die door ons aangeleverd wordt
+
+Haal de laatste versie van de startcode op en merge die in je repository via `git pull startcode main`. Doe dit minstens voor elke nieuwe opdracht, en eventueel ook tussendoor (als er wijzigingen/bugfixes aan onze startcode gebeurd zijn).
+
+### Startcode
+
+De startcode bevat een JavaFX-applicatie voor het spel CandyCrush.
+Het is een Gradle-project voor IntelliJ, en maakt gebruik van Java 21.
+Je kan de folder openen als project in IntelliJ.
+De applicatie is gestructureerd volgens het Model-View-Controller (MVC) patroon.
+Er zijn ook reeds enkele testen voorgedefinieerd met AssertJ.
+
+{{% notice warning "Belangrijk!" %}}
+Omdat je inzendingen (deels) automatisch verbeterd zal worden, is het noodzakelijk dat de gegeven testen werken **zonder enige aanpassing** aan de gegeven testcode.
+Je mag uiteraard wel extra testen toevoegen.
+{{% /notice %}}
+
+### Opdracht: Records
+
+1. Maak, in package `be.kuleuven.cs.ses.candycrush.board` een record genaamd `BoardSize` dat de grootte van een candycrush speelveld voorstelt als een aantal rijen (`rows`) en aantal kolommen (`columns`).
+   Het aantal rijen en kolommen moeten beiden groter zijn dan 0, zoniet gooi je een IllegalArgumentException.
+
+2. Maak, in hetzelfde package, ook een tweede record (genaamd `Position`) dat een _geldige_ positie van een cel op een candycrush-speelveld voorstelt (rij- en kolomnummer).
+   Bij het aanmaken van een Position-object moet een rij- en kolomnummer en een `BoardSize` meegegeven worden aan de constructor.
+   Indien de positie niet geldig is gegeven de grootte van het speelveld, moet je een IllegalArgumentException gooien.
+
+3. Voeg in `Position` de volgende methodes toe, samen met zinvolle tests voor elke methode:
+
+   - een methode `int toIndex()` die de positie omzet in een index. Voor veld met 2 rijen en 4 kolommen lopen de indices als volgt:
+
+     ```
+     0 1 2 3
+     4 5 6 7
+     ```
+
+   - een **statische** methode `Position fromIndex(int index, BoardSize size)` die de positie teruggeeft die overeenkomt met de gegeven index.
+     Deze methode moet een exception gooien indien de index ongeldig is.
+   - een methode `Collection<Position> neighborPositions()` die alle posities van (bestaande) directe buren in het speelveld teruggeeft.
+   - een methode `boolean isLastColumn()` die aangeeft of de positie de laatste is in een rij.
+
+4. Voeg in `BoardSize` de volgende methodes toe, samen met zinvolle tests:
+
+   - een methode `Collection<Position> positions()` die alle posities op het bord teruggeeft.
+
+5. Voeg een sealed interface `Candy` toe, met subklassen (records) voor
+
+   - `NormalCandy`, met een attribuut `color` (een int met mogelijke waarden 0, 1, 2, of 3)
+   - Elk van de vier speciale snoepjes uit `Candy_Crush_Spelregels.txt`
+
+6. Voeg, in het package `be.kuleuven.cs.ses.candycrush.model` een record `Switch` toe, die een switch voorstelt tussen twee posities `first` en `second`.
+Beide posities moeten buren zijn van elkaar; je constructor moet een IllegalArgumentException gooien indien dat niet het geval is.
+Zorg ervoor dat het niet uitmaakt in welke volgorde de twee posities meegegeven worden aan de constructor; maar het veld `first` moet uiteindelijk de positie bevatten met de kleinste index (zoals gedefinieerd bij `toIndex()`).
+
+7. Voeg aan het Switch-record een operatie `other(Position pos)` toe die de andere positie geeft dan de gegeven positie (dus first als je second meegeeft, en omgekeerd). Indien de gegeven positie geen deel uitmaakt van het switch-object, gooi je een IllegalArgumentException.
+
+8. Pas nu de startcode (model en view) aan zodat die zoveel mogelijk gebruik maakt van bovenstaande records. Dus:
+
+   - op elke plaats waar voorheen een int voor width en/of height gebruikt of teruggegeven werd, moet nu `BoardSize` gebruikt worden
+   - op elke plaats waar voorheen een index (of rij- en/of kolomnummer) gebruikt of teruggegeven werd, moet nu een `Position` object gebruikt worden
+   - op elke plaats waar voorheen een int gebruikt of teruggegeven werd om een snoepje aan te duiden, moet nu een `Candy` object gebruikt worden.
+     - Je zal hiervoor (in je model) een methode moeten maken die een willekeurig Candy-object aan kan maken.
+     - Maak (in je view) een methode `Node makeCandyShape(Position position, Candy candy)` die een switch-expressie gebruikt om een JavaFX Node te maken voor de gegeven candy op de gegeven positie.
+       - Voor `NormalCandy` geef je een `Circle` terug met een (zelf te kiezen) kleur die overeenkomt met waarden 0, 1, 2, of 3.
+       - Voor de vier speciale snoepjes geef je een vierkant (`Rectangle`) terug, elk met een eigen kleur.
+
+{{% notice todo %}}
+9. Voeg, naar analogie van `getSameNeighboursIds`, een methode `Collection<Position> getSameNeighbourPositions(Position position)` toe aan je model, gebruik makend van de records en methodes die je geschreven hebt. Denk eraan dat je records moet vergelijken met `equals`, en niet met `==`.
+{{% /notice %}}
+
+Tag het resultaat als `v1` en push dit naar jouw remote repository (origin) op GitHub.
