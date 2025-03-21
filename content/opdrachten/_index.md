@@ -309,6 +309,8 @@ Je mag uiteraard wel extra testen toevoegen.
 
 9. Maak in de model-klasse `CandyCrushGame` een publieke methode `Collection<Switch> getPotentialSwitchesOf(Position pos)` die alle mogelijke wissels teruggeeft (bv. in een ArrayList) van positie `pos` met één van zijn buren, zolang die buur geen NoCandy is en een verschillende kleur heeft. (_Deze methode zullen we in een latere opdracht verfijnen, maar voorlopig volstaat dit_).
 
-Als je dit alles gedaan hebt, zou alle code moeten compileren en zouden de tests moeten slagen.
+10. In de `update()`-methode van `CandyCrushBoardUI` kan je nu code (gerelateerd aan het tonen van hints) uit commentaar halen (zie de TODO daarin).
+
+Als je dit alles gedaan hebt, zou alle code moeten compileren, zou de applicatie moeten uitvoeren (`./gradlew run`), en zouden de testen moeten slagen.
 
 Tag het resultaat als `v1` en push dit naar jouw remote repository (origin) op GitHub.
