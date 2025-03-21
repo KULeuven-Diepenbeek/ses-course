@@ -1,5 +1,5 @@
 ---
-title: "5.2.1 Definiëren en gebruiken"
+title: "7.2.1 Definiëren en gebruiken"
 toc: true
 weight: 10
 autonumbering: true

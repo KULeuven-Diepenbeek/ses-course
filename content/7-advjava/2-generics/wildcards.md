@@ -1,5 +1,5 @@
 ---
-title: "5.2.3 Wildcards"
+title: "7.2.3 Wildcards"
 toc: true
 weight: 50
 autonumbering: true
@@ -478,7 +478,7 @@ public void pet(Mammal mammal) { ... }
 Deze methode kan óók al opgeroepen worden met een `Cat`-object, `Dog`-object, of elk ander type `Mammal` als argument.
 Je hebt hier geen co- of contra-variantie van generische types nodig; je maakt gewoon gebruik van overerving uit objectgeoriënteerd programmeren.
 
-### Bounds vs co-/contravariantie en wildcards
+### Bounds vs. co-/contravariantie en wildcards
 
 Tot slot is het nuttig om nog eens te benadrukken dat er een verschil is tussen het begrenzen van een generische parameter (met `extends`) enerzijds, en het gebruik van co-variantie, contra-variantie en wildcards (`? extends T`, `? super T`) anderzijds. Het feit dat `extends` in beide gevallen gebruikt wordt, kan misschien tot wat verwarring leiden.
 

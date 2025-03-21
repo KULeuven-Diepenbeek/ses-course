@@ -1,9 +1,14 @@
 ---
-title: "5.2 Generics"
-toc: true
-autonumbering: true
-draft: false
+title: "7.2 Generics"
+draft: true
 ---
+
+{{% notice info "In andere programmeertalen" %}}
+De concepten in andere programmeertalen die het dichtst aanleunen bij Java generics zijn
+- templates in C++
+- generic types in Python (as type hints)
+- generics in C#
+{{% /notice %}}
 
 > [!todo]
 > - [TODO: generische methodes](#generische-methodes)
@@ -89,3 +94,5 @@ Generics geven je dus een combinatie van de beste eigenschappen van de twee opti
 1. er moet slechts één implementatie gemaakt worden (zoals bij `ArrayList` hierboven), en
 2. deze implementatie kan gebruikt worden om lijsten te maken waarbij het gegarandeerd is dat alle elementen een specifiek type hebben (zoals bij `ArrayListOfStudents`).
 
+In de volgende secties vind je meer informatie over het gebruik van generics.
+{{% children %}}
