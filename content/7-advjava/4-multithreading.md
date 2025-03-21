@@ -1,9 +1,9 @@
 ---
-title: "5.4 Multithreading en concurrency"
+title: "7.4 Multithreading en concurrency"
 toc: true
 autonumbering: true
 author: "Koen Yskout"
-draft: false
+draft: true
 ---
 
 {{% notice info "In andere programmeertalen" %}}

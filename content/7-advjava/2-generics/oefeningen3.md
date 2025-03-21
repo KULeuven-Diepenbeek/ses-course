@@ -90,6 +90,12 @@ public void testCompose() {
 }
 ```
 
+## Oud-examenvraag
+
+{{% notice todo TODO %}}
+Examenoefening
+{{% /notice %}}
+
 ## Animal food
 
 **Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen.**

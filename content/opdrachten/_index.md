@@ -218,6 +218,16 @@ Krijg je een type error in de `main` method van `App.java` in het 'checkneighbou
 
 Deze opdrachten worden **enkel door de studenten van SES**  gemaakt en ingediend via Github Classroom.
 
+### Gebruik van GenAI en samenwerking
+
+GenAI (ChatGPT, Copilot, Claude, ...) maakt een razendsnelle opgang in het leven van iedereen, en dus ook van informatici. Deze tools zijn dan ook zeer onderlegd in het schrijven van (beperkte hoeveelheden) code.
+
+Omdat dit deel van het vak gericht is op het **zelf leren programmeren**, en de opdrachten gequoteerd worden, is het **niet toegestaan** om dergelijke tools in te schakelen om de opdrachten op te lossen. Met andere woorden, we verwachten dus dat je **alle ingediende code zelf geschreven hebt**. Ook code delen met mede-studenten, of buitenstaanders om hulp vragen, is om dezelfde reden niet toegestaan.
+
+Op het examen zal een examenvraag toegevoegd worden die nagaat in welke mate je deze opdracht effectief onder de knie hebt. De score op die vraag zal ook invloed hebben op de punten van je werk doorheen het semester.
+
+Tenslotte is het absoluut geen probleem om GenAI tools te gebruiken bij het studeren en verwerken van de leerstof. Begrijp je een concept niet goed, en wil je meer uitleg of voorbeelden? Wil je hulp bij het oplossen van een oefening? Krijg je een compiler error niet opgelost? Gebruik deze tools dan gerust (hou er wel rekening mee dat er ook fouten in hun antwoord kunnen zitten)! Maar gebruik ze dus niet voor de opdracht.
+
 ### Setup
 
 Maak [hier (via GitHub Classroom)](https://classroom.github.com/a/OhUGgJxZ) je repository aan voor de assignment "Opdrachten deel 2". Deze repository is nog leeg.
@@ -226,7 +236,7 @@ Clone jouw (lege) repository naar je eigen machine, en voeg vervolgens een **twe
 git remote add startcode git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2425.git
 ```
 
-Je lokale repository heeft nu dus **twee** remote repositories:
+Je lokale repository heeft nu dus **twee** remote repositories (kijk dit na met `git remote -v`):
 - **origin**: je eigen GitHub repository
 - **startcode**: de GitHub repository met de startcode die door ons aangeleverd wordt
 
@@ -238,23 +248,25 @@ De startcode bevat een JavaFX-applicatie voor het spel CandyCrush.
 Het is een Gradle-project voor IntelliJ, en maakt gebruik van Java 21.
 Je kan de folder openen als project in IntelliJ.
 De applicatie is gestructureerd volgens het Model-View-Controller (MVC) patroon.
-Er zijn ook reeds enkele testen voorgedefinieerd met AssertJ.
+
+Er zijn ook reeds enkele testen voorgedefinieerd met AssertJ, maar de set van testen is **niet volledig**. De voorgedefinieerde testen dienen voornamelijk om na te gaan of je alle delen van de opgave geïmplementeerd hebt.
 
 {{% notice warning "Belangrijk!" %}}
 Omdat je inzendingen (deels) automatisch verbeterd zal worden, is het noodzakelijk dat de gegeven testen werken **zonder enige aanpassing** aan de gegeven testcode.
 Je mag uiteraard wel extra testen toevoegen.
 {{% /notice %}}
 
-### Opdracht: Records
+### Opdracht 1: Records
 
-1. Maak, in package `be.kuleuven.cs.ses.candycrush.board` een record genaamd `BoardSize` dat de grootte van een candycrush speelveld voorstelt als een aantal rijen (`rows`) en aantal kolommen (`columns`).
-   Het aantal rijen en kolommen moeten beiden groter zijn dan 0, zoniet gooi je een IllegalArgumentException.
+1. Maak, in package `ses.candycrush.board` een record genaamd `BoardSize` dat de grootte van een candycrush speelveld voorstelt als een aantal rijen (`rows`) en aantal kolommen (`columns`).
+   - Het aantal rijen en kolommen moeten beiden groter zijn dan 0, zoniet gooi je een `IllegalArgumentException`.
 
-2. Maak, in hetzelfde package, ook een tweede record (genaamd `Position`) dat een _geldige_ positie van een cel op een candycrush-speelveld voorstelt (rij- en kolomnummer).
-   Bij het aanmaken van een Position-object moet een rij- en kolomnummer en een `BoardSize` meegegeven worden aan de constructor.
-   Indien de positie niet geldig is gegeven de grootte van het speelveld, moet je een IllegalArgumentException gooien.
+2. Maak, in hetzelfde package, ook een tweede record genaamd `Position` dat een _geldige_ positie van een cel op een candycrush-speelveld voorstelt (`row` en `column`).
+   - Rijen en kolommen worden genummerd vanaf 0.
+   - Aan de constructor van een Position-object moeten een rij- en kolomnummer alsook een `BoardSize` meegegeven worden.
+   - Indien de positie ongeldig is voor de grootte van het speelveld, moet je een `IllegalArgumentException` gooien.
 
-3. Voeg in `Position` de volgende methodes toe, samen met zinvolle tests voor elke methode:
+3. Voeg in `Position` volgende methodes toe, samen met zinvolle tests voor elke methode:
 
    - een methode `int toIndex()` die de positie omzet in een index. Voor veld met 2 rijen en 4 kolommen lopen de indices als volgt:
 
@@ -262,39 +274,41 @@ Je mag uiteraard wel extra testen toevoegen.
      0 1 2 3
      4 5 6 7
      ```
-
    - een **statische** methode `Position fromIndex(int index, BoardSize size)` die de positie teruggeeft die overeenkomt met de gegeven index.
-     Deze methode moet een exception gooien indien de index ongeldig is.
-   - een methode `Collection<Position> neighborPositions()` die alle posities van (bestaande) directe buren in het speelveld teruggeeft.
-   - een methode `boolean isLastColumn()` die aangeeft of de positie de laatste is in een rij.
+     Deze methode moet een `IllegalArgumentException` gooien indien de index ongeldig is.
+   - methodes `boolean isFirstRow()`, `boolean isFirstColumm()`, `boolean isLastRow()`, en `boolean isLastColumn()` die aangeven of de positie zich in de eerste/laatste rij/kolom van het bord bevindt.
+   - een methode `Collection<Position> neighbors()` die alle posities van (geldige) directe buren (horizontaal en vertikaal) in het speelveld teruggeeft.
+   - een methode `boolean isNeighborOf(Position other)` die nagaat of de gegeven positie een directe buur is van de huidige positie. Gooit een `IllegalArgumentException` als de gegeven positie bij een andere bordgrootte hoort.
 
 4. Voeg in `BoardSize` de volgende methodes toe, samen met zinvolle tests:
 
-   - een methode `Collection<Position> positions()` die alle posities op het bord teruggeeft.
+   - een methode `Collection<Position> positions()` die een collectie (bv. een ArrayList) met daarin alle posities op het bord teruggeeft.
 
-5. Voeg een sealed interface `Candy` toe, met subklassen (records) voor
+5. Voeg, in package `ses.candycrush.model`, een **sealed interface** `Candy` toe, met subklassen (telkens een **record**, die je in de Candy-interface plaatst) voor
 
-   - `NormalCandy`, met een attribuut `color` (een int met mogelijke waarden 0, 1, 2, of 3)
-   - Elk van de vier speciale snoepjes uit `Candy_Crush_Spelregels.txt`
+   - `NoCandy`, wat staat voor het ontbreken van een snoepje.
+   - `NormalCandy`, met een attribuut `color` (een int met mogelijke waarden 0, 1, 2, of 3); je gooit een `IllegalArgumentException` indien een ongeldige kleur opgegeven wordt.
+   - Elk van de volgende speciale soorten snoepjes:
+      * een `RowSnapper`
+      * een `MultiCandy`
+      * een `RareCandy`
+      * een `TurnMaster`
 
-6. Voeg, in het package `be.kuleuven.cs.ses.candycrush.model` een record `Switch` toe, die een switch voorstelt tussen twee posities `first` en `second`.
-Beide posities moeten buren zijn van elkaar; je constructor moet een IllegalArgumentException gooien indien dat niet het geval is.
-Zorg ervoor dat het niet uitmaakt in welke volgorde de twee posities meegegeven worden aan de constructor; maar het veld `first` moet uiteindelijk de positie bevatten met de kleinste index (zoals gedefinieerd bij `toIndex()`).
+6. Voeg, in het package `ses.candycrush.model`, een record `Switch` toe. Switch-objecten stellen een wissel voor tussen twee posities `first` en `second`.
+   - Beide posities moeten buren zijn van elkaar; je constructor moet een `IllegalArgumentException` gooien indien dat niet het geval is.
+   - Zorg ervoor dat het niet uitmaakt in welke volgorde de twee posities meegegeven worden aan de constructor; maar het veld `first` moet uiteindelijk de positie bevatten met de kleinste index (zoals gedefinieerd bij `toIndex()`).
 
-7. Voeg aan het Switch-record een operatie `other(Position pos)` toe die de andere positie geeft dan de gegeven positie (dus first als je second meegeeft, en omgekeerd). Indien de gegeven positie geen deel uitmaakt van het switch-object, gooi je een IllegalArgumentException.
+7. Voeg aan dat Switch-record een operatie `other(Position pos)` toe die de andere positie teruggeeft dan de gegeven positie (dus als je first meegeeft, krijg je second terug, en omgekeerd).
+   - Indien de gegeven positie geen deel uitmaakt van het Switch-object, gooi je een `IllegalArgumentException`.
 
-8. Pas nu de startcode (model en view) aan zodat die zoveel mogelijk gebruik maakt van bovenstaande records. Dus:
-
+8. Pas nu je code (`CandyCrushGame`, `CandyCrushBoardUI`, en `Controller`) aan zodat die op zoveel mogelijk plaatsen gebruik maakt van bovenstaande records in plaats van int's (Switch moet je nog niet gebruiken). Dus:
    - op elke plaats waar voorheen een int voor width en/of height gebruikt of teruggegeven werd, moet nu `BoardSize` gebruikt worden
-   - op elke plaats waar voorheen een index (of rij- en/of kolomnummer) gebruikt of teruggegeven werd, moet nu een `Position` object gebruikt worden
+   - op elke plaats waar voorheen een rij- en/of kolomnummer gebruikt of teruggegeven werd, moet nu een `Position` object gebruikt worden
    - op elke plaats waar voorheen een int gebruikt of teruggegeven werd om een snoepje aan te duiden, moet nu een `Candy` object gebruikt worden.
-     - Je zal hiervoor (in je model) een methode moeten maken die een willekeurig Candy-object aan kan maken.
-     - Maak (in je view) een methode `Node makeCandyShape(Position position, Candy candy)` die een switch-expressie gebruikt om een JavaFX Node te maken voor de gegeven candy op de gegeven positie.
-       - Voor `NormalCandy` geef je een `Circle` terug met een (zelf te kiezen) kleur die overeenkomt met waarden 0, 1, 2, of 3.
-       - Voor de vier speciale snoepjes geef je een vierkant (`Rectangle`) terug, elk met een eigen kleur.
+   - In de klasse CandyCrushBoardUI moet je **pattern matching** gebruiken om een JavaFX Node aan te maken voor de gegeven candy op de gegeven positie.
 
-{{% notice todo %}}
-9. Voeg, naar analogie van `getSameNeighboursIds`, een methode `Collection<Position> getSameNeighbourPositions(Position position)` toe aan je model, gebruik makend van de records en methodes die je geschreven hebt. Denk eraan dat je records moet vergelijken met `equals`, en niet met `==`.
-{{% /notice %}}
+9. Maak in de model-klasse `CandyCrushGame` een publieke methode `Collection<Switch> getPotentialSwitchesOf(Position pos)` die alle mogelijke wissels teruggeeft (bv. in een ArrayList) van positie `pos` met één van zijn buren, zolang die buur geen NoCandy is en een verschillende kleur heeft. (_Deze methode zullen we in een latere opdracht verfijnen, maar voorlopig volstaat dit_).
+
+Als je dit alles gedaan hebt, zou alle code moeten compileren en zouden de tests moeten slagen.
 
 Tag het resultaat als `v1` en push dit naar jouw remote repository (origin) op GitHub.

@@ -1,9 +1,9 @@
 ---
-title: "5.5 Streams"
+title: "7.5 Streams"
 toc: true
 autonumbering: true
 author: "Koen Yskout"
-draft: false
+draft: true
 ---
 
 {{% notice info "In andere programmeertalen" %}}

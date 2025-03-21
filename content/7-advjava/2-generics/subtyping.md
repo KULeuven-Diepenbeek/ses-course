@@ -1,5 +1,5 @@
 ---
-title: "5.2.2 Generics en subtyping"
+title: "7.2.2 Generics en subtyping"
 toc: true
 weight: 30
 autonumbering: true

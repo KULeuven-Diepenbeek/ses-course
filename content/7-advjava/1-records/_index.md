@@ -1,5 +1,5 @@
 ---
-title: "5.1 Records"
+title: "7.1 Records"
 toc: true
 weight: 10
 autonumbering: true
@@ -8,7 +8,7 @@ draft: false
 
 {{% notice info "In andere programmeertalen" %}}
 De concepten in andere programmeertalen die het dichtst aanleunen bij Java records, pattern matching en sealed interfaces zijn
-- structs in C en C++ (pattern matching in C++ is nog niet beschikbaar, maar er wordt gewerkt aan het toevoegen)
+- structs in C en C++ (pattern matching in C++ is nog niet beschikbaar, maar er wordt gewerkt aan dit toe te voegen aan de taal)
 - @dataclass en structured pattern matching in Python
 - (sealed) record types en pattern matching in C#
 {{% /notice %}}
@@ -86,9 +86,9 @@ record PositiveNumber(int number) {
 
 4. wanneer je een (immutable) datatype wil maken dat zonder probleem door meerdere threads gebruikt kan worden; dit komt later nog aan bod in het onderwerp _Multithreading en concurrency_.
 
-Merk op dat bij records in de eerste plaats gaat over het creëren van een nieuw datatype, door (primitievere) data te bundelen of te beperken qua mogelijke waarden.
-Je maakt dus als het ware een nieuw primitief datatype, zoals int, double, of String.
-Dit in tegenstelling tot klassen, waar mogelijkheden om de toestand van het object aan te passen (mutatie-methodes) ook essentieel zijn.
+Merk op dat bij records in de eerste plaats gaat over het creëren van een nieuw datatype, door (primitievere) data of andere records te bundelen, of beperkingen op te leggen aan mogelijke waarden.
+Je maakt dus als het ware een nieuw 'primitief' datatype, zoals int, double, of String.
+Dit in tegenstelling tot gewone klassen, waar encapsulatie en mogelijkheden om de toestand van een object aan te passen (mutatie-methodes) ook essentieel zijn.
 
 ## Achter de schermen
 
@@ -188,10 +188,10 @@ Een record zelf kan ook geen subklasse zijn van een andere klasse of record, maa
 
 ## Immutable
 
-Een record is immutable: de attributen krijgen een waarde wanneer het object geconstrueerd wordt, en kunnen daarna nooit meer wijzigen.
+Een record is **immutable** (onveranderbaar): de attributen krijgen een waarde wanneer het object geconstrueerd wordt, en kunnen daarna nooit meer wijzigen.
 Als je een object wil met andere waarden, moet je dus een nieuw object maken.
 
-Bijvoorbeeld, als we een `translate` methode willen maken voor `Coordinate` hierboven, dan kunnen we de x- en y-coordinaten niet aanpassen.
+Bijvoorbeeld, als we een `translate` methode willen maken voor `Coordinate`, dan kunnen we de x- en y-coordinaten niet aanpassen.
 We moeten een nieuw Coordinate-object maken, en dat teruggeven:
 
 ```java
@@ -223,7 +223,8 @@ System.out.println(playlist1.equals(playlist2)); // => false
 ```
 
 Hier zijn twee record-objecten eerst gelijk, maar later niet meer.
-Dat schendt het principe dat, voor data-objecten, de identiteit van het object niet uitmaakt.
+Dat schendt het principe dat, voor data-objecten, de identiteit van het object niet zou mogen uitmaken.
+De objecten zijn immers niet meer dan de aggregatie van de data die ze bevatten.
 Overal waar `playlist1` gebruikt wordt, zou ook `playlist2` gebruikt moeten kunnen worden en vice versa.
 Twee record-objecten die gelijk zijn, moeten altijd gelijk blijven, onafhankelijk van wat er later nog gebeurt.
 Gebruik dus bij voorkeur immutable data types in een record.
@@ -294,7 +295,17 @@ record Rectangle(double length, double width) implements Shape {}
 
 Indien je geen permits-clausule opgeeft, zijn enkel de klassen die in hetzelfde bestand staan toegestaan.
 
-Voor een sealed klasse of interface zoals `Shape` zal de compiler niet toelaten dat je er later een andere klasse van laat overerven:
+Omdat elk Java-bestand slechts 1 publieke top-level klasse (of interface/record) mag hebben, zal je vaak ook zien dat de records _in_ de interface-definitie geplaatst worden:
+```java
+public sealed interface Shape {
+  record Square(double side) implements Shape {}
+  record Circle(double radius) implements Shape {}
+  record Rectangle(double length, double width) implements Shape {}
+}
+```
+Zo staan ze allemaal samen in 1 bestand, en kan je ze overal in je code gebruiken via bv. `Shape.Square`.
+
+Voor een sealed klasse of interface zoals `Shape` zal de compiler niet toelaten dat je er ergens anders een andere klasse van laat overerven:
 
 ```java
 record Triangle(double base, double height) implements Shape {} // <- compiler error
