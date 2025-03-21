@@ -79,6 +79,10 @@ Je kan dit toevoegen via onderstaande code:
 ![example workflow](https://github.com/USERNAME/REPONAME/actions/workflows/YMLFILENAME.yml/badge.svg)
 ```
 
+{{% notice tip Tip %}}
+Bij de opdrachten zal je repository onder de organisatie KULeuven-Diepenbeek staan, en niet onder je eigen username.
+{{% /notice %}}
+
 ## 2. Continuous Deployment (CD)
 
 Automatisch code compileren, testen, en packagen, is slechts één stap in het continuous development proces. De volgende stap is deze package ook automatisch _deployen_, of _installeren_. Op deze manier staat er altijd de laatste versie op een interne development website, kunnen installaties automatisch worden uitgevoerd op bepaalde tijdstippen, ... 
