@@ -63,7 +63,7 @@ Voeg extra methodes toe:
 ## Expressie-hierarchie
 
 Maak een set van records om een wiskundige uitdrukking voor te stellen.
-Alle records moeten een interface `Expression` implementeren.
+Alle records moeten een **sealed** interface `Expression` implementeren.
 
 De mogelijke expressies zijn:
 
@@ -96,7 +96,7 @@ class ExpressionUtils {
 ```
 
 Gebruik **pattern matching** (en TDD) voor elk van volgende opdrachten:
-1. Schrijf de methode `prettyPrint` die de gegeven expressie omzet in een string, bijvoorbeeld `prettyPrint(poly)` geeft `((3 * x^2) + 5)`.
+1. Schrijf de methode `prettyPrint` die de gegeven expressie omzet in een string, bijvoorbeeld `prettyPrint(poly)` geeft `(3.0) * ((x)^2.0) + 5.0`.
 2. zorg ervoor dat er geen onnodige haakjes verschijnen in het resultaat van `prettyPrint`, door rekening te houden met de volgorde van de bewerkingen. (_Hint: geef elke expressie een numerieke prioriteit_)
 3. de methode `simplify` moet de gegeven expressie te vereenvoudigen door enkele vereenvoudigingsregels toe te passen. Bijvoorbeeld, het vervangen van \(3 + 7\) door \(10\), vervangen van \(x+0\), \(x*1\), en \(x^1\) door \(x\); vervangen van \(x * 0\) door \(0\),  ...
 4. de methode `evaluate` moet de gegeven expressie evalueren voor de gegeven waarden van de variabelen. Bijvoorbeeld, \( 3x^2+5 \) evalueren met \( x=7 \) geeft \(152\). De parameter `variableValues` bevat een lijst van toekenningen van een waarde aan een variabele. Je moet de klasse `Assignment` eerst zelf nog maken (_Hint: gebruik hiervoor ook een record_).
