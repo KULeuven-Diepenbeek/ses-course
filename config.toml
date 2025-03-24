@@ -35,7 +35,7 @@ enableGitInfo = true
     lineNoStart = 1
     lineNos = false
     lineNumbersInTable = true
-    noClasses = true
+    noClasses = false
     tabWidth = 4
     style = "monokailight"
 
