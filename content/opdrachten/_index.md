@@ -249,11 +249,12 @@ Het is een Gradle-project voor IntelliJ, en maakt gebruik van Java 21.
 Je kan de folder openen als project in IntelliJ.
 De applicatie is gestructureerd volgens het Model-View-Controller (MVC) patroon.
 
-Er zijn ook reeds enkele testen voorgedefinieerd met AssertJ, maar de set van testen is **niet volledig**. De voorgedefinieerde testen dienen voornamelijk om na te gaan of je alle delen van de opgave geïmplementeerd hebt.
+Er zijn ook reeds enkele testen voorgedefinieerd met AssertJ, maar de set van testen is **niet volledig**. De voorgedefinieerde testen dienen voornamelijk om na te gaan of je oplossing automatisch getest kan worden.
 
 {{% notice warning "Belangrijk!" %}}
-Omdat je inzendingen (deels) automatisch verbeterd zal worden, is het noodzakelijk dat de gegeven testen werken **zonder enige aanpassing** aan de gegeven testcode.
+Omdat je inzendingen (deels) automatisch verbeterd zullen worden, is het noodzakelijk dat **alle** gegeven testen compileren **zonder enige aanpassingen**.
 Je mag uiteraard wel extra testen toevoegen.
+Ook is het geen groot probleem indien een bepaalde test niet slaagt --- zolang hij maar uitgevoerd kan worden.
 {{% /notice %}}
 
 ### Opdracht 1: Records
@@ -294,7 +295,7 @@ Je mag uiteraard wel extra testen toevoegen.
       * een `RareCandy`
       * een `TurnMaster`
 
-6. Voeg, in het package `ses.candycrush.model`, een record `Switch` toe. Switch-objecten stellen een wissel voor tussen twee posities `first` en `second`.
+6. Voeg, in het package `ses.candycrush.model`, een record `Switch` toe. Een Switch-object stelt een mogelijke wissel voor tussen twee posities `first` en `second`.
    - Beide posities moeten buren zijn van elkaar; je constructor moet een `IllegalArgumentException` gooien indien dat niet het geval is.
    - Zorg ervoor dat het niet uitmaakt in welke volgorde de twee posities meegegeven worden aan de constructor; maar het veld `first` moet uiteindelijk de positie bevatten met de kleinste index (zoals gedefinieerd bij `toIndex()`).
 
@@ -307,10 +308,12 @@ Je mag uiteraard wel extra testen toevoegen.
    - op elke plaats waar voorheen een int gebruikt of teruggegeven werd om een snoepje aan te duiden, moet nu een `Candy` object gebruikt worden.
    - In de klasse CandyCrushBoardUI moet je **pattern matching** gebruiken om een JavaFX Node aan te maken voor de gegeven candy op de gegeven positie.
 
-9. Maak in de model-klasse `CandyCrushGame` een publieke methode `Collection<Switch> getPotentialSwitchesOf(Position pos)` die alle mogelijke wissels teruggeeft (bv. in een ArrayList) van positie `pos` met één van zijn buren, zolang die buur geen NoCandy is en een verschillende kleur heeft. (_Deze methode zullen we in een latere opdracht verfijnen, maar voorlopig volstaat dit_).
+   Laat de compiler je helpen met het vinden van de nog aan te passen code, door bv. eerst de type van een veld te veranderen.
 
-10. In de `update()`-methode van `CandyCrushBoardUI` kan je nu code (gerelateerd aan het tonen van hints) uit commentaar halen (zie de TODO daarin).
+9. Maak in de model-klasse `CandyCrushGame` een publieke methode `Collection<Switch> getPotentialSwitchesOf(Position pos)` die alle mogelijke wissels teruggeeft (bv. in een ArrayList) van positie `pos`. Positie `pos` kan wisselen met een andere positie indien (1) ze buren zijn; (2) geen van beiden een NoCandy zijn; én (3) de snoepjes op beide posities verschillend zijn (qua soort of kleur). (_Deze methode zullen we in een latere opdracht verfijnen, maar voorlopig volstaat dit_).
 
-Als je dit alles gedaan hebt, zou alle code moeten compileren, zou de applicatie moeten uitvoeren (`./gradlew run`), en zouden de testen moeten slagen.
+10. In de `update()`-methode van `CandyCrushBoardUI` kan je nu code uit commentaar halen, gerelateerd aan het tonen van hints (zie de TODO daarin).
 
-Tag het resultaat als `v1` en push dit naar jouw remote repository (origin) op GitHub.
+Als je dit alles correct gedaan hebt, zou alle code moeten compileren, zou de applicatie moeten uitvoeren (`./gradlew run`), en zouden de testen moeten slagen.
+
+Tag het resultaat als `v1` en push dit naar jouw remote repository (origin) op GitHub: `git push origin`.
