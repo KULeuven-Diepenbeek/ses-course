@@ -46,15 +46,13 @@ static void pet(Mammal mammal) { /* ... */ }
 static void bark(Dog dog) { /* ... */ }
 static void layEgg(Bird bird) { /* ... */ }
 
-{
 Cat cat = new Cat();
 pet(cat);    // <- toegelaten (voldoet aan principe)
 bark(cat);   // <- niet toegelaten (compiler error) 👍
 layEgg(cat); // <- niet toegelaten (compiler error) 👍
-}
 ```
 
-## Toegepast op lijsten
+## Subtyping en generische lijsten
 
 Een lijst in Java is een geordende groep van elementen van hetzelfde type.
 `List<E>` is de interface[^interface] die aan de basis ligt van alle lijsten.
@@ -72,14 +70,17 @@ interface Collection<E> {
   public int size();
   /* ... */
 }
+
 interface List<E> extends Collection<E> {
   public E get(int index);
   /* ... */
 }
+
 class ArrayList<E> implements List<E> {
   private E[] elements;
   /* ... */
 }
+
 interface Set<E> extends Collection<E> { /* ... */ }
 interface Queue<E> extends Collection<E> { /* ... */ }
 ```
@@ -99,7 +100,7 @@ style Y2 fill:#eee,stroke:#aaa,color:#888
 {{% multicolumn %}}
 
 <div>
-In deze situatie is hetvolgende geldig:
+Volgende code is geldig:
 
 ```java
 List<Cat> cats = new ArrayList<Cat>();
@@ -122,7 +123,7 @@ X3["ArrayList#lt;Animal>"] --> Y3["List#lt;Animal>"] --> Z3["Collection#lt;Anima
 ```
 {{% /multicolumn %}}
 
-Het lijkt misschien logisch dat `ArrayList<Cat>` ook een subtype moet zijn van `ArrayList<Animal>`.
+Het lijkt intuïtief misschien logisch dat `ArrayList<Cat>` ook een subtype moet zijn van `ArrayList<Animal>`.
 Een lijst van katten lijkt tenslotte toch een speciaal geval te zijn van een lijst van dieren?
 Maar dat is niet het geval.
 
@@ -151,15 +152,20 @@ animals.add(dog); // <- OOPS: er zit nu een hond in de lijst van katten 🙁
 
 Je zou dus honden kunnen toevoegen aan je lijst van katten zonder dat de compiler je waarschuwt, en dat is niet gewenst.
 Om die reden beschouwt Java `ArrayList<Cat>` dus niet als subtype van `ArrayList<Animal>`, ondanks dat `Cat` wél een subtype van `Animal` is.
-Hieronder zullen we zien hoe we dit met wildcards in sommige gevallen wel kunnen toelaten.
+
+{{% notice note Onthoud %}}
+Zelfs als klasse `Sub` een subtype is van klasse `Super`, dan is `ArrayList<Sub>` toch **geen** subtype van `ArrayList<Super>`.
+{{% /notice %}}
+
+Later zullen we zien hoe we hier met [wildcards](wildcards.md) in sommige gevallen wel flexibeler mee kunnen omgaan.
 
 ## Overerven van een generisch type
 
-> [!todo]
-> TODO: nog verder uit te schrijven
-
 Hierboven gebruikten we vooral `ArrayList` als voorbeeld van een generische klasse.
 We hebben echter ook gezien dat je zelf generische klassen kan definiëren, en daarvan kan je uiteraard ook overerven.
+
+Bij de definitie van een subklasse moet je voor de generische parameter van de superklasse een waarde (type) meegeven. Je kan ervoor kiezen om je subklasse zelf generisch te maken (dus een nieuwe generische parameter te introduceren), of om een vooraf bepaald type mee te geven.
+Bijvoorbeeld:
 
 ```java
 class Super<T> { ... }
@@ -168,3 +174,7 @@ class SubForAnimal<A extends Animal> extends Super<A> { ... }
 
 class SubForCat extends SubAnimal<Cat> { ... }
 ```
+
+De superklasse `Super` heeft een generische parameter `T`.
+De subklasse `SubForAnimal` definieert zelf een generische parameter `A` (hier met begrenzing), en gebruikt parameter `A` als type voor `T` uit de superklasse.
+De klasse `SubForCat` tenslotte definieert zelf geen nieuwe generische parameter, maar geeft het type `Cat` op als type voor parameter `A` uit diens superklasse.

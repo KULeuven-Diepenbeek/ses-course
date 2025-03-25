@@ -7,14 +7,16 @@ draft: false
 ---
 
 We zagen eerder dat de types `List<Dog>` en `List<Animal>` niets met elkaar te maken hebben, ondanks het feit dat `Dog` een subtype is van `Animal`.
-Dat geldt in het algemeen voor generische types. Bijvoorbeeld, in volgende situatie:
+Dat geldt in het algemeen voor generische types.
+
+Als beide generische parameters hetzelfde type hebben, bestaat er wel een overervingsrelatie. Bijvoorbeeld, in volgende situatie:
 
 ```java
 class Shelter<T> { }
 class AnimalShelter<A extends Animal> extends Shelter<A> { ... }
 ```
 
-is `AnimalShelter<Dog>` een subtype van `Shelter<Dog>`, om dezelfde reden dat `ArrayList<Dog>` een subtype is van `List<Dog>`.
+is `AnimalShelter<Dog>` wel degelijk een subtype van `Shelter<Dog>`, om dezelfde reden dat `ArrayList<Dog>` een subtype is van `List<Dog>`.
 Volgende toekenning en methode-oproep zijn dus toegelaten:
 
 ```java
@@ -27,7 +29,7 @@ protectDog(animalShelter); // OK! 👍
 
 Dat komt omdat `AnimalShelter` een subtype is van `Shelter`, en de generische parameter bij beiden hetzelfde is.
 
-Als de generische parameters verschillend zijn, is er geen overervingsrelatie.
+Als de generische parameters verschillend zijn, is er echter geen overervingsrelatie.
 Bijvoorveeld, tussen `AnimalShelter<Cat>` en `Shelter<Animal>` is er geen overervingsrelatie.
 Ook is `Shelter<Cat>` geen subtype van `Shelter<Animal>`.
 Het volgende is bijgevolg **niet** toegelaten:
@@ -54,7 +56,9 @@ Dat staat los van de **definitie** van een generische klasse --- die definities 
 Wat als we een methode `copyFromTo` willen schrijven die de dieren uit een gegeven (bron-)lijst toevoegt aan een andere (doel-)lijst van dieren? Bijvoorbeeld:
 
 ```java
-public static void copyFromTo(ArrayList<Animal> source, ArrayList<Animal> target) {
+public static void copyFromTo(
+    ArrayList<Animal> source,
+    ArrayList<Animal> target) {
   for (Animal a : source) { target.add(a); }
 }
 
@@ -71,13 +75,19 @@ Maar dat lijkt wel een zinnige operatie.
 Een oplossing kan zijn om verschillende versies van de methode te schrijven:
 
 ```java
-public static void copyFromCatsTo(ArrayList<Cat> source, ArrayList<Animal> target) {
+public static void copyFromCatsTo(
+    ArrayList<Cat> source,
+    ArrayList<Animal> target) {
   for (Cat cat : source) { target.add(cat); }
 }
-public static void copyFromDogsTo(ArrayList<Dog> source, ArrayList<Animal> target) {
+public static void copyFromDogsTo(
+    ArrayList<Dog> source,
+    ArrayList<Animal> target) {
   for (Dog dog : source) { target.add(dog); }
 }
-public static void copyFromBirdsTo(ArrayList<Bird> source, ArrayList<Animal> target) {
+public static void copyFromBirdsTo(
+    ArrayList<Bird> source,
+    ArrayList<Animal> target) {
   for (Bird bird : source) { target.add(bird); }
 }
 ```
@@ -90,7 +100,9 @@ Maar dan lopen we opnieuw tegen het probleem van gedupliceerde code aan.
 Een eerste oplossing daarvoor is een generische methode, met een generische parameter die begrensd is (`T extends Animal`):
 
 ```java
-public static <T extends Animal> void copyFromTo_generic(ArrayList<T> source, ArrayList<Animal> target) {
+public static <T extends Animal> void copyFromTo_generic(
+    ArrayList<T> source,
+    ArrayList<Animal> target) {
   for (Animal a : source) { target.add(a); }
 }
 ```
@@ -100,18 +112,22 @@ In zo'n situatie kunnen we ook gebruik maken van het **wildcard-type `<? extends
 We kunnen bovenstaande methode dus ook zonder generische parameter schrijven als volgt:
 
 ```java
-public static void copyFromTo_wildcard(ArrayList<? extends Animal> source, ArrayList<Animal> target) {
+public static void copyFromTo_wildcard(
+    ArrayList<? extends Animal> source,
+    ArrayList<Animal> target) {
   for (Animal a : source) { target.add(a); }
 }
 ```
 
-Het type `ArrayList<? extends Animal>` staat dus voor _"elke ArrayList waar het element-type een (niet nader bepaald) subtype is van `Animal`"_.
 Volgende code is nu toegelaten:
 
 ```java
 copyFromTo_wildcard(dogs, animals); // OK! 👍
 copyFromTo_wildcard(cats, animals); // OK! 👍
 ```
+
+Het type `ArrayList<? extends Animal>` staat dus voor _"elke ArrayList waar het element-type een (niet nader bepaald) subtype is van `Animal`"_.
+Je kan dit ook bekijken alsof het type `ArrayList<? extends Animal>` tegelijk staat voor de types `ArrayList<Animal>`, `ArrayList<Mammal>`, `ArrayList<Cat>`, `ArrayList<Dog>`, alsook een lijst van elk ander type dier.
 
 Dit heet **covariantie**: omdat `Cat` een subtype is van `Animal`, is `ArrayList<Cat>` een subtype van `ArrayList<? extends Animal>`.
 De 'co' in covariantie wijst erop dat de overervingsrelatie tussen `Cat` en `Animal` in dezelfde richting loopt als die tussen `ArrayList<Cat>` en `ArrayList<? extends Animal>` (in tegenstelling tot contravariantie, wat zodadelijk aan bod komt).
@@ -135,7 +151,7 @@ class ALAnimal,Animal,ALextendsAnimal animal;
 
 Merk op dat `ArrayList<Animal>` ook een subtype is van `ArrayList<? extends Animal>`.
 
-We kunnen ook de relatie met `Mammal` toevoegen:
+We kunnen ook de relatie met `Mammal` toevoegen aan het plaatje:
 
 ```mermaid
 graph BT
@@ -175,7 +191,7 @@ public void copyMammalsFromTo(
 }
 ```
 
-omdat de eerste `ArrayList<? extends Mammal>` (`source`) bijvoorbeeld een `ArrayList<Cat>` kan zijn, en de tweede (`target`) een `ArrayList<Dog>`. Als je de types van beide parameters wil linken aan elkaar, moet je een generische methode gebruiken (zoals eerder gezien):
+omdat de eerste `ArrayList<? extends Mammal>` (`source`) bijvoorbeeld een `ArrayList<Cat>` kan zijn, en de tweede (`target`) een `ArrayList<Dog>`. Als je de types van beide parameters wil linken aan elkaar, _moet_ je een generische methode gebruiken (zoals eerder gezien):
 
 ```java
 public <T extends Mammal> void copyMammalsFromTo(
@@ -193,14 +209,16 @@ lijst.add("Hello");
 ```
 
 > [!tip]- Antwoord
-> De `lijst`-variabele is gedeclareerd als een ArrayList van een ongekend type. Op basis van het type van de variabele kan de compiler niet afleiden dat er  Strings toegevoegd mogen worden aan de lijst (het zou evengoed een ArrayList van Animals kunnen zijn).
+> De `lijst`-variabele is gedeclareerd als een ArrayList met elementen van een ongekend type. Op basis van het type van de variabele kan de compiler niet afleiden dat er  Strings toegevoegd mogen worden aan de lijst (het zou evengoed een ArrayList van Animals kunnen zijn).
 > Het feit dat `lijst` geinititialiseerd wordt met `<String>` doet hier niet terzake; enkel het type van de declaratie is van belang.
 
-
+{{% notice note Onthoud %}}
+Het type `ArrayList<? extends Mammal>` staat tegelijk voor de types `ArrayList<Mammal>`, `ArrayList<Cat>`, `ArrayList<Dog>`, en elk ander type dat overerft van Mammal.
+{{% /notice %}}
 
 ## Contravariantie (super)
 
-Wat als we een methode willen die de objecten uit een gegeven lijst van katten kopieert naar een lijst van willekeurige dieren? Bijvoorbeeld:
+Wat als we een methode willen die de objecten uit een gegeven bronlijst van katten kopieert naar een doellijst van willekeurige dieren? Bijvoorbeeld:
 
 ```java
 public static void copyFromCatsTo(
@@ -234,27 +252,37 @@ public static void copyFromCatsTo(
 En aparte methodes schrijven leidt opnieuw tot code-duplicatie:
 
 ```java
-public static void copyFromCatsToCats(ArrayList<Cat> source, ArrayList<Cat> target) {
+public static void copyFromCatsToCats(
+    ArrayList<Cat> source,
+    ArrayList<Cat> target) {
   for (Cat cat : source) { target.add(a); }
 }
-public static void copyFromCatsToMammals(ArrayList<Cat> source, ArrayList<Mammal> target) {
+public static void copyFromCatsToMammals(
+    ArrayList<Cat> source,
+    ArrayList<Mammal> target) {
   for (Cat cat : source) { target.add(a); }
 }
-public static void copyFromCatsToAnimals(ArrayList<Cat> source, ArrayList<Animal> target) {
+public static void copyFromCatsToAnimals(
+    ArrayList<Cat> source,
+    ArrayList<Animal> target) {
   for (Cat cat : source) { target.add(a); }
 }
 ```
 
-{{% notice note %}}
+{{% notice info Denkvraag %}}
 Zou het nuttig zijn om een methode `copyFromCatsToBirds(ArrayList<Cat> source, ArrayList<Bird> target)` te voorzien? Waarom (niet)?
 {{% /notice %}}
 
 De oplossing in dit geval is gebruik maken van het **wildcard-type `<? super T>`**.
 Het type `ArrayList<? super Cat>` staat dus voor _"elke ArrayList waar het element-type een supertype is van `Cat`"_ (inclusief het type `Cat` zelf).
+Of nog: `ArrayList<? super Cat>` staat tegelijk voor de types `ArrayList<Cat>`, `ArrayList<Mammal>`, `ArrayList<Animal>`, en `ArrayList<Object>`, alsook elke andere ArrayList met een supertype van `Cat` als element-type.
+
 We kunnen dus schrijven:
 
 ```java
-public static void copyFromCatsTo_wildcard(ArrayList<Cat> source, ArrayList<? super Cat> target) {
+public static void copyFromCatsTo_wildcard(
+    ArrayList<Cat> source,
+    ArrayList<? super Cat> target) {
   for (Cat cat : source) { target.add(a); }
 }
 ```
@@ -315,7 +343,12 @@ class ALMammal,Mammal,ALsuperMammal mammal;
 class ALAnimal,Animal,ALsuperAnimal animal;
 ```
 
-Aan de hand van de kleuren kan je snel zien dat de overervingsrelatie omgekeerd verloopt.
+Aan de hand van de kleuren kan je snel zien dat de overervingsrelatie links en rechts inderdaad omgekeerd verlopen.
+
+{{% notice note Onthoud %}}
+Het type `ArrayList<? super Mammal>` staat tegelijk voor de types `ArrayList<Mammal>`, `ArrayList<Animal>`, `ArrayList<Object>`, en elk ander type dat een superklasse (of interface) is van Mammal.
+{{% /notice %}}
+
 
 ## Covariantie of contravariantie: PECS
 
@@ -354,7 +387,7 @@ Een goede vuistregel is het acroniem **PECS**, wat staat voor **P**roducer **E**
 Dus:
 
 - Wanneer het object gebruikt wordt als een producent van `T`'s (met andere woorden, het object is een levancier van `T`-objecten voor jouw code, die ze vervolgens gebruikt), gebruik je `<? extends T>`. Dat is logisch: als jouw code met aangeleverde `T`'s omkan, dan kan jouw code ook om met de aanlevering van een subklasse van `T` (basisprincipe objectgeoriënteerd programmeren).
-- Wanneer het object gebruikt wordt als een consument van `T`'s (met andere woorden, het neemt `T`-objecten aan van jouw code), gebruik je `<? super T>`. Ook dat is logisch: een object dat beweert om te kunnen met elke superklasse van `T` kan zeker overweg met een `T` die jouw code aanlevert.
+- Wanneer het object gebruikt wordt als een consument van `T`'s (met andere woorden, het neemt `T`-objecten aan van jouw code), gebruik je `<? super T>`. Ook dat is logisch: een object dat beweert om te kunnen met elke superklasse van `T` moet zeker overweg kunnen met een `T` die jouw code aanlevert.
 - Wanneer het object zowel als consument als als producent gebruikt wordt, gebruik je gewoon `<T>` (dus geen co- of contra-variantie). Er is dan weinig tot geen flexibiliteit meer in het type.
 
 Een voorbeeld om PECS toe te passen: we willen een methode `copyFromTo` die zo flexibel mogelijk is, om elementen uit een lijst van zoogdieren te kopiëren naar een andere lijst.
@@ -415,7 +448,7 @@ copyMammalsFromTo(birds, animals);
 // compiler error (Bird is geen subtype van Mammal) 👍
 ```
 
-Merk op dat het type Mammal in onze laatste versie van `copyMammalsFromTo` hierboven eigenlijk onnodig is. We kunnen de methode nog verder veralgemenen door er een generische methode van te maken, die werkt voor alle lijsten:
+Merk op dat het type Mammal in onze laatste versie van `copyMammalsFromTo` hierboven eigenlijk onnodig is. We kunnen de methode nog verder veralgemenen door er een generische methode van te maken, die werkt voor alle lijsten (niet enkel lijsten van zoogdieren):
 
 ```java
 <T> void copyFromTo(
@@ -435,7 +468,7 @@ copyFromTo(birds, animals); // OK 👍
 
 ## Arrays en type erasure
 
-In tegenstelling tot ArrayLists (en andere generische types), beschouwt Java arrays wel altijd als co-variant.
+In tegenstelling tot ArrayLists (en andere generische types), beschouwt Java arrays wél altijd als covariant.
 Dat betekent dat `Cat[]` een subtype is van `Animal[]`.
 Volgende code compileert dus (maar gooit een uitzondering bij het uitvoeren):
 
@@ -448,15 +481,15 @@ De reden hiervoor is, in het kort, dat informatie over generics gewist wordt bij
 Dit heet **type erasure**.
 In de gecompileerde code is een `ArrayList<Animal>` en `ArrayList<Cat>` dus exact hetzelfde.
 Er kan dus, tijdens de uitvoering, niet gecontroleerd worden of je steeds het juiste type gebruikt.
-Dat moet de compiler dus doen, en die moet het zekere voor het onzekere nemen.
+Daarom moet de compiler dat doen, en die neemt het zekere voor het onzekere: alles wat mogelijk fout zou kunnen aflopen, wordt geweigerd.
 
-Bij arrays wordt er _wel_ type-informatie bijgehouden na het compileren, en kan dus gecontroleerd worden dat je geen ongeldig getypeerde elementen toevoegt. De compiler hoeft het niet af te dwingen --- maar het wordt wel nog steeds gecontroleerd tijdens de uitvoering, en kan leiden tot een exception.
+Bij arrays wordt er _wel_ type-informatie bijgehouden na het compileren, en kan dus tijdens de uitvoering nog gecontroleerd worden of je geen elementen met een ongeldig type toevoegt. De compiler hoeft het niet af te dwingen --- maar het wordt wel nog steeds gecontroleerd tijdens de uitvoering, en kan leiden tot een exception.
 
 ## Aandachtspunten
 
 ### Enkel bij generische types!
 
-Tenslotte nog een opmerking.
+Tenslotte nog een opmerking (op basis van vaak gemaakte fouten op examens).
 Co- en contra-variantie (extends, super, en wildcards dus) zijn enkel van toepassing op **generische** types.
 Alles wat we hierboven gezien hebben is dus enkel nuttig op plaatsen waar je een generisch type (`List<T>`, `Food<T>`, ...) gebruikt voor een parameter, terugkeertype, variabele, ....
 Dergelijke types kan je met behulp van co-/contra-variantie en wildcards verrijken tot bijvoorbeeld `List<? extends T>`, `Food<? super T>`, ...
@@ -478,6 +511,10 @@ public void pet(Mammal mammal) { ... }
 Deze methode kan óók al opgeroepen worden met een `Cat`-object, `Dog`-object, of elk ander type `Mammal` als argument.
 Je hebt hier geen co- of contra-variantie van generische types nodig; je maakt gewoon gebruik van overerving uit objectgeoriënteerd programmeren.
 
+{{% notice note Onthoud %}}
+Wildcards (`?`), co-variantie (`? extends`) en contra-variantie (`? super`) zijn enkel van toepassing bij generische types! Je kan ze dus niet gebruiken als een op zichzelf staand type. Je kan ze ook niet gebruiken bij de _definitie_ van een nieuwe generische parameter (voor een klasse of methode), maar enkel bij het gebruik ervan.
+{{% /notice %}}
+
 ### Bounds vs. co-/contravariantie en wildcards
 
 Tot slot is het nuttig om nog eens te benadrukken dat er een verschil is tussen het begrenzen van een generische parameter (met `extends`) enerzijds, en het gebruik van co-variantie, contra-variantie en wildcards (`? extends T`, `? super T`) anderzijds. Het feit dat `extends` in beide gevallen gebruikt wordt, kan misschien tot wat verwarring leiden.
@@ -495,3 +532,48 @@ Je kan co- en contravariantie toepassen op elke plaats waar je een generisch typ
 Het kan dus perfect zijn dat je de ene keer in je code eens `Food<Cat>` gebruikt, ergens anders `Food<? extends Cat>`, en nog ergens anders `Food<? super Cat>`.
 Bij begrenzing is dat niet zo; dat legt de grenzen eenmalig vast, en die moeten overal gerespecteerd worden waar het generisch type gebruikt wordt.
 
+{{% notice note Onthoud %}}
+Een **begrenzing** (`T extends X`) is een eenmalige **beperking** op het type dat gebruikt kan worden als waarden voor een nieuw geïntroduceerde generische parameter. Dit kan enkel voorkomen in de _definitie_ van een nieuwe generische parameter (bij een generische klasse of methode).
+
+**Co-en contravariantie** (`? extends X`, `? super X`) met wildcard `?` **versoepelen** de types die aanvaard worden door de compiler. Ze komen enkel voor op plaatsen waar een generisch type _gebruikt_ wordt. 
+{{% /notice %}}
+
+### Arrays met generisch type
+
+Als je een array wil maken van een generisch type, laat de Java-compiler dat niet toe:
+```java
+class MyClass<T> {
+  private T[] array;
+  public MyClass() {
+    array = new T[10]; // <-- niet toegelaten ☹️
+  }
+}
+```
+
+De reden is opnieuw [type erasure](#arrays-en-type-erasure).
+Aangezien arrays covariant zijn, moet tijdens de uitvoering gecontroleerd kunnen worden of objecten die in de array terechtkomen een geschikt type hebben.
+Aangezien generische parameters verwijderd worden door de compiler, kan dat niet.
+
+Een oplossing voor bovenstaand probleem is om een cast toe te voegen. Met een `@SuppressWarning` annotatie kan je de waarschuwing die door de compiler gegeven wordt negeren.
+
+```java
+class MyClass<T> {
+  private T[] array;
+
+  @SuppressWarning("unchecked")
+  public MyClass() {
+    array = (T[])new Object[10]; // <-- ok! 👍
+  }
+}
+```
+
+Het is natuurlijk ook mogelijk om gewoon een ArrayList te gebruiken; dan heb je dit probleem niet.
+```java
+class MyClass<T> {
+  private ArrayList<T> list;
+
+  public MyClass() {
+    list = new ArrayList<>(); // <-- ok! 👍
+  }
+}
+```
