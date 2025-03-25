@@ -455,7 +455,6 @@ public class ConnectionManager {
 </details>
 
 ```sql
---student.sql
 DROP TABLE IF EXISTS student_volgt_vak;
 
 DROP TABLE IF EXISTS student;
