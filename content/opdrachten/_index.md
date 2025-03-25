@@ -212,3 +212,142 @@ Krijg je een type error in de `main` method van `App.java` in het 'checkneighbou
 2. **Let op!** Je wil nu dus de testen runnen van een specifiek gradle project dat in een subdirectory staat. Meer info [hier](https://stackoverflow.com/questions/57806624/github-actions-how-to-build-project-in-sub-directory)
 
 3. Commit nu de veranderingen en tag als `v9` en push.
+
+
+## Opdrachten deel 2
+
+Deze opdrachten worden **enkel door de studenten van SES**  gemaakt en ingediend via Github Classroom.
+
+### Gebruik van GenAI en samenwerking
+
+GenAI (ChatGPT, Copilot, Claude, ...) maakt een razendsnelle opgang in het leven van iedereen, en dus ook van informatici. Deze tools zijn dan ook zeer onderlegd in het schrijven van (beperkte hoeveelheden) code.
+
+Omdat dit deel van het vak gericht is op het **zelf leren programmeren**, en de opdrachten gequoteerd worden, is het **niet toegestaan** om dergelijke tools in te schakelen om de opdrachten op te lossen. Met andere woorden, we verwachten dus dat je **alle ingediende code zelf geschreven hebt**. Ook code delen met mede-studenten, of buitenstaanders om hulp vragen, is om dezelfde reden niet toegestaan.
+
+Op het examen zal een examenvraag toegevoegd worden die nagaat in welke mate je deze opdracht effectief onder de knie hebt. De score op die vraag zal ook invloed hebben op de punten van je werk doorheen het semester.
+
+Tenslotte is het absoluut geen probleem om GenAI tools te gebruiken bij het studeren en verwerken van de leerstof. Begrijp je een concept niet goed, en wil je meer uitleg of voorbeelden? Wil je hulp bij het oplossen van een oefening? Krijg je een compiler error niet opgelost? Gebruik deze tools dan gerust (hou er wel rekening mee dat er ook fouten in hun antwoord kunnen zitten)! Maar gebruik ze dus niet voor de opdracht.
+
+### Setup
+
+Maak [hier (via GitHub Classroom)](https://classroom.github.com/a/OhUGgJxZ) je repository aan voor de assignment "Opdrachten deel 2". Deze repository is nog leeg.
+Clone jouw (lege) repository naar je eigen machine, en voeg vervolgens een **tweede remote** repository toe, namelijk `git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2425.git` onder de naam `startcode`. Dat kan je met volgend commando:
+```bash
+git remote add startcode git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2425.git
+```
+
+Je lokale repository heeft nu dus **twee** remote repositories (kijk dit na met `git remote -v`):
+- **origin**: je eigen GitHub repository
+- **startcode**: de GitHub repository met de startcode die door ons aangeleverd wordt
+
+Haal de laatste versie van de startcode op en merge die in je repository via `git pull startcode main`. Doe dit minstens voor elke nieuwe opdracht, en eventueel ook tussendoor (als er wijzigingen/bugfixes aan onze startcode gebeurd zijn).
+
+### Startcode
+
+De startcode bevat een JavaFX-applicatie voor het spel CandyCrush.
+Het is een Gradle-project voor IntelliJ, en maakt gebruik van Java 21.
+Je kan de folder openen als project in IntelliJ.
+De applicatie is gestructureerd volgens het Model-View-Controller (MVC) patroon.
+
+Er zijn ook reeds enkele testen voorgedefinieerd met AssertJ, maar de set van testen is **niet volledig**. De voorgedefinieerde testen dienen voornamelijk om na te gaan of je oplossing automatisch getest kan worden.
+
+{{% notice warning "Belangrijk!" %}}
+Omdat je inzendingen (deels) automatisch verbeterd zullen worden, is het noodzakelijk dat **alle** gegeven testen compileren **zonder enige aanpassingen**.
+Je mag uiteraard wel extra testen toevoegen.
+Ook is het geen groot probleem indien een bepaalde test niet slaagt --- zolang hij maar uitgevoerd kan worden.
+{{% /notice %}}
+
+### Opdracht 1: Records
+
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode main` uit te voeren in jouw lokale repository.
+{{% /notice %}}
+
+
+1. Maak, in package `ses.candycrush.board` een record genaamd `BoardSize` dat de grootte van een candycrush speelveld voorstelt als een aantal rijen (`rows`) en aantal kolommen (`columns`).
+   - Het aantal rijen en kolommen moeten beiden groter zijn dan 0, zoniet gooi je een `IllegalArgumentException`.
+
+2. Maak, in hetzelfde package, ook een tweede record genaamd `Position` dat een _geldige_ positie van een cel op een candycrush-speelveld voorstelt (`row` en `column`).
+   - Rijen en kolommen worden genummerd vanaf 0.
+   - Aan de constructor van een Position-object moeten een rij- en kolomnummer alsook een `BoardSize` meegegeven worden.
+   - Indien de positie ongeldig is voor de grootte van het speelveld, moet je een `IllegalArgumentException` gooien.
+
+3. Voeg in `Position` volgende methodes toe, samen met zinvolle tests voor elke methode:
+
+   - een methode `int toIndex()` die de positie omzet in een index. Voor veld met 2 rijen en 4 kolommen lopen de indices als volgt:
+
+     ```
+     0 1 2 3
+     4 5 6 7
+     ```
+   - een **statische** methode `Position fromIndex(int index, BoardSize size)` die de positie teruggeeft die overeenkomt met de gegeven index.
+     Deze methode moet een `IllegalArgumentException` gooien indien de index ongeldig is.
+   - methodes `boolean isFirstRow()`, `boolean isFirstColumm()`, `boolean isLastRow()`, en `boolean isLastColumn()` die aangeven of de positie zich in de eerste/laatste rij/kolom van het bord bevindt.
+   - een methode `Collection<Position> neighbors()` die alle posities van (geldige) directe buren (horizontaal en vertikaal) in het speelveld teruggeeft.
+   - een methode `boolean isNeighborOf(Position other)` die nagaat of de gegeven positie een directe buur is van de huidige positie. Gooit een `IllegalArgumentException` als de gegeven positie bij een andere bordgrootte hoort.
+
+4. Voeg in `BoardSize` de volgende methodes toe, samen met zinvolle tests:
+
+   - een methode `Collection<Position> positions()` die een collectie (bv. een ArrayList) met daarin alle posities op het bord teruggeeft.
+
+5. Voeg, in package `ses.candycrush.model`, een **sealed interface** `Candy` toe, met subklassen (telkens een **record**, die je in de Candy-interface plaatst) voor
+
+   - `NoCandy`, wat staat voor het ontbreken van een snoepje.
+   - `NormalCandy`, met een attribuut `color` (een int met mogelijke waarden 0, 1, 2, of 3); je gooit een `IllegalArgumentException` indien een ongeldige kleur opgegeven wordt.
+   - Elk van de volgende speciale soorten snoepjes:
+      * een `RowSnapper`
+      * een `MultiCandy`
+      * een `RareCandy`
+      * een `TurnMaster`
+
+6. Voeg, in het package `ses.candycrush.model`, een record `Switch` toe. Een Switch-object stelt een mogelijke wissel voor tussen twee posities `first` en `second`.
+   - Beide posities moeten buren zijn van elkaar; je constructor moet een `IllegalArgumentException` gooien indien dat niet het geval is.
+   - Zorg ervoor dat het niet uitmaakt in welke volgorde de twee posities meegegeven worden aan de constructor; maar het veld `first` moet uiteindelijk de positie bevatten met de kleinste index (zoals gedefinieerd bij `toIndex()`).
+
+7. Voeg aan dat Switch-record een operatie `other(Position pos)` toe die de andere positie teruggeeft dan de gegeven positie (dus als je first meegeeft, krijg je second terug, en omgekeerd).
+   - Indien de gegeven positie geen deel uitmaakt van het Switch-object, gooi je een `IllegalArgumentException`.
+
+8. Pas nu je code (`CandyCrushGame`, `CandyCrushBoardUI`, en `Controller`) aan zodat die op zoveel mogelijk plaatsen gebruik maakt van bovenstaande records in plaats van int's (Switch moet je nog niet gebruiken). Dus:
+   - op elke plaats waar voorheen een int voor width en/of height gebruikt of teruggegeven werd, moet nu `BoardSize` gebruikt worden
+   - op elke plaats waar voorheen een rij- en/of kolomnummer gebruikt of teruggegeven werd, moet nu een `Position` object gebruikt worden
+   - op elke plaats waar voorheen een int gebruikt of teruggegeven werd om een snoepje aan te duiden, moet nu een `Candy` object gebruikt worden.
+   - In de klasse CandyCrushBoardUI moet je **pattern matching** gebruiken om een JavaFX Node aan te maken voor de gegeven candy op de gegeven positie.
+
+   Laat de compiler je helpen met het vinden van de nog aan te passen code, door bv. eerst de type van een veld te veranderen.
+
+9. Maak in de model-klasse `CandyCrushGame` een publieke methode `Collection<Switch> getPotentialSwitchesOf(Position pos)` die alle mogelijke wissels teruggeeft (bv. in een ArrayList) van positie `pos`. Positie `pos` kan wisselen met een andere positie indien (1) ze buren zijn; (2) geen van beiden een NoCandy zijn; én (3) de snoepjes op beide posities verschillend zijn (qua soort of kleur). (_Deze methode zullen we in een latere opdracht verfijnen, maar voorlopig volstaat dit_).
+
+10. In de `update()`-methode van `CandyCrushBoardUI` kan je nu code uit commentaar halen, gerelateerd aan het tonen van hints (zie de TODO daarin).
+
+Als je dit alles correct gedaan hebt, zou alle code moeten compileren, zou de applicatie moeten uitvoeren (`./gradlew run`), en zouden de testen moeten slagen.
+
+Tag het resultaat als `v1` en push dit naar jouw remote repository (origin) op GitHub: `git push origin`.
+
+### Opdracht 2: Generics
+
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode main` uit te voeren in jouw lokale repository.
+{{% /notice %}}
+
+
+Een rechthoekig spelbord met cellen (vakjes) kan ook voor andere spellen dan Candycrush gebruikt worden; denk bijvoorbeeld aan schaken, dammen, zeeslag, go, ... . In deze opdracht ga je daarom een algemene klasse ontwikkelen voor een rechthoekig spelbord.
+
+1. Maak, in package `ses.candycrush.board`, een generische `Board`-klasse, met een generische parameter die het type van elke cel weergeeft.
+   Deze klasse moet maximaal gebruik maken van de `BoardSize` en `Position` records uit de vorige opdracht. De inhoud van de cellen kan je bijhouden als een array of ArrayList.
+
+2. De constructor van `Board` vereist enkel een `BoardSize`. Alle cellen zijn initieel `null`.
+
+2. Voeg volgende publieke methodes toe en implementeer ze:
+
+   - `BoardSize getSize()` die de grootte van het bord teruggeeft (als BoardSize-object)
+   - `boolean isValidPosition(position)` die nagaat of de gegeven positie geldig is voor dit bord (dus of ze in het bord ligt).
+   - `getCellAt(position)` om de cel op een gegeven positie van het bord op te vragen. Als de positie ongeldig is, gooi je een `IllegalArgumentException`.
+   - `void replaceCellAt(position, newCell)` om de cel op een gegeven positie te vervangen door een meegegeven object. Als de positie ongeldig is, gooi je een `IllegalArgumentException`.
+   - `void fill(cellCreatorFunction)` om het hele bord te vullen met objecten die teruggegeven worden door de `cellCreatorFunction`. De `cellCreatorFunction` is een `java.util.function.Function`-object die, gegeven een Position-object als argument, een nieuw cel-object teruggeeft als resultaat.
+   - een methode `copyTo(otherBoard)` die alle cellen van het huidige bord kopieert naar het meegegeven bord. Als het meegegeven bord niet dezelfde afmetingen heeft, gooi je een `IllegalArgumentException`.
+
+   Zorg dat deze laatste twee methodes zo algemeen mogelijk zijn qua type, en schrijf telkens een test waarin je hier gebruik van maakt.
+
+3. Gebruik de Board-klasse nu zoveel mogelijk in je model van Candycrush, waarbij de cellen `Candy`-objecten zijn.
+
+Tag het resultaat als `v2` en push dit naar je remote repository op Github.

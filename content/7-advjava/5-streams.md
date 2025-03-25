@@ -1,10 +1,17 @@
 ---
-title: "5.5 Streams"
+title: "7.5 Streams"
 toc: true
 autonumbering: true
 author: "Koen Yskout"
-draft: false
+draft: true
 ---
+
+{{% notice info "In andere programmeertalen" %}}
+De concepten in andere programmeertalen die het dichtst aanleunen bij Java streams zijn
+- ranges in C++
+- iterators en generators in Python
+- LINQ in C#
+{{% /notice %}}
 
 > [!todo]
 > TODO: antipattern 'forEach' + externe mutatie

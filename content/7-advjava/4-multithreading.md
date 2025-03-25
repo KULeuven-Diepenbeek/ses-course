@@ -1,10 +1,18 @@
 ---
-title: "5.4 Multithreading en concurrency"
+title: "7.4 Multithreading en concurrency"
 toc: true
 autonumbering: true
 author: "Koen Yskout"
-draft: false
+draft: true
 ---
+
+{{% notice info "In andere programmeertalen" %}}
+De concepten in andere programmeertalen die het dichtst aanleunen bij Java's multithreading en concurrency primitieven zijn
+- pthreads in C
+- `std::thread` en aanverwanten in C++
+- de `threading` en `multiprocessing` modules in Python
+- de `System.Threading` namespace in C#
+{{% /notice %}}
 
 ## Wat en waarom?
 

@@ -67,7 +67,7 @@ Het materiaal op deze website bouwt voort op materiaal van Dr. ing. Wouter Groen
 
 ### Vereiste voorkennis
 
-Het vak '_Software Ontwerp in Java_' (INF1) dient eerst gevolgd te worden. We gaan uit van een basiskennis Java en object-georiënteerd programmeren.
+Het vak '_Software Ontwerp in Java_' (INF1) dient eerst gevolgd te worden. We gaan uit van een basiskennis Java en object-georiënteerd programmeren. Een snelle opfrissing van Java kan je vinden [in de bijlagen](bijlagen/bijlageB_Java%20in%20een%20notendop.md).
 
 ### Beoordeling en evaluatie
 

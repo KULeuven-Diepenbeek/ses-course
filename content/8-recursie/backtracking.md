@@ -1,5 +1,5 @@
 ---
-title: "6.2 Backtracking"
+title: "8.2 Backtracking"
 autonumbering: true
 toc: true
 draft: false

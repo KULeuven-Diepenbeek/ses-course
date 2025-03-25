@@ -1,25 +1,33 @@
 ---
-title: "5.1 Records"
+title: "7.1 Records"
 toc: true
 weight: 10
 autonumbering: true
 draft: false
 ---
 
-> [!todo]
-> data-oriented programming (niet value classes): opt out of internal state/encapsulation (value = opt out of identity)
-
+{{% notice info "In andere programmeertalen" %}}
+De concepten in andere programmeertalen die het dichtst aanleunen bij Java records, pattern matching en sealed interfaces zijn
+- structs in C en C++ (pattern matching in C++ is nog niet beschikbaar, maar er wordt gewerkt aan dit toe te voegen aan de taal)
+- @dataclass en structured pattern matching in Python
+- (sealed) record types en pattern matching in C#
+{{% /notice %}}
 
 ## Wat zijn records
 
-Een **record** in Java is een eenvoudige klasse die een waarde voorstelt.
-Met een waarde bedoelen we een object waarvoor de identiteit volledig bepaald wordt door de attribuut-waarden, en het dus niet uitmaakt welke instantie je bekijkt.
-Welgekende voorbeelden zijn een coordinaat (bestaande uit een x- en y-attribuut), een geldbedrag (een bedrag en een munteenheid), een adres (straat, huisnummer, postcode, gemeente), etc.
+Wanneer we object-georiënteerd programmeren, maken we gebruik van *encapsulatie*: we maken de velden van een klasse gewoonlijk privaat, zodat ze worden afgeschermd van andere klassen. Op die manier kunnen we de interne representatie (de velden en hun types) makkelijk aanpassen: zolang de publieke methodes hetzelfde blijven, heeft zo'n aanpassing geen effect op de rest van het systeem.
 
-Een record-object dient dus als data-drager, waarbij verschillende objecten met dezelfde attribuut-waarden volledig inwisselbaar (equivalent) zijn.
+Maar soms is encapsulatie niet echt nodig: sommige klassen zijn niet meer dan een bundeling van verschillende waarden.
+Welgekende voorbeelden zijn een coordinaat (bestaande uit een x- en y-attribuut), een geldbedrag (een bedrag en een munteenheid), een adres (straat, huisnummer, postcode, gemeente), etc.
+Ze bevatten vaak geen complex gedrag, en objecten van deze klassen hoeven ook niet aanpasbaar te zijn; je kan makkelijk een nieuw object maken met andere waarden.
+We noemen dit **data-oriented programming**. 
+Voor dergelijke klassen heeft doorgedreven encapsulatie weinig zin.
+
+Een **record** in Java is een eenvoudige klasse die gebruikt kan worden voor data-oriented programming.
+Een record-object dient voornamelijk als data-drager, waarbij verschillende objecten met dezelfde attribuut-waarden gewoonlijk volledig inwisselbaar (equivalent) zijn.
 De attributen van een record-object mogen daarom niet veranderen doorheen de tijd (het object is dus **immutable**).
 
-Als voorbeeld definiëren we een coordinaat-klasse als een record, met 2 attributen: een x- en y-coordinaat.
+Als voorbeeld definiëren we een coördinaat-klasse als een record, met 2 attributen: een x- en y-coördinaat.
 
 ```java
 public record Coordinate(double x, double y) {
@@ -36,7 +44,7 @@ System.out.println(coord);
 // => Coordinate[x=3.0, y=5.0]
 ```
 
-Twee coordinaat-objecten met dezelfde x- en y-coordinaat worden als equivalent beschouwd, ook al zijn het twee verschillende objecten:
+Twee coördinaat-objecten met dezelfde x- en y-coordinaat worden als equivalent beschouwd, ook al zijn het twee verschillende objecten:
 
 ```java
 var coordinate1 = new Coordinate(3, 5);
@@ -51,7 +59,11 @@ Er zijn meerdere situaties waarin het aangeraden is om een record te gebruiken, 
 1. wanneer je meerdere waarden (die logisch bij elkaar horen) wil bundelen:
 
 ```java
-record Address(String street, int number, int zipcode, String city, String country) {}
+record Address(String street,
+               int houseNumber,
+               int zipCode,
+               String city,
+               String country) {}
 ```
 
 2. wanneer je een methode meerdere waarden wil laten teruggeven
@@ -74,9 +86,9 @@ record PositiveNumber(int number) {
 
 4. wanneer je een (immutable) datatype wil maken dat zonder probleem door meerdere threads gebruikt kan worden; dit komt later nog aan bod in het onderwerp _Multithreading en concurrency_.
 
-Merk op dat bij records in de eerste plaats gaat over het creëren van een nieuw datatype, door (primitievere) data te bundelen of te beperken qua mogelijke waarden.
-Je maakt dus als het ware een nieuw primitief datatype, zoals int, double, of String.
-Dit in tegenstelling tot klassen, waar gedrag om het object aan te passen (mutatie-methodes) en identiteit ook essentieel zijn.
+Merk op dat bij records in de eerste plaats gaat over het creëren van een nieuw datatype, door (primitievere) data of andere records te bundelen, of beperkingen op te leggen aan mogelijke waarden.
+Je maakt dus als het ware een nieuw 'primitief' datatype, zoals int, double, of String.
+Dit in tegenstelling tot gewone klassen, waar encapsulatie en mogelijkheden om de toestand van een object aan te passen (mutatie-methodes) ook essentieel zijn.
 
 ## Achter de schermen
 
@@ -89,7 +101,7 @@ Een record is eigenlijk een gewone klasse, waarbij de Java-compiler zelf enkele 
 
 De klasse is ook `final`, zodat er geen subklassen van gemaakt kunnen worden.
 
-De coordinaat-definitie van hierboven is equivalent aan volgende klasse-definitie:
+De coördinaat-record van hierboven is equivalent aan volgende klasse-definitie:
 
 ```java
 public final class Coordinate {
@@ -119,20 +131,28 @@ Je kan zelf extra methodes toevoegen aan een record op dezelfde manier als bij e
 
 ```java
 public record Coordinate(double x, double y) {
+
   public double distanceTo(Coordinate other) {
     double deltaX = other.x() - this.x();
     double deltaY = other.y() - this.y();
     return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
   }
+
 }
 ```
 
+Merk wel op dat, omdat de klasse immutable is, je in een methode geen nieuwe waarde kan toekennen aan de velden. Code als
+```java
+  this.x = 5;
+```
+in een methode van een record is dus ongeldig, en leidt tot een foutmelding van de compiler.
+
 ## Constructor van een record
 
-Als je geen constructor definieert, krijgt een record een standaard constructor met de opgegeven attributen als parameters (in dezelfde volgorde).
+Als je geen enkele constructor definieert, krijgt een record een standaard constructor met de opgegeven attributen als parameters (in dezelfde volgorde).
 
-Maar je kan ook zelf een of meerdere constructoren definiëren voor een record, net zoals bij klassen.
-Je moet dan zelf zorgen dat je alle attributen van de record initialiseert.
+Maar je kan ook zelf een of meerdere constructoren definiëren voor een record, net zoals bij klassen (je krijgt dan geen default-constructor meer).
+Je moet in die constructoren zorgen dat alle attributen van het record geïnitialiseerd worden.
 
 ```java
 public record Coordinate(double x, double y) {
@@ -148,7 +168,7 @@ public record Coordinate(double x, double y) {
 
 Er is ook een verkorte notatie, waarbij je de parameters niet meer moet herhalen (die staan immers al achter de naam van het record).
 Je hoeft met deze notatie ook de parameters niet toe te kennen aan de velden; dat gebeurt automatisch.
-Het belangrijkste nut hiervan is dus om de geldigheid van de waarden te controleren bij het aanmaken van een object:
+Het belangrijkste nut hiervan is om de geldigheid van de waarden te controleren bij het aanmaken van een object:
 
 ```java
 public record Coordinate(double x, double y) {
@@ -161,18 +181,18 @@ public record Coordinate(double x, double y) {
 
 ## Records en overerving
 
-Zoals eerder al vermeldt komt een record overeen met een `final` klasse.
+Zoals eerder al vermeld werd, komt een record overeen met een `final` klasse.
 Je kan er dus niet van overerven.
 
 Een record zelf kan ook geen subklasse zijn van een andere klasse of record, maar kan wel interfaces implementeren.
 
 ## Immutable
 
-Een record is immutable: de attributen krijgen een waarde wanneer het object geconstrueerd wordt, en kunnen daarna nooit meer wijzigen.
+Een record is **immutable** (onveranderbaar): de attributen krijgen een waarde wanneer het object geconstrueerd wordt, en kunnen daarna nooit meer wijzigen.
 Als je een object wil met andere waarden, moet je dus een nieuw object maken.
 
-Bijvoorbeeld, als we een `translate` methode willen maken voor `Coordinate` hierboven, dan kunnen we de x- en y-coordinaten niet aanpassen.
-We moeten een nieuw object maken, en dat teruggeven:
+Bijvoorbeeld, als we een `translate` methode willen maken voor `Coordinate`, dan kunnen we de x- en y-coordinaten niet aanpassen.
+We moeten een nieuw Coordinate-object maken, en dat teruggeven:
 
 ```java
 public record Coordinate(double x, double y) {
@@ -186,11 +206,8 @@ public record Coordinate(double x, double y) {
 }
 ```
 
-{{% notice note %}}
-**Let op!** Als een van de attributen van het object zelf gewijzigd kan worden, kan dat attribuut nog steeds aangepast worden.
+**Let op!** Als een van de velden van het record een object is dat zelf wél gewijzigd kan worden (bijvoorbeeld een array of ArrayList), dan kan je de data die geassocieerd wordt met het record dus wel nog wijzigen.
 Vermijd deze situatie!
-{{% /notice %}}
-
 Bijvoorbeeld:
 
 ```java
@@ -206,10 +223,11 @@ System.out.println(playlist1.equals(playlist2)); // => false
 ```
 
 Hier zijn twee record-objecten eerst gelijk, maar later niet meer.
-Dat schendt het principe dat de identiteit van het object niet uitmaakt.
+Dat schendt het principe dat, voor data-objecten, de identiteit van het object niet zou mogen uitmaken.
+De objecten zijn immers niet meer dan de aggregatie van de data die ze bevatten.
 Overal waar `playlist1` gebruikt wordt, zou ook `playlist2` gebruikt moeten kunnen worden en vice versa.
 Twee record-objecten die gelijk zijn, moeten altijd gelijk blijven, onafhankelijk van wat er later nog gebeurt.
-Gebruik dus steeds immutable data types in een record.
+Gebruik dus bij voorkeur immutable data types in een record.
 
 ## Pattern matching
 
@@ -261,6 +279,8 @@ public double area(Shape shape) {
 }
 ```
 
+Op die manier kan je extra voorwaarden toevoegen om een case te laten matchen, bovenop het type van het element.
+
 ## Sealed interfaces
 
 Wanneer je alle klassen kent die een bepaalde interface zullen implementeren (of van een abstracte klasse zullen overerven), kan je van deze interface (of klasse) een **sealed** interface (of klasse) maken.
@@ -273,9 +293,19 @@ record Circle(double radius) implements Shape {}
 record Rectangle(double length, double width) implements Shape {}
 ```
 
-Indien je geen permits-clausule opgeeft, zijn enkel de klassen die in hetzelfde bestand toegestaan.
+Indien je geen permits-clausule opgeeft, zijn enkel de klassen die in hetzelfde bestand staan toegestaan.
 
-Voor een sealed klasse of interface zoals `Shape` zal de compiler niet toelaten dat je er later een andere klasse van laat overerven:
+Omdat elk Java-bestand slechts 1 publieke top-level klasse (of interface/record) mag hebben, zal je vaak ook zien dat de records _in_ de interface-definitie geplaatst worden:
+```java
+public sealed interface Shape {
+  record Square(double side) implements Shape {}
+  record Circle(double radius) implements Shape {}
+  record Rectangle(double length, double width) implements Shape {}
+}
+```
+Zo staan ze allemaal samen in 1 bestand, en kan je ze overal in je code gebruiken via bv. `Shape.Square`.
+
+Voor een sealed klasse of interface zoals `Shape` zal de compiler niet toelaten dat je er ergens anders een andere klasse van laat overerven:
 
 ```java
 record Triangle(double base, double height) implements Shape {} // <- compiler error
