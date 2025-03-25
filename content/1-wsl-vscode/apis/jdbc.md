@@ -393,9 +393,11 @@ public class Student {
 ```java
 package be.kuleuven;
 
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.Objects;
 
 public class ConnectionManager {
     private Connection connection;
@@ -434,7 +436,8 @@ public class ConnectionManager {
     }
 
     public void initTables() throws Exception {
-        String sql = new String(Files.readAllBytes(Paths.get("src/main/resources/dbcreate.sql")));
+        URI path = Objects.requireNonNull(App.class.getClassLoader().getResource("student.sql")).toURI();
+        var sql = new String(Files.readAllBytes(Paths.get(path)));
         System.out.println(sql);
         Statement s = connection.createStatement();
         s.executeUpdate(sql);
@@ -450,6 +453,26 @@ public class ConnectionManager {
 ```
 </p>
 </details>
+
+```sql
+--student.sql
+DROP TABLE IF EXISTS student_volgt_vak;
+
+DROP TABLE IF EXISTS student;
+DROP TABLE IF EXISTS vak;
+DROP TABLE IF EXISTS opleiding;
+
+CREATE TABLE student(
+    studnr INT NOT NULL PRIMARY KEY,
+    naam VARCHAR(200) NOT NULL,
+    voornaam VARCHAR(200),
+    goedbezig BOOLEAN
+);
+
+INSERT INTO student(studnr, naam, voornaam, goedbezig) VALUES (123, 'Trekhaak', 'Jaak', 0);
+INSERT INTO student(studnr, naam, voornaam, goedbezig) VALUES (456, 'Peeters', 'Jos', 0);
+INSERT INTO student(studnr, naam, voornaam, goedbezig) VALUES (890, 'Dongmans', 'Ding', 1);
+```
 
 <details closed>
 <summary><i><b>Klik hier voor een voorbeeld van de <code>Main</code> klasse waar we bovenstaande klassen gebruiken </b></i>🔽</summary>
