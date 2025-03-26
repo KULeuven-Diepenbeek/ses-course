@@ -230,17 +230,27 @@ Tenslotte is het absoluut geen probleem om GenAI tools te gebruiken bij het stud
 
 ### Setup
 
-Maak [hier (via GitHub Classroom)](https://classroom.github.com/a/OhUGgJxZ) je repository aan voor de assignment "Opdrachten deel 2". Deze repository is nog leeg.
-Clone jouw (lege) repository naar je eigen machine, en voeg vervolgens een **tweede remote** repository toe, namelijk `git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2425.git` onder de naam `startcode`. Dat kan je met volgend commando:
-```bash
-git remote add startcode git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2425.git
-```
+Volg onderstaande stappen nauwgezet om je project juist te configureren.
 
-Je lokale repository heeft nu dus **twee** remote repositories (kijk dit na met `git remote -v`):
-- **origin**: je eigen GitHub repository
-- **startcode**: de GitHub repository met de startcode die door ons aangeleverd wordt
+1. Maak [hier (via GitHub Classroom)](https://classroom.github.com/a/OhUGgJxZ) je repository aan voor de assignment "Opdrachten deel 2". Deze repository is nog leeg.
+2. Clone jouw (lege) repository naar een folder op je eigen machine.
+3. Voeg vervolgens een **tweede remote** aan die repository op je machine toe, namelijk `git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2425.git` onder de naam `startcode`. Dat kan je met volgend commando:
+   ```bash
+   git remote add startcode git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2425.git
+   ```
 
-Haal de laatste versie van de startcode op en merge die in je repository via `git pull startcode main`. Doe dit minstens voor elke nieuwe opdracht, en eventueel ook tussendoor (als er wijzigingen/bugfixes aan onze startcode gebeurd zijn).
+   Je lokale repository heeft nu dus **twee** remote repositories (kijk dit na met `git remote -v`):
+   - **origin**: je eigen GitHub repository
+   - **startcode**: de GitHub repository met de startcode die door ons aangeleverd wordt
+
+4. Haal de laatste versie van de startcode op en merge die in je repository via `git pull startcode main`. Doe dit minstens voor elke nieuwe opdracht, en eventueel ook tussendoor (als er wijzigingen/bugfixes aan onze startcode gebeurd zijn).
+
+5. Open de folder `CandyCrush` uit de repository als project in IntelliJ. **Opgelet!** zorg dat je de `CandyCrush` folder als project opent in IntelliJ, en _niet_ de bovenliggende folder van je repository (`ses-opdrachten-deel2-...`)!
+
+Als alles goed gegaan is, wordt je project herkend en geïmporteerd als een Gradle-Java-project. Het is normaal dat de testen nog fouten geven bij het compileren, aangezien die code verwachten die je nog moet schrijven als deel van de opdracht.
+Je kan normaalgezien wel al de `main`-methode in `CandyCrushMain` uitvoeren.
+
+![IntelliJ bij het importeren van het project.](/img/opdracht2/opdracht2-intellij.png)
 
 ### Startcode
 
