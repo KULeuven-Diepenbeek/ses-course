@@ -332,3 +332,32 @@ Merge eerst de laatste versie van de startcode in je repository door `git pull s
 Als je dit alles correct gedaan hebt, zou alle code moeten compileren, zou de applicatie moeten uitvoeren (`./gradlew run`), en zouden de testen moeten slagen.
 
 Tag het resultaat als `v1` en push dit naar jouw remote repository (origin) op GitHub: `git push origin`.
+
+### Opdracht 2: Generics
+
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode 02-generics` uit te voeren in de `main`-branch van jouw lokale repository.
+{{% /notice %}}
+
+
+Een rechthoekig spelbord met cellen (vakjes) kan ook voor andere spellen dan Candycrush gebruikt worden; denk bijvoorbeeld aan schaken, dammen, zeeslag, go, ... . In deze opdracht ga je daarom een algemene klasse ontwikkelen voor een rechthoekig spelbord.
+
+1. Maak, in package `ses.candycrush.board`, een generische `Board`-klasse, met een generische parameter die het type van elke cel weergeeft.
+   Deze klasse moet maximaal gebruik maken van de `BoardSize` en `Position` records uit de vorige opdracht. De inhoud van de cellen kan je bijhouden als een array of ArrayList.
+
+2. De constructor van `Board` vereist enkel een `BoardSize`. Alle cellen zijn initieel `null`.
+
+2. Voeg volgende publieke methodes toe en implementeer ze:
+
+   - `BoardSize getSize()` die de grootte van het bord teruggeeft (als BoardSize-object)
+   - `boolean isValidPosition(position)` die nagaat of de gegeven positie geldig is voor dit bord (dus of ze in het bord ligt).
+   - `getCellAt(position)` om de cel op een gegeven positie van het bord op te vragen. Als de positie ongeldig is, gooi je een `IllegalArgumentException`.
+   - `void replaceCellAt(position, newCell)` om de cel op een gegeven positie te vervangen door een meegegeven object. Als de positie ongeldig is, gooi je een `IllegalArgumentException`.
+   - `void fill(cellCreatorFunction)` om het hele bord te vullen met objecten die teruggegeven worden door de `cellCreatorFunction`. De `cellCreatorFunction` is een `java.util.function.Function`-object dat, gegeven een Position-object als argument, het cel-object teruggeeft wat op die positie geplaatst moet worden.
+   - een methode `copyTo(otherBoard)` die alle cellen van het huidige bord kopieert naar het meegegeven bord. Als het meegegeven bord niet dezelfde afmetingen heeft, gooi je een `IllegalArgumentException`.
+
+   Zorg dat deze laatste twee methodes zo algemeen mogelijk zijn qua type, en schrijf telkens een test waarin je hier gebruik van maakt.
+
+3. Gebruik de Board-klasse nu zoveel mogelijk in `CandyCrushGame`, waarbij de cellen `Candy`-objecten zijn.
+
+Tag het resultaat als `v2` en push dit naar je remote repository op GitHub.
