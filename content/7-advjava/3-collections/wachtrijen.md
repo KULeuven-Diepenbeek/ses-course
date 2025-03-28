@@ -48,7 +48,7 @@ classDiagram
 ## Queue, Deque
 
 Een [`Queue`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Queue.html) is een collectie die lijkt op een lijst.
-Het voornaamste verschil met een lijst is dat een queue specifiek dient elk toegevoegd elementen er later terug uit te halen, en dat een queue niet toelaat om te werken met de positie (index) van een element.
+Het voornaamste verschil met een lijst is dat een queue specifiek dient om elk toegevoegd elementen er later terug uit te halen, en dat een queue niet toelaat om te werken met de positie (index) van een element.
 Het volgende element dat teruggegeven wordt uit de queue wordt het hoofd (**head**) van de queue genoemd, de andere elementen de staart (**tail**).
 Er bestaan operaties om het element aan het hoofd van de queue terug te geven en meteen te verwijderen (`poll`), alsook een andere operatie om het hoofd op te vragen zonder het meteen te verwijderen (`peek`). Als er geen elementen in de queue zitten, geven beiden `null` terug.
 

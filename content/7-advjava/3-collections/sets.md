@@ -26,10 +26,10 @@ classDiagram
 
 ## Set
 
-Alle collecties die we hierboven gezien hebben, kunnen dubbels bevatten.
+Alle collecties die we totnogtoe gezien hebben, kunnen dubbels bevatten.
 Bij een `Set` is dat niet het geval. Het is een abstractie voor een wiskundige verzameling: elk element komt hoogstens één keer voor.
 In een wiskundige verzameling is ook de volgorde van de elementen niet van belang.
-De `Set` interface legt geen volgorde van elementen vast, maar er bestaan sub-interfaces van `Set` (bijvoorbeeld `SequencedSet` en `SortedSet`) die wel toelaten dat de elementen een bepaalde volgorde hebben.
+De `Set` interface legt geen volgorde van elementen vast, maar er bestaan sub-interfaces van `Set` (bijvoorbeeld `SequencedSet` en `SortedSet`) die wél toelaten dat de elementen een bepaalde volgorde hebben.
 
 De [`Set`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html) interface voegt in feite geen nieuwe operaties toe aan de Collection-interface. Je kan elementen toevoegen, verwijderen, en nagaan of een element in de verzameling zit.
 
@@ -76,7 +76,7 @@ Elke keer wanneer we een element toevoegen, voegen we een knoop toe aan de gelin
 Wanneer we een element opvragen, doorlopen we de gelinkte lijst om na te gaan of het element daarin voorkomt.
 Als er veel collisions zijn, verliezen we zo natuurlijk het performantie-voordeel van de hashtable.
 Inderdaad, in extremis hebben alle objecten dezelfde hashcode, en bevat de hashtable slechts één gelinkte lijst met daarin alle elementen.
-Een goede hashfunctie, die elemnten goed verspreidt over de verschillende buckets, is dus essentieel voor de performantie.
+Een goede hashfunctie, die elementen goed verspreidt over de verschillende buckets, is dus essentieel voor de performantie.
 
 ```mermaid
 block-beta
@@ -143,4 +143,4 @@ De elementen worden steeds in gesorteerde volgorde opgeslagen en teruggegeven.
 De [`TreeSet`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeSet.html) klasse is een implementatie van SortedSet die gebruik maakt van een gebalanceerde boomstructuur (een [red-black tree](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree) --- de werking daarvan is hier niet van belang).
 
 Alle basisoperaties (add, remove, contains) hebben worst-case tijdscomplexiteit \\(\mathcal{O}(\log n)\\); invoegen en verwijderen zijn best-case \\(\mathcal{O}(1)\\).
-
+De oorsprong van het logaritme wordt duidelijk aan de hand van [deze oefening](oefeningen.md/#boomstructuur).

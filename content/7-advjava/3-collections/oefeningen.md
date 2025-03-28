@@ -195,10 +195,51 @@ Hint: schrijf een Comparator. Je kan daarbij gebruik maken van de statische meth
 
 ## Sets
 
+### Unieke hashcode
+Test uit hoe belangrijk het is dat de hashcodes van verschillende objecten in een HashSet goed verdeeld zijn aan de hand van de code hieronder.
+Deze code meet hoelang het duurt om een HashSet te vullen met 50000 objecten; de eerste keer met goed verspreide hashcodes, en de tweede keer een keer met steeds dezelfde hashcode. Voer uit; merk je een verschil?
+
+```java
+import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+
+public class Timing {
+
+    record DefaultHashcode(int i) {}
+    record CustomHashcode(int i) {
+        @Override
+        public int hashCode() {
+            return 4;
+        }
+    }
+
+    public static void main(String[] args) {
+        test(DefaultHashcode::new);
+        System.gc();
+        test(CustomHashcode::new);
+    }
+
+    private static <T> void test(Function<Integer, T> ctor) {
+        var set = new HashSet<T>();
+        var start = System.nanoTime();
+        for (int i = 0; i < 50_000; i++) {
+            set.add(ctor.apply(i));
+        }
+        var end = System.nanoTime();
+        System.out.println(set.size() + " elements added in " + TimeUnit.NANOSECONDS.toMillis(end - start) + "ms");
+    }
+}
+```
+
 ### Veranderende hashcode
 
 Is het nodig dat de hashCode van een object hetzelfde blijft doorheen de levensduur van het object, of mag deze veranderen?
 Verklaar je antwoord.
+
+{{% notice style=tip title=Antwoord expanded=false %}}
+Nee, deze mag niet veranderen. Mocht die wel veranderen, kan het zijn dat je een object niet meer terugvindt in een set, omdat er (door de veranderde hashcode) in een andere bucket gezocht wordt dan waar het object zich bevindt.
+{{% /notice %}}
 
 ### Boomstructuur
 
@@ -281,7 +322,7 @@ Kies een of meerdere datastructuren om volgende methodes te implementeren:
 
 Om te werken met huidige tijd en intervallen tussen twee tijdstippen, kan je gebruik maken van [`java.time.Instant`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Instant.html).
 
-### Multimap
+### MultiMap
 
 Schrijf een klasse `MultiMap` die een map voorstelt, maar waar bij elke key een _verzameling_ (Set) van waarden hoort in plaats van slechts één waarde.
 Gebruik een `Map` in je implementatie.

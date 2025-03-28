@@ -289,7 +289,7 @@ List<String> mutable = new ArrayList<>(List.of("first", "second", "third"));
 mutable.add("fourth"); // OK
 ```
 
-## Operaties met lijsten
+## Meer operaties op lijsten
 
 De [`List`-interface](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html) zelf bevat al enkele nuttige operaties op lijsten.
 In de [`Collections`-klasse](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collections.html) (niet hetzelfde als de `Collection`-interface!) vind je nog een heleboel extra operaties die je kan uitvoeren op lijsten (of soms op collecties), bijvoorbeeld:
