@@ -1,6 +1,7 @@
 ---
 title: "7.5 Streams"
 toc: true
+weight: 50
 autonumbering: true
 author: "Koen Yskout"
 draft: true

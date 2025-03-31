@@ -1,5 +1,6 @@
 ---
 title: "7.2 Generics"
+weight: 20
 draft: false
 ---
 

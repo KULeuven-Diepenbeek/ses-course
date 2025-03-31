@@ -1,6 +1,7 @@
 ---
 title: "7.3 Collections"
 author: "Koen Yskout"
+weight: 30
 draft: false
 ---
 
