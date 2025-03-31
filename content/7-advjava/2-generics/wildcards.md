@@ -466,6 +466,27 @@ Met deze versie kunnen we nu bijvoorbeeld ook Birds kopiëren naar een lijst van
 copyFromTo(birds, animals); // OK 👍
 ```
 
+{{% notice note Opmerking %}}
+Wanneer een parameter zowel een producent (co-variant) als een consument (contra-variant) is, gebruik je geen wildcards.
+De generische parameter heet dan _invariant_. 
+Bijvoorbeeld:
+```java
+public static <T> void reverse(List<T> list) {
+    int left = 0;
+    int right = list.size() - 1;
+    while (left < right) {
+        // Producent (get)
+        T temp = list.get(left);
+        // Consumer (set)
+        list.set(left, list.get(right));
+        list.set(right, temp);
+        left++;
+        right--;
+    }
+}
+```
+{{% /notice %}}
+
 ## Arrays en type erasure
 
 In tegenstelling tot ArrayLists (en andere generische types), beschouwt Java arrays wél altijd als covariant.

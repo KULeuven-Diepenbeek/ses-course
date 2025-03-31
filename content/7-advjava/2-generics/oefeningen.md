@@ -271,7 +271,9 @@ Dit is een oud-examenvraag.
 Vul de types en generische parameters aan op de 7 genummerde plaatsen zodat onderstaande code en main-methode compileert (behalve de laatste regel van de main-methode) en voldaan is aan volgende voorwaarden:
 1.	Elk actie-type kan enkel uitgevoerd worden door een bepaald karakter-type. Bijvoorbeeld: een FightAction kan enkel uitgevoerd worden door een karakter dat CanFight implementeert.
 2.	doAction mag enkel opgeroepen worden met een actie die uitgevoerd kan worden door alle karakters in de meegegeven lijst.
+
 Als er op een bepaalde plaats geen type of generische parameter nodig is, vul je $\emptyset$ in.
+
 3. Verklaar je keuze voor de combinatie van (5), (6), en (7).
 
 
@@ -301,7 +303,7 @@ class GameEngine {
 }
 public static void main(String[] args) {
     var engine = new GameEngine();
-    Action<CanFight> fight = new FightAction<>();
+    Action<CanFight> fight = new FightAction();
 
     List<Warrior> warriors = List.of(new Warrior(), new Warrior());
     engine.doAction(warriors, fight);
@@ -311,6 +313,23 @@ public static void main(String[] args) {
 }
 ```
 
+{{% notice style=tip title=Antwoord expanded=false %}}
+- 1: `C extends Character` : acties kunnen enkel uitgevoerd worden door subtypes van Character
+- 2: `C`: C is het type van Character dat de actie zal uitvoeren
+- 3: `CanFight`: FightAction is enkel mogelijk voor characters die `CanFight` implementeren
+- 4: `CanFight`: aangezien de generische paremeter `C` van superinterface `Action` geinitialiseerd werd met `CanFight`, moet hier ook `CanFight` gebruikt worden.
+- 5: `T extends Character`: we noemen T het type van de objecten in de meegeven lijst; we hebben hier een begrenzing nodig (want we willen enkel subtypes van Character toelaten)
+- 6: `T`: lijst van T's, zoals verondersteld in 5
+- 7: `? super T`: de meegegeven actie moet een actie zijn die door alle T's uitgevoerd kan worden (dus door T of een van de supertypes van T).
+     Redenering met behulp van PECS: de meegegeven actie gebruikt/_consumeert_ het character, dus _super_.
+
+Alternatieve keuze voor 5/6/7:
+- 5: `T extends Character`: we noemen T het type dat bij de actie hoort; we hebben hier een begrenzing nodig (want we willen enkel subtypes van Character toelaten)
+- 6: `? extends T`: lijst van T's of subtypes ervan.
+     Redenering met behulp van PECS: de lijst levert/_produceert_ de characters, dus _extends_.
+- 7: `T`: het type van de actie, zoals verondersteld in 5
+{{% /notice %}}
+
 ## Animal food
 
 **Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen.**
@@ -319,26 +338,46 @@ Voeg generics (met grenzen/bounds) toe aan de code hieronder, zodat de code (beh
 en de compiler enkel toelaat om kattenvoer te geven aan katten, en hondenvoer aan honden:
 
 ```java
-class Animal {
-  public void eat(Food food) { }
-}
-class Cat extends Animal {}
-class Dog extends Animal {}
-class Food {}
+public class AnimalFood {
+    static class Animal {
+        public void eat(Food food) {
+            System.out.println(this.getClass().getSimpleName() + " says 'Yummie!'");
+        }
+    }
+    static class Mammal extends Animal {
+        public void drink(Milk milk) {
+            this.eat(milk);
+        }
+    }
+    static class Cat extends Mammal {}
+    static class Kitten extends Cat {}
+    static class Dog extends Mammal {}
+    static class Food {}
+    static class Milk extends Food {}
 
-class Main {
-  public static void main(String[] args) {
-    Food catFood = new Food();
-    Food dogFood = new Food();
+    static class Main {
+        public static void main(String[] args) {
+            Food catFood = new Food();
+            Milk catMilk = new Milk();
+            Food dogFood = new Food();
+            Milk dogMilk = new Milk();
 
-    Cat cat = new Cat();
-    Dog dog = new Dog();
+            Cat cat = new Cat();
+            Dog dog = new Dog();
+            Kitten kitten = new Kitten();
 
-    cat.eat(catFood); // OK 👍
-    dog.eat(dogFood); // OK 👍
+            cat.eat(catFood); // OK 👍
+            cat.drink(catMilk); // OK 👍
+            dog.eat(dogFood); // OK 👍
+            dog.drink(dogMilk); // OK 👍
+            kitten.eat(catFood); // OK 👍
+            kitten.drink(catMilk); // OK 👍
 
-    cat.eat(dogFood); // <- moet een compiler error geven! ❌
-  }
+            cat.eat(dogFood); // <- moet een compiler error geven! ❌
+            kitten.eat(dogFood); // <- moet een compiler error geven! ❌
+            kitten.drink(dogMilk); // <- moet een compiler error geven! ❌
+        }
+    }
 }
 ```
 
