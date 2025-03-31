@@ -361,3 +361,21 @@ Een rechthoekig spelbord met cellen (vakjes) kan ook voor andere spellen dan Can
 3. Gebruik de Board-klasse nu zoveel mogelijk in `CandyCrushGame`, waarbij de cellen `Candy`-objecten zijn.
 
 Tag het resultaat als `v2` en push dit naar je remote repository op GitHub.
+
+### Opdracht 3: Collections
+
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode 03-collections` uit te voeren in de `main`-branch van jouw lokale repository.
+{{% /notice %}}
+
+
+1. Hou in je klasse `Board` de elementen (cellen) bij via een `Map`, met `Position` als de sleutel.
+2. Hou ook een omgekeerde `Map` bij, dus van een element (cel) naar alle posities (in een `Set`) waarop dat element voorkomt.
+   - Dus: (in de context van CandyCrush) kan je uit deze `Map` een `Set` halen met alle posities waarop een bepaalde Candy voorkomt.
+   - Deze structuur moet altijd overeenkomen met de andere map (van positie naar cel).
+     Zorg er dus voor dat andere klassen die de klasse Board gebruiken beide maps enkel via gepaste methodes kunnen aanpassen.
+3. Voorzie een methode `getPositionsOfElement` die alle posities teruggeeft waarop het gegeven element (cel) voorkomt, gebruik makend van de `Map` van hierboven.
+   De teruggegeven collectie mag niet aanpasbaar zijn (dus: de ontvanger mag ze niet kunnen aanpassen).
+4. Als je klasse Board goed geëncapsuleerd was, hoef je geen andere code (buiten de klasse Board) aan te passen na bovenstaande wijzigingen.
+
+Tag het resultaat als `v3` en push dit naar je remote repository op Github.
