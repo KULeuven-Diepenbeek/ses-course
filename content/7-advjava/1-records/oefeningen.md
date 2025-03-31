@@ -14,10 +14,28 @@ Geef enkele voorbeelden van types die volgens jou best als record gecodeerd word
 
 Kan je, voor een van je voorbeelden, een situatie bedenken waarin je van record naar klasse zou gaan, en omgekeerd?
 
+{{% notice style=tip title="Antwoord" expanded=false %}}
+Records zijn vooral geschikt voor het bijhouden van _stateless_ informatie (objecten zonder gedrag).
+Bijvoorbeeld: `Money`, `ISBN`, `BookInfo`, `ProductDetails`, ...
+
+Klassen zijn geschikt als de identiteit van het object van belang is en constant blijft, maar de state (data) doorheen de tijd kan wijzigen.
+Bijvoorbeeld: `BankAccount`, `ShoppingCart`, `GameCharacter`, `OrderProcessor`, ...
+
+Overgaan van de ene naar de andere vorm kan wanneer er gedrag toegevoegd of verwijderd wordt.
+Bijvoorbeeld, `BookInfo` zou een klasse kunnen worden indien we er (in de context van een bibliotheek) ook informatie over ontleningen in willen bijhouden. Omgekeerd kan `BankAccount` van klasse naar object gaan indien het enkel een voorstelling wordt van rekeninginformatie (rekeningnummer en naam van de houder bijvoorbeeld), en de balans en transacties naar een ander object (bv. `TransactionHistory`) verplaatst worden.
+{{% /notice %}}
+
 ## Sealed interface
 
 Kan je een voorbeeld bedenken van een nuttig gebruik van een sealed interface?
 
+{{% notice style=tip title="Antwoord" expanded=false %}}
+Sealed interfaces zijn vooral nuttig om een uitgebreidere vorm van enum's te maken, waar elke optie ook extra informatie met zich kan meedragen.
+
+Bijvoorbeeld:
+- sealed interface `PaymentMethod` om een manier van betalen voor te stellen, met subtypes (records) `CreditCard(cardName, cardNumber, expirationDate)`, `PayPal(email)`, `BankTransfer(iban)`, ...
+- sealed interface `Command` wat een commando voorstelt dat uitgevoerd kan worden, met subtypes (records) `CreateUser(name, email)`, `DeleteUser(uuid)`, `UpdateUser(uuid, newEmail)`, ...
+{{% /notice %}}
 ## Email
 
 Definieer (volgens de principes van TDD) een `Email`-record dat een geldig e-mailadres voorstelt.
