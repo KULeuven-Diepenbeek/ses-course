@@ -247,7 +247,7 @@ record Passenger(String name, int priority) { }
 ```
 
 Maak een klasse `PriorityBoarding` waar je een PriorityQueue gebruikt om passagiers te laten boarden.
-Passagiers mogen het vliegtuig betreden volgens afnemende prioriteit (prioriteit 3 mag voor 2), en bij gelijke prioriteit, in alfabetische volgorde (A mag voor B).
+Passagiers mogen het vliegtuig betreden volgens oplopende prioriteit (prioriteit 1 mag voor 2), en bij gelijke prioriteit, in alfabetische volgorde (A mag voor B).
 Maak daarvoor twee operaties in je klasse:
 
 - `checkin(Passenger p)` om een passagier toe te voegen aan de lijst van passagiers die kunnen instappen
