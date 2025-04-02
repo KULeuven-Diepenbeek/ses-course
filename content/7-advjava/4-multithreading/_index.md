@@ -229,7 +229,7 @@ We bespreken er hier enkele.
 
 #### Semafoor
 
-Een [**Semaphore**](https://docs.oracle.com/en%2Fjava%2Fjavase%2F21%2Fdocs%2Fapi%2F%2F/java.base/java/util/concurrent/Semaphore.html) deelt een gegeven maximum aantal toestemmingen uit aan threads (via `acquire()`). Alle volgende threads die toestemming willen, moeten wachten tot een van de vorige toestemmingen terug ingeleverd wordt (via `release()`). Een binaire semafoor (met maximaal 1 toestemming) kan dienen als _mutual exclusion lock_ (_mutex_). Een semafoor houdt (conceptueel) enkel een teller bij van het resterend aantal toestemmingen, en niet welke thread al toestemming heeft. Er is dan ook geen enkele garantie of verificatie dat een thread die `release()` oproept effectief zo'n toestemming verkregen had; het aantal beschikbare toestemmingen wordt gewoon terug verhoogd.
+Een [**Semaphore**](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/Semaphore.html) deelt een gegeven maximum aantal toestemmingen uit aan threads (via `acquire()`). Alle volgende threads die toestemming willen, moeten wachten tot een van de vorige toestemmingen terug ingeleverd wordt (via `release()`). Een binaire semafoor (met maximaal 1 toestemming) kan dienen als _mutual exclusion lock_ (_mutex_). Een semafoor houdt (conceptueel) enkel een teller bij van het resterend aantal toestemmingen, en niet welke thread al toestemming heeft. Er is dan ook geen enkele garantie of verificatie dat een thread die `release()` oproept effectief zo'n toestemming verkregen had; het aantal beschikbare toestemmingen wordt gewoon terug verhoogd.
 
 Een voorbeeld van het gebruik van een semafoor voor de implementatie van Counter:
 
@@ -262,12 +262,12 @@ class Counter {
 }
 ```
 
-Met het gebruik van een semafoor voor synchronisatie krijg je ook automatisch **zichtbaarheids-garanties**; je kan het vrijgeven van de semafoor beschouwen als het schrijven naar een volatile variabele, en het verkrijgen van een toestemming als het lezen van een volatile variabele.
-Alle wijzigingen die gedaan worden voor het vrijgeven zijn dus zichtbaar voor alle threads die nadien een toestemming verkrijgen.
+Met het gebruik van een semafoor voor synchronisatie krijg je ook automatisch **zichtbaarheids-garanties**; je kan het vrijgeven van de semafoor beschouwen als het schrijven naar een `volatile` variabele, en het verkrijgen van een toestemming als het lezen van een `volatile` variabele.
+Alle wijzigingen die gedaan worden voor het vrijgeven van de semafoor zijn dus zichtbaar voor alle threads die nadien een toestemming verkrijgen.
 
 #### Lock
 
-De [**Lock**](https://docs.oracle.com/en%2Fjava%2Fjavase%2F21%2Fdocs%2Fapi%2F%2F/java.base/java/util/concurrent/locks/Lock.html) interface, en de implementatie [**ReentrantLock**](https://docs.oracle.com/en%2Fjava%2Fjavase%2F21%2Fdocs%2Fapi%2F%2F/java.base/java/util/concurrent/locks/ReentrantLock.html), stellen een mechanisme voor waarbij een thread de lock kan verkrijgen (`lock()`) en terug vrijgeven (`unlock()`). Hierbij wordt wél nagegaan dat enkel de thread die de lock verkregen heeft, de lock terug kan vrijgeven. 'Re-entrant' betekent dat een thread die reeds een lock heeft, verder mag gaan wanneer die een tweede keer `lock()` oproept (op hetzelfde lock-object).
+De [**Lock**](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/locks/Lock.html) interface, en de implementaties [**ReentrantLock**](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html), stellen een mechanisme voor waarbij een thread de lock kan verkrijgen (`lock()`) en terug vrijgeven (`unlock()`). Hierbij wordt wél nagegaan dat enkel de thread die de lock verkregen heeft, de lock terug kan vrijgeven. 'Re-entrant' betekent dat een thread die reeds een lock heeft, verder mag gaan wanneer die een tweede keer `lock()` oproept (op hetzelfde lock-object).
 
 Een voorbeeld van het gebruik van een ReentrantLock voor de implementatie van Counter:
 
@@ -300,12 +300,12 @@ class Counter {
 }
 ```
 
-Net zoals bij een semafoor krijg je bij het gebruik van een lock ook automatisch **zichtbaarheids-garanties**; je kan 'unlock()' beschouwen als het schrijven naar een volatile variabele, en 'lock()' als het lezen van een volatile variabele.
+Net zoals bij een semafoor krijg je bij het gebruik van een lock ook automatisch **zichtbaarheids-garanties**; je kan 'unlock()' beschouwen als het schrijven naar een `volatile` variabele, en 'lock()' als het lezen van een `volatile` variabele.
 Alle wijzigingen die gedaan worden voor het unlocken zijn dus zichtbaar voor alle threads die nadien lock uitvoeren.
 
 #### AtomicInteger
 
-Specifiek voor primitieve types biedt Java ook een verzameling atomische objecten aan, bijvoorbeeld [`AtomicInteger`](https://docs.oracle.com/en%2Fjava%2Fjavase%2F21%2Fdocs%2Fapi%2F%2F/java.base/java/util/concurrent/atomic/AtomicInteger.html). Daarop zijn operaties gedefinieerd zoals `incrementAndGet`, `updateAndGet`, `getAndAdd`, .... Bovenstaande counter kan dus ook eenvoudig als volgt geïmplementeerd worden:
+Specifiek voor primitieve types biedt Java ook een verzameling atomische objecten aan, bijvoorbeeld [`AtomicInteger`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/atomic/AtomicInteger.html). Daarop zijn operaties gedefinieerd zoals `incrementAndGet`, `updateAndGet`, `getAndAdd`, .... Bovenstaande counter kan dus ook eenvoudig als volgt geïmplementeerd worden:
 
 ```java
 class Counter {
@@ -395,7 +395,7 @@ class Counter {
 }
 ```
 
-Code die gebruik maakt van synchronized heeft ook **zichtbaarheids-garanties**; je kan het einde van een synchronized-block beschouwen als het schrijven naar een volatile variabele (die hoort bij het object waarop gesynchroniseerd wordt), en het begin ervan als het lezen van die volatile variabele.
+Code die gebruik maakt van synchronized heeft ook **zichtbaarheids-garanties**; je kan het einde van een synchronized-block beschouwen als het schrijven naar een `volatile` variabele (die hoort bij het object waarop gesynchroniseerd wordt), en het begin ervan als het lezen van die `volatile` variabele.
 Alle wijzigingen die gedaan worden voor of in een synchronized-blok of methode zijn dus zichtbaar voor alle threads die nadien een synchronized-blok of methode uitvoeren, tenminste _als er gesynchroniseerd wordt op hetzelfde object_.
 In onderstaande code is er dus **geen** garantie dat thread B de acties van thread A ziet:
 
@@ -581,6 +581,122 @@ Een fork-join pool is vooral nuttig wanneer de taken onafhankelijk van elkaar zi
 Er wordt gebruik gemaakt van _work stealing_: threads in de pool die niets meer te doen hebben, kunnen subtaken beginnen uitvoeren die gegenereerd werden door een andere thread.
 
 We gaan hier niet verder in op het gebruik van een fork-join pool.
+
+## Testen van concurrent code
+
+Het testen of bepaalde code thread-safe is, is allesbehalve eenvoudig.
+Ten eerste moeten we de tests uitvoeren met meerdere threads; concurrency-problemen zijn immers veelal onzichtbaar als er maar één thread in het spel is.
+Bovendien is een correct resultaat na één uitvoering van de test geen garantie dat de code ook correct is.
+Er kan immers een probleem zijn dat niet tot uiting kwam bij die specifieke uitvoering (met andere woorden, bij die specifieke interleaving van de threads), maar dat zich wel zou manifesteren bij een andere uitvoeringsvolgorde.
+De test meerdere keren herhalen kan in zo'n gevallen soelaas bieden.
+
+In Java kunnen we gebruik maken van een library zoals [jcstress](https://github.com/openjdk/jcstress).
+Deze library laat toe om testcode te schrijven die onder verschillende regimes uitgevoerd wordt, om zo de kans te vergroten dat thread safety problemen (bv. race-condities) aan het licht komen.
+De jcstress library wordt ook gebruikt om de concurrency-aspecten van de implementatie van de Java Virtual Machine zelf te testen.
+
+### jcstress toevoegen aan je project
+
+Voeg volgende regel toe aan de `plugins` sectie van je `build.gradle`:
+
+```groovy
+plugins {
+    ...
+    id 'io.github.reyerizo.gradle.jcstress' version '0.8.15'
+}
+```
+
+Zorg ervoor dat IntelliJ je nieuwe Gradle-configuratie verwerkt (klik op het olifantje dat verschijnt).
+
+In je project maak je nu een extra folder onder `src`, namelijk `src/jcstress`, en daaronder een folder `src/jcstress/java`.
+Voeg deze `java` folder toe als 'Test sources root' (rechtsklik op de `java` folder > Mark Directory As > Test sources root).
+IntelliJ zou de folder nu groen moeten kleuren.
+
+### Anatomie van een jcstress test
+
+Een test in jcstress maakt geen gebruik van JUnit-annotaties (`@Test` etc), maar van een eigen set van annotaties.
+[Hier](https://github.com/mtumilowicz/java8-concurrency-jcstress-happens-before) vind je een voorbeeld en wat meer uitleg over de betekenis annotaties.
+We bespreken de belangrijkste annotaties ook hieronder, met als voorbeeld het testen van onze [originele Counter-klasse](#race-conditie).
+
+```java
+package demo;
+
+import org.openjdk.jcstress.annotations.*;
+import org.openjdk.jcstress.infra.results.I_Result;
+
+@JCStressTest
+@Outcome(id="0", expect = Expect.ACCEPTABLE, desc = "Incremented and decremented atomically")
+@Outcome(id="", expect = Expect.FORBIDDEN, desc = "Unexpected counter value")
+@State
+public class CounterTest {
+
+    private final Counter counter = new Counter();
+    private final int N = 5;
+
+    @Actor
+    public void incrementer() {
+        for (int i = 0; i < N; i++) {
+            counter.increment();
+        }
+    }
+
+    @Actor
+    public void decrementer() {
+        for (int i = 0; i < N; i++) {
+            counter.decrement();
+        }
+    }
+
+    @Arbiter
+    public void arbiter(I_Result result) {
+        result.r1 = counter.getCount();
+    }
+
+}
+```
+
+We zien in de test hetvolgende:
+- De annotatie `@JCStressTest` duidt aan dat het om een jcstress-test gaat
+- De annotatie `@State` geeft aan in welke klasse we de te testen state-variabelen vinden; hier is dat de variabele `counter`, in de `CounterTest` klasse zelf. Het object met `@State` zal erg vaak aangemaakt worden, en moet voldoen aan bepaalde voorwaarden (bv. publieke constructor zonder argumenten).
+
+We negeren `@Outcome` nog even, en kijken naar de actoren en arbiter:
+- Elke methode met `@Actor` staat voor de code die door één thread uitgevoerd wordt. Hier hebben we 2 verschillende actoren: eentje die de teller N keer verhoogt, en een andere die de teller N keer verlaagt. Het jcstress framework zal de actoren uitvoeren met zoveel mogelijk verschillende interleavings, in de hoop zo eventuele problemen bloot te leggen.
+- De methode met `@Arbiter` (gewoonlijk 1 per test) wordt uitgevoerd nadat alle actoren helemaal klaar zijn. De arbiter bezorgt de data waaraan we kunnen zien of er zich een probleem voorgedaan heeft. In dit geval kijken we naar de waarde van de counter na afloop van de verhogingen en verlagingen. We kennen die counter-waarde toe aan attribuut `r1` van het resultaat-object. Dat heeft type `I_Result`, wat staat voor een resultaat met 1 integer (`I`). Er zijn ook andere types beschikbaar in de library, bv. `II_Result` (2 integers), `DBI_Result` (een double, een byte, en een integer), etc.
+
+{{% notice style=info title="Letters in Result-type" expanded=false %}}
+Volgende letters worden gebruikt in de types van de Result-objecten:
+- `I`: 	int
+- `Z`: 	boolean
+- `F`:	float
+- `J`:	long
+- `S`: 	short
+- `B`:	byte
+- `C`:	char
+- `D`:	double
+- `L`:	object
+{{% /notice %}}
+
+{{% notice note Opmerking %}}
+Het is niet strikt noodzakelijk om een `@Arbiter`-methode te hebben.
+Je kan ook één van de `@Actor`-methodes een result-parameter geven en zonder arbiter werken.
+{{% /notice %}}
+
+Tenslotte bespreken we de `@Outcome`-annotaties. Die geven aan welke resultaat-objecten verwacht/acceptabel zijn en welke niet.
+In het voorbeeld hierboven:
+- Een resultaat met `r1=0` is acceptabel; dat is wat we verwachten van een thread-safe counter. Dat geven we aan met `@Outcome(id="0", expect = Expect.ACCEPTABLE, ...)`. Merk op dat de `id` parameter het verwachte resultaat (uit de `I_Result` parameter) voorstelt.
+- Elk ander resultaat is niet toegelaten: `@Outcome(id="", expect = Expect.FORBIDDEN, ...)`. 
+
+Als we een resultaat met meerdere waarden zouden hebben (bv. een `II_Result`) dan specifiëren we de outcome bijvoorbeeld als `@Outcome(id="0, 1", ...)`, wat overeenkomt met `r1=0` en `r1=1`.
+
+### Tests uitvoeren
+
+Je kan de tests uitvoeren via de `jcstress` taak in Gradle: `./gradlew jcstress`.
+
+Dit genereert uitvoer op de console, en ook een html-bestand in `build/reports/jcstress`.
+Daarin vinden we een tabel zoals onderstaande, die aangeeft hoe vaak elk resultaat bekomen werd:
+
+![JCStress output](/img/jcstress-output.png)
+
+We zien hieruit duidelijk dat onze counter niet thread-safe is: alle waarden van -5 tot 5 werden bekomen in sommige tests.
 
 ## Oefeningen
 
