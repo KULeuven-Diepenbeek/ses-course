@@ -379,3 +379,22 @@ Merge eerst de laatste versie van de startcode in je repository door `git pull s
 4. Als je klasse Board goed geëncapsuleerd was, hoef je geen andere code (buiten de klasse Board) aan te passen na bovenstaande wijzigingen.
 
 Tag het resultaat als `v3` en push dit naar je remote repository op Github.
+
+### Opdracht 4: Concurrency
+
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode 04-concurrency` uit te voeren in de `main`-branch van jouw lokale repository.
+{{% /notice %}}
+
+In deze opdracht gaan we uit van een situatie dat er meerdere spelers (threads) tegelijk met één Board-object werken.
+
+1. Maak de `fill`-methode in de `Board`-klasse thread-safe. Wanneer meerdere threads fill oproepen, moet het resultaat overeenkomen met dan van één van de threads (met andere woorden, het uiteindelijke bord mag niet deels opgevuld zijn door één thread, en deels door een andere).
+2. Schrijf een test (met jcstress) die het correcte gedrag van `fill` nagaat. 
+   > In de startcode is jcstress al toegevoegd als dependency, en staat er een klasse `ses.candycrush.board.Assignment04_Concurrency_Tests` klaar in de map `src/jcstress/java` die je kan aanpassen. Vergeet niet eerst je gradle configuratie te herladen in IntelliJ.
+3. Schrijf in package `ses.candycrush.experiment` een klasse `MultithreadedBoardClient` met een `main`-methode.
+   In die methode maak je een `Board<Integer>` aan (met grootte 10x10 en 0 als initiële waarde voor elke cel).
+   Gebruik vervolgens een Executor om 10 threads te maken die elk de waarde van elke cel verhogen met 1.
+   Als dat correct gebeurt, zodat alle cellen van het bord uiteindelijk waarde 10 moeten hebben (ga dat na).
+   _(Dit client-programma moet geen GUI starten en/of JavaFX gebruiken.)_
+
+Tag het resultaat als `v4` en push dit naar je remote repository op Github.

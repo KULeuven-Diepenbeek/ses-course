@@ -608,8 +608,8 @@ plugins {
 Zorg ervoor dat IntelliJ je nieuwe Gradle-configuratie verwerkt (klik op het olifantje dat verschijnt).
 
 In je project maak je nu een extra folder onder `src`, namelijk `src/jcstress`, en daaronder een folder `src/jcstress/java`.
-Voeg deze `java` folder toe als 'Test sources root' (rechtsklik op de `java` folder > Mark Directory As > Test sources root).
-IntelliJ zou de folder nu groen moeten kleuren.
+Voeg deze `java` folder toe als 'Sources root': rechtsklik op de `java` folder > Mark Directory As > Sources root.
+IntelliJ zou de folder nu blauw moeten kleuren.
 
 ### Anatomie van een jcstress test
 
