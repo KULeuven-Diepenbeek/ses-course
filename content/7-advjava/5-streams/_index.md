@@ -14,9 +14,6 @@ De concepten in andere programmeertalen die het dichtst aanleunen bij Java strea
 - LINQ in C#
 {{% /notice %}}
 
-> [!todo]
-> TODO: antipattern 'forEach' + externe mutatie
-
 ## Wat en waarom?
 
 [Streams](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/package-summary.html) vormen een krachtig concept om efficiënt data te verwerken.
@@ -39,7 +36,7 @@ style Source stroke:black,fill:#afa
 style Terminal stroke:black,fill:#faa
 ```
 
-Je kan een stream slechts **éénmaal** doorlopen. Als je na het uitvoeren van de operaties nog een sequentie van operaties wil uitvoeren op dezelfde bron-elementen, moet je een nieuwe stream maken.
+Je kan een stream-pijplijn slechts **éénmaal** doorlopen. Als je na het uitvoeren van de operaties nog een sequentie van operaties wil uitvoeren op dezelfde bron-elementen, moet je een nieuwe stream maken.
 
 Streams zijn ook **lazy**: er worden slechts zoveel elementen verwerkt als nodig om het resultaat te berekenen.
 Dat maakt dat de bron oneindig veel elementen mag aanleveren; zolang de rest van de pijplijn er slechts een eindig aantal nodig heeft, vormt dat geen probleem.
@@ -73,6 +70,8 @@ for (var person : people) {
     if (person.age() >= 18) {
         average += person.age();
         count++;
+        if (count >= 20)
+          break;
     }
 }
 average /= count;
@@ -97,6 +96,28 @@ Beide versies doen hetzelfde, maar in de tweede versie is het veel duidelijker w
 - kijk dan enkel naar de leeftijden >= 18 (`filter`)
 - kijk vervolgens enkel naar de eerste 20 van die leeftijden (`limit`)
 - neem tenslotte het gemiddelde (`average`).
+
+Deze manier van programmeren ligt veel dichter bij bijvoorbeeld SQL:
+```sql
+SELECT AVG(age)
+FROM (
+    SELECT age FROM Person
+    WHERE age >= 18
+    LIMIT 20
+) AS limited_people;
+```
+
+{{% notice info Weetje %}}
+In C# is **LINQ** het equivalent van streams. Dat is een taal die erg nauw aansluit bij SQL.
+Het voorbeeld van hierboven kan er in C# als volgt uitzien:
+```csharp
+var averageAge = (
+    from p in people
+    where p.Age >= 18
+    select p.Age
+).Take(20).Average();
+```
+{{% /notice %}}
 
 ## Lambda functies en methode-referenties
 
@@ -749,21 +770,6 @@ Dat is efficiënt, maar kan soms leiden tot verrassende situaties (zoals hierbov
 
 We bekijken nu enkele vaak voorkomende terminale operaties.
 
-### forEach
-
-De `forEach(fn)` terminale operatie voert de meegegeven functie `fn` uit voor elk element dat het einde van de pijplijn bereikt.
-Een heel eenvoudig gebruik hiervan is het uitprinten van alle elementen via `System.out.println`:
-
-```java
-Stream.of("C", "D", "A", "F", "E", "B")
-   .map(String::toLowerCase)
-   .filter(l -> !"aeiouy".contains(l))
-   .sorted()
-   .forEach(x -> System.out.println(x)); // => b, c, d, f
-   // OF:  .forEach(System.out::println);
-```
-
-De `forEach`-operatie is dus zowat het streams-equivalent van de enhanced for-loop (`for (var x : collection)`) bij collecties.
 
 ### toList, toArray
 
@@ -1033,6 +1039,44 @@ Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.partitioningB
 // => {false=["Charlie"], true=["Alpha", "Bravo", "Delta"]}
 ```
 
+
+### forEach
+
+De `forEach(fn)` terminale operatie voert de meegegeven functie `fn` uit voor elk element dat het einde van de pijplijn bereikt.
+Een heel eenvoudig gebruik hiervan is het uitprinten van alle elementen via `System.out.println`:
+
+```java
+Stream.of("C", "D", "A", "F", "E", "B")
+   .map(String::toLowerCase)
+   .filter(l -> !"aeiouy".contains(l))
+   .sorted()
+   .forEach(x -> System.out.println(x)); // => b, c, d, f
+   // OF:  .forEach(System.out::println);
+```
+
+De `forEach`-operatie is dus zowat het streams-equivalent van de enhanced for-loop (`for (var x : collection)`) bij collecties.
+
+{{% notice warning Opgelet %}}
+Vermijd het gebruik een `forEach` om een variabele/lijst/... buiten de `forEach`-lambda aan te passen, zoals het toevoegen aan de `result`-lijst in onderstaand voorbeeld.
+Meestal is dit een antipattern, en is er een betere manier om hetzelfde resultaat te bekomen.
+```java
+List<String> result = new ArrayList<>();
+Stream.of("C", "D", "A", "F", "E", "B")
+   .map(String::toLowerCase)
+   .filter(l -> !"aeiouy".contains(l))
+   .sorted()
+   .forEach(x -> result.add(x)); // Niet doen! ❌
+```
+De betere manier hier is uiteraard
+```java
+List<String> result = Stream.of("C", "D", "A", "F", "E", "B")
+   .map(String::toLowerCase)
+   .filter(l -> !"aeiouy".contains(l))
+   .sorted()
+   .toList();
+```
+{{% /notice %}}
+
 ## Parallelle streams
 
 Vaak kunnen operaties in een stream efficiënt in parallel gebeuren.
@@ -1045,72 +1089,6 @@ Er is ook een `sequential()` operatie die de stream sequentieel maakt.
 Merk op dat de mode waarin de stream zich bevindt op het moment van de terminale operatie bepaalt hoe de _hele_ stream uitgevoerd wordt; je kan dus geen deel van de operaties parallel en een ander deel sequentieel uitvoeren.
 
 We gaan niet in meer detail in op parallelle streams.
-
-## Oefeningen
-
-Alle oefeningen moeten opgelost worden **zonder for- of while-lussen**.
-
-### Personen
-
-We gaan werken met [een dataset van personen](https://github.com/KULeuven-Diepenbeek/ses-demos-exercises-student/tree/main/streams/src/main/java/streams/exercises/exercise1), onderverdeeld in volwassenen en kinderen:
-
-```java
-interface Person { String firstName(); String lastName(); int age(); String zipCode(); }
-record Adult(String firstName, String lastName, int age, String zipCode, List<Child> children) implements Person {}
-record Child(String firstName, String lastName, int age, String zipCode) implements Person {}
-```
-
-De dataset vind je in het bestand `Data.java`, en ziet er als volgt uit:
-
-```java
-public static final List<Adult> DATASET = List.of(
-        new Adult("John", "Doe", 30, "12345", List.of(
-                new Child("Alice", "Doe", 5, "12345"),
-                new Child("Liam", "Doe", 7, "12345"))),
-  ...
-);
-```
-
-Los volgende oefeningen op met streams.
-
-1. Print alle namen van de volwassenen in de dataset.
-2. Ga na dat alle volwassenen in de dataset inderdaad ouder dan 18 zijn.
-3. Ga na of er minstens één volwassene in de dataset zit waarvan de voornaam "Joseph" is.
-4. Geef enkele statistieken (minimum, maximum, gemiddelde) van de leeftijd van alle volwassenen in de dataset die ten minste 30 jaar oud zijn.
-5. Zoek de volwassene met de langste achternaam.
-6. Groepeer alle volwassenen in een Map volgens hun postcode.
-7. Geef een String met de 5 oudste volwassenen terug, in het formaat "voornaam achternaam leeftijd", gesorteerd volgens voornaam, 1 persoon per lijn.
-8. Tel het totaal aantal kinderen in de dataset.
-9. Tel het aantal volwassenen met kinderen in de dataset.
-10. Geef het minimum en maximum aantal kinderen dat een volwassene heeft.
-11. Zoek alle personen die precies 6 keer zo oud zijn als een van hun kinderen.
-12. Maak een lijst van alle kind-objecten in de dataset.
-13. Maak een gesorteerde lijst met alle unieke voornamen van alle kinderen in de dataset.
-14. Bereken de gemiddelde leeftijd van alle kinderen in de dataset die een ouder hebben die ouder is dan 40.
-15. Maak een lijst van alle personen (volwassenen + kinderen) in de dataset, gesorteerd volgens voornaam.
-16. Bereken de gemiddelde leeftijd van alle personen (volwassenen + kinderen) in de dataset.
-
-### Extra: mapValues
-
-Schrijf, gebruik makend van streams, een generische methode `mapAllValues(map, function)` die je kan gebruiken om een nieuwe Map te maken waarbij alle waarden vervangen zijn door de gegeven functie erop toe te passen.
-Bijvoorbeeld, in onderstaande code gebruiken we deze functie om alle String-values in de map te vervangen door hun lengte:
-
-```java
-Map<String, String> myMap = Map.of("first", "333", "second", "55555"); // => {first="333", second="55555"}
-Map<String, Integer> result = mapAllValues(myMap, String::length);
-System.out.println(result); // => {first=3, second=5}
-```
-
-_Hint: gebruik [`Collectors.toMap(...)`](<https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Collectors.html#toMap(java.util.function.Function,java.util.function.Function)>)_
-
-Denk ook na over geschikte grenzen voor je generische parameters (PECS).
-Ook hetvolgende zou moeten werken:
-
-```java
-Map<String, String> myMap = Map.of("first", "333", "second", "55555");
-Function<Object, Integer> fn = (x) -> x.toString().length();
-Map<Object, Object> result = mapAllValues(myMap, fn);
-```
 
 ## Nog meer streams? (optioneel)
 
