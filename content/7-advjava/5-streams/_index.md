@@ -4,13 +4,14 @@ toc: true
 weight: 50
 autonumbering: true
 author: "Koen Yskout"
-draft: true
+draft: false
+math: true
 ---
 
 {{% notice info "In andere programmeertalen" %}}
 De concepten in andere programmeertalen die het dichtst aanleunen bij Java streams zijn
 - ranges in C++
-- iterators en generators in Python
+- iterators, generators en comprehensions in Python
 - LINQ in C#
 {{% /notice %}}
 
@@ -20,14 +21,25 @@ De concepten in andere programmeertalen die het dichtst aanleunen bij Java strea
 Ze vormen een abstractie voor sequentiële en parallele operaties op datasets, zoals filteren, transformeren, en aggregeren, zonder de onderliggende datastructuur te wijzigen.
 Bovendien maakt het gebruik van streams het mogelijk om declaratief te programmeren: je beschrijft op hoog niveau _wát_ je met de dataset wilt doen, in plaats van stap voor stap te beschrijven _hoe_ dat moet gebeuren.
 
+Een snel voorbeeldje om dat wat concreter te maken is onderstaande code, die streams gebruikt om de gemiddelde leeftijd te berekenen van de eerste 20 meerderjarige `Person`-objecten in de lijst `people` (we gaan later dieper in op de details):
+```java
+List<Person> people = ...
+var average = people.stream()
+                .mapToInt(Person::age)
+                .filter(a -> a >= 18)
+                .limit(20)
+                .average();
+System.out.println(average.getAsDouble());
+```
+
 Een stream zelf is _geen_ datastructuur of collectie; een stream is een pijplijn --- een ketting van operaties die uitgevoerd moeten worden op de data.
 Die operaties kunnen de data filteren, transformeren, groeperen, reduceren, ...
 Een stream stelt dus één grote bewerking voor op de data, samengesteld uit meerdere operaties.
 Elke stream bestaat uit 3 delen:
 
-- een **bron** voor de data (een _stroom_ van data, vandaar de naam). Die bron kan een datastructuur zijn (bv. een array, ArrayList, HashSet, ...), maar ook andere bronnen zijn mogelijk (bijvoorbeeld een oneindige sequentie van getallen, zoals de natuurlijke getallen)
-- **intermediaire operaties** (mogelijk meerdere na elkaar) die de data verwerken (transformeren). Elke operatie neemt het resultaat van de vorige operatie (of de bron) en doet daar iets mee; het resultaat daarvan dient als invoer voor de volgende operatie. Zo krijg je een pijplijn waar de data doorheen stroomt terwijl ze bewerkt wordt.
-- een **terminale operatie**: deze beëindigt de ketting en geeft het uiteindelijke resultaat terug.
+- één **bron** voor de data (een _stroom_ van data, vandaar de naam). Die bron kan een datastructuur zijn (bv. een array, ArrayList, HashSet, ...), maar ook andere bronnen zijn mogelijk (bijvoorbeeld een oneindige sequentie van getallen, zoals de natuurlijke getallen). In het voorbeeld hierboven is de lijst `people` de bron.
+- **intermediaire operaties** (mogelijk meerdere na elkaar) die de data verwerken (transformeren). Elke operatie neemt het resultaat van de vorige operatie (of de bron) en doet daar iets mee; het resultaat daarvan dient als invoer voor de volgende operatie. Zo krijg je een pijplijn waar de data doorheen stroomt terwijl ze bewerkt wordt. In het voorbeeld hierboven zijn `mapToInt`, `filter` en `limit` intermediaire operaties.
+- één **terminale operatie**: deze beëindigt de ketting en geeft het uiteindelijke resultaat terug. In het voorbeeld hierboven is `average` de terminale operatie.
 
 ```mermaid
 graph LR
@@ -59,8 +71,8 @@ return result;
 ```
 
 Dit patroon komt zeer vaak voor in code.
-Neem, als eenvoudig voorbeeld om te starten, de situatie waarin je de gemiddelde leeftijd wil berekenen van de eerste 20 meerderjarige personen in een lijst.
-Je kan dat als volgt schrijven (merk op hoe dit het patroon van hierboven volgt):
+Neem, als eenvoudig voorbeeld om te starten, de situatie uit het voorbeeld hierboven: de gemiddelde leeftijd berekenen van de eerste 20 meerderjarige personen in een lijst.
+Zonder streams zou je dat waarschijnlijk ongeveer als volgt schrijven (merk op hoe dit het patroon van hierboven volgt):
 
 ```java
 List<Person> people = ...
@@ -78,7 +90,8 @@ average /= count;
 System.out.println(average);
 ```
 
-De versie met streams ziet er helemaal anders uit --- je schrijft zelf geen lussen, maar focust je op het beschrijven van de uit te voeren operaties:
+De versie met streams ziet er helemaal anders uit --- je schrijft zelf geen lussen, maar focust je op het beschrijven van de uit te voeren operaties.
+Hier ter vergelijking nogmaals de code met streams:
 
 ```java
 List<Person> people = ...
@@ -122,6 +135,56 @@ var averageAge = (
 ## Lambda functies en methode-referenties
 
 Bij het gebruik van streams zal je veelvuldig gebruik maken van methode-referenties en lambda-functies.
+
+### Wat?
+
+Stel dat we een record `Person` hebben:
+```java
+record Person(String firstName, String lastName, int age) {
+  public boolean isAdult() {
+    return this.age() >= 18;
+  }
+}
+```
+
+Met lambda-functies kun je in Java kort en bondig een functie schrijven.
+Die functie heeft geen naam te geven; je zal ze typisch dus maar één keer gebruiken.
+Een lambda-functie in Java, die de voor- en achternaam van een persoon aan elkaar plakt met een spatie, ziet er bijvoorbeeld als volgt uit:
+
+```java
+(Person p) -> p.firstName() + " " + p.lastName()
+```
+De `->` wijst op een lambda-functie. Links ervan staan de parameters, rechts de _body_ van de methode.
+
+
+Je kan zo'n lambda-functie bijvoorbeeld gebruiken om een Comparator te maken die een lijst van personen sorteert volgens hun voor- en achternaam:
+```java
+var people = new java.util.ArrayList<>(List.of(
+                new Person("Jane", "Doe", 17),
+                new Person("John", "Doe", 18),
+                new Person("Alex", "Jones", 20)));
+        people.sort(Comparator.comparing((Person p) -> p.firstName() + " " + p.lastName()));
+        System.out.println(people);
+```
+
+Je hoeft niet expliciet te zeggen welk type `p` heeft; Java kan dat vaak zelf afleiden. Hetvolgende kan dus ook:
+
+```java
+people.sort(Comparator.comparing(p -> p.firstName() + " " + p.lastName()));
+```
+
+Methode-referenties zijn een manier om direct te verwijzen naar een reeds bestaande methode, in plaats van er een lambda voor te schrijven.
+Waar je een lambda van de vorm `(Person p) -> p.age()` zou gebruiken, kun je ook gewoon `Person::age` schrijven.
+De `::` wijst op een methode-referentie. Links ervan staat de naam van de klasse, rechts de naam van de (bestaande) methode.
+
+Een methode-referentie is vooral handig als de lambda precies één methode-aanroep doet.
+Achter de schermen gebeurt hetzelfde, maar de code is nog compacter.
+Om de lijst van people te sorteren volgens leeftijd, kan je dus ook een methode-referentie gebruiken als volgt:
+```java
+people.sort(Comparator.comparing(Person::age()));
+```
+
+### Types van lambda's en methode-referenties
 Omdat Java een sterk getypeerde taal is, moeten lambda-functies en methode-referenties ook een type hebben.
 Dat gebeurt door een interface te definiëren.
 Elke interface met daarin precies één methode kan automatisch gebruikt worden als type voor lambda-functies en methode-referenties (als de types overeen komen).
@@ -131,7 +194,7 @@ Bijvoorbeeld:
 ```java
 @FunctionalInterface
 interface PersonPredicate {
-  public boolean test(Person person);
+  boolean test(Person person);
 }
 
 public List<Person> selectPeople(List<Person> people, PersonPredicate predicate) {
@@ -144,7 +207,10 @@ public List<Person> selectPeople(List<Person> people, PersonPredicate predicate)
     return result;
 }
 
-List<Person> people = List.of(new Person("Vandeneynde", 16), new Person("Vervoort", 23));
+var people = List.of(
+      new Person("Jane", "Doe", 17),
+      new Person("John", "Doe", 18),
+      new Person("Alex", "Jones", 20));
 ```
 
 In de code hierboven zie je de `PersonPredicate`-interface, geannoteerd met `@FunctionalInterface`.
@@ -165,14 +231,14 @@ Dat werkt, maar is nogal omslachtig:
 class IsAdult implements PersonPredicate {
   @Override
   public boolean test(Person person) {
-    return person.age() >= 18;
+    return person.isAdult();
   }
 }
 System.out.println(selectPeople(people, new IsAdult()));
-// => [Person[name=Vervoort, age=23]]
+// => [Person[firstName=Alex, lastName=Jones, age=20], Person[firstName=John, lastName=Doe, age=18]]
 ```
 
-Een tweede optie is om een anonieme klasse te gebruiken. In het voorbeeld hieronder is dat een anonieme klasse die nagaat of de naam van de persoon begint met "Van".
+Een tweede optie is om een anonieme klasse te gebruiken. In het voorbeeld hieronder is dat een anonieme klasse die nagaat of de achternaam van de persoon begint met "Do".
 Ook dat blijft omslachtig:
 
 ```java
@@ -180,38 +246,37 @@ Ook dat blijft omslachtig:
 System.out.println(selectPeople(people, new PersonPredicate() {
     @Override
     public boolean test(Person person) {
-        return person.name().startsWith("Van");
+        return person.lastName().startsWith("Do");
     }
 }));
-// => [Person[name=Vandeneynde, age=16]]
+// => [Person[firstName=Jane, lastName=Doe, age=17], Person[firstName=John, lastName=Doe, age=18]]
 ```
 
-Sinds Java lambda-functies ondersteunt, kan je dergelijke code veel eenvoudiger schrijven.
+Met lambda-functies kan je dergelijke code veel eenvoudiger schrijven.
 In \[3] en \[4] hieronder zie je hoe je een lambda-functie kan gebruiken die hetzelfde doet als de vorige voorbeelden, maar dan zonder een klasse te schrijven.
 Merk op dat het toegelaten is om de lambda-functies te gebruiken waar een `PersonPredicate` verwacht wordt.
 De lambda-functies zijn inderdaad functies die een Person-object als argument hebben, en een boolean teruggeven, en komen dus qua type overeen met de `test`-methode in `PersonPredicate`.
 
 ```java
 /* [3] */
-System.out.println(selectPeople(people, p -> p.age() >= 18));
-// => [Person[name=Vervoort, age=23]]
+System.out.println(selectPeople(people, p -> p.isAdult()));
+// => [Person[firstName=Alex, lastName=Jones, age=20], Person[firstName=John, lastName=Doe, age=18]]
 
 /* [4] */
-System.out.println(selectPeople(people, p -> p.name().startsWith("Van")));
-// => [Person[name=Vandeneynde, age=16]]
+System.out.println(selectPeople(people, p -> p.lastName().startsWith("Do")));
+// => [Person[firstName=Jane, lastName=Doe, age=17], Person[firstName=John, lastName=Doe, age=18]]
 ```
 
 Tenslotte kunnen we ook een methode-referentie gebruiken:
 
 ```java
 /* [5] */
-boolean isAdult(Person person) {
-  return person.age() >= 18;
-}
-System.out.println(selectPeople(people, this::isAdult));
+System.out.println(selectPeople(people, Person::isAdult));
 ```
 
 Dat is vooral nuttig als er al een methode bestaat, of als de implementatie van de methode te omslachtig is om als lambda te schrijven.
+
+### Voorgedefinieerde types voor functies
 
 In plaats van zelf een interface zoals `PersonPredicate` te schrijven, kan je vaak beroep doen op een voorgedefinieerde functie-interface.
 Je vindt de lijst daarvan [in de documentatie](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/package-summary.html).
@@ -439,13 +504,19 @@ class in,out str
 Merk op dat de plaats van `limit` (zoals die van de meeste tussentijdse operaties trouwens) belangrijk is:
 
 ```java
-Stream.of("A", "B", "C", "D", "E", "F").filter(l -> !"AEIOUY".contains(l)).limit(3) // => B, C, D
+Stream.of("A", "B", "C", "D", "E", "F")
+    .filter(l -> !"AEIOUY".contains(l))
+    .limit(3)
+// => B, C, D
 ```
 
 is iets anders dan
 
 ```java
-Stream.of("A", "B", "C", "D", "E", "F").limit(3).filter(l -> !"AEIOUY".contains(l)) // => B, C
+Stream.of("A", "B", "C", "D", "E", "F")
+    .limit(3)
+    .filter(l -> !"AEIOUY".contains(l))
+// => B, C
 ```
 
 De eerste variant resulteert in de eerste 3 medeklinkers uit de oorspronkelijke stream (je filtert eerst alle klinkers eruit, en neemt dan de eerste 3 overblijvende elementen).
@@ -595,7 +666,7 @@ class in,out,out2,out3 str
 
 ### flatMap
 
-De `flatMap` operatie is gelijkaardig aan de `map`-operatie, maar wordt gebruikt wanneer het resultaat van de map-functie op 1 element opnieuw een stream geeft.
+De `flatMap` operatie is gelijkaardig aan de `map`-operatie, maar wordt gebruikt wanneer het resultaat van de map-functie op één element opnieuw een stream geeft.
 Opnieuw bestaan er specifieke versies `flatMapToInt`, `flatMapToLong`, en `flatMapToDouble` voor wanneer het resultaat een IntStream, LongStream of DoubleStream moet worden.
 
 We gebruiken de `String::chars` methode als voorbeeld; die geeft voor een String een IntStream terug met de char-values van elk karakter (denk: de ASCII of Unicode-waarde van elke letter).
@@ -603,7 +674,8 @@ We gebruiken de `String::chars` methode als voorbeeld; die geeft voor een String
 Als we gewoon `map` zouden toepassen, krijgen we een stream van streams (hier: een stream van 3 streams, elk met 2 elementen):
 
 ```java
-Stream<IntStream> result = Stream.of("Aa", "Bb", "Cc").map(String::chars); // => ['A', 'a'], ['B', 'b'], ['C', 'c']
+Stream<IntStream> result = Stream.of("Aa", "Bb", "Cc").map(String::chars);
+// => ['A', 'a'], ['B', 'b'], ['C', 'c']
 ```
 
 ```mermaid
@@ -638,7 +710,8 @@ Vaak is dat niet wat we willen: stel dat we één lange stream van char-waarden 
 In dat geval gebruiken we `flatMap` (of, in dit geval, `flatMapToInt` omdat `chars` een IntStream teruggeeft):
 
 ```java
-IntStream result = Stream.of("Aa", "Bb", "Cc").flatMapToInt(String::chars); // => 'A', 'a', 'B', 'b', 'C', 'c'
+IntStream result = Stream.of("Aa", "Bb", "Cc").flatMapToInt(String::chars); 
+// => 'A', 'a', 'B', 'b', 'C', 'c'
 ```
 
 ```mermaid
@@ -680,7 +753,7 @@ Dat doen we hieronder door een oneindige stream te maken (via `generate`) van te
 
 ```java
 IntStream.range(1, 4) // => 1 2 3
-         .flatMap((value) -> IntStream.generate(() -> value).limit(value)) // => 1 2 2 3 3 3
+         .flatMap( (value) -> IntStream.generate(() -> value).limit(value) ) // => 1 2 2 3 3 3
 ```
 
 Dankzij de laziness van streams (zie later) moeten we niet bang zijn dat de oneindige stream zal leiden tot een oneindige uitvoeringstijd; het aantal elementen dat we gebruiken wordt beperkt door de `limit`-operatie, en er zullen er nooit meer dan dat gegenereerd worden.
@@ -803,8 +876,7 @@ String[] result = Stream.of("C", "D", "A", "F", "E", "B")
    .map(String::toLowerCase)
    .filter(l -> !"aeiouy".contains(l))
    .sorted()
-   .toArray(n -> new String[n]);
-   // OF: toArray(String[]::new);
+   .toArray(n -> new String[n]); // OF: toArray(String[]::new);
 ```
 
 ### count
@@ -817,7 +889,7 @@ Bijvoorbeeld:
 long nbConsonants = Stream.of("A", "B", "C", "D", "E", "F")
    .map(String::toLowerCase)
    .filter(l -> !"aeiouy".contains(l))
-   .count;
+   .count();
 // => nbConsonants == 4L
 ```
 
@@ -848,7 +920,7 @@ Optional<String> result = Stream.of("C", "D", "A", "F", "E", "B")
 
 ### anyMatch, allMatch, noneMatch
 
-Deze methodes geven true of false terug, afhankelijk van of respectievelijk ten minste 1, elk, of geen enkel element in de stream voldoet aan de meegegeven voorwaarde.
+Deze methodes geven true of false terug, afhankelijk van of respectievelijk ten minste één, elk, of geen enkel element in de stream voldoet aan de meegegeven voorwaarde.
 
 ```java
 Stream.of("Alpha", "Bravo", "Charlie", "Delta")
@@ -904,7 +976,7 @@ Stream.of("Alpha", "Bravo", "Charlie", "Delta")
 ### reduce
 
 De `reduce`-operatie is een zeer veelzijdige operatie.
-Ze combineert alle elementen in de stream tot 1 nieuw element (dit is dus bijna de definitie van een terminale operatie).
+Ze combineert alle elementen in de stream tot één nieuwe waarde (dit is dus bijna de definitie van een terminale operatie).
 We beschouwen hier de versie van `reduce` met twee argumenten, die een resultaat teruggeeft van hetzelfde type als de elementen in de stream:
 
 - een _startwaarde_ `identity` van type `T`
@@ -965,29 +1037,63 @@ Schematisch ziet dat er zo uit:
 
 Merk op dat, in tegenstelling tot de accumulator bij `reduce`, er bij die van een collector niets wordt teruggegeven; de verwachting is dat het tijdelijke resultaat zelf geüpdated wordt (en dus stateful is).
 
-We geven één voorbeeld van een Collector-implementatie, namelijk een collector die (voor een stream van Strings) de `StringJoiner`-klasse gebruikt om de strings aan elkaar te plakken, gescheiden door komma's.
-(De StringJoiner is een stateful klasse, vergelijkbaar met een StringBuilder).
+{{% notice info %}}
+De `combiner` is enkel nuttig indien er meerdere deelresultaten zijn.
+Dat is enkel het geval als de invoer-stream in meerdere delen opgedeeld kan worden.
+Gewoonlijk gebeurt dat enkel bij parallelle streams (zie later).
+Een gewone (sequentiële) stream heeft geen combiner nodig.
+{{% /notice %}}
+
+We geven één voorbeeld van een Collector-implementatie, namelijk een collector die (voor een stream van Strings) de Strings aan elkaar plakt tot één lange String, gescheiden door komma's.
+De state van de collector is een object van de klasse JoiningState.
+Die state houdt de tot dan toe aan elkaar geplakte string bij (`current`), alsook of het eerste element nog toegevoegd moet worden (`first`).
 
 ```java
-class StringJoiningCollector implements Collector<String, StringJoiner, String> {
+class JoiningState {
+    private boolean first = true;
+    private String current = "";
+    public void add(String s) {
+        if (!first)
+            current += ", ";
+        current += s;
+        first = false;
+    }
+    public JoiningState merge(JoiningState other) {
+        var result = new JoiningState();
+        result.current = this.current + (other.first ? "" : ", " + other.current);
+        result.first = this.first && other.first;
+        return result;
+    }
+    public String result() {
+        return this.current;
+    }
+}
+
+class StringJoiningCollector implements Collector<String, JoiningState, String> {
+
     @Override
-    public Supplier<StringJoiner> supplier() {
-        return () -> new StringJoiner(", ", "", ""); // separator, prefix, postfix
+    public Supplier<JoiningState> supplier() {
+        return JoiningState::new;
     }
 
     @Override
-    public BiConsumer<StringJoiner, String> accumulator() {
-        return StringJoiner::add;
+    public BiConsumer<JoiningState, String> accumulator() {
+        return (state, s) -> state.add(s);
     }
 
     @Override
-    public BinaryOperator<StringJoiner> combiner() {
-        return StringJoiner::merge;
+    public BinaryOperator<JoiningState> combiner() {
+        return (state1, state2) -> state1.merge(state2);
     }
 
     @Override
-    public Function<StringJoiner, String> finisher() {
-        return StringJoiner::toString;
+    public Function<JoiningState, String> finisher() {
+        return JoiningState::result;
+    }
+
+    @Override
+    public Set<Characteristics> characteristics() {
+        return Set.of();
     }
 }
 ```
