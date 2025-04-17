@@ -176,12 +176,13 @@ people.sort(Comparator.comparing(p -> p.firstName() + " " + p.lastName()));
 Methode-referenties zijn een manier om direct te verwijzen naar een reeds bestaande methode, in plaats van er een lambda voor te schrijven.
 Waar je een lambda van de vorm `(Person p) -> p.age()` zou gebruiken, kun je ook gewoon `Person::age` schrijven.
 De `::` wijst op een methode-referentie. Links ervan staat de naam van de klasse, rechts de naam van de (bestaande) methode.
+Merk op dat er _geen haakjes_ staan (dus niet `Person::age()`). Het is enkel een verwijzing naar de methode; de methode zelf wordt niet meteen opgeroepen.
 
 Een methode-referentie is vooral handig als de lambda precies één methode-aanroep doet.
 Achter de schermen gebeurt hetzelfde, maar de code is nog compacter.
 Om de lijst van people te sorteren volgens leeftijd, kan je dus ook een methode-referentie gebruiken als volgt:
 ```java
-people.sort(Comparator.comparing(Person::age()));
+people.sort(Comparator.comparing(Person::age));
 ```
 
 ### Types van lambda's en methode-referenties
