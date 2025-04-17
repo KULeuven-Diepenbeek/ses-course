@@ -14,9 +14,21 @@ Alle oefeningen moeten opgelost worden **zonder for- of while-lussen**.
 We gaan werken met een dataset van personen, onderverdeeld in volwassenen en kinderen:
 
 ```java
-interface Person { String firstName(); String lastName(); int age(); String zipCode(); }
-record Adult(String firstName, String lastName, int age, String zipCode, List<Child> children) implements Person {}
-record Child(String firstName, String lastName, int age, String zipCode) implements Person {}
+interface Person { 
+    String firstName();
+    String lastName();
+    int age();
+    String zipCode();
+}
+record Adult(String firstName,
+             String lastName,
+             int age,
+             String zipCode,
+             List<Child> children) implements Person {}
+record Child(String firstName,
+             String lastName,
+             int age,
+             String zipCode) implements Person {}
 ```
 
 De dataset vind je in het bestand `Data.java`, en ziet er als volgt uit:
@@ -43,11 +55,6 @@ public class Data {
     public interface Person { String firstName(); String lastName(); int age(); String zipCode(); }
     public record Adult(String firstName, String lastName, int age, String zipCode, List<Child> children) implements Person {}
     public record Child(String firstName, String lastName, int age, String zipCode) implements Person {}
-
-    public static void main(String[] args) {
-        System.out.println(DATASET.stream().mapToInt(Person::age).summaryStatistics());
-        System.out.println(DATASET.stream().flatMap(p -> p.children().stream()).mapToInt(Person::age).summaryStatistics());
-    }
 
     public static final List<Adult> DATASET = List.of(
             new Adult("John", "Doe", 30, "12345", List.of(
@@ -203,7 +210,9 @@ public class Main {
     // Hulpfunctie om het resultaat van een oefening te printen
     // Voegt ook de oefening (naam van de methode) toe.
     private static void print(Object value) {
-        var s = Arrays.stream(Thread.currentThread().getStackTrace()).dropWhile(m -> !m.getMethodName().startsWith("ex")).findFirst().get();
+        var s = Arrays.stream(Thread.currentThread().getStackTrace())
+                      .dropWhile(m -> !m.getMethodName().startsWith("ex"))
+                      .findFirst().get();
         if (value instanceof Optional<?> o) {
             if (o.isPresent())
                 value = o.get();
@@ -216,7 +225,8 @@ public class Main {
                 value = "Nothing found.";
             }
         }
-        System.out.println("\n- " + s.getMethodName() + ":\n" + value.toString().lines().map(l -> "  " + l).collect(Collectors.joining("\n")));
+        System.out.println("\n- " + s.getMethodName() + ":\n" +
+            value.toString().lines().map(l -> "  " + l).collect(Collectors.joining("\n")));
     }
 }
 ```
