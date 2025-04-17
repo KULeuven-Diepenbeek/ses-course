@@ -293,7 +293,7 @@ Merge eerst de laatste versie van de startcode in je repository door `git pull s
    - een **statische** methode `Position fromIndex(int index, BoardSize size)` die de positie teruggeeft die overeenkomt met de gegeven index.
      Deze methode moet een `IllegalArgumentException` gooien indien de index ongeldig is.
    - methodes `boolean isFirstRow()`, `boolean isFirstColumm()`, `boolean isLastRow()`, en `boolean isLastColumn()` die aangeven of de positie zich in de eerste/laatste rij/kolom van het bord bevindt.
-   - een methode `Collection<Position> neighbors()` die alle posities van (geldige) directe buren (horizontaal en vertikaal) in het speelveld teruggeeft.
+   - een methode `Collection<Position> neighbors()` die alle posities van (geldige) directe buren (horizontaal en verticaal) in het speelveld teruggeeft.
    - een methode `boolean isNeighborOf(Position other)` die nagaat of de gegeven positie een directe buur is van de huidige positie. Gooit een `IllegalArgumentException` als de gegeven positie bij een andere bordgrootte hoort.
 
 4. Voeg in `BoardSize` de volgende methodes toe, samen met zinvolle tests:
@@ -398,3 +398,75 @@ In deze opdracht gaan we uit van een situatie dat er meerdere spelers (threads) 
    _(Dit client-programma moet geen GUI starten en/of JavaFX gebruiken.)_
 
 Tag het resultaat als `v4` en push dit naar je remote repository op Github.
+
+### Opdracht 5: Streams
+
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode 05-streams` uit te voeren in de `main`-branch van jouw lokale repository.
+{{% /notice %}}
+
+
+> **Elke methode** die hieronder vermeld wordt moet **volledig geïmplementeerd worden met streams**.
+> In het bijzonder mogen er **_geen_ if-statement, for- of while-lussen** gebruikt worden.
+> Je mag ook de **`forEach()`-methode niet gebruiken**.
+> _(Als een methode je echt niet lukt met streams, mag je wel if-statements of lussen gebruiken --- dat zal je wel een deel van de punten op deze opdracht kosten.)_
+
+1. Maak in klasse `Position` vier methodes (uitsluitend met behulp van streams).
+
+   - `public Stream<Position> walkLeft()`
+   - `public Stream<Position> walkRight()`
+   - `public Stream<Position> walkUp()`
+   - `public Stream<Position> walkDown()`
+
+   Elk van die methodes geeft een stream terug met alle (geldige) posities die links, rechts, boven, of onder een positie liggen (_rij 0 is de bovenste rij_).
+   De streams **starten met de positie zelf**, dan de positie die vlak naast de this-positie ligt, dan die daarnaast, enzovoort.
+   Kijk naar de meegeleverde testen voor het verwachte gedrag.
+
+   _Hint: de makkelijkste manier is om te vertrekken van een `IntStream`._
+
+
+2. De startcode bevat een klasse `ses.candycrush.model.Match`. Een Match-object stelt een opeenvolging van posities voor (bijgehouden in een lijst).
+   Deze posities mogen niet `null` zijn, en moeten steeds naast elkaar liggen, ofwel allemaal horizontaal (geordend van links naar rechts), ofwel allemaal verticaal (geordend van boven naar onder).
+   
+   Implementeer in deze klasse (uitsluitend met behulp van streams) de statische methodes 
+   - `containsNull`
+   - `areAdjacentFromLeftToRight`
+   - `areAdjacentFromTopToBottom`
+   
+   die gebruikt worden om deze voorwaarden te controleren.
+
+   _Hint: de makkelijkste manier voor de `areAdjacent`-methodes is om te vertrekken van een `IntStream`._
+   
+3. Voorzie in klasse `CandyCrushGame` een methode `Set<Match> findAllMatches()` die alle matches met een **minimale lengte van 3** op het bord teruggeeft.
+   
+   Bijvoorbeeld: voor het bord hieronder moet de methode een `Set` met daarin twee Match-objecten teruggeven, namelijk de rode match (de posities van de 3 rode snoepjes, van links naar rechts) en de groene match (de posities van 4 groene snoepjes, van boven naar onder).
+   <img src="/img/opdracht2/all-matches.png" width="300px"></img>
+
+   Om deze `findAllMatches`-methode te implementeren, zijn volgende hulpfuncties handig. Zet deze (publiek) in je CandyCrushGame-klasse, en implementeer ze volledig via streams.
+   Het idee van deze hulpmethodes is om eerst de mogelijke startposities van een match te zoeken (het meest linkse of bovenste snoepje van de match), en van daaruit (naar rechts of naar onder) de langste reeks van dezelfde snoepjes te zoeken.
+
+   - `static <T> boolean firstTwoEqual(T value, Stream<T> stream)`. Deze methode geeft terug of de eerste twee elementen in de gegeven stream hetzelfde zijn als de gegeven waarde. Als de stream minder dan 2 elementen bevat, geef je `false` terug.
+   
+   - `Stream<Position> horizontalStartingPositions()`. Deze methode geeft een stream terug van alle posities op het bord waar een snoepje staat, en _links_ van die positie een _ander_ soort snoepje (of geen snoepje) staat. Deze posities zijn dus de mogelijke startposities van een horizontale match. (Die match loopt dus naar rechts). We kijken hier nog niet naar de lengte van de match. _Hint: Maak gebruik van `firstTwoEqual` en de `walkLeft`-methode._
+
+      Maak ook de (gelijkaardige) methode `Stream<Position> verticalStartingPositions()` die de mogelijke startposities van een verticale match teruggeeft.
+   
+      In de figuren hieronder wordt met een kruisje aangeduid welke posities een mogelijke startpositie zijn, en teruggegeven moeten worden.
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem">
+         <figure><img src="/img/opdracht2/startpos-hor.png" width="250px" /><figcaption style="text-align: center">Mogelijke horizontale startposities</figcaption></figure>
+         <figure><img src="/img/opdracht2/startpos-vert.png" width="250px" /><figcaption  style="text-align: center">Mogelijke verticale startposities</figcaption></figure>
+      </div>
+
+   - `Match longestMatchToRight(Position pos)` en `Match longestMatchDown(Position pos)`. Deze methodes geven de langste match terug, vertrekkend vanop de gegeven positie en in de richting aangegeven door de methodenaam. Deze methode geeft ook matches van lengte 1 of 2 terug. (_Hint: gebruik de walk-methodes van Position_).
+
+      Voor het voorbeeld hierboven zijn dit de matches die teruggegeven worden door `longestMatchDown` voor elk van de verticale startposities:
+       <img src="/img/opdracht2/longest-match-vert.png" width="250px" />
+
+   Eens je beschikt over deze hulpmethodes, kan je `findAllMatches` implementeren (via streams). (_Hint: `Stream.concat`_)
+
+Tag het resultaat als `v5` en push dit naar je remote repository op Github.
+
+> Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v5`. Dit gebeurt namelijk niet automatisch bij een `git push`.
+> Je kan ook alle tags in 1 keer pushen met `git push --tags`.
+> Controleer op je GitHub-repository of je de tags kan zien.
+
