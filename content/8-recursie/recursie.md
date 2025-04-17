@@ -1,6 +1,7 @@
 ---
 title: "8.1 Recursie"
 autonumbering: true
+weight: 10
 toc: true
 draft: false
 math: true
@@ -9,8 +10,10 @@ math: true
 ## Wat is recursie?
 
 Wiskundig gezien zijn recursieve functies functies die zichzelf één of meerdere keren oproepen.
-Een gekend voorbeeld is **faculteit**: $$ n! = n \times (n-1)! \quad\textrm{met}\quad 0! = 1 $$
-Bijvoorbeeld $$\begin{align} 
+Een gekend voorbeeld is **faculteit**: \( n! = n \times (n-1)! \) met \( 0! = 1 \).
+Bijvoorbeeld:
+
+\(\begin{align} 
 5! & = 5 \times 4! \\\\
 & = 5 \times (4 \times 3!) \\\\
 & = 5 \times (4 \times (3 \times 2!)) \\\\
@@ -18,10 +21,10 @@ Bijvoorbeeld $$\begin{align}
 & = 5 \times (4 \times (3 \times (2 \times (1 \times 0!)))) \\\\
 & = 5 \times (4 \times (3 \times (2 \times (1 \times 1)))) \\\\
 & = 120
-\end{align}$$
+\end{align}\)
 
 Een ander gekend voorbeeld zijn de **Fibonacci**-getallen \\( 0, 1, 1, 2, 3, 5, 8, 13, 21, \ldots \\), gegeven door volgende recursieve vergelijking:
-$$ F(n) = F(n-1) + F(n-2) \quad\textrm{met}\quad F(1) = 1 \quad\textrm{en}\quad F(0) = 0 $$.
+\( F(n) = F(n-1) + F(n-2) \) met \( F(1) = 1 \) en \( F(0) = 0 \).
 
 In Java kunnen we ook recursieve methodes definiëren.
 Hier is bijvoorbeeld een recursieve methode om de faculteit van een getal te berekenen:
@@ -542,7 +545,7 @@ Daarbij zijn er twee regels:
 1. Je mag slechts 1 schijf per keer verplaatsen.
 2. Een schijf mag nooit op een kleinere schijf terecht komen.
 
-<img src="/img/hanoi-start.png" alt="drawing" style="max-width: 1024px;"/>
+<img src="/img/hanoi-start.png" alt="drawing" style="max-width: 100%;"/>
 
 > Hoe moeilijk/lang verwacht je dat een algoritme wordt om deze puzzel op te lossen?
 
@@ -558,7 +561,7 @@ De laatste overblijvende schijf op stapel A (de grootste schijf) verplaatsen we 
 Tenslotte verplaatsen we de \\( n-1\\) schijven van hulpstapel B ook naar doelstapel C (opnieuw via onze magische oplossing).
 Het basisgeval is heel eenvoudig: indien we 0 schijven moeten verplaatsen, doen we niets.
 
-<img src="/img/hanoi.png" alt="drawing" style="max-width: 1024px;"/>
+<img src="/img/hanoi.png" alt="drawing" style="max-width: 100%;"/>
 
 Dat geeft volgende oplossing in code, met `n` het aantal schijven en `from`, `to`, en `helper` de namen van de stapels, (bijvoorbeeld "A", "B", en "C", of "links", "midden", en "rechts"):
 
@@ -685,7 +688,7 @@ classDef move stroke:green,fill:#afa
 In sommige gevallen kan je een for- of while-lus eenvoudig herschrijven tot een recursieve methode en omgekeerd.
 Die omzetting volgt vaak eenzelfde patroon. Gegeven volgende while- of for-lus (in pseudocode):
 
-<div style="display: grid; grid-template-columns: repeat(2, 50%); gap: 20px; align-items: top;">
+{{% multicolumn %}}
 
 ```java
 R solve(input) {
@@ -708,7 +711,7 @@ R solve(input) {
 }
 ```
 
-</div>
+{{% /multicolumn %}}
 
 kunnen we volgende equivalente recursieve versie schrijven (opnieuw in pseudo-code):
 
@@ -877,293 +880,3 @@ public static int fib(int n) {
 ```
 
 > Onderzoek de gelijkenissen en verschillen tussen de recursieve en iteratieve versie.
-
-## Oefeningen
-
-Je vind tests en skelet-code voor de oefeningen op [Github](https://github.com/KULeuven-Diepenbeek/ses-demos-exercises-student/tree/main), in de folder 'recursie'.
-
-### Palindroom
-
-Schrijf een recursieve functie `isPalindrome` die nagaat of een String een palindroom is.
-Een String is een palindroom als die hetzelfde is van links naar rechts als van rechts naar links, bijvoorbeeld
-
-- `racecar`
-- `level`
-- `deified`
-- `lepel`
-- `droomoord`
-- `redder`
-- `meetsysteem`
-- `koortsmeetsysteemstrook`
-
-### String omkeren
-
-Schrijf een recursieve methode `reverse` om een String om te keren, bijvoorbeeld:
-
-- `Hello` -> `olleH`
-- `racecar` -> `racecar`
-
-### Element zoeken in lijst
-
-Schrijf een recursieve functie `<T> int search(List<T> list, T element)` die nagaat of het gegeven element voorkomt in de gegeven lijst.
-Als het element voorkomt, wordt de index teruggegeven, anders -1.
-
-- Maak eerst een versie die werkt voor een willekeurige (niet-gesorteerde) lijst.
-- Maar vervolgens een snellere versie die werkt voor een _gesorteerde_ lijst, door het te doorzoeken stuk van de lijst telkens halveert en slechts in één van die helften verder gaat zoeken. (_Dit is 'binary search'_)
-
-### Duplicaten verwijderen
-
-Schrijf een recursieve methode `removeDuplicateCharacters` die opeenvolgende dezelfde karakters uit een String verwijdert.
-Bijvoorbeeld:
-
-- `aaaaa` -> `a`
-- `koortsmeetsysteemstrook` -> `kortsmetsystemstrok`
-- `AAAbbCdddAAA` -> `AbCdA`
-
-### Greatest common divisor
-
-Schrijf een functie `gcd` die de grootste gemene deler bepaalt tussen twee getallen.
-Maak gebruik van het feit dat, als \\( x \geq y \\), dat dan \\( \gcd(x, y) = \gcd(y, x \\% y) \\) met % de modulo-operatie, en dat \\( \gcd(x, 0) = x \\).
-
-### Snelle macht
-
-Schrijf een recursieve functie `double power(double x, int n)` die \\( x^n \\) berekent met zo weinig mogelijk berekeningen.
-Maak gebruik van het feit dat \\( x^{2n} = x^n \cdot x^n \\) en \\( x^{2n+1} = x \cdot x^{2n} \\).
-
-### Sum of digits
-
-Schrijf een recursieve methode `int sumOfDigits(long number)` die de som van de cijfers van een (niet-negatief) getal berekent, en dat herhaalt tot die som kleiner is dan 10.
-Bijvoorbeeld: `62984` geeft `6+2+9+8+4 = 29`; dat wordt vervolgens `2+9 = 11`; en dat wordt uiteindelijk `1+1 = 2`.
-Het resultaat is dus 2.
-
-### Trap beklimmen
-
-Schrijf een functie om te berekenen hoeveel _verschillende_ manieren er zijn om een trap met \\( n \\) treden op te gaan, als je bij elke stap kan kiezen om 1 of 2 treden tegelijk te nemen.
-Bijvoorbeeld, een trap met \\( n = 4 \\) treden kan je op 5 verschillende manieren beklimmen:
-
-<div style="max-width: 500px">
-
-```goat
-               _________
-            ___|
-         ___|
-      ___|
-______|
-```
-
-</div>
-
-1. 1 trede, 1 trede, 1 trede, 1 trede
-2. 1 trede, 1 trede, 2 treden
-3. 1 trede, 2 treden, 1 trede
-4. 2 treden, 1 trede, 1 trede
-5. 2 treden, 2 treden
-
-### Gepast betalen
-
-Schrijf een recursieve methode `boolean kanGepastBetalen(int bedrag, List<Integer> munten)` die nagaat of je het gegeven bedrag (uitgedrukt in eurocent) gepast kan betalen met (een deel van) de gegeven munten (en briefjes).
-Bijvoorbeeld:
-
-- `kanGepastBetalen(20, List.of(50, 10, 10, 5))` geeft **true** terug, want 10+10 = 20.
-- `kanGepastBetalen(125, List.of(100, 100, 50, 20, 10, 5 ))` geeft **true** terug, want 100+20+5 = 125.
-- `kanGepastBetalen(260, List.of(100, 100, 50, 20, 5 ))` geeft **false** terug: er is geen combinatie van munten die samen 260 geeft.
-
-### Gepast betalen (bis)
-
-Gegeven een lijst van muntwaarden (bv. 5, 10, 20, 50, 100, 200), schrijf een recursieve methode `int countChange(int amount, List<Integer> coinValues)` die bepaal **op hoeveel manieren** je een specifiek bedrag kan betalen.
-Je mag nu veronderstellen dat je een voldoende aantal (of oneindig veel) munten van elke opgegeven waarde hebt.
-
-Bijvoorbeeld, met bovenstaande muntwaarden
-
-- kan je een bedrag van 35 betalen op 6 manieren:
-  - 7×5
-  - 1×10 en 5×5
-  - 1×10 en 1×20 en 1×5
-  - 2×10 en 3×5
-  - 3×10 en 1×5
-  - 1×20 en 3×5
-- kan je een bedrag van 260 betalen op 646 manieren
-- kan je een bedrag van 1000 betalen op 98411 manieren
-
-### Alle prefixen van een String
-
-Schrijf een recursieve functie `allPrefixes` die een Set teruggeeft met alle prefixen van een gegeven String.
-Bijvoorbeeld:
-
-- `allPrefixes("cat") == { "", "c", "ca", "cat" }`
-- `allPrefixes("Hello") == { "", "H", "He", "Hel", "Hell", "Hello" }`
-
-### Alle interleavings van twee strings
-
-Schrijf een recursieve functie `allInterleavings(String s1, String s2)` die een Set teruggeeft met alle interleavings van de twee strings `s1` en `s2`.
-Een interleaving is een nieuwe string met daarin alle karakters van de eerste en de tweede string, in dezelfde volgorde waarin ze in elk van de originele strings voorkomen, maar mogelijk door elkaar.
-Bijvoorbeeld:
-
-- `allInterleavings("A", "B") = [AB, BA]`
-- `allInterleavings("ABC", "x") = [ABCx, ABxC, AxBC, xABC]`
-- `allInterleavings("AB", "xy") = [ABxy, AxBy, AxyB, xABy, xAyB, xyAB]`
-- `allInterleavings("ABC", "xy") = [ABCxy, ABxCy, ABxyC, AxBCy, AxByC, AxyBC, xABCy, xAByC, xAyBC, xyABC]`
-
-### Vliegtuigreis
-
-Gegeven een record `Item`:
-
-```java
-record Item(String name, int weight) {}
-```
-
-schrijf een methode `List<Item> pack(List<Item> choices, int maxWeight)` die een keuze maakt uit de gegeven lijst van items, zodanig dat je zoveel mogelijk items kan meenemen zonder dat het totale gewicht hoger wordt dan het maximumgewicht (opgelegd door de vliegtuigmaatschappij).
-
-Bijvoorbeeld, met 3 items (A: 50, B: 20, C: 10, en D: 5):
-
-- met een totaal toegelaten gewicht van 100 kan je alle items meenemen;
-- met een totaal toegelaten gewicht van 40 kan je maximaal 3 items meenemen (B, C, en D);
-- met een totaal toegelaten gewicht van 20 kan je maximaal 2 items meenemen (C en D);
-
-### Powerset
-
-Schrijf een recursieve functie `Set<Set<T>> powerset(Set<T> s)` die de powerset berekent van de gegeven set `s`.
-De powerset is de set van alle deelverzamelingen van `s`.
-Bijvoorbeeld:
-
-- `powerset(Set.of("A", "B")) = [[], [A], [B], [A, B]]`
-- `powerset(Set.of("A", "B", "C")) = [[], [A], [B], [C], [A, B], [A, C], [B, C], [A, B, C]]`
-
-### Alle permutaties van een lijst berekenen
-
-Schrijf een functie `allPermutations` die een Set teruggeeft met alle permutaties van een gegeven lijst.
-Bijvoorbeeld:
-
-- `allPermutations(List.of("A", "B")) = [ [A, B], [B, A] ]`
-- `allPermutations(List.of("A", "B", "C")) = [ [A, B, C], [A, C, B], [B, A, C], [B, C, A], [C, A, B], [C, B, A] ]`
-
-### Gebalanceerde haakjes
-
-Schrijf een recursieve methode `boolean balancedParentheses(String s)` die nagaat of alle haakjes in de gegeven string gebalanceerd zijn.
-Bijvoorbeeld:
-
-- `()` geeft **true** terug
-- `())` geeft **false** terug
-- `()()` geeft **true** terug
-- `)(` geeft **false** terug
-- `((` geeft **false** terug
-- `abc(def(xy))z` geeft **true** terug
-- `a(bc(def(xy))z` geeft **false** terug
-
-### Longest common subsequence
-
-Schrijf een recursieve methode `String longestCommonSubsequence(String s1, String s2)` die de langste reeks karakters teruggeeft die in beide strings in dezelfde volgorde terugkomen (niet noodzakelijk aaneensluitend). Als er meerdere oplossingen zijn, maakt het niet uit welke je teruggeeft.
-Bijvoorbeeld:
-
-- `longestCommonSubsequence("gitaarsnaar", "imaginair") == "ginar" of "ianar"`: <pre style="display: inline;">**gi**taars**na**a**r**</pre> en <pre style="display: inline">ima**gina**i**r**</pre>, of <pre style="display: inline">g**i**t**a**ars**na**a**r**</pre> en <pre style="display: inline">**i**m**a**gi**na**i**r**</pre>
-- `longestCommonSubsequence("aardappel", "adoptie") == "adpe"`: <pre style="display: inline">**a**ar**d**a**p**p**e**l</pre> en <pre style="display: inline">**ad**o**p**ti**e**</pre>
-
-**Uitbreiding**: zoek _alle_ longest common subsequences tussen 2 strings.
-
-### Boomstructuur
-
-Gegeven onderstaande record om een boomstructuur op te bouwen:
-
-```java
-public record TreeNode<T>(T value, TreeNode<T> left, TreeNode<T> right){}
-```
-
-De boom
-
-<div style="max-width: 150px">
-
-```goat
-      A
-     / \
-    /   \
-   B     E
-  / \   /
- /   \ /
-C    D F
-```
-
-</div>
-
-kan je hiermee aanmaken als:
-
-```java
-var tree = new TreeNode<>("A",
-              new TreeNode<>("B",
-                new TreeNode<>("C", null, null),
-                new TreeNode<>("D", null, null)),
-              new TreeNode<>("E",
-                new TreeNode<>("F", null, null),
-                null));
-```
-
-1. Schrijf een recursieve methode `int treeSize(TreeNode<?> tree)` om het totale aantal knopen in de boom te berekenen. Voor de boom hierboven is de grootte 6.
-2. Schrijf een recursieve methode `int treeHeight(TreeNode<?> tree)` om de hoogte van de boom te berekenen. De hoogte is het maximum aantal stappen van de wortel ("A" hierboven) tot een kind ("C", "D", of "F"). In het voorbeeld is de hoogte dus 2.
-3. Schrijf een recursieve methode `<T> void visitDepthFirstPreOrder(TreeNode<T> tree, Consumer<T> consumer)` die de elementen van de boom overloopt in depth-first, pre-order volgorde. Dat houdt in: eerst de huidige knoop, dan de knopen van de linkertak (opnieuw in depth-first pre-order volgorde) en daarna die van de rechtertak. Voor de boom hierboven worden dus achtereenvolgens knopen "A", "B", "C", "D", "E", en "F" bezocht en doorgegeven aan de consumer. Een voorbeeld van het gebruik van de methode om de knopen uit te printen:
-   ```java
-   visitDepthFirstPreOrder(tree, System.out::print);
-   System.out.println();
-   ```
-4. Schrijf een recursieve methode `<T> void visitDepthFirstInOrder(TreeNode<T> tree, Consumer<T> consumer)` die de elementen van de boom overloopt in depth-first, in-order volgorde. Dat houdt in: eerst de linkertak (in depth-first in-order volgorde), dan de knoop zelf, dan de rechtertak. Voor de boom hierboven worden dus achtereenvolgens knopen "C", "B", "D", "A", "F", en "E" bezocht en doorgegeven aan de consumer.
-5. Schrijf een recursieve methode `<T> TreeNode<T> mirrorTree(TreeNode<T> tree)` om een willekeurige boom te spiegelen: het resultaat moet een nieuwe boom zijn, waar de linker-takken de rechtertakken geworden zijn en omgekeerd.
-   De gespiegelde versie van de boom hierboven is dus:
-
-<div style="max-width: 150px">
-
-```goat
-      A
-     / \
-    /   \
-   E     B
-    \   / \
-     \ /   \
-     F D   C
-```
-
-</div>
-
-6. (**extra**) Schrijf een methode `String prettyPrint(TreeNode<?> tree)` die een ASCII-voorstelling van de boom maakt.
-   De voorbeeldboom wordt bijvoorbeeld:
-   ```
-   A
-   |
-   +-- B
-   |   |
-   |   +-- C
-   |   '-- D
-   '-- E
-       |
-       +-- F
-   ```
-
-### Stack omkeren
-
-Schrijf een recursieve methode `<T> void reverse(Deque<T> stack)` die de volgorde van de items in een stack (Deque) omdraait, zonder gebruik te maken van een extra datastructuur (dus zonder een andere array, lijst, set, ...).
-Maak enkel gebruik van de `isEmpty()`-, `pollFirst()` en `addFirst()`-methodes van de Deque-interface.
-
-```java
-var stack = new LinkedList<>(List.of("A", "B", "C", "D", "E", "F"));
-System.out.println(stack); // [A, B, C, D, E, F]
-reverse(stack);
-System.out.println(stack); // [F, E, D, C, B, A]
-```
-
-_Hint: je zal waarschijnlijk een hulpoperatie nodig hebben; die kan je ook recursief schrijven._
-
-### Toren van Hanoi (uitbreiding)
-
-Los de toren van Hanoi op voor \\( n\\) schijven op 4 stapels (dus 2 hulpstapels).
-Je kan je oplossing manueel uittesten [via deze simulator](https://towersofhanoi.info/Play.aspx).
-_(In de simulator moet je klikken, niet slepen)_
-
-### Sorteren van een lijst
-
-Schrijf een recursieve methode om een lijst van getallen te sorteren. De sortering moet _in-place_ gebeuren (je past de lijst zelf aan door elementen van volgorde te wisselen, en geeft dus geen nieuwe lijst terug).
-
-### reduce
-
-Schrijf een recursieve `reduce`-operatie die werkt op een lijst, naar analogie met de reduce-operatie op streams.
-
-```java
-List<Integer> lst = List.of(1, 2, 3, 4);
-int sum = reduce(lst, 0, (sum, x) -> sum + y); // sum == 10
-```
