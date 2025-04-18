@@ -166,6 +166,22 @@ Bijvoorbeeld:
 - `allPermutations(List.of("A", "B")) = [ [A, B], [B, A] ]`
 - `allPermutations(List.of("A", "B", "C")) = [ [A, B, C], [A, C, B], [B, A, C], [B, C, A], [C, A, B], [C, B, A] ]`
 
+
+## Gebalanceerde haakjes
+
+Schrijf met behulp van recursie een methode `boolean balancedParentheses(String s)` die nagaat of alle haakjes in de gegeven string gebalanceerd zijn.
+Bijvoorbeeld:
+
+- `()` geeft **true** terug
+- `())` geeft **false** terug
+- `()()` geeft **true** terug
+- `)(` geeft **false** terug
+- `((` geeft **false** terug
+- `abc(def(xy))z` geeft **true** terug
+- `a(bc(def(xy))z` geeft **false** terug
+
+_Hint: gebruik het worker-wrapper-patroon, en denk (in plaats van 'is deze string gebalanceerd') aan een andere (gerelateerde) vraag die wél nuttig kan zijn om het probleem recursief op te lossen._
+
 ## Longest common subsequence
 
 Schrijf een recursieve methode `String longestCommonSubsequence(String s1, String s2)` die de langste reeks karakters teruggeeft die in beide strings in dezelfde volgorde terugkomen (niet noodzakelijk aaneensluitend). Als er meerdere oplossingen zijn, maakt het niet uit welke je teruggeeft.
@@ -195,8 +211,7 @@ Bijvoorbeeld:
 
 - `longestCommonSubsequence("sterrenstelselsamenstellingsanalyseinstrument", "restaurantkeukenapparatuurontwerpmethodiek") == "restantenaantrmet"` (met dank aan ChatGPT voor de suggestie): <pre class="lcs-pre">ster**re**n**st**elsels**a**me**n**s**te**lli**n**gs**a**n**a**lysei**n**s**tr**u**me**n**t**</pre> en <pre class="lcs-pre">**resta**ura**nt**k**e**uke**na**pp**a**ratuuro**nt**we**r**p**met**hodiek</pre>
 
-
-**Uitbreiding**: zoek _alle_ longest common subsequences tussen 2 strings.
+_Het laatste voorbeeld zal waarschijnlijk veel te lang duren. Je kan nadenken of je je algoritme wat 'slimmer' kan maken._
 
 ## Boomstructuur
 
