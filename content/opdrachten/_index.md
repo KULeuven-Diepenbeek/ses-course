@@ -502,4 +502,118 @@ Tag het resultaat als `v5` en push dit naar je remote repository op Github.
 > Je kan ook alle tags in 1 keer pushen met `git push --tags`.
 > Controleer op je GitHub-repository of je de tags kan zien.
 
+### Opdracht 6: Recursie
 
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode 06-recursie` uit te voeren in de `main`-branch van jouw lokale repository.
+{{% /notice %}}
+
+**Elke methode** die hieronder vermeld wordt moet **recursief geïmplementeerd worden**. Dat wil zeggen dat ze minstens 1 nuttige recursieve oproep moeten bevatten. Je mag daarnaast ook for- en while-lussen gebruiken, en ook extra parameters en/of hulpmethodes toevoegen indien nodig.
+_(Als een methode je echt niet lukt met recursie, mag je ze ook op een andere manier implementeren --- dat zal je wel een deel van de punten op deze opdracht kosten.)_
+
+1. Maak (in klasse `CandyCrushGame`) een recursieve methode `void clearMatch(List<Position> match)` die alle snoepjes die deel uitmaken van de gegeven match (= de posities uit één van de matches gevonden door `findAllMatches` uit de vorige opdracht) van het speelbord verwijdert. De plaatsen waarop een verwijderd snoepje stond, blijven leeg (en krijgen dus een `NoCandy` in de plaats).
+
+2. Maak (in klasse `CandyCrushGame`) een recursieve methode `fallDownTo(Position pos)` die alle snoepjes die boven positie `pos` staan zoveel mogelijk naar beneden laat vallen, tot ze op een ander snoepje of positie `pos` terecht komen. Bijvoorbeeld, in onderstaande situatie (met `pos` aangegeven door het pijltje) verandert de methode de situatie aan de linkerkant in die van de rechterkant.
+
+   <div style="width: 400px; display: grid; grid: auto-flow / repeat(8, 50px); gap: 30px; align-items: center;">
+
+   ```goat
+      *
+      o
+      *
+      *
+   -> o
+      o
+      *
+   ```
+
+   wordt
+
+   ```goat
+      o
+      o
+      *
+      *
+   -> *
+      o
+      *
+   ```
+
+   <div style="grid-column: span 2; justify-self: center;">en</div>
+
+   ```goat
+      o
+      *
+      o
+      *
+   -> *
+      o
+      *
+   ```
+
+   wordt
+
+   ```goat
+      o
+      o
+      *
+      *
+   -> *
+      o
+      *
+   ```
+
+   </div>
+
+3. Maak (in klasse `CandyCrushGame`) een recursieve methode `boolean updateBoard()` die alle matches zoekt, verwijdert, en de overblijvende snoepjes naar beneden laat vallen (gebruik hiervoor de methodes `findAllMatches`, `clearMatch`, en `fallDownTo`). Als er hierdoor nieuwe matches ontstaan, moeten die ook weer verwijderd worden en moeten de snoepjes weer naar beneden vallen etc., totdat er geen matches meer zijn. De methode moet `true` teruggeven indien er minstens één match verwijderd werd, en `false` indien dat niet zo is.
+
+4. Wijzig de code in `CandyCrushGame` als volgt:
+   - voeg de methode `doSwitch` toe:
+      ```java
+      private void doSwitch(Switch sw) {
+        var firstCandy = getCandyAt(sw.first());
+        var secondCandy = getCandyAt(sw.second());
+        setCandyAt(sw.first(), secondCandy);
+        setCandyAt(sw.second(), firstCandy);
+      }
+      ```
+
+   - vervang de methode `selectCandy` door volgende code:
+      ```java
+      public void selectCandy(Position position) {
+         if (!hasCandyAt(position)) {
+               previousSelected = null;
+               return;
+         }
+         if (!hasAnySelected()) {
+               previousSelected = position;
+         } else if (position.isNeighborOf(previousSelected)) {
+               var sw = new Switch(position, previousSelected);
+               doSwitch(sw);
+               if (!updateBoard()) {
+                  doSwitch(sw);
+                  previousSelected = position;
+               } else {
+                  previousSelected = null;
+               }
+         } else {
+               previousSelected = position;
+         }
+      }
+      ```
+   - verander je methode `getPotentialSwitchesOf`
+
+{{% notice todo TODO %}}
+Vervangen van getPotentialSwitches in opdracht streams?
+(doSwitch laten kopieren/toevoegen)
+
+Dan hier enkel selectCandy vervangen
+{{% /notice %}}
+
+Merk dus op dat we het bord _niet_ terug opvullen met nieuwe snoepjes: in onze variant van CandyCrush is het de bedoeling om het bord zo leeg mogelijk te maken. Om alles zo eenvoudig mogelijk te houden, negeren we ook de effecten van de speciale snoepjes.
+
+Tag het resultaat als `v6` en push dit naar je remote repository op Github.
+
+> Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v6`. Dit gebeurt namelijk niet automatisch bij een `git push`.
+> Je kan ook alle tags in 1 keer pushen met `git push --tags`.
+> Controleer op je GitHub-repository of je de tags kan zien.
