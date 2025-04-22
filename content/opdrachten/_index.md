@@ -490,6 +490,8 @@ Merge eerst de laatste versie van de startcode in je repository door `git pull s
    }
    ```
 
+   De test van `getPotentialSwitchesOf` in `Assignment01_Records_Tests` zal niet meer slagen. Deze werd daarom verwijderd uit de startcode. In `Assignment05_Streams_Tests` vind je een nieuwe test.
+
 
 Tag het resultaat als `v5` en push dit naar je remote repository op Github.
 
