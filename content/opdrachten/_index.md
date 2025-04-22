@@ -457,16 +457,44 @@ Merge eerst de laatste versie van de startcode in je repository door `git pull s
          <figure><img src="/img/opdracht2/startpos-vert.png" width="250px" /><figcaption  style="text-align: center">Mogelijke verticale startposities</figcaption></figure>
       </div>
 
-   - `Match longestMatchToRight(Position pos)` en `Match longestMatchDown(Position pos)`. Deze methodes geven de langste match terug, vertrekkend vanop de gegeven positie en in de richting aangegeven door de methodenaam. Deze methode geeft ook matches van lengte 1 of 2 terug. (_Hint: gebruik de walk-methodes van Position_).
+   - `List<Position> longestMatchToRight(Position pos)` en `List<Position> longestMatchDown(Position pos)`. Deze methodes geven de langste match terug als een lijst van posities. De teruggegeven posities vertrekken op de gegeven positie en lopen in de richting aangegeven door de methodenaam. Deze methode geeft ook matches van lengte 1 of 2 terug. (_Hint: gebruik de walk-methodes van Position_).
 
       Voor het voorbeeld hierboven zijn dit de matches die teruggegeven worden door `longestMatchDown` voor elk van de verticale startposities:
        <img src="/img/opdracht2/longest-match-vert.png" width="250px" />
 
-   Eens je beschikt over deze hulpmethodes, kan je `findAllMatches` implementeren (via streams). (_Hint: `Stream.concat`_)
+   Eens je beschikt over deze hulpmethodes, kan je `findAllMatches` implementeren (via streams). (_Hint: [`Stream.concat`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html#concat(java.util.stream.Stream,java.util.stream.Stream))_)
+
+4. Vervang de bestaande implementatie van de methode `getPotentialSwitchesOf` door een implementatie die **volledig werkt via streams**.
+   Deze mag enkel Switch-objecten teruggeven die voldoen aan volgende voorwaarden:
+   - de posities zijn twee naburige posities;
+   - er staat een snoepje (geen NoCandy) op beide posities;
+   - beide snoepjes zijn verschillend;
+   - na het uitvoeren van de wissel zou er minstens één match ontstaan (dus: `findAllMatches` geeft een niet-lege Set terug). 
+     _Let op: de uitvoering van `getPotentialSwitchesOf` moet het bord in de oorspronkelijke toestand achterlaten!_
+
+   Volgende methodes zijn hierbij handig; je mag deze dan ook kopiëren in je `CandyCrushGame`-klasse:
+   ```java
+   // kopieer naar CandyCrushGame.java
+   private boolean leadsToMatch(Switch sw) {
+      doSwitch(sw);
+      var result = !findAllMatches().isEmpty();
+      doSwitch(sw);
+      return result;
+   }
+
+   private void doSwitch(Switch sw) {
+      var firstCandy = getCandyAt(sw.first());
+      var secondCandy = getCandyAt(sw.second());
+      setCandyAt(sw.first(), secondCandy);
+      setCandyAt(sw.second(), firstCandy);
+   }
+   ```
+
 
 Tag het resultaat als `v5` en push dit naar je remote repository op Github.
 
 > Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v5`. Dit gebeurt namelijk niet automatisch bij een `git push`.
 > Je kan ook alle tags in 1 keer pushen met `git push --tags`.
 > Controleer op je GitHub-repository of je de tags kan zien.
+
 
