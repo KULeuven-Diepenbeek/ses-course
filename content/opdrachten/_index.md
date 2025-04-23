@@ -425,7 +425,10 @@ Merge eerst de laatste versie van de startcode in je repository door `git pull s
    _Hint: de makkelijkste manier is om te vertrekken van een `IntStream`._
 
 
-2. De startcode bevat een klasse `ses.candycrush.model.Match`. Een Match-object stelt een opeenvolging van posities voor (bijgehouden in een lijst).
+2. {{% notice note %}}
+   De methodes in Match zijn optioneel; het niet maken ervan (of ze oplossen met lussen) zal geen negatieve invloed hebben op je score (je kan er wel bonuspunten mee verdienen).
+   {{% /notice %}}
+   De startcode bevat een klasse `ses.candycrush.model.Match`. Een Match-object stelt een opeenvolging van posities voor (bijgehouden in een lijst).
    Deze posities mogen niet `null` zijn, en moeten steeds naast elkaar liggen, ofwel allemaal horizontaal (geordend van links naar rechts), ofwel allemaal verticaal (geordend van boven naar onder).
    
    Implementeer in deze klasse (uitsluitend met behulp van streams) de statische methodes 
