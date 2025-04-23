@@ -506,6 +506,8 @@ Tag het resultaat als `v5` en push dit naar je remote repository op Github.
 
 {{% notice task Startcode %}}
 Merge eerst de laatste versie van de startcode in je repository door `git pull startcode 06-recursie` uit te voeren in de `main`-branch van jouw lokale repository.
+
+**Opgelet**: de startcode voegt een regel toe aan je `build.gradle` (namelijk `testImplementation('org.ow2.asm:asm-tree:9.8')`). Herlaad de Gradle-configuratie in IntelliJ als er klassen niet gevonden worden bij het uitvoeren van de test.
 {{% /notice %}}
 
 **Elke methode** die hieronder vermeld wordt moet **recursief geïmplementeerd worden**. Dat wil zeggen dat ze minstens 1 nuttige recursieve oproep moeten bevatten. Je mag daarnaast ook for- en while-lussen gebruiken, en ook extra parameters en/of hulpmethodes toevoegen indien nodig.
@@ -567,50 +569,33 @@ _(Als een methode je echt niet lukt met recursie, mag je ze ook op een andere ma
 
 3. Maak (in klasse `CandyCrushGame`) een recursieve methode `boolean updateBoard()` die alle matches zoekt, verwijdert, en de overblijvende snoepjes naar beneden laat vallen (gebruik hiervoor de methodes `findAllMatches`, `clearMatch`, en `fallDownTo`). Als er hierdoor nieuwe matches ontstaan, moeten die ook weer verwijderd worden en moeten de snoepjes weer naar beneden vallen etc., totdat er geen matches meer zijn. De methode moet `true` teruggeven indien er minstens één match verwijderd werd, en `false` indien dat niet zo is.
 
-4. Wijzig de code in `CandyCrushGame` als volgt:
-   - voeg de methode `doSwitch` toe:
-      ```java
-      private void doSwitch(Switch sw) {
-        var firstCandy = getCandyAt(sw.first());
-        var secondCandy = getCandyAt(sw.second());
-        setCandyAt(sw.first(), secondCandy);
-        setCandyAt(sw.second(), firstCandy);
-      }
-      ```
+   Merk op dat we (in tegenstelling tot de 'gewone' CandyCrush) het bord _niet_ terug opvullen met nieuwe snoepjes: in onze variant is het de bedoeling om het bord zo leeg mogelijk te maken. Om alles zo eenvoudig mogelijk te houden, negeren we ook de effecten van de speciale snoepjes.
 
-   - vervang de methode `selectCandy` door volgende code:
-      ```java
-      public void selectCandy(Position position) {
-         if (!hasCandyAt(position)) {
-               previousSelected = null;
-               return;
-         }
-         if (!hasAnySelected()) {
-               previousSelected = position;
-         } else if (position.isNeighborOf(previousSelected)) {
-               var sw = new Switch(position, previousSelected);
+4. Vervang de code van de methode `selectCandy` in `CandyCrushGame.java` door hetvolgende:
+   ```java
+   public void selectCandy(Position position) {
+      if (!hasCandyAt(position)) {
+            previousSelected = null;
+            return;
+      }
+      if (!hasAnySelected()) {
+            previousSelected = position;
+      } else if (position.isNeighborOf(previousSelected)) {
+            var sw = new Switch(position, previousSelected);
+            doSwitch(sw);
+            if (!updateBoard()) {
                doSwitch(sw);
-               if (!updateBoard()) {
-                  doSwitch(sw);
-                  previousSelected = position;
-               } else {
-                  previousSelected = null;
-               }
-         } else {
                previousSelected = position;
-         }
+            } else {
+               previousSelected = null;
+            }
+      } else {
+            previousSelected = position;
       }
-      ```
-   - verander je methode `getPotentialSwitchesOf`
+   }
+   ```
 
-{{% notice todo TODO %}}
-Vervangen van getPotentialSwitches in opdracht streams?
-(doSwitch laten kopieren/toevoegen)
-
-Dan hier enkel selectCandy vervangen
-{{% /notice %}}
-
-Merk dus op dat we het bord _niet_ terug opvullen met nieuwe snoepjes: in onze variant van CandyCrush is het de bedoeling om het bord zo leeg mogelijk te maken. Om alles zo eenvoudig mogelijk te houden, negeren we ook de effecten van de speciale snoepjes.
+   Met deze wijzigingen, en correcte implementaties tot nu toe, krijg je een speelbare versie van CandyCrush.
 
 Tag het resultaat als `v6` en push dit naar je remote repository op Github.
 
