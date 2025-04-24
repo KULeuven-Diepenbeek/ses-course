@@ -1,5 +1,6 @@
 ---
 title: "Taak 1 OSS Contrib.: Feedback"
+draft: true
 ---
 
 ## Contributie/code feedback

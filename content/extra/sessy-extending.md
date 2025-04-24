@@ -1,5 +1,6 @@
 ---
 title: 'SESsy Library (2) Uitbreidingen'
+draft: true
 ---
 
 ## SESsy Library Uitbreiden

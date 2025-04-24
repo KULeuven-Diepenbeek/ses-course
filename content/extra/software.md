@@ -1,5 +1,6 @@
 ---
 title: 'Gebruikte Software'
+draft: true
 ---
 
 Voor deze cursus werken we met Java en met Git. Dat betekent dat **JDK 15.0.2** (en de Gradle build tool, `v6.7`) en een **Git client** de enige vereisten zijn. 

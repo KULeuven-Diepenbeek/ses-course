@@ -91,6 +91,8 @@ Een waarheidsgetrouw voorbeeld ziet er als volgt uit:
 
 Op deze manier kan je zeer gemakkelijk je steentje bijdragen aan de wereld van open source software en dit maakt het principe van open source ook juist mede zo aantrekkelijk.
 
+<!-- TODO: add iets over submodules en subtrees! (submodules toevoegen, verwijderen en verschil met subtrees) -->
+
 ## Oefeningen
 1. Maak in je Github een repository aan voor je Git directory uit [de vorige oefenreeks](/versiebeheer/lokaal-versiebeheer-met-git/#oefeningen).
 2. Koppel je lokale repo aan je remote repo en push je versiegeschiedenis naar Github.

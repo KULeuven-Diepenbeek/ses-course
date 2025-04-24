@@ -1,5 +1,6 @@
 ---
 title: "Taak 1: Open Source Contributie"
+draft: true
 ---
 
 De evaluatie van het vak verloopt op twee manieren: 50% examen op papier, 50% praktische taken, waarvan dit één is. Andere taken zullen ook tijdig via Toledo en/of in de lessen worden aangekondigd. Zie de ECTS fiche voor meer informatie betreffrende de puntenverdeling. 

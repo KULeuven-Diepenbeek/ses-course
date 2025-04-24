@@ -93,6 +93,9 @@ Om `Java`code te runnen en te compileren op je WSL ga je een aantal prerequisite
   - create gradle project in directory: `gradle init`
   - update gradle version per project: `gradle wrapper --gradle-version x.x.x`.
 
+<!-- TODO: voeg to hoe je met cmdline ook packagenaam meegeeft aan gradle init. Mss zelf alle opties in 1 command `echo 'no' | gradle init --type java-application --no-split-project --dsl groovy --java-version 21  --test-framework junit --package be.ses --project-name gradletest`-->
+<!-- TODO: Duidelijke vermelding maken dat je per javaproject BEST een apart vscode window opent anders registreert die niet dat het om een gradle project gaat en geeft hij ook errors bij package names die wel kloppen bijvoorbeeld OOK iets zeggen over de 3 veschillende manieren om te runnen 1. boven static void main als die exact zoals het hoort geschreven is 2. play knop in vscode 3. gradle run 4. ./gradlew run -->
+
 Verder kunnen volgende VSCode extensies handig zijn om je development proces te optimaliseren:
 - **Extension Pack for Java**: dit bevat volgende extensies
   - **Language Support for Java(TM) by Red Hat**: Java Linting, Intellisense, formatting, refactoring, Maven/Gradle support and more... Java Linting, Intellisense, formatting, refactoring, Maven/Gradle support and more... Provides Java ™ language support via Eclipse ™ JDT Language Server, which utilizes Eclipse ™ JDT, M2Eclipse and Buildship.

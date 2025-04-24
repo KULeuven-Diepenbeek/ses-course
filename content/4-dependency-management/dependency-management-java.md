@@ -168,7 +168,7 @@ Bovendien kan je voor je projecten ook de verschillende Gradle-taken bekijken en
     <figcaption ><strong><i>Gradle extention for VSCode</i></strong></figcation>
 </figure>
 
-
+<!-- TODO: Duidelijke vermelding maken dat je per javaproject BEST een apart vscode window opent anders registreert die niet dat het om een gradle project gaat en geeft hij ook errors bij package names die wel kloppen bijvoorbeeld OOK iets zeggen over de 3 veschillende manieren om te runnen 1. boven static void main als die exact zoals het hoort geschreven is 2. play knop in vscode 3. gradle run 4. ./gradlew run -->
 
 ### Een nieuw Gradle project creëren
 Je kan nu een directory initialiseren als een Gradle project met `gradle init`. (Zie ook [Gradle Docs: Bootstrapping new projects](https://docs.gradle.org/current/userguide/command_line_interface.html#sec:command_line_bootstrapping_projects)) Volg onderstaande stappen:
@@ -209,13 +209,15 @@ Select test framework:
   2: TestNG
   3: Spock
   4: JUnit Jupiter
-Enter selection (default: JUnit Jupiter) [1..4] 4
+Enter selection (default: JUnit Jupiter) [1..4] 1
 
 # Nu vraagt Gradle een projectnaam, default is dit de directorynaam. Vul niets in en druk op enter om de default te gebruiken.
 Project name (default: gradletest):
 # Als laatste vraagt Gradle je de naam van de source package te kiezen. Gelijkaardig als in INF 1 kiezen we voor be.ses.<app_name>
 Source package (default: gradletest): be.ses.my_application
 ```
+
+<!-- TODO: voeg to hoe je met cmdline ook packagenaam meegeeft aan gradle init. Mss zelf alle opties in 1 command -->
 
 Gradle vraagt ons tijdens de init een aantal opties te kiezen. Alhoewel we in deze lessen 90% van de tijd de opties kiezen zoals hierboven getoond in het voorbeeld, kan je hieronder toch een overzicht terugvinden met enkele andere opties:
 - **Select type of build to generate**: opties - Application - Library (gaan we niet verder op in) - Gradle Plugin (gaan we niet verder op in) - Basic
@@ -376,6 +378,7 @@ Met de Groovy syntax definiëren we verschillende configuratie-blokken als `blok
 
 4. **application**: met `mainClass = 'be.ses.my_application.App'` geef je aan welke `main`-methode van welke klasse moet gerund worden wanneer je je applicatie wil runnen. (Dit is dus het entrypoint van je applicatie)
 
+<!-- TODO: vermeld dat het belangrijk is dat je de classpaths moet laten updaten door vscode. hij vraagt dit normaal automatisch na aanpassing van de build file. -->
 
 ### Dependencies toevoegen
 In het kort volg je volgende procedure als je Gradle je dependencies laat beheren:
