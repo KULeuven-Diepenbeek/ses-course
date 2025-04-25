@@ -880,3 +880,21 @@ public static int fib(int n) {
 ```
 
 > Onderzoek de gelijkenissen en verschillen tussen de recursieve en iteratieve versie.
+
+## Patronen om het probleem te verkleinen
+
+Zoals eerder gezegd, gaan we bij recursie kijken of/hoe de oplossing voor hetzelfde maar kleiner probleem ons kan helpen om het volledige probleem op te lossen.
+Er zijn enkele vaak voorkomende manieren om dat te doen, die we hier kort oplijsten.
+Alle manieren komen in essentie natuurlijk op hetzelfde neer: een geschikt deelprobleem zoeken dat je helpt om het volledige probleem op te lossen.
+
+- **Een numerieke parameter rechtstreeks verkleinen**. Bijvoorbeeld, de oplossing voor parameter `x` berekenen aan de hand van de oplossing voor `x-1`, `x-2`, `x/2`, ...
+
+- **Het eerste/laatste element van de invoer weglaten**. Bijvoorbeeld, de oplossing voor de hele invoerlijst `lst` berekenen aan de hand van de oplossing voor de invoerlijst maar dan zonder het eerste of laatste element (bv. `lst.subList(1, lst.size()))`). Hetzelfde idee kan je toepassen op Strings (met `substring`).
+
+- **De invoer halveren**. Bijvoorbeeld, de oplossing voor de hele lijst `lst` berekenen aan de hand van de oplossing voor de eerste en tweede helft van de invoerlijst (bv. `lst.subList(0, lst.size()/2)`). Ook dit idee kan toegepast worden op Strings (met `substring`).
+
+- **Twee situaties beschouwen**. Dit is een variant van het weglaten van het eerste/laatste element die vooral handig is bij problemen waar de oplossing gevormd wordt met een combinatie van sommige invoerelementen. Je beschouwt dan twee deelproblemen:
+  1. je zoekt eerst naar een oplossing waarbij je ervan uitgaat dat het eerste (of laatste, middelste, ...) element deel uitmaakt van de oplossing.
+  2. Daarnaast zoek je ook naar een oplossing waarbij je ervan uitgaat dat dat element _geen_ deel uitmaakt van de oplossing.
+  
+  Voor elk van die twee situaties los je dan een kleiner (en waarschijnlijk aangepast) probleem op waarbij je verder geen rekening meer houdt met dat ene element. Achteraf combineer je de oplossingen voor beide deelproblemen op een gepaste manier. Zie de oefeningen voor concrete voorbeelden (in het bijzonder de [oefening over gepast betalen](./recursie_oefeningen.md#gepast-betalen)).
