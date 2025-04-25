@@ -144,3 +144,34 @@ De [`TreeSet`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java
 
 Alle basisoperaties (add, remove, contains) hebben worst-case tijdscomplexiteit \\(\mathcal{O}(\log n)\\); invoegen en verwijderen zijn best-case \\(\mathcal{O}(1)\\).
 De oorsprong van het logaritme wordt duidelijk aan de hand van [deze oefening](oefeningen.md/#boomstructuur).
+
+## Voorbeeld
+
+Een voorbeeld van het gebruik van een set:
+```java
+Set<String> mySet = new HashSet<>();
+mySet.add("John");
+mySet.add("Mary");
+
+System.out.println(mySet); // => [John, Mary]
+
+mySet.add("John"); // John zit al in de set
+
+System.out.println(mySet); // => [Mary, John]
+```
+
+Merk op dat er geen garanties zijn over de volgorde van de elementen in de set.
+Als we dat wel willen, gebruiken we een `SortedSet`:
+
+```java
+SortedSet<String> mySet = new TreeSet<>();
+mySet.add("John");
+mySet.add("Mary");
+
+for (String el : mySet) {
+  System.out.println(el);
+}
+// gegarandeerd in alfabetische volgorde:
+//  John
+//  Mary
+```
