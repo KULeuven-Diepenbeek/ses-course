@@ -47,3 +47,48 @@ Een [`SortedMap`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/j
 
 De [TreeMap](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/TreeMap.html) klasse implementeert een SortedMap aan de hand van een boomstructuur.
 
+## Voorbeeld
+
+Een voorbeeld van het gebruik van `Map` als een telefoonbook:
+
+```java
+record Person(String name) {}
+record PhoneNumber(int countryCode, String prefix, String number) {}
+
+Person mary = new Person("Mary");
+Person john = new Person("John");
+
+Map<Person, PhoneNumber> phoneBook = new HashMap<>();
+phoneBook.put(john, "0470123456");
+phoneBook.put(mary, "0480999999");
+
+Person somePerson = ...
+
+String numberOrInfo;
+if (phoneBook.containsKey(somePerson)) {
+  // geeft `null` terug indien persoon niet gevonden
+  numberOrInfo = phoneBook.get(somePerson);
+} else {
+  numberOrInfo = "1207"
+}
+
+// alternatief voor bovenstaande code:
+var numberOrInfo = phoneBook.getOrDefault(somePerson, "1207");
+```
+
+Als we personen alfabetisch kunnen sorteren, kunnen we ook een `SortedMap` gebruiken. 
+Als implementatie gebruiken we dan een `TreeMap` in plaats van `HashMap`, en moeten we een comparator meegeven die bepaalt hoe de elementen gesorteerd worden.
+
+```java
+SortedMap<Person, String> phoneBook = new TreeMap<>(Comparator.comparing(Person::name));
+phoneBook.put(john, "0470123456");
+phoneBook.put(mary, "0480999999");
+```
+We zijn nu zeker dat we, bij het itereren over alle items, de personen in alfabetische volgorde terugkrijgen:
+```java
+for (Map.Entry<Person, String> entry : phoneBook.entrySet()) {
+    System.out.println(entry.getKey() + " " + entry.getValue());
+}
+// => Person[name=John] 0470123456
+//    Person[name=Mary] 0480999999
+``` 
