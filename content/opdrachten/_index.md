@@ -602,3 +602,123 @@ Tag het resultaat als `v6` en push dit naar je remote repository op Github.
 > Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v6`. Dit gebeurt namelijk niet automatisch bij een `git push`.
 > Je kan ook alle tags in 1 keer pushen met `git push --tags`.
 > Controleer op je GitHub-repository of je de tags kan zien.
+
+### Opdracht 7: Backtracking
+
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode 07-backtracking` uit te voeren in de `main`-branch van jouw lokale repository.
+{{% /notice %}}
+
+De spelregels van CandyCrush nog eens samengevat:
+
+- De speler mag enkel snoepjes van plaats wisselen die vlak naast elkaar liggen.
+- Twee snoepjes van plaats proberen te wisselen zonder dat dat onmiddellijk leidt tot een match is niet toegelaten; beide snoepjes blijven dan op hun oorspronkelijke plaats.
+- De speler mag geen snoepje wisselen met een lege plaats, enkel met een ander snoepje.
+- Wanneer er een match is (3 of meer dezelfde snoepjes naast elkaar, horizontaal of verticaal), verdwijnen die snoepjes en vallen de andere snoepjes naar beneden. Dit herhaalt zich tot er geen matches meer zijn.
+
+We voegen nu ook een score toe:
+- De score verhoogt telkens er snoepjes verwijderd worden, en dat met het aantal snoepjes dat verwijderd wordt. Dus 3 snoepjes verwijderen verhoogt de score met 3.
+- Elk verwijderd snoepje telt slechts één keer voor de score, ook als het tegelijkertijd deel is van zowel een horizontale als een verticale match.
+
+De enige operatie die de speler dus kan uitvoeren is twee naburige snoepjes van plaats wisselen, om zo nieuwe matches te creëren, die vervolgens verdwijnen. Daardoor verandert het bord en kan er opnieuw een wissel gedaan worden. Het doel van het spel is om het bord zo leeg mogelijk te krijgen. Omdat het bord verandert na elke wissel, is de volgorde van die wissels erg belangrijk.
+
+Schrijf in klasse `CandyCrushGame` een methode `public List<Switch> maximizeScore()` met **een backtracking-algoritme** dat de **beste sequentie** van geldige wissels zoekt voor het huidige spel. De beste sequentie is deze die de **hoogste score** oplevert.
+Als er meerdere sequenties zijn die tot dezelfde score leiden, geef je de **kortste** terug. Zijn er meerdere met dezelfde score en lengte, dan maakt het niet uit welke je daarvan teruggeeft.
+
+Na afloop van deze methode moet de toestand van het bord **onveranderd** zijn: de methode berekent enkel de optimale lijst van switches, zonder het bord te wijzigen.
+
+_Hints:_
+
+- Je mag, naast de `maximizeScore`-methode, uiteraard ook nog hulpmethodes toevoegen. Een nuttige hulpmethode is eentje om alle mogelijke switches op het bord te zoeken (gebruik makend van `getPotentialSwitchesOf`).
+- Maak zeker gebruik van de `updateBoard()`-methode de vorige opdracht. Je kan die uitbreiden om de score aan te passen.
+- Besteed niet te veel aandacht aan efficiëntie; kies liever voor duidelijkheid.
+- Je kan werken met een kopie van het bord om aanpassingen uit te voeren zonder de oorspronkelijke toestand te veranderen.
+
+In de bijgeleverde tests worden de volgende drie spellen gebruikt:
+- Spel 1
+   <img src="/img/opdracht2/model1-1.png" width="100px"></img>
+   ```java
+   CandyCrushGame model1 = Util.createBoardFromString("""
+            @@o#
+            o*#o
+            @@**
+            *#@@""");
+   ```
+   **Oplossing**: De maximumscore is **16** na **4 wissels**.
+   {{% notice style=info title="Meer detail" expanded=false %}}
+   Er is slechts 1 sequentie van 4 wissels die tot een eindscore van 16 leidt.
+   1. (r2,c1) ⇄ (r3,c1)
+   2. (r2,c1) ⇄ (r3,c1)
+   3. (r2,c0) ⇄ (r2,c1)
+   4. (r2,c3) ⇄ (r3,c3)
+
+   _(rA,cB) ⇄ (rC,cD) betekent een wissel van het snoepje op rij A, kolom B met dat op rij C, kolom D._
+
+   {{% multicolumn min=100px %}}
+   <img src="/img/opdracht2/model1-1.png" width="100px"></img>
+
+   <img src="/img/opdracht2/model1-2.png" width="100px"></img>
+
+   <img src="/img/opdracht2/model1-3.png" width="100px"></img>
+
+   <img src="/img/opdracht2/model1-4.png" width="100px"></img>
+
+   <img src="/img/opdracht2/model1-5.png" width="100px"></img>
+
+   {{% /multicolumn %}}
+
+  {{% /notice %}}
+   
+
+- Spel 2
+   <img src="/img/opdracht2/model2.png" width="130px"></img>
+
+   ```java
+   CandyCrushGame model2 = Util.createBoardFromString("""
+            #oo##
+            #@o@@
+            *##o@
+            @@*@o
+            **#*o""");
+   ```
+   **Oplossing**: De maximumscore is **23** na **7 wissels**.
+   {{% notice style=info title="Meer detail" expanded=false %}}
+   Er zijn 4 verschillende sequenties van 7 wissels die tot een eindscore van 23 leiden:
+   - (r2,c0) ⇄ (r2,c1) ; (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
+   - (r3,c3) ⇄ (r3,c4) ; (r2,c0) ⇄ (r2,c1) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
+   - (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c0) ⇄ (r2,c1) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
+   - (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c0) ⇄ (r2,c1) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
+  {{% /notice %}}
+- Spel 3
+   <img src="/img/opdracht2/model3.png" width="160px"></img>
+
+   ```java
+   CandyCrushGame model3 = Util.createBoardFromString("""
+            #@#oo@
+            @**@**
+            o##@#o
+            @#oo#@
+            @*@**@
+            *#@##*""");
+   ```
+   **Oplossing**: De maximumscore is **33** na **9 wissels** (dit berekenen kan een tijdje duren).
+   {{% notice style=info title="Meer detail" expanded=false %}}
+   Voor model3 (score 33 na 9 wissels) zijn er volgende 7 sequenties:
+
+   - (r1,c0) ⇄ (r2,c0) ; (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r1,c0) ⇄ (r2,c0) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r5,c0) ⇄ (r5,c1) ; (r2,c2) ⇄ (r3,c2) ; (r4,c0) ⇄ (r5,c0) ; (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r1,c0) ⇄ (r2,c0) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r1,c0) ⇄ (r2,c0) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r1,c0) ⇄ (r2,c0) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4) ; (r1,c0) ⇄ (r2,c0) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+   {{% /notice %}}
+
+
+Tag het resultaat als `v7` en push dit naar je remote repository op Github.
+
+> Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v7`. Dit gebeurt namelijk niet automatisch bij een `git push`.
+> Je kan ook alle tags in 1 keer pushen met `git push --tags`.
+> Controleer op je GitHub-repository of je de tags kan zien.
+
+_Dit was de laatste opdracht voor het vak._
