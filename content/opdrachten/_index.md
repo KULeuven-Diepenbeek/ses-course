@@ -636,7 +636,7 @@ _Hints:_
 
 In de bijgeleverde tests worden de volgende drie spellen gebruikt:
 - Spel 1
-   <img src="/img/opdracht2/model1-1.png" width="100px"></img>
+   <img src="/img/opdracht2/model1.png" width="100px"></img>
    ```java
    CandyCrushGame model1 = Util.createBoardFromString("""
             @@o#
@@ -646,14 +646,15 @@ In de bijgeleverde tests worden de volgende drie spellen gebruikt:
    ```
    **Oplossing**: De maximumscore is **16** na **4 wissels**.
    {{% notice style=info title="Meer detail" expanded=false %}}
-   Er is slechts 1 sequentie van 4 wissels die tot een eindscore van 16 leidt.
-   1. (r2,c1) ⇄ (r3,c1)
-   2. (r2,c1) ⇄ (r3,c1)
-   3. (r2,c0) ⇄ (r2,c1)
-   4. (r2,c3) ⇄ (r3,c3)
+   Er zijn 3 sequenties van 4 wissels die tot een eindscore van 16 leiden, namelijk:
+
+   - (r2,c1) ⇄ (r3,c1), (r2,c1) ⇄ (r3,c1), (r2,c0) ⇄ (r2,c1), (r2,c3) ⇄ (r3,c3)
+   - (r2,c1) ⇄ (r3,c1), (r1,c0) ⇄ (r1,c1), (r2,c1) ⇄ (r3,c1), (r2,c3) ⇄ (r3,c3)
+   - (r2,c1) ⇄ (r3,c1), (r1,c0) ⇄ (r1,c1), (r1,c3) ⇄ (r2,c3), (r2,c1) ⇄ (r3,c1)
 
    _(rA,cB) ⇄ (rC,cD) betekent een wissel van het snoepje op rij A, kolom B met dat op rij C, kolom D._
 
+   De eerste sequentie ziet er als volgt uit:
    {{% multicolumn min=100px %}}
    <img src="/img/opdracht2/model1-1.png" width="100px"></img>
 
@@ -684,10 +685,10 @@ In de bijgeleverde tests worden de volgende drie spellen gebruikt:
    **Oplossing**: De maximumscore is **23** na **7 wissels**.
    {{% notice style=info title="Meer detail" expanded=false %}}
    Er zijn 4 verschillende sequenties van 7 wissels die tot een eindscore van 23 leiden:
-   - (r2,c0) ⇄ (r2,c1) ; (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
-   - (r3,c3) ⇄ (r3,c4) ; (r2,c0) ⇄ (r2,c1) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
-   - (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c2) ⇄ (r3,c2) ; (r2,c0) ⇄ (r2,c1) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
-   - (r3,c3) ⇄ (r3,c4) ; (r1,c2) ⇄ (r1,c3) ; (r2,c0) ⇄ (r2,c1) ; (r2,c2) ⇄ (r3,c2) ; (r2,c1) ⇄ (r2,c2) ; (r4,c2) ⇄ (r4,c3) ; (r4,c3) ⇄ (r4,c4)
+   - (r2,c0) ⇄ (r2,c1), (r3,c3) ⇄ (r3,c4), (r1,c2) ⇄ (r1,c3), (r2,c2) ⇄ (r3,c2), (r2,c1) ⇄ (r2,c2), (r4,c2) ⇄ (r4,c3), (r4,c3) ⇄ (r4,c4)
+   - (r3,c3) ⇄ (r3,c4), (r2,c0) ⇄ (r2,c1), (r1,c2) ⇄ (r1,c3), (r2,c2) ⇄ (r3,c2), (r2,c1) ⇄ (r2,c2), (r4,c2) ⇄ (r4,c3), (r4,c3) ⇄ (r4,c4)
+   - (r3,c3) ⇄ (r3,c4), (r1,c2) ⇄ (r1,c3), (r2,c2) ⇄ (r3,c2), (r2,c0) ⇄ (r2,c1), (r2,c1) ⇄ (r2,c2), (r4,c2) ⇄ (r4,c3), (r4,c3) ⇄ (r4,c4)
+   - (r3,c3) ⇄ (r3,c4), (r1,c2) ⇄ (r1,c3), (r2,c0) ⇄ (r2,c1), (r2,c2) ⇄ (r3,c2), (r2,c1) ⇄ (r2,c2), (r4,c2) ⇄ (r4,c3), (r4,c3) ⇄ (r4,c4)
   {{% /notice %}}
 - Spel 3
    <img src="/img/opdracht2/model3.png" width="160px"></img>
@@ -705,13 +706,13 @@ In de bijgeleverde tests worden de volgende drie spellen gebruikt:
    {{% notice style=info title="Meer detail" expanded=false %}}
    Voor model3 (score 33 na 9 wissels) zijn er volgende 7 sequenties:
 
-   - (r1,c0) ⇄ (r2,c0) ; (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
-   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r1,c0) ⇄ (r2,c0) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
-   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r5,c0) ⇄ (r5,c1) ; (r2,c2) ⇄ (r3,c2) ; (r4,c0) ⇄ (r5,c0) ; (r4,c4) ⇄ (r5,c4)
-   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r1,c0) ⇄ (r2,c0) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
-   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r1,c0) ⇄ (r2,c0) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
-   - (r2,c3) ⇄ (r2,c4) ; (r4,c5) ⇄ (r5,c5) ; (r1,c0) ⇄ (r2,c0) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
-   - (r2,c3) ⇄ (r2,c4) ; (r1,c0) ⇄ (r2,c0) ; (r4,c5) ⇄ (r5,c5) ; (r2,c2) ⇄ (r2,c3) ; (r2,c5) ⇄ (r3,c5) ; (r5,c1) ⇄ (r5,c2) ; (r2,c2) ⇄ (r3,c2) ; (r5,c0) ⇄ (r5,c1) ; (r4,c4) ⇄ (r5,c4)
+   - (r1,c0) ⇄ (r2,c0), (r2,c3) ⇄ (r2,c4), (r4,c5) ⇄ (r5,c5), (r2,c2) ⇄ (r2,c3), (r2,c5) ⇄ (r3,c5), (r5,c1) ⇄ (r5,c2), (r2,c2) ⇄ (r3,c2), (r5,c0) ⇄ (r5,c1), (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4), (r1,c0) ⇄ (r2,c0), (r4,c5) ⇄ (r5,c5), (r2,c2) ⇄ (r2,c3), (r2,c5) ⇄ (r3,c5), (r5,c1) ⇄ (r5,c2), (r2,c2) ⇄ (r3,c2), (r5,c0) ⇄ (r5,c1), (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4), (r4,c5) ⇄ (r5,c5), (r1,c0) ⇄ (r2,c0), (r2,c2) ⇄ (r2,c3), (r2,c5) ⇄ (r3,c5), (r5,c1) ⇄ (r5,c2), (r2,c2) ⇄ (r3,c2), (r5,c0) ⇄ (r5,c1), (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4), (r4,c5) ⇄ (r5,c5), (r2,c2) ⇄ (r2,c3), (r2,c5) ⇄ (r3,c5), (r1,c0) ⇄ (r2,c0), (r5,c1) ⇄ (r5,c2), (r2,c2) ⇄ (r3,c2), (r5,c0) ⇄ (r5,c1), (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4), (r4,c5) ⇄ (r5,c5), (r2,c2) ⇄ (r2,c3), (r2,c5) ⇄ (r3,c5), (r5,c1) ⇄ (r5,c2), (r1,c0) ⇄ (r2,c0), (r2,c2) ⇄ (r3,c2), (r5,c0) ⇄ (r5,c1), (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4), (r4,c5) ⇄ (r5,c5), (r2,c2) ⇄ (r2,c3), (r2,c5) ⇄ (r3,c5), (r5,c1) ⇄ (r5,c2), (r5,c0) ⇄ (r5,c1), (r2,c2) ⇄ (r3,c2), (r4,c0) ⇄ (r5,c0), (r4,c4) ⇄ (r5,c4)
+   - (r2,c3) ⇄ (r2,c4), (r4,c5) ⇄ (r5,c5), (r2,c2) ⇄ (r2,c3), (r1,c0) ⇄ (r2,c0), (r2,c5) ⇄ (r3,c5), (r5,c1) ⇄ (r5,c2), (r2,c2) ⇄ (r3,c2), (r5,c0) ⇄ (r5,c1), (r4,c4) ⇄ (r5,c4)
    {{% /notice %}}
 
 
