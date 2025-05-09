@@ -52,7 +52,7 @@ De naamgeving: voor het committen van je resultaat van "Opdracht 1" gebruik je d
 
 Er is 1 deadline voor alle opdrachten van het eerste deel (SES+EES): **vrijdag 21/03/2025 23u59**.
 
-De deadline voor alle opdrachten van het tweede deel (enkel SES) is **vrijdag 23/05/2025 23u59**.
+De deadline voor alle opdrachten van het tweede deel (enkel SES) is **zondag 25/05/2025 23u59**.
 
 ## Opdrachten deel 1
 
