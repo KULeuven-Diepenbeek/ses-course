@@ -3,7 +3,7 @@ title: "9.2. Design Patterns"
 weight: 90
 toc: true
 autonumbering: true
-draft: true
+draft: false
 ---
 
 ## Wat is een ontwerppatroon?
