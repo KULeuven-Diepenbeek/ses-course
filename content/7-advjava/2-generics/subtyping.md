@@ -172,7 +172,7 @@ class Super<T> { ... }
 
 class SubForAnimal<A extends Animal> extends Super<A> { ... }
 
-class SubForCat extends SubAnimal<Cat> { ... }
+class SubForCat extends SubForAnimal<Cat> { ... }
 ```
 
 De superklasse `Super` heeft een generische parameter `T`.
