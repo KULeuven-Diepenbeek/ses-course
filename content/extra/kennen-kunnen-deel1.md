@@ -14,7 +14,7 @@ Enkel kunnen, niets specifiek te kennen voor examen
 
 #### Versiebeheer: Git en Github
 **Voorbeeld vragen:**
-- Casus gegeven van een bug in een programma en er moet een nieuwe feature ontwikkeld worden, de ontwikkelaars werken met een productie branch en een development branch. Schets de git workflow die de bugfix en de nieuwe feature uiteindelijk integreerd in de productiebranch.
+- Casus gegeven van een bug in een programma en er moet een nieuwe feature ontwikkeld worden, de ontwikkelaars werken met een productie branch en een development branch. Schets de git workflow die de bugfix en de nieuwe feature uiteindelijk integreert in de productie branch.
 
 #### Build systems + Dependency Management
 **Voorbeeld vragen:**
