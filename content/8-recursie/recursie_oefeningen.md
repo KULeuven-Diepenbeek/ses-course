@@ -214,6 +214,8 @@ _Het laatste voorbeeld zal waarschijnlijk veel te lang duren. Je kan nadenken of
 
 ## Boomstructuur
 
+> In deze oefening maken we gebruik van een boomstructuur. Deze structuur zal in het vak rond algoritmen en datastructuren een belangrijke rol spelen en daar dan ook uitgebreid aan bod komen. We gebruiken deze hier enkel als voorbeeld.
+
 Gegeven onderstaande record om een boomstructuur op te bouwen:
 
 ```java

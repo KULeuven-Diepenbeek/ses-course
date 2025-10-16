@@ -789,6 +789,7 @@ Die parameter wordt ook vaak de 'accumulator' genoemd, aangezien die het resulta
 De `factorial_worker`-methode is ook **tail-recursive**.
 Dat betekent dat de recursieve oproep de laatste bewerking is die gebeurt voor de functie eindigt (ze staat direct achter de 'return').
 In sommige programmeertalen (maar niet in Java) worden dergelijke tail-recursive oproepen geoptimaliseerd door de compiler: aangezien er geen werk meer uitgevoerd moet worden na de recursieve oproep, kan het stackframe meteen ook verwijderd worden. Je loopt dan geen risico op een stack overflow door teveel recursieve oproepen.
+Tail-recursie (maar dan in C++) zal in meer detail behandeld worden in het vak Algoritmen en datastructuren.
 
 ## Efficiëntie
 
@@ -797,89 +798,7 @@ Bijvoorbeeld, `fib(3)` wordt tweemaal opnieuw berekend, `fib(2)` driemaal, en `f
 Dat is natuurlijk niet erg efficiënt.
 
 Technieken zoals 'dynamisch programmeren' (_dynamic programming_) en _memoization_ kunnen hier soelaas bieden.
-We gebruiken deze technieken niet verder binnen deze cursus, maar illustreren hier kort even het achterliggende idee.
-
-Een voorbeeld van hoe _memoization_ gebruikt kan worden voor Fibonacci gaat als volgt (merk op dat we ook het worker-wrapper patroon gebruiken):
-
-```java
-public static int fib(int n) {
-    if (n < 0) throw new IllegalArgumentException();
-    int[] memo = new int[n+1];
-    Arrays.fill(memo, -1);
-    return fib_memoized(n, memo);
-}
-
-private static int fib_memoized(int n, int[] memo) {
-    var result = memo[n];
-    if (result == -1) {
-        if (n == 0) result = 0;
-        else if (n == 1) result = 1;
-        else result = fib_memoized(n-1, memo) + fib_memoized(n-2, memo);
-        memo[n] = result;
-    }
-    return result;
-}
-```
-
-We maken gebruik van een array `memo`.
-Initieel zijn alle elementen daarvan gelijk aan -1, wat hier betekent dat ze nog niet berekend zijn.
-Telkens het n-de Fibonacci-getal berekend wordt, slaan we het op op plaats `memo[n]`.
-Wanneer dit getal later opnieuw opgevraagd wordt, berekenen we het niet opnieuw, maar herbruiken we gewoon het resultaat van de vorige keer.
-
-Voor \\( n=20 \\) gebeuren er in de gewone implementatie 6765 oproepen van de `fib`-methode.
-De versie met memoization doet in totaal 39 oproepen van `fib_memoized`; alle andere oproepen werden vervangen door het uitlezen van het resultaat uit de `memo`-array.
-
-Je kan dit nog verder optimaliseren: je weet dat elke oproep alleen de vorige twee waarden nodig heeft: om het n-de fibonacci-getal te berekenen heb je enkel het (n-1)'ste en (n-2)'de fibonacci-getal nodig.
-Je hoeft dus niet alle waarden bij te houden in een array, enkel de laatste twee (dat kan met twee variabelen).
-En in plaats van te vertrekken bij het n-de Fibonacci-getal en naar kleinere Fibonacci-getallen te gaan, kunnen we ook beginnen bij de kleinste Fibonacci-getallen en omhoog gaan tot we uiteindelijk bij het n-de uitkomen.
-
-<img src="/img/fib.png" alt="drawing" style="max-width: 500px;"/>
-
-Dat leidt tot volgende recursieve oplossing (opnieuw met het worker-wrapper patroon), waar `prevprev` en `prev` de vorige twee waarden voorstellen.
-
-```java
-public static int fib(int n) {
-    if (n < 0) throw new IllegalArgumentException();
-    if (n == 0) return 0;
-    if (n == 1) return 1;
-    return fib_worker(n, 2, 0, 1); // n >= 2
-}
-private static int fib_worker(int targetN, int currentN, int prevprev, int prev) {
-    if (currentN == targetN) return prevprev + prev; // fib(n-2) + fib(n-1)
-    return fib_worker(targetN, currentN+1, prev, prevprev+prev);
-}
-```
-
-Hieronder zie je de oproepen van `fib_worker` om `fib(6)` te berekenen.
-
-| targetN | currentN | prevprev | prev | returns                      |
-| ------- | -------- | -------- | ---- | ---------------------------- |
-| 6       | 2        | 0        | 1    | `fib_worker(6, 3, 1, 0+1=1)` |
-| 6       | 3        | 1        | 1    | `fib_worker(6, 4, 1, 1+1=2)` |
-| 6       | 4        | 1        | 2    | `fib_worker(6, 5, 2, 1+2=3)` |
-| 6       | 5        | 2        | 3    | `fib_worker(6, 6, 3, 2+3=5)` |
-| 6       | 6        | 3        | 5    | `3 + 5 = 8`                  |
-
-Deze versie kan ook makkelijk iteratief geschreven worden:
-
-```java
-public static int fib(int n) {
-    if (n < 0) throw new IllegalArgumentException();
-    if (n == 0) return 0;
-    if (n == 1) return 1;
-    int prevprev = 0;
-    int prev = 1;
-    for (int x = 2; x != n; x++) {
-      int newprevprev = prev;
-      int newprev = prevprev + prev;
-      prevprev = newprevprev;
-      prev = newprev;
-    }
-    return prevprev + prev;
-}
-```
-
-> Onderzoek de gelijkenissen en verschillen tussen de recursieve en iteratieve versie.
+We gebruiken deze technieken niet verder binnen deze cursus, maar deze komen later wel aan bod binnen het opleidingsonderdeel Algoritmen en datastructuren.
 
 ## Patronen om het probleem te verkleinen
 
