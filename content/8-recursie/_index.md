@@ -1,6 +1,6 @@
 ---
 title: "8. Recursie en backtracking"
-weight: 80
+weight: 120
 draft: false
 ---
 

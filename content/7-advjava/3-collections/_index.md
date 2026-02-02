@@ -5,6 +5,11 @@ weight: 30
 draft: false
 ---
 
+{{% notice todo %}}
+Verwijder tijdscomplexiteit
+Focus enkel op List, Set, Map - geen details over implementatie
+{{% /notice %}}
+
 {{% notice info "In andere programmeertalen" %}}
 De concepten in andere programmeertalen die het dichtst aanleunen bij Java collections zijn
 - de Standard Template Library (STL) in C++
@@ -16,7 +21,7 @@ Totnogtoe hebben we enkel gewerkt met een Java array (vaste grootte), en met `Ar
 In dit hoofdstuk kijken we in meer detail naar ArrayList, en behandelen we ook verschillende andere collectie-types in Java.
 De meeste van die types vind je ook (soms onder een andere naam) terug in andere programmeertalen.
 
-Je kan je afvragen waarom we andere collectie-types nodig hebben; uiteindelijk kan je (met genoeg werk) alles toch implementeren met een ArrayList? Dat klopt, maar de collectie-types verschillen in welke operaties snel zijn, en welke meer tijd vragen. Om dat wat preciezer te maken, kijken we eerst even naar de notie van **tijdscomplexiteit**.
+Je kan je afvragen waarom we andere collectie-types nodig hebben; uiteindelijk kan je (met genoeg werk) alles toch implementeren met een ArrayList? Dat klopt, maar de collectie-types verschillen in welke operaties snel zijn, en welke meer tijd vragen. Om dat preciezer uit te drukken, kan je gebruik maken van **tijdscomplexiteit**. We gaan daar in deze cursus niet verder op in.
 
 {{% children %}}
 

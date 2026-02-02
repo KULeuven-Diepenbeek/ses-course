@@ -1,10 +1,10 @@
 ---
-title: "7.3.1 Tijdscomplexiteit"
+title: "Optioneel: tijdscomplexiteit"
 toc: true
 weight: 10
 autonumbering: true
 author: "Koen Yskout"
-draft: false
+draft: true
 math: true
 ---
 

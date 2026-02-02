@@ -1,6 +1,6 @@
 ---
 title: 'Extra informatie'
-weight: 100
+weight: 400
 draft: false
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Bijlagen
-weight: 110
+weight: 500
 author: Koen Yskout
 draft: false
 ---

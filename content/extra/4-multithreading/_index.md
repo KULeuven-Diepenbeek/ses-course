@@ -1,10 +1,10 @@
 ---
-title: "7.4 Multithreading en concurrency"
+title: "Optioneel: Multithreading en concurrency"
 toc: true
 weight: 40
 autonumbering: true
 author: "Koen Yskout"
-draft: false
+draft: true
 ---
 
 {{% notice info "In andere programmeertalen" %}}

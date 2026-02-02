@@ -17,7 +17,12 @@ enableGitInfo = true
 
 [markup]
   defaultMarkdownHandler = "goldmark"
-  
+
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+
   [markup.goldmark.renderer]
     unsafe= true
 
@@ -56,11 +61,6 @@ enableGitInfo = true
     disableInlineCopyToClipBoard = true
     ordersectionsby = "weight"
 
-[outputs]
-  home = ['html', 'rss', 'print']
-  page = ['html', 'rss', 'print']
-  section = ['html', 'rss', 'print']  
-
 [params.author]
   name = "Arne Duyver, Koen Yskout"
   email = "<i>fname</i>.<i>lname</i>A T<i>kuleuven.be</i>"
@@ -96,3 +96,9 @@ name = "<i class='fab fa-github'></i> Course Git Repository"
 identifier = "cgit"
 url = "https://github.com/kuleuven-diepenbeek/ses-course/"
 weight = 20
+
+
+[outputs]
+  home = ['html', 'rss', 'print']
+  page = ['html', 'rss', 'print']
+  section = ['html', 'rss', 'print']  
