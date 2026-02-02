@@ -2,7 +2,7 @@
 title: "Software Engineering Skills"
 ---
 
-Academiejaar 2024---2025
+Academiejaar 2025---2026
 
 ## Inhoud
 
