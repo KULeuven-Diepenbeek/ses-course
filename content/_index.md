@@ -40,20 +40,18 @@ Gelijkaardige concepten bestaan vaak ook in andere programmeertalen.
 
 1. Records
 2. Generics
-3. Gegevensstructuren (collections)
-4. Multithreading
-5. Streams
+3. Lambda-functies
+4. Streams
 
 #### Recursie en backtracking
 
 Recursie en backtracking zijn krachtige tools om complexe problemen op te lossen.
 We leren hoe na te denken over recursie, alsook templates voor typische backtracking-problemen.
 
-#### Design Patterns
+#### Software ontwerpprincipes
 
-Design patterns zijn ontwerpoplossingen voor vaak terugkerende problemen.
-Wanneer je zo'n probleem tegenkomt, biedt het patroon een goed startpunt voor je ontwerp.
-Er bestaan erg veel patronen; we bekijken er enkele zeer gekende en vaak voorkomende.
+We bekijken enkele software ontwerpprincipes die helpen om grotere projecten goed te structureren, 
+zodat het onderhouden ervan eenvoudiger wordt.
 
 ## Syllabus
 
