@@ -51,16 +51,12 @@ Bijvoorbeeld:
 Schrijf een functie `gcd` die de grootste gemene deler bepaalt tussen twee getallen.
 Maak gebruik van het feit dat, als \\( x \geq y \\), dat dan \\( \gcd(x, y) = \gcd(y, x \\% y) \\) met % de modulo-operatie, en dat \\( \gcd(x, 0) = x \\).
 
-## Snelle macht
-
-Schrijf een recursieve functie `double power(double x, int n)` die \\( x^n \\) berekent met zo weinig mogelijk berekeningen.
-Maak gebruik van het feit dat \\( x^{2n} = x^n \cdot x^n \\) en \\( x^{2n+1} = x \cdot x^{2n} \\).
-
 ## Sum of digits
 
 Schrijf een recursieve methode `int sumOfDigits(long number)` die de som van de cijfers van een (niet-negatief) getal berekent, en dat herhaalt tot die som kleiner is dan 10.
 Bijvoorbeeld: `62984` geeft `6+2+9+8+4 = 29`; dat wordt vervolgens `2+9 = 11`; en dat wordt uiteindelijk `1+1 = 2`.
 Het resultaat is dus 2.
+
 
 ## Trap beklimmen
 
@@ -84,6 +80,14 @@ ______|
 3. 1 trede, 2 treden, 1 trede
 4. 2 treden, 1 trede, 1 trede
 5. 2 treden, 2 treden
+
+## Alle permutaties van een lijst berekenen
+
+Schrijf een functie `allPermutations` die een Set teruggeeft met alle permutaties van een gegeven lijst.
+Bijvoorbeeld:
+
+- `allPermutations(List.of("A", "B")) = [ [A, B], [B, A] ]`
+- `allPermutations(List.of("A", "B", "C")) = [ [A, B, C], [A, C, B], [B, A, C], [B, C, A], [C, A, B], [C, B, A] ]`
 
 ## Gepast betalen
 
@@ -157,14 +161,6 @@ Bijvoorbeeld:
 - `powerset(Set.of("A", "B")) = [[], [A], [B], [A, B]]`
 - `powerset(Set.of("A", "B", "C")) = [[], [A], [B], [C], [A, B], [A, C], [B, C], [A, B, C]]`
 
-## Alle permutaties van een lijst berekenen
-
-Schrijf een functie `allPermutations` die een Set teruggeeft met alle permutaties van een gegeven lijst.
-Bijvoorbeeld:
-
-- `allPermutations(List.of("A", "B")) = [ [A, B], [B, A] ]`
-- `allPermutations(List.of("A", "B", "C")) = [ [A, B, C], [A, C, B], [B, A, C], [B, C, A], [C, A, B], [C, B, A] ]`
-
 
 ## Gebalanceerde haakjes
 
@@ -211,6 +207,40 @@ Bijvoorbeeld:
 - `longestCommonSubsequence("sterrenstelselsamenstellingsanalyseinstrument", "restaurantkeukenapparatuurontwerpmethodiek") == "restantenaantrmet"` (met dank aan ChatGPT voor de suggestie): <pre class="lcs-pre">ster**re**n**st**elsels**a**me**n**s**te**lli**n**gs**a**n**a**lysei**n**s**tr**u**me**n**t**</pre> en <pre class="lcs-pre">**resta**ura**nt**k**e**uke**na**pp**a**ratuuro**nt**we**r**p**met**hodiek</pre>
 
 _Het laatste voorbeeld zal waarschijnlijk veel te lang duren. Je kan nadenken of je je algoritme wat 'slimmer' kan maken._
+
+
+## Stack omkeren
+
+Schrijf een recursieve methode `<T> void reverse(Deque<T> stack)` die de volgorde van de items in een stack (Deque) omdraait, zonder gebruik te maken van een extra datastructuur (dus zonder een andere array, lijst, set, ...).
+Maak enkel gebruik van de `isEmpty()`-, `pollFirst()` en `addFirst()`-methodes van de Deque-interface.
+
+```java
+var stack = new LinkedList<>(List.of("A", "B", "C", "D", "E", "F"));
+System.out.println(stack); // [A, B, C, D, E, F]
+reverse(stack);
+System.out.println(stack); // [F, E, D, C, B, A]
+```
+
+_Hint: overweeg een (recursieve) hulpoperatie om een element onderaan de stack in te voegen._
+
+## Toren van Hanoi (uitbreiding)
+
+Los de toren van Hanoi op voor \\( n\\) schijven op 4 stapels (dus 2 hulpstapels).
+Je kan je oplossing manueel uittesten [via deze simulator](https://towersofhanoi.info/Play.aspx).
+_(In de simulator moet je klikken, niet slepen)_
+
+## Sorteren van een lijst
+
+Schrijf een recursieve methode om een lijst van getallen te sorteren. De sortering moet _in-place_ gebeuren (je past de lijst zelf aan door elementen van volgorde te wisselen, en geeft dus geen nieuwe lijst terug).
+
+## reduce
+
+Schrijf een recursieve `reduce`-operatie die werkt op een lijst, naar analogie met de reduce-operatie op streams.
+
+```java
+List<Integer> lst = List.of(1, 2, 3, 4);
+int sum = reduce(lst, 0, (sum, x) -> sum + y); // sum == 10
+```
 
 ## Boomstructuur
 
@@ -288,36 +318,3 @@ var tree = new TreeNode<>("A",
        |
        +-- F
    ```
-
-## Stack omkeren
-
-Schrijf een recursieve methode `<T> void reverse(Deque<T> stack)` die de volgorde van de items in een stack (Deque) omdraait, zonder gebruik te maken van een extra datastructuur (dus zonder een andere array, lijst, set, ...).
-Maak enkel gebruik van de `isEmpty()`-, `pollFirst()` en `addFirst()`-methodes van de Deque-interface.
-
-```java
-var stack = new LinkedList<>(List.of("A", "B", "C", "D", "E", "F"));
-System.out.println(stack); // [A, B, C, D, E, F]
-reverse(stack);
-System.out.println(stack); // [F, E, D, C, B, A]
-```
-
-_Hint: overweeg een (recursieve) hulpoperatie om een element onderaan de stack in te voegen._
-
-## Toren van Hanoi (uitbreiding)
-
-Los de toren van Hanoi op voor \\( n\\) schijven op 4 stapels (dus 2 hulpstapels).
-Je kan je oplossing manueel uittesten [via deze simulator](https://towersofhanoi.info/Play.aspx).
-_(In de simulator moet je klikken, niet slepen)_
-
-## Sorteren van een lijst
-
-Schrijf een recursieve methode om een lijst van getallen te sorteren. De sortering moet _in-place_ gebeuren (je past de lijst zelf aan door elementen van volgorde te wisselen, en geeft dus geen nieuwe lijst terug).
-
-## reduce
-
-Schrijf een recursieve `reduce`-operatie die werkt op een lijst, naar analogie met de reduce-operatie op streams.
-
-```java
-List<Integer> lst = List.of(1, 2, 3, 4);
-int sum = reduce(lst, 0, (sum, x) -> sum + y); // sum == 10
-```
