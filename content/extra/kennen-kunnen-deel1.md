@@ -1,7 +1,7 @@
 ---
 title: 'Examen: Kennen en kunnen deel 1 SES'
 weight: 10
-draft: false
+draft: true
 ---
 
 ### Extra informatie Examen deel 1 SES
