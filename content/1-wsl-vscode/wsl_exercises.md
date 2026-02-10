@@ -42,8 +42,8 @@ _De gegeven oplossingen zijn EEN mogelijke oplossing, soms zijn meerdere mogelij
 <!-- _**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ nano nieuwbestand.txt
-# save met Ctrl+o en Enter. Exit met Ctrl+x -->
-``` 
+# save met Ctrl+o en Enter. Exit met Ctrl+x 
+``` -->
 - Toon de inhoud van `nieuwbestand.txt` in de terminal.
 <!-- EXSOL -->
 <!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ cat nieuwbestand.txt```  -->
