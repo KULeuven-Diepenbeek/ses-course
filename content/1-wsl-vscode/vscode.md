@@ -112,7 +112,7 @@ Om `Python`code te runnen (en te compileren) op je WSL ga je een aantal prerequi
 - `python3`: Install via `sudo apt install python3 -y`. Het package **python3** heb je nodig om Python 3 scripts en programma's uit te voeren. Het bevat de **interpreter** en de standard libraries die essentieel zijn voor het draaien van Python 3 code.
 - `pip`: Install via `sudo apt-get install python3-pip`. **Pip** is een package manager voor Python die wordt gebruikt om Python-packages te installeren en te beheren.
   - update pip via `pip install --upgrade pip`
-- `pyinstaller`: Install via `pip install pyinstaller`. **PyInstaller** is een tool dat Python-scripts bundelt tot stand-alone executables voor Windows, macOS en Linux. Het maakt het mogelijk om Python-applicaties te distribueren zonder dat gebruikers een Python-omgeving hoeven te installeren.
+- `pyinstaller`: Install via `pip install pyinstaller (--break-system-packages)`. **PyInstaller** is een tool dat Python-scripts bundelt tot stand-alone executables voor Windows, macOS en Linux. Het maakt het mogelijk om Python-applicaties te distribueren zonder dat gebruikers een Python-omgeving hoeven te installeren.
 
 Verder kunnen volgende VSCode extensies handig zijn om je development proces te optimaliseren:
 - **Python**: A Visual Studio Code extension with rich support for the Python language (for all actively supported Python versions), providing access points for extensions to seamlessly integrate and offer support for IntelliSense (Pylance), debugging (Python Debugger), formatting, linting, code navigation, refactoring, variable explorer, test explorer, and more!

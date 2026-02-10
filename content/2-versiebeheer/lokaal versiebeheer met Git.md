@@ -239,6 +239,8 @@ _Indien niet afgewerkt in het applicatiecollege, gelieve thuis af te werken tege
 
 ## Extra
 
+<!-- TODO: add iets over hoe git juist werkt -->
+
 ### Wildcards en commando's aaneenschakelen
 
 **Wildcards** kunnen gebruikt worden om naar meerdere files tegelijk te verwijzen. Zo kan je de wildcard '<b>_</b>' gebruiken om naar alle files die eindigen op '.txt' te verwijzen.

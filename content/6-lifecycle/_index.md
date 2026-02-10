@@ -1,7 +1,7 @@
 ---
 Title: "6. Software Management"
 weight: 60
-draft: false
+draft: true
 ---
 
 #### Software Management

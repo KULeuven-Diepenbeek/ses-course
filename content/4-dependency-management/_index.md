@@ -1,7 +1,7 @@
 ---
 title: '4. Dependency Management'
 weight: 40
-draft: false
+draft: true
 author: Arne Duyver
 ---
 

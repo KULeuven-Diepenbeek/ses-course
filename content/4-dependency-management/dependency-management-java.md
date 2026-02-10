@@ -228,6 +228,22 @@ Gradle vraagt ons tijdens de init een aantal opties te kiezen. Alhoewel we in de
     - **Only one application project**: Dit type project is gericht op het bouwen van één enkele applicatie. De projectstructuur is eenvoudig en bevat meestal alleen de bronbestanden en configuratiebestanden die nodig zijn om de applicatie te bouwen en uit te voeren. Geschikt voor kleinere projecten of wanneer er geen behoefte is aan herbruikbare componenten.
     - **Application and library project**: Dit type project is opgesplitst in meerdere modules, waaronder een applicatiemodule en een of meer bibliotheekmodules. De bibliotheekmodules bevatten herbruikbare code die door de applicatiemodule kan worden gebruikt. Deze structuur bevordert modulariteit en hergebruik van code, wat vooral nuttig is voor grotere projecten of wanneer je van plan bent om delen van je code in andere projecten te gebruiken. 
 
+{{% notice info %}}
+Je kan al die opties ook als flags meegeven aan het `init`-commando. Voor het voorbeeld hierboven wordt dat:
+```bash
+gradle init \
+  --type java-application \
+  --dsl groovy \
+  --test-framework junit \
+  --project-name my_application \
+  --package be.ses.my_application \
+  --java-version 21 \
+  --no-incubating \
+  --no-split-project \
+  --overwrite
+```
+{{% /notice %}}
+
 _**Bij het aanmaken van je project maakt Gradle een aantal folders en bestanden aan. We overlopen hieronder de functionaliteit van de belangrijkste onderdelen.**_ 
 
 ### Ontleding van een Gradle project mappenstructuur

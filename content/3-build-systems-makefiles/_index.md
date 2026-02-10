@@ -2,6 +2,7 @@
 title: "3. Build systems and Makefiles"
 weight: 30
 author: Arne Duyver
+draft: true
 ---
 
 ## Hoe ga je van broncode naar een werkende software applicatie

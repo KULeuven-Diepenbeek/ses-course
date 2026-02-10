@@ -72,7 +72,7 @@ Het vak '_Software Ontwerp in Java_' (INF1) dient eerst gevolgd te worden. We ga
 1. Schriftelijke evaluatie tijdens onderwijsperiode: 50%.
 2. Schriftelijk examen (gesloten boek): 50%.
 
-Een uitgebreide beschrijving is beschikbaar in de [studiegids](https://studiegidswww.uhasselt.be/opleidingsonderdeel.aspx?i=4083).
+Een uitgebreide beschrijving is beschikbaar in de [studiegids (SES)](https://studiegidswww.uhasselt.be/opleidingsonderdeel.aspx?i=5547) en [studiegids (EES)](https://studiegidswww.uhasselt.be/opleidingsonderdeel.aspx?i=4952).
 
 ### Meer leermiddelen
 

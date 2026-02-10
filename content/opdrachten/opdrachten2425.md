@@ -29,7 +29,7 @@ Er is 1 deadline voor alle opdrachten van het eerste deel van SES en EES: vrijda
 
 1. Maak een nieuwe directory aan op je computer voor deze opdracht.
 2. Initialiseer die directory als een git directory.
-3. Download de file [`Candy_Crush_spelregels.txt`](/files/Candy_Crush_spelregels.txt) van Toledo en plaats de file in je git directory.
+3. Download de file [`Candy_Crush_spelregels.txt`](/files/Candy_Crush_spelregels.txt) en plaats de file in je git directory.
 4. Commit nu de veranderingen in je directory en tag als `v1`.
 
 #### Opdracht 2:
