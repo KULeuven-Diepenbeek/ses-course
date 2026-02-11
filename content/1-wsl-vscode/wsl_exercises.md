@@ -77,60 +77,60 @@ $ rm ./info.txt
 ## Oefeningenreeks 2
 - Wijzig de eigenaar van een bestand genaamd `nieuwbestand.txt` naar de gebruiker jezelf en de groep je eigen groep.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ sudo chown $USER:$USER nieuwbestand.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ sudo chown $USER:$USER nieuwbestand.txt``` 
 - Verplaats een bestand genaamd `nieuwbestand.txt` naar een nieuwe locatie met de naam `nieuw_bestand.txt`.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ mv nieuwbestand.txt ./some_dir/nieuw_bestand.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ mv nieuwbestand.txt ./some_dir/nieuw_bestand.txt``` 
 - Kopieer een bestand genaamd `nieuw_bestand.txt` naar een nieuwe locatie met de naam `doel.txt`.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ cp nieuw_bestand.txt ./some_dir/doel.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ cp nieuw_bestand.txt ./some_dir/doel.txt``` 
 - Zoek naar een softwarepakket met de naam 'neofetch'.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ sudo apt search neofetch```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ sudo apt search neofetch``` 
 - Installeer een softwarepakket genaamd 'neofetch'.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ sudo apt install neofetch```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ sudo apt install neofetch``` 
 - Verwijder een geïnstalleerd softwarepakket genaamd 'neofetch'.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ $ sudo apt remove neofetch```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ $ sudo apt remove neofetch``` 
 - Wijzig de permissies van een bestand genaamd `nieuwbestand.txt` zodat de eigenaar lees-, schrijf- en uitvoerrechten heeft, en de groep en anderen alleen lees- en uitvoerrechten hebben.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ sudo chmod 755 nieuwbestand.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ sudo chmod 755 nieuwbestand.txt``` 
 - Voer twee commando's na elkaar uit, ongeacht of het eerste commando succesvol is.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ cat nieuwbestand.txt; echo "De file bestaat of niet"```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ cat nieuwbestand.txt; echo "De file bestaat of niet"``` 
 - Voer een tweede commando alleen uit als het eerste commando succesvol is.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ cat nieuwbestand.txt && echo "De file bestaat"```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ cat nieuwbestand.txt && echo "De file bestaat"``` 
 - Schrijf de uitvoer van een commando naar een bestand genaamd `output.txt`, waarbij de bestaande inhoud van het bestand wordt overschreven.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ ls > output.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ ls > output.txt``` 
 - Voeg de uitvoer van een commando toe aan het einde van een bestand genaamd `output.txt`, zonder de bestaande inhoud te verwijderen.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ echo "Einde bestand" >> output.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ echo "Einde bestand" >> output.txt``` 
 - Zoek naar een softwarepakket genaamd `curl`, installeer het pakket.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ sudo apt search curl
 $ sudo apt install curl
-```  -->
+``` 
 - Verwijder alle bestanden in je map met de extensie `.txt`.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ rm *.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ rm *.txt``` 
 
 <br>
 
 - Maak een bestand genaamd `config.txt` en voeg wat tekst toe. Maak een kopie van een bestand genaamd `config.txt` naar een nieuwe locatie met de naam `backup_config.txt`, wijzig de eigenaar van backup_config.txt naar de gebruiker `root`, en voeg de tekst "Backup voltooid" toe aan een logbestand genaamd `log.txt`.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ nano config.txt
 $ cp config.txt ./backups/backup_config.txt
 $ sudo chown root:root ./backups/backup_config.txt
 $ touch log.txt && echo "Backup voltooid" > log.txt
 ```  
--->
+
 
 ## Oefeningenreeks 3
 
@@ -141,14 +141,14 @@ $ touch log.txt && echo "Backup voltooid" > log.txt
 - Kopieer het bestand `main.c` naar de `bin`-directory.
 - Toon de inhoud van de `bin`-directory.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ mkdir -p project/src project/bin project/docs
 $ cd project/src
 $ touch main.c
 $ cp main.c ../bin/
 $ ls ../bin/
-```  -->
+``` 
 
 **Oefening 2:**
 - Maak een nieuwe directory genaamd `backup` in je thuismap.
@@ -157,14 +157,14 @@ $ ls ../bin/
 - Voeg de tekst "Backup data voor 2025" toe aan `data.txt`.
 - Toon de inhoud van `data.txt` in de terminal.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ mkdir ~/backup
 $ mkdir ~/backup/2025
 $ touch  ~/backup/2025/data.txt
 $ echo "Backup data voor 2025" > ~/backup/2025/data.txt
 $ cat ~/backup/2025/data.txt
-```  -->
+``` 
 
 **Oefening 3:**
 - Zoek naar een softwarepakket genaamd `htop`.
@@ -172,7 +172,7 @@ $ cat ~/backup/2025/data.txt
 - Maak een directorystructuur aan met de volgende paden: `tools/monitoring`.
 - Start het programma `htop` via het absolute pad naar de htop executable file.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 # vergeet voor het installeren van software packages geen update te doen...
 $ sudo apt-get update
@@ -180,7 +180,7 @@ $ sudo apt-get install -y htop
 $ mkdir -p tools/monitoring
 # Een kleine zoektocht toont met dat de `htop` executable file zich bevindt in de `/bin` folder
 $ /bin/htop
-```  -->
+``` 
 
 **Oefening 4:**
 - Maak een directorystructuur aan met de volgende paden: `website/css`, `website/js`, en `website/images`.
@@ -189,13 +189,13 @@ $ /bin/htop
 - Voeg de tekst "body { background-color: #f0f0f0; }" toe aan `styles.css`.
 - Toon de inhoud van `styles.css` in de terminal.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ mkdir -p website/css website/js website/images
 $ cd website/css
 $ echo "body { background-color: #f0f0f0; }" > styles.css
 $ cat styles.css
-```  -->
+``` 
 
 **Oefening 5:**
 - Maak een nieuwe directory genaamd scripts in je thuismap.
@@ -210,13 +210,13 @@ echo "Opruimen voltooid."
 ```
 - Maak het script uitvoerbaar en voer het uit.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ mkdir -p ~/scripts/utilities
 $ nano ~/scripts/utilities/cleanup.sh
 $ chmod +x ~/scripts/utilities/cleanup.sh
 $ ~/scripts/utilities/cleanup.sh
-```  -->
+``` 
 
 ## Oefenreeks 4
 
