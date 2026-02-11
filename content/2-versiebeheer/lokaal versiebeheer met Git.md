@@ -222,12 +222,12 @@ We hebben hier enkel de basis commando's aangehaald met een paar van de meest ge
 5. Maak aanpassingen aan de tekstbestanden en commit.
 6. Keer terug naar de eerste commit via `$ git reset`
 7. Bestudeer de output van `$ git log`
-8. Maak een nieuwe branch en chechout naar die nieuwe branch
+8. Maak een nieuwe branch en checkout naar die nieuwe branch
 9. Voeg in deze branch nieuwe textbestanden toe en commit de verandering in die nieuwe branch.
 10. Open File Explorer en doe een checkout terug naar de main branch. Zie je de nieuwe files verdwijnen/verschijnen wanneer je tussen de twee branches wisselt?
 11. Merge je nieuwe branch met de main branch.
 12. Maak veranderingen in de main branch en commit.
-13. Switch terug naar je andere branch en maak op dezelfde plaats veranderingen en commit. Zo kan ga je een mergeconflict opwekken.
+13. Switch terug naar je andere branch en maak op dezelfde plaats veranderingen en commit. Zo ga je een merge conflict opwekken.
 14. Probeer nu weer je nieuwe branch te mergen met je main branch. Je zal eerst het merge conflict moeten oplossen
 15. Tag je eerste commit met `v1.0` en tag je laatste commit met `v2.0`.
 16. Doe een git checkout naar je eerste commit door gebruik te maken van je nieuwe tags.
@@ -239,7 +239,8 @@ _Indien niet afgewerkt in het applicatiecollege, gelieve thuis af te werken tege
 
 ## Extra
 
-<!-- TODO: add iets over hoe git juist werkt -->
+<!-- TODO: add iets over hoe git juist werkt [dit artikel](https://get-git.readthedocs.io/en/latest/internal.html#internal) -->
+<!-- TODO: Google's "Git Killer" is Jiujutsu (JJ) maar gebruikt git under the hood -->
 
 ### Wildcards en commando's aaneenschakelen
 

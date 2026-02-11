@@ -222,7 +222,7 @@ $ ~/scripts/utilities/cleanup.sh
 
 **Oefening 1:** Maak een shell script dat aan de gebruiker een absoluut pad van een directory vraagt en het aantal `.txt` bestanden in die directory teruggeeft.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 #!/bin/bash
 
@@ -245,11 +245,11 @@ if [ -d "$DIR_PATH" ]; then
 else
   echo "De directory $DIR_PATH bestaat niet."
 fi
-```  -->
+``` 
 
 **Oefening 2:** Maak een shell script dat het ls commando nadoet met de opties `-l` en `-a` in de huidige directory. Je kan enkel de opties apart meegeven of als combinatie `-la`. Je hebt dus maximum 1 flag die je meegeeft aan je shell script waaruit je afleidt hoe je het `ls` commando moet uitvoeren. 
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 #!/bin/bash
 
@@ -262,7 +262,7 @@ elif [ "$1" == "-la" ]; then
 else
   ls
 fi
-```  -->
+``` 
 
 **Oefening 3:** Maak een shell script genaamd `make.sh` dat 4 mogelijke opties kan meekrijgen:
 - Als je de optie `start` meegeeft vraagt het script de gebruiker naar een projectnaam en maakt dan volgende directories aan: `./projectnaam/src` en `./projectnaam/build`.
@@ -270,7 +270,7 @@ fi
 - Als je de optie `clean` meegeeft worden alle bestanden in de `./projectnaam/build` directory gewist.
 - Als je de optie `run` meegeeft worden alle bestanden in `./projectnaam/build` van alle `.txt` bestanden een na een getoond.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 #!/bin/bash
 
@@ -298,4 +298,4 @@ else
   echo "Wrong command, choose: 'start', 'build', 'clean', or 'run'."
 fi
 echo "Done"
-```  -->
+``` 
