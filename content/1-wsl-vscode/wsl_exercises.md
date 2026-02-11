@@ -12,67 +12,67 @@ _De gegeven oplossingen zijn EEN mogelijke oplossing, soms zijn meerdere mogelij
 
 - Toon het pad van de huidige werkdirectory.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_ ```$ pwd```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_ ```$ pwd``` 
 - Maak een nieuw leeg bestand genaamd `nieuwbestand.txt`.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_ ```$ touch nieuwbestand.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_ ```$ touch nieuwbestand.txt``` 
 - Maak een nieuwe directory genaamd `testmap`.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_ ```$ mkdir testmap```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_ ```$ mkdir testmap``` 
 - Verwijder een bestand genaamd `nieuwbestand.txt`.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_ ```$ rm nieuwbestand.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_ ```$ rm nieuwbestand.txt``` 
 - Voeg de tekst "Hallo, wereld!" toe aan de terminaloutput.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_ ```$ echo "Hallo, wereld!"```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_ ```$ echo "Hallo, wereld!"``` 
 - Navigeer naar je `home` directory.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_ ```$ cd ~```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_ ```$ cd ~``` 
 - Wis de output van je terminal.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_ ```$ clear```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_ ```$ clear``` 
 - Bekijk de handleiding voor het commando dat bestanden en directories weergeeft.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ man cd```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ man cd``` 
 - Toon de inhoud van de huidige directory.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ ls```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ ls``` 
 - Open het bestand `nieuwbestand.txt` in een teksteditor en voeg de tekst "Dit is een test." toe. Sla het bestand op en sluit de editor.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ nano nieuwbestand.txt
 # save met Ctrl+o en Enter. Exit met Ctrl+x 
-``` -->
+```
 - Toon de inhoud van `nieuwbestand.txt` in de terminal.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  ```$ cat nieuwbestand.txt```  -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ cat nieuwbestand.txt``` 
 
 <br>
 
 - Maak een nieuw directory genaamd `project`, navigeer naar deze directory, en maak een nieuw bestand genaamd `README.md`.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ mkdir project
 $ cd ./project
 $ touch ./README.md
-```   -->
+```  
 - Maak een nieuw bestand genaamd `info.txt`, voeg de tekst "Dit is een informatief bestand." toe, en toon de inhoud van het bestand.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ nano info.txt
 $ cat info.txt
-``` -->
+```
 - Maak een nieuw directory genaamd `backup`, kopieer het bestand `info.txt` naar de backup-directory, en verwijder vervolgens het originele `info.txt`-bestand.
 <!-- EXSOL -->
-<!-- _**<span style="color: #03C03C;">Solution:</span>**_  
+_**<span style="color: #03C03C;">Solution:</span>**_  
 ```bash
 $ mkdir backup
 $ cp ./info.txt ./backup/info.txt
 $ rm ./info.txt
-``` -->
+```
 
 ## Oefeningenreeks 2
 - Wijzig de eigenaar van een bestand genaamd `nieuwbestand.txt` naar de gebruiker jezelf en de groep je eigen groep.
