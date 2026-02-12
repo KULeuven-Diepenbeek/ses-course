@@ -237,10 +237,19 @@ We hebben hier enkel de basis commando's aangehaald met een paar van de meest ge
 
 _Indien niet afgewerkt in het applicatiecollege, gelieve thuis af te werken tegen volgende les._
 
-## Extra
+## Hoe Git onder de motorkap werkt
 
-<!-- TODO: add iets over hoe git juist werkt [dit artikel](https://get-git.readthedocs.io/en/latest/internal.html#internal) -->
-<!-- TODO: Google's "Git Killer" is Jiujutsu (JJ) maar gebruikt git under the hood -->
+Git behandelt een repository niet als een verzameling losse mappen en submappen met afzonderlijke geschiedenissen, maar als één ondeelbare momentopname (*snapshot*) van de volledige projecttoestand. Bij elke commit legt Git de complete staat van alle getrackte bestanden vast. Het is dus niet zo dat Git een specifieke map of enkel een gewijzigd bestand afzonderlijk opslaat; elke commit verwijst naar een volledige boomstructuur die het hele project representeert. Conceptueel werkt Git daarom altijd met het volledige project als één consistente eenheid.
+
+In tegenstelling tot klassieke versiebeheersystemen slaat Git wijzigingen niet primair op als verschillen (diffs) tussen opeenvolgende versies. Hoewel Git verschillen kan berekenen en tonen wanneer dat nodig is, is het interne opslagmodel snapshot-gebaseerd. Wanneer een bestand wijzigt, wordt een nieuwe versie van de inhoud opgeslagen als een nieuw object. Ongewijzigde bestanden worden niet opnieuw gekopieerd, maar simpelweg opnieuw gerefereerd. Hierdoor kan elke commit worden gezien als een volledige projecttoestand, terwijl opslagruimte efficiënt wordt benut door hergebruik van identieke objecten.
+
+Intern gebruikt Git een eenvoudig maar krachtig key-value opslagmodel. Alle data wordt opgeslagen als objecten die geïdentificeerd worden door een cryptografische hash van hun inhoud (traditioneel SHA-1, steeds vaker SHA-256). De hash fungeert als sleutel, de inhoud als waarde. Er zijn vier hoofdtypes objecten: *blobs* (bestandsinhoud), *trees* (mapstructuren), *commits* (momentopnames met metadata en verwijzingen naar een tree en eventuele ouders) en *tags*. Een tree-object bevat geen bestandsdata zelf, maar koppelt bestandsnamen aan blob-hashes en mapnamen aan andere tree-hashes. Op die manier vormt de volledige repositorygeschiedenis een gerichte acyclische graaf (DAG) van onveranderlijke, content-addressed objecten, waarbij elke commit via een root-tree de volledige projectstructuur definieert.
+
+<img src="https://www.freecodecamp.org/news/content/images/2020/12/image-41.png" alt="Git object model" width="500">
+
+{{% notice info %}}
+Jiujutsu (JJ), the new kid on the block, is een modern versiecontrolesysteem dat ontwikkeld wordt bij Google en ontworpen is als een gebruiksvriendelijker alternatief voor Git. Het biedt een eenvoudiger en consistenter command-model, met krachtige mogelijkheden voor het herschrijven en beheren van geschiedenis. Onder de motorkap gebruikt Jujutsu echter gewoon Git als opslagbackend, waardoor het compatibel blijft met bestaande Git-repositories en infrastructuur.
+{{% /notice %}}
 
 ### Wildcards en commando's aaneenschakelen
 
@@ -258,4 +267,4 @@ Je kan commando's ook **aaneenschakelen** met '<b>;</b>' zodat meerdere commando
 
 - [Beginner vriendelijke Git en Github tutorials](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV)
 - [Tools & Concepts for Mastering Version Control with Git](https://www.youtube.com/watch?v=Uszj_k0DGsg)
-- Wil je meer inzicht in hoe git achter de schermen precies werkt? Lees dan zeker [dit artikel](https://get-git.readthedocs.io/en/latest/internal.html#internal) eens! Die geeft je op een toegankelijke manier uitleg over hoe git wijzigingen opslaat, wat de staging area precies is, etc. (Opmerking: het artikel begint met een vergelijking met SVN; dat is een ander/ouder versiecontrolesysteem.)
+- Wil je meer inzicht in hoe git achter de schermen precies werkt? Lees dan zeker [dit artikel](https://get-git.readthedocs.io/en/latest/internal.html#internal) en [deze webpagina](https://www.freecodecamp.org/news/git-internals-objects-branches-create-repo/) eens! Die geeft je op een toegankelijke manier uitleg over hoe git wijzigingen opslaat, wat de staging area precies is, etc. (Opmerking: het artikel begint met een vergelijking met SVN; dat is een ander/ouder versiecontrolesysteem.)

@@ -460,6 +460,8 @@ drwxr-xr-x 2 arne arne 4096 Feb 11 14:55 test
 -r-xr-xr-x 1 arne arne   22 Feb 11 14:52 test.txt
 ```
 
+<!-- TODO:  ook nog optie van binair uitleggen -->
+
 **mv** - 'move': Met dit commando verplaats of hernoem je een bestand of directory.
 ```bash
 $ mv [bron] [doel]
