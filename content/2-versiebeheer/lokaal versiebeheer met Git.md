@@ -245,7 +245,7 @@ In tegenstelling tot klassieke versiebeheersystemen slaat Git wijzigingen niet p
 
 Intern gebruikt Git een eenvoudig maar krachtig key-value opslagmodel. Alle data wordt opgeslagen als objecten die geïdentificeerd worden door een cryptografische hash van hun inhoud (traditioneel SHA-1, steeds vaker SHA-256). De hash fungeert als sleutel, de inhoud als waarde. Er zijn vier hoofdtypes objecten: *blobs* (bestandsinhoud), *trees* (mapstructuren), *commits* (momentopnames met metadata en verwijzingen naar een tree en eventuele ouders) en *tags*. Een tree-object bevat geen bestandsdata zelf, maar koppelt bestandsnamen aan blob-hashes en mapnamen aan andere tree-hashes. Op die manier vormt de volledige repositorygeschiedenis een gerichte acyclische graaf (DAG) van onveranderlijke, content-addressed objecten, waarbij elke commit via een root-tree de volledige projectstructuur definieert.
 
-<img src="https://www.freecodecamp.org/news/content/images/2020/12/image-41.png" alt="Git object model" width="500">
+<img src="https://www.freecodecamp.org/news/content/images/2020/12/image-41.png" alt="Git object model" width="800">
 
 {{% notice info %}}
 Jiujutsu (JJ), the new kid on the block, is een modern versiecontrolesysteem dat ontwikkeld wordt bij Google en ontworpen is als een gebruiksvriendelijker alternatief voor Git. Het biedt een eenvoudiger en consistenter command-model, met krachtige mogelijkheden voor het herschrijven en beheren van geschiedenis. Onder de motorkap gebruikt Jujutsu echter gewoon Git als opslagbackend, waardoor het compatibel blijft met bestaande Git-repositories en infrastructuur.
