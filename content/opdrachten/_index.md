@@ -3,7 +3,7 @@ title: Opdrachten
 weight: 210
 author: Arne Duyver, koen Yskout
 draft: false
-toc: true
+toc: false
 ---
 
 ## Algemene informatie
