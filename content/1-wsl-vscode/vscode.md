@@ -49,7 +49,7 @@ _Je kan extenties ook op die verschillende niveaus enablen/disablen._
 De **Command Palette** in VSCode is een krachtige tool die je toegang geeft tot vrijwel alle functies en instellingen van de editor via een eenvoudige interface. Je kunt de Command Palette openen door `Ctrl+Shift+p` (Windows/Linux) of `Cmd+Shift+p` (Mac) te gebruiken. In de Command Palette kun je commando's invoeren om taken uit te voeren zoals het openen van bestanden, het wijzigen van instellingen, het installeren van extensies, en nog veel meer. Het biedt een snelle manier om acties uit te voeren zonder door menu's te hoeven navigeren, wat je workflow aanzienlijk kan versnellen. De Command Palette ondersteunt ook fuzzy search, waardoor je snel kunt vinden wat je zoekt, zelfs als je de exacte naam van het commando niet weet.
 
 ## Connectie maken met WSL
-Om connectie te maken met je WSL in VSCode heb je de extensie WSL nodig. Daarna kan je onderaan links op de blauwe of groene knop met `><` pijlen klikken om connectie te maken met je WSL, op die manier kan je (de meeste) van je extensies behouden wanneer je 
+Om connectie te maken met je WSL in VSCode heb je de extensie WSL nodig. Daarna kan je onderaan links op de blauwe of groene knop met `><` pijlen klikken om connectie te maken met je WSL, op die manier kan je (de meeste) van je extensies behouden wanneer je connectie maakt met je wsl instantie. Je kan dan ook native de bestanden aanpassen, nieuwe bestanden/directories maken, etc. alsof vscode in de WSL omgeving zou zitten.
 
 ## Enkele nuttige algemene extensies
 - Prettier: Coder formatter
