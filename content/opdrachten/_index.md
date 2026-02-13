@@ -184,7 +184,7 @@ Voorbeeld: voor het volgende grid:
 
 3. Doe nu op de correcte manier een commit en tag de commit met `v8` en push naar Github.
 
-## Opdrachten rond Continuous Integration and Continuous Deployment
+### Opdrachten rond Continuous Integration and Continuous Deployment
 
 #### Opdracht 9
 1. Gebruik Github Actions om een CI-pipeline aan te maken die steeds je testen van je 'checkneighbours' uit opdracht 7 uitvoert wanneer je naar de `main` branch pusht. Voorzie ook een badge in een README.md in de root folder van deze git directory zodat je in één opslag kan zien wanneer de tests falen.
