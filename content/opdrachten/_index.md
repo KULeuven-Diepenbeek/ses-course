@@ -124,7 +124,7 @@ Dankzij `--all` wordt je branch mee gepushed en dankzij `--tags` worden je tags 
 1. In de folder `opdracht5-6_DependencyManagement` maak je een javaproject met **gradle** aan in een subdirectory genaamd "checkneighbours" met package "be.ses".
    - _Je kan de package name meegeven met het 'gradle init' commando op de volgende manier: `gradle init --package be.ses`_
 2. In je `checkneighbours` gradle project, moet je nu een klasse 'CheckNeighboursInGrid' maken en onderstaande static method in implementeren, los ook de **TODO** op:
-<!-- {{% notice style="code" title="CheckNeighboursInGrid.java (klik om te verbergen/tonen)" expanded=true %}} -->
+{{% notice style="code" title="CheckNeighboursInGrid.java (klik om te verbergen/tonen)" expanded=true %}}
 ```java
 /**
 CheckNeighboursInGrid.java
