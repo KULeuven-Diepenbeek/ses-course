@@ -1,7 +1,7 @@
 ---
-title: "7.2 Generics"
-weight: 20
-draft: false
+title: "7.4 Generics"
+weight: 40
+draft: true
 ---
 
 {{% notice info "In andere programmeertalen" %}}

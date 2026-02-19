@@ -2,7 +2,8 @@
 title: "7.1 Java basics"
 weight: 10
 autonumbering: true
-draft: true
+toc: true
+draft: false
 ---
 
 
@@ -27,6 +28,8 @@ In deel 2 van dit vak zullen we **voor elk onderwerp (~elke les) een afzonderlij
 Dat zorgt ervoor dat je elke oefening onafhankelijk kan oplossen.
 In combinatie met git zullen we **één repository per project** (en dus per onderwerp) gebruiken.
 
+![alt text](/img/intellij-project-structuur.png)
+
 Je opdracht voor dit deel maak je ook in een apart project (en aparte git repository); zie de instructies bij de opdrachten.
 
 ## Oefening 1: Hello world
@@ -40,9 +43,9 @@ Je opdracht voor dit deel maak je ook in een apart project (en aparte git reposi
 
     Klik op *Create*.
 
-2. IntelliJ opent nu je project. Je kan de projectstructuur openen en sluiten door links op het map-icontje te drukken.
+2. IntelliJ opent nu je project. Je kan de projectstructuur tonen en verbergen door links op het map-icontje te drukken.
 
-3. Maak in de root van het project eerst een nieuw leeg bestand `.noai`. Dit zet de AI-ondersteuning uit.
+3. Maak in de root van het project eerst een nieuw leeg bestand `.noai`. Dit zet de AI-ondersteuning in dit project uit.
 
 4. Voeg nu een nieuwe Java-module toe aan het project:
 
@@ -117,16 +120,18 @@ class Opteller {
 
 {{% /notice %}}
 
-## Oefening 3: ArrayList
+## Oefening 3: Klasse en ArrayList
 
-Met deze oefening fris je je geheugen over het gebruik van een ArrayList nog eens op.
+Deze oefening dient om je kennis van klassen en het gebruik van een ArrayList nog eens op te frissen.
 
-Maak een nieuwe Java-module `oef03-arraylist`.
-Maak in die module een klasse `Persoon` met een naam en leeftijd.
-Maak ook een klasse `Programma` die aan de gebruiker steeds achtereenvolgens een naam en leeftijd vraagt, een object van klasse Persoon aanmaakt, en deze objecten bijhoudt in een ArrayList.
+1. Maak een nieuwe Java-module `oef03-arraylist`.
+2. Maak in die module een nieuwe klasse `Persoon` met 2 attributen (velden):
+   - een naam (String)
+   - een leeftijd (int)
+3. Maak ook een klasse `Programma` met een main-methode die aan de gebruiker steeds achtereenvolgens een naam en leeftijd vraagt, telkens een object van klasse Persoon aanmaakt, en deze Persoon-objecten bijhoudt in een ArrayList.
 De invoer stopt wanneer de ingegeven naam leeg is.
+4. Vervolgens moeten de gegevens van alle ingegeven personen uitgeprint worden (in de volgorde dat ze ingegeven werden).
 
-Vervolgens moeten de gegevens van alle ingegeven personen uitgeprint worden.
 Bijvoorbeeld:
 
 ```bash
@@ -169,14 +174,18 @@ import java.util.ArrayList;
 public class Programma {
     public static void main() {
         ArrayList<Persoon> personen = new ArrayList<>();
+
         String naam = IO.readln("Geef de naam van de volgende persoon: ");
         while (!naam.isBlank()) {
             int leeftijd = Integer.parseInt(IO.readln("Geef de leeftijd van " + naam + ": "));
+            
             Persoon p = new Persoon(naam, leeftijd);
             personen.add(p);
+
             IO.println();
             naam = IO.readln("Geef de naam van de volgende persoon: ");
         }
+
         IO.println("De ingegeven personen zijn:");
         for (var p : personen) {
             IO.println("- " + p);
@@ -186,5 +195,3 @@ public class Programma {
 ```
 
 {{% /notice %}}
-
-We gaan nu verder met [Java collecties](./collectionapi.md).

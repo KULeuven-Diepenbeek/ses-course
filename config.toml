@@ -79,6 +79,13 @@ enableGitInfo = true
   identifier = 'task'
   title = 'Oefening'
 
+[[params.boxStyle]]
+  color = 'lightblue'
+  i18n = ''
+  icon = 'question'
+  identifier = 'question'
+  title = 'Vraag'
+
 [[menu.shortcuts]] 
 name = "<i class='fa fa-university'></i> Toledo"
 identifier = "tol"

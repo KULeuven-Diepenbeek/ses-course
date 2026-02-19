@@ -1,10 +1,10 @@
 ---
-title: "7.4 Streams"
+title: "7.6 Streams"
 toc: true
-weight: 40
+weight: 60
 autonumbering: true
 author: "Koen Yskout"
-draft: false
+draft: true
 math: true
 ---
 

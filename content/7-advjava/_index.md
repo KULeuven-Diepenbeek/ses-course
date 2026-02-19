@@ -1,7 +1,7 @@
 ---
 title: "7. Advanced Java"
 weight: 110
-draft: true
+draft: false
 ---
 
 Hier start het tweede deel van de cursus, waarin we enkele geavanceerdere Java-concepten bekijken.
