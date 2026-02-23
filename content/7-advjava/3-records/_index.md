@@ -3,7 +3,7 @@ title: "7.3 Records"
 toc: true
 weight: 30
 autonumbering: true
-draft: true
+draft: false
 ---
 
 {{% notice info "In andere programmeertalen" %}}
@@ -15,12 +15,14 @@ De concepten in andere programmeertalen die het dichtst aanleunen bij Java recor
 
 ## Wat zijn records
 
-Wanneer we object-georiënteerd programmeren, maken we gebruik van *encapsulatie*: we maken de velden van een klasse gewoonlijk privaat, zodat ze worden afgeschermd van andere klassen. Op die manier kunnen we de interne representatie (de velden en hun types) makkelijk aanpassen: zolang de publieke methodes hetzelfde blijven, heeft zo'n aanpassing geen effect op de rest van het systeem.
+In een object-georiënteerd software-ontwerp brengen we data en gedrag samen binnen één klasse.
+We gebruiken dan gewoonlijk *encapsulatie*: we maken de velden van een klasse privaat, zodat ze worden afgeschermd van andere klassen. Op die manier kunnen we de interne representatie (de velden en hun types) makkelijk aanpassen: zolang de publieke methodes (het gedrag) hetzelfde blijven, heeft zo'n aanpassing aan de interne voorstellingswijze geen effect op de rest van het systeem.
 
-Maar soms is encapsulatie niet echt nodig: sommige klassen zijn niet meer dan een bundeling van verschillende waarden.
+Maar soms is encapsulatie niet echt nodig: sommige klassen zijn niet meer dan een bundeling van verschillende waarden, zonder bijhorend complex gedrag.
 Welgekende voorbeelden zijn een coordinaat (bestaande uit een x- en y-attribuut), een geldbedrag (een bedrag en een munteenheid), een adres (straat, huisnummer, postcode, gemeente), etc.
-Ze bevatten vaak geen complex gedrag, en objecten van deze klassen hoeven ook niet aanpasbaar te zijn; je kan makkelijk een nieuw object maken met andere waarden.
-We noemen dit **data-oriented programming**. 
+Objecten van deze klassen hoeven ook niet aanpasbaar te zijn; je kan makkelijk een nieuw object maken met andere waarden.
+Met andere woorden, de _identiteit_ van het object is van ondergeschikt belang.
+We noemen dit **data-oriented programming**: een ontwerpstrategie waar data een _first class citizen_ is, en niet gekoppeld hoeft te worden aan gedrag.
 Voor dergelijke klassen heeft doorgedreven encapsulatie weinig zin.
 
 Een **record** in Java is een eenvoudige klasse die gebruikt kan worden voor data-oriented programming.
@@ -49,7 +51,7 @@ Twee coördinaat-objecten met dezelfde x- en y-coordinaat worden als equivalent 
 ```java
 var coordinate1 = new Coordinate(3, 5);
 var coordinate2 = new Coordinate(3, 5);
-assertEquals(coordinate1, coordinate2);
+coordinate1.equals(coordinate2); // => true
 ```
 
 ## Wanneer gebruik je een record
@@ -84,11 +86,16 @@ record PositiveNumber(int number) {
 }
 ```
 
-4. wanneer je een (immutable) datatype wil maken dat zonder probleem door meerdere threads gebruikt kan worden; dit komt later nog aan bod in het onderwerp _Multithreading en concurrency_.
+4. wanneer je een (immutable) datatype wil maken dat zonder probleem door meerdere threads gebruikt kan worden. We gaan in dit vak niet dieper in op het onderwerp _Multithreading en concurrency_, maar onthoud dat het gebruik van immutable objecten zeer sterk aangeraden wordt in deze context!
 
 Merk op dat bij records in de eerste plaats gaat over het creëren van een nieuw datatype, door (primitievere) data of andere records te bundelen, of beperkingen op te leggen aan mogelijke waarden.
 Je maakt dus als het ware een nieuw 'primitief' datatype, zoals int, double, of String.
 Dit in tegenstelling tot gewone klassen, waar encapsulatie en mogelijkheden om de toestand van een object aan te passen (mutatie-methodes) ook essentieel zijn.
+
+{{% notice tip Onthoud %}}
+Gebruik een record wanneer je puur data modelleert, zonder bijhorend gedrag dat de toestand van het object kan veranderen.
+Gebruik **geen** record als je een entiteit modelleert waarvan de toestand kan evolueren doorheen de tijd (met andere woorden, wanneer de identiteit van het object belangrijk is).
+{{% /notice %}}
 
 ## Achter de schermen
 
@@ -216,7 +223,7 @@ public record Playlist(ArrayList<Song> songs) {}
 
 var songs = new ArrayList<>(List.of(new Song("Hello", "Adele")));
 var playlist1 = new Playlist(songs);
-var playlist2 = new Playlist(new ArrayList<>(songs));
+var playlist2 = new Playlist(new ArrayList<>(songs)); // kopie
 System.out.println(playlist1.equals(playlist2)); // => true: beide playlists bevatten dezelfde liedjes
 songs.add(new Song("Bye bye bye", "NSYNC"));
 System.out.println(playlist1.equals(playlist2)); // => false
@@ -247,10 +254,12 @@ Je kan dan een switch expressie gebruiken, bijvoorbeeld om een methode te implem
 ```java
 public double area(Shape shape) {
   return switch(shape) {
-    case Square s -> s.side() * s.side();
-    case Circle(double radius) -> Math.PI * radius * radius;
+    case Square s -> 
+        s.side() * s.side();
+    case Circle(double radius) -> 
+        Math.PI * radius * radius;
     case Rectangle(Coordinate(double topLeftX, double topLeftY), Coordinate bottomRight) ->
-         (bottomRight.x() - topLeftX) * (bottomRight.y() - topLeftY);
+        (bottomRight.x() - topLeftX) * (bottomRight.y() - topLeftY);
     default -> throw new IllegalArgumentException("Unknown shape");
   };
 }
@@ -269,11 +278,13 @@ Tenslotte is er in een switch-expressie de mogelijkheid om een conditie toe te v
 ```java
 public double area(Shape shape) {
   return switch(shape) {
-    case Square s -> s.side() * s.side();
-    case Circle(double radius) -> Math.PI * radius * radius;
+    case Square s ->
+        s.side() * s.side();
+    case Circle(double radius) ->
+        Math.PI * radius * radius;
     case Rectangle(Coordinate(double topLeftX, double topLeftY), Coordinate bottomRight)
-         when topLeftX <= bottomRight.x() && topLeftY <= bottomRight.y() -> // <= when-clausule
-         (bottomRight.x() - topLeftX) * (bottomRight.y() - topLeftY);
+        when topLeftX <= bottomRight.x() && topLeftY <= bottomRight.y() -> // <= when-clausule
+        (bottomRight.x() - topLeftX) * (bottomRight.y() - topLeftY);
     default -> throw new IllegalArgumentException("Unknown or invalid shape");
   };
 }
