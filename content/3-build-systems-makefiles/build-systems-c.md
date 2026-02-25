@@ -215,7 +215,7 @@ program: main.o header.o
 
 # Doel: opruimen van gecompileerde bestanden
 clean:
-    rm -f program.bin main.o utils.o
+    rm -f program.bin main.o header.o
 ```
 - Het doel `program` hangt af van `main.o` en `header.o`. Als een van deze objectbestanden wordt gewijzigd, wordt `program` opnieuw gegenereerd.
 - De regel `compile` specificeert hoe de nodige `.c`-bestanden moeten worden gecompileerd naar de respectievelijke `.o`-bestanden. 

@@ -218,6 +218,18 @@ $ chmod +x ~/scripts/utilities/cleanup.sh
 $ ~/scripts/utilities/cleanup.sh
 ``` 
 
+**Oefening 6:**
+- Download de text file op het volgende adres [https://example-files.online-convert.com/document/txt/example.txt](https://example-files.online-convert.com/document/txt/example.txt) met `curl` naar je home folder.
+<!-- EXSOL -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ curl -o ~/example.txt https://example-files.online-convert.com/document/txt/example.txt``` 
+- Download het zip bestand op het volgende adres [https://getsamplefiles.com/download/zip/sample-1.zip](https://getsamplefiles.com/download/zip/sample-1.zip) met `curl` naar je home folder.
+<!-- EXSOL -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ curl -L -o ~/sample-1.zip https://getsamplefiles.com/download/zip/sample-1.zip``` 
+- Unzip dat bestand met het `unzip`-commando naar je home folder.
+<!-- EXSOL -->
+_**<span style="color: #03C03C;">Solution:</span>**_  ```$ unzip ~/sample-1.zip -d ~/``` 
+
+
 ## Oefenreeks 4
 
 **Oefening 1:** Maak een shell script dat aan de gebruiker een absoluut pad van een directory vraagt en het aantal `.txt` bestanden in die directory teruggeeft.
