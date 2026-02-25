@@ -111,7 +111,7 @@ Extract alle files in [dit zip bestand](/files/monstergame-c.zip) naar een direc
 - `run` : Voert de binary uit (bouwt eerst als die nog niet bestaat) en geeft eventuele flags door (`bv --hp 12`)
 
 <!-- EXSOL -->
-<details closed>
+<!-- <details closed>
 <summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
 <p>
 
@@ -181,7 +181,7 @@ fi
 ```
 
 </p>
-</details>
+</details> -->
 
 ### Moeilijkheden
 
@@ -337,7 +337,7 @@ Makefiles blijven een aantal beperkingen hebben waaronder dat wanneer je een CON
 ## Oefening
 1. Maak nu een Makefile voor de game van hierboven die dezelfde functionaliteit biedt als je gemaakte shell script.
 <!-- EXSOL -->
-<details closed>
+<!-- <details closed>
 <summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
 <p>
 
@@ -387,7 +387,7 @@ clean:
 ```
 
 </p>
-</details>
+</details> -->
 
 2. Breid de functionaliteit van je spel verder uit, door nieuwe Monsters te spawnen wanneer je een monster verslaat. Hou dan ook bij hoeveel monsters je verslagen hebt. Dat is je uitendelijke score wanneer je sterft.
     - Zoek op hoe je de library `cJSON` downloaden, toevoegen aan je applicatie en kan gebruiken in de `main.c` file.

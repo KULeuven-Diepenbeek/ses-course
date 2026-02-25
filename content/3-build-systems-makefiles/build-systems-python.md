@@ -31,7 +31,7 @@ Extract alle files in [dit zip bestand](/files/ses-monstergame-python-start.zip)
 - `test` : Voert de 'app.py' uit
 
 <!-- EXSOL -->
-<details closed>
+<!-- <details closed>
 <summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
 <p>
 
@@ -62,4 +62,4 @@ run:
 ```
 
 </p>
-</details>
+</details> -->
