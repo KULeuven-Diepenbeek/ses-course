@@ -116,7 +116,7 @@ Extract alle files in [dit zip bestand](/files/monstergame-c.zip) naar een direc
 <p>
 
 ```bash
-#!/bin/sh
+#!/bin/bash
 # Dit script ondersteunt drie commando's:
 #   compile: Compileert de bronbestanden en maakt de binary
 #   run:   Voert de binary uit (bouwt eerst als die nog niet bestaat)
