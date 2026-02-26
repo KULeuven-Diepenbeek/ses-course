@@ -17,6 +17,31 @@ De opdrachten voor **deel 2** worden enkel gemaakt door de studenten SES.
 Om de permanente evaluatie opdrachten in te dienen voor het vak Software Engineering Skills maken we gebruik van GitHub. In de lessen zal je onder begeleiding een gratis account aanmaken op dit platform. 
 Je maakt de opdrachten in een repository die je aanmaakt via GitHub Classroom. Daarvoor moet je je GitHub gebruikersnaam linken aan je naam, zodat wij weten bij welke student de repository van 'FluffyBunny' hoort :). Zie de instructies bij de eerste opdracht voor meer details.
 
+### Naamgeving bij indienen (tags)
+Om de verschillende (sub)opdrachten te identificeren wordt er gebruik gemaakt van "tags" bij het committen van je finale resultaat. (In de eerste lessen worden deze onderwerpen klassikaal uitgelegd zodat alle studenten de juiste werkwijze gebruiken).
+
+De naamgeving: voor het committen van je resultaat van "Opdracht 1" gebruik je de tag `v1`, voor "Opdracht 2" gebruik je de tag `v2`, enzoverder.
+
+**Tags pushen naar github**: `git push --tags`
+**Tags op github verwijderen**: `git push --delete origin <tagname>`. Dit moet je doen als je bijvoorbeeld lokaal een tag verplaatst hebt.
+**Lokaal een tag deleten**: `git tag --delete <tagname>`
+
+### Pushen van branches en tags naar de remote repository
+Standaard worden lokale branches en tags niet altijd gepushed naar een remote repository, gebruik daarom volgende flags bij het `push`-command: `$ git push --all --tags`
+
+### Deadlines
+
+Er is 1 deadline voor alle opdrachten van het eerste deel (SES+EES): **vrijdag 23/03/2026 23u59**.
+
+De deadline voor alle opdrachten van het tweede deel (enkel SES) is **vrijdag 15/05/2025 23u59**.
+
+## Opdrachten deel 1 SES/EES
+
+Hier vind je de opdrachten voor de permanente evaluatie van SES+EES. De opdrachten voor **deel 1** worden gemaakt door alle studenten (SES+EES).
+
+### Github classroom link
+Klik [hier](https://classroom.github.com/a/bitFVHgR) voor de invite van de assignment "SES en EES Opdrachten deel 1".
+
 ### Extra start files van andere start repositories downloaden in je eigen repo
 Om jullie het leven makkelijk te maken, hebben we voor veel van de opdrachten al startcode geschreven in de vorm van een github repository. Die nieuwe repositories simpelweg clonen in een subdirectory van je eigen repository zorgt echter voor een aantal problemen. Die nieuwe directories met startcode worden dan namelijk als een **submodule** toegevoegd aan je main repo. Die repo wordt dus als een soort link beschouwd en aangezien die nieuwe repo niet van jullie zelf is ga je dan ook geen veranderingen aan die code kunnen pushen. <br />
 In de plaats moeten we die start-code-repositories als een **subtree** toevoegen. Dat heeft als voordeel dat je zelf gewoon wijzigingen kan aanbrengen, committen en pushen naar je eigen hoofd repository. Bovendien blijft er ook een zachte link met de originele start-code-repository zodat als hier iets aan wijzigt je die online wijzigingen nog wel kan fetchen. (Bijvoorbeeld als we merken dat er nog een foutje in de startcode stond!).
@@ -39,30 +64,6 @@ git subtree pull --prefix=<subdirectory_waarin_je_de_files_wil_pullen> <remote-s
 Heb je toch al zo een repo gecloned en is dit nu een een submodule waarvan je de changes niet kan committen dan kan je best je wijzigingen even kopieren naar een andere locatie buiten je repo. De subdirectory verwijderen en nu als subtree toevoegen en dan je oplossingen terug erin zetten.
 {{% /notice %}}
 
-### Naamgeving bij indienen (tags)
-Om de verschillende (sub)opdrachten te identificeren wordt er gebruik gemaakt van "tags" bij het committen van je finale resultaat. (In de eerste lessen worden deze onderwerpen klassikaal uitgelegd zodat alle studenten de juiste werkwijze gebruiken).
-
-De naamgeving: voor het committen van je resultaat van "Opdracht 1" gebruik je de tag `v1`, voor "Opdracht 2" gebruik je de tag `v2`, enzoverder.
-
-**Tags pushen naar github**: `git push --tags`
-**Tags op github verwijderen**: `git push --delete origin <tagname>`. Dit moet je doen als je bijvoorbeeld lokaal een tag verplaatst hebt.
-**Lokaal een tag deleten**: `git tag --delete <tagname>`
-
-### Pushen van branches en tags naar de remote repository
-Standaard worden lokale branches en tags niet altijd gepushed naar een remote repository, gebruik daarom volgende flags bij het `push`-command: `$ git push --all --tags`
-
-### Deadlines
-
-Er is 1 deadline voor alle opdrachten van het eerste deel (SES+EES): **vrijdag 23/03/2026 23u59**.
-
-<!-- De deadline voor alle opdrachten van het tweede deel (enkel SES) is **zondag 25/05/2025 23u59**. -->
-
-## Opdrachten deel 1 SES/EES
-
-Hier vind je de opdrachten voor de permanente evaluatie van SES+EES. De opdrachten voor **deel 1** worden gemaakt door alle studenten (SES+EES).
-
-### Github classroom link
-Klik [hier](https://classroom.github.com/a/bitFVHgR) voor de invite van de assignment "SES en EES Opdrachten deel 1".
 
 ### Opdrachten rond Versiebeheer
 
@@ -192,3 +193,122 @@ Voorbeeld: voor het volgende grid:
 2. **Let op!** Je wil nu dus de testen runnen van een specifiek gradle project dat in een subdirectory staat. Meer info [hier](https://stackoverflow.com/questions/57806624/github-actions-how-to-build-project-in-sub-directory)
 
 3. Doe nu op de correcte manier een commit en tag de commit met `v9` en push naar Github.
+
+## Opdrachten deel 2
+
+Deze opdrachten worden **enkel door de studenten van SES**  gemaakt en ingediend via Github Classroom.
+
+### Gebruik van GenAI en samenwerking
+
+Omdat dit deel van het vak gericht is op het **zelf leren programmeren**, en de opdrachten gequoteerd worden, is het **niet toegestaan** om GenAI tools (ChatGPT, Claude Code, Gemini, CoPilot, de assistent in IntelliJ, ...) te gebruiken om de opdrachten op te lossen. Met andere woorden, we verwachten dus dat je **alle ingediende code zelf geschreven hebt**. Ook code delen met mede-studenten, of buitenstaanders om hulp vragen, is om dezelfde reden niet toegestaan.
+
+**Je zal je oplossing na de indiening mondeling nog moeten toelichten** (moment nog vast te leggen). Bij deze toelichting wordt getoetst of je de code die je ingedien hebt ook zelf begrijpt.
+
+Tenslotte is het absoluut geen probleem om GenAI tools te gebruiken bij het studeren en verwerken van de leerstof. Begrijp je een concept niet goed, en wil je meer uitleg of voorbeelden? Wil je hulp bij het oplossen van een oefening? Krijg je een compiler error niet opgelost? Gebruik deze tools dan gerust (hou er wel rekening mee dat er ook fouten in hun antwoord kunnen zitten)! Maar gebruik ze dus niet voor de opdracht.
+
+### Setup
+
+Volg onderstaande stappen nauwgezet om je project juist te configureren.
+
+1. Maak [hier (via GitHub Classroom)](https://classroom.github.com/a/YsVvycmO) je repository aan voor de assignment "SES opdrachten deel 2". Deze repository is nog leeg.
+2. Clone jouw (lege) repository naar een folder op je eigen machine (bv. `project-candycrush`).
+3. Voeg vervolgens een **tweede remote** aan die repository op je machine toe, namelijk `git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2526.git` onder de naam `startcode`. Dat kan je met volgend commando:
+   
+   ```bash
+   git remote add startcode git@github.com:KULeuven-Diepenbeek/ses-startcode-deel2-2526.git
+   ```
+
+   Je lokale repository heeft nu dus **twee** remote repositories (kijk dit na met `git remote -v`):
+   - **origin**: je eigen GitHub repository (hierop heb je schrijfrechten)
+   - **startcode**: de GitHub repository met de startcode die door ons aangeleverd wordt (deze kan je alleen lezen)
+
+4. Haal de laatste versie van de startcode op en merge die in je repository via `git pull startcode main`. Doe dit minstens voor elke nieuwe opdracht, en eventueel ook tussendoor (als er wijzigingen/bugfixes aan onze startcode gebeurd zijn).
+
+5. Open de folder als project in IntelliJ.
+
+Als alles goed gegaan is, wordt je project herkend en geïmporteerd als een Gradle-Java-project. Het is normaal dat de code nog fouten geeft bij het compileren, aangezien die code verwachten die je nog moet schrijven als deel van de opdracht.
+
+![IntelliJ bij het importeren van het project.](/img/opdracht2/opdracht2-intellij.png)
+
+### Startcode
+
+De startcode bevat een JavaFX-applicatie voor het spel CandyCrush.
+Het is een Gradle-project voor IntelliJ, en maakt gebruik van Java 25.
+Je kan de folder openen als project in IntelliJ.
+De applicatie is gestructureerd volgens het Model-View-Controller (MVC) patroon.
+
+Er zijn ook reeds enkele testen voorgedefinieerd met AssertJ, maar de set van testen is **niet volledig**. De voorgedefinieerde testen dienen voornamelijk om na te gaan of je oplossing automatisch getest kan worden.
+
+{{% notice warning "Belangrijk!" %}}
+Omdat je inzendingen (deels) automatisch verbeterd zullen worden, is het noodzakelijk dat **alle** gegeven testen compileren **zonder enige aanpassingen**.
+Je mag uiteraard wel extra testen toevoegen.
+Ook is het geen groot probleem indien een bepaalde test niet slaagt --- zolang hij maar uitgevoerd kan worden.
+{{% /notice %}}
+
+### Opdracht 1: Records
+
+{{% notice task Startcode %}}
+Zorg dat je eerst de [setup-instructies voor deel 2](#setup) hierboven gevolgd hebt.
+Merge de laatste versie van de startcode in je repository door `git pull startcode main` uit te voeren in jouw lokale repository.
+{{% /notice %}}
+
+1. Maak, in package `ses.candycrush.board` een record `BoardSize`. Dit stelt de grootte voor van een CandyCrush speelveld. Het heeft als attributen het aantal rijen (`rows`) en aantal kolommen (`columns`) van het speelveld.
+   - Het aantal rijen en kolommen moeten beiden groter zijn dan 0, zoniet gooi je een `IllegalArgumentException`.
+
+2. Maak, in hetzelfde package, ook een tweede record genaamd `Position` met attributen `row` en `column`. Dit stelt een _geldige_ positie van een cel op een CandyCrush-speelveld voor.
+   - Rijen en kolommen worden genummerd vanaf 0.
+   - Aan de constructor van een Position-object moeten (in deze volgorde) een rij- en kolomnummer alsook een `BoardSize` meegegeven worden.
+   - Indien de positie ongeldig is voor de grootte van het speelveld, moet je een `IllegalArgumentException` gooien.
+
+3. Voeg in `Position` volgende methodes toe:
+
+   - een methode `int toIndex()` die de positie omzet in een index. Voor veld met 2 rijen en 4 kolommen lopen de indices als volgt:
+
+     ```
+     0 1 2 3
+     4 5 6 7
+     ```
+   - een **statische** methode `Position fromIndex(int index, BoardSize size)` die de positie teruggeeft die overeenkomt met de gegeven index.
+     Deze methode moet een `IllegalArgumentException` gooien indien de index ongeldig is.
+   - methodes `boolean isFirstRow()`, `boolean isFirstColumm()`, `boolean isLastRow()`, en `boolean isLastColumn()` die aangeven of de positie zich in de eerste/laatste rij/kolom van het bord bevindt.
+   - een methode `Collection<Position> neighbors()` die alle posities van (geldige) directe buren (horizontaal en verticaal) in het speelveld teruggeeft. **Kies een geschikt collectie-type** voor de teruggegeven collectie.
+   - een methode `boolean isNeighborOf(Position other)` die nagaat of de gegeven positie een directe buur is van de huidige positie. Gooit een `IllegalArgumentException` als de gegeven positie bij een andere bordgrootte hoort.
+
+4. Voeg in `BoardSize` de volgende methodes toe:
+
+   - een methode `Collection<Position> positions()` die een collectie (**kies zelf het type**) met daarin _alle_ posities op het bord teruggeeft.
+
+5. Voeg, in package `ses.candycrush.model`, een **sealed interface** `Candy` toe, met subklassen (telkens een **record**, die je **in** de `Candy`-interface plaatst) voor
+
+   - `NoCandy`, wat staat voor het ontbreken van een snoepje.
+   - `NormalCandy`, met een attribuut `color` (een `int` met mogelijke waarden 0, 1, 2, of 3); je gooit een `IllegalArgumentException` indien een ongeldige kleur opgegeven wordt.
+   - Elk van de volgende speciale soorten snoepjes:
+      * een `RowSnapper`
+      * een `MultiCandy`
+      * een `RareCandy`
+      * een `TurnMaster`
+
+6. Voeg, in het package `ses.candycrush.model`, een record `Switch` toe. Een Switch-object stelt een mogelijke wissel voor tussen twee Positions `first` en `second`.
+   - Beide posities moeten buren zijn van elkaar; je constructor moet een `IllegalArgumentException` gooien indien dat niet het geval is.
+   - Zorg ervoor dat het niet uitmaakt in welke volgorde de twee posities meegegeven worden aan de constructor; maar het veld `first` moet uiteindelijk de positie bevatten met de kleinste index (zoals gedefinieerd bij `toIndex()`).
+
+7. Voeg aan dat Switch-record een operatie `other(Position pos)` toe die de andere positie teruggeeft dan de gegeven positie (dus als je first meegeeft, krijg je second terug, en omgekeerd).
+   - Indien de gegeven positie geen deel uitmaakt van het Switch-object, gooi je een `IllegalArgumentException`.
+
+8. Pas nu je code (`CandyCrushGame`, `CandyCrushBoardUI`, en `Controller`) aan zodat die op zoveel mogelijk plaatsen gebruik maakt van bovenstaande records in plaats van `int` en `int[]` (`Switch` moet je nog niet gebruiken). Dus:
+   - op elke plaats waar voorheen een int voor width en/of height gebruikt of teruggegeven werd, moet nu `BoardSize` gebruikt worden
+   - op elke plaats waar voorheen een rij- en/of kolomnummer gebruikt of teruggegeven werd, moet nu een `Position` object gebruikt worden
+   - op elke plaats waar voorheen een int gebruikt of teruggegeven werd om een snoepje aan te duiden, moet nu een `Candy` object gebruikt worden.
+   - In de klasse CandyCrushBoardUI (methode `makeCandyShape`) moet je **pattern matching** gebruiken om een JavaFX Node aan te maken voor de gegeven candy op de gegeven positie.
+
+   _Hint: Laat de compiler je helpen met het vinden van de nog aan te passen code, door bv. eerst de type van een veld te veranderen en dan alle compilatie-problemen die daardoor ontstaan aan te pakken._
+
+9. Implementeer in de model-klasse `CandyCrushGame` de methode `Collection<Switch> getPotentialSwitchesOf(Position pos)`. Deze moet alle mogelijke wissels teruggeven (collectie-type naar keuze) van positie `pos`. Positie `pos` kan wisselen met een andere positie indien (1) ze buren zijn; (2) geen van beiden een NoCandy zijn; én (3) de snoepjes op beide posities verschillend zijn (qua soort en/of kleur). (_Deze methode zullen we in een latere opdracht verfijnen, maar voorlopig volstaat dit_).
+
+Als je dit alles correct gedaan hebt, zou alle code moeten compileren en kan je de applicatie uitvoeren (`./gradlew run`). Ook de testen zouden moeten slagen.
+
+Tag het resultaat als `v1` en push dit naar jouw remote repository (origin) op GitHub: `git push origin`.
+
+> Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v1`. Dit gebeurt namelijk niet automatisch bij een `git push`.
+> Je kan ook alle tags in 1 keer pushen met `git push --tags`.
+> Controleer op je GitHub-repository of je de tags kan zien.
