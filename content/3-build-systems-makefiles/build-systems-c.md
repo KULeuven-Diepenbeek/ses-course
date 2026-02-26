@@ -111,7 +111,7 @@ Extract alle files in [dit zip bestand](/files/monstergame-c.zip) naar een direc
 - `run` : Voert de binary uit (bouwt eerst als die nog niet bestaat) en geeft eventuele flags door (`bv --hp 12`)
 
 <!-- EXSOL -->
-<!-- <details closed>
+<details closed>
 <summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
 <p>
 
@@ -181,7 +181,7 @@ fi
 ```
 
 </p>
-</details> -->
+</details>
 
 ### Moeilijkheden
 
