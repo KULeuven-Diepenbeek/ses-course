@@ -175,7 +175,7 @@ Extract alle files in [dit zip bestand](/files/ses-monstergame-java-start.zip) n
 - `clean`: Verwijdert de '.class'-bestanden en het '.jar'-bestand uit de 'build'-directory
 
 <!-- EXSOL -->
-<!-- <details closed>
+<details closed>
 <summary><i><b><span style="color: #03C03C;">Solution:</span> Klik hier om de code te zien/verbergen</b></i>🔽</summary>
 <p>
 
@@ -205,4 +205,4 @@ jar:
 ```
 
 </p>
-</details> -->
+</details>
