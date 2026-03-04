@@ -4,6 +4,7 @@ weight: 210
 author: Arne Duyver, koen Yskout
 draft: false
 toc: true
+math: true
 ---
 
 ## Algemene informatie
@@ -249,7 +250,7 @@ Ook is het geen groot probleem indien een bepaalde test niet slaagt --- zolang h
 
 {{% notice task Startcode %}}
 Zorg dat je eerst de [setup-instructies voor deel 2](#setup) hierboven gevolgd hebt.
-Merge de laatste versie van de startcode in je repository door `git pull startcode main` uit te voeren in jouw lokale repository.
+Merge de laatste versie van de startcode in je repository door `git pull startcode 01-records` uit te voeren in jouw lokale repository.
 {{% /notice %}}
 
 1. Maak, in package `ses.candycrush.board` een record `BoardSize`. Dit stelt de grootte voor van een CandyCrush speelveld. Het heeft als attributen het aantal rijen (`rows`) en aantal kolommen (`columns`) van het speelveld.
@@ -312,3 +313,58 @@ Tag het resultaat als `v1` en push dit naar jouw remote repository (origin) op G
 > Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v1`. Dit gebeurt namelijk niet automatisch bij een `git push`.
 > Je kan ook alle tags in 1 keer pushen met `git push --tags`.
 > Controleer op je GitHub-repository of je de tags kan zien.
+
+### Opdracht 2: Generics
+
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode 02-generics` uit te voeren in de `main`-branch van jouw lokale repository.
+{{% /notice %}}
+
+CandyCrush bestaat uit een rechthoekig spelbord, met verschillende vakjes (**cellen**) waarin een candy geplaatst kan worden. Zo'n spelbord kan ook voor andere spellen dan Candycrush gebruikt worden; denk bijvoorbeeld aan schaken, dammen, zeeslag, go, ... . In deze opdracht ga je daarom een *algemene* klasse `Board` ontwikkelen voor zo'n rechthoekig spelbord.
+
+1. Maak, in package `ses.candycrush.board`, een generische `Board`-klasse, met een generische parameter die het type voorstelt van de mogelijke inhoud van een cel (bv. een `Candy` voor CandyCrush, een schaakstuk voor schaken, of een boot voor zeeslag).
+
+2. De constructor van `Board` vereist enkel een `BoardSize`. Initieel zijn alle cellen leeg (`null`).
+
+3. Voor het voorstellen van de inhoud van het bord moet deze klasse maximaal gebruik maken van de `BoardSize` en `Position` records uit de vorige opdracht. Je moet volgende operaties snel en efficiënt kunnen uitvoeren; kies daarvoor geschikte datastructuren:
+   - Het opvragen van de inhoud van een cel op basis van positie (_bv. welk snoepje staat er op positie (2, 3)?_)
+   - Het opvragen van alle cel-posities (als `Set`) waarop een element voorkomt. Bijvoorbeeld:
+      - in de context van CandyCrush: alle posities waarop een `RowSnapper` snoepje voorkomt
+      - in de context van zeeslag: alle posities die bezet zijn door een bepaald schip
+   
+   Zorg voor **encapsulatie**: andere klassen mogen de inhoud van een bord _enkel_ via de gepaste publieke methodes kunnen aanpassen (zie hieronder).
+
+4. Voeg volgende publieke methodes toe en implementeer ze:
+
+   - `BoardSize getSize()` die de grootte van het bord teruggeeft (als BoardSize-object)
+   - `boolean isValidPosition(position)` die nagaat of de gegeven positie geldig is voor dit bord (dus of ze in het bord ligt).
+   - `getCellAt(position)` om de cel op een gegeven positie van het bord op te vragen. Als de positie ongeldig is, gooi je een `IllegalArgumentException`.
+   - `getPositionsOfElement` die alle posities teruggeeft waarop het gegeven element (cel) voorkomt, gebruik makend van de omgekeerde `Map` van hierboven.
+   De teruggegeven collectie mag niet aanpasbaar zijn (dus: de ontvanger mag ze niet kunnen aanpassen).
+   - `void replaceCellAt(position, newCell)` om de cel op een gegeven positie te vervangen door een meegegeven object. Als de positie ongeldig is, gooi je een `IllegalArgumentException`.
+   - `void fill(cellCreatorFunction)` om het hele bord te vullen met objecten die teruggegeven worden door de `cellCreatorFunction`. De `cellCreatorFunction` is een `java.util.function.Function`-object dat, gegeven een Position-object als argument, het cel-object teruggeeft wat op die positie geplaatst moet worden.
+      > _Je kan deze methode bijvoorbeeld gebruiken om op alle even rijen een rood snoepje te zetten, en op alle onven rijen een blauw snoepje. Als functie geef je dan een functie_
+      > $$f(pos) = \begin{cases}
+      \text{NormalCandy(1)} & \text{als } pos.row \text{ even} \\
+      \text{NormalCandy(0)} & \text{anders}
+      \end{cases}$$
+      > _In Java implementeer je die bijvoorbeeld met een lambda-expressie (zie later):_
+      >
+      > ```java
+      > Function<Position, Candy> fillFunction = (pos) -> switch(pos) {
+      >      case Position(var row, var col) when row % 2 == 0 -> new Candy.NormalCandy(1);
+      >      default -> new Candy.NormalCandy(0);
+      > };
+      > ```
+      >
+      > De meegeleverde tests bevatten deze functie als voorbeeld.
+      
+   - een methode `copyTo(otherBoard)` die alle cellen van het huidige bord kopieert naar het meegegeven bord. Als het meegegeven bord niet dezelfde afmetingen heeft, gooi je een `IllegalArgumentException`.
+
+   Zorg dat deze laatste twee methodes **zo algemeen mogelijk** zijn qua (generische) types, en schrijf telkens een test waarin je hier gebruik van maakt.
+
+5. Gebruik je `Board`-klasse en bijhorende methodes nu zoveel mogelijk in `CandyCrushGame` (in plaats van de array `int[][] speelbord`). De inhoud van de cellen moeten uiteraard `Candy`-objecten zijn (en niet langer `int`s).
+
+Tag het resultaat als `v2` en push dit naar je remote repository op GitHub.
+
+> Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v2` of `git push --tags`
