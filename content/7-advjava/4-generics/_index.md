@@ -7,7 +7,7 @@ draft: true
 {{% notice info "In andere programmeertalen" %}}
 De concepten in andere programmeertalen die het dichtst aanleunen bij Java generics zijn
 - templates in C++
-- generic types in Python (as type hints)
+- generic types in Python (in de vorm van type hints)
 - generics in C#
 {{% /notice %}}
 
@@ -30,7 +30,7 @@ Stel dat we deze klasse makkelijk willen kunnen herbruiken, telkens met een ande
 We kunnen nu nog niet zeggen wat het type wordt van die elementen.
 Gaan er Student-objecten in de lijst terechtkomen? Of Animal-objecten?
 Dat weten we nog niet.
-We kiezen daarom voor `Object`, het meest algemene type in Java.
+We daarom voor `Object` (het meest algemene type in Java) als type van `elements`, `element`, en het resultaat van `get`.
 
 Maar dat betekent ook dat je nu objecten van verschillende, niet-gerelateerde types kan opnemen in één en dezelfde lijst, hoewel dat niet de bedoeling is!
 Stel bijvoorbeeld dat je een lijst van studenten wil bijhouden, dan houdt de compiler je niet tegen om ook andere types van objecten toe te voegen:
@@ -87,5 +87,5 @@ Generics geven je dus een combinatie van de beste eigenschappen van de twee opti
 1. er moet slechts één implementatie gemaakt worden (zoals bij `ArrayList` hierboven), en
 2. deze implementatie kan gebruikt worden om lijsten te maken waarbij het gegarandeerd is dat alle elementen een specifiek type hebben (zoals bij `ArrayListOfStudents`).
 
-In de volgende secties vind je meer informatie over het gebruik van generics.
+In de volgende secties bekijken we generics in meer detail.
 {{% children %}}

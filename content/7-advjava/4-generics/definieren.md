@@ -1,5 +1,5 @@
 ---
-title: "7.2.1 Definiëren en gebruiken"
+title: "7.4.1 Definiëren en gebruiken"
 toc: true
 weight: 10
 autonumbering: true
@@ -7,15 +7,17 @@ draft: false
 math: true
 ---
 
-Om een klasse generisch te maken, moet je een **generische parameter** (meestal aangegeven met een enkele _letter_) toevoegen, zoals de generische parameter `T` bij `ArrayList<T>`.
+Om generics te gebruiken moet je altijd een **generische parameter** (meestal aangegeven met een enkele _letter_) toevoegen, zoals de generische parameter `T` bij `ArrayList<T>`.
 In het algemeen zijn er slechts twee plaatsen in je code waar je een _nieuwe_ generische parameter mag introduceren:
 
 1. Bij de definitie van een **klasse** (of interface, record, ...)
 2. Bij de definitie van een **methode** (of constructor)
 
+We kijken eerst naar generische klassen.
+
 ## Een generische klasse definiëren
 
-Om een generische **klasse** te definiëren (de eerste optie), zet je de type-parameter tussen `<` en `>` achter de naam van de klasse die je definieert.
+Om een generische **klasse** te definiëren, zet je de type-parameter tussen `<` en `>` achter de naam van de klasse die je definieert.
 Vervolgens kan je die parameter (bijna[^static]) overal in die klasse gebruiken als type:
 
 ```java
@@ -48,9 +50,11 @@ class ArrayList<Element> {
 }
 ```
 
+Naast klassen kan je ook **records** en **interfaces** voorzien van een generische parameter.
+
 > [!info] Weetje
 > Je kan een generische klasse ook zien als een **functie** (soms een [_type constructor_](https://en.wikipedia.org/wiki/Type_constructor) genoemd).
-> Die functie geeft geen _object_ terug op basis van een of meerdere parameters zoals je dat gewoon bent van een functie, bijvoorbeeld `getPet : (Person p) → Animal`, maar geeft een nieuw _type_ (een nieuwe klasse) terug, gebaseerd op de type-parameters.
+> Die functie geeft geen _object_ terug op basis van een of meerdere parameters zoals je dat gewoon bent van functies, bijvoorbeeld `getPet : (Person p) → Animal`, maar geeft een nieuw _type_ (een nieuwe klasse) terug, gebaseerd op de type-parameters.
 > Bijvoorbeeld, de generische klasse `ArrayList<T>` kan je beschouwen als een functie `ArrayList : (Type T) → Type`, die het type `ArrayListOfStudents` of `ArrayListOfAnimals` teruggeeft wanneer je ze oproept met respectievelijk `T=Student` of `T=Animal`.
 > In plaats van `ArrayListOfStudents` schrijven we dat type als `ArrayList<Student>`.
 
@@ -161,7 +165,7 @@ Onthoud dus: op de plaatsen waar je een nieuwe parameter (een nieuwe 'letter') i
 ## Een generische methode definiëren en gebruiken
 
 In de voorbeelden hierboven hebben we steeds een hele klasse generisch gemaakt.
-Naast een generische klasse was er ook een tweede plaats om een generische parameter te definiëren, namelijk eentje die enkel in **één methode** gebruikt kan worden.
+Naast een generische klasse is er ook een tweede manier om een generische parameter te definiëren, namelijk eentje die enkel in **één methode** gebruikt kan worden.
 Dat doe je door de parameter te declareren vóór het terugkeertype van die methode, opnieuw tussen `<` en `>`.
 Dat kan ook in een klasse die zelf geen type-parameters heeft.
 
@@ -190,6 +194,8 @@ class Foo<T> {
   }
 }
 ```
+
+Deze methode-definitie maakt zowel gebruik van de generische parameter `T` (beschikbaar in de hele klasse `Foo`) als de parameter `U` (enkel beschikbaar in de methode `doSomething`).
 
 ### Type inference
 

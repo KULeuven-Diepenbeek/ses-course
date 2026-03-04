@@ -1,5 +1,5 @@
 ---
-title: "7.2.2 Generics en subtyping"
+title: "7.4.2 Generics en subtyping"
 toc: true
 weight: 30
 autonumbering: true
@@ -58,7 +58,7 @@ Een lijst in Java is een geordende groep van elementen van hetzelfde type.
 `List<E>` is de interface[^interface] die aan de basis ligt van alle lijsten.
 `ArrayList<E>` is een klasse die een lijst implementeert met behulp van een array.
 `ArrayList<E>` is een subtype van `List<E>`; dus overal waar een `List`-object verwacht wordt, mag ook een `ArrayList` gebruikt worden.
-Later (in het hoofdstuk rond Collections) zullen we ook zien dat er een interface `Collection<E>` bestaat, wat een willekeurige groep van elementen voorstelt: niet enkel een lijst, maar bijvoorbeeld ook verzamelingen (`Set`) of wachtrijen (`Queue`).
+In het [hoofdstuk rond Collections](../2-collecties/) zagen we ook dat er een interface `Collection<E>` bestaat, wat een willekeurige groep van elementen voorstelt: niet enkel een lijst, maar bijvoorbeeld ook verzamelingen (`Set`) of wachtrijen (`Queue`).
 `List<E>` is een subtype van `Collection<E>`. Bijgevolg (via transitiviteit) is `ArrayList<E>` dus ook subtype van `Collection<E>`.
 
 In code ziet deze situatie er als volgt uit:
@@ -164,7 +164,7 @@ Later zullen we zien hoe we hier met [wildcards](wildcards.md) in sommige gevall
 Hierboven gebruikten we vooral `ArrayList` als voorbeeld van een generische klasse.
 We hebben echter ook gezien dat je zelf generische klassen kan definiëren, en daarvan kan je uiteraard ook overerven.
 
-Bij de definitie van een subklasse moet je voor de generische parameter van de superklasse een waarde (type) meegeven. Je kan ervoor kiezen om je subklasse zelf generisch te maken (dus een nieuwe generische parameter te introduceren), of om een vooraf bepaald type mee te geven.
+Bij de definitie van een subklasse **moet** je voor de generische parameter van de superklasse een waarde (type) meegeven. Je kan ervoor kiezen om je subklasse zelf generisch te maken (door opnieuw een generische parameter te introduceren), of om een vooraf bepaald type mee te geven.
 Bijvoorbeeld:
 
 ```java
@@ -176,5 +176,7 @@ class SubForCat extends SubForAnimal<Cat> { ... }
 ```
 
 De superklasse `Super` heeft een generische parameter `T`.
+
 De subklasse `SubForAnimal` definieert zelf een generische parameter `A` (hier met begrenzing), en gebruikt parameter `A` als type voor `T` uit de superklasse.
+
 De klasse `SubForCat` tenslotte definieert zelf geen nieuwe generische parameter, maar geeft het type `Cat` op als type voor parameter `A` uit diens superklasse.

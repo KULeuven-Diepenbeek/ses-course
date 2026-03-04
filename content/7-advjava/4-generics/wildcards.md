@@ -1,5 +1,5 @@
 ---
-title: "7.2.3 Wildcards"
+title: "7.4.3 Wildcards"
 toc: true
 weight: 50
 autonumbering: true
@@ -27,7 +27,7 @@ AnimalShelter<Dog> animalShelter = new AnimalShelter<Dog>();
 protectDog(animalShelter); // OK! 👍
 ```
 
-Dat komt omdat `AnimalShelter` een subtype is van `Shelter`, en de generische parameter bij beiden hetzelfde is.
+Dat komt omdat `AnimalShelter` een subtype is van `Shelter`, en de generische parameter bij beiden hetzelfde is (`Dog`).
 
 Als de generische parameters verschillend zijn, is er echter geen overervingsrelatie.
 Bijvoorveeld, tussen `AnimalShelter<Cat>` en `Shelter<Animal>` is er geen overervingsrelatie.
@@ -42,12 +42,17 @@ AnimalShelter<Cat> animalShelter = new AnimalShelter<Cat>(); // wel OK!
 protectAnimal(animalShelter); // NIET toegelaten
 ```
 
+{{% notice tip Onthoud %}}
+In het algemeen: als `class Sub<T> extends Super<T>`, dan is `Sub<SomeClass>` is een subklasse van `Super<SomeClass`>, maar _niet_ van `Super<OtherClass>`, zélfs niet als `SomeClass` een subtype is van `OtherClass`.
+{{% /notice %}}
+
+
 In sommige situaties willen we _wel_ zo'n overervingsrelatie kunnen maken.
 We bekijken daarvoor twee soorten relaties, namelijk **covariantie** en **contravariantie**.
 
 {{% notice note %}}
 **Opgelet**: Zowel covariantie als contravariantie gaan enkel over het **gebruik** van generische klassen.
-Meer bepaald beïnvloeden ze wanneer twee generische klassen door de compiler als subtype van elkaar beschouwd worden.
+Meer bepaald beïnvloeden ze wanneer twee generische klassen door de compiler als subtype van elkaar beschouwd worden, wat van belang is voor toekenningen en parameters bij methode-oproepen.
 Dat staat los van de **definitie** van een generische klasse --- die definities (en bijhorende begrenzing) blijven onveranderd!
 {{% /notice %}}
 
@@ -71,7 +76,7 @@ copyFromTo(cats, animals); // niet toegelaten 🙁
 ```
 
 Volgens de regels die we hierboven gezien hebben, kunnen we deze methode niet gebruiken om de dieren uit een lijst van honden (`ArrayList<Dog>`) of katten (`ArrayList<Cat>`) te kopiëren naar een lijst van dieren (`ArrayList<Animal>`).
-Maar dat lijkt wel een zinnige operatie.
+Maar dat lijkt wel een zinvolle operatie.
 Een oplossing kan zijn om verschillende versies van de methode te schrijven:
 
 ```java
@@ -109,7 +114,7 @@ public static <T extends Animal> void copyFromTo_generic(
 
 Dat werkt, maar de generische parameter `T` wordt slechts eenmaal gebruikt, namelijk bij de parameter `ArrayList<T> source`.
 In zo'n situatie kunnen we ook gebruik maken van het **wildcard-type `<? extends X>`**.
-We kunnen bovenstaande methode dus ook zonder generische parameter schrijven als volgt:
+We kunnen bovenstaande methode dus ook zonder generische parameter `<T>` schrijven als volgt:
 
 ```java
 public static void copyFromTo_wildcard(
@@ -127,7 +132,7 @@ copyFromTo_wildcard(cats, animals); // OK! 👍
 ```
 
 Het type `ArrayList<? extends Animal>` staat dus voor _"elke ArrayList waar het element-type een (niet nader bepaald) subtype is van `Animal`"_.
-Je kan dit ook bekijken alsof het type `ArrayList<? extends Animal>` tegelijk staat voor de types `ArrayList<Animal>`, `ArrayList<Mammal>`, `ArrayList<Cat>`, `ArrayList<Dog>`, alsook een lijst van elk ander type dier.
+Je kan dit ook bekijken alsof het type `ArrayList<? extends Animal>` staat voor de hele verzameling van types `ArrayList<Animal>`, `ArrayList<Mammal>`, `ArrayList<Cat>`, `ArrayList<Dog>`, alsook elke andere lijst van dieren.
 
 Dit heet **covariantie**: omdat `Cat` een subtype is van `Animal`, is `ArrayList<Cat>` een subtype van `ArrayList<? extends Animal>`.
 De 'co' in covariantie wijst erop dat de overervingsrelatie tussen `Cat` en `Animal` in dezelfde richting loopt als die tussen `ArrayList<Cat>` en `ArrayList<? extends Animal>` (in tegenstelling tot contravariantie, wat zodadelijk aan bod komt).
@@ -191,7 +196,7 @@ public void copyMammalsFromTo(
 }
 ```
 
-omdat de eerste `ArrayList<? extends Mammal>` (`source`) bijvoorbeeld een `ArrayList<Cat>` kan zijn, en de tweede (`target`) een `ArrayList<Dog>`. Als je de types van beide parameters wil linken aan elkaar, _moet_ je een generische methode gebruiken (zoals eerder gezien):
+omdat de eerste `ArrayList<? extends Mammal>` (`source`) bijvoorbeeld een `ArrayList<Cat>` kan zijn, en de tweede (`target`) een `ArrayList<Dog>`. Als je de types van beide parameters wil linken aan elkaar, _moet_ je een generische methode gebruiken (zoals we eerder gezien hebben):
 
 ```java
 public <T extends Mammal> void copyMammalsFromTo(
@@ -205,15 +210,15 @@ Onderstaande code is ook ongeldig. Waarom?
 
 ```java
 ArrayList<?> lijst = new ArrayList<String>();
-lijst.add("Hello");
+lijst.add("Hello"); // compiler error
 ```
 
 > [!tip]- Antwoord
 > De `lijst`-variabele is gedeclareerd als een ArrayList met elementen van een ongekend type. Op basis van het type van de variabele kan de compiler niet afleiden dat er  Strings toegevoegd mogen worden aan de lijst (het zou evengoed een ArrayList van Animals kunnen zijn).
-> Het feit dat `lijst` geinititialiseerd wordt met `<String>` doet hier niet terzake; enkel het type van de declaratie is van belang.
+> Het feit dat `lijst` onmiddellijk geinititialiseerd werd met een `ArrayList<String>` doet hier niet terzake; enkel het type bij de declaratie van `lijst` is van belang.
 
-{{% notice note Onthoud %}}
-Het type `ArrayList<? extends Mammal>` staat tegelijk voor de types `ArrayList<Mammal>`, `ArrayList<Cat>`, `ArrayList<Dog>`, en elk ander type dat overerft van Mammal.
+{{% notice tip Onthoud %}}
+Het type `ArrayList<? extends Mammal>` staat voor de verzameling van types `ArrayList<Mammal>`, `ArrayList<Cat>`, `ArrayList<Dog>`, en elk ander type dat overerft van `Mammal`.
 {{% /notice %}}
 
 ## Contravariantie (super)
@@ -275,7 +280,7 @@ Zou het nuttig zijn om een methode `copyFromCatsToBirds(ArrayList<Cat> source, A
 
 De oplossing in dit geval is gebruik maken van het **wildcard-type `<? super T>`**.
 Het type `ArrayList<? super Cat>` staat dus voor _"elke ArrayList waar het element-type een supertype is van `Cat`"_ (inclusief het type `Cat` zelf).
-Of nog: `ArrayList<? super Cat>` staat tegelijk voor de types `ArrayList<Cat>`, `ArrayList<Mammal>`, `ArrayList<Animal>`, en `ArrayList<Object>`, alsook elke andere ArrayList met een supertype van `Cat` als element-type.
+Of nog: `ArrayList<? super Cat>` staat voor de verzameling van types `ArrayList<Cat>`, `ArrayList<Mammal>`, `ArrayList<Animal>`, en `ArrayList<Object>`, alsook elke andere ArrayList met een supertype van `Cat` als element-type.
 
 We kunnen dus schrijven:
 
@@ -345,8 +350,8 @@ class ALAnimal,Animal,ALsuperAnimal animal;
 
 Aan de hand van de kleuren kan je snel zien dat de overervingsrelatie links en rechts inderdaad omgekeerd verlopen.
 
-{{% notice note Onthoud %}}
-Het type `ArrayList<? super Mammal>` staat tegelijk voor de types `ArrayList<Mammal>`, `ArrayList<Animal>`, `ArrayList<Object>`, en elk ander type dat een superklasse (of interface) is van Mammal.
+{{% notice tip Onthoud %}}
+Het type `ArrayList<? super Mammal>` staat voor de verzameling van types `ArrayList<Mammal>`, `ArrayList<Animal>`, `ArrayList<Object>`, en elk ander type dat een superklasse (of interface) is van Mammal.
 {{% /notice %}}
 
 
@@ -386,9 +391,19 @@ Hoe weet je nu wanneer je wat gebruikt als type voor een parameter? Wanneer kies
 Een goede vuistregel is het acroniem **PECS**, wat staat voor **P**roducer **E**xtends, **C**onsumer **S**uper.
 Dus:
 
-- Wanneer het object gebruikt wordt als een producent van `T`'s (met andere woorden, het object is een levancier van `T`-objecten voor jouw code, die ze vervolgens gebruikt), gebruik je `<? extends T>`. Dat is logisch: als jouw code met aangeleverde `T`'s omkan, dan kan jouw code ook om met de aanlevering van een subklasse van `T` (basisprincipe objectgeoriënteerd programmeren).
-- Wanneer het object gebruikt wordt als een consument van `T`'s (met andere woorden, het neemt `T`-objecten aan van jouw code), gebruik je `<? super T>`. Ook dat is logisch: een object dat beweert om te kunnen met elke superklasse van `T` moet zeker overweg kunnen met een `T` die jouw code aanlevert.
-- Wanneer het object zowel als consument als als producent gebruikt wordt, gebruik je gewoon `<T>` (dus geen co- of contra-variantie). Er is dan weinig tot geen flexibiliteit meer in het type.
+- Wanneer het object gebruikt wordt als een **producent** van `T`'s (met andere woorden, het object is een levancier van `T`-objecten voor jouw code, die ze vervolgens gebruikt), gebruik je `<? extends T>` (covariantie). Dat is logisch: als jouw code met aangeleverde `T`'s omkan, dan kan jouw code ook om met de aanlevering van een subklasse van `T` (basisprincipe objectgeoriënteerd programmeren).
+- Wanneer het object gebruikt wordt als een **consument** van `T`'s (met andere woorden, het neemt `T`-objecten aan van jouw code), gebruik je `<? super T>` (contravariantie). Ook dat is logisch: een object dat beweert om te kunnen met elke superklasse van `T` moet zeker overweg kunnen met een `T` die jouw code aanlevert.
+- Wanneer het object **zowel als consument als als producent** gebruikt wordt, gebruik je gewoon `<T>` (dus geen co- of contra-variantie, maar *invariantie*). Er is dan weinig tot geen flexibiliteit meer in het type.
+
+{{% notice tip Onthoud %}}
+
+Is de parameter uitsluitend een producent van `T`'s? Gebruik dan `<? extends T>`.
+
+Is de parameter uitsluitend een consument van `T`'s? Gebruik dan `<? super T>`.
+
+Is de parameter zowel een producent als consument? Gebruik dan gewoon `<T>`.
+
+{{% /notice %}}
 
 Een voorbeeld om PECS toe te passen: we willen een methode `copyFromTo` die zo flexibel mogelijk is, om elementen uit een lijst van zoogdieren te kopiëren naar een andere lijst.
 
@@ -467,7 +482,7 @@ copyFromTo(birds, animals); // OK 👍
 ```
 
 {{% notice note Opmerking %}}
-Wanneer een parameter zowel een producent (co-variant) als een consument (contra-variant) is, gebruik je geen wildcards.
+Wanneer een parameter zowel een producent als een consument is, gebruik je geen wildcards.
 De generische parameter heet dan _invariant_. 
 Bijvoorbeeld:
 ```java
@@ -532,7 +547,7 @@ public void pet(Mammal mammal) { ... }
 Deze methode kan óók al opgeroepen worden met een `Cat`-object, `Dog`-object, of elk ander type `Mammal` als argument.
 Je hebt hier geen co- of contra-variantie van generische types nodig; je maakt gewoon gebruik van overerving uit objectgeoriënteerd programmeren.
 
-{{% notice note Onthoud %}}
+{{% notice tip Onthoud %}}
 Wildcards (`?`), co-variantie (`? extends`) en contra-variantie (`? super`) zijn enkel van toepassing bij generische types! Je kan ze dus niet gebruiken als een op zichzelf staand type. Je kan ze ook niet gebruiken bij de _definitie_ van een nieuwe generische parameter (voor een klasse of methode), maar enkel bij het gebruik ervan.
 {{% /notice %}}
 
@@ -553,7 +568,7 @@ Je kan co- en contravariantie toepassen op elke plaats waar je een generisch typ
 Het kan dus perfect zijn dat je de ene keer in je code eens `Food<Cat>` gebruikt, ergens anders `Food<? extends Cat>`, en nog ergens anders `Food<? super Cat>`.
 Bij begrenzing is dat niet zo; dat legt de grenzen eenmalig vast, en die moeten overal gerespecteerd worden waar het generisch type gebruikt wordt.
 
-{{% notice note Onthoud %}}
+{{% notice tip Onthoud %}}
 Een **begrenzing** (`T extends X`) is een eenmalige **beperking** op het type dat gebruikt kan worden als waarden voor een nieuw geïntroduceerde generische parameter. Dit kan enkel voorkomen in de _definitie_ van een nieuwe generische parameter (bij een generische klasse of methode).
 
 **Co-en contravariantie** (`? extends X`, `? super X`) met wildcard `?` **versoepelen** de types die aanvaard worden door de compiler. Ze komen enkel voor op plaatsen waar een generisch type _gebruikt_ wordt. 

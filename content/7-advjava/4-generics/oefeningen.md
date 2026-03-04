@@ -7,10 +7,355 @@ autonumbering: true
 math: true
 ---
 
+De startcode van deze oefeningen vind je (als IntelliJ project) op [https://github.com/KULeuven-Diepenbeek/ses-deel2-oefeningen-03-generics](https://github.com/KULeuven-Diepenbeek/ses-deel2-oefeningen-03-generics).
+
 Voor de tests maken we gebruik van [assertJ](https://assertj.github.io/doc).
 
 
-## Maybe-klasse
+## Subtyping: voertuigen
+
+Vetrek van volgende klasse-hiërarchie en zeg van elk van volgende lijnen code of ze toegelaten worden door de Java compiler:
+
+```mermaid
+graph BT
+Bike --> Vehicle
+Motorized --> Vehicle
+Car --> Motorized
+Plane --> Motorized
+```
+
+```java
+/* 1 */  Motorized myCar = new Car();
+/* 2 */  Vehicle yourPlane = new Plane();
+/* 3 */  yourPlane = new Bike();
+/* 4 */  Collection<Vehicle> vehicles = new ArrayList<>();
+/* 5 */  vehicles.add(myCar);
+/* 6 */  List<Car> cars = new ArrayList<Car>();
+/* 7 */  List<Vehicle> carsAsVehicles = cars;
+/* 8 */  List<? extends Motorized> motorized = new ArrayList<Car>();
+/* 9 */  motorized.add(myCar);
+```
+
+{{% notice style=tip title=Antwoord expanded=false %}}
+Alles behalve lijn 7 en 9 is toegelaten.
+
+- Lijn 1 OK: `Car` erft over van `Motorized`
+- Lijn 2 OK: `Plane` erft over van `Vehicle`
+- Lijn 3 OK: `yourPlace` heeft type `Vehicle`, en `Bike` erft over van `Vehicle` *(de naam van de variabele is wel slecht gekozen)*
+- Lijn 4 OK: `ArrayList<Vehicle>` (hier `ArrayList<>`) is een subtype van `Collection<Vehicle>`
+- Lijn 5 OK: `vehicles` kan om het even welk `Vehicle` bevatten, dus ook een `Motorized` (type van `myCar`)
+- Lijn 6 OK: `ArrayList<Car>` is een subtype van `List<Car>`
+- Lijn 7 niet OK: `List<Car>` is geen subtype van `List<Vehicles>`
+- Lijn 8 OK: `ArrayList<Car>` is een subtype van `List<? extends Motorized>`
+- Lijn 9 niet OK: `motorized` is een lijst van een onbekend type gemotoriseerde voertuigen; we kunnen daar geen auto aan toevoegen.
+
+{{% /notice %}}
+
+## Covariantie en contravariantie 1
+
+Maak een schema met de overervingsrelaties tussen
+
+- `List<Animal>`
+- `List<? super Animal>`
+- `List<? extends Animal>`
+- `List<Cat>`
+- `List<? extends Cat>`
+- `List<? super Cat>`
+
+{{% notice style=tip title=Antwoord expanded=false %}}
+```mermaid
+graph BT
+LA["List#lt;Animal>"]
+LSA["List#lt;? super Animal>"]
+LEA["List#lt;? extends Animal>"]
+
+LC["List#lt;Cat>"]
+LSC["List#lt;? super Cat>"]
+LEC["List#lt;? extends Cat>"]
+
+LA --> LSA
+LA --> LSC
+LA --> LEA
+
+LC --> LSC
+LC --> LEC
+LC --> LEA
+
+LSA --> LSC
+LEC --> LEA
+```
+
+In onderstaande figuur worden de verschillende types weergegeven door verzamelingen: een deelverzameling betekent dat het binnenste type overerft van het buitenste.
+
+<img src="/img/covar-contravar-1.png" style="max-width: 350px" alt="Covariantie en contravariantie"></img>
+
+{{% /notice %}}
+
+
+## Covariantie en contravariantie 2
+
+Maak een schema met de overervingsrelaties tussen
+
+- `List<Cat>`
+- `ArrayList<Cat>`
+- `List<? super Cat>`
+- `ArrayList<? super Cat>`
+- `List<? extends Cat>`
+- `ArrayList<? extends Cat>`
+
+{{% notice style=tip title=Antwoord expanded=false %}}
+```mermaid
+graph BT
+LC["List#lt;Cat>"]
+LSC["List#lt;? super Cat>"]
+LEC["List#lt;? extends Cat>"]
+
+AC["ArrayList#lt;Cat>"]
+ASC["ArrayList#lt;? super Cat>"]
+AEC["ArrayList#lt;? extends Cat>"]
+
+
+AC --> LC
+AC --> ASC
+AC --> LSC
+
+AC --> AEC
+AC --> LEC
+
+LC --> LSC
+LC --> LEC
+
+AEC --> LEC
+ASC --> LSC
+```
+
+In onderstaande figuur worden de verschillende types weergegeven door verzamelingen: een deelverzameling betekent dat het binnenste type overerft van het buitenste.
+
+<img src="/img/covar-contravar-2.png" style="max-width: 280px" alt="Covariantie en contravariantie"></img>
+
+{{% /notice %}}
+
+
+## Repository
+
+Schrijf een generische klasse `Repository` die een repository van objecten voorstelt. De objecten hebben ook een ID. Zowel het type van objecten als het type van de ID moeten generische parameters zijn.
+
+Definieer en implementeer volgende methodes (maak gebruik van een ArrayList):
+  - `add(id, obj)`: toevoegen van een object
+  - `findById(id)`: opvragen van een object aan de hand van de id
+  - `findAll()`: opvragen van alle objecten in de repository
+  - `update(id, obj)`: vervangen van een object met gegeven id door het meegegeven object
+  - `remove(id)`: verwijderen van een object aan de hand van een id
+
+
+
+## Shop
+
+Maak een klasse `Shop` die een winkel voorstelt die items (subklasse van `StockItem`) aankoopt.
+Af en toe wordt er een inventaris opgemaakt van alle items die op stock zijn.
+
+Een `Shop`-object wordt geparametriseerd met het type items dat aangekocht kan worden.
+We beschouwen hier `Fruit` en `Electronics`; daarmee kunnen we dus een fruitwinkel (`Shop<Fruit>`) en elektronica-winkel (`Shop<Electronics>`) maken.
+
+De `Shop`-klasse heeft drie methodes:
+
+- `buy`, die een lijst van items toevoegt aan de stock;
+- `addStockToInventory`, die de lijst van items uit de stock toevoegt aan de meegegeven inventaris-lijst (de items blijven bewaard in de stock);
+- `stockSize()` die het huidig aantal items in de stock toevoegt.
+
+Daarnaast maak je een statische methode `merge` waarmee je twee Shop-objecten kan samenvoegen tot een nieuw `Shop`-object.
+De twee Shops die samengevoegd worden hoeven niet hetzelfde type items te hebben. Je kan bijvoorbeeld een fruitwinkel en electronicawinkel samenvoegen tot een supermarkt waar elk soort `StockItem` verkocht kan worden.
+Na een `merge` is de stock verdwenen uit de oorspronkelijke shops en terechtgekomen in de nieuwe (samengevoegde) winkel.
+
+In de startcode vind je reeds een implementatie van een abstracte klasse `StockItem`, `Fruit`, en subklassen `Apple` en `Orange`.
+Daarnaast is er ook een abstracte klasse `Electronics`, met als subklasse `Smartphone`.
+
+Zorg dat onderstaande code (ongewijzigd) compileert en dat de test slaagt:
+
+```java
+@Test
+public void testGenerics() {
+    Shop<Fruit> fruitShop = new Shop<>();
+    Shop<Electronics> electronicsShop = new Shop<>();
+
+    List<Apple> twoApples = List.of(new Apple(), new Apple());
+    List<Orange> threeOranges = List.of(new Orange(), new Orange(), new Orange());
+    List<Fruit> twoMiscFruits = List.of(new Apple(), new Orange());
+
+    List<Smartphone> twoPhones = List.of(new Smartphone(), new Smartphone());
+
+    fruitShop.buy(twoApples);
+    fruitShop.buy(threeOranges);
+    fruitShop.buy(twoMiscFruits);
+
+    assertThat(fruitShop.stockSize()).isEqualTo(7);
+
+    electronicsShop.buy(twoPhones);
+    assertThat(electronicsShop.stockSize()).isEqualTo(2);
+
+    List<StockItem> inventory = new ArrayList<>();
+    fruitShop.addStockToInventory(inventory);
+    assertThat(inventory).hasSize(7);
+
+    electronicsShop.addStockToInventory(inventory);
+    assertThat(inventory).hasSize(9);
+
+    Shop<Apple> appleShop = new Shop<>();
+    appleShop.buy(twoApples);
+
+    Shop<Orange> orangeShop = new Shop<>();
+    orangeShop.buy(threeOranges);
+
+    Shop<Fruit> mergedFruitShop = Shop.merge(appleShop, orangeShop);
+    assertThat(mergedFruitShop.stockSize()).isEqualTo(2+3);
+    assertThat(appleShop.stockSize()).isEqualTo(0);
+    assertThat(orangeShop.stockSize()).isEqualTo(0);
+
+    mergedFruitShop.buy(twoMiscFruits);
+    assertThat(mergedFruitShop.stockSize()).isEqualTo(2+3+2);
+
+    Shop<StockItem> supermarket = Shop.merge(mergedFruitShop, electronicsShop);
+    assertThat(mergedFruitShop.stockSize()).isEqualTo(0);
+    assertThat(electronicsShop.stockSize()).isEqualTo(0);
+    assertThat(supermarket.stockSize()).isEqualTo(7+2);
+
+    supermarket.buy(twoPhones);
+    assertThat(supermarket.stockSize()).isEqualTo(7+2+2);
+}
+```
+
+
+## Game engine
+
+{{% notice info Oud-examenvraag %}}
+Dit is een oud-examenvraag.
+{{% /notice %}}
+
+Vul de types en generische parameters aan op de 7 genummerde plaatsen zodat onderstaande code en main-methode compileert (behalve de laatste regel van de main-methode) en voldaan is aan volgende voorwaarden:
+1.	Elk actie-type kan enkel uitgevoerd worden door een bepaald karakter-type. Bijvoorbeeld: een FightAction kan enkel uitgevoerd worden door een karakter dat CanFight implementeert.
+2.	doAction mag enkel opgeroepen worden met een actie die uitgevoerd kan worden door alle karakters in de meegegeven lijst.
+
+Als er op een bepaalde plaats geen type of generische parameter nodig is, vul je $\emptyset$ in.
+
+3. Verklaar je keuze voor de combinatie van (5), (6), en (7).
+
+
+```java
+interface Character {}
+interface CanFight extends Character {}
+record Warrior() implements CanFight {}
+record Knight() implements CanFight {}
+record Wizard() implements Character {} // kan niet vechten
+interface Action<___/* 1 */___> {
+    void execute(___/* 2 */____ character);
+}
+class FightAction implements Action<___/* 3 */_____> {
+    @Override
+    public void execute(___/* 4 */______ character) {
+        System.out.println(character + " fights!");
+    }
+}
+class GameEngine {
+    public <___/* 5 */______> void doAction(
+            List<___/* 6 */____> characters,
+            Action<___/* 7 */____> action) {
+        for (var character : characters) {
+            action.execute(character);
+        }
+    }
+}
+public static void main(String[] args) {
+    var engine = new GameEngine();
+    Action<CanFight> fight = new FightAction();
+
+    List<Warrior> warriors = List.of(new Warrior(), new Warrior());
+    engine.doAction(warriors, fight);
+
+    List<Wizard> wizards = List.of(new Wizard());
+    engine.doAction(wizards, fight); // deze regel mag NIET compileren
+}
+```
+
+{{% notice style=tip title=Antwoord expanded=false %}}
+- 1: `C extends Character` : acties kunnen enkel uitgevoerd worden door subtypes van Character
+- 2: `C`: C is het type van Character dat de actie zal uitvoeren
+- 3: `CanFight`: FightAction is enkel mogelijk voor characters die `CanFight` implementeren
+- 4: `CanFight`: aangezien de generische paremeter `C` van superinterface `Action` geinitialiseerd werd met `CanFight`, moet hier ook `CanFight` gebruikt worden.
+- 5: `T extends Character`: we noemen T het type van de objecten in de meegeven lijst; we hebben hier een begrenzing nodig (want we willen enkel subtypes van Character toelaten)
+- 6: `T`: lijst van T's, zoals verondersteld in 5
+- 7: `? super T`: de meegegeven actie moet een actie zijn die door alle T's uitgevoerd kan worden (dus door T of een van de supertypes van T).
+     Redenering met behulp van PECS: de meegegeven actie gebruikt/_consumeert_ het character, dus _super_.
+
+Alternatieve keuze voor 5/6/7:
+- 5: `T extends Character`: we noemen T het type dat bij de actie hoort; we hebben hier een begrenzing nodig (want we willen enkel subtypes van Character toelaten)
+- 6: `? extends T`: lijst van T's of subtypes ervan.
+     Redenering met behulp van PECS: de lijst levert/_produceert_ de characters, dus _extends_.
+- 7: `T`: het type van de actie, zoals verondersteld in 5
+{{% /notice %}}
+
+
+## Extra oefeningen
+
+### SuccessOrFail
+
+Schrijf een generische klasse (of record) `SuccessOrFail` die een object voorstelt dat precies één element bevat.
+Dat element heeft 1 van 2 mogelijke types (die types zijn generische parameters).
+Het eerste type stelt het type van een succesvol resultaat voor; het tweede type is dat van een fout.
+Je kan objecten enkel aanmaken via de statische methodes `success` en `fail`.
+Een voorbeeld van tests voor die klasse vind je hieronder:
+
+```java
+@Test
+public void success() {
+    SuccessOrFail<String, Exception> result = SuccessOrFail.success("This is the result");
+    assertThat(result.isSuccess()).isTrue();
+    assertThat(result.successValue()).isEqualTo("This is the result");
+}
+
+@Test
+public void failure() {
+    SuccessOrFail<String, Exception> result = SuccessOrFail.fail(new IllegalStateException());
+    assertThat(result.isSuccess()).isFalse();
+    assertThat(result.failValue()).isInstanceOf(IllegalStateException.class);
+}
+```
+
+### Functie compositie
+
+Java bevat een ingebouwde interface `java.util.function.Function<T, R>`, wat een functie voorstelt met één parameter van type `T`, en een resultaat van type `R`. Deze interface voorziet 1 methode `R apply(T value)` om de functie uit te voeren.
+
+Schrijf nu een generische methode `compose` die twee functie-objecten als parameters heeft, en als resultaat een nieuwe functie teruggeeft die de compositie voorstelt: eerst wordt de eerste functie uitgevoerd, en dan wordt de tweede functie uitgevoerd op het resultaat van de eerste.
+
+Dus: voor functies
+
+```java
+Function<A, B> f1 = ...
+Function<B, C> f2 = ...
+```
+
+moet `compose(f1, f2)` een `Function<A, C>` teruggeven, die als resultaat `f2.apply(f1.apply(a))` teruggeeft.
+
+Pas de PECS-regel toe om ook functies te kunnen samenstellen die niet exact overeenkomen qua type.
+Bijvoorbeeld, volgende code moet compileren en de test moet slagen:
+
+```java
+interface Ingredient {}
+record Fruit() implements Ingredient {}
+record PeeledFruit(Fruit fruit) implements Ingredient {}
+record Chopped(Ingredient food) implements Ingredient {}
+
+@Test
+public void testCompose() {
+    Function<Fruit, PeeledFruit> peelFruit = (var fruit) -> new PeeledFruit(fruit);
+    Function<Ingredient, Chopped> chopIngredient = (var food) -> new Chopped(food);
+
+    var makeFruitSalad = compose(peelFruit, chopIngredient);
+
+    assertThat(makeFruitSalad.apply(new Fruit())).isEqualTo(new Chopped(new PeeledFruit(new Fruit())));
+}
+```
+
+### Maybe-klasse
 
 1. Schrijf een generische klasse (of record) `Maybe` die een object voorstelt dat nul of één waarde van een bepaald type kan bevatten.
    Dat type wordt bepaald door een generische parameter. Je kan Maybe-objecten enkel aanmaken via de statische methodes `some` en `none`.
@@ -91,246 +436,11 @@ Java bevat een ingebouwd type gelijkaardig aan de Maybe-klasse uit deze oefening
 {{% /notice %}}
 
 
-## Repository
-
-Schrijf een generische klasse `Repository` die een repository van objecten voorstelt. De objecten hebben ook een ID. Zowel het type van objecten als het type van de ID moeten generische parameters zijn.
-
-Definieer en implementeer volgende methodes (maak gebruik van een ArrayList):
-  - `add(id, obj)`: toevoegen van een object
-  - `findById(id)`: opvragen van een object aan de hand van de id
-  - `findAll()`: opvragen van alle objecten in de repository
-  - `update(id, obj)`: vervangen van een object met gegeven id door het meegegeven object
-  - `remove(id)`: verwijderen van een object aan de hand van een id
 
 
 
-## SuccessOrFail
 
-Schrijf een generische klasse (of record) `SuccessOrFail` die een object voorstelt dat precies één element bevat.
-Dat element heeft 1 van 2 mogelijke types (die types zijn generische parameters).
-Het eerste type stelt het type van een succesvol resultaat voor; het tweede type is dat van een fout.
-Je kan objecten enkel aanmaken via de statische methodes `success` en `fail`.
-Een voorbeeld van tests voor die klasse vind je hieronder:
-
-```java
-@Test
-public void success() {
-    SuccessOrFail<String, Exception> result = SuccessOrFail.success("This is the result");
-    assertThat(result.isSuccess()).isTrue();
-    assertThat(result.successValue()).isEqualTo("This is the result");
-}
-
-@Test
-public void failure() {
-    SuccessOrFail<String, Exception> result = SuccessOrFail.fail(new IllegalStateException());
-    assertThat(result.isSuccess()).isFalse();
-    assertThat(result.failValue()).isInstanceOf(IllegalStateException.class);
-}
-```
-
-
-## Subtyping: voertuigen
-
-Vetrek van volgende klasse-hiërarchie en zeg van elk van volgende lijnen code of ze toegelaten worden door de Java compiler:
-
-```mermaid
-graph BT
-Bike --> Vehicle
-Motorized --> Vehicle
-Car --> Motorized
-Plane --> Motorized
-```
-
-```java
-/* 1 */  Motorized myCar = new Car();
-/* 2 */  Vehicle yourPlane = new Plane();
-/* 3 */  Collection<Vehicle> vehicles = new ArrayList<Vehicle>();
-/* 4 */  vehicles.add(myCar);
-/* 5 */  List<Car> cars = new ArrayList<Car>();
-/* 6 */  List<Vehicle> carsAsVehicles = cars;
-```
-
-{{% notice style=tip title=Antwoord expanded=false %}}
-Alles behalve lijn 6 is toegelaten.
-{{% /notice %}}
-
-## Covariantie
-
-Maak een schema met de overervingsrelaties tussen
-
-- `List<Cat>`
-- `List<? extends Cat>`
-- `ArrayList<Cat>`
-- `ArrayList<? extends Cat>`
-- `List<Animal>`
-- `List<? extends Animal>`
-- `ArrayList<Animal>`
-- `ArrayList<? extends Animal>`
-
-{{% notice style=tip title=Antwoord expanded=false %}}
-```mermaid
-graph BT
-ALC["ArrayList#lt;Cat>"] --> LC["List#lt;Cat>"]
-ALC --> ALeC["ArrayList#lt;? extends Cat>"]
-LC --> LeC["List#lt;? extends Cat>"]
-ALeC --> LeC
-ALeC --> ALeA["ArrayList#lt;? extends Animal>"]
-ALA["ArrayList#lt;Animal>"] --> ALeA
-ALA --> LA["List#lt;Animal>"]
-LeC --> LeA["List#lt;? extends Animal>"]
-ALeA --> LeA
-LA --> LeA
-```
-- `ArrayList<Cat>` is een subtype van `List<Cat>` en van `ArrayList<? extends Cat>`.
-- `List<Cat>` is een subtype van `List<? extends Cat>`
-- `ArrayList<? extends Cat>` is een subtype van `List<? extends Cat>` en van `ArrayList<? extends Animal>`
-- `ArrayList<Animal>` is een subtype van `ArrayList<? extends Animal>` en `List<Animal>`
-- `List<? extends Cat>`, `ArrayList<? extends Animal>` en `List<Animal>` zijn alledrie subtypes van `List<? extends Animal>`
-{{% /notice %}}
-
-## Shop
-
-Maak een klasse `Shop` die een winkel voorstelt die items (subklasse van `StockItem`) aankoopt.
-Een Shop-object wordt geparametriseerd met het type items dat aangekocht kan worden. We beschouwen hier `Fruit` en `Electronics`; daarmee kunnen we dus een fruitwinkel (`Shop<Fruit>`) en elektronica-winkel (`Shop<Electronics>`) maken.
-
-`Shop` heeft twee methodes:
-
-- `buy`, die een lijst van items toevoegt aan de stock;
-- `addStockToInventory`, die de lijst van items in stock toevoegt aan de meegegeven inventaris-lijst.
-
-Voor het fruit maak je een abstracte klasse `Fruit`, en subklassen `Apple` en `Orange`.
-Maak daarnaast nog een abstracte klasse `Electronics`, met als subklasse `Smartphone`.
-
-Zorg dat onderstaande code (ongewijzigd) compileert en dat de test slaagt:
-
-```java
-@Test
-public void testGenerics() {
-  Shop<Fruit> fruitShop = new Shop<>();
-  Shop<Electronics> electronicsShop = new Shop<>();
-
-  List<Apple> apples = List.of(new Apple(), new Apple());
-  List<Fruit> oranges = List.of(new Orange(), new Orange(), new Orange());
-
-  List<Smartphone> phones = List.of(new Smartphone(), new Smartphone());
-
-  fruitShop.buy(apples);
-  fruitShop.buy(oranges);
-
-  electronicsShop.buy(phones);
-
-  List<StockItem> inventory = new ArrayList<>();
-  fruitShop.addStockToInventory(inventory);
-  Assertions.assertThat(inventory).hasSize(5);
-
-  electronicsShop.addStockToInventory(inventory);
-
-  Assertions.assertThat(inventory).hasSize(7);
-}
-```
-
-## Functie compositie
-
-Java bevat een ingebouwde interface `java.util.function.Function<T, R>`, wat een functie voorstelt met één parameter van type `T`, en een resultaat van type `R`. Deze interface voorziet 1 methode `R apply(T value)` om de functie uit te voeren.
-
-Schrijf nu een generische methode `compose` die twee functie-objecten als parameters heeft, en als resultaat een nieuwe functie teruggeeft die de compositie voorstelt: eerst wordt de eerste functie uitgevoerd, en dan wordt de tweede functie uitgevoerd op het resultaat van de eerste.
-
-Dus: voor functies
-```java
-Function<A, B> f1 = ...
-Function<B, C> f2 = ...
-```
-moet `compose(f1, f2)` een `Function<A, C>` teruggeven, die als resultaat `f2.apply(f1.apply(a))` teruggeeft.
-
-Pas de PECS-regel toe om ook functies te kunnen samenstellen die niet exact overeenkomen qua type.
-Bijvoorbeeld, volgende code moet compileren en de test moet slagen:
-
-```java
-interface Ingredient {}
-record Fruit() implements Ingredient {}
-record PeeledFruit(Fruit fruit) implements Ingredient {}
-record Chopped(Ingredient food) implements Ingredient {}
-
-@Test
-public void testCompose() {
-    Function<Fruit, PeeledFruit> peelFruit = (var fruit) -> new PeeledFruit(fruit);
-    Function<Ingredient, Chopped> chopIngredient = (var food) -> new Chopped(food);
-
-    var makeFruitSalad = compose(peelFruit, chopIngredient);
-
-    assertThat(makeFruitSalad.apply(new Fruit())).isEqualTo(new Chopped(new PeeledFruit(new Fruit())));
-}
-```
-
-## Game engine
-
-{{% notice info Oud-examenvraag %}}
-Dit is een oud-examenvraag.
-{{% /notice %}}
-
-Vul de types en generische parameters aan op de 7 genummerde plaatsen zodat onderstaande code en main-methode compileert (behalve de laatste regel van de main-methode) en voldaan is aan volgende voorwaarden:
-1.	Elk actie-type kan enkel uitgevoerd worden door een bepaald karakter-type. Bijvoorbeeld: een FightAction kan enkel uitgevoerd worden door een karakter dat CanFight implementeert.
-2.	doAction mag enkel opgeroepen worden met een actie die uitgevoerd kan worden door alle karakters in de meegegeven lijst.
-
-Als er op een bepaalde plaats geen type of generische parameter nodig is, vul je $\emptyset$ in.
-
-3. Verklaar je keuze voor de combinatie van (5), (6), en (7).
-
-
-```java
-interface Character {}
-interface CanFight extends Character {}
-record Warrior() implements CanFight {}
-record Knight() implements CanFight {}
-record Wizard() implements Character {}
-interface Action<___/* 1 */___> {
-    void execute(___/* 2 */____ character);
-}
-class FightAction implements Action<___/* 3 */_____> {
-    @Override
-    public void execute(___/* 4 */______ character) {
-        System.out.println(character + " fights!");
-    }
-}
-class GameEngine {
-    public <___/* 5 */______> void doAction(
-            List<___/* 6 */____> characters,
-            Action<___/* 7 */____> action) {
-        for (var character : characters) {
-            action.execute(character);
-        }
-    }
-}
-public static void main(String[] args) {
-    var engine = new GameEngine();
-    Action<CanFight> fight = new FightAction();
-
-    List<Warrior> warriors = List.of(new Warrior(), new Warrior());
-    engine.doAction(warriors, fight);
-
-    List<Wizard> wizards = List.of(new Wizard());
-    engine.doAction(wizards, fight); // deze regel mag NIET compileren
-}
-```
-
-{{% notice style=tip title=Antwoord expanded=false %}}
-- 1: `C extends Character` : acties kunnen enkel uitgevoerd worden door subtypes van Character
-- 2: `C`: C is het type van Character dat de actie zal uitvoeren
-- 3: `CanFight`: FightAction is enkel mogelijk voor characters die `CanFight` implementeren
-- 4: `CanFight`: aangezien de generische paremeter `C` van superinterface `Action` geinitialiseerd werd met `CanFight`, moet hier ook `CanFight` gebruikt worden.
-- 5: `T extends Character`: we noemen T het type van de objecten in de meegeven lijst; we hebben hier een begrenzing nodig (want we willen enkel subtypes van Character toelaten)
-- 6: `T`: lijst van T's, zoals verondersteld in 5
-- 7: `? super T`: de meegegeven actie moet een actie zijn die door alle T's uitgevoerd kan worden (dus door T of een van de supertypes van T).
-     Redenering met behulp van PECS: de meegegeven actie gebruikt/_consumeert_ het character, dus _super_.
-
-Alternatieve keuze voor 5/6/7:
-- 5: `T extends Character`: we noemen T het type dat bij de actie hoort; we hebben hier een begrenzing nodig (want we willen enkel subtypes van Character toelaten)
-- 6: `? extends T`: lijst van T's of subtypes ervan.
-     Redenering met behulp van PECS: de lijst levert/_produceert_ de characters, dus _extends_.
-- 7: `T`: het type van de actie, zoals verondersteld in 5
-{{% /notice %}}
-
-## Animal food
+### Animal food
 
 **Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen.**
 
@@ -383,7 +493,7 @@ public class AnimalFood {
 
 (Hint: Begin met het type `Food` te parametriseren met een generische parameter die het `Animal`-type voorstelt dat dit voedsel eet.)
 
-## Self-type
+### Self-type
 
 **Dit is een uitdagende oefening, voor als je je kennis over generics echt wil testen.**
 
