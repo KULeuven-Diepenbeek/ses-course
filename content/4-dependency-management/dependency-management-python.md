@@ -181,4 +181,4 @@ Je zou dit project nu kunnen laten compileren tot een binary met bijvoorbeeld `p
 python3 ./app.py
 ```
 
-_De bronbestanden voor dit voorbeeld kan je ook in deze [github repo terugvinden](). Merk op dat in dit project de 'venv' niet is opgenomen in het versiebeheer via de `higher_lower_venv/` in de `./.gitignore`-file wat de conventie is._
+_De bronbestanden voor dit voorbeeld kan je ook in deze [github repo terugvinden](https://github.com/ArneDuyver/ses-dependency-management-python). Merk op dat in dit project de 'venv' niet is opgenomen in het versiebeheer via de `higher_lower_venv/` in de `./.gitignore`-file wat de conventie is._
