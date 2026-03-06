@@ -67,9 +67,9 @@ source higher_lower_venv/bin/activate
 ```
 `Requirements.txt` bevat nu enkel volgende regel: `simplejson==3.20.1` en kan je installeren in de 'venv' met `pip install -r requirements.txt`.
 
-Je `main.py` ziet er dan als volgt uit, waarbij de `if __name__ == '__main__':` een indicatie geeft dat deze file de entrypoint tot onze applicatie is:
+Je `app.py` ziet er dan als volgt uit, waarbij de `if __name__ == '__main__':` een indicatie geeft dat deze file de entrypoint tot onze applicatie is:
 <details closed>
-<summary><i><b>Klik hier om de code te zien/verbergen voor <code>main.py</code></b></i>🔽</summary>
+<summary><i><b>Klik hier om de code te zien/verbergen voor <code>app.py</code></b></i>🔽</summary>
 <p>
 
 ```python
