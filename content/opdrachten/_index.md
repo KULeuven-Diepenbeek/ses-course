@@ -69,7 +69,7 @@ Heb je toch al zo een repo gecloned en is dit nu een een submodule waarvan je de
 ### Opdrachten rond Versiebeheer
 
 #### Opdracht 1:
-1. Download volgende file [`Candy_Crush_spelregels.txt`](https://kuleuven-diepenbeek.github.io/ses-course/files/Candy_Crush_spelregels.txt) via rechtermuisklik, '`opslaan als`' en sla de file op in volgende directory/folder `opdracht1-4_Versiebeheer`. **Behoud de juiste naam!**
+1. Download volgende file [`Candy_Crush_spelregels.txt`](https://kuleuven-diepenbeek.github.io/ses-course/files/Candy_Crush_spelregels.txt) via rechtermuisklik, '`opslaan als`' en sla de file op in volgende directory/folder `opdracht1-3_Versiebeheer`. **Behoud de juiste naam!**
 2. Doe nu op de correcte manier een commit en tag de commit met `v1`.
 
 #### Opdracht 2:
