@@ -28,7 +28,7 @@ De naamgeving: voor het committen van je resultaat van "Opdracht 1" gebruik je d
 **Lokaal een tag deleten**: `git tag --delete <tagname>`
 
 ### Pushen van branches en tags naar de remote repository
-Standaard worden lokale branches en tags niet altijd gepushed naar een remote repository, gebruik daarom volgende flags bij het `push`-command: `$ git push --all --tags`
+Standaard worden lokale branches en tags niet altijd gepushed naar een remote repository, gebruik daarom volgende flags bij het `push`-command: `$ git push --all && git push --tags`
 
 ### Deadlines
 
@@ -91,7 +91,7 @@ Heb je toch al zo een repo gecloned en is dit nu een een submodule waarvan je de
 
 #### Laatste belangrijke stap!
 
-Push nu je aanpassingen naar Github met behulp van `git push --all --tags`
+Push nu je aanpassingen naar Github met behulp van `git push --all && git push --tags`
 
 Dankzij `--all` wordt je branch mee gepushed en dankzij `--tags` worden je tags mee gepushed.
 
