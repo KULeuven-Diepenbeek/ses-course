@@ -201,7 +201,9 @@ var average = people.stream()
                 .average();
 ```
 
-We bespreken hier de meest voorkomende bewerkingen.
+We bespreken hieronder de meest voorkomende tussentijdse operaties.
+De lijst van alle tussentijdse operaties is vooraf vastgelegd door de `Stream`-interface.
+Met behulp van [_Gatherers_](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/Gatherer.html) kan je sinds Java 24 zelf tussentijdse operaties definiëren; we gaan hier niet dieper op in (zie [links onderaan deze pagina voor meer info](#nog-meer-streams-optioneel)).
 
 ### filter
 
@@ -1006,11 +1008,14 @@ We gaan niet in meer detail in op parallelle streams.
 
 ## Nog meer streams? (optioneel)
 
-In onderstaande presentatie zie je hoe er momenteel gewerkt wordt om streams nog uitbreidbaarder te maken.
+### Gatherers
+
 Via de Collector-API kan je, zoals we gezien hebben, zelf al nieuwe collectors toevoegen.
-Voor de tussentijdse operaties ben je in de huidige versie van de streams API echter beperkt tot de voorgedefinieerde tussentijdse operaties; maar je kan er veel meer bedenken.
-De oplossing die onderzocht wordt komt in de vorm van een `Gatherer`-interface.
-{{< youtube 8fMFa6OqlY8 >}}
+Voor de tussentijdse operaties ben je via de streams API echter beperkt tot de voorgedefinieerde tussentijdse operaties; maar je kan er veel meer bedenken.
+Onderstaande presentatie bespreekt Gatherers, de oplossing die sinds Java 24 aangeboden wordt om zelf nieuwe tussentijdse operaties te definiëren.
+{{< youtube 1CT57yPixAc >}}
+
+### Spliterators
 
 Streams (en parallelle streams in het bijzonder) maken gebruik van [`Spliterators`](https://docs.oracle.com/en%2Fjava%2Fjavase%2F21%2Fdocs%2Fapi%2F%2F/java.base/java/util/Spliterator.html).
 Dat is een variant op een iterator, die (naast de elementen overlopen, zoals bij een gewone iterator) ook de elementen van een bron (bv. een collectie) in 2 delen kan splitsen.
