@@ -623,9 +623,11 @@ Gebruik `Comparator.comparing`, `thenComparing` en methode-referenties.
 
 ```java
 Comparator<Person> comparator = Comparator
-                .comparing(Person::lastName)
-                .thenComparing(Person::firstName)
-                .thenComparing(Person::age);
+    .comparing(Person::lastName)
+    .thenComparing(Person::firstName)
+    .thenComparing(Comparator.comparing(Person::age).reversed());
+    // of: .thenComparing(p -> -p.age());
+
 ```
 
 {{% /notice %}}
