@@ -454,8 +454,8 @@ record Person(String firstName, String lastName, int age) {}
 schrijf lambda-expressies voor volgende types:
 
 - `Function<Person, String> fullname`: geef `"firstName lastName"` terug
-- `Predicate<Person> isSenior`: true als de persoon minstens 65 jaar is
 - `BiFunction<Person, Integer, Boolean> isAtLeast`: true als `person.age()` groter of gelijk is aan de tweede parameter
+- `Predicate<Person> isSenior`: true als de persoon minstens 65 jaar is. Herbruik de zonet gedefinieerde variabele `isAtLeast`.
 - `Supplier<Person> newPerson`: maak telkens een nieuwe `Person("Jane", "Doe", 25)`
 
 Gebruik daarna ook elk van deze methodes.
@@ -467,12 +467,13 @@ Gebruik daarna ook elk van deze methodes.
   ```
 
 - ```java
-  Predicate<Person> isSenior = (Person p) -> p.age() >= 65;
+  BiFunction<Person, Integer, Boolean> isAtLeast = (Person p, Integer minAge) -> p.age() >= minAge;
   ```
 
 - ```java
-  BiFunction<Person, Integer, Boolean> isAtLeast = (Person p, Integer minAge) -> p.age() >= minAge;
+  Predicate<Person> isSenior = (Person p) -> isAtLeast.apply(p, 65);
   ```
+  (isAtLeast is effectively final, en kan gebruikt worden)
 
 - ```java
   Supplier<Person> newPerson = () -> new Person("Jane", "Doe", 25);
