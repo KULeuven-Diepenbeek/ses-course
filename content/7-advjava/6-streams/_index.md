@@ -29,7 +29,7 @@ var average = people.stream()
                 .filter(a -> a >= 18)
                 .limit(20)
                 .average();
-System.out.println(average.orElse(0));
+IO.println(average.orElse(0));
 ```
 
 Een stream zelf is _geen_ datastructuur of collectie; een stream is een pijplijn --- een ketting van operaties die uitgevoerd moeten worden op de data.
@@ -43,8 +43,8 @@ Elke stream bestaat uit 3 delen:
 
 {{% notice note %}}
 `average()` geeft een `OptionalDouble` terug, geen gewone `double`.
-Dat komt omdat het gemiddelde van een lege stream niet bestaat.
-Gebruik dus bij voorkeur `orElse(...)`, `orElseThrow(...)` of `ifPresent(...)` in plaats van meteen `getAsDouble()`.
+Dat komt omdat de stream leeg kan zijn (er zijn bijvoorbeeld geen meerderjarigen), en de gemiddelde waarde van een lege stream niet berekend kan worden.
+We gebruiken daarom bij het uitprinten `orElse(...)` om 0 terug te geven als er geen ander resultaat is.
 {{% /notice %}}
 
 ```mermaid
@@ -64,7 +64,7 @@ long count2 = adults.count(); // IllegalStateException: stream has already been 
 
 Streams zijn ook **lazy**: er worden slechts zoveel elementen verwerkt als nodig om het resultaat te berekenen.
 Dat maakt dat de bron oneindig veel elementen mag aanleveren; zolang de rest van de pijplijn er slechts een eindig aantal nodig heeft, vormt dat geen probleem.
-Enkel de elementen die nuttig zijn om het resultaat te bekomen worden gebruikt.
+Enkel elementen die nuttig zijn om het resultaat te bekomen worden gebruikt.
 We zullen hier later nog op terugkomen.
 
 Een zeer concrete situatie waarin streams nuttig zijn, is wanneer je van plan bent om code te schrijven met volgende vorm:
@@ -99,7 +99,7 @@ for (var person : people) {
     }
 }
 average /= count;
-System.out.println(average);
+IO.println(average);
 ```
 
 De versie met streams ziet er helemaal anders uit --- je schrijft zelf geen lussen, maar focust je op het beschrijven van de uit te voeren operaties.
@@ -112,7 +112,7 @@ var average = people.stream()
                 .filter(a -> a >= 18)
                 .limit(20)
                 .average();
-System.out.println(average.orElse(0));
+IO.println(average.orElse(0));
 ```
 
 Beide versies doen hetzelfde, maar in de tweede versie is het veel duidelijker wat de bedoeling is:
@@ -194,14 +194,6 @@ Dat kan op verschillende manieren.
   builder.add(str1);
   builder.add(str2);
   var stream = builder.build(); // => str1, str2
-  ```
-- Voor streams die gekoppeld zijn aan I/O-resources (zoals bestanden), moet je de stream sluiten.
-  Dit doe je met `try-with-resources`:
-  ```java
-  try (Stream<String> lines = Files.lines(Path.of("data.txt"))) {
-      long nbLongLines = lines.filter(s -> s.length() > 80).count();
-      System.out.println(nbLongLines);
-  }
   ```
 
 [^1]: Omdat `int` maar een eindig aantal waarden kan hebben (de hoogste waarde is \\( 2^{31}-1 \\)), zal deze stream ooit negatieve getallen beginnen produceren: ..., 2147483646, 2147483647, -2147483648, -2147483647, .... De stream is wel nog steeds oneindig.
@@ -423,7 +415,7 @@ class in,out str
 
 ### distinct
 
-De `distinct`-operatie filtert alle dubbele waarden uit de stream. Deze operatie is _stateful_: de waarden die reeds gezien zijn moeten bijgehouden worden.
+De `distinct`-operatie filtert alle dubbele waarden uit de stream. Deze operatie is _stateful_: de waarden die reeds gezien zijn moeten bijgehouden worden om mee te vergelijken.
 
 ```java
 Stream.of("A", "B", "A", "C", "A", "D").distinct() // => A, B, C, D
@@ -473,7 +465,7 @@ Deze operatie kan bijvoorbeeld handig zijn om te debuggen: je kan ze middenin ee
 ```java
 Stream.of("A", "B", "C", "D", "E", "F")
    .limit(3)
-   .peek(System.out::println) // => A, B, C
+   .peek(IO::println) // => A, B, C
    .filter(l -> !"AEIOUY".contains(l))
 ```
 
@@ -648,17 +640,15 @@ Bekijk bijvoorbeeld onderstaande code:
 var list = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 Stream<Integer> incrementAll = list.stream()
-  .map(n -> {
-    System.out.println("Processing " + n);
-    return n + 1;
-  })
+  .peek(n -> IO.println("Processing " + n))
+  .map(n -> n + 1)
   .limit(1);
 
 // [1] hier werd nog niets uitgeprint
 
 incrementAll
   .forEach(n -> {
-    System.out.println("Got " + n);
+    IO.println("Got " + n);
 });
 
 // [2] print "Processing 1" en vervolgens "Got 2"
@@ -774,7 +764,7 @@ De `min` en `max` operaties vereisen een `Comparator`-object om elementen te ver
 Ze geven een `Optional` terug met het kleinste respectievelijk grootste element, of de lege optional indien de stream geen elementen bevat.
 
 Bijvoorbeeld, onderstaande code geeft het element terug waarin de letter 'a' het vaakst voorkomt.
-We maken dus een Comparator gebaseerd op het aantal 'a's in het woord.
+We maken dus een Comparator gebaseerd op het aantal _a_'s in het woord.
 Om dat aantal te tellen, maken we opnieuw gebruik van een stream-pipeline, namelijk `chars().filter().count()`:
 
 ```java
@@ -957,10 +947,10 @@ Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.joining(", ")
 Deze collectors doen wat de naam zegt: ze maken een List, Set, of Collection met daarin de elementen van de stream.
 De [`toList`](#tolist-toarray) terminale operatie die we eerder zagen lijkt op `Collectors.toList()`, maar er is een belangrijk verschil:
 
-- `stream.toList()` geeft een **unmodifiable** lijst terug
-- `collect(Collectors.toList())` geeft een lijst terug waarvan het concrete type niet gegarandeerd is; die is in de praktijk vaak wel aanpasbaar, maar je mag daar niet op vertrouwen
+- `stream.toList()` geeft gegarandeerd een **unmodifiable** lijst terug
+- `collect(Collectors.toList())` geeft een lijst terug waarvan het concrete type niet gegarandeerd is; het kan dus aanpasbaar zijn of niet.
 
-Bij `toCollection` ligt niet vast welk type collectie gemaakt moet worden; je moet zelf een functie meegeven om een lege collectie van het gewenste type te maken:
+Bij `toCollection` ligt niet vast welk type collectie gemaakt moet worden; je moet zelf een functie meegeven (de _collectionFacory_) om een lege collectie van het gewenste type te maken:
 
 ```java
 Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.toCollection(() -> new LinkedList<>()));
@@ -968,7 +958,7 @@ Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.toCollection(
 
 #### Collectors.groupingBy
 
-Deze collector groepeert de elementen in een `Map`, volgens de meegegeven functie om de key te bepalen:
+Deze collector groepeert de elementen (van type `T`) in een `Map<K, List<T>>`, volgens de meegegeven functie om de key te bepalen:
 
 ```java
 Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.groupingBy(String::length));
@@ -987,6 +977,8 @@ Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.partitioningB
 #### Collectors.toMap
 
 Met `Collectors.toMap` maak je een `Map` op basis van een key-functie en value-functie.
+Dit is een flexibelere versie van `groupingBy`: je definieert zelf hoe de `Map` opgebouwd moet worden.
+
 Let op: als twee elementen dezelfde key produceren, krijg je standaard een `IllegalStateException`.
 
 ```java
@@ -995,7 +987,7 @@ Map<Integer, String> byLength = Stream.of("alpha", "bravo")
 // => IllegalStateException (duplicate key: 5)
 ```
 
-Als duplicate keys mogelijk zijn, geef dan expliciet een merge-functie mee:
+Als duplicate keys mogelijk zijn, geef dan expliciet een merge-functie mee die aangeeft hoe twee waarden gecombineerd moeten worden tot 1 waarde in de Map:
 
 ```java
 Map<Integer, String> byLength = Stream.of("alpha", "bravo")
@@ -1007,28 +999,18 @@ Map<Integer, String> byLength = Stream.of("alpha", "bravo")
 ### forEach
 
 De `forEach(fn)` terminale operatie voert de meegegeven functie `fn` uit voor elk element dat het einde van de pijplijn bereikt.
-Een heel eenvoudig gebruik hiervan is het uitprinten van alle elementen via `System.out.println`:
+Een heel eenvoudig gebruik hiervan is het uitprinten van alle elementen via `IO.println`:
 
 ```java
 Stream.of("C", "D", "A", "F", "E", "B")
    .map(String::toLowerCase)
    .filter(l -> !"aeiouy".contains(l))
    .sorted()
-   .forEach(x -> System.out.println(x)); // => b, c, d, f
-   // OF:  .forEach(System.out::println);
+   .forEach(x -> IO.println(x)); // => b, c, d, f
+   // OF:  .forEach(IO::println);
 ```
 
 De `forEach`-operatie is dus zowat het streams-equivalent van de enhanced for-loop (`for (var x : collection)`) bij collecties.
-Bij parallelle streams is de volgorde bij `forEach` niet gegarandeerd.
-Als je de encounter order wil behouden, gebruik dan `forEachOrdered`.
-
-```java
-Stream.of("C", "D", "A", "F", "E", "B")
-   .parallel()
-   .map(String::toLowerCase)
-   .sorted()
-   .forEachOrdered(System.out::println); // => a, b, c, d, e, f
-```
 
 {{% notice warning Opgelet %}}
 Vermijd het gebruik van `forEach` om een variabele/lijst/... buiten de `forEach`-lambda aan te passen, zoals het toevoegen aan de `result`-lijst in onderstaand voorbeeld.
@@ -1051,28 +1033,6 @@ List<String> result = Stream.of("C", "D", "A", "F", "E", "B")
 ```
 {{% /notice %}}
 
-### Side effects en non-interference
-
-Probeer lambdas in stream-operaties zo veel mogelijk **stateless** en zonder side effects te houden.
-Met andere woorden: laat een lambda idealiter geen externe toestand aanpassen.
-Dat maakt code correcter, beter testbaar, en veiliger voor parallelle streams.
-
-Vermijd bijvoorbeeld:
-
-```java
-List<Integer> output = new ArrayList<>();
-IntStream.rangeClosed(1, 10)
-    .parallel()
-    .forEach(output::add); // Niet veilig: race conditions
-```
-
-Gebruik liever een terminale operatie die het resultaat zelf opbouwt:
-
-```java
-List<Integer> output = IntStream.rangeClosed(1, 10)
-    .boxed()
-    .toList();
-```
 
 ## Parallelle streams
 
