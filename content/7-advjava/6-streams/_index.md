@@ -18,7 +18,7 @@ De concepten in andere programmeertalen die het dichtst aanleunen bij Java strea
 ## Wat en waarom?
 
 [Streams](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/package-summary.html) vormen een krachtig concept om efficiënt data te verwerken.
-Ze vormen een abstractie voor sequentiële en parallele operaties op datasets, zoals filteren, transformeren, en aggregeren, zonder de onderliggende datastructuur te wijzigen.
+Ze vormen een abstractie voor sequentiële en parallelle operaties op datasets, zoals filteren, transformeren, en aggregeren, zonder de onderliggende datastructuur te wijzigen.
 Bovendien maakt het gebruik van streams het mogelijk om declaratief te programmeren: je beschrijft op hoog niveau _wát_ je met de dataset wilt doen, in plaats van stap voor stap te beschrijven _hoe_ dat moet gebeuren.
 
 Een snel voorbeeldje om dat wat concreter te maken is onderstaande code, die streams gebruikt om de gemiddelde leeftijd te berekenen van de eerste 20 meerderjarige `Person`-objecten in de lijst `people` (we gaan later dieper in op de details):
@@ -29,7 +29,7 @@ var average = people.stream()
                 .filter(a -> a >= 18)
                 .limit(20)
                 .average();
-System.out.println(average.getAsDouble());
+System.out.println(average.orElse(0));
 ```
 
 Een stream zelf is _geen_ datastructuur of collectie; een stream is een pijplijn --- een ketting van operaties die uitgevoerd moeten worden op de data.
@@ -41,6 +41,12 @@ Elke stream bestaat uit 3 delen:
 - **intermediaire operaties** (mogelijk meerdere na elkaar) die de data verwerken (transformeren). Elke operatie neemt het resultaat van de vorige operatie (of de bron) en doet daar iets mee; het resultaat daarvan dient als invoer voor de volgende operatie. Zo krijg je een pijplijn waar de data doorheen stroomt terwijl ze bewerkt wordt. In het voorbeeld hierboven zijn `mapToInt`, `filter` en `limit` intermediaire operaties.
 - één **terminale operatie**: deze beëindigt de ketting en geeft het uiteindelijke resultaat terug. In het voorbeeld hierboven is `average` de terminale operatie.
 
+{{% notice note %}}
+`average()` geeft een `OptionalDouble` terug, geen gewone `double`.
+Dat komt omdat het gemiddelde van een lege stream niet bestaat.
+Gebruik dus bij voorkeur `orElse(...)`, `orElseThrow(...)` of `ifPresent(...)` in plaats van meteen `getAsDouble()`.
+{{% /notice %}}
+
 ```mermaid
 graph LR
 Source --> Op1 --> Op2 --> Op3 --> Terminal
@@ -49,6 +55,12 @@ style Terminal stroke:black,fill:#faa
 ```
 
 Je kan een stream-pijplijn slechts **éénmaal** doorlopen. Als je na het uitvoeren van de operaties nog een sequentie van operaties wil uitvoeren op dezelfde bron-elementen, moet je een nieuwe stream maken.
+
+```java
+var adults = people.stream().filter(Person::isAdult);
+long count1 = adults.count(); // OK
+long count2 = adults.count(); // IllegalStateException: stream has already been operated upon or closed
+```
 
 Streams zijn ook **lazy**: er worden slechts zoveel elementen verwerkt als nodig om het resultaat te berekenen.
 Dat maakt dat de bron oneindig veel elementen mag aanleveren; zolang de rest van de pijplijn er slechts een eindig aantal nodig heeft, vormt dat geen probleem.
@@ -100,7 +112,7 @@ var average = people.stream()
                 .filter(a -> a >= 18)
                 .limit(20)
                 .average();
-System.out.println(average.getAsDouble());
+System.out.println(average.orElse(0));
 ```
 
 Beide versies doen hetzelfde, maar in de tweede versie is het veel duidelijker wat de bedoeling is:
@@ -183,6 +195,14 @@ Dat kan op verschillende manieren.
   builder.add(str2);
   var stream = builder.build(); // => str1, str2
   ```
+- Voor streams die gekoppeld zijn aan I/O-resources (zoals bestanden), moet je de stream sluiten.
+  Dit doe je met `try-with-resources`:
+  ```java
+  try (Stream<String> lines = Files.lines(Path.of("data.txt"))) {
+      long nbLongLines = lines.filter(s -> s.length() > 80).count();
+      System.out.println(nbLongLines);
+  }
+  ```
 
 [^1]: Omdat `int` maar een eindig aantal waarden kan hebben (de hoogste waarde is \\( 2^{31}-1 \\)), zal deze stream ooit negatieve getallen beginnen produceren: ..., 2147483646, 2147483647, -2147483648, -2147483647, .... De stream is wel nog steeds oneindig.
 
@@ -228,7 +248,7 @@ classDef str stroke:black,fill:orange
 class in,out str
 ```
 
-### map, mapToInt, mapToLong, mapToDouble, mapToObject
+### map, mapToInt, mapToLong, mapToDouble, mapToObj
 
 De `map`-operatie transformeert elk elementen in een stream naar een ander element door een functie toe te passen op elk element.
 Bijvoorbeeld, onderstaande map-operatie zet alle strings om naar lowercase:
@@ -283,11 +303,16 @@ Stream.of("ALICE", "Bob", "ChaRLIe").mapToInt(String::length) // => 5, 3, 7
 ```
 
 Bij een `IntStream`, `LongStream` en `DoubleStream` geeft de `map`-operatie altijd opnieuw een stream van hetzelfde type (IntStream, LongStream, of DoubleStream).
-Wanneer je de getallen in zo'n stream wil omzetten naar een object, kan dat met `mapToObject`:
+Wanneer je de getallen in zo'n stream wil omzetten naar een object, kan dat met `mapToObj`:
 
 ```java
-IntStream.of(1, 2, 3).mapToObject(i -> "Number " + i) // => "Number 1", "Number 2", "Number 3"
+IntStream.of(1, 2, 3).mapToObj(i -> "Number " + i) // => "Number 1", "Number 2", "Number 3"
 ```
+
+{{% notice tip %}}
+Werk bij voorkeur met `IntStream`/`LongStream`/`DoubleStream` wanneer je numerieke data verwerkt.
+Zo vermijd je onnodige boxing en unboxing van `Integer`, `Long`, of `Double`.
+{{% /notice %}}
 
 ### limit en takeWhile
 
@@ -709,23 +734,23 @@ De operaties `findFirst` en `findAny` geven respectievelijk het eerste en een ni
 Merk op dat `findAny` niet 'random' is; er zijn gewoon geen garanties over welk element precies teruggegeven wordt.
 `findAny` is vooral nuttig bij parallelle streams (zie later).
 
-Het resultaat van beide methodes is een [`Optional`](https://docs.oracle.com/en%2Fjava%2Fjavase%2F21%2Fdocs%2Fapi%2F%2F/java.base/java/util/Optional.html); die is leeg wanneer de stream leeg is, er er dus geen element is om terug te geven.
+Het resultaat van beide methodes is een [`Optional`](https://docs.oracle.com/en%2Fjava%2Fjavase%2F21%2Fdocs%2Fapi%2F%2F/java.base/java/util/Optional.html); die is leeg wanneer de stream leeg is, er dus geen element is om terug te geven.
 
 ```java
-Optional<String> result = Stream.of("C", "D", "A", "F", "E", "B")
+Optional<String> result1 = Stream.of("C", "D", "A", "F", "E", "B")
    .map(String::toLowerCase)
    .filter(l -> !"aeiouy".contains(l))
    .sorted()
    .findFirst();
 
-// => result == Optional["B"]
+// => result1 == Optional[b]
 
-Optional<String> result = Stream.of("C", "D", "A", "F", "E", "B")
+Optional<String> result2 = Stream.of("C", "D", "A", "F", "E", "B")
    .map(String::toLowerCase)
-   .filter(l -> "XYZ".contains(l))
+   .filter(l -> "xyz".contains(l))
    .findAny();
 
-// => result == Optional.empty
+// => result2 == Optional.empty
 ```
 
 ### anyMatch, allMatch, noneMatch
@@ -745,7 +770,7 @@ Stream.of("Alpha", "Bravo", "Charlie", "Delta")
 
 ### min en max
 
-De `min` en `max` operatie vereisten een `Comparator`-object om elementen te vergelijken met elkaar.
+De `min` en `max` operaties vereisen een `Comparator`-object om elementen te vergelijken met elkaar.
 Ze geven een `Optional` terug met het kleinste respectievelijk grootste element, of de lege optional indien de stream geen elementen bevat.
 
 Bijvoorbeeld, onderstaande code geeft het element terug waarin de letter 'a' het vaakst voorkomt.
@@ -754,7 +779,7 @@ Om dat aantal te tellen, maken we opnieuw gebruik van een stream-pipeline, namel
 
 ```java
 Stream.of("Alpha", "Bravo", "Charlie", "Delta")
-      .max(Comparator.comparing(s -> s.toLowerCase().chars().filter(c -> c == 'a').count())); // => Optional["alpha"]
+      .max(Comparator.comparing(s -> s.toLowerCase().chars().filter(c -> c == 'a').count())); // => Optional[Alpha]
 ```
 
 Voor een `IntStream`, `LongStream` en `DoubleStream` hoef je geen Comparator mee te geven; daar worden uiteraard gewoon de getallen zelf vergeleken.
@@ -763,6 +788,7 @@ Voor een `IntStream`, `LongStream` en `DoubleStream` hoef je geen Comparator mee
 
 De `sum`, `average` en `summaryStatistics` operaties zijn enkel beschikbaar op `IntStream`, `LongStream` en `DoubleStream`.
 De eerste twee geven, weinig verrassend, de som en het gemiddelde van de waarden terug.
+`average` geeft een `OptionalDouble` terug, omdat een lege stream geen gemiddelde heeft.
 
 De `summaryStatistics` operatie geeft een object terug met daarin
 
@@ -792,7 +818,7 @@ We beschouwen hier de versie van `reduce` met twee argumenten, die een resultaat
 - een _startwaarde_ `identity` van type `T`
 - een _accumulator_-functie `accumulator` (een BinaryOperator) die een vorige `T` combineert met de huidige `T` uit de stream, en de nieuwe `T` teruggeeft
 
-Met andere woorden, de `reduce`-operatie op een stream heeft hetvolgende effect:
+Met andere woorden, de `reduce`-operatie op een stream heeft het volgende effect:
 
 ```java
 T result = identity;
@@ -920,7 +946,7 @@ Deze vind je in de [`Collectors`](https://docs.oracle.com/en/java/javase/21/docs
 #### Collectors.joining
 
 Deze collector doet wat we hierboven zelf implementeerden: Strings aan elkaar plakken, gescheiden door een separator-string.
-We hadden onszelf dus wat werk kunnen besparen, en gewoon hetvolgende schrijven:
+We hadden onszelf dus wat werk kunnen besparen, en gewoon het volgende schrijven:
 
 ```java
 Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.joining(", ")); // => "Alpha, Bravo, Charlie, Delta"
@@ -929,7 +955,10 @@ Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.joining(", ")
 #### Collectors.toList, Collectors.toSet, Collectors.toCollection
 
 Deze collectors doen wat de naam zegt: ze maken een List, Set, of Collection met daarin de elementen van de stream.
-De [`toList`](#tolist-toarray) terminale operatie die we eerder zagen is gewoon een methode om makkelijk deze collector te gebruiken.
+De [`toList`](#tolist-toarray) terminale operatie die we eerder zagen lijkt op `Collectors.toList()`, maar er is een belangrijk verschil:
+
+- `stream.toList()` geeft een **unmodifiable** lijst terug
+- `collect(Collectors.toList())` geeft een lijst terug waarvan het concrete type niet gegarandeerd is; die is in de praktijk vaak wel aanpasbaar, maar je mag daar niet op vertrouwen
 
 Bij `toCollection` ligt niet vast welk type collectie gemaakt moet worden; je moet zelf een functie meegeven om een lege collectie van het gewenste type te maken:
 
@@ -955,6 +984,25 @@ Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.partitioningB
 // => {false=["Charlie"], true=["Alpha", "Bravo", "Delta"]}
 ```
 
+#### Collectors.toMap
+
+Met `Collectors.toMap` maak je een `Map` op basis van een key-functie en value-functie.
+Let op: als twee elementen dezelfde key produceren, krijg je standaard een `IllegalStateException`.
+
+```java
+Map<Integer, String> byLength = Stream.of("alpha", "bravo")
+    .collect(Collectors.toMap(String::length, s -> s));
+// => IllegalStateException (duplicate key: 5)
+```
+
+Als duplicate keys mogelijk zijn, geef dan expliciet een merge-functie mee:
+
+```java
+Map<Integer, String> byLength = Stream.of("alpha", "bravo")
+    .collect(Collectors.toMap(String::length, s -> s, (s1, s2) -> s1 + "/" + s2));
+// => {5=alpha/bravo}
+```
+
 
 ### forEach
 
@@ -971,9 +1019,19 @@ Stream.of("C", "D", "A", "F", "E", "B")
 ```
 
 De `forEach`-operatie is dus zowat het streams-equivalent van de enhanced for-loop (`for (var x : collection)`) bij collecties.
+Bij parallelle streams is de volgorde bij `forEach` niet gegarandeerd.
+Als je de encounter order wil behouden, gebruik dan `forEachOrdered`.
+
+```java
+Stream.of("C", "D", "A", "F", "E", "B")
+   .parallel()
+   .map(String::toLowerCase)
+   .sorted()
+   .forEachOrdered(System.out::println); // => a, b, c, d, e, f
+```
 
 {{% notice warning Opgelet %}}
-Vermijd het gebruik een `forEach` om een variabele/lijst/... buiten de `forEach`-lambda aan te passen, zoals het toevoegen aan de `result`-lijst in onderstaand voorbeeld.
+Vermijd het gebruik van `forEach` om een variabele/lijst/... buiten de `forEach`-lambda aan te passen, zoals het toevoegen aan de `result`-lijst in onderstaand voorbeeld.
 Meestal is dit een antipattern, en is er een betere manier om hetzelfde resultaat te bekomen.
 ```java
 List<String> result = new ArrayList<>();
@@ -993,18 +1051,43 @@ List<String> result = Stream.of("C", "D", "A", "F", "E", "B")
 ```
 {{% /notice %}}
 
+### Side effects en non-interference
+
+Probeer lambdas in stream-operaties zo veel mogelijk **stateless** en zonder side effects te houden.
+Met andere woorden: laat een lambda idealiter geen externe toestand aanpassen.
+Dat maakt code correcter, beter testbaar, en veiliger voor parallelle streams.
+
+Vermijd bijvoorbeeld:
+
+```java
+List<Integer> output = new ArrayList<>();
+IntStream.rangeClosed(1, 10)
+    .parallel()
+    .forEach(output::add); // Niet veilig: race conditions
+```
+
+Gebruik liever een terminale operatie die het resultaat zelf opbouwt:
+
+```java
+List<Integer> output = IntStream.rangeClosed(1, 10)
+    .boxed()
+    .toList();
+```
+
 ## Parallelle streams
 
 Vaak kunnen operaties in een stream efficiënt in parallel gebeuren.
 Denk bijvoorbeeld aan `map` of `filter`: deze gebeuren element per element, en zijn dus onafhankelijk van wat er met de andere elementen gebeurt.
 Je kan in Java daarom ook een parallelle stream aanmaken.
-Deze zal, bij uitvoering, meerdere threads gebruiken (via een ForkJoinPool, zie vroeger) om de stream te verwerken.
+Deze zal, bij uitvoering, meerdere threads gebruiken om de stream te verwerken.
 
 Het is eenvoudig om een stream parallel te maken: dat kan via de `parallel()` intermediate operatie, of de `parallelStream()`-operatie op collecties.
 Er is ook een `sequential()` operatie die de stream sequentieel maakt.
 Merk op dat de mode waarin de stream zich bevindt op het moment van de terminale operatie bepaalt hoe de _hele_ stream uitgevoerd wordt; je kan dus geen deel van de operaties parallel en een ander deel sequentieel uitvoeren.
 
-We gaan niet in meer detail in op parallelle streams.
+Parallelle streams zijn niet automatisch sneller: de overhead van het opsplitsen, schedulen en samenvoegen van deelresultaten kan groter zijn dan de winst.
+Voor kleine datasets of goedkope bewerkingen is een sequentiële stream vaak efficiënter.
+Meet dus altijd eerst voor je parallelle streams als optimalisatie inzet.
 
 ## Nog meer streams? (optioneel)
 
@@ -1013,6 +1096,7 @@ We gaan niet in meer detail in op parallelle streams.
 Via de Collector-API kan je, zoals we gezien hebben, zelf al nieuwe collectors toevoegen.
 Voor de tussentijdse operaties ben je via de streams API echter beperkt tot de voorgedefinieerde tussentijdse operaties; maar je kan er veel meer bedenken.
 Onderstaande presentatie bespreekt Gatherers, de oplossing die sinds Java 24 aangeboden wordt om zelf nieuwe tussentijdse operaties te definiëren.
+Gebruik dit enkel als je met Java 24 of nieuwer werkt; in Java 21 is `Gatherer` nog niet beschikbaar.
 {{< youtube 1CT57yPixAc >}}
 
 ### Spliterators
