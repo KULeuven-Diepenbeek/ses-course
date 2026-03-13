@@ -13,7 +13,7 @@ Dit is een stuk complexer en wordt ook net iets minder gebruikt dan in de higher
 Hoewel dat de tutorial gemaakt is rond C++ files, maakt dit niet uit omdat je hier ook gewoon C functies kan gebruiken. Het is echter wel waar dat de testen zelf WEL in een `.cpp`-file (C++) geschreven moeten zijn! In de oude cursus [Besturingssystemen & C](https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/testing/) kan je ook nog eens de nodige info terugvinden indien gewenst.
 {{% /notice %}}
 
-## Hieronder toch al een klein voorbeeld waar je me van start kan gaan:
+## Hieronder toch al een klein voorbeeld waar je mee van start kan gaan:
 
 ### Unit testen in C met CMake
 
