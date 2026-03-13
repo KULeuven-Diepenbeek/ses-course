@@ -13,6 +13,166 @@ Dit is een stuk complexer en wordt ook net iets minder gebruikt dan in de higher
 Hoewel dat de tutorial gemaakt is rond C++ files, maakt dit niet uit omdat je hier ook gewoon C functies kan gebruiken. Het is echter wel waar dat de testen zelf WEL in een `.cpp`-file (C++) geschreven moeten zijn! In de oude cursus [Besturingssystemen & C](https://kuleuven-diepenbeek.github.io/osc-course/ch5-debugging/testing/) kan je ook nog eens de nodige info terugvinden indien gewenst.
 {{% /notice %}}
 
+## Hieronder toch al een klein voorbeeld waar je me van start kan gaan:
+
+### Unit testen in C met CMake
+
+We maken een klein C‑project en schrijven twee eenvoudige unit testen. We maken een klein calculatorvoorbeeld dat vergelijkbaar is met wat je eerder in Java hebt gezien.
+
+---
+
+### Installeren van de benodigde tools (normaal gezien al ok)
+
+```bash
+sudo apt update
+sudo apt install build-essential cmake
+```
+### Projectstructuur
+
+We maken gebruik van de volgende projectstructuur:
+```
+calculator-c/
+├── CMakeLists.txt
+├── build/
+├── include/
+│   └── calculator.h
+├── src/
+│   └── calculator.c
+└── tests/
+    └── test_calculator.c
+```
+
+Hier staan de volgende directories voor:
+- `build/` de build directory
+- `include/` bevat header files
+- `src/` bevat de implementatie
+- `tests/` bevat unit testen
+
+
+### Implementatie van het calculator voorbeeld
+
+`calculator.h`
+```c
+#ifndef CALCULATOR_H
+#define CALCULATOR_H
+
+float divide(float x, float y);
+
+#endif
+```
+`calculator.c`
+```c
+#include "calculator.h"
+#include <math.h>
+
+float divide(float x, float y) {
+    if (y == 0.0f) {
+        return NAN;
+    }
+
+    return x / y;
+}
+```
+
+### Een eenvoudige test schrijven
+Net zoals in Java willen we controleren of onze functie correct werkt. C heeft geen ingebouwd testframework zoals JUnit, maar we kunnen de `assert` macro gebruiken zoals in Python. Wanneer een assert faalt, stopt het programma met een foutmelding.
+
+`test_calculator.c`
+```c
+#include <assert.h>
+#include <math.h>
+#include <stdio.h>
+#include "calculator.h"
+
+void test_divide_4_by_2_returns_2() {
+    float result = divide(4.0f, 2.0f);
+
+    assert(result == 2.0f);
+}
+
+void test_divide_by_zero_returns_nan() {
+    float result = divide(4.0f, 0.0f);
+
+    assert(isnan(result));
+}
+
+int main() {
+    test_divide_4_by_2_returns_2();
+    test_divide_by_zero_returns_nan();
+
+    printf("All tests passed!\\n");
+    return 0;
+}
+```
+
+### Het buildproces configureren met CMake
+
+`CMakeLists.txt`
+```c
+cmake_minimum_required(VERSION 3.16)
+
+project(CalculatorC C)
+
+set(CMAKE_C_STANDARD 11)
+
+# Testing ondersteuning activeren
+enable_testing()
+
+# Library target
+add_library(calculator
+    src/calculator.c
+)
+
+target_include_directories(calculator PUBLIC include)
+
+# Test executable
+add_executable(test_calculator
+    tests/test_calculator.c
+)
+
+target_link_libraries(test_calculator PRIVATE calculator m)
+
+# Test registreren
+add_test(NAME calculator_tests COMMAND test_calculator)
+```
+
+### Builden en testen
+We builden het project zoals we gewend zijn met `cd build && cmake ..`, daarna builden we met `make` en runnen de testen met `make test`. Zo simpel kan het zijn
+
+Een voorbeeld output van de testen geeft: (Als alle testen slagen)
+```bash
+ubuntu@DESKTOP-4KP0M1C:~/tdd/ctest/build$ make test
+Running tests...
+Test project /home/ubuntu/tdd/ctest/build
+    Start 1: calculator_tests
+1/1 Test #1: calculator_tests .................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.00 sec
+```
+
+Of volgende output als er testen falen:
+```bash
+ubuntu@DESKTOP-4KP0M1C:~/tdd/ctest/build$ make test
+Running tests...
+Test project /home/ubuntu/tdd/ctest/build
+    Start 1: calculator_tests
+1/1 Test #1: calculator_tests .................Subprocess aborted***Exception:   0.02 sec
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   0.02 sec
+
+The following tests FAILED:
+          1 - calculator_tests (Subprocess aborted)
+Errors while running CTest
+Output from these tests are in: /home/ubuntu/tdd/ctest/build/Testing/Temporary/LastTest.log
+Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.
+make: *** [Makefile:71: test] Error 8
+```
+**Merk op dat met deze simpele manier alles faalt zodra 1 test faalt, aangezien de hele main functie faalt met de asser. Voor meer granulariteit kan je dus best de Google Test Suite gebruikem.**
+
 <!-- 
 ## Debugging in C
 
