@@ -142,18 +142,17 @@ Kijk in [Github](https://docs.github.com/en/repositories/configuring-branches-an
 
 **Let op: je repo moet hiervoor public zijn. Je kan zoeken op status checks via de `job` names in je `.yml` action files**
 
-<!-- ### Opgave 3
+### Opgave 3
 
-Neem je JavaFX darts applicatie van het applicatie-college over dependecy management. Voeg de moeglijkheid toe om in te loggen.
+Voeg nu aan je applicatie uit de vorige oefening de mogelijkheid toe om in te loggen.
 
-Simuleer nu Continuous Development door de achtergrond kleur groen te maken voor alle gebruikers, maar rood voor alle gebruikers wiens gebruikersnaam start met de letter 'A'.  -->
+Simuleer nu Continuous Development door geen begroeting in te voeren voor alle gebruikers, maar alle gebruikers wiens gebruikersnaam start met de letter 'A' moet een begroeting krijgen zoals bv. "Welkom terug <naam>". 
 
 
-
-<!-- ## Denkvragen
+## Denkvragen
 
 - Waarom is het belangrijk om gebuilde artifacts van de CI server bij te houden? 
 - Wat zijn de voordelen van het werken met een CI en CD systeem, ten opzichte van alles met de hand (of met eigen gemaakte scripts) in te stellen? 
 - Version control en continuous delivery zijn klassiek gezien vijanden van database migratie (of omgekeerd). Toch is het mogelijk om een database systeem ook automatisch te up- of downgraden, met bijvoorbeeld https://flywaydb.org. Hoe gaat zoiets in zijn werk?
-- Zou het ook mogelijk zijn om een geautomatiseerde scenariotest uit te voeren in CircleCI? Zo ja, welke wijzigingen zou je moeten doorvoeren aan de `config.yml`? -->
+- Zou het ook mogelijk zijn om een geautomatiseerde scenariotest uit te voeren in CircleCI? Zo ja, welke wijzigingen zou je moeten doorvoeren aan de `config.yml`?
 
