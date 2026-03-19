@@ -4,7 +4,7 @@ toc: true
 weight: 60
 autonumbering: true
 author: "Koen Yskout"
-draft: true
+draft: false
 math: true
 ---
 
@@ -927,7 +927,8 @@ class StringJoiningCollector implements Collector<String, JoiningState, String> 
 We kunnen deze collector nu als volgt gebruiken:
 
 ```java
-Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(new StringJoiningCollector()); // => "Alpha, Bravo, Charlie, Delta"
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .collect(new StringJoiningCollector()); // => "Alpha, Bravo, Charlie, Delta"
 ```
 
 Java bevat reeds enkele handige voorgedefinieerde collectors.
@@ -939,8 +940,10 @@ Deze collector doet wat we hierboven zelf implementeerden: Strings aan elkaar pl
 We hadden onszelf dus wat werk kunnen besparen, en gewoon het volgende schrijven:
 
 ```java
-Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.joining(", ")); // => "Alpha, Bravo, Charlie, Delta"
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .collect(Collectors.joining(", ")); // => "Alpha, Bravo, Charlie, Delta"
 ```
+
 
 #### Collectors.toList, Collectors.toSet, Collectors.toCollection
 
@@ -953,16 +956,152 @@ De [`toList`](#tolist-toarray) terminale operatie die we eerder zagen lijkt op `
 Bij `toCollection` ligt niet vast welk type collectie gemaakt moet worden; je moet zelf een functie meegeven (de _collectionFacory_) om een lege collectie van het gewenste type te maken:
 
 ```java
-Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.toCollection(() -> new LinkedList<>()));
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .collect(Collectors.toCollection(LinkedList::new));
 ```
 
 #### Collectors.groupingBy
 
-Deze collector groepeert de elementen (van type `T`) in een `Map<K, List<T>>`, volgens de meegegeven functie om de key te bepalen:
+Deze collector groepeert de elementen vanuit een stream (van type `T`) in een `Map<K, List<T>>`, volgens de meegegeven functie om de key te bepalen:
 
 ```java
-Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.groupingBy(String::length));
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .collect(Collectors.groupingBy(String::length));
 // => {5=["Alpha", "Bravo", "Delta"], 7=["Charlie"]}
+```
+
+Je kan ook een collector meegeven (de _downstream collector_) die bepaalt hoe de values geaggegregeerd worden in elke groep (als je die niet meegeeft wordt er een lijst gemaakt, zoals in het voorbeeld hierboven).
+Deze downstream collector is een collector die de `T`'s in elke groep kan omzetten naar een resultaattype (`V`), om zo een `Map<K, V>` terug te geven.
+Het resultaat hoeft dus niet hetzelfde type te hebben als de elementen in de oorspronkelijke stream.
+Met andere woorden, `groupingBy` zet een stream van `T`'s om in meerdere streams, namelijk één stream per groep, en de downstream collector bepaalt hoe die streams verwerkt worden tot een eindresultaat.
+Dat eindresultaat komt als value terecht in de resulterende map, met als key de waarde die bepaald werd door de eerste functie (de _classifier_).
+
+We geven hier enkele voorbeelden van zo'n nuttige downstream collectors en hun gebruik in `groupingBy`.
+
+##### Collectors.counting()
+
+Deze collector telt simpelweg het aantal elementen.
+Bijvoorbeeld:
+
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .collect(Collectors.counting()); // => 4
+```
+
+De `count()` terminale operatie van eerder is een kortere manier om bovenstaande te schrijven:
+
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .count(); // => 4
+```
+
+`Collectors.counting()` is dan ook vooral handig in combinatie met `groupingBy`.
+Bijvoorbeeld, als je het aantal woorden per lengte wil tellen in de stream, kan je dat doen via `groupingBy` met `counting` als _downstream_ collector:
+
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+  .collect(Collectors.groupingBy(String::length, Collectors.counting()));
+// => {5=3, 7=1}
+```
+
+Deze functie groepeert dus eerst alle woorden volgens hun aantal letters (met het eerste argument `String::length`), en telt vervolgens per groep het aantal woorden (met het tweede argument `Collectors.counting()`).
+Je krijgt dus een `Map<Integer, Long>` terug, waarbij de key de woordlengte is, en de value het aantal woorden met die lengte.
+
+Een visualisatie van het proces (voor een ander voorbeeld) vind je in volgende afbeelding:
+
+<img src="/img/streams-groupby-downstream.png" alt="drawing" style="max-width: 800px;"/>
+
+Hier wordt een stream van gekleurde Box-objecten gegroepeerd volgens hun kleur, en vervolgens per kleur het aantal Boxen geteld.
+
+##### Collectors.summingInt, summingLong, summingDouble
+
+Deze collector zet eerst elk element om naar een `int` volgens de meegegeven functie (dus equivalent aan een `mapToInt`) en telt deze vervolgens op.
+Er zijn ook gelijkaardige collectors voor `long` en `double`.
+
+Bijvoorbeeld, om het totaal aantal karakters te tellen van de woorden in een stream kunnen we `summingInt` als volgt gebruiken:
+
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .collect(Collectors.summingInt(String::length)); // => 22
+```
+
+Dit konden we ook al via een `mapToInt` gevolgd door `sum`:
+
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .mapToInt(String::length)
+      .sum(); // => 22
+```
+
+Het gebruik van `summingInt` als downstream collector bij `groupingBy` is ook mogelijk, en nuttiger.
+We kunnen dit bijvoorbeeld gebruiken om het totaal aantal karakters te tellen van de woorden per beginletter:
+
+```java
+Stream.of("appel", "banaan", "bosbes")
+      .collect(Collectors.groupingBy(w -> w.charAt(0), Collectors.summingInt(String::length)))
+// => {a=5, b=12}
+```
+
+Dus: de woorden die met een 'a' beginnen hebben samen 5 letters, en de woorden die met een 'b' beginnen hebben samen 12 letters.
+
+##### Collectors.mapping
+
+Deze collector past een functie toe op elk element, en verwerkt vervolgens de resultaten met een downstream collector.
+Bijvoorbeeld, als we de woorden in hoofdletters willen hebben in plaats van kleine letters, kunnen dat doen via `mapping`:
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+  .collect(Collectors.mapping(String::toUpperCase, Collectors.toList()));
+// => ["ALPHA", "BRAVO", "CHARLIE", "DELTA"]
+```
+
+Dat is uiteraard equivalent aan een gewone `map` gevolgd door `toList`:
+
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+  .map(String::toUpperCase)
+  .collect(Collectors.toList());
+// => ["ALPHA", "BRAVO", "CHARLIE", "DELTA"]
+```
+
+In combinatie met `groupingBy` kan dit bijvoorbeeld gebruikt worden om de woorden per beginletter te groeperen, met telkens de lengte van de woorden:
+
+```java
+Stream.of("alpha", "alphabet", "bravo", "charlie", "cheerio")
+  .collect(Collectors.groupingBy(w -> w.charAt(0),
+                                 Collectors.mapping(String::length, Collectors.toList())));
+// => {a=[5, 8], b=[5], c=[7, 7]}
+```
+
+Er zijn dus twee woorden die met 'a' beginnen, met respectievelijk 5 en 8 letters, één woord dat met 'b' begint en 5 letters heeft, en twee woorden die met 'c' beginnen, elk met 7 letters.
+
+##### Collectors.flatMapping
+
+Deze collector is gelijkaardig aan `Collectors.mapping()`, maar de functie die je meegeeft moet een stream teruggeven, en de resultaten van al die streams worden samengevoegd tot één stream.
+Dat komt overeen met de `flatMap`-operatie, maar dan in de context van collectors.
+
+Je geeft aan `flatMapping` dus een functie mee die één element uit de oorspronkelijke stream omzet naar een nieuwe stream, en ook een downstream collector die de elementen van die resulterende streams verwerkt.
+
+Bijvoorbeeld, stel dat we een `Stream<String>` als bron hebben, en we willen een `List<Character>` terugkrijgen met alle karakters uit alle woorden, dan kunnen we dat als volgt doen:
+
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .collect(Collectors.flatMapping(word -> word.chars().mapToObj(c -> (char) c), Collectors.toList()));
+// => ['A', 'l', 'p', 'h', 'a', 'B', 'r', 'a', 'v', 'o', 'C', 'h', 'a', 'r', 'l', 'i', 'e', 'D', 'e', 'l', 't', 'a']
+```
+
+{{% notice info boxed %}}
+`mapToObj()` is nodig omdat `chars()` een `IntStream` teruggeeft.
+Die moet omgezet worden naar een `Stream<Character>`, omdat `flatMapping` een `Stream<? extends Object>` verwacht, en geen `IntStream`
+Zonder `mapToObj()` zou de code niet compileren.
+{{% /notice %}}
+
+In combinatie met `groupingBy` kan dit bijvoorbeeld gebruikt worden om alle letters per woordlengte in een Set te groeperen:
+
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .collect(Collectors.groupingBy(String::length,
+               Collectors.flatMapping(word -> word.chars().mapToObj(c -> (char) c), Collectors.toSet())));
+// => {5=[p, A, a, B, r, D, t, e, v, h, l, o], 7=[a, r, C, e, h, i, l]}
 ```
 
 #### Collectors.partitioningBy
@@ -974,10 +1113,19 @@ Stream.of("Alpha", "Bravo", "Charlie", "Delta").collect(Collectors.partitioningB
 // => {false=["Charlie"], true=["Alpha", "Bravo", "Delta"]}
 ```
 
+Ook hier bestaan, net zoals bij `groupingBy`, varianten waarbij je een downstream collector kan meegeven om de values te aggregeren.
+Bijvoorbeeld, als we het aantal korte en lange woorden willen tellen, kunnen we dat doen via `partitioningBy` met `counting` als downstream collector:
+
+```java
+Stream.of("Alpha", "Bravo", "Charlie", "Delta")
+      .collect(Collectors.partitioningBy(s -> s.length() < 6, Collectors.counting()));
+// => {false=1, true=3}
+```
+
 #### Collectors.toMap
 
-Met `Collectors.toMap` maak je een `Map` op basis van een key-functie en value-functie.
-Dit is een flexibelere versie van `groupingBy`: je definieert zelf hoe de `Map` opgebouwd moet worden.
+Met `Collectors.toMap` maak je een `Map` door twee argumenten mee te geven: een key-functie en value-functie.
+De key-functie bepaalt de key voor elk element in de stream, en de value-functie bepaalt de waarde die aan die key gekoppeld wordt.
 
 Let op: als twee elementen dezelfde key produceren, krijg je standaard een `IllegalStateException`.
 
@@ -987,14 +1135,13 @@ Map<Integer, String> byLength = Stream.of("alpha", "bravo")
 // => IllegalStateException (duplicate key: 5)
 ```
 
-Als duplicate keys mogelijk zijn, geef dan expliciet een merge-functie mee die aangeeft hoe twee waarden gecombineerd moeten worden tot 1 waarde in de Map:
+Als duplicate keys mogelijk zijn, geef dan expliciet een merge-functie mee (als derde argument) die aangeeft hoe twee waarden gecombineerd moeten worden tot 1 waarde in de Map:
 
 ```java
 Map<Integer, String> byLength = Stream.of("alpha", "bravo")
     .collect(Collectors.toMap(String::length, s -> s, (s1, s2) -> s1 + "/" + s2));
 // => {5=alpha/bravo}
 ```
-
 
 ### forEach
 
