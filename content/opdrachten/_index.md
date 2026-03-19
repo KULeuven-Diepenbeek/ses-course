@@ -32,9 +32,9 @@ Standaard worden lokale branches en tags niet altijd gepushed naar een remote re
 
 ### Deadlines
 
-Er is 1 deadline voor alle opdrachten van het eerste deel (SES+EES): **vrijdag 23/03/2026 23u59**.
+Er is 1 deadline voor alle opdrachten van het eerste deel (SES+EES): **vrijdag 27/03/2026 23u59**.
 
-De deadline voor alle opdrachten van het tweede deel (enkel SES) is **vrijdag 15/05/2025 23u59**.
+De deadline voor alle opdrachten van het tweede deel (enkel SES) is **vrijdag 15/05/2026 23u59**.
 
 ## Opdrachten deel 1 SES/EES
 

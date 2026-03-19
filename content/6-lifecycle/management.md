@@ -162,14 +162,14 @@ Werk in teams van 5 mensen: 1 product owner, 1 teamleider, 1 customer proxy, 2 o
 3. Knip stories op in taken, die op post-its op het scrumbord verschijnen. 
 4. Werk taak per taak af. Houd de totale verlopen tijd per story bij om een ruwe burndown chart te kunnen schetsen. Dit helpt jullie bij de planning van de tweede iteratie.
 
-Denk aan de juiste taken voor de juiste rollen! 
+Denk aan de juiste taken voor de juiste rollen! -->
 
 ## Denkvragen
 
 - Wat is het voordeel van taken of stories relatief ten opzichte van een referentiestory in te schatten, in plaats van een hoeveelheid in tijd zoals dagen of uren te gebruiken? 
 - Wat is het verschil in taak tussen de Product Owner en de Customer Proxy?
 - Hoe lang moet een ideale iteratie volgens jou zijn, in dagen? Beargumenteer.
-- Waarvoor kan een burndown chart gebruikt worden? Bedenk minstens drie verschillende mogelijkheden en beargumenteer.  -->
+- Waarvoor kan een burndown chart gebruikt worden? Bedenk minstens drie verschillende mogelijkheden en beargumenteer.
 
 
 
