@@ -3,7 +3,7 @@ title: "8.2 Backtracking"
 autonumbering: true
 weight: 30
 toc: true
-draft: false
+draft: true
 math: true
 ---
 

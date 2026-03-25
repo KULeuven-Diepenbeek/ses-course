@@ -7,7 +7,12 @@ draft: false
 math: true
 ---
 
-Je vind tests en skelet-code voor de oefeningen rond recursie op [Github](https://github.com/KULeuven-Diepenbeek/ses-oefeningen-recursie).
+Je vind tests en skelet-code voor de oefeningen rond recursie [op Github](https://github.com/KULeuven-Diepenbeek/ses-deel2-oefeningen-05-recursie):
+
+```
+https://github.com/KULeuven-Diepenbeek/ses-deel2-oefeningen-05-recursie.git
+```
+
 ## Palindroom
 
 Schrijf een recursieve functie `isPalindrome` die nagaat of een String een palindroom is.
@@ -45,18 +50,6 @@ Bijvoorbeeld:
 - `aaaaa` -> `a`
 - `koortsmeetsysteemstrook` -> `kortsmetsystemstrok`
 - `AAAbbCdddAAA` -> `AbCdA`
-
-## Greatest common divisor
-
-Schrijf een functie `gcd` die de grootste gemene deler bepaalt tussen twee getallen.
-Maak gebruik van het feit dat, als \\( x \geq y \\), dat dan \\( \gcd(x, y) = \gcd(y, x \\% y) \\) met % de modulo-operatie, en dat \\( \gcd(x, 0) = x \\).
-
-## Sum of digits
-
-Schrijf een recursieve methode `int sumOfDigits(long number)` die de som van de cijfers van een (niet-negatief) getal berekent, en dat herhaalt tot die som kleiner is dan 10.
-Bijvoorbeeld: `62984` geeft `6+2+9+8+4 = 29`; dat wordt vervolgens `2+9 = 11`; en dat wordt uiteindelijk `1+1 = 2`.
-Het resultaat is dus 2.
-
 
 ## Trap beklimmen
 
@@ -102,18 +95,20 @@ Bijvoorbeeld:
 
 Gegeven een lijst van muntwaarden (bv. 5, 10, 20, 50, 100, 200), schrijf een recursieve methode `int countChange(int amount, List<Integer> coinValues)` die bepaal **op hoeveel manieren** je een specifiek bedrag kan betalen.
 Je mag nu veronderstellen dat je een voldoende aantal (of oneindig veel) munten van elke opgegeven waarde hebt.
+Met andere woorden, je mag een munt(waarde) meerdere keren gebruiken.
 
 Bijvoorbeeld, met bovenstaande muntwaarden
 
-- kan je een bedrag van 35 betalen op 6 manieren:
+- `countChange(35, List.of(5, 10, 20, 50, 100, 200)) == 6`:
+  je kan een bedrag van 35 betalen op 6 manieren:
   - 7×5
   - 1×10 en 5×5
   - 1×10 en 1×20 en 1×5
   - 2×10 en 3×5
   - 3×10 en 1×5
   - 1×20 en 3×5
-- kan je een bedrag van 260 betalen op 646 manieren
-- kan je een bedrag van 1000 betalen op 98411 manieren
+- `countChange(260, List.of(5, 10, 20, 50, 100, 200)) == 646`: je kan een bedrag van 260 betalen op 646 manieren
+- `countChange(1000, List.of(5, 10, 20, 50, 100, 200)) == 98411`: je kan een bedrag van 1000 betalen op 98411 manieren
 
 ## Alle prefixen van een String
 
@@ -126,13 +121,20 @@ Bijvoorbeeld:
 ## Alle interleavings van twee strings
 
 Schrijf een recursieve functie `allInterleavings(String s1, String s2)` die een Set teruggeeft met alle interleavings van de twee strings `s1` en `s2`.
-Een interleaving is een nieuwe string met daarin alle karakters van de eerste en de tweede string, in dezelfde volgorde waarin ze in elk van de originele strings voorkomen, maar mogelijk door elkaar.
+Een interleaving is een nieuwe string met daarin alle karakters van de eerste en de tweede string, in dezelfde volgorde waarin ze in elk van de originele strings voorkomen, maar mogelijk afwisselend.
 Bijvoorbeeld:
 
 - `allInterleavings("A", "B") = [AB, BA]`
 - `allInterleavings("ABC", "x") = [ABCx, ABxC, AxBC, xABC]`
 - `allInterleavings("AB", "xy") = [ABxy, AxBy, AxyB, xABy, xAyB, xyAB]`
 - `allInterleavings("ABC", "xy") = [ABCxy, ABxCy, ABxyC, AxBCy, AxByC, AxyBC, xABCy, xAByC, xAyBC, xyABC]`
+
+
+## Sum of digits
+
+Schrijf een recursieve methode `int sumOfDigits(long number)` die de som van de cijfers van een (niet-negatief) getal berekent, en dat herhaalt tot die som kleiner is dan 10.
+Bijvoorbeeld: `62984` geeft `6+2+9+8+4 = 29`; dat wordt vervolgens `2+9 = 11`; en dat wordt uiteindelijk `1+1 = 2`.
+Het resultaat is dus 2.
 
 ## Vliegtuigreis
 
@@ -142,7 +144,7 @@ Gegeven een record `Item`:
 record Item(String name, int weight, int value) {}
 ```
 
-wat een item voorstelt dat je mee wil nemen op reis. Het item heeft een naam, een gewicht, en een waarde (hoe graag je het mee wil).
+wat een item voorstelt dat je mee wil nemen op reis. Het item heeft een naam, een gewicht (> 0), en een waarde (hoe graag je het mee wil, > 0).
 
 Schrijf een methode `List<Item> pack(List<Item> choices, int maxWeight)` die een keuze maakt uit de gegeven lijst van items, zodanig dat de items met een zo groot mogelijke totaalwaarde kan meenemen zonder dat het totale gewicht hoger wordt dan het maximumgewicht (opgelegd door de vliegtuigmaatschappij).
 
@@ -175,7 +177,11 @@ Bijvoorbeeld:
 - `abc(def(xy))z` geeft **true** terug
 - `a(bc(def(xy))z` geeft **false** terug
 
-_Hint: gebruik het worker-wrapper-patroon, en denk (in plaats van 'is deze string gebalanceerd') aan een andere (gerelateerde) vraag die wél nuttig kan zijn om het probleem recursief op te lossen._
+{{% notice style=tip title=Hint expanded=false %}}
+Je eerste intuïtie, namelijk _'is deze string gebalanceerd'_ als deelprobleem voor kleinere strings gebruiken, zal je niet verder helpen.
+Probeer een andere (gerelateerde) vraag te vinden die wél nuttig kan zijn om het probleem recursief op te lossen.
+Gebruik ook het worker-wrapper-patroon.
+{{% /notice %}}
 
 ## Longest common subsequence
 
@@ -221,7 +227,11 @@ reverse(stack);
 System.out.println(stack); // [F, E, D, C, B, A]
 ```
 
-_Hint: overweeg een (recursieve) hulpoperatie om een element onderaan de stack in te voegen._
+{{% notice style=tip title=Hint expanded=false %}}
+Zou een (recursieve) hulpoperatie om een element onderaan de stack in te voegen nuttig kunnen zijn?
+{{% /notice %}}
+
+> Denkvraag: ondanks dat je geen extra datastructuur mag gebruiken in je oplossing, wordt er toch een vorm van extra opslag gebruikt om de stack te kunnen omkeren. Waar bevindt die opslag zich?
 
 ## Toren van Hanoi (uitbreiding)
 
