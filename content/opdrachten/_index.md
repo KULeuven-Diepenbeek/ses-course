@@ -465,3 +465,102 @@ Tag het resultaat als `v3` en push dit naar je remote repository op Github.
 > Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v3`. Dit gebeurt namelijk niet automatisch bij een `git push`.
 > Je kan ook alle tags in 1 keer pushen met `git push --tags`.
 > Controleer op je GitHub-repository of je de tags kan zien.
+
+### Opdracht 4: Recursie
+
+{{% notice task Startcode %}}
+Merge eerst de laatste versie van de startcode in je repository door `git pull startcode 04-recursie` uit te voeren in de `main`-branch van jouw lokale repository.
+{{% /notice %}}
+
+**Elke methode** die hieronder vermeld wordt moet **recursief geïmplementeerd worden**. Dat wil zeggen dat ze minstens 1 nuttige recursieve oproep moeten bevatten. Je mag daarnaast ook for- en while-lussen gebruiken, en ook extra parameters en/of hulpmethodes toevoegen indien nodig.
+_(Als een methode je echt niet lukt met recursie, mag je ze ook op een andere manier implementeren --- dat zal je wel een deel van de punten op deze opdracht kosten.)_
+
+1. Maak (in klasse `CandyCrushGame`) een recursieve methode `void clearMatch(List<Position> match)` die alle snoepjes die deel uitmaken van de gegeven match (= de posities uit één van de matches gevonden door `findAllMatches` uit de vorige opdracht) van het speelbord verwijdert. De plaatsen waarop een verwijderd snoepje stond, blijven leeg (en krijgen dus een `NoCandy` in de plaats).
+
+2. Maak (in klasse `CandyCrushGame`) een recursieve methode `fallDownTo(Position pos)` die alle snoepjes die boven positie `pos` staan zoveel mogelijk naar beneden laat vallen, tot ze op een ander snoepje of positie `pos` terecht komen. Bijvoorbeeld, in onderstaande situatie (met `pos` aangegeven door het pijltje) verandert de methode de situatie aan de linkerkant in die van de rechterkant.
+
+   <div style="width: 400px; display: grid; grid: auto-flow / repeat(8, 50px); gap: 30px; align-items: center;">
+
+   ```goat
+      *
+      o
+      *
+      *
+   -> o
+      o
+      *
+   ```
+
+   wordt
+
+   ```goat
+      o
+      o
+      *
+      *
+   -> *
+      o
+      *
+   ```
+
+   <div style="grid-column: span 2; justify-self: center;">en</div>
+
+   ```goat
+      o
+      *
+      o
+      *
+   -> *
+      o
+      *
+   ```
+
+   wordt
+
+   ```goat
+      o
+      o
+      *
+      *
+   -> *
+      o
+      *
+   ```
+
+   </div>
+
+3. Maak (in klasse `CandyCrushGame`) een recursieve methode `boolean updateBoard()` die alle matches zoekt, verwijdert, en de overblijvende snoepjes naar beneden laat vallen (gebruik hiervoor de methodes `findAllMatches`, `clearMatch`, en `fallDownTo`). Als er hierdoor nieuwe matches ontstaan, moeten die ook weer verwijderd worden en moeten de snoepjes weer naar beneden vallen etc., totdat er geen matches meer zijn. De methode moet `true` teruggeven indien er minstens één match verwijderd werd, en `false` indien dat niet zo is.
+
+   Merk op dat we (in tegenstelling tot de 'gewone' CandyCrush) het bord _niet_ terug opvullen met nieuwe snoepjes: in onze variant is het de bedoeling om het bord zo leeg mogelijk te maken. Om alles zo eenvoudig mogelijk te houden, negeren we ook de effecten van de speciale snoepjes.
+
+4. Vervang de code van de methode `selectCandy` in `CandyCrushGame.java` door hetvolgende:
+   ```java
+   public void selectCandy(Position position) {
+      if (!hasCandyAt(position)) {
+            previousSelected = null;
+            return;
+      }
+      if (!hasAnySelected()) {
+            previousSelected = position;
+      } else if (position.isNeighborOf(previousSelected)) {
+            var sw = new Switch(position, previousSelected);
+            doSwitch(sw);
+            if (!updateBoard()) {
+               doSwitch(sw);
+               previousSelected = position;
+            } else {
+               previousSelected = null;
+            }
+      } else {
+            previousSelected = position;
+      }
+   }
+   ```
+
+   Met deze wijzigingen, en correcte implementaties tot nu toe, krijg je een speelbare versie van CandyCrush.
+
+Tag het resultaat als `v4` en push dit naar je remote repository op Github.
+
+> Vergeet niet om de tag zelf ook expliciet te pushen: `git push origin v4`. Dit gebeurt namelijk niet automatisch bij een `git push`.
+> Je kan ook alle tags in 1 keer pushen met `git push --tags`.
+> Controleer op je GitHub-repository of je de tags kan zien.
