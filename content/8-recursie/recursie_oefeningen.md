@@ -328,3 +328,7 @@ var tree = new TreeNode<>("A",
        |
        +-- F
    ```
+
+## Expressie (uit records)
+
+De [oefeningen over de expressie-hierarchie uit de les rond records](../7-advjava/3-records/oefeningen.md#expressie-hierarchie) maken ook gebruik van recursie.
