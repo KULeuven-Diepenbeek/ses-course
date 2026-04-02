@@ -206,7 +206,7 @@ Voorbeeldtests:
 
 ## Oefening 8: Van AI-output naar productieklare patch
 
-Beschrijf een concrete checklist die je team gebruikt voordat AI-gegenereerde code gemerged mag worden.
+Beschrijf een concrete checklist die je gebruikt voordat je AI-gegenereerde code indient.
 Je checklist moet minstens 8 controlepunten bevatten.
 
 {{% notice style=tip title="Modeloplossing" expanded=false %}}
@@ -218,32 +218,32 @@ Voorbeeldchecklist:
 4. Inputvalidatie aanwezig op externe inputs.
 5. Logging bevat geen gevoelige data.
 6. Dependency-wijzigingen zijn expliciet gemotiveerd.
-7. Reviewer begrijpt en kan code uitleggen.
-8. PR beschrijft welke delen met AI zijn opgesteld.
+7. Je kan elke codewijziging zelf uitleggen.
+8. Je noteert kort welke delen met AI zijn opgesteld.
 {{% /notice %}}
 
-## Oefening 9: Evalueer een AI-werkflow voor jouw team
+## Oefening 9: Evalueer een AI-werkflow voor jezelf als student
 
-Werk een mini-protocol uit voor studenten die samen aan een project werken:
+Werk een mini-protocol uit voor je eigen manier van werken:
 
 1. wanneer AI wel/niet gebruiken,
-2. hoe prompts gedeeld worden,
+2. hoe je prompts documenteert,
 3. hoe kwaliteit bewaakt wordt,
-4. hoe je voorkomt dat iemand blind code overneemt.
+4. hoe je voorkomt dat je blind code overneemt.
 
-Lever je antwoord als 10 concrete teamafspraken.
+Lever je antwoord als 10 concrete werkafspraken.
 
 {{% notice style=tip title="Modeloplossing" expanded=false %}}
 Voorbeeldafspraken:
 
 1. AI mag voor ideevorming, refactorvoorstellen en testsuggesties.
-2. Geen directe merge van AI-output.
+2. Geen directe overname van AI-output zonder controle.
 3. Altijd eerst taak scherp afbakenen.
-4. Prompt + output samenvatten in PR.
-5. Minstens 1 extra reviewer bij securityrelevante code.
+4. Prompt + output kort samenvatten in je werknotities.
+5. Bij securitygevoelige code extra aandacht besteden aan validatie en foutafhandeling.
 6. Test-first bij bugfixes.
 7. Geen secrets in prompts.
 8. Onzekere externe claims verifieerbaar citeren.
 9. Kleine commits met duidelijke boodschap.
-10. Teamretro na elke sprint over AI-kwaliteitseffect.
+10. Na elke opdracht kort reflecteren over AI-kwaliteitseffect.
 {{% /notice %}}

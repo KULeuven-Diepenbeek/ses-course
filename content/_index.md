@@ -48,6 +48,11 @@ Gelijkaardige concepten bestaan vaak ook in andere programmeertalen.
 Recursie en backtracking zijn krachtige tools om complexe problemen op te lossen.
 We leren hoe na te denken over recursie, alsook templates voor typische backtracking-problemen.
 
+#### Specificatie en contracten
+
+In dit hoofdstuk bekijken we hoe je softwaregedrag precies kan beschrijven los van de concrete code:
+specificaties, contracten (pre- en postcondities), invarianten, en de link met testen en formele redeneringen.
+
 #### Software ontwerpprincipes
 
 We bekijken enkele software ontwerpprincipes die helpen om grotere projecten goed te structureren, 

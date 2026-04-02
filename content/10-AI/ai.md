@@ -3,27 +3,35 @@ title: "10.1 AI in software engineering"
 autonumbering: true
 weight: 10
 toc: true
+math: true
 draft: false
 ---
 
 ## Wat is een LLM? (next-token-prediction)
 
-Wanneer we in software engineering over AI spreken, bedoelen we meestal een Large Language Model (LLM). Voor programmeurs is het belangrijk om dat model niet als een "kennisbank met waarheden" te zien, maar als een probabilistisch systeem dat telkens het meest waarschijnlijke **volgende token** kiest op basis van de huidige context. Dat klinkt eenvoudig, maar daarachter zit een volledige keten van representaties en kansberekeningen.
+Wanneer we in software engineering over AI spreken, bedoelen we meestal een Large Language Model (LLM). De intuïtieve manier om zo'n model te begrijpen is: het is een systeem dat tekst (en code) **stukje per stukje aanvult**. Het kijkt naar wat er al staat, en kiest daarna het meest waarschijnlijke volgende stukje tekst.
 
-Een eerste stap is tokenisatie. In plaats van "woorden" werkt een model met subwoorden en symbolen, typisch via varianten van byte-pair encoding of gelijkaardige tokenizers. In code betekent dat dat `calculateDiscount`, `(`, `)`, `{`, `return`, spaties en zelfs inspringingselementen afzonderlijke tokenpatronen kunnen worden. Vervolgens wordt elk token omgezet naar een vector (embedding), en verwerkt een transformer-architectuur de volledige context via aandachtmechanismen (self-attention). Zo leert het model welke stukken context relevant zijn voor de volgende voorspelling, bijvoorbeeld een eerder gedeclareerd type, een methodesignature of een geopende haak.
+Dat "stukje" noemen we een token. Je kan dat ruwweg zien als een klein fragment van code of tekst: een woorddeel, operator, haakje, enzovoort. Het model bouwt dus geen antwoord in één keer op, maar kiest steeds het volgende fragment, dan het volgende, en zo verder tot een volledige output ontstaat.
 
-Aan het einde van zo'n stap produceert het model geen tekst maar een vector met **logits**: ruwe scores per mogelijk volgend token. Na een softmax-transformatie krijg je een kansverdeling. De decodingstrategie bepaalt dan welk token effectief gekozen wordt. Bij lage temperatuur en zonder sampling krijg je meer deterministisch gedrag; bij hogere temperatuur of top-p sampling krijg je creatievere, maar minder stabiele output. Voor codegeneratie wil je doorgaans lagere entropie: je wil consistente, controleerbare voorstellen in plaats van variatie om de variatie.
-
-Tijdens training leert het model die kansverdeling door voor elk positie-token \(t_i\) de log-waarschijnlijkheid \( \log p(t_i \mid t_{<i}) \) te maximaliseren. Praktisch komt dit neer op het minimaliseren van cross-entropy loss over heel veel tokensequenties. Dat detail is didactisch nuttig, omdat het verklaart waarom het model zo sterk reageert op contextformulering: een kleine contextwijziging verandert de conditionele kansverdeling en dus het vervolg.
-
-Concreet zie je dit in miniatuur wanneer je deze context geeft:
+Concreet zie je dit in miniatuur met deze context:
 
 ```java
 public static int add(int a, int b) {
     return
 ```
 
-De kansmassa zal dan sterk naar tokenreeksen verschuiven die in trainingsdata vaak volgden na vergelijkbare context, zoals ` a`, ` +`, ` b`, `;`. Het model "begrijpt" hier niet op menselijke manier dat optellen nodig is; het herkent vooral een statistisch patroon van gelijkaardige programmaconstructies. Net dat verklaart waarom LLM's tegelijk sterk en kwetsbaar zijn: ze zijn uitstekend in patroonrijke domeinen zoals code, maar ze garanderen geen formele correctheid.
+In heel veel codevoorbeelden werd zo'n regel gevolgd door iets als `a + b;`, dus het model zal ook vaak in die richting gaan. Dat lijkt op "begrijpen", maar technisch is het vooral patroonherkenning op basis van heel veel eerdere voorbeelden.
+
+Die intuïtie helpt om het gedrag van een LLM correct in te schatten. Het model is sterk in code omdat code veel terugkerende structuren heeft: methodesignatures, null-checks, testpatronen, API-calls, foutafhandeling. Tegelijk verklaart dit ook waarom het soms overtuigend fout kan zijn: als de context onvolledig is, vult het model de gaten op met wat statistisch waarschijnlijk is, niet met wat noodzakelijk juist is in jouw project.
+
+Een tweede belangrijke intuïtie is dat de formulering van je prompt sterk doorwerkt in het resultaat. Als jij vaag bent, moet het model veel gokken. Als jij expliciet bent over randvoorwaarden en context, daalt die gokruimte. Daarom krijg je in praktijk betere output met concrete prompts dan met korte algemene vragen.
+
+Voor deze cursus volstaat dit mentaal model: een LLM is een zeer geavanceerde "volgende-stap-voorspeller" voor tekst en code. Gebruik het als snelle assistent voor voorstellen, maar niet als automatische waarheidsmachine.
+
+## Transformer architecture
+
+Een ouder model, GPT-2, kan je lokaal in je browser draaien en visualiseren aan de hand van deze interactieve explainer:
+[https://poloclub.github.io/transformer-explainer/](https://poloclub.github.io/transformer-explainer/).
 
 ## Beperkingen en betrouwbaarheid
 
@@ -56,6 +64,8 @@ Die prompt werkt goed omdat ze gedrag specificeert in plaats van implementatiede
 De keuze van toolvorm bepaalt welk soort context het model ziet en hoe snel je feedback krijgt. Een chat-UI is sterk voor conceptueel ontwerpwerk: je wil een trade-off begrijpen, alternatieve architecturen vergelijken of een lastig stuk codegedrag laten herformuleren. De latentie zit hier minder in code-editing en meer in denkkwaliteit.
 
 IDE-integratie is vooral efficiënt bij lokale transformaties in bestanden die al openstaan. Het model krijgt directe nabijcontext, en jij kan snel accepteren, aanpassen of verwerpen. In dit patroon schuilt wel een klassiek risico: acceptatiebias. Omdat suggesties inline verschijnen en vlot leesbaar zijn, stijgt de kans dat je semantische fouten minder streng controleert dan bij handgeschreven code.
+
+GitHub Copilot bestaat daarnaast ook buiten de IDE, bijvoorbeeld in de GitHub-webinterface bij repositories en pull requests. Dat is handig voor reviewondersteuning en snelle uitleg bij voorgestelde wijzigingen, maar dezelfde regel blijft gelden: gebruik het als assistentie, niet als automatische kwaliteitsgarantie.
 
 Agentische UI/CLI-omgevingen zijn bedoeld voor langere workflows: meerdere bestanden aanpassen, tests draaien, fouten interpreteren, opnieuw patchen, en rapporteren. Dat lijkt meer op een mini-CI-loop. Voor dit type werk moet je expliciet afspreken welke checks verplicht zijn, welke directories write-access hebben, en hoe het resultaat samengevat wordt. Zonder die grenzen produceert een agent snel veel verandering met te weinig controle.
 

@@ -19,10 +19,10 @@ Motiveer telkens kort in één zin.
 5. "Na `withdraw(amount)` is het saldo exact `oudSaldo - amount`."
 6. "De implementatie gebruikt intern een `LinkedList` in plaats van een `ArrayList`."
 
-## Oefening 2: schrijf pre- en postcondities
+## Oefening 2: schrijf OpenJML-contracten
 
-Schrijf voor elke methode een zinvolle preconditie en postconditie.
-Gebruik duidelijke, controleerbare formuleringen.
+Schrijf voor elke methode een OpenJML-contract met `requires` en `ensures`.
+Gebruik waar nuttig ook `assignable`.
 
 ```java
 public static int divide(int a, int b) {
@@ -41,7 +41,7 @@ public static void transfer(BankAccount from, BankAccount to, int amountInCents)
 
 Vervolgvragen:
 1. Welke preconditie ontbreekt er om `transfer` veilig te maken?
-2. Welke postconditie zou je toevoegen om "geld verdwijnt niet" expliciet te maken?
+2. Welke `ensures`-clausule zou je toevoegen om "geld verdwijnt niet" expliciet te maken?
 
 ## Oefening 3: invarianten herkennen en herstellen
 
@@ -68,6 +68,7 @@ class TemperatureLog {
 3. Pas het ontwerp conceptueel aan zodat de invariant altijd behouden blijft.
 4. Formuleer een mogelijke loop-invariant voor de lus in `average`.
 5. Geef één testcase die een schending van jouw invariant zichtbaar maakt.
+6. Schrijf je invarianten ook in OpenJML-notatie (`invariant` en `loop_invariant`).
 
 ## Oefening 4: meerdere implementaties, één specificatie
 
@@ -78,6 +79,7 @@ Je wil een methode `contains(List<Integer> values, int x)`.
 3. Leg uit waarom beide implementaties toch onder dezelfde functionele bedoeling vallen.
 4. Leg uit welke gedragskeuzes je expliciet moet vastleggen in de specificatie (bv. eerste index bij duplicaten).
 5. Geef een voorbeeldinput waarvoor de binaire variant fout gedrag kan geven als de preconditie niet geldt.
+6. Schrijf de contracten van beide varianten in OpenJML-notatie.
 
 ## Oefening 5: tests zijn groen, maar specificatie fout
 
@@ -147,6 +149,19 @@ public static int countPositive(List<Integer> values) {
 2. Toon kort aan waarom die invariant initieel waar is.
 3. Toon kort aan waarom die invariant behouden blijft in één iteratie.
 4. Leid op basis van invariant + stopvoorwaarde de postconditie af.
+
+## Oefening 8: van Hoare naar OpenJML
+
+Vertaal volgende Hoare-triple naar een methodecontract in OpenJML:
+
+\[
+\{x > 3\}\ y = x + 2\ \{y > 5\}
+\]
+
+Werk in drie stappen:
+1. schrijf een Java-methode met parameters en returnwaarde,
+2. schrijf `requires` en `ensures` in OpenJML,
+3. geef een korte implementatie die aan het contract voldoet.
 
 ## Suggestie voor zelfcontrole
 

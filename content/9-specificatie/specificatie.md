@@ -52,23 +52,75 @@ Die specificatie zegt niets over hoe je dit berekent.
 Je kan intern werken met `if`-blokken, een tabel, of een formule: allemaal prima, zolang het externe gedrag klopt.
 Dit is exact dezelfde denkwijze die we straks op Java-methodes toepassen.
 
-### Voorbeeld: `max(a, b)`
+### Pre- en postcondities
 
-Voor de methode `max(a, b)` kan je bijvoorbeeld deze specificatie formuleren:
-- het resultaat is groter dan of gelijk aan `a`,
-- het resultaat is groter dan of gelijk aan `b`,
-- het resultaat is gelijk aan `a` of gelijk aan `b`.
+Een **preconditie** is een voorwaarde die waar moet zijn **vóór** de methode start.
+Een **postconditie** is een voorwaarde die waar moet zijn **na** de methode, als de preconditie geldig was.
 
-### Volledigheid van specificaties
+Belangrijk is de taakverdeling:
+- de **aanroeper** is verantwoordelijk om de preconditie te respecteren,
+- de **methode** is verantwoordelijk om de postconditie te garanderen.
+
+Kort voorbeeld:
+
+```java
+//@ requires b != 0;
+//@ ensures a == b * \result + (a % b);
+public static int divide(int a, int b) {
+    return a / b;
+}
+```
+
+Interpretatie:
+- je mag `divide` alleen oproepen met `b != 0`,
+- daarna garandeert de methode de standaard eigenschap van gehele deling in Java.
+
+Zonder pre/postcondities blijft vaak onduidelijk wie welke fout moet voorkomen.
+Met pre/postcondities is die afspraak expliciet en toetsbaar.
+
+{{% notice note Notatie %}}
+Om zulke afspraken precies te maken, gebruiken we in dit hoofdstuk **OpenJML** (JML-annotaties in Java-comments).
+
+Belangrijkste bouwstenen:
+- `requires ...;` voor precondities,
+- `ensures ...;` voor postcondities,
+- `\result` voor de returnwaarde,
+- `\old(expr)` voor de waarde vóór uitvoering,
+- `invariant ...;` voor klasse-invarianten,
+- `loop_invariant ...;` voor loop-invarianten.
+
+In code ziet dat er meestal zo uit:
+
+```java
+//@ requires ...;
+//@ ensures ...;
+```
+
+Concreet voorbeeld:
+
+```java
+//@ requires true;
+//@ ensures \result >= a && \result >= b;
+//@ ensures \result == a || \result == b;
+public static int max(int a, int b) {
+    return (a >= b) ? a : b;
+}
+```
+{{% /notice %}}
+
+## Volledigheid van specificaties
 
 Bij specificaties gaat het niet alleen over juistheid, maar ook over **volledigheid**.
 Een te zwakke specificatie laat implementaties toe die formeel “kloppen”, maar inhoudelijk fout zijn.
 
-Stel dat je voor `max(a, b)` alleen dit noteert:
-- resultaat is groter dan of gelijk aan `a`,
-- resultaat is groter dan of gelijk aan `b`.
+Stel dat je voor `max(a, b)` alleen dit zou eisen:
 
-Dan is deze implementatie volgens die (te zwakke) specificatie perfect toegelaten:
+```java
+//@ requires true;
+//@ ensures \result >= a && \result >= b;
+```
+
+Dan is deze implementatie toegelaten:
 
 ```java
 public static int max(int a, int b) {
@@ -76,89 +128,138 @@ public static int max(int a, int b) {
 }
 ```
 
-Voor alle `int`-waarden geldt immers dat `Integer.MAX_VALUE >= a` en `>= b`.
-Toch is dit duidelijk niet wat we bedoelen met “maximum van twee getallen”.
+Die is duidelijk fout als "maximum van twee getallen", maar voldoet wel aan de te zwakke postconditie.
+Daarom is de extra regel
 
-Daarom staat in de volledige specificatie nog een extra voorwaarde:
-- resultaat is gelijk aan `a` of gelijk aan `b`.
+```java
+//@ ensures \result == a || \result == b;
+```
 
-Die derde lijn sluit de foute implementatie meteen uit.
-Dit is een goede illustratie van een algemene regel:
-een bruikbare specificatie moet niet enkel gewenste gevallen toelaten,
-maar ook **ongewenste implementaties actief blokkeren**.
+essentieel.
 
-Merk op wat deze specificatie **niet** zegt:
-- niet welke `if`-structuur je gebruikt,
-- niet of je `Math.max` oproept,
-- niet hoe de compiler de code optimaliseert.
+Algemene les:
+een bruikbare specificatie moet niet alleen correcte implementaties toelaten,
+maar ook **ongewenste implementaties uitsluiten**.
 
-Die zaken horen bij de implementatie.
+Hetzelfde zie je bij `berekenParkeerkost`.
+Als je alleen specificeert `//@ ensures \result >= 0;`, dan is dit ook “correct”:
+
+```java
+public static int berekenParkeerkost(int duurInMinuten) {
+    return 0;
+}
+```
+
+Maar dat schendt duidelijk de bedoeling voor langdurig parkeren.
+Dus ook daar moet de specificatie extra regels bevatten over de drempel van 30 minuten en het gedrag erboven.
 
 ## Specificatie en implementatie
 
 In het vorige stuk zagen we al dat een specificatie gedrag beschrijft zonder codekeuzes.
-Hier maken we dat onderscheid expliciet en systematisch.
+Hier maken we dat onderscheid expliciet.
 
-Het onderscheid tussen **wat** en **hoe** is de kern van dit hoofdstuk:
-- **specificatie**: _wat_ moet waar zijn vanuit het standpunt van de gebruiker van de methode,
-- **implementatie**: _hoe_ je dat gedrag technisch realiseert in code.
+- **specificatie**: wat moet waar zijn vanuit het standpunt van de gebruiker,
+- **implementatie**: hoe je dat gedrag technisch realiseert.
 
-Neem opnieuw `max(a, b)`. Volgende implementaties zijn verschillend, maar gedragsequivalent:
+Voor dezelfde OpenJML-specificatie van `max` zijn bijvoorbeeld meerdere implementaties mogelijk:
 
 ```java
-public static int max(int a, int b) {
+public static int maxIf(int a, int b) {
     if (a >= b) return a;
     return b;
 }
 ```
 
 ```java
-public static int max(int a, int b) {
+public static int maxMath(int a, int b) {
     return Math.max(a, b);
 }
 ```
 
-Beide voldoen aan dezelfde specificatie.
+Zolang beide methodes aan hetzelfde contract voldoen, zijn ze extern equivalent.
+
+Hetzelfde principe geldt voor de parkeerkost-functie.
+Twee verschillende implementaties kunnen dezelfde specificatie realiseren:
+
+```java
+public static int berekenParkeerkostIf(int duurInMinuten) {
+    if (duurInMinuten <= 30) return 0;
+    int extra = duurInMinuten - 30;
+    int halveUren = (extra + 29) / 30; // afronden naar boven
+    return halveUren * 2; // euro
+}
+```
+
+```java
+public static int berekenParkeerkostTabel(int duurInMinuten) {
+    List<Integer> grenzen = List.of(30, 60, 90, 120);
+    List<Integer> prijzen = List.of(0, 2, 4, 6);
+    for (int i = 0; i < grenzen.size(); i++) {
+        if (duurInMinuten <= grenzen.get(i)) return prijzen.get(i);
+    }
+    int extra = duurInMinuten - 120;
+    int halveUren = (extra + 29) / 30;
+    return 6 + halveUren * 2;
+}
+```
+
+De code ziet er anders uit, maar wat gebruikers zien is hetzelfde contract.
 
 ### Waarom dit belangrijk is
 
 1. **Refactoren wordt veiliger**
-   Je mag intern herwerken zolang de specificatie identiek blijft.
+   Je mag intern herwerken zolang het contract gelijk blijft.
 2. **Samenwerken wordt duidelijker**
-   Teamleden discussiëren over gedrag, niet over persoonlijke codevoorkeuren.
+   Teamleden discussiëren over gedrag, niet over codevoorkeuren.
 3. **Testen krijgt richting**
-   Tests moeten specificatie valideren, niet toevallige implementatiedetails.
+   Tests worden afgeleid uit contracten.
 4. **Vervangbaarheid**
-   Je kan implementaties uitwisselen zonder de rest van het systeem te breken.
+   Een implementatie kan vervangen worden zonder callers aan te passen.
 
 Een praktische vuistregel:
-als een zin de woorden "for-loop", "hashmap", "recursie", "if", "pointer" bevat,
-dan is het vaak implementatie, geen specificatie.
+als een zin de woorden "for-loop", "hashmap", "recursie", "if" bevat,
+dan beschrijf je vaak implementatie in plaats van specificatie.
 
 ## Meerdere implementaties
 
-Nu komt de belangrijkste consequentie van dat onderscheid:
-als specificatie en implementatie echt los staan, dan moeten meerdere implementaties mogelijk zijn onder dezelfde specificatie.
+Nu volgt de belangrijkste consequentie:
+als specificatie en implementatie los staan, dan moeten meerdere implementaties mogelijk zijn onder één specificatie.
 
-Een krachtige gedachte in softwareontwerp:
-**één specificatie kan meerdere correcte implementaties hebben**.
-
-We werken dit uit met `indexOf` op een `List<Integer>`.
+We werken dit uit met `indexOf` op `List<Integer>`.
 
 ### Specificatie
 
-Voor methode `indexOf(list, x)`:
-- als `x` in `list` voorkomt, geef een geldige index `i` terug zodat `list.get(i) == x`,
-- als `x` niet voorkomt, geef `-1` terug.
+We willen:
+- als `x` voorkomt, geef een geldige index terug,
+- anders geef `-1` terug.
 
-Je kan deze specificatie nog strikter maken met extra keuzes, bijvoorbeeld:
-- "geef de **eerste** index terug als `x` meerdere keren voorkomt".
+Voor zulke specificaties is het handig om eerst pure hulpfuncties te definiëren:
 
-Zonder die extra zin zijn meerdere antwoorden soms correct.
+```java
+//@ pure
+private static boolean contains(List<Integer> list, int x) {
+    for (int i = 0; i < list.size(); i++) {
+        if (list.get(i) == x) return true;
+    }
+    return false;
+}
+
+//@ pure
+private static boolean isSorted(List<Integer> list) {
+    for (int i = 0; i + 1 < list.size(); i++) {
+        if (list.get(i) > list.get(i + 1)) return false;
+    }
+    return true;
+}
+```
 
 ### Implementatie 1: lineair zoeken
 
 ```java
+//@ requires list != null;
+//@ ensures (!contains(list, x)) ==> (\result == -1);
+//@ ensures (\result != -1) ==> (0 <= \result && \result < list.size());
+//@ ensures (\result != -1) ==> (list.get(\result) == x);
 public static int indexOfLinear(List<Integer> list, int x) {
     for (int i = 0; i < list.size(); i++) {
         if (list.get(i) == x) return i;
@@ -167,13 +268,16 @@ public static int indexOfLinear(List<Integer> list, int x) {
 }
 ```
 
-Eigenschap:
-- werkt op elke `List<Integer>`,
-- geen extra preconditie nodig.
-
 ### Implementatie 2: binair zoeken
 
+Voor binair zoeken komt er een extra preconditie bij:
+
 ```java
+//@ requires list != null;
+//@ requires isSorted(list);
+//@ ensures (!contains(list, x)) ==> (\result == -1);
+//@ ensures (\result != -1) ==> (0 <= \result && \result < list.size());
+//@ ensures (\result != -1) ==> (list.get(\result) == x);
 public static int indexOfBinary(List<Integer> list, int x) {
     int lo = 0;
     int hi = list.size() - 1;
@@ -190,79 +294,54 @@ public static int indexOfBinary(List<Integer> list, int x) {
 }
 ```
 
-Eigenschap:
-- alleen correct als de lijst oplopend gesorteerd is.
-
-Die voorwaarde hoort expliciet in de specificatie, bijvoorbeeld als preconditie:
-
-\[
-\forall i,j: 0 \le i < j < n \Rightarrow \texttt{list.get(i)} \le \texttt{list.get(j)}
-\]
-
-waarbij \( n = \texttt{list.size()} \).
-
-Als je die preconditie niet communiceert, krijg je schijnbaar "random" fouten bij niet-gesorteerde input.
+Als de preconditie `isSorted(list)` ontbreekt, is de tweede implementatie niet betrouwbaar.
 
 ### Interface versus implementatie
 
-Als je als parameter type `List<T>` gebruikt, laat je ook meerdere **datastructuur-implementaties** toe, zoals:
-- `ArrayList<T>`
-- `LinkedList<T>`
-
-Ook dat is exact dezelfde ontwerpgedachte:
-- specificatie op interface-niveau,
-- meerdere implementaties op intern niveau.
-
-Met andere woorden: het is geen detail, maar een kernprincipe van goed ontwerp.
-Je legt vast wat gebruikers mogen verwachten, en laat ruimte om het hoe later te verbeteren.
+Als je parameters typt als `List<T>` in plaats van `ArrayList<T>`,
+beschrijf je gedrag op interface-niveau.
+Dat maakt het eenvoudiger om later de interne datastructuur te wijzigen,
+zonder het contract voor gebruikers te veranderen.
 
 ## Contracten
 
-Tot nu toe beschreven we specificaties vooral in gewone taal.
-Dat is een goede start, maar voor implementatie en testen wil je meestal preciezere afspraken.
-Daar komen **contracten** in beeld.
+Tot nu toe beschreven we specificaties in woorden.
+Met OpenJML maak je ze exact en machineleesbaar.
 
-Een methodecontract maakt specificaties heel concreet.
-
-- **preconditie**: wat de aanroeper moet garanderen vóór de oproep.
-- **postconditie**: wat de methode garandeert na afloop, op voorwaarde dat de preconditie gold.
-
-De verantwoordelijkheden zijn dus verdeeld.
-Dat voorkomt discussies zoals "maar ik dacht dat negatieve bedragen ook mochten".
+- **preconditie**: `requires`
+- **postconditie**: `ensures`
+- **gewijzigde toestand**: `assignable`
 
 ### Voorbeeld 1: `max`
 
 ```java
-/**
- * @pre  true
- * @post result >= a && result >= b
- * @post result == a || result == b
- */
+//@ requires true;
+//@ ensures \result >= a && \result >= b;
+//@ ensures \result == a || \result == b;
 public static int max(int a, int b) {
     return (a >= b) ? a : b;
 }
 ```
 
-Hier is de preconditie triviaal (`true`).
-Bij andere methodes is de preconditie vaak essentieel.
-
 ### Voorbeeld 2: `withdraw`
 
 ```java
 class BankAccount {
+    //@ spec_public
     private int balanceInCents;
 
+    //@ public invariant balanceInCents >= 0;
+
+    //@ requires initialBalanceInCents >= 0;
+    //@ ensures balanceInCents == initialBalanceInCents;
+    //@ assignable balanceInCents;
     public BankAccount(int initialBalanceInCents) {
-        if (initialBalanceInCents < 0) {
-            throw new IllegalArgumentException("initial balance must be >= 0");
-        }
         this.balanceInCents = initialBalanceInCents;
     }
 
-    /**
-     * @pre  amountInCents > 0 && amountInCents <= balanceInCents
-     * @post balanceInCents == old(balanceInCents) - amountInCents
-     */
+    //@ requires amountInCents > 0 && amountInCents <= balanceInCents;
+    //@ ensures balanceInCents == \old(balanceInCents) - amountInCents;
+    //@ assignable balanceInCents;
     public void withdraw(int amountInCents) {
         if (amountInCents <= 0 || amountInCents > balanceInCents) {
             throw new IllegalArgumentException("invalid amount");
@@ -276,74 +355,72 @@ class BankAccount {
 }
 ```
 
-`old(balanceInCents)` betekent: de waarde vóór de uitvoering.
+`\old(balanceInCents)` verwijst naar de waarde vóór de methode-uitvoering.
 
-Belangrijk inzicht:
-postcondities gaan vaak over relaties tussen "voor" en "na".
-Voor toestandrijke objecten is dat cruciaal.
+### Voorbeeld 3: `berekenParkeerkost`
 
-### Schending van precondities
-
-Daar zijn verschillende strategieën voor:
-- exception gooien,
-- foutcode teruggeven,
-- defensief normaliseren.
-
-Welke strategie je kiest is een ontwerpbeslissing, maar moet zelf ook deel uitmaken van de specificatie.
-
-## Invarianten
-
-Contracten per methode zijn krachtig, maar vaak nog niet voldoende.
-Bij objecten met toestand wil je ook eigenschappen die over **alle** methodes heen blijven gelden.
-Dat zijn invarianten.
-
-Een **invariant** is een eigenschap die altijd behouden moet blijven tijdens een bepaalde levensduur.
-
-- bij objecten: klasse-invariant,
-- bij lussen: loop-invariant.
-
-Invarianten zijn bijzonder nuttig omdat ze stabiliteit brengen:
-je hoeft niet telkens alles opnieuw te bewijzen, je vertrekt van iets dat altijd waar blijft.
-
-### Klasse-invariant
-
-Voor `BankAccount` is een natuurlijke invariant:
-
-\[
-\texttt{balanceInCents} \ge 0
-\]
-
-Die moet gelden:
-- na constructor,
-- voor en na elke publieke methode,
-- na elke combinatie van method calls.
-
-Bij een klasse met collecties kan een invariant er zo uitzien:
-- de lijst bevat geen `null`-elementen,
-- de lijst is steeds oplopend gesorteerd,
-- de lijst bevat enkel unieke sleutels.
-
-Voorbeeldidee:
+Ook voor het intuïtieve voorbeeld kan je een contract precies maken:
 
 ```java
-class GuestList {
-    private final List<String> names = new ArrayList<>();
-
-    // mogelijke invariant:
-    // - geen nulls
-    // - geen lege strings
-    // - geen duplicaten
+//@ requires duurInMinuten >= 0;
+//@ ensures \result >= 0;
+//@ ensures duurInMinuten <= 30 ==> \result == 0;
+//@ ensures duurInMinuten > 30 ==> \result > 0;
+//@ assignable \nothing;
+public static int berekenParkeerkost(int duurInMinuten) {
+    if (duurInMinuten <= 30) return 0;
+    int extra = duurInMinuten - 30;
+    int halveUren = (extra + 29) / 30;
+    return halveUren * 2;
 }
 ```
 
-### Loop-invariant
+Merk op: dit contract legt het gedrag al stevig vast, maar je kan het nog uitbreiden
+als je ook exact het tarief per begonnen half uur formeel wil vastleggen.
 
-We berekenen de som van een lijst:
+### Schending van precondities
+
+Als een preconditie niet geldt, moet dat ook duidelijk gespecificeerd zijn.
+Een veelgebruikte praktijk is dan een exception gooien.
+Je kan dit in OpenJML expliciteren met `exceptional_behavior`, maar voor dit hoofdstuk volstaat het om die afspraak consequent te documenteren.
+
+## Invarianten
+
+Contracten per methode zijn sterk, maar bij toestandrijke objecten wil je ook eigenschappen die altijd behouden blijven.
+Dat zijn invarianten.
+
+- klasse-invariant: eigenschap over objecttoestand,
+- loop-invariant: eigenschap die waar blijft tijdens een lus.
+
+### Klasse-invariant
+
+Voor `BankAccount` gebruikten we:
 
 ```java
+//@ public invariant balanceInCents >= 0;
+```
+
+Die moet gelden na constructor en na elke publieke methode.
+
+### Loop-invariant
+
+Bij een som over een lijst:
+
+```java
+//@ pure
+private static int prefixSum(List<Integer> values, int endExclusive) {
+    int s = 0;
+    for (int k = 0; k < endExclusive; k++) s += values.get(k);
+    return s;
+}
+
 public static int sum(List<Integer> values) {
     int s = 0;
     int i = 0;
+
+    //@ loop_invariant 0 <= i && i <= values.size();
+    //@ loop_invariant s == prefixSum(values, i);
+    //@ decreases values.size() - i;
     while (i < values.size()) {
         s = s + values.get(i);
         i = i + 1;
@@ -352,30 +429,18 @@ public static int sum(List<Integer> values) {
 }
 ```
 
-Mogelijke loop-invariant:
-
-\[
-s = \sum_{k=0}^{i-1} \texttt{values.get(k)}
-\]
-
-Interpretatie:
-- vóór de lus: `i = 0`, dus som over een leeg bereik is 0,
-- tijdens de lus: `s` blijft de som van exact de reeds verwerkte prefix,
-- na de lus: `i = values.size()`, dus `s` is de som van alle elementen.
-
-Dat is precies de brug van lokale stapjes naar globale correctheid.
+Deze annotaties maken expliciet waarom de lus correct is.
 
 ## Tests versus specificaties
 
-Nu we precondities, postcondities en invarianten hebben, kunnen we hun relatie met testen helder maken.
+Nu we contracten hebben, kunnen we het verschil scherp maken:
 
-Tests en specificaties vullen elkaar aan, maar ze zijn fundamenteel verschillend.
+- een specificatie zegt wat voor **alle** geldige inputs moet gelden,
+- een test controleert slechts enkele concrete voorbeelden.
 
-- specificatie: universele uitspraak over gedrag,
-- test: concrete observatie op één testcase.
-
-Een testset kan nooit letterlijk alle inputs uitproberen.
-Daarom is een formele of semiformele specificatie onmisbaar als referentie.
+Tests en specificaties vullen elkaar aan.
+Contracten geven richting aan testontwerp.
+Tests geven snelle feedback tijdens implementatie.
 
 ### Tegenvoorbeeld
 
@@ -401,31 +466,36 @@ void maxWhenFirstIsBigger() {
 }
 ```
 
-Deze tests slagen, maar `max(2, 9)` geeft fout resultaat.
+Deze tests zijn groen, maar `max(2, 9)` blijft fout.
+
+Met OpenJML-contracten kan je hier extra zekerheid opbouwen:
+als de contracten sterk genoeg zijn, kan de verifier zulke implementaties afkeuren.
+
+Een gelijkaardig risico bestaat bij `berekenParkeerkost`.
+Met alleen deze tests:
+
+```java
+@Test
+void kostTot30MinutenIsNul() {
+    assertEquals(0, berekenParkeerkost(15));
+}
+
+@Test
+void kostOp30MinutenIsNul() {
+    assertEquals(0, berekenParkeerkost(30));
+}
+```
+
+kan een foute implementatie die altijd `0` teruggeeft nog steeds groen zijn.
+Daarom heb je ook tests nodig boven 30 minuten, en liefst rechtstreeks afgeleid uit je contract.
 
 ### Conclusies
 
-1. Tests zonder duidelijke specificatie missen snel belangrijke gevallen.
-2. "Groen" betekent enkel: alle geschreven tests slagen.
-3. Niet-geteste delen van het invoerdomein blijven risico.
-
-Praktisch patroon:
-- stap 1: schrijf contract (pre/post/invarianten),
-- stap 2: leid tests af uit dat contract,
-- stap 3: voeg extra tests toe voor grensgevallen en tegenvoorbeelden.
-
-Voor `max` zijn bijvoorbeeld nuttige categorieën:
-- `a < b`
-- `a == b`
-- `a > b`
-- negatieve waarden
-- combinaties met 0.
+1. Zonder expliciete specificatie missen tests snel belangrijke gevallen.
+2. "Groen" betekent alleen dat je huidige testset slaagt.
+3. OpenJML-contracten en tests samen geven een veel sterker kwaliteitsnet.
 
 ## Hoare-logica
-
-Tests geven dus steekproeven.
-Soms wil je sterker redeneren: niet “dit geval werkt”, maar “elke toestand die aan de preconditie voldoet leidt tot de postconditie”.
-Dat is precies de intuïtie achter Hoare-logica.
 
 Hoare-logica beschrijft correctheid met triples:
 
@@ -433,12 +503,19 @@ Hoare-logica beschrijft correctheid met triples:
 \{P\}\ C\ \{Q\}
 \]
 
-Lees dit als:
-"Als `P` waar is vóór commando `C`, dan is `Q` waar na uitvoering van `C`."
+Interpretatie:
+als preconditie `P` geldt vóór commando `C`, dan geldt postconditie `Q` erna.
 
-Belangrijk: dit gaat over **partiële correctheid**.
-Dat betekent: als het programma terminaal eindigt, dan geldt de postconditie.
-Terminatie op zich vraagt vaak een extra argument (bijvoorbeeld een variant die afneemt).
+OpenJML kan je zien als een praktische, code-nabije manier om diezelfde redenering toe te passen op Java-methodes:
+- `P` komt overeen met `requires`,
+- `Q` met `ensures`.
+
+Ook voor `berekenParkeerkost` kan je zo redeneren:
+\[
+\{\texttt{duurInMinuten >= 0}\}\ \texttt{berekenParkeerkost(duurInMinuten)}\ \{\texttt{resultaat >= 0}\}
+\]
+
+Dat is precies dezelfde gedachte als het OpenJML-contract van die methode.
 
 ### Achterwaarts redeneren
 
@@ -448,21 +525,19 @@ Voor:
 x = x + 1;
 ```
 
-En gewenste postconditie `x > 10`:
-- na uitvoering wil je `x > 10`,
-- dus vóór uitvoering moet oude `x > 9` zijn.
+en postconditie `x > 10` heb je preconditie `x > 9` nodig:
 
 \[
 \{x > 9\}\ x = x + 1\ \{x > 10\}
 \]
 
-Nog een:
+Voor:
 
 ```java
 y = x + 2;
 ```
 
-Gewenste postconditie `y > 5` geeft preconditie `x > 3`.
+met doel `y > 5` heb je `x > 3` nodig:
 
 \[
 \{x > 3\}\ y = x + 2\ \{y > 5\}
@@ -475,46 +550,34 @@ x = x + 1;
 y = x + 2;
 ```
 
-Doel: `y > 10` na beide statements.
+Doel: `y > 10`.
 
-Redenering:
-1. vóór tweede statement heb je `x > 8` nodig (want `x + 2 > 10`).
-2. vóór eerste statement heb je dus `x > 7` nodig.
-
-Dus een geldige triple is:
+Dan volstaat preconditie `x > 7`:
 
 \[
 \{x > 7\}\ x = x + 1;\ y = x + 2\ \{y > 10\}
 \]
 
-Dit is de intuïtie van formeel bewijzen: je maakt tussenstappen expliciet.
-
 ### Lussen en invarianten
 
-Bij lussen combineer je twee elementen:
-- loop-invariant (blijft waar),
-- terminatie-idee (er is vooruitgang).
+Bij lussen combineer je:
+- een loop-invariant (blijft waar),
+- een terminatie-argument (`decreases`).
 
-Voorbeeld in woorden:
-- invariant zegt dat `s` de som van de reeds verwerkte prefix is,
-- `i` stijgt elke iteratie,
-- `i < values.size()` wordt uiteindelijk false,
-- bij exit combineer je invariant + lusconditie om de postconditie af te leiden.
-
-Daarmee wordt duidelijk waarom invarianten geen "extra theorie" zijn, maar een praktisch hulpmiddel om lussen te begrijpen en te vertrouwen.
+Dat is precies dezelfde structuur als in OpenJML-lusannotaties.
 
 ## Samenvatting en checklist
 
-Gebruik deze checklist telkens je een methode ontwerpt, reviewt of refactort:
+Gebruik deze checklist bij ontwerp, review en implementatie:
 
-1. Staat expliciet beschreven **wat** de methode doet?
-2. Is het verschil tussen gedrag en implementatiedetails helder?
-3. Zijn precondities en postcondities concreet en toetsbaar?
-4. Zijn relevante invarianten benoemd?
-5. Is duidelijk of meerdere implementaties toegelaten zijn?
-6. Dekt de testset alle belangrijke inputklassen uit de specificatie?
-7. Kan je de kernredenering eventueel samenvatten met `{P} C {Q}`?
-8. Is de specificatie volledig genoeg om “technisch geldige maar inhoudelijk foute” implementaties uit te sluiten?
+1. Staat het gewenste gedrag expliciet beschreven?
+2. Zijn precondities (`requires`) duidelijk?
+3. Zijn postcondities (`ensures`) volledig genoeg?
+4. Sluiten de specificaties ongewenste implementaties uit?
+5. Zijn invarianten (klasse/lus) expliciet?
+6. Is duidelijk welke toestand gewijzigd mag worden (`assignable`)?
+7. Dekt de testset de belangrijkste inputklassen?
+8. Ondersteunen contracten en tests elkaar?
+9. Kan je de kernredenering samenvatten als `{P} C {Q}`?
 
-Wie op deze manier werkt, schrijft code die voorspelbaar gedrag heeft,
-robuuster is tegen regressies en veel makkelijker onderhoudbaar blijft over meerdere semesters of projectjaren heen.
+Wie op deze manier werkt, schrijft code met voorspelbaar gedrag en minder regressies.
