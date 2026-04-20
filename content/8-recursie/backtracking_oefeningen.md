@@ -3,18 +3,28 @@ title: "Backtracking: oefeningen"
 autonumbering: true
 weight: 40
 toc: true
-draft: true
+draft: false
 math: true
 ---
+
+Je vindt de startcode voor deze oefeningen [in deze GitHub repository](https://github.com/KULeuven-Diepenbeek/ses-deel2-oefeningen-07-backtracking):
+
+```
+git@github.com:KULeuven-Diepenbeek/ses-deel2-oefeningen-07-backtracking.git
+```
+
 
 ## Variant op token-segmentatie
 
 In het voorbeeld van token-segmentatie mocht een token meermaals gebruikt worden.
-Schrijf nu een algoritme dat uitzoekt of een token gesegmenteerd kan worden op een manier waarbij elke token **hoogstens één keer** gebruikt wordt.
+Schrijf nu een algoritme dat uitzoekt of een string gesegmenteerd kan worden op een manier waarbij elke token **hoogstens één keer** gebruikt wordt.
 Doe dat voor de drie varianten:
-- één oplossing
-- alle oplossingen
-- optimale oplossing
+
+1. één oplossing
+2. alle oplossingen
+3. optimale oplossing, waarbij de optimale oplossing deze keer de segmentatie is met het **grootste** aantal tokens.
+
+Als er geen oplossing is, geef dan `null` terug (voor variant 1 en 3) of een lege `Set` (voor variant 2).
 
 ## 8-queens / n-queens
 
@@ -41,7 +51,7 @@ o * o * o * o
 
 **Uitbreiding 1:** Doe dit voor een schaakbord van willekeurige grootte n, in plaats van 8.
 
-**Uitbreiding 2:** Zoek alle oplossingen in plaats van 1 oplossing (voor een bord van 5x5).
+**Uitbreiding 2:** Zoek alle oplossingen in plaats van 1 oplossing (voor een bord van willekeurige grootte `n`, maar probeer met 5x5).
 
 ## Knight's tour
 
@@ -66,7 +76,7 @@ o o o o o o o
 
 _Hint als je oplossing te lang duurt:_ Begin met een kleiner bord (5x5), en overloop de mogelijke volgende posities van het paard steeds volgens de wijzers van de klok.
 
-**Uitbreiding:** Zoek alle oplossingen in plaats van 1 oplossing, voor een klein bord (5x5). Zoek ook online op hoeveel oplossingen er bestaan voor een 8x8 bord.
+**Uitbreiding:** Zoek alle oplossingen in plaats van 1 oplossing, voor een klein bord (5x5). Begin nog steeds op (0, 0). Zoek ook online op hoeveel oplossingen er bestaan voor een 8x8 bord.
 
 ## SEND+MORE=MONEY
 
@@ -113,14 +123,17 @@ private static boolean containsLetter(String str) {
 Schrijf een programma om een conflict-vrije uurrooster te maken voor een lijst van vakken.
 Bij elk vak hoort een verzameling van personen (bv. leerkracht en studenten).
 We vereenvoudigen het uurrooster tot een verzameling van vaste slots waarop vakken ingepland kunnen worden.
-Elk slot stellen we voor door een positief getal.
+Elk slot stellen we voor door een positief getal, beginnend bij 1.
 Zo kan slot 1 bijvoorbeeld staan voor maandagmorgen om 8u30, slot 2 voor maandagmorgen om 10u30, etc.
 
 Enkele beperkingen waaraan het rooster moet voldoen:
 
-- (optimaal) Het uiteindelijke uurrooster moet gebruik maken van zo weinig mogelijk slots.
-- (conflict-vrij) Een persoon mag nooit voor 2 verschillende vakken in hetzelfde slot ingeroosterd worden.
-- (capaciteitsconform) Er mogen nooit meer dan 5 vakken op hetzelfde slot ingepland worden, zodat er steeds voldoende lokalen zijn.
+- (compleet) Elk vak moet ingepland worden op precies 1 slot.
+- (beperkt) Er moet rekening gehouden worden met een maximaal aantal slots (bv. 10).
+- (optimaal) Het uiteindelijke uurrooster moet gebruik maken van zo weinig mogelijk slots, met de voorkeur om lagere slotnummers eerst te gebruiken.
+- (conflict-vrij) Een persoon mag nooit voor 2 of meer verschillende vakken in hetzelfde slot ingeroosterd worden.
+- (capaciteitsconform) Er mogen nooit meer dan 3 vakken op hetzelfde slot ingepland worden, zodat er steeds voldoende lokalen zijn.
+
 
 ## Woorden samentrekken
 
@@ -175,7 +188,7 @@ Bijvoorbeeld, voor de volgende lijst van locaties (hieronder visueel weergegeven
 
 ## Doolhof
 
-Schrijf een functie om het **kortste pad** door een doolhof te vinden van het begin- naar een eindpunt.
+Schrijf een functie om het **kortste pad** door een doolhof te vinden van het begin- naar een eindpunt (er kunnen meerdere eindpunten zijn).
 Een doolhof wordt voorgesteld als een string, met
 
 - `@` voor het startpunt (steeds exact één per doolhof)
@@ -183,27 +196,87 @@ Een doolhof wordt voorgesteld als een string, met
 - `.` voor een vrije cel (hier kan je doorgaan)
 - `X` voor een cel met een muur (hier kan je niet doorheen gaan)
 
-Je kan je enkel horizontaal of verticaal verplaatsen naar een naburige vrije cel.
-
 Bijvoorbeeld:
+
 ```
 @..X.....X
 X.XXX.X.X.
 ..X.X.X...
 .XX...XX.X
-....XXX..$
+....XX$..$
+```
+
+Je kan je enkel horizontaal of verticaal verplaatsen naar een naburige vrije cel.
+
+Voor het voorbeeld hierboven heeft het kortste pad lengte 24 (inclusief start- en eindpunt):
+
+```
+@#   ###  
+ #   # # 
+##   # ##
+#  ###  # 
+####    #$
 ```
 
 ## Handdoeken
 
 Maak de eerste opgave van [dag 19 van de Advent of code 2024](https://adventofcode.com/2024/day/19).
+Deze gaat (samengevat) als volgt.
+
+Je krijgt een lijst van kleurpatronen voor een handdoek (gekleurde strepen van links naar rechts), bv. `r, wr, b, g, bwu` wat staat voor _red_, _white-red_, _black_, _green_, _black-white-blue_.
+Je krijgt ook een lijst van voorgestelde designs (bv. `brwrr`).
+De vraag is om na te gaan hoeveel van de voorgestelde designs je kan maken door handdoeken met de gegeven patronen naast elkaar te leggen.
+
+Het design `brwrr` kan je bijvoorbeeld maken met de gegeven patronen (`r, wr, b, g, bwu`) door 4 handdoeken naast elkaar te leggen: `b + r + wr + r` = `brwrr`.
+Merk op dat je meerdere handdoeken met hetzelfde patroon mag gebruiken (bv. `r` in dit voorbeeld).
+Je mag echter geen handdoeken in stukken knippen (dus je kan bv. `bwu` niet gebruiken om `bw` te maken).
+
+Schrijf een functie `nbPossibleDesigns` om te tellen hoeveel van de voorgestelde designs je kan maken met behulp van handdoeken met de gegeven patronen.
+
+Bijvoorbeeld: voor onderstaande invoer (eerste lijn zijn de patronen, en na een lege lijn volgen de voorgestelde designs):
+
+```
+r, wr, b, g, bwu, rb, gb, br
+
+brwrr
+bggr
+gbbr
+rrbgbr
+ubwu
+bwurrg
+brgr
+bbrgwb
+```
+
+moet het algoritme **6** teruggeven, omdat:
+
+- `brwrr` gemaakt kan worden met een `br` handdoek, dan een `wr` handdoek, en tenslotte een `r` handdoek.
+- `bggr` gemaakt kan worden met een `b` handdoek, twee `g` handdoeken, en tenslotte een `r` handdoek.
+- `gbbr` gemaakt kan worden met een `gb` handdoek en dan een `br` handdoek.
+- `rrbgbr` gemaakt kan worden met een `r`, `rb`, `g`, and `br`.
+- `ubwu` is **onmogelijk**.
+- `bwurrg` gemaakt kan worden met een `bwu`, `r`, `r`, and `g`.
+- `brgr` gemaakt kan worden met een `br`, `g`, and `r`.
+- `bbrgwb` is **onmogelijk**.
+
+_Hint: Je eerste backtracking-algoritme zal waarschijnlijk werken voor kleine problemen, maar heel traag zijn voor het grote probleem in de meegeleverde tests. Je kan het heel wat versnellen door gebruik te maken van een cache (die het resultaat van vorige sub-patronen bijhoudt)._
+
+**Uitbreiding**: maak nu ook een methode `countDifferentRealizations` die het aantal verschillende manieren zoekt om een design te maken. Bijvoorbeeld, `gbbr` kan gemaakt worden op 4 verschillende manieren met de patronen van hierboven, namelijk
+
+- `g`, `b`, `b`, `r`
+- `g`, `b`, `br`
+- `gb`, `b`, `r`
+- `gb`, `br`
+
+De methode `countDifferentRealizations` moet dus het getal 4 teruggeven voor het design `gbbr` en de patronen van hierboven.
+
+Ook hier zal caching nuttig zijn om het algoritme sneller te maken.
 
 ## Snakefill
 
 {{% notice info Oud-examenvraag %}}
 Dit is een oud-examenvraag.
 {{% /notice %}}
-
 
 In het spel SnakeFill beweeg je het hoofd van een slang over een bord in een bepaalde richting. Het bord bestaat uit vrije cellen en muren. De slang wordt steeds langer, en beweegt steeds verder in dezelfde richting tot die een obstakel (een muur, de rand van het bord, of een deel van zichzelf) tegenkomt. Pas dan kan je de richting veranderen. Het hoofd van de slang beweegt dus steeds van obstakel tot obstakel.
 

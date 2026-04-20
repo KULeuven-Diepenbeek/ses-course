@@ -3,15 +3,15 @@ title: "8.2 Backtracking"
 autonumbering: true
 weight: 30
 toc: true
-draft: true
+draft: false
 math: true
 ---
 
 ## Wat is backtracking?
 
-Backtracking is een techniek om oplossingen te zoeken voor een probleem.
+Backtracking is een techniek om oplossingen te vinden voor zoekproblemen.
 Een eenvoudig voorbeeld waar je backtracking kan toepassen is de weg zoeken in een doolhof: op elke splitsing waar je kan kiezen welke richting je uitgaat, maak je een keuze.
-Als je later niet meer verder blijkt te kunnen, keer je terug naar die splitsing en probeer je een van de andere richtingen.
+Als die keuze niet leidde tot een oplossing, keer je terug naar die splitsing en probeer je een van de andere richtingen.
 
 <img src="/img/maze.png" alt="doolhof" style="max-width: 350px;"/>
 
@@ -133,33 +133,37 @@ Hoe ziet dat eruit in code? Zo:
 ```java
 private static List<String> findAny(String remainingString,
                                     List<String> allTokens,
-                                    List<String> usedTokens) {
+                                    List<String> tokensUsedSoFar) {
     // basisgeval
-    if (remainingString.isEmpty()) return usedTokens;
+    if (remainingString.isEmpty()) return tokensUsedSoFar;
 
     for (String tok : allTokens) {
         // probeer token tok
         if (remainingString.startsWith(tok)) {
             // uitbreiden gedeeltelijke oplossing
-            usedTokens.add(tok); 
+            tokensUsedSoFar.add(tok); 
             var shorterString = remainingString.substring(tok.length());
             // recursief verder zoeken
-            var solution = findAny(shorterString, allTokens, usedTokens);
+            var solution = findAny(shorterString, allTokens, tokensUsedSoFar);
             if (solution != null) {
+                // oplossing gevonden; stop met zoeken en geef oplossing terug
                 return solution;
             } else {
-                // ongedaan maken
-                usedTokens.removeLast();
+                // laatste keuze ongedaan maken
+                tokensUsedSoFar.removeLast();
             }
         }
     }
+
+    // geen enkel token leidde tot een oplossing;
+    // geef null terug om aan te duiden dat er geen oplossing is
     return null;
 }
 ```
 
-De gedeeltelijke oplossing wordt voorgesteld met de twee parameters `remainingString` en `usedTokens`.
+De gedeeltelijke oplossing wordt voorgesteld met de twee parameters `remainingString` en `tokensUsedSoFar`.
 Het basisgeval komt overeen met een lege string; we hebben dan een oplossing gevonden.
-Die oplossing zit in de parameter `usedTokens`.
+Die oplossing zit in de parameter `tokensUsedSoFar`.
 
 Als de string niet leeg is, proberen we alle tokens beurt om de beurt uit.
 - Als een token niet overeenkomt met het begin van de string, kunnen we die token meteen overslaan.
@@ -171,7 +175,7 @@ Als de string niet leeg is, proberen we alle tokens beurt om de beurt uit.
 
 Als we alle tokens geprobeerd hebben zonder een oplossing te vinden (`return solution` werd nooit uitgevoerd), dan is er geen oplossing en geven we `null` terug.
 
-Om deze methode wat eenvoudiger bruikbaar te maken, kunnen we het worker-wrapper patroon toepassen. 
+Om deze methode wat eenvoudiger bruikbaar te maken, kunnen we het [worker-wrapper patroon](./recursie.md#recursie-vs-iteratie) toepassen. 
 We voegen dan een tweede `findAny`-methode toe, die geen lijst van gebruikte tokens bevat, en de methode hierboven oproept met een lege lijst.
 
 ```java
@@ -264,9 +268,9 @@ Herken je de verschillende onderdelen?
 ```java
 private static List<String> findAny(String remainingString,
                                     List<String> allTokens,
-                                    List<String> usedTokens) {
+                                    List<String> tokensUsedSoFar) {
     // if (current.isComplete()) return current.toSolution();
-    if (remainingString.isEmpty()) return usedTokens;
+    if (remainingString.isEmpty()) return tokensUsedSoFar;
 
     // if (current.shouldAbort()) return null;
 
@@ -274,15 +278,15 @@ private static List<String> findAny(String remainingString,
     for (String tok : allTokens) {
         if (remainingString.startsWith(tok)) {
             // extension.apply(current);
-            usedTokens.add(tok); 
+            tokensUsedSoFar.add(tok); 
             var shorterString = remainingString.substring(tok.length());
             // var solution = findAnySolution(current);
-            var solution = findAny(shorterString, allTokens, usedTokens);
+            var solution = findAny(shorterString, allTokens, tokensUsedSoFar);
             if (solution != null) {
                 return solution;
             } else {
                 // extension.undo(current);
-                usedTokens.removeLast();
+                tokensUsedSoFar.removeLast();
             }
         }
     }
@@ -311,9 +315,9 @@ We kiezen daarom voor `List<List<String>>` als terugkeertype.
 Een tweede wijziging komt voort vanuit het volgende inzicht.
 Waar we bij het zoeken van 1 oplossing meteen konden stoppen eens we een oplossing gevonden hadden, zullen we bij het zoeken naar alle oplossingen verder moeten backtracken nadat we een oplossing tegengekomen zijn.
 Dat betekent dat, op het moment dat we een oplossing vinden, we die ergens willen 'wegschrijven'.
-We voegen daarom een extra parameter toe, een lijst `foundSoFar`, die alle oplossingen voorstelt die we eerder al gevonden hebben.
-Telkens we een nieuwe oplossing tegenkomen, voegen we die toe aan `foundSoFar`.
-Nadat we (via backtracking) alle keuzes doorlopen hebben, bevat `foundSoFar` alle gevonden oplossingen.
+We voegen daarom een extra parameter toe, een lijst `solutionsSoFar`, die alle oplossingen voorstelt die we eerder al gevonden hebben.
+Telkens we een nieuwe oplossing tegenkomen, voegen we die toe aan `solutionsSoFar`.
+Nadat we (via backtracking) alle keuzes doorlopen hebben, bevat `solutionsSoFar` dan ook alle gevonden oplossingen.
 
 Een derde wijziging is dat we geen `null` meer teruggeven als we geen oplossing vinden; als er geen oplossingen zijn voor het probleem, vertaalt zich dat in een lege lijst van oplossingen.
 
@@ -326,31 +330,31 @@ public static List<List<String>> findAll(String string, List<String> tokens) {
 
 private static List<List<String>> findAll(String remainingString,
                                           List<String> allTokens,
-                                          List<String> usedTokens,
-                                          List<List<String>> foundSoFar) {
+                                          List<String> tokensUsedSoFar,
+                                          List<List<String>> solutionsSoFar) {
     if (remainingString.isEmpty()) {
-        foundSoFar.add(List.copyOf(usedTokens));
-        return foundSoFar;
+        solutionsSoFar.add(List.copyOf(tokensUsedSoFar));
+        return solutionsSoFar;
     };
 
     for (String tok : allTokens) {
         if (remainingString.startsWith(tok)) {
-            usedTokens.add(tok);
+            tokensUsedSoFar.add(tok);
             var shorterString = remainingString.substring(tok.length());
-            findAll(shorterString, allTokens, usedTokens, foundSoFar);
-            usedTokens.removeLast();
+            findAll(shorterString, allTokens, tokensUsedSoFar, solutionsSoFar);
+            tokensUsedSoFar.removeLast();
         }
     }
-    return foundSoFar;
+    return solutionsSoFar;
 }
 ```
 
-Belangrijk om op te merken is dat we de lijst `usedTokens` kopiëren wanneer we die toevoegen aan de lijst `foundSoFar`.
-Dat is noodzakelijk: de `usedTokens`-lijst is immers deel van de partiële oplossing, en die lijst zal later nog aangepast (bijvoorbeeld met `.removeLast()`) wanneer we verder naar oplossingen zoeken.
+Belangrijk om op te merken is dat we de lijst `tokensUsedSoFar` **kopiëren** wanneer we die toevoegen aan de lijst `solutionsSoFar`.
+Dat is noodzakelijk: de `tokensUsedSoFar`-lijst is immers deel van de partiële oplossing, en die lijst zal later nog aangepast (bijvoorbeeld met `.removeLast()`) wanneer we verder naar oplossingen zoeken.
 In het vorige voorbeeld was dit niet essentieel; zodra we een oplossing vonden, gaven we de gevonden lijst meteen terug en stopten we met zoeken.
 
 In de uitvoeringsboom voor het zoeken van alle oplossingen zien we dat alle mogelijkheden overlopen en teruggegeven worden.
-Alle groene knopen zijn oplossingen, en zullen (van links naar rechts) aan de lijst `foundSoFar` toegevoegd worden.
+Alle groene knopen zijn oplossingen, en zullen (van links naar rechts) aan de lijst `solutionsSoFar` toegevoegd worden.
 
 ```mermaid
 graph TB
@@ -411,7 +415,8 @@ public Collection<Solution> solve() {
     return findAllSolutions(initial, new ArrayList<>());
 }
 
-private Collection<Solution> findAllSolutions(PartialSolution current, Collection<Solution> solutionsSoFar) {
+private Collection<Solution> findAllSolutions(PartialSolution current, 
+                                              Collection<Solution> solutionsSoFar) {
     if (current.isComplete()) {
         solutionsSoFar.add(current.toSolution());
         return solutionsSoFar;
@@ -434,12 +439,12 @@ Herken je de verschillende onderdelen?
 ```java
 private static List<List<String>> findAll(String remainingString,
                                           List<String> allTokens,
-                                          List<String> usedTokens,
+                                          List<String> tokensUsedSoFar,
                                           List<List<String>> foundSoFar) {
     // if (current.isComplete()) {
     if (remainingString.isEmpty()) {
         // solutionsSoFar.add(current.toSolution());
-        foundSoFar.add(List.copyOf(usedTokens));
+        foundSoFar.add(List.copyOf(tokensUsedSoFar));
         // return solutionsSoFar;
         return foundSoFar;
     };
@@ -450,12 +455,12 @@ private static List<List<String>> findAll(String remainingString,
     for (String tok : allTokens) {
         if (remainingString.startsWith(tok)) {
             // extension.apply(current);
-            usedTokens.add(tok);
+            tokensUsedSoFar.add(tok);
             var shorterString = remainingString.substring(tok.length());
             // findAllSolutions(current, solutionsSoFar);
-            findAll(shorterString, allTokens, usedTokens, foundSoFar);
+            findAll(shorterString, allTokens, tokensUsedSoFar, foundSoFar);
             // extension.undo(current);
-            usedTokens.removeLast();
+            tokensUsedSoFar.removeLast();
         }
     }
     // return solutionsSoFar;
@@ -473,8 +478,8 @@ Het bijhouden van alle oplossingen kan in sommige gevallen echter leiden tot een
 In plaats van alle oplossingen bij te houden, is het daarom beter om enkel de (tot dantoe) beste oplossing te bewaren.
 
 Het zoeken van een optimale oplossing duurt dus meestal even lang als het zoeken van alle oplossingen, maar niet altijd.
-Soms is het zinloos om nog naar oplossingen te blijven zoeken die sowieso nooit beter kunnen zijn dan een reeds eerder gevonden oplossing.
-Je kan immers meteen stoppen met zoeken wanneer je weet dat de huidige partiële oplossing nooit meer tot een betere finale oplossing kan leiden dan de tot dan toe beste oplossing.
+Soms is het zinloos om nog naar oplossingen te blijven zoeken als die sowieso nooit beter kunnen zijn dan een reeds eerder gevonden oplossing.
+Je kan dus meteen stoppen met zoeken wanneer je weet dat de huidige partiële oplossing nooit meer tot een betere finale oplossing kan leiden dan de tot dan toe beste oplossing.
 Dat kan een hoop werk besparen, en de tijd gevoelig inkorten.
 
 ### Voorbeeld: token segmentatie
@@ -489,7 +494,7 @@ De wijzigingen ten opzichte van het algoritme om alle oplossingen te zoeken zijn
    We geven de kortste van de twee terug.
 3. Tenslotte kijken we of we de zoektocht voortijdig kunnen staken.
    Wanneer de huidige splitsing al meer tokens bevat dan de beste splitsing die we op dat moment kennen, heeft het geen zin om nog verder te zoeken.
-   Er kunnen immers enkel tokens bijkomen.
+   Er kunnen immers enkel nog extra tokens bijkomen, waardoor de oplossing enkel langer kan worden, nooit korter.
 
 Zoek deze wijzigingen in onderstaande code:
 
@@ -500,10 +505,10 @@ public static List<String> findShortest(String string, List<String> tokens) {
 
 private static List<String> findShortest(String remainingString,
                                          List<String> allTokens,
-                                         List<String> usedTokens,
+                                         List<String> tokensUsedSoFar,
                                          List<String> bestSoFar) { // 1. 
     if (remainingString.isEmpty()) {
-        var solution = List.copyOf(usedTokens);
+        var solution = List.copyOf(tokensUsedSoFar);
         // 2.
         if (bestSoFar == null || solution.size() < bestSoFar.size()) {
             return solution;
@@ -513,24 +518,23 @@ private static List<String> findShortest(String remainingString,
     };
 
     // 3.
-    if (bestSoFar != null && bestSoFar.size() <= usedTokens.size()) {
+    if (bestSoFar != null && bestSoFar.size() <= tokensUsedSoFar.size()) {
         return bestSoFar;
     }
 
     for (String tok : allTokens) {
         if (remainingString.startsWith(tok)) {
-            usedTokens.add(tok);
+            tokensUsedSoFar.add(tok);
             var shorterString = remainingString.substring(tok.length());
-            bestSoFar = findShortest(shorterString, allTokens, usedTokens, bestSoFar);
-            usedTokens.removeLast();
+            bestSoFar = findShortest(shorterString, allTokens, tokensUsedSoFar, bestSoFar);
+            tokensUsedSoFar.removeLast();
         }
     }
     return bestSoFar;
 }
 ```
 
-Merk op dat we na de recursieve oproep ook de variabele `bestSoFar` aanpassen, voor het geval de recursieve oproep een betere oplossing gevonden heeft.
-
+Merk op dat we na de recursieve oproep de variabele `bestSoFar` aanpassen met het resultaat van die oproep, voor het geval de recursieve oproep een betere oplossing opgeleverd heeft.
 
 De uitvoeringsboom ziet er als volgt uit.
 De gele knopen zijn oplossingen die op een bepaald moment de beste oplossing waren, maar later vervangen zijn door een nog betere oplossing.
@@ -629,12 +633,12 @@ Herken je de verschillende onderdelen?
 ```java
 private static List<String> findShortest(String remainingString,
                                          List<String> allTokens,
-                                         List<String> usedTokens,
+                                         List<String> tokensUsedSoFar,
                                          List<String> bestSoFar) {
     // if (current.isComplete()) {
     if (remainingString.isEmpty()) {
         // var solution = current.toSolution();
-        var solution = List.copyOf(usedTokens);
+        var solution = List.copyOf(tokensUsedSoFar);
         // if (bestSoFar == null || solution.isBetterThan(bestSoFar)) {
         if (bestSoFar == null || solution.size() < bestSoFar.size()) {
             return solution;
@@ -645,7 +649,7 @@ private static List<String> findShortest(String remainingString,
 
     // if (current.shouldAbort() ||
     //      (bestSoFar != null && !current.canImproveUpon(bestSoFar))) {
-    if (bestSoFar != null && bestSoFar.size() <= usedTokens.size()) {
+    if (bestSoFar != null && bestSoFar.size() <= tokensUsedSoFar.size()) {
         return bestSoFar;
     }
 
@@ -653,12 +657,12 @@ private static List<String> findShortest(String remainingString,
     for (String tok : allTokens) {
         if (remainingString.startsWith(tok)) {
             // extension.apply(current);
-            usedTokens.add(tok);
+            tokensUsedSoFar.add(tok);
             var shorterString = remainingString.substring(tok.length());
             // bestSoFar = findOptimalSolution(current, bestSoFar);
-            bestSoFar = findShortest(shorterString, allTokens, usedTokens, bestSoFar);
+            bestSoFar = findShortest(shorterString, allTokens, tokensUsedSoFar, bestSoFar);
             // extension.undo(current);
-            usedTokens.removeLast();
+            tokensUsedSoFar.removeLast();
         }
     }
     return bestSoFar;
@@ -669,13 +673,13 @@ private static List<String> findShortest(String remainingString,
 
 ## Efficiëntie van backtracking
 
-Backtracking is vaak niet heel efficiënt.
+Backtracking is vaak niet heel efficiënt, zeker niet als je alle oplossingen of een optimale oplossing zoekt.
 Bijvoorbeeld, als er \\( k \\) keuzepunten zijn, en je bij elke keuzepunt precies \\( m\\) mogelijkheden hebt, dan zijn er in totaal \\( m^k \\) mogelijke paden die je moet proberen.
 Door snel te herkennen wanneer een partiële oplossing niet zal leiden tot een geschikte oplossing, en de zoekoperatie dan onmiddellijk af te breken, kan je het algoritme soms wel een pak efficiënter maken.
 
 ## Kopiëren vs. aanpassen en herstellen
 
-In de skeletten hierboven maakten we steeds gebruik van `apply()` en `undo()`: we passen de partiële oplossing aan (door ze uit te breiden), en maken die aanpassing later weer ongedaan.
+In de skelet-code hierboven maakten we steeds gebruik van `apply()` en `undo()`: we passen de partiële oplossing aan (door ze uit te breiden), en maken die aanpassing later weer ongedaan.
 Dat gaat makkelijk als de aanpassing eenvoudig ongedaan te maken is, bijvoorbeeld een element toevoegen aan een lijst en dat nadien weer verwijderen.
 
 Als het ongedaan maken niet zo eenvoudig is (bijvoorbeeld omdat er na de aanpassing heel wat herberekend wordt), is het vaak eenvoudiger om de volledige toestand eerst te **kopiëren** en verder te werken met deze kopie.
@@ -689,13 +693,13 @@ De commentaarregels geven aan wat er van belang is.
 ```java
 private static List<String> findAny(String remainingString,
                                     List<String> allTokens,
-                                    List<String> usedTokens) {
-    if (remainingString.isEmpty()) return usedTokens;
+                                    List<String> tokensUsedSoFar) {
+    if (remainingString.isEmpty()) return tokensUsedSoFar;
 
     for (String tok : allTokens) {
         if (remainingString.startsWith(tok)) {
             // uitbreiding gedeeltelijke oplossing OP EEN KOPIE
-            var copyOfUsedTokens = new ArrayList<>(usedTokens);
+            var copyOfUsedTokens = new ArrayList<>(tokensUsedSoFar);
             copyOfUsedTokens.add(tok); 
             var shorterString = remainingString.substring(tok.length());
             // recursief verder zoeken OP BASIS VAN DE KOPIE
