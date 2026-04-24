@@ -1,7 +1,7 @@
 ---
 title: "10. AI in software engineering"
 weight: 140
-draft: false
+draft: true
 ---
 
 In dit hoofdstuk bekijken we hoe je AI praktisch en verantwoord inzet tijdens software engineering.
