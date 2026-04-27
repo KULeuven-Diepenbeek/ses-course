@@ -3,7 +3,7 @@ title: "AI in software engineering: oefeningen"
 autonumbering: true
 weight: 20
 toc: true
-draft: false
+draft: true
 ---
 
 ## Oefening 1: Next-token-denken

@@ -4,7 +4,7 @@ autonumbering: true
 weight: 10
 toc: true
 math: true
-draft: false
+draft: true
 ---
 
 ## Wat is een LLM? (next-token-prediction)
