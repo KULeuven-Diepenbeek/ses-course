@@ -1,7 +1,7 @@
 ---
 title: "9. Specificaties"
 weight: 130
-draft: true
+draft: false
 toc: true
 autonumbering: true
 math: true
