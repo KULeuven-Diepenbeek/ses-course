@@ -7,13 +7,17 @@ autonumbering: true
 math: true
 ---
 
-In dit hoofdstuk bekijken we hoe je softwaregedrag precies kan beschrijven, los van de concrete code die dat gedrag realiseert.
+Wanneer is software correct? Hoe weet je dat een implementatie doet wat het moet doen?
+Zeker in een wereld waar meer en meer code door AI-tools gegenereerd wordt, is het belangrijk om een goed begrip te hebben van wat correct gedrag is, en hoe je dat kan specificeren en controleren, zonder blind te vertrouwen op de gegenereerde code.
+
+Om dat te onderzoeken, bekijken we in dit hoofdstuk hoe je softwaregedrag precies kan beschrijven, los van de concrete code die dat gedrag realiseert.
 We focussen op specificaties, contracten, invarianten, en op hoe je met tests en formele redeneringen (zoals Hoare-logica) kan nagaan of een implementatie correct is.
 
 Het domein van specificatie en correctheid is enorm breed, met veel theorie en tools.
 We beperken ons hier daarom tot een eerste kennismaking met de kernconcepten.
 
-## Wat en waarom?
+
+## Specificaties
 
 Een **specificatie** beschrijft het gewenste gedrag van software.
 Ze zegt wat correct gedrag is, zonder vast te leggen hoe je dat gedrag intern programmeert.
@@ -161,7 +165,6 @@ De belangrijkste annotaties zijn:
 - `\result` voor de returnwaarde,
 - `\old(expr)` voor de waarde vóór uitvoering,
 - `invariant ...;` voor klasse-invarianten,
-- `loop_invariant ...;` voor loop-invarianten.
 
 In code ziet dat er meestal zo uit:
 
@@ -188,7 +191,7 @@ public static int max(int a, int b) {
 Hieronder zie je een voorbeeld van een preconditie (weergegeven met `requires`) en postconditie (weergegeven met `ensures`) voor een methode `divide` die een gehele deling uitvoert:
 
 ```java
-//@ requires a >= 0
+//@ requires a >= 0;
 //@ requires b > 0;
 //@ ensures a == b * \result + (a % b);
 public static int divide(int a, int b) {
@@ -215,7 +218,7 @@ Als programmeur van `divide` mag je de implementatie later dus wijzigen in een a
 Een andere implementatie van `divide` die aan dezelfde specificatie voldoet, maar gebruik maakt van een lus in plaats van de delingsoperator, is bijvoorbeeld:
 
 ```java
-//@ requires a >= 0
+//@ requires a >= 0;
 //@ requires b > 0;
 //@ ensures a == b * \result + (a % b);
 public static int divide(int a, int b) {
@@ -256,7 +259,7 @@ De zwakst mogelijke postconditie is `ensures true;`, omdat die geen enkele uitsp
 
 [^1]: In de praktijk zou een methode met `ensures false;` kunnen worden geïmplementeerd als een methode die altijd een exception gooit of oneindig blijft lopen, omdat er dan strikt genomen geen eindtoestand is, maar dat is meestal niet de bedoeling.
 
-Hieronder zie je, als voorbeeld, een methode `max` met een zwakke preconditie én een zwakke postconditie::
+Hieronder zie je, als voorbeeld, een methode `max` met een zwakke preconditie én een zwakke postconditie:
 
 ```java
 //@ requires true;
@@ -382,7 +385,7 @@ class BankAccount {
 
 We zien hier enkele opvallendheden:
 
-- `invariant` geeft aan dat `balanceInCents` altijd groter of gelijk aan 0 moet zijn, ongeacht welke methode wordt aangeroepen. Het concept van invarianten komt zodadelijk verder aan bod.
+- `invariant` geeft aan dat `balanceInCents` altijd groter of gelijk aan 0 moet zijn, ongeacht welke methode wordt aangeroepen. Het concept van invarianten komt dadelijk verder aan bod.
 - `spec_public` geeft aan dat een *private* veld toch gebruikt mag worden in specificaties, zodat we het kunnen gebruiken om pre- en postcondities mee te formuleren.
 - `assignable balanceInCents;` geeft aan dat deze methode alleen `balanceInCents` mag wijzigen, en geen andere toestand van het object (of andere objecten).
 - `\old(balanceInCents)` verwijst naar de waarde van `balanceInCents` vóór de methode-uitvoering.
@@ -466,7 +469,7 @@ Motiveer telkens kort in één zin.
 
 ### Specificatie van `indexOf`
 
-Schrijf een specificatie (pre- en postcondities) voor een methode `indexOf` die een element `x` zoekt in een lijst van gehele getallen, en de index teruggeeft als `x` voorkomt, or `-1` als `x` niet voorkomt.
+Schrijf een specificatie (pre- en postcondities) voor een methode `indexOf` die een element `x` zoekt in een lijst van gehele getallen, en de index teruggeeft als `x` voorkomt, of `-1` als `x` niet voorkomt.
 
 {{% notice style="tip" title="Antwoord"  expanded=false %}}
 ```java
@@ -536,6 +539,7 @@ Welke pre- en postcondities zou je toevoegen om deze methode correct te specific
 ```java
 //@ requires from != null;
 //@ requires to != null;
+//@ requires from != to;
 //@ requires amountInCents > 0;
 //@ requires from.balanceInCents() >= amountInCents;
 //@ ensures from.balanceInCents() == \old(from.balanceInCents()) - amountInCents;
@@ -588,7 +592,7 @@ class TemperatureLog {
 
 {{% notice style="tip" title="Antwoord"  expanded=false %}}
 
-1. De fout in deze klasse is dat de `average`-methode een deling door nul kan veroorzaken als er geen temperaturen zijn toegevoegd aan de `values`-lijst. Dit gebeurt wanneer `values.size()` gelijk is aan 0, wat leidt tot een `ArithmeticException`.
+1. De fout in deze klasse is dat de `average`-methode een deling door nul kan veroorzaken als er geen temperaturen zijn toegevoegd aan de `values`-lijst. Dit gebeurt wanneer `values.size()` gelijk is aan 0.
 2. Een nuttige klasse-invariant is dat de lijst `values` nooit leeg mag zijn. Dus we kunnen de invariant formuleren als: `//@ invariant values.size() > 0;`.
 3. Om het ontwerp aan te passen zodat de invariant altijd behouden blijft, kunnen we ervoor zorgen dat er altijd minstens één temperatuur in de lijst staat bij het aanmaken van een `TemperatureLog`. Bijvoorbeeld:
 
@@ -742,8 +746,72 @@ Een mogelijke formulering van deze sterkere postconditie, met behulp van een te 
 //@ requires list != null;
 //@ ensures isSorted(\result);
 //@ ensures \result.size() == \old(list.size());
-//@ ensures (\forall int i; 0 <= i < \result.size(); 
+//@ ensures (\forall int i; 0 <= i && i < \result.size(); 
 //@          countOccurrences(\result, \result.get(i)) == countOccurrences(\old(list), \result.get(i)));
 ```
+
+{{% /notice %}}
+
+### Specificaties voor backtracking-oefeningen
+
+Schrijf een specificatie (pre- en postcondities) voor de volgende methodes uit de [oefeningen over backtracking](../8-recursie/backtracking_oefeningen.md).
+Dat mag informeel (in woorden) in plaats van formeel met JML-annotaties, maar probeer wel zo precies mogelijk te zijn in je formulering.
+
+- Token-segmentatie (waar elke token slechts eenmalig gebruikt mag worden)
+
+{{% notice style="tip" title="Antwoord"  expanded=false %}}
+**Pre-conditie:**
+
+- De invoerlijst van tokens is niet null.
+- De te segmenteren string is niet null.
+
+**Post-conditie:**
+
+- Als er geen segmentatie mogelijk is, dan is het resultaat null.
+- Als er een segmentatie mogelijk is, dan is het resultaat een lijst die voldoet aan volgende voorwaarden:
+  - alle elementen uit de lijst zijn tokens uit de invoerlijst
+  - het aantal keer dan een token voorkomt in het resultaat is niet groter dan het aantal keer dat het voorkomt in de invoerlijst
+  - als we de tokens in het resultaat achter elkaar plakken, krijgen we precies de te segmenteren string terug.
+
+{{% /notice %}}
+
+- Uurrooster-planner
+
+{{% notice style="tip" title="Antwoord"  expanded=false %}}
+**Pre-conditie:**
+
+- De lijst van vakken is niet null.
+- De planningparameters zijn niet null.
+- Het maximaal aantal slots is een positief getal.
+- Het maximaal aantal vakken per slot is een positief getal.
+- Elk vak heeft een niet-null verzameling van personen.
+
+**Post-conditie:**
+
+- Als er geen rooster mogelijk is, dan is het resultaat null.
+- Als er een rooster mogelijk is, dan is het resultaat een Planning-object dat voldoet aan volgende voorwaarden:
+  - elk vak uit de invoerlijst is precies één keer ingeroosterd in een slot
+  - elk gebruikt slot is kleiner dan het maximaal aantal slots
+  - er zijn nooit meer vakken in hetzelfde slot dan het maximaal aantal vakken per slot
+  - er is geen persoon die in twee verschillende vakken is ingeroosterd in hetzelfde slot
+  - er bestaat geen planning waarbij het hoogst gebruikte slotnummer lager is dan in het resultaat
+{{% /notice %}}
+
+- Traveling Sales Person
+
+{{% notice style="tip" title="Antwoord"  expanded=false %}}
+**Pre-conditie:**
+
+- De startlocatie is niet null.
+- De lijst van andere locaties is niet null.
+- De startlocatie mag niet voorkomen in de lijst van andere locaties (omdat we elke locatie precies één keer moeten bezoeken, en we al beginnen bij de startlocatie).
+
+**Post-conditie:**
+
+- Als er geen geldige route mogelijk is, dan is het resultaat null.
+- Als er een geldige route mogelijk is, dan is het resultaat een Route-object dat voldoet aan volgende voorwaarden:
+  - de route begint en eindigt bij de startlocatie
+  - elke locatie uit de lijst van andere locaties komt precies één keer voor in de route
+  - de totale afstand van de route is kleiner dan of gelijk aan de afstand van elke andere mogelijke route die aan bovenstaande voorwaarden voldoet.
 
 {{% /notice %}}
