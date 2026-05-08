@@ -193,22 +193,7 @@ Belangrijk is dat de LLM zelf geen directe toegang heeft tot externe systemen. H
 De mogelijkheid om tool calls te maken is niet standaard in een LLM, maar vereist specifieke training: de LLM moet leren om de juiste syntax te gebruiken voor tool calls.
 Daarnaast moet er een infrastructuur zijn die deze tool calls kan herkennen en uitvoeren, en de resultaten terug kan geven aan het model. Deze combinatie van LLM met tool calls maakt het mogelijk om veel krachtigere en contextueel relevante antwoorden te genereren, omdat het model nu toegang heeft tot actuele informatie en specifieke functionaliteiten die het zelf niet kan genereren.
 
-De mogelijkheid om tools betrouwbaar te gebruiken vereist doorgaans bijkomende training of fine-tuning, zodat het model leert:
-
-welke tools beschikbaar zijn;
-wanneer een tool nuttig is;
-hoe een correcte tool call gestructureerd moet worden.
-
-Daarnaast is infrastructuur nodig die:
-
-tool calls detecteert;
-de juiste tool uitvoert;
-en de resultaten teruggeeft aan het model.
-
-Deze combinatie van LLM en externe tools maakt het mogelijk om veel krachtigere systemen te bouwen, omdat het model zo toegang krijgt tot actuele informatie en functionaliteiten die niet in de modelgewichten zelf opgeslagen zitten.
-
 Hoe weet een LLM welke tools er beschikbaar zijn en hoe die werken?
-
 Een eenvoudige techniek is om de beschikbare tools expliciet mee te geven in de prompt of systeemcontext. Bijvoorbeeld:
 
 ```text
