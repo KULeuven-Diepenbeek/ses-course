@@ -6,26 +6,8 @@ toc: true
 autonumbering: true
 ---
 
+AI is een krachtig hulpmiddel dat softwareontwikkeling kan versnellen, maar het brengt ook nieuwe uitdagingen en overwegingen met zich mee.
 In dit hoofdstuk bekijken we hoe je AI praktisch en verantwoord inzet tijdens software engineering.
-We focussen op Large Language Models (LLMs), modern toolgebruik, agents, MCP, en op concrete werkwijzen om sneller te werken zonder kwaliteit of veiligheid te verliezen.
-
-We behandelen volgende onderwerpen:
-
-- Hoe werken LLMs?
-  * next token prediction
-  * tool calls en MCP
-  * reasoning
-- Agents vs Agentic AI
-- Hoe werkt codegeneratie met LLMs?
-- Welke verschillende soorten tools zijn er? (chatbots, code-assistenten, MCP, agents)
-  * Chatbots, bv. ChatGPT, Claude, Gemini, ...
-  * Code-assistenten (IDE-integraties, CLI-tools), bv. Claude Code, Codex, opencode, ...
-  * Agents
-- Aanpak
-  * Vibe coding
-  * Spec-driven development met AI
-    * Programmeren in markdown
-- AI, code quality, software engineering principles
 
 ## Hoe werken LLMs?
 
