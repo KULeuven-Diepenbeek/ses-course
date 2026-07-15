@@ -48,9 +48,8 @@ Je kan dat ruwweg zien als een klein fragment: een woorddeel, operator, haakje, 
 [Op deze webpagina](https://platform.openai.com/tokenizer) kan je zien hoe OpenAI/ChatGPT een tekst opsplitst in tokens.
 Bijvoorbeeld, de zin `Beter één vogel in de hand dan tien in de lucht.` wordt bij OpenAI opgesplitst in 13 tokens:
 
-```text
-B eter ␣één ␣vogel ␣in ␣de ␣hand ␣dan ␣tien ␣in ␣de ␣lucht .
-```
+`B` `eter` `␣één` `␣vogel` `␣in` `␣de` `␣hand` `␣dan` `␣tien` `␣in` `␣de` `␣lucht` `.`
+
 
 Merk op dat de hoofdletter B een apart token is, en heel wat tokens bestaan uit een spatie gevolgd door een woord.
 
